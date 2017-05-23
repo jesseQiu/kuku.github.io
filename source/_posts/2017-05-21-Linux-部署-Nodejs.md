@@ -1,0 +1,62 @@
+---
+title: Linux 部署 Nodejs
+date: 2017-05-21 10:16:29
+categories: Linux
+---
+
+本文主要是对 nodejs 在 linux 系统部署备忘
+
+## 部署步骤
+
+### 1. 查看 linux 系统版本信息
+这里使用 `uname` 命令,用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）
+```bash
+uname -a
+Linux Jesse 3.10.0-514.2.2.el7.x86_64 #1 SMP Tue Dec 6 23:06:41 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+### 2. 下载 nodejs 软件
+从上一步中查看到的系统信息，再去[nodejs](https://nodejs.org/en/download/)下载对应的版本
+![nodjs版本](http://od6sd4xau.bkt.clouddn.com/linux-nodejs.png)
+根据上面的系统版本信息，我选择的是 binarias 版本(可以直接运行的二进制版本)，软件包名为 `node-v6.10.3-linux-x64.tar.xz`
+
+### 3. 通过 WinSCP 软件上传到 linux 服务
+
+### 4. 解压软件包
+这边我把软件放在 `/usr/local/` 目录下
+注意，这里的 nodejs 软件包是以 `xz` 为后缀，而不是 `*.gz,*.bz2` 为后缀名。所有需要用 xz 工具来解压。
+```bash
+// 先将 node-v6.10.3-linux-x64.tar.xz 解压成 node-v6.10.3-linux-x64.tar
+xz -d node-v6.10.3-linux-x64.tar.xz  
+// 再将 tar 解包
+tar xvf node-v6.10.3-linux-x64.tar
+```
+ps 因为 xz 工具不能像 gzip 和 bzip2 那要可以通过 `j/zxvf` 一条命令解压解包，所以要分两步
+
+### 5. 测试解压的 nodejs 软件是否可用
+```bash
+cd /usr/local/node-v6.10.3-linux-x64/bin/
+./node -v
+// v6.10.3 如果正常显示 nodejs 版本号，说明软件安装正常
+```
+
+### 6. 添加 node 到环境变量中
+```bash
+exoprt PATH=$PATH:/usr/local/node-v6.10.3-linux-x64/bin/
+env | grep PATH
+// 如果可以看到刚添加的环境变量说明添加成功
+node -v
+// v6.10.3 
+```
+如果需要永久有效，需要在 `/ect/profile` 文件中添加
+```bash
+vi /etc/profile
+// 在文件的尾部添加：PATH=$PATH:/usr/local/node-v6.10.3-linux-x64/bin/
+source /etc/profile // 可以让刚设置马上生效
+```
+
+## 参考
+- [nodejs 下载地址](https://nodejs.org/en/download/)
+- [linux 部署 nodejs](http://www.cnblogs.com/dubaokun/p/3558848.html)
+
+
