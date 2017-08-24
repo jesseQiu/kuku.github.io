@@ -352,4 +352,4 @@ $ npm config set foo:port 80
 
 
 ## 十二、引用
-- [阮一峰 pm scripts 使用指南](http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html)
+- [阮一峰 npm scripts 使用指南](http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html)

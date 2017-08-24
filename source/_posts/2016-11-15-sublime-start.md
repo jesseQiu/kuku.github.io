@@ -128,3 +128,4 @@ Shift+右键拖动：光标多不，用来更改或插入列内容
 - [sublime 推荐必备插件](http://www.xuanfengge.com/practical-collection-of-sublime-plug-in.html)
 - [JavaScript 开发者必备的 10 款 SublimeText 插件](http://linux.it.net.cn/e/news/2015/0904/16932.html)
 - [推荐！Sublime Text 最佳插件列表](http://blog.jobbole.com/79326/)
+- [关于Sublime Text 3](http://www.cnblogs.com/hykun/p/sublimeText3.html)

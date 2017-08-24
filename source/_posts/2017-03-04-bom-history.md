@@ -104,7 +104,7 @@ history.go(2);  // url显示为http://example.com/example.html?page=3
 
 ## history.state属性
 
-history.state属性保存当前页面的state对象。
+history.state 属性保存当前页面的state对象。
 
 ```javascript
 history.pushState({page: 1}, "title 1", "?page=1");
@@ -113,9 +113,9 @@ history.state
 // { page: 1 }
 ```
 
-## popstate事件
+## popstate 事件
 
-每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。需要注意的是，仅仅调用pushState方法或replaceState方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back、forward、go方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
+每当同一个文档的浏览历史（即history对象）出现变化时，就会触发 popstate 事件。需要注意的是，仅仅调用 pushState 方法或 replaceState 方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 back、forward、go 方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
 
 使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。
 
@@ -145,8 +145,19 @@ var currentState = history.state;
 
 ```
 
-另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate事件，而Firefox和IE浏览器不会。
+另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate 事件，而Firefox和IE浏览器不会。
 
+### 如果要设置禁止浏览器后退和前进的按钮
+```js
+//防止页面后退
+// 把当前的 url 地址设置的历史记录中
+window.history.pushState(null, null, document.URL);
+// 监听 popstate 事件，每当页面切换时，触发更新设置历史记录中的记录为当前 url 地址，
+// 这样每次历史记录中永远都是当前页面，达到进制后退功能
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+```
 ## URLSearchParams API
 
 URLSearchParams API用于处理URL之中的查询字符串，即问号之后的部分。没有部署这个API的浏览器，可以用[url-search-params](https://github.com/WebReflection/url-search-params)这个垫片库。

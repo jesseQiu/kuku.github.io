@@ -152,6 +152,32 @@ feature:
 	vue-resource 是 Vue.js 的一款插件，它可以通过 XMLHttpRequest 或 JSONP 发起请求并处理响应。也就是说，$.ajax 能做的事情，vue-resource 插件一样也能做到，而且 vue-resource 的 API 更为简洁。另外，vue-resource 还提供了非常有用的 inteceptor 功能，使用 inteceptor 可以在请求前和请求后附加一些行为，比如使用 inteceptor 在 ajax 请求时显示 loading 界面。
 	- [vue-resource 全攻略](http://www.cnblogs.com/keepfool/p/5657065.html)
 
+16. watch 监测对象
+```js
+data() {
+　　return {
+　　　　bet: {
+　　　　　　pokerState: 53,
+　　　　　　pokerHistory: 'local'
+　　　　}   
+    }
+},
+watch: {
+　　bet: {
+　　　　handler(newValue, oldValue) {
+　　　　　　console.log(newValue)
+　　　　},
+　　　　deep: true
+　　}
+}
+// 数组同上一样
+// 参考：http://www.cnblogs.com/hity-tt/p/6677753.html
+```
+
+	## 参考
+	- [vue 登入状态管理](http://www.jianshu.com/p/eff145fb815b)
+	- [vue router](https://router.vuejs.org/zh-cn/advanced/navigation-guards.html)
+
 
 
 

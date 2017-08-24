@@ -7,7 +7,7 @@ categories: Node.js
 
 ## path.join()
 
-`path.join`方法用于连接路径。该方法的主要用途在于，会正确使用当前系统的路径分隔符，Unix系统是”/“，Windows系统是”\“。
+`path.join` 方法用于连接路径。该方法的主要用途在于，会正确使用当前系统的路径**分隔符**，Unix 系统是 `”/“`，Windows 系统是 `”\“`。
 
 ```
 var path = require('path');
@@ -15,13 +15,13 @@ path.join(mydir, "foo");
 
 ```
 
-上面代码在Unix系统下，会返回路径`mydir/foo`。
+上面代码在 Unix 系统下，会返回路径 `mydir/foo`。
 
 ## path.resolve()
 
-`path.resolve`方法用于将相对路径转为绝对路径。
+`path.resolve`方法用于将相**对路径转为绝对路径**。
 
-它可以接受多个参数，依次表示所要进入的路径，直到将最后一个参数转为绝对路径。如果根据参数无法得到绝对路径，就以当前所在路径作为基准。除了根目录，该方法的返回值都不带尾部的斜杠。
+它可以接受多个参数，依次表示所要进入的路径，直到将**最后一个参数**转为绝对路径。如果根据参数无法得到绝对路径，就以当前所在路径作为基准。除了根目录，该方法的返回值都不带尾部的斜杠。
 
 ```javascript
 
@@ -80,7 +80,7 @@ function exists(pth, mode) {
 
 ## path.relative
 
-`path.relative`方法接受两个参数，这两个参数都应该是绝对路径。该方法返回第二个路径想对于地一个路径的系那个相对路径。
+`path.relative`方法接受两个参数，这两个参数都应该是绝对路径。该方法返回第二个路径相对于第一个路径的系统相对路径。
 
 ```javascript
 path.relative('/data/orandea/test/aaa', '/data/orandea/impl/bbb')
