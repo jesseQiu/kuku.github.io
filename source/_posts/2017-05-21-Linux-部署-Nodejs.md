@@ -30,8 +30,14 @@ Linux Jesse 3.10.0-514.2.2.el7.x86_64 #1 SMP Tue Dec 6 23:06:41 UTC 2016 x86_64 
 xz -d node-v6.10.3-linux-x64.tar.xz  
 // 再将 tar 解包
 tar xvf node-v6.10.3-linux-x64.tar
+mv node-v6.10.3-linux-x64 /usr/local/node-v6.10.3-linux-x64
 ```
-ps 因为 xz 工具不能像 gzip 和 bzip2 那要可以通过 `j/zxvf` 一条命令解压解包，所以要分两步
+ps 因为 xz 工具不能像 gzip 和 bzip2 那要可以通过 `j/zxvf` 一条命令解压解包，所以要分两步.
+如果 linux 没有安装 xz 工具可以通过 yum 来安装
+```bash
+yum install xz
+```
+如果还是不行，可以[参考](http://blog.sina.com.cn/s/blog_ba08e8e00101b1rs.html)
 
 ### 5. 测试解压的 nodejs 软件是否可用
 ```bash
@@ -54,6 +60,50 @@ vi /etc/profile
 // 在文件的尾部添加：PATH=$PATH:/usr/local/node-v6.10.3-linux-x64/bin/
 source /etc/profile // 可以让刚设置马上生效
 ```
+
+### 7. 安装 PM2 插件
+```bash
+$ npm i pm2 -g
+```
+
+### 8. 安装 git 环境
+#### 1. git 安装
+在 Linux 上安装预编译好的 Git 二进制安装包，可以直接用系统提供的包管理工具。在 Fedora 上用 yum 安装：
+```bash
+$ yum install git-core
+$ git --version
+// git version 1.8.3.1
+```
+#### 2. 生成 rsa 密钥
+首先查看 `~/.ssh` 目录，看是否已经存在 `id_ras` 和 `id_rsa.pub` 两个文件，如果已经有了就不用生成，直接使用。如果没有使用下面的命令生成
+```bash
+ssh-keygen -t rsa -C "your.email@example.com" -b 4096
+```
+
+#### 3. 拷贝生成的公钥内容到 `github` 或者 `gitlab` 上面
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+选中内容 -> 回车 -> 在 git 仓库创建 ssh keys -> 粘贴内容 -> 保存
+[参考 ssh keys generate it](https://gitlab.com/help/ssh/README)
+
+#### 4. 克隆仓库工程
+```bash
+git clone git@gitlab.com:JesseChiu/jesse-xxx.git
+cd jesse-xxx
+// 运行命令
+```
+
+#### 5. 同步最新代码
+```bash
+git pull
+```
+
+### 9. 运行
+```bash
+npm run xxx
+```
+**注意:如果使用运行 80 端口必须要 root 权限用户。否则会报 `Port 80 requires elevated privileges`**
 
 ## 参考
 - [nodejs 下载地址](https://nodejs.org/en/download/)
