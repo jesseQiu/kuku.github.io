@@ -61,23 +61,6 @@ path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif')
 
 该方法忽略非字符串的参数。
 
-## accessSync()
-
-`accessSync`方法用于同步读取一个路径。
-
-下面的代码可以用于判断一个目录是否存在。
-
-```javascript
-function exists(pth, mode) {
-  try {
-    fs.accessSync(pth, mode);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-```
-
 ## path.relative
 
 `path.relative`方法接受两个参数，这两个参数都应该是绝对路径。该方法返回第二个路径相对于第一个路径的系统相对路径。

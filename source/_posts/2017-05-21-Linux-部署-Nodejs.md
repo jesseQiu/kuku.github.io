@@ -61,12 +61,30 @@ vi /etc/profile
 source /etc/profile // 可以让刚设置马上生效
 ```
 
-### 7. 安装 PM2 插件
+### 7. 升级 nodejs
+```bash
+// 安装 node 更新模块
+npm i -g n
+
+// 安装最新稳定版本
+n stable
+
+//[root@fpxt01yht code]# n stable
+//install : node-v9.2.0
+//mkdir : /usr/local/n/versions/node/9.2.0  // 最新的 nodejs 存放位置
+//fetch : https://nodejs.org/dist/v9.2.0/node-v9.2.0-linux-x64.tar.gz
+######################################################################## 100.0%
+//installed : v9.2.0
+```
+如果使用 `node -v` 命令显示的还是之前版本，可能是又要之前安装的时候，配置了环境变量指向，只要把相应的环境变量注释掉即可，因为 n 模块以及安装了全局最新版本。
+**注意:如果之前版本的 node 有安装全局的插件，需要重新安装**
+
+### 8. 安装 PM2 插件
 ```bash
 $ npm i pm2 -g
 ```
 
-### 8. 安装 git 环境
+### 9. 安装 git 环境
 #### 1. git 安装
 在 Linux 上安装预编译好的 Git 二进制安装包，可以直接用系统提供的包管理工具。在 Fedora 上用 yum 安装：
 ```bash
@@ -99,7 +117,7 @@ cd jesse-xxx
 git pull
 ```
 
-### 9. 运行
+### 10. 运行
 ```bash
 npm run xxx
 ```

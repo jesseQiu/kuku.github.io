@@ -2,10 +2,11 @@
 title: MongoDB 的应用
 date: 2017-04-14 14:34:39
 updated: 2017-04-14 14:34:39
-categories: Node.js
+tags: MongoDB
+categories: Database
 ---
 
-MongoDB是目前最流行的noSQL数据库之一，它是专为Node开发的。
+MongoDB 是目前最流行的noSQL数据库之一，它是专为Node开发的。
 
 MongoDB的一条记录叫做文档（document），它是一个包含多个字段的数据结构，很类似于JSON格式。
 

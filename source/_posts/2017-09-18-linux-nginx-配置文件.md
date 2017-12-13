@@ -7,6 +7,7 @@ categories: Linux
 ## 一、默认的配置文件
 ### 1. 全局配置文件
 ```bash
+// 位置：/etc/nginx/nginx.conf
 # 这个需要修改为启动 nginx 用户名，建议使用 root
 user  nginx; 
 worker_processes  1;
@@ -15,76 +16,77 @@ error_log  /var/log/nginx/error.log warn;
 pid        /var/run/nginx.pid;
 
 events {
-    worker_connections  1024;
+  worker_connections  1024;
 }
 
 http {
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
+  include       /etc/nginx/mime.types;
+  default_type  application/octet-stream;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
 
-    access_log  /var/log/nginx/access.log  main;
+  access_log  /var/log/nginx/access.log  main;
 
-    sendfile        on;
-    #tcp_nopush     on;
+  sendfile        on;
+  #tcp_nopush     on;
 
-    keepalive_timeout  65;
+  keepalive_timeout  65;
 
-    #gzip  on;
+  #gzip  on;
 
-    # 这里会包含默认配置文件，也就是下面的文件
-    include /etc/nginx/conf.d/*.conf; 
+  # 这里会包含默认配置文件，也就是下面的文件
+  include /etc/nginx/conf.d/*.conf; 
 }
 
 ```
 ### 2. 网站默认配置文件
 ```bash
+// 位置：/etc/nginx/conf.d/default.conf
 server {
-    listen       80;
-    server_name  localhost;
+  listen       80;
+  server_name  localhost;
 
-    #charset koi8-r;
-    #access_log  /var/log/nginx/host.access.log  main;
+  #charset koi8-r;
+  #access_log  /var/log/nginx/host.access.log  main;
 
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html index.htm;
-    }
+  location / {
+      root   /usr/share/nginx/html;
+      index  index.html index.htm;
+  }
 
-    #error_page  404              /404.html;
+  #error_page  404              /404.html;
 
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
+  # redirect server error pages to the static page /50x.html
+  #
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+      root   /usr/share/nginx/html;
+  }
 
-    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-    #
-    #location ~ \.php$ {
-    #    proxy_pass   http://127.0.0.1;
-    #}
+  # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+  #
+  #location ~ \.php$ {
+  #    proxy_pass   http://127.0.0.1;
+  #}
 
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    #location ~ \.php$ {
-    #    root           html;
-    #    fastcgi_pass   127.0.0.1:9000;
-    #    fastcgi_index  index.php;
-    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-    #    include        fastcgi_params;
-    #}
+  # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+  #
+  #location ~ \.php$ {
+  #    root           html;
+  #    fastcgi_pass   127.0.0.1:9000;
+  #    fastcgi_index  index.php;
+  #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+  #    include        fastcgi_params;
+  #}
 
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    #location ~ /\.ht {
-    #    deny  all;
-    #}
+  # deny access to .htaccess files, if Apache's document root
+  # concurs with nginx's one
+  #
+  #location ~ /\.ht {
+  #    deny  all;
+  #}
 }
 ```
 上面显示的，只配置了一个虚拟服务器，如果需要配置多个服务器，可以添加相应的结构。下面是对虚拟服务器配置几点说明:
@@ -96,19 +98,72 @@ server_name=www.jessechiu.com > server_name=localhost
 - 一个 server 中只能配置一个更路径('/')端口转发
 ```bash
 location / {
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
+  root   /usr/share/nginx/html;
+  index  index.html index.htm;
 }
 或者
 location / {
-    proxy_pass http://127.0.0.1:6066;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_pass http://127.0.0.1:6066;
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 }
 ```
 > 如果需要多个端口转发可以通过配置多个 server 信息，注意其中的 server_name 配置不能相同(nodejs 服务器是这样，其它的没有验证)。
 
+### 3. 配置实例
+```bash
+# http
+server {
+  listen       80;
+  server_name  wechat.jessechiu.com.cn;
+
+  #charset koi8-r;
+  #access_log  /var/log/nginx/host.access.log  main;
+
+  location / {
+    proxy_pass http://127.0.0.1:xxxx;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+      root   html;
+  } 
+}
+
+# https
+server {
+  listen       443 ssl;
+  server_name  wechat.jessechiu.com.cn;
+
+  ssl on;
+  ssl_certificate      /etc/pki/tls/private/www_jessechiu_com_cn.crt;
+  ssl_certificate_key  /etc/pki/tls/private/www_jessechiu_com_cn.key;
+
+  ssl_session_cache    shared:SSL:1m;
+  ssl_session_timeout  5m;
+
+  ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers  HIGH:!aNULL:!MD5;
+  # ssl_prefer_server_ciphers  on;
+  fastcgi_param HTTPS on; #attention!#
+
+  location / {
+      proxy_pass http://127.0.0.1:xxxx;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+  
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+      root   html;
+  } 
+}
+```
 
 ## 二、nginx location 匹配规则
 
