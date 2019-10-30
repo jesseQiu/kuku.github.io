@@ -2,9 +2,7 @@
 title: Android App 内存占用分析方法
 date: 2016-11-01 10:45:58
 updated: 2016-11-01 10:45:58
-tags: 
 categories: Android
-feature:
 ---
 
 > 本文主要是归纳了如何查看 Android App 的内存占用情况的方法，这对于分析内存泄漏提供很大的帮助。

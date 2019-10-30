@@ -1,5 +1,5 @@
 ---
-title: Start Git
+title: Git Starting
 date: 2017-10-15 18:49:25
 categories: Git
 ---

@@ -1,8 +1,8 @@
 ---
-title: Python Start
-date: 2017-12-21 14:34:39
-updated: 2017-12-21 14:34:39
-categories: Vue
+title: Python Starting
+date: 2018-01-08 14:34:39
+updated: 2018-01-08 14:34:39
+categories: Python
 ---
 
 ## 一、基础语法

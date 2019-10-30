@@ -166,7 +166,7 @@ Promise.all([
     console.log(values);    // [1,32,64,128]
 });
 ```
-*`Promise.all` 的 `Promise` 不是按顺序执行，当时值是按顺序传递*
+*`Promise.all` 的 `Promise` 不是按顺序执行，但是值是按顺序传递*
 
 #### 7.Promise.race
 ```javascript
@@ -245,7 +245,63 @@ goodMain(function(){
 *上在上面的代码中， badMain 是一个不太好的实现方式（但也不是说它有多坏）， goodMain 则是一个能非常好的进行错误处理的版本。
 为什么说 badMain 不好呢？，因为虽然我们在 .then 的第二个参数中指定了用来错误处理的函数，但实际上它却不能捕获第一个参数 onFulfilled 指定的函数（本例为 throwError ）里面出现的错误*
 
+#### 10. 按顺序执行
+```js
+function fun1(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun1()')
+            resolve();
+        },1000)
+    })
+}
+function fun2(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun2()')
+            resolve();
+        },1000)
+    })
+}
+function fun3(callback){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun3()')
+            resolve();
+        },300)
+    })
+}
+function fun4(callback){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun4()')
+            resolve();
+        },2000)
+    })
+}
+function fun5(callback){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun5()')
+            resolve();
+        },100)
+    })
+}
+function fun6(callback){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('fun6()')
+            resolve();
+        },500)
+    })
+}
 
+var proArray = [fun2,fun3,fun4,fun5,fun6];
+
+proArray.reduce(function(accumulator,currentValue){
+    return accumulator.then(currentValue)
+},fun1())
+```
 
 ### 二、传值问题 
 

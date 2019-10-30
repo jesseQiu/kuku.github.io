@@ -1,8 +1,8 @@
 ---
 title: 30 Seconds of code
-date: 2017-12-21 14:34:39
-updated: 2017-12-21 14:34:39
-categories: Vue
+date: 2018-01-08 14:34:39
+updated: 2018-01-08 14:34:39
+categories: JavaScript
 ---
 >Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less.
 
