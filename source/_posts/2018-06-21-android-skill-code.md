@@ -5,35 +5,7 @@ updated: 2018-06-21 14:34:39
 categories: Android
 ---
 
-## 一、MD5
-```java
-private String getMd5String(String input){
-      MessageDigest md = null;
-      try {
-          md = MessageDigest.getInstance("md5");
-      } catch (NoSuchAlgorithmException e) {
-          e.printStackTrace();
-      }
-
-      String result="";
-      try {
-          byte[] mdBytes = md.digest(input.getBytes("UTF-8"));
-          for (byte b : mdBytes) {
-              String temp = Integer.toHexString(b & 0xff);
-              if (temp.length() == 1) {
-                  temp = "0" + temp;
-              }
-              result += temp;
-          }
-      } catch (UnsupportedEncodingException e) {
-          e.printStackTrace();
-      }
-
-      return result;
-  }
-```
-
-## 二、显示弹框
+## 一、显示弹框
 ### 1. 普通弹框
 ```java
 private void showInputTimeDialog(){
@@ -99,3 +71,13 @@ private void showInputTimeDialog(final Context context,final String filePath){
 ```
 在 `AndroidManifest.xml` 文件中添加 `<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />`
 
+
+
+## Activity
+
+### Activity 之间传值
+- [android 之Activity的五种传值方式](https://blog.csdn.net/qq_37169103/article/details/80406441)
+
+### Activity 四种启动模式
+- [细谈 Activity 四种启动模式](https://blog.csdn.net/zy_jibai/article/details/80587083)
+- [终于懂了之 Activity 的四种启动模式](https://www.jianshu.com/p/50264d6cccb3?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)

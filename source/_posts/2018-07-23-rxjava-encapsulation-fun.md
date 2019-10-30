@@ -7,8 +7,7 @@ categories: Java
 
 ## 一、封装同步函数
 ```java
-public Observable
-     wrappedMethod() {
+public Observable wrappedMethod() {
       return Observable.defer(() -> {
         return Observable.just(library.synchronousMethod());
       });

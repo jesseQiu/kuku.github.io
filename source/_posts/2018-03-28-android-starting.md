@@ -58,11 +58,11 @@ Android 系统可以通过这种方式实现最小权限原则。也就是说，
 - 电量、网络连接状态...
 - getSystemService()// Activity 方法
 
-## 五、杂食
+## 五、其它
 - Android 应用并没有单一入口点（例如，没有 main() 函数）,因为应用的启动可以通过其中某个组件。
 - 只用系统可以调用各个应用的某个组件(A 要调用 B 某个组件，需要先通过 intent 向系统发送消息，再由系统调起 B 应用)
 - 四种组件类型中的三种 — Activity、服务和广播接收器 — 通过名为 Intent 的异步消息进行启动。Intent 会在运行时将各个组件相互绑定（您可以将 Intent 视为从其他组件请求操作的信使），无论组件属于您的应用还是其他应用。
-- intent: 信使，在不同页面间传递数据
+- Intent: 信使，在不同页面间传递数据
 
 - 文件系统
 	* openFileOutput()//写文件
@@ -70,8 +70,8 @@ Android 系统可以通过这种方式实现最小权限原则。也就是说，
 	* getFileDir()// 默认存储目录
 	* getFileCacheDir()
 	* getDir()// 创建目录
-	* /data/data/packagename
-	* /mnt/sdcard/Android/data
+	* `/data/data/packagename`
+	* `/mnt/sdcard/Android/data`
 
 - ContentProvider
 - ContentResolve
