@@ -5,7 +5,7 @@ updated: 2018-06-21 14:34:39
 categories: Android
 ---
 
-## 一、显示弹框
+## 显示弹框
 ### 1. 普通弹框
 ```java
 private void showInputTimeDialog(){
@@ -72,6 +72,57 @@ private void showInputTimeDialog(final Context context,final String filePath){
 在 `AndroidManifest.xml` 文件中添加 `<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />`
 
 
+## 权限检查三种方法
+```java
+    public static boolean checkPermission1(Context context, String[] permissions) {
+        PackageManager packageManager = context.getPackageManager();
+        String packageName = context.getPackageName();
+
+        for (String permission : permissions) {
+            int per = packageManager.checkPermission(permission, packageName);
+            if (PackageManager.PERMISSION_DENIED == per) {
+                Log.w(TAG, "required permission not granted . permission = " + permission);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkPermission2(Context context, String[] permissions) {
+
+        for (String permission : permissions) {
+            int per =context.checkPermission(permission, Process.myPid(),Process.myUid());
+            if (PackageManager.PERMISSION_GRANTED != per) {
+                Log.w(TAG, "required permission not granted . permission = " + permission);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkPermission3(Context context, String[] permissions) {
+
+        for (String permission : permissions) {
+            int per = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+            if (PackageManager.PERMISSION_GRANTED != per) {
+                Log.w(TAG, "required permission not granted . permission = " + permission);
+                return false;
+            }
+        }
+        return true;
+    }
+```
+- [Android 检测权限的三种写法]https://www.jianshu.com/p/11d99a9be7d9)
+
+
+
+
+
+## 主线程和子线程之间传递消息
+- [android 主线程和子线程之间的消息传递](https://www.cnblogs.com/laughingQing/p/5436998.html)
+
+
+
 
 ## Activity
 
@@ -81,3 +132,38 @@ private void showInputTimeDialog(final Context context,final String filePath){
 ### Activity 四种启动模式
 - [细谈 Activity 四种启动模式](https://blog.csdn.net/zy_jibai/article/details/80587083)
 - [终于懂了之 Activity 的四种启动模式](https://www.jianshu.com/p/50264d6cccb3?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
+
+
+
+
+
+## Service
+服务和广播都是运行在 UI 线程中，如果需要操作耗时操作，需要在里面创建一个新的线程来运行
+
+### 服务类型
+1. 不可交互的后台服务：onCreate() -> onStartCommand() -> onDestroy()
+2. 可交互的后台服务： onCreate() -> onBind() -> onUnbind() -> onDestory()
+3. 前台服务
+4. IntentService
+
+### 跨应用 Service 通讯
+#### 通过 Intent
+通过 Action 的隐式 Intent 启动 Service 在安卓 5.0 以前的版本是可以实现跨应用启动 Service 的，安卓 5.0 以后的版本若想实现跨应用启动 Service 的功能必须使用显示 Intent
+```java
+serviceIntent = new Intent();
+serviceIntent.setComponent(new ComponentName("com.example.service1", "com.example.service1.MyService"));
+//...
+startService(serviceIntent);
+//...
+stopService(serviceIntent);
+```
+- [Android -- 跨应用启动Service](https://blog.csdn.net/gaopeng0071/article/details/46048159)
+
+#### AIDL 
+- [Android 通过 AIDL 在两个 APP之 间 Service 通信]方式(https://www.cnblogs.com/xqz0618/p/aidl_service.html)
+
+
+### 参考
+- [Service 精炼详解](https://blog.csdn.net/weixin_41101173/article/details/79684183)
+- [Android IntentService 使用介绍以及原理分析](https://www.jianshu.com/p/8c4181049564)
+- [Android Service 与 Activity 之间通信的几种方式](https://blog.csdn.net/xiaanming/article/details/9750689)
