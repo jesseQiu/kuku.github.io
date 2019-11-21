@@ -167,3 +167,15 @@ stopService(serviceIntent);
 - [Service 精炼详解](https://blog.csdn.net/weixin_41101173/article/details/79684183)
 - [Android IntentService 使用介绍以及原理分析](https://www.jianshu.com/p/8c4181049564)
 - [Android Service 与 Activity 之间通信的几种方式](https://blog.csdn.net/xiaanming/article/details/9750689)
+
+
+## Fragment
+- [《Android Fragment 非常详细的一篇》](https://www.jianshu.com/p/11c8ced79193)
+
+
+## RecyclerView
+- [RecyclerView](https://www.jianshu.com/p/b4bb52cdbeb7)
+
+
+## FrameLayout
+- [FrameLayout](https://www.runoob.com/w3cnote/android-tutorial-framelayout.html)
