@@ -4,21 +4,29 @@ date: 2017-11-06 18:49:25
 categories: Java
 ---
 
-## 一、java 分类
-- java-se // 基础核心版本(面向对象、API、JVM...)
-- java-ee // 企业版(JSP、EJB、服务...)
-- java-me // 手机(移动设备、游戏、通信、...)
+## 一、Java 分类
+- JavaSE（J2SE）（Java2 Platform Standard Edition，java 平台标准版） // 基础核心版本(面向对象、API、JVM...)
+- JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java 平台企业版) // 企业版(JSP、EJB、服务...)
+- JavaME(J2ME)(Java 2 Platform Micro Edition，java 平台微型版) // 手机(移动设备、游戏、通信、...)
 
-## 二、java windows 环境配置
+
+## 二、Java 环境变量配置
+- [Java 官网 JDK 下载地址](https://www.oracle.com/technetwork/cn/java/javase/downloads/index.html)
+- *现在下载需要注册账号*
+
+### 1. Java Windows 环境配置
 - 新建一个环境变量: JAVA_HOME
 例如:
 ```bash
-C:\Program Files (x86)\Java\jdk1.7.0_51  // JDK 相应的版本安装目录
+C:\Program Files (x86)\Java\jdk.xxx  // JDK 相应的版本安装目录
 ```
+
 - 新建一个环节变量：CLASSPATH
 ```bash
 .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar // 类库目录(*.jar 文件)
 ```
+**如果下载的 JDK 版本 > 10.x 的可以不需要配置这一步**
+
 - 在 PATH 环境变量中添加
 ```bash
 %JAVA_HOME%\bin;
@@ -27,15 +35,36 @@ C:\Program Files (x86)\Java\jdk1.7.0_51  // JDK 相应的版本安装目录
 - 测试是否配置成功
 ```bash
 java -version
+java version "11.0.5" 2019-10-15 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.5+10-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.5+10-LTS, mixed mode)
 
-// java version "1.7.0_51"
-// Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
-// Java HotSpot(TM) Client VM (build 24.51-b03, mixed mode, sharing)
+javac -version
+javac 11.0.5
 ```
 如果正常显示上面信息表示设置成
 
-## 三、java 组成
-- JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。在 JDK 的安装目录下有一个 jre 目录，里面有两个文件夹 bin和 lib，在这里可以认为 bin 里的就是 jvm，lib 中则是 jvm 工作所需要的类库，而 jvm 和 lib 合起来就称为 jre。
+- 编写代码测试
+新建一个 HelloJava.java 文件
+```java
+public class HelloJava {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+编译测试
+```bash
+$javac HelloJava.java
+$ java HelloJava
+Hello World
+```
+如果正常显示表示可以正常编译 Java 文件
+
+
+
+## 三、Java 组成
+- JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。在 JDK 的安装目录下有一个 jre 目录，里面有两个文件夹 bin 和 lib，在这里可以认为 bin 里的就是 jvm，lib 中则是 jvm 工作所需要的类库，而 jvm 和 lib 合起来就称为 jre。
 
 - JRE（Java Runtime Environment，Java 运行环境），包含 JVM 标准实现及 Java 核心类库。JRE 是 Java 运行环境，并不是一个开发环境，所以没有包含任何开发工具（如编译器和调试器）
 最后 JVM 也一目了然了
@@ -47,7 +76,7 @@ java -version
 - java 语言执行流程
 ![](http://images.jessechiu.com/java-20180420.png)
 
-## 四、eclipse
+## 四、Eclipse
 - http://www.eclipse.org
 - http://www.my-eclipse.cn // 拓展工具包
 - 创建工程 -> 创建包 -> 创建文件 -> 运行
@@ -55,79 +84,9 @@ java -version
 - 自动创建 `toString()` 方法: `菜单 -> Source -> Generat toString()`
 - 自动创建 `equals() 和 hashCode()` 方法: `菜单 -> Source -> Generat toString()`
 
+
 ## 五、基本语法
-- 常量声明: final int age=18;
-- 定义数组：int[] score = {1,2,3,4,5}  等价于 int[] score = new int[]{1,2,3,4,5}
-- 数组操作：Array 类(java.util 库中) Array.sort()、Array.toString();
-- foreach 循环数组
-
-```java
-for(int i : score){
-	System.out.println(i);
-}
-```
-
-### 5.1 静态变量、方法
-- 静态函数只能访问静态变量
-- 静态初始块只能初始静态变量
-- 普通函数只能通过类访问静态函数
-- 普通函数不能访问静态变量
-
-### 5.2 java 封装
-#### 5.2.1 java 包
-- 管理 java 文件
-- 解决 **同名文件** 冲突
-- 包名称全部使用小写，用 `.` 号连接
-- 包名一般使用 **公司网址反写+项目名称**: `com.jesse.myjava`
-
-#### 5.2.2 内部类
-1. 内部类提供了更好的封装，可以把内部类隐藏在外部类之内，不允许同一个包中的其他类访问该类
-2. 内部类的方法可以直接访问外部类的所有数据，包括私有的数据
-3. 内部类所实现的功能使用外部类同样可以实现，只是有时使用内部类更方便
-
-### 5.3 java 继承
-```java
-// 是指向同一个内存地址(这个和 javascript 有点不同)
-SayHello say = new SayHello("jesse");
-SayHello say1 = new SayHello("jesse");
-
-System.out.println(say);
-System.out.println(say1);
-
-if(say.equals(say1)) {
-	System.out.println("equal");
-}else {
-	System.out.println("no equal");
-}
-// HelloJava.SayHello@6056309
-// HelloJava.SayHello@6056309
-
-// 是指向 不同 内存地址
-SayHello say = new SayHello("jesse");
-SayHello say1 = new SayHello("jesse");
-
-System.out.println(say);
-System.out.println(say1);
-
-if(say.equals(say1)) {
-	System.out.println("equal");
-}else {
-	System.out.println("no equal");
-}
-// HelloJava.SayHello@6056309
-// HelloJava.SayHello@32dbde
-```
-
-### 5.4 多态
-- 抽象类不关心子类实现，只是约束作用
-
-### 5.5 String 对象
-- StringBuilder 不是线程安全，性能相对较 StringBufer 高。
-
-
-### 5.6 常用类
-- Date: java.util // 建议使用 Calendar 替代
-- SimpleDateFormate(): java.text 
+- [参考](/2018/04/09/java-simple-grammar/)
 
 
 ## 六、UML()
@@ -137,8 +96,8 @@ if(say.equals(say1)) {
 - Power Designer
 
 ## 七、JUnit
-> 是一个 Java 语言的单元测试框架。它由 Kent Beck 和 Erich Gamma 建立，逐渐成为源于 Kent Beck 的 sUnit 的 xUnit 家族中最为成功的一个。 JUnit 有它自己的 JUnit 扩展生态圈。多数Java的开发环境都已经集成了JUnit作为单元测试的工具。[1] 
-JUnit是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing framework）。Junit测试是程序员测试，即所谓 **白盒测试**，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。Junit是一套框架，继承 TestCase 类，就可以用 Junit 进行自动测试了。
+> 是一个 Java 语言的单元测试框架。它由 Kent Beck 和 Erich Gamma 建立，逐渐成为源于 Kent Beck 的 sUnit 的 xUnit 家族中最为成功的一个。 JUnit 有它自己的 JUnit 扩展生态圈。多数 Java 的开发环境都已经集成了 JUnit 作为单元测试的工具。
+JUnit 是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing framework）。Junit 测试是程序员测试，即所谓 **白盒测试**，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。Junit 是一套框架，继承 TestCase 类，就可以用 Junit 进行自动测试了。
 
 ## 八、Tomcat
 > Tomcat 服务器是一个免费的开放源代码的 Web 应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试 JSP 程序的首选。对于一个初学者来说，可以这样认为，当在一台机器上配置好 Apache 服务器，可利用它响应 HTML（标准通用标记语言下的一个应用）页面的访问请求。实际上 Tomcat 是 Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行 tomcat 时，它实际上作为一个与 Apache 独立的进程单独运行的。

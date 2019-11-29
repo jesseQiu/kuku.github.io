@@ -1,10 +1,10 @@
 ---
-title: Java Grammar
+title: Java Simple Grammar
 date: 2018-04-09 09:49:25
 categories: Java
 ---
 
-本文主要记录了学习过程中的语法知识笔记，并不系统，主要是针对个人比较容易混淆或难以理解的点记录，方便后期可以通过本文快速回忆
+>本文主要记录了学习 Java 过程中的语法知识笔记，方便后期可以通过本文快速回忆相关的知识点。
 
 
 ## 一、基础
@@ -623,15 +623,15 @@ class IEatPlug implements IEat{
 
 ## 四、文件 与 IO
 - File 类表示一个文件 或 目录
-- 流的类  别
+- 流的类别
     * 字节流: 一般在操作非字符文件时使用字节流
     * 字符流: 操作字符文件时使用，内部也是使用字节流操作
 
 ## 五、字符编码
-- iso8859-1: 单字节编码，最多只能表示 0-255 之间的字符，主要应用在英文
+- ISO8859-1: 单字节编码，最多只能表示 **0-255** 之间的字符，主要应用在英文
 - GBK/2312: 双字节编码，中文的国际编码，专门用来表示汉字
-- unicode: 双字节编码，使用 16 进制表示编码，java 中使用此编码方式，也是最标准的一种编码。但是不兼容 iso8859-1 编码。
-- utf: 1-6 字节不定长度编码。由于 uniconde 编码不支持 iso8859-1 编码，在表示英文字母时也使用 2 个字节，占用空间，不便于传输和存储，因此产生了 uft 编码。
+- UNICODE: 双字节编码，使用 16 进制表示编码，java 中使用此编码方式，也是最标准的一种编码。但是不兼容 ISO8859-1 编码
+- UTF: 1-6 字节不定长度编码。由于 UNICONDE 编码不支持 ISO8859-1 编码，在表示英文字母时也使用 2 个字节，占用空间，不便于传输和存储，因此产生了 UTF 编码
 - 造成乱码根本原因:
     * 程序使用的编码与本机的编码不统一
     * 在网络中，客服端与服务端编码不统一
@@ -663,9 +663,9 @@ str2: 我在唱歌，啦啦啦啦...
 Java NIO（New IO）是从 Java 1.4 版本开始引入的一个新的 IO API，可以替代标准的 Java IO AP.
 
 ### 6.1 Java NIO 提供了与标准 IO 不同的 IO 工作方式： 
-- Channels and Buffers（通道和缓冲区）：标准的 IO 基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。 
+- Channels and Buffers（通道和缓冲区）：标准的 IO 基于字节流和字符流进行操作的，而 NIO 是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。 
 
-- Asynchronous IO（异步IO）：Java NIO 可以让你异步的使用IO，例如：当线程从通道读取数据到缓冲区时，线程还是可以进行其他事情。当数据被写入到缓冲区时，线程可以继续处理它。从缓冲区写入通道也类似。 
+- Asynchronous IO（异步IO）：Java NIO 可以让你异步的使用 IO，例如：当线程从通道读取数据到缓冲区时，线程还是可以进行其他事情。当数据被写入到缓冲区时，线程可以继续处理它。从缓冲区写入通道也类似。 
 
 - Selectors（选择器）：Java NIO 引入了选择器的概念，选择器用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个的线程可以监听多个数据通道。
 
@@ -749,6 +749,8 @@ Files.deleteIfExists(pathfile);         //先判断是否存在，存在再删
 ```java
 public class Main {
     public static void main(String[] args) {
+
+
         // 复制文件
         Path source = Paths.get("d:\\test.txt");
         Path target = Paths.get("d:\\test-copy.txt");
@@ -767,6 +769,8 @@ public class Main {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
         // 文件移动
         // 移动的目标路径必须是存在的
         Path path = Paths.get("d:\\test");
@@ -785,6 +789,8 @@ public class Main {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
         // 读出和写入操作
         Path textFile = Paths.get("d:\\write.txt");
         String line1 = "你好：";
@@ -811,6 +817,8 @@ public class Main {
     }
 }
 ```
+
+
 
 ## 八、集合
 
@@ -958,7 +966,7 @@ public class Main {
 
         // 随机生成 指定数量的 0-100 随机数
         public List<Integer> supply(Integer num ,Supplier<Integer> supplier){
-            List<Integer> resultList=new ArrayList<Integer>()   ;
+            List<Integer> resultList = new ArrayList<Integer>()   ;
             for(int x=0;x<num;x++)
                 resultList.add(supplier.get())   ;
             return resultList ;
@@ -971,6 +979,7 @@ public class Main {
             String string2 = handleStr("我爱游泳哒哒哒", str->str.substring(2, 6));
             System.out.println("函数型接口: " + string2);
         }
+
         // 去除输入字符的头尾空格
         public String handleStr(String target,Function<String, String> fun){
             return fun.apply(target)   ;
@@ -978,14 +987,15 @@ public class Main {
 
         // Predicate<T> : 断言型接口
         public void test4(){
-            List<String>  list=Arrays.asList("atguigu","mldn","bjpowernode","itcast","sxt")   ;
-            List<String> newList = filterStr(list,string->string.length()>3) ;
+            List<String>  list = Arrays.asList("atguigu","mldn","bjpowernode","itcast","sxt")   ;
+            List<String> newList = filterStr(list,string->string.length() > 3) ;
             System.out.println("断言型接口:");
             newList.stream().forEach(System.out::println) ;
         }
+
         // 提取字符数 >3 的元素
         public List<String> filterStr(List<String> list,Predicate<String> predicate){
-            List<String>  resultList=new ArrayList<>()   ;
+            List<String>  resultList = new ArrayList<>();
             int size = list.size();
             for(int x=0;x<size;x++){
                 String string = list.get(x) ;
@@ -1030,8 +1040,9 @@ public class Main {
                 stoneList1.add(s);
             }
         }
-        System.out.println("过虑 < 300: ");
+        System.out.println("过虑 > 300: ");
         stoneList1.forEach(s->System.out.println(s.getWeight()));
+
         // 排序(使用了匿名类)
         // Collections 工具类方法
         Collections.sort(stoneList1, new Comparator<Stone>() {
@@ -1042,6 +1053,7 @@ public class Main {
         });
         System.out.println("按重量排序: ");
         stoneList1.forEach(s->System.out.println(s.getWeight()));
+
         // 提取名称
         List<String> stoneName = new ArrayList<>();
         for(Stone s:stoneList1){
@@ -1081,7 +1093,9 @@ class Stone{
 }
 ```
 
+
 ## 十一、`Optional` 容器类
+
 调用一个方法得到了返回值，我们首先要判断这个返回值是否为 null，只有在非空的前提下才能将其作为其他方法的参数。这正是一些类似 Guava 的外部 API 试图解决的问题。
 Optional 是 Java8 提供的为了解决 null 安全问题的一个 API。善用 Optional 可以使我们代码中很多繁琐、丑陋的设计变得十分优雅。
 ```java
@@ -1125,6 +1139,7 @@ class User{
     }
 }
 ```
+
 
 ## 十二、`Queue` `Deque` `Stack`
 - queue 队列，先进先出，不支持迭代器。队列通常（但并非一定）以 FIFO（先进先出）的方式排序各个元素。Queue 使用时要尽量避免 Collection 的 add() 和 remove() 方法，而是要使用 `offer()` 来加入元素，使用 `poll()` 来获取并移出元素。它们的优点是通过返回值可以判断成功与否，add() 和 remove() 方法在失败的时候会抛出异常。 如果只是使用而不移出该元素，使用 element() 或者 peek() 方法
@@ -1183,6 +1198,7 @@ public class Main {
 
 ## 十三、Guava
 Guava 工程包含了若干被 Google 的 Java 项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等
+
 
 ## 十四、程序、进程、线程
 - 程序: 指令集合，是进程静态描述文本，只有加载到内存中才能运行
@@ -1331,7 +1347,7 @@ Apache 的 Mina（Multipurpose Infrastructure Networked Applications）是一个
 
 ## 十六、反射 与 内省
 ### 16.1 反射
-- 反射(reflection): JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+- 反射(reflection): JAVA 反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为 java 语言的反射机制。
 
 - JavaBean: 就是 java 组件，广泛理解就是一个类。对于组件来说，关键要具有能够被 IDE 构建工具侦测其属性和事件的能力。可以被反射的能力。
 
