@@ -17,7 +17,7 @@ categories: Html
 
 例如，BBC 主页包含大量的链接，不仅指向多个新闻故事，而且指向网站的不同区域（导航功能），登录/注册页面（用户工具）等等。
 
-![frontpage of bbc.co.uk, showing many news items, and navigation menu functionality](http://images.jessechiu.com/bbc-homepage.png)
+![frontpage of bbc.co.uk, showing many news items, and navigation menu functionality](https://raw.githubusercontent.com/Jesse-Chiu/images/master/bbc-homepage.png)
 
 ## 二、链接的解析
 
@@ -229,7 +229,7 @@ to download Firefox</p>
 
 最终的例子应该是这样的：
 
-![An example of a simple HTML navigation menu, with home, pictures, projects, and social menu items](http://images.jessechiu.com/simple-directory.png)
+![An example of a simple HTML navigation menu, with home, pictures, projects, and social menu items](https://raw.githubusercontent.com/Jesse-Chiu/images/master/simple-directory.png)
 
 **注意**: 如果你卡住了，或者不确定你是否正确，你可以检查导航菜单上的目录，看看正确的答案。
 

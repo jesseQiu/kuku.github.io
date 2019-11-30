@@ -16,7 +16,7 @@ categories: Java
 - 包名一般使用 **公司网址反写+项目名称**: `com.jesse.myjava`
 
 ### 1.2 八种数据类型
-![](http://images.jessechiu.com/8-data-type.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/8-data-type.png)
 
 - 方法定义修饰符顺序
 访问权限修饰符 + 静态修饰符 + 返回值类型 + 方法名称
@@ -44,7 +44,7 @@ Cars car = new Cars();
 ### 1.4 包与访问修饰符
 - `package.com.xxx` 语句只能出现在代码中第一句
 - 访问修饰符
-![](http://images.jessechiu.com/package.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/package.png)
 
 
 
@@ -823,7 +823,7 @@ public class Main {
 ## 八、集合
 
 ### 8.1 集合类总图
-![](http://images.jessechiu.com/collection-class.jpg)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/collection-class.jpg)
 
 ### 8.2 Collection 接口
 用于存储单个对象的集合
@@ -1009,7 +1009,7 @@ public class Main {
 ```
 
 ## 十、Stream
-![](http://images.jessechiu.com/stream.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/stream.png)
 
 Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。同时它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用 fork/join 并行方式来拆分任务和加速处理过程。通常编写并行代码很难而且容易出错, 但使用 Stream API 无需编写一行多线程的代码，就可以很方便地写出高性能的并发程序。所以说，Java 8 中首次出现的 java.util.stream 是一个函数式语言+多核时代综合影响的产物。
 下面是一个综合实例对比
@@ -1352,7 +1352,7 @@ Apache 的 Mina（Multipurpose Infrastructure Networked Applications）是一个
 - JavaBean: 就是 java 组件，广泛理解就是一个类。对于组件来说，关键要具有能够被 IDE 构建工具侦测其属性和事件的能力。可以被反射的能力。
 
 - JavaBean 模型
-![](http://images.jessechiu.com/javabean-model.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/javabean-model.png)
 
 
 

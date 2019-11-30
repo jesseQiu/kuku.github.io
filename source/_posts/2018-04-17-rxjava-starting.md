@@ -5,7 +5,7 @@ updated: 2018-04-17 14:34:39
 categories: Java
 ---
 
-![](http://images.jessechiu.com/rxjava.jpg)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/rxjava.jpg)
 
 ## 一、ReactiveX
 
@@ -43,7 +43,7 @@ RxJava 是 ReactiveX 在 JVM 上的一个实现，ReactiveX 使用 Observable �
 - 添加了 `onCompleted()` 通知事件
 - 添加了 `onError()` 事件
 - 组合而不是嵌套，避免了回调地狱
-![](http://images.jessechiu.com/rajava-observable.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/rajava-observable.png)
 
 ### 2.4 `subscribeOn()` vs `observeOn()`
 - `subscribeOn()` 改变的是 **订阅** 的线程，即 `subscribe()` 执行的线程(创建可观察对象时回调事件，只会触发一次)

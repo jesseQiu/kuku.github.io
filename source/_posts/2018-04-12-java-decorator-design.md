@@ -120,7 +120,7 @@ class Casquette extends HatDecorator {
 
 Java 中经常出现的地方就是 JavaIO。提到 JavaIO，脑海中就冒出了大量的类：InputStream、FileInputStream、BufferedInputStream……等。其实，这里面大部分都是装饰类，只要弄清楚这一点就容易理解了。
 
-![](http://images.jessechiu.com/io-class.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/io-class.png)
 
 下面是利用 javaIo 类实现的一个装饰，实现对单词首字母转为大写。
 ```java

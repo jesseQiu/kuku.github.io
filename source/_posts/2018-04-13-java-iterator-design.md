@@ -8,7 +8,7 @@ categories: Java
 迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各种元素，而又不暴露该对象的内部表示。
 
 ## 二、角色构成
-![](http://images.jessechiu.com/iterator.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/iterator.png)
 
 - 抽象迭代器角色(Iterator): 定义遍历元素所需要的方法，一般来说会有这么三个方法：取得下一个元素的方法 next()，判断是否遍历结束的方法 hasNext()，移出当前对象的方法 remove(),
 

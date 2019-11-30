@@ -9,7 +9,7 @@ categories: Android
 
 >ABI（Application Binary Interface）: 定义了二进制文件（尤其是 .so 文件）如何运行在相应的系统平台上，从使用的指令集，内存对齐到可用的系统函数库。在 Android 系统上，每一个 CPU 架构对应一个 ABI：armeabi，armeabi-v7a，x86，mips，arm64-v8a，mips64，x86_64
 
-![ABI 与 CPU 关系](http://images.jessechiu.com/abi-cpu.png)
+![ABI 与 CPU 关系](https://raw.githubusercontent.com/Jesse-Chiu/images/master/abi-cpu.png)
 
 
 ## 一、为什么你需要重点关注 .so 文件

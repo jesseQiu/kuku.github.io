@@ -67,7 +67,7 @@ startup
 浏览器输入: `http://localhost:8080` 如果看到左上叫有一只猫，就表示成功
 
 ### 2.2 Tomcat 目录结构
-![](http://images.jessechiu.com/tomcat.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/tomcat.png)
 
 ### 2.3 WEB-INF 目录
 WEB-INF 是 java 的 web 应用安全目录，所谓安全就是客户端无法访问，只有服务端可以访问的目录

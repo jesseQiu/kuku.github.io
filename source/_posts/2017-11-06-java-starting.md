@@ -74,7 +74,7 @@ Hello World
 - 包含关系: JDK > JRE > JVM
 
 - java 语言执行流程
-![](http://images.jessechiu.com/java-20180420.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/java-20180420.png)
 
 ## 四、Eclipse
 - http://www.eclipse.org
@@ -120,10 +120,10 @@ mvn install // 安装 jar 包到本地仓库
 ```
 ### 10.2 常见错误处理
 - `Could not create the Java Virtual Machine`
-![maven-02](http://images.jessechiu.com/maven-02.png)
+![maven-02](https://raw.githubusercontent.com/Jesse-Chiu/images/master/maven-02.png)
 主要是由于 java 默认的最大内存不够 maven 使用，需要在启动 maven 时重新指定参数。
 可以在环境变量 PATH 中手动加入 `MAVEN_OPTS:-Xms128m-Xmx512m` 参数值,如下图
-![maven-01](http://images.jessechiu.com/maven-01.png)
+![maven-01](https://raw.githubusercontent.com/Jesse-Chiu/images/master/maven-01.png)
 
 ### 10.3 学习资源: [项目管理利器——maven](http://www.imooc.com/learn/443)
 

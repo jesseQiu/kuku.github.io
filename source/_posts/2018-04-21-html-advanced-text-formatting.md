@@ -413,7 +413,7 @@ para.onclick = function() {
 
 上面的代码显示效果如下：
 
-![](http://images.jessechiu.com/html-sup-sub.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/html-sup-sub.png)
 
 ## 七、标记时间和日期
 

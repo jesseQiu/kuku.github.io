@@ -13,8 +13,8 @@ categories: AliPay
 - 创建应用
 我这边选择的是 `网页&移动应用` -> `自定义接入`  -> `自用型应用` -> `填写应用名称` -> `添加详细信息` -> `开发配置` -> `提交审核`
 开发环境配置中，生成密钥方式可以使用官方提供的工具，直接生成。
-![alipay-config01](http://images.jessechiu.com/alipay-config01.png)
-![alipay-config02](http://images.jessechiu.com/alipay-config02.png)
+![alipay-config01](https://raw.githubusercontent.com/Jesse-Chiu/images/master/alipay-config01.png)
+![alipay-config02](https://raw.githubusercontent.com/Jesse-Chiu/images/master/alipay-config02.png)
 - 开发测试
 我这一步直接省了，直接跳转到下一步
 - 审核发布

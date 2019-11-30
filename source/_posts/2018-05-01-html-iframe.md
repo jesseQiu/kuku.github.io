@@ -178,7 +178,7 @@ window.addEventListener("load", drawOutput);
 
 **注意**：**插件**是一种对浏览器原生无法读取的内容提供访问权限的软件。然而，您不太可能使用这些元素 - Applet 几年来一直没有被使用；由于许多原因，Flash 不再受欢迎（见下面的[插件案例](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#The_case_against_plugins)）；PDF 更倾向于被链接而不是被嵌入；其他内容，如图像和视频都有更优秀、更容易元素来处理。插件和这些嵌入方法真的是一种传统技术，我们提及它们主要是为了以防您在某些情况下遇到问题，比如内部网或企业项目等。如果您发现自己需要嵌入插件内容，那么您至少需要一些这样的信息：
 
-![](http://images.jessechiu.com/embed-object.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/embed-object.png)
 
 **注意**：<`object>``需要`data`属性，`type`属性或两者。如果您同时使用这两个，您也可以使用该`[typemustmatch](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object#attr-typemustmatch)`属性（仅在Firefox中实现，在本文中）。`typemustmatch`保持嵌入文件不运行，除非`type`属性提供正确的媒体类型。`typemustmatch`因此，当您嵌入来自不同[来源的](https://developer.mozilla.org/en-US/docs/Glossary/origin "来源：Web内容的起源由方案（协议），主机（域）和用于访问它的URL的端口定义。 只有当方案，主机和端口都匹配时，两个对象具有相同的原点。")内容（可以防止攻击者通过插件运行任意脚本）时，可以赋予重要的安全优势。
 

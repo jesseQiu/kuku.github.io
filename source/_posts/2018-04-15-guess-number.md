@@ -8,8 +8,8 @@ categories: JavaScript
 扫雷游戏想必大家都玩过，今天我向大家介绍一个类似扫雷的游戏，**猜数字** 游戏。
 
 先来两张靓照:
-![](http://images.jessechiu.com/guess-number-1.png)
-![](http://images.jessechiu.com/guess-number-2.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/guess-number-1.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/guess-number-2.png)
 
 具体的游戏规则:
 1. 每次随机生成 5 个数字(1-100 之间，游戏玩家看不到)

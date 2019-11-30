@@ -43,7 +43,7 @@ categories: Html
 ```
 将创建如下输出:
 
-![](http://images.jessechiu.com/svg.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/svg.png)
 
 从上面的例子可以看出，SVG很容易手工编码。 是的，您可以在文本编辑器中手动编写简单的SVG，但是对于复杂的图像，这很快就开始变得非常困难。 为了创建SVG图像，大多数人使用矢量图形编辑器，如 [Inkscape](https://inkscape.org/en/) 或 [Illustrator](https://en.wikipedia.org/wiki/Adobe_Illustrator)。 这些软件包允许您使用各种图形工具创建各种插图，并创建照片的近似值（例如Inkscape的跟踪位图功能）。
 

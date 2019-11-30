@@ -8,7 +8,7 @@ categories: Java
 观察者模式（又被称为 发布-订阅（Publish/Subscribe）模式，属于 **行为** 型模式的一种，它定义了 **一种一对多** 的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态变化时，会通知所有的观察者对象，使他们能够自动更新自己。
 
 ## 二、结构图
-![](http://images.jessechiu.com/observer.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/observer.png)
 
 ## 三、具体角色
 - Subject：抽象主题（抽象被观察者），抽象主题角色把所有观察者对象保存在一个集合里，每个主题都可以有任意数量的观察者，抽象主题提供一个接口，可以增加和删除观察者对象。

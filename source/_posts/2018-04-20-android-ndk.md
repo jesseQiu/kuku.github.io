@@ -6,7 +6,7 @@ categories: Android
 ---
 
 
-![](http://images.jessechiu.com/android-ndk.jpg)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/android-ndk.jpg)
 
 ## 一、Android NDK？
 Android NDK 是在 SDK 前面又加上了“原生”二字，即 Native Development Kit，因此又被 Google 称为 “NDK”。
@@ -29,33 +29,33 @@ JNI 是 Java Native Interface 的缩写，它提供了若干的 API 实现了 Ja
 
 ## 三、创建 NDK 工程
 ### 1. 创建一个空的 Activity 工程
-![](http://images.jessechiu.com/ndk-1.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-1.png)
 *AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish*
-![](http://images.jessechiu.com/ndk-2.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-2.png)
 工程会自动创建 Ndk 环境配置
-![](http://images.jessechiu.com/ndk-3.png)
-![](http://images.jessechiu.com/ndk-4.png)
-![](http://images.jessechiu.com/ndk-5.png)
-![](http://images.jessechiu.com/ndk-6.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-3.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-4.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-5.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-6.png)
 
 ### 2. 创建生成 .so 库和对应 jar 包模块
-![](http://images.jessechiu.com/ndk-7.png)
-![](http://images.jessechiu.com/ndk-8.png)
-![](http://images.jessechiu.com/ndk-9.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-7.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-8.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-9.png)
 
 ### 3. 把第一步中的 NDK 代码移到新创建的模块中
 这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用
-![](http://images.jessechiu.com/ndk-10.png)
-![](http://images.jessechiu.com/ndk-11.png)
-![](http://images.jessechiu.com/ndk-12.png)
-![](http://images.jessechiu.com/ndk-13.png)
-![](http://images.jessechiu.com/ndk-14.png)
-![](http://images.jessechiu.com/ndk-15.png)
-![](http://images.jessechiu.com/ndk-16.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-10.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-11.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-12.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-13.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-14.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-15.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-16.png)
 
 
 ### 4. 在其他工程中使用 NDK 的 so 文件和 jar 包
-![](http://images.jessechiu.com/ndk-17.png)
+![](https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-17.png)
 
 
 
