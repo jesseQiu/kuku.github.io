@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>调试 HTML (七) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="写 HTML 是非常容易的，但如果某部分出了问题并且你找不到错误代码在哪里的时候，本文将向您介绍一些可以帮助您查找和修复 HTML 中的错误的工具。目标: | 学习基础使用调试工具查找 HTML 中的错误。
+
+一、HTML 和 调试今天这里并没有介绍使用工具的高级用法，因为目前我们还在基础阶段，所以">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="调试 HTML (七)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 调试 HTML (七)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>写 HTML 是非常容易的，但如果某部分出了问题并且你找不到错误代码在哪里的时候，本文将向您介绍一些可以帮助您查找和修复 HTML 中的错误的工具。<br>目标: | 学习基础使用调试工具查找 HTML 中的错误。</p>
+</blockquote>
+<h2 id="一、HTML-和-调试"><a href="#一、HTML-和-调试" class="headerlink" title="一、HTML 和 调试"></a>一、HTML 和 调试</h2><p>今天这里并没有介绍使用工具的高级用法，因为目前我们还在基础阶段，所以介绍的都是基础原理性的知识，所以大家不用急，后面我们会推出相应的教程。</p>
+<h3 id="1-1-宽容模式代码"><a href="#1-1-宽容模式代码" class="headerlink" title="1.1 宽容模式代码"></a>1.1 宽容模式代码</h3><p>宽容的意思是什么呢？通常当你写错代码的时候，你会遇到以下两种主要类型的错误：</p>
+<ul>
+<li><strong>语法错误</strong>: 由于拼写错误导致程序无法运行，就像上面Rust的例子. 修正这些错误是没问题的，只要你熟悉正确的使用工具和知道错误信息的意思。</li>
+<li><strong>逻辑错误</strong>: 实际上语法是正确的，但代码不是你想要的，这意味着程序运行不正确. 逻辑错误通常比语法错误更难修复，因为没有一个错误信息指示你到错误的来源。</li>
+</ul>
+<p>HTML 本身不容易因语法错误出错，因为浏览器是以 <strong>宽松模式</strong> 来运行，这意味着即使出现语法错误浏览器依然会运行。浏览器通常都有自己的规则来解析语法错误的标记语言，所以程序仍然会运行，尽管可能不是你预期的样子。这样当然仍然会带来问题。</p>
+<p><strong>注意</strong>: HTML 可以自由的运行，是因为在 Web 创建之初，它的宗旨就是：允许人们获取他们发布的内容比确保所有语法完全正确更重要。如果当初 Web 在一开始就更加严格的话，也许 Web 就不会像今天这样流行了。</p>
+<h3 id="1-2-主动学习-学习宽容式代码风格"><a href="#1-2-主动学习-学习宽容式代码风格" class="headerlink" title="1.2 主动学习: 学习宽容式代码风格"></a>1.2 主动学习: 学习宽容式代码风格</h3><p>现在到你自己学习 HTML 代码宽松特性的时候了。</p>
+<ol>
+<li><p>首先，找到我们的 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">debug-example demo</a> 副本并保存到本地。这里故意写了一些错误在代码中，以便我们探究（HTML 标记被写成了<strong>糟糕的格式</strong>，与 <strong>良好的格式</strong>相反）。</p>
+</li>
+<li><p>接着，在浏览器中打开—你会看到下面的样子：<img src="https://mdn.mozillademos.org/files/12437/badly-formed-html.png" alt="A simple HTML document with a title of HTML debugging examples, and some information about common HTML errors, such as unclosed elements, badly nested elements, and unclosed attributes. "></p>
+</li>
+<li><p>这看起来一点儿也不好；让我们来看看源代码，看看我们是否能找出为什么（只显示了 body 的内容）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML debugging examples<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>What causes errors in HTML?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed elements: If an element is <span class="tag">&lt;<span class="name">strong</span>&gt;</span>not closed properly,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      then its effect can spread to areas you didn't intend</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Badly nested elements: Nesting elements properly is also very important</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      for code behaving correctly. <span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed attributes: Another common source of HTML problems. Let's</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      look at an example: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.mozilla.org/&gt;link to Mozilla</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">      homepage&lt;/a&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">&lt;/ul&gt;</span></span></span></pre></td></tr></table></figure>
+</li>
+<li><p>让我们检查一下这里看到的问题：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p" target="_blank" rel="noopener" title="HTML &lt;p&gt;元素（或者说 HTML 段落元素）表示文本的一个段落。该元素通常表现为一整块与相邻文本分离的文本，或以垂直的空白隔离或以首行缩进。另外，&lt;p&gt; 是块级元素。">paragraph</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/li" target="_blank" rel="noopener" title="HTML &lt;li&gt; 元素 (或者 HTML 列表条目元素) 用于表示列表里的条目。它必须被包含在一个父元素里：一个有顺序的列表(&lt;ol&gt;)，一个无顺序的列表(&lt;ul&gt;)，或者一个菜单 (&lt;menu&gt;)。在菜单或者无顺序的列表里，列表条目通常用点排列显示。在有顺序的列表里，列表条目通常是在左边有按升序排列计数的显示，例如数字或者字母。">list item</a> 元素没有结束标签。看看上面的图片，看起来对标记并没有导致太严重的影响，因为很容易推断出一个元素应该在哪里结束，在哪里开始。</li>
+<li>第一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a> 元素没有结束标签。这问题有一点大，因为不太容易确定元素在哪里结束。事实上，整个剩下的文本都被加粗强调了。</li>
+<li>这部分代码嵌套很糟糕：<code>&lt;strong&gt;strong &lt;em&gt;strong emphasised?&lt;/strong&gt; what is this?&lt;/em&gt;</code>。由于之前的问题，要解释这是如何解析的并不容易。</li>
+<li><code>[href](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-href)</code> 属性缺少了一个双引号。这导致了最大的问题—链接完全没有解析出来。</li>
+</ul>
+</li>
+<li><p>现在我们看看浏览器渲染出来的标记语言，而不是源代码中的标记语言。我们打开浏览器的开发者工具。如果你对这个不太熟悉的话，先浏览一下<a href="https://developer.mozilla.org/zh-CN/docs/Learn/Discover_browser_developer_tools" target="_blank" rel="noopener">Discover browser developer tools</a>。</p>
+</li>
+<li><p>在开发者模式中的审查器件，你可以看到被渲染出来的标记语言会像这样。<img src="https://mdn.mozillademos.org/files/12439/html-inspector.png" alt="The HTML inspector in Firefox, with our example&#39;s paragraph highlighted, showing the text &quot;What causes errors in HTML?&quot; Here you can see that the paragraph element has been closed by the browser."></p>
+</li>
+<li><p>使用开发者模式下的审查器，可以非常清楚地看到 <strong>浏览器尝试修补</strong> 我们的代码错误（下面是火狐浏览器中的情况，其他浏览器也会进行修补）</p>
+<ul>
+<li><p>段落和类表元素被加上了闭合标签。</p>
+</li>
+<li><p>第一个<strong>标签闭合的位置并不明确，因此浏览器用自己的<strong>标签将每一块分离的文本包括了进来，就在文档的底部。</p>
+</li>
+<li><p>浏览器像下面这样修补嵌套错误：</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span> what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>有错误属性的链接整个被删掉了。最后一个列表元素就像这样：</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Unclosed attributes: Another common source of HTML problems.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  Let's look at an example: <span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="1-3-HTML-验证"><a href="#1-3-HTML-验证" class="headerlink" title="1.3 HTML 验证"></a>1.3 HTML 验证</h3><p>看了上面的例子之后，你应该会希望自己的HTML格式正确。那么应该如何做呢？上面的例子都是一些非常小的错误，因此稍微浏览一下自己的代码就可以发现，但是如果是一个非常庞大、复杂的HTML文档呢？</p>
+<p>最好的方法就是让你的 HTML 页面通过 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> — 由 W3C 创立并维护的，这个网站紧跟定义 HTML，CSS，和其他网络技术的具体内容. 这个网页将 HTML 文档作为输入,并运行 ，然后给你一个报告告诉你你的 HTML 有哪些错误.</p>
+<p><img src="https://mdn.mozillademos.org/files/12441/validator.png" alt="The HTML validator homepage"></p>
+<p>为了确定需要验证的HTML，你可以输入一个指向该HTML页面的网址，或者上传一份HTML文件，或者直接输入一些HTML代码。</p>
+<h3 id="1-4-主动学习：验证一份HTML文档"><a href="#1-4-主动学习：验证一份HTML文档" class="headerlink" title="1.4 主动学习：验证一份HTML文档"></a>1.4 主动学习：验证一份HTML文档</h3><p>让我们用 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">sample document</a>尝试一下：</p>
+<ol>
+<li>在浏览器中打开 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> 。</li>
+<li>点击或者激活 <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">Validate by Direct Input</a> 栏。</li>
+<li>将整个示范文档的代码（不仅仅是body部分）复制粘贴到在 Markup Validation Service中显示的巨大的文本框。</li>
+<li><em>点击Check按钮。</em></li>
+</ol>
+<p>然后就会出现一张列表，显示了文档中的错误或者其他信息。</p>
+<p><img src="https://mdn.mozillademos.org/files/12443/validation-results.png" alt="A list of of HTML validation results from the W3C markup validation service"></p>
+<h4 id="1-5-解析错误信息"><a href="#1-5-解析错误信息" class="headerlink" title="1.5 解析错误信息"></a>1.5 解析错误信息</h4><p>展示在你眼前的错误信息列表可能会很有用，也可能并没有帮助。经过一点点练习你就会知道如何解析这些错误从而修复错误。让我们来浏览一下这些错误信息的含义。你会看到每一行都有一个数字和信息栏，来帮助你轻松定位错误。</p>
+<ul>
+<li><p>End tag <code>li</code> implied, but there were open elements（隐含着结束标签 <code>li</code> ，但却出现了元素的开始标签；共两个）: 这条信息表明一个元素的开始标签应该对应着一个结束标签，结束标签是隐含的，但实际上并不存在。行/列（line/column）信息指出那一行代码的下一行是结束标签应该出现的地方，这已经足够看出问题所在了。</p>
+</li>
+<li><p>Unclosed element <code>strong</code>（未闭合标签 <code>strong</code> ）：这是非常容易理解的，一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a>元素没有闭合，行/列信息指出了它所在之处。</p>
+</li>
+<li><p>End tag <code>strong</code> violates nesting rules（结束标签 <code>strong</code> 违反了嵌套规则）：指出了错误嵌套的元素，行/列信息表明了错误所在。</p>
+</li>
+<li><p>End of file reached when inside an attribute value. Ignoring tag（在属性值内达到文件末尾。忽略标签）: 这个比较难懂，它说的是在某个地方有一个属性的值没有正确构成，估计是在文件末尾附近，因为文件的结尾（EOF）出现在了一个属性值里。事实上浏览器没有渲染超链接就已经告诉我们错误出在哪个元素了。</p>
+</li>
+<li><p>End of file seen and there were open elements（文件结尾有未闭合的元素）：这个有点意义不明，但基本上表明了有元素没有正确闭合。行号指向文件最后几行，且错误信息给出了一个这种错误的案例：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">example: &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.mozilla.org&#x2F;&gt;link to Mozilla homepage&lt;&#x2F;a&gt; ↩ &lt;&#x2F;ul&gt;↩ &lt;&#x2F;body&gt;↩&lt;&#x2F;html&gt;</span></pre></td></tr></table></figure>
+
+<p>  <strong>注意</strong>: 一个缺少结束引号标记的属性会导致一个未闭合的元素，因为其余的文档被解析为了属性的内容。</p>
+</li>
+<li><p>Unclosed element <code>ul</code>（未闭合元素 <code>ul</code>）：这个不是很有帮助，因为<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul" target="_blank" rel="noopener" title="The HTML &lt;ul&gt; 元素 ( 或 HTML 无序列表元素） 代表多项的无序列表，即无数值排序项的集合，且它们在列表中的顺序是没有意义的。通常情况下，无序列表项的头部可以是几种形式，如一个点，一个圆形或方形。头部的风格并不是在页面的HTML描述定义, 但在其相关的CSS 可以用 list-style-type 属性。"><code>&lt;ul&gt;</code></a>已经正确闭合了。出现这个错误是因为那个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素因少了右引号而没有闭合。</p>
+</li>
+</ul>
+<p>如果你不能一次弄懂所有的错误，别着急，你可以试试先修复那些你已经弄懂的错误，然后再申请验证，看看剩下的错误是哪些。有时候最先修复的错误可能让你摆脱了后面一系列的错误——因为一个小问题可能引发好几个错误，就像连锁反应。</p>
+<p>当你所有的错误都修复之后，会得到下面的输出。</p>
+<p><img src="https://mdn.mozillademos.org/files/12445/valid-html-banner.png" alt="Banner that reads &quot;The document validates according to the specified schema(s) and to additional constraints checked by the validator.&quot;"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这就是我们关于HTML调试的介绍，这应该也会帮助你调试 CSS 和 JavaScript，或者你未来遇到的任何一种语言。这也是HTML模块学习的最后一篇文章，现在你可以用我们给你布置的任务来测试一下自己：下面的第一个链接。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/Debugging_HTML" target="_blank" rel="noopener">调试 HTML</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/04/22/2018-04-22-html-marking-up-a-letter/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/04/21/2018-04-21-html-document-and-website-structure/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-04-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Html/">Html<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

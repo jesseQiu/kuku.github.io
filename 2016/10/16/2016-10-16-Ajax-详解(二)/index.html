@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ajax 详解(二) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、XMLHttpRequestXMLHttpRequest 是一个 JavaScript 对象，它最初由微软设计,随后被 Mozilla、Apple 和 Google 采纳. 如今,该对象已经被 W3C 组织标准化. 通过它,你可以很容易的取回一个 URL 上的资源数据. 尽管名字里 有XML, ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Ajax 详解(二)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Ajax 详解(二)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h3 id="一、XMLHttpRequest"><a href="#一、XMLHttpRequest" class="headerlink" title="一、XMLHttpRequest"></a>一、XMLHttpRequest</h3><p>XMLHttpRequest 是一个 JavaScript 对象，它最初由微软设计,随后被 Mozilla、Apple 和 Google 采纳. 如今,该对象已经被 W3C 组织标准化. 通过它,你可以很容易的取回一个 URL 上的资源数据. 尽管名字里 有XML, 但 XMLHttpRequest 可以取回所有类型的数据资源，并不局限于 XML。 而且除了 HTTP ,它还支持 <code>file</code> 和 <code>ftp</code> 协议.</p>
+<p>创建一个 XMLHttpRequest 实例, 可以使用如下语句:</p>
+<p><code>var req = new XMLHttpRequest();</code></p>
+<p>查看文章 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">Using XMLHttpRequest</a> 来获取更多详细的 XMLHttpRequest 用法。</p>
+<h3 id="二、方法概述"><a href="#二、方法概述" class="headerlink" title="二、方法概述"></a>二、方法概述</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> abort();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">DOMString getAllResponseHeaders();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">DOMString? getResponseHeader(DOMString header);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> open(DOMString method, DOMString url, optional boolean <span class="keyword">async</span>, optional DOMString? user, optional DOMString? password);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> overrideMimeType(DOMString mime);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(<span class="built_in">ArrayBuffer</span> data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(Blob data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(Document data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(DOMString? data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(FormData data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> setRequestHeader(DOMString header, DOMString value);</span></pre></td></tr></table></figure>
+
+<p>非标准方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[noscript] <span class="keyword">void</span> init(<span class="keyword">in</span> nsIPrincipal principal, <span class="keyword">in</span> nsIScriptContext scriptContext, <span class="keyword">in</span> nsPIDOMWindow ownerWindow);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">[noscript] <span class="keyword">void</span> openRequest(<span class="keyword">in</span> AUTF8String method, <span class="keyword">in</span> AUTF8String url, <span class="keyword">in</span> boolean <span class="keyword">async</span>, <span class="keyword">in</span> AString user, <span class="keyword">in</span> AString password);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> sendAsBinary(<span class="keyword">in</span> DOMString body);</span></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">getAllResponseHeaders()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">DOMString getAllResponseHeaders();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">返回所有响应头信息(响应头名和值), 如果响应头还没接受,则返回<span class="literal">null</span>. 注意: For multipart requests, <span class="keyword">this</span> returns the headers <span class="keyword">from</span> the current part <span class="keyword">of</span> the request, not <span class="keyword">from</span> the original channel.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">getResponseHeader()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">DOMString? getResponseHeader(DOMString header);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">返回指定的响应头的值, 如果响应头还没被接受,或该响应头不存在,则返回<span class="literal">null</span>.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">open()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">初始化一个请求. 该方法用于 JavaScript 代码中;如果是本地代码, 使用 openRequest()方法代替.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">注意: Calling <span class="keyword">this</span> method an already active request (one <span class="keyword">for</span> which open()or openRequest()has already been called) is the equivalent <span class="keyword">of</span> calling abort().</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">   DOMString method,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">   DOMString url,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">   optional boolean <span class="keyword">async</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">   optional DOMString user,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">   optional DOMString password</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
+
+<h3 id="三、参数"><a href="#三、参数" class="headerlink" title="三、参数"></a>三、参数</h3><p>method<br>请求所使用的 HTTP 方法; 例如 “GET”, “POST”, “PUT”, “DELETE”等. 如果下个参数是非 HTTP(S) 的 URL,则忽略该参数.</p>
+<p>url</p>
+<p>该请求所要访问的 URL</p>
+<p>async</p>
+<p>一个可选的布尔值参数，默认为 true,意味着是否执行异步操作，如果值为 false,则 send()方法不会返回任何东西，直到接受到了服务器的返回数据。如果为值为 true，一个对开发者透明的通知会发送到相关的事件监听者。这个值必须是 true,如果 multipart 属性是 true，否则将会出现一个意外。</p>
+<p>user<br>用户名,可选参数,为授权使用;默认参数为空 string.</p>
+<p>password</p>
+<p>密码,可选参数,为授权使用;默认参数为空 string.</p>
+<p>overrideMimeType()</p>
+<p>重写由服务器返回的 MIME type。这个可用于, 例如，强制把一个响应流当作 “text/xml” 来处理和解析,即使服务器没有指明数据是这个类型。注意，这个方法必须在 send() 之前被调用。</p>
+<p>void overrideMimeType(DOMString mimetype);</p>
+<p>send()</p>
+<p>发送请求. 如果该请求是异步模式(默认),该方法会立刻返回. 相反,如果请求是同步模式,则直到请求的响应完全接受以后,该方法才会返回.</p>
+<p><strong>注意: 所有相关的事件绑定必须在调用 send() 方法之前进行.</strong></p>
+<p>void send();<br>void send(ArrayBuffer data);<br>void send(Blob data);<br>void send(Document data);<br>void send(DOMString? data);<br>void send(FormData data);</p>
+<p>setRequestHeader()</p>
+<p>给指定的 HTTP 请求头赋值.在这之前,你必须确认已经调用 open() 方法打开了一个url.</p>
+<p>void setRequestHeader(<br>   DOMString header,<br>   DOMString value<br>);</p>
+<p>参数</p>
+<p>header<br>将要被赋值的请求头名称.</p>
+<p>value<br>给指定的请求头赋的值.<br>非标准方法</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">XMLHttpRequest</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/10/16/2016-10-16-Ajax-详解(三)/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/10/16/2016-10-16-Ajax-详解(一)/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-10-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Ajax/">Ajax<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

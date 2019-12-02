@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AliPay Starting - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是记录从零开始，配置和搭建如何获取蚂蚁金服开票平台提供的获取支付宝中发票管家的发票抬头信息过程备忘。
+
+一、注册开发平台1. 注册
+登入官网，按照页面的提示步骤。
+注册
+创建应用我这边选择的是 网页&amp;amp;移动应用 -&amp;gt; 自定义接入  -&amp;gt; 自用型应用 -&amp;gt; 填写应用名称">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="AliPay Starting"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> AliPay Starting</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>本文主要是记录从零开始，配置和搭建如何获取<a href="https://docs.open.alipay.com/" target="_blank" rel="noopener">蚂蚁金服开票平台</a>提供的获取支付宝中发票管家的发票抬头信息过程备忘。</p>
+</blockquote>
+<h2 id="一、注册开发平台"><a href="#一、注册开发平台" class="headerlink" title="一、注册开发平台"></a>一、注册开发平台</h2><h3 id="1-注册"><a href="#1-注册" class="headerlink" title="1. 注册"></a>1. 注册</h3><ul>
+<li>登入<a href="https://open.alipay.com/developmentAccess/developmentAccess.htm" target="_blank" rel="noopener">官网</a>，按照页面的提示步骤。</li>
+<li>注册</li>
+<li>创建应用<br>我这边选择的是 <code>网页&amp;移动应用</code> -&gt; <code>自定义接入</code>  -&gt; <code>自用型应用</code> -&gt; <code>填写应用名称</code> -&gt; <code>添加详细信息</code> -&gt; <code>开发配置</code> -&gt; <code>提交审核</code><br>开发环境配置中，生成密钥方式可以使用官方提供的工具，直接生成。<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/alipay-config01.png" alt="alipay-config01"><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/alipay-config02.png" alt="alipay-config02"></li>
+<li>开发测试<br>我这一步直接省了，直接跳转到下一步</li>
+<li>审核发布</li>
+</ul>
+<h2 id="二、后台服务器配置"><a href="#二、后台服务器配置" class="headerlink" title="二、后台服务器配置"></a>二、后台服务器配置</h2><p>由于我使用的是 Node.js 后台，官方没有提供 demo 源码，只能自己撸了。还好在 github 上找到了类似的基础库。</p>
+<h3 id="1-下载-Alipay-Node-js-SDK-基于最新版蚂蚁金服开发文档"><a href="#1-下载-Alipay-Node-js-SDK-基于最新版蚂蚁金服开发文档" class="headerlink" title="1. 下载 Alipay Node.js SDK 基于最新版蚂蚁金服开发文档"></a>1. 下载 <a href="https://github.com/Luncher/alipay" target="_blank" rel="noopener">Alipay Node.js SDK 基于最新版蚂蚁金服开发文档</a></h3><p>由于找到的工程是订单相关的，没有我需要的获取发票抬头信息接口，所以接着就是改造代码。由于基础的接口已经实现，所以还是省去了很多工作量。</p>
+<h3 id="2-提取工程代码到你现有的工程中"><a href="#2-提取工程代码到你现有的工程中" class="headerlink" title="2. 提取工程代码到你现有的工程中"></a>2. 提取工程代码到你现有的工程中</h3><p>这边主要是增加了一些获取发票抬头信息的接口代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * 获取授权 url 地址</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param  &#123;[type]&#125; params [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @return &#123;[type]&#125;        [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *      redirect_uri:'http://wechatlpt.xxxx.com/xxx/scan-invoice/',</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *      scope: 'auth_invoice_info'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">getAuthUri(params) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">`getAuthUri(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(params)&#125;</span>)`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> authUri = <span class="string">`<span class="subst">$&#123;config.aliPayConfig.AUTH_URI&#125;</span>?<span class="subst">$&#123;querystring.stringify(params)&#125;</span>`</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">`getAuthUri result: <span class="subst">$&#123;authUri&#125;</span>`</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> authUri;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * 获取 auth token</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param  &#123;[type]&#125; params [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @return &#123;[type]&#125;        [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *  &#123;"app_id":"2017103009616680","source":"alipay_wallet","scope":"auth_invoice_info","auth_code":"c8f168d4ca33480fbe016880e00dXX79"&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">getAuthToken(publicParams, basicParams = &#123;&#125;) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">`getAuthToken(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(publicParams)&#125;</span>,<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(basicParams)&#125;</span>)`</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.validateParams(config.methodType.GET_AUTH_TOKEN, publicParams, basicParams)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                .then(<span class="function"><span class="params">params</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.makeRequest(params)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> (&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            code: <span class="string">'-1'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            message: err.message,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">            data: &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        &#125;))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * 请求发票抬头信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * [alipay.ebpp.invoice.title.list.get](https://docs.open.alipay.com/api_36/alipay.ebpp.invoice.title.list.get)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param  &#123;[type]&#125; publicParams [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param  &#123;Object&#125; basicParams  [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @return &#123;[type]&#125;              [description]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">queryInvoiceTitle(publicParams, basicParams = &#123;&#125;) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (!publicParams.user_id) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"userID can not empty!!!"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.validateParams(config.methodType.QUERY_INVOICE_TITLE, publicParams, basicParams)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">                .then(<span class="function"><span class="params">params</span> =&gt;</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.makeRequest(params)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">                &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> (&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">            code: <span class="string">'-1'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">            message: err.message,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">            data: &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        &#125;))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="填坑"><a href="#填坑" class="headerlink" title="填坑"></a>填坑</h2><ul>
+<li>android 版本的 支付宝 浏览器不支持 ES6 语法(调了好久才发现这个坑)</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/Luncher/alipay" target="_blank" rel="noopener">Alipay Node.js SDK 基于最新版蚂蚁金服开发文档</a></li>
+<li><a href="https://open.alipay.com" target="_blank" rel="noopener">蚂蚁金服开放平台</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/11/03/2017-11-13-jsp-starting/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/10/26/2017-10-26-yeoman/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-11-03 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

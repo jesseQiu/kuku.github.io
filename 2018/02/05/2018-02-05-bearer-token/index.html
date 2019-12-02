@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Bearer Token - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="Bearer Token (RFC 6750) 用于 OAuth 2.0 授权访问资源，任何 Bearer 持有者都可以无差别地用它来访问相关的资源，而无需证明持有加密 key。一个 Bearer 代表授权范围、有效期，以及其他授权事项；一个 Bearer 在存储和传输过程中应当防止泄露，需实现 T">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Bearer Token"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Bearer Token</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>Bearer Token (RFC 6750) 用于 OAuth 2.0 授权访问资源，任何 Bearer 持有者都可以无差别地用它来访问相关的资源，而无需证明持有加密 key。一个 Bearer 代表授权范围、有效期，以及其他授权事项；一个 Bearer 在存储和传输过程中应当防止泄露，需实现 Transport Layer Security (TLS)；一个 Bearer 有效期不能过长，过期后可用 Refresh Token 申请更新。</p>
+</blockquote>
+<h2 id="一-资源请求"><a href="#一-资源请求" class="headerlink" title="一. 资源请求"></a>一. 资源请求</h2><p>Bearer 实现资源请求有三种方式：Authorization Header、Form-Encoded Body Parameter、URI Query Parameter，这三种方式优先级依次递减</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Authorization Header：该头部定义与Basic方案类似</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">GET /resource HTTP/1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Host: server.example.com</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Authorization: Bearer mF_9.B5f-4.1JqM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Form-Encoded Body Parameter： 下面是用法实例</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">POST /resource HTTP/1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Host: server.example.com</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Content-Type: application/x-www-form-urlencoded</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">access_token=mF_9.B5f-4.1JqM</span></pre></td></tr></table></figure>
+<p>使用该方法发送Bearer须满足如下条件：</p>
+<p>1.头部必须包含”Content-Type: application/x-www-form-urlencoded”<br>2.entity-body必须遵循application/x-www-form-urlencoded编码(RFC 6749)<br>3.如果entity-body除了access_token之外，还包含其他参数，须以”&amp;”分隔开<br>4.entity-body只包含ASCII字符<br>5.要使用request-body已经定义的请求方法，不能使用GET<br>如果客户端无法使用Authorization请求头，才应该使用该方法发送Bearer</p>
+<p>URI Query Parameter：<br>GET /resource?access_token=mF_9.B5f-4.1JqM HTTP/1.1<br>Host: server.example.com<br>Cache-Control: no-store<br>服务端应在响应中使用 Cache-Control: private</p>
+<h2 id="二-WWW-Authenticate头"><a href="#二-WWW-Authenticate头" class="headerlink" title="二. WWW-Authenticate头"></a>二. WWW-Authenticate头</h2><p>在客户端未发送有效Bearer的情况下，即错误发生时，资源服务器须发送WWW-Authenticate头，下为示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.1 401 Unauthorized</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Bearer realm=<span class="string">"example"</span>, error=<span class="string">"invalid_token"</span>, error_description=<span class="string">"The access token expired"</span></span></pre></td></tr></table></figure>
+<p>下面将就WWW-Authenticate字段的用法进行详细描述(下列这些属性/指令不应重复使用)：</p>
+<p>Bearer：Beare作为一种认证类型(基于OAuth 2.0)，使用”Bearer”关键词进行定义<br>realm：与Basic、Digest一样，Bearer也使用相同含义的域定义reaml<br>scope：授权范围，可选的，大小写敏感的，空格分隔的列表(%x21 / %x23-5B / %x5D-7E)，可以是授权服务器定义的任何值，不应展示给终端用户。OAuth 2.0还规定客户端发送scope请求参数以指定授权访问范围，而在实际授权范围与客户端请求授权范围不一致时，授权服务器可发送scope响应参数以告知客户端下发的token实际的授权范围。下为两个scope用法实例：<br>scope=”openid profile email”<br>scope=”urn:example:channel=HBO&amp;urn:example:rating=G,PG-13”<br>error：描述访问请求被拒绝的原因，字符%x20-21 / %x23-5B / %x5D-7E之内<br>error_description：向开发者提供一个可读的解释，字符%x20-21 / %x23-5B / %x5D-7E之内<br>error_uri：absolute URI，标识人工可读解释错误的页面，字符%x21 / %x23-5B / %x5D-7E之内<br>　　当错误发生时，资源服务器将发送的HTTP Status Code(通常是400, 401, 403, 或405)及Error Code如下：</p>
+<p>invalid_request：请求丢失参数，或包含无效参数、值，参数重复，多种方法发送access token，畸形等。资源服务器将发送HTTP 400 (Bad Request)<br>invalid_token：access token过期、废除、畸形，或存在其他无效理由的情况。资源服务器将发送HTTP 401 (Unauthorized)，而客户端则需要申请一个新的access token，然后才能重新发送该资源请求<br>insufficient_scope：客户端提供的access token的享有的权限太低。资源服务器将发送HTTP 403 (Forbidden)，同时WWW-Authenticate头包含scope属性，以指明需要的权限范围<br>　　如果客户端发送的资源请求缺乏任何认证信息(如缺少access token，或者使用 RFC 6750 所规定的三种资源请求方式之外的任何method)，资源服务器不应该在响应中包含错误码或者其他错误信息，如下即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.1 401 Unauthorized</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Bearer realm=<span class="string">"example"</span></span></pre></td></tr></table></figure>
+
+<h2 id="三-Bearer-Token-Response"><a href="#三-Bearer-Token-Response" class="headerlink" title="三. Bearer Token Response"></a>三. Bearer Token Response</h2><p>下为示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Content-Type: application/json;charset=UTF-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Cache-Control: no-store</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Pragma: no-cache</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">   <span class="string">"access_token"</span>:<span class="string">"mF_9.B5f-4.1JqM"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   <span class="string">"token_type"</span>:<span class="string">"Bearer"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">   <span class="string">"expires_in"</span>:3600,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   <span class="string">"refresh_token"</span>:<span class="string">"tGzv3JOkF0XG5Qx2TlKWIA"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="四-安全威胁"><a href="#四-安全威胁" class="headerlink" title="四. 安全威胁"></a>四. 安全威胁</h2><p>Token 伪造/修改(Token manufacture/modification)：攻击者伪造或修改已有的token，导致资源服务器授权通过非法访问的客户端。因此需要对token使用数字签名或消息认证码来保证其完整性<br>Token 泄露(Token disclosure)：Token本身可能包含认证、有效期等敏感信息。因此实现TLS并验证证书是必选项，加密token可用于防止客户端观察token的内容，加密token还可防止token在前端服务器和后端服务器(如果他们没有启用TLS)之间发生泄露<br>Token 改寄(Token redirect)：攻击者用一个访问A资源服务器的token去请求B资源服务器的资源。因此通常token中可以包含代表资源服务器的标识来防止这种情况的发生<br>Token 重放(Token replay)：攻击者企图使用曾经使用过的token来请求资源。因此token需包含有效期(比如少于1小时)<br>另外cookie不能包含token，关于cookie的安全弱点，RFC 6265 中有如下描述：</p>
+<blockquote>
+<p>A server that uses cookies to authenticate users can suffer security<br>vulnerabilities because some user agents let remote parties issue<br>HTTP requests from the user agent (e.g., via HTTP redirects or HTML<br>forms).  When issuing those requests, user agents attach cookies even<br>if the remote party does not know the contents of the cookies,<br>potentially letting the remote party exercise authority at an unwary<br>server.</p>
+</blockquote>
+<p>可见即使服务端实现了TLS，攻击者依旧可以利用cookie来获取机密信息，如果cookie中包含机密信息的话；对此，不得已可将机密信息包含于URLs(前提是已实现了TLS)，但尽量使用更安全的办法，因为浏览器历史记录、服务器日志等可能泄露URLs机密信息。</p>
+<h2 id="五-Transport-Layer-Security-TLS"><a href="#五-Transport-Layer-Security-TLS" class="headerlink" title="五. Transport Layer Security (TLS)"></a>五. Transport Layer Security (TLS)</h2><p>　TLS (SSL / TLS)源于NetScape设计的SSL(Secure Sockets Layer，1994 / SSL 1.0、1995 / SSL 2.0、1996 / SSL 3.0)；1999年，IETF接替NetScape，发布了SSL的升级版TLS 1.0，最新为TLS 1.3(draft)，TLS 用于在两个通信应用程序之间提供保密性和数据完整性。目前，应用最广泛的是TLS 1.0，接下来是SSL 3.0，主流浏览器都已经实现了TLS 1.2的支持。TLS 1.0通常被标示为SSL 3.1，TLS 1.1为SSL 3.2，TLS 1.2为SSL 3.3。获取更多信息可参考 TLS 1.2 / RFC 5246 。</p>
+<p>　TLS是一种位于传输层(TCP)和应用层之间的协议层，由记录协议(Record Layer)和握手协议(Handshake Layer)两层构成：</p>
+<p>TLS算法套件由三个部分组成：了解更多可参考 <a href="http://www.rfcreader.com/#rfc5246_line3649" target="_blank" rel="noopener">http://www.rfcreader.com/#rfc5246_line3649</a></p>
+<p>密钥交换算法：  RSA或Diffie-Hellman算法的各种变种<br>加密算法：  AES, DES, Triple-DES, RC4, RC2, IDEA 或 none<br>摘要算法：  MD5, SHA</p>
+<h2 id="六-application-x-www-form-urlencoded-Media-Type"><a href="#六-application-x-www-form-urlencoded-Media-Type" class="headerlink" title="六. application/x-www-form-urlencoded Media Type"></a>六. application/x-www-form-urlencoded Media Type</h2><p>　首先application/x-www-form-urlencoded这种编码类型未考虑非US ASCII字符的情况，因此待编码的内容(包括名称、值)可先经UTF-8编码，然后再按字节序列进行字符转义操作；而接收这种数据类型则需进行逆向处理。通常各种web编程语言已经提供原生URL编码/URL解码接口(可能不同语言版本的URL编码/解码会有差异)，使用起来也极为方便，因此这里不做详细介绍。</p>
+<h2 id="七-MAC-Token"><a href="#七-MAC-Token" class="headerlink" title="七. MAC Token"></a>七. MAC Token</h2><p>　MAC Token与Bearer Token一样，可作为OAuth 2.0的一种Access Token类型，但Bearer Token才是RFC建议的标准；MAC Token是在MAC Access Authentication中被定义的，采用Message Authentication Code(MAC)算法来提供完整性校验。</p>
+<p>　MAC Access Authentication 是一种HTTP认证方案，具体内容可参考： HTTP Authentication: MAC Access Authentication draft-hammer-oauth-v2-mac-token-05 。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
+<li><a href="https://www.cnblogs.com/XiongMaoMengNan/p/6785155.html" target="_blank" rel="noopener">OAuth 2.0: Bearer Token Usage</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/03/12/2018-03-12-https/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/01/31/2018-01-31-choclatey/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-02-05 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Tools/">Tools<span>16</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 部署 Nodejs - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是对 nodejs 在 linux 系统部署备忘
+部署步骤1. 查看 linux 系统版本信息这里使用 uname 命令,用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）
+1uname -a2Linux Jesse 3.10.0-514.2.2.el7.x86_64">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux 部署 Nodejs"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Linux 部署 Nodejs</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>本文主要是对 nodejs 在 linux 系统部署备忘</p>
+<h2 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h2><h3 id="1-查看-linux-系统版本信息"><a href="#1-查看-linux-系统版本信息" class="headerlink" title="1. 查看 linux 系统版本信息"></a>1. 查看 linux 系统版本信息</h3><p>这里使用 <code>uname</code> 命令,用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">uname -a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Linux Jesse 3.10.0-514.2.2.el7.x86_64 <span class="comment">#1 SMP Tue Dec 6 23:06:41 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span></span></pre></td></tr></table></figure>
+
+<h3 id="2-下载-nodejs-软件"><a href="#2-下载-nodejs-软件" class="headerlink" title="2. 下载 nodejs 软件"></a>2. 下载 nodejs 软件</h3><p>从上一步中查看到的系统信息，再去<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">nodejs</a>下载对应的版本<br><img src="http://od6sd4xau.bkt.clouddn.com/linux-nodejs.png" alt="nodjs版本"><br>根据上面的系统版本信息，我选择的是 binarias 版本(可以直接运行的二进制版本)，软件包名为 <code>node-v6.10.3-linux-x64.tar.xz</code></p>
+<h3 id="3-通过-WinSCP-软件上传到-linux-服务"><a href="#3-通过-WinSCP-软件上传到-linux-服务" class="headerlink" title="3. 通过 WinSCP 软件上传到 linux 服务"></a>3. 通过 WinSCP 软件上传到 linux 服务</h3><h3 id="4-解压软件包"><a href="#4-解压软件包" class="headerlink" title="4. 解压软件包"></a>4. 解压软件包</h3><p>这边我把软件放在 <code>/usr/local/</code> 目录下<br>注意，这里的 nodejs 软件包是以 <code>xz</code> 为后缀，而不是 <code>*.gz,*.bz2</code> 为后缀名。所有需要用 xz 工具来解压。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 先将 node-v6.10.3-linux-x64.tar.xz 解压成 node-v6.10.3-linux-x64.tar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xz -d node-v6.10.3-linux-x64.tar.xz  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// 再将 tar 解包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">tar xvf node-v6.10.3-linux-x64.tar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mv node-v6.10.3-linux-x64 /usr/<span class="built_in">local</span>/node-v6.10.3-linux-x64</span></pre></td></tr></table></figure>
+<p>ps 因为 xz 工具不能像 gzip 和 bzip2 那要可以通过 <code>j/zxvf</code> 一条命令解压解包，所以要分两步.<br>如果 linux 没有安装 xz 工具可以通过 yum 来安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yum install xz</span></pre></td></tr></table></figure>
+<p>如果还是不行，可以<a href="http://blog.sina.com.cn/s/blog_ba08e8e00101b1rs.html" target="_blank" rel="noopener">参考</a></p>
+<h3 id="5-测试解压的-nodejs-软件是否可用"><a href="#5-测试解压的-nodejs-软件是否可用" class="headerlink" title="5. 测试解压的 nodejs 软件是否可用"></a>5. 测试解压的 nodejs 软件是否可用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/node-v6.10.3-linux-x64/bin/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">./node -v</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// v6.10.3 如果正常显示 nodejs 版本号，说明软件安装正常</span></pre></td></tr></table></figure>
+
+<h3 id="6-添加-node-到环境变量中"><a href="#6-添加-node-到环境变量中" class="headerlink" title="6. 添加 node 到环境变量中"></a>6. 添加 node 到环境变量中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">exoprt PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/node-v6.10.3-linux-x64/bin/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">env | grep PATH</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// 如果可以看到刚添加的环境变量说明添加成功</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">node -v</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// v6.10.3</span></pre></td></tr></table></figure>
+<p>如果需要永久有效，需要在 <code>/ect/profile</code> 文件中添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// 在文件的尾部添加：PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/node-v6.10.3-linux-x64/bin/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile // 可以让刚设置马上生效</span></pre></td></tr></table></figure>
+
+<h3 id="7-升级-nodejs"><a href="#7-升级-nodejs" class="headerlink" title="7. 升级 nodejs"></a>7. 升级 nodejs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 安装 node 更新模块</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">npm i -g n</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 安装最新稳定版本</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">n stable</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">//[root@fpxt01yht code]<span class="comment"># n stable</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">//install : node-v9.2.0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">//mkdir : /usr/<span class="built_in">local</span>/n/versions/node/9.2.0  // 最新的 nodejs 存放位置</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">//fetch : https://nodejs.org/dist/v9.2.0/node-v9.2.0-linux-x64.tar.gz</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">######################################################################## 100.0%</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">//installed : v9.2.0</span></pre></td></tr></table></figure>
+<p>如果使用 <code>node -v</code> 命令显示的还是之前版本，可能是又要之前安装的时候，配置了环境变量指向，只要把相应的环境变量注释掉即可，因为 n 模块以及安装了全局最新版本。<br><strong>注意:如果之前版本的 node 有安装全局的插件，需要重新安装</strong></p>
+<h3 id="8-安装-PM2-插件"><a href="#8-安装-PM2-插件" class="headerlink" title="8. 安装 PM2 插件"></a>8. 安装 PM2 插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm i pm2 -g</span></pre></td></tr></table></figure>
+
+<h3 id="9-安装-git-环境"><a href="#9-安装-git-环境" class="headerlink" title="9. 安装 git 环境"></a>9. 安装 git 环境</h3><h4 id="1-git-安装"><a href="#1-git-安装" class="headerlink" title="1. git 安装"></a>1. git 安装</h4><p>在 Linux 上安装预编译好的 Git 二进制安装包，可以直接用系统提供的包管理工具。在 Fedora 上用 yum 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ yum install git-core</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ git --version</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// git version 1.8.3.1</span></pre></td></tr></table></figure>
+<h4 id="2-生成-rsa-密钥"><a href="#2-生成-rsa-密钥" class="headerlink" title="2. 生成 rsa 密钥"></a>2. 生成 rsa 密钥</h4><p>首先查看 <code>~/.ssh</code> 目录，看是否已经存在 <code>id_ras</code> 和 <code>id_rsa.pub</code> 两个文件，如果已经有了就不用生成，直接使用。如果没有使用下面的命令生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your.email@example.com"</span> -b 4096</span></pre></td></tr></table></figure>
+
+<h4 id="3-拷贝生成的公钥内容到-github-或者-gitlab-上面"><a href="#3-拷贝生成的公钥内容到-github-或者-gitlab-上面" class="headerlink" title="3. 拷贝生成的公钥内容到 github 或者 gitlab 上面"></a>3. 拷贝生成的公钥内容到 <code>github</code> 或者 <code>gitlab</code> 上面</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span></pre></td></tr></table></figure>
+<p>选中内容 -&gt; 回车 -&gt; 在 git 仓库创建 ssh keys -&gt; 粘贴内容 -&gt; 保存<br><a href="https://gitlab.com/help/ssh/README" target="_blank" rel="noopener">参考 ssh keys generate it</a></p>
+<h4 id="4-克隆仓库工程"><a href="#4-克隆仓库工程" class="headerlink" title="4. 克隆仓库工程"></a>4. 克隆仓库工程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@gitlab.com:JesseChiu/jesse-xxx.git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> jesse-xxx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// 运行命令</span></pre></td></tr></table></figure>
+
+<h4 id="5-同步最新代码"><a href="#5-同步最新代码" class="headerlink" title="5. 同步最新代码"></a>5. 同步最新代码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git pull</span></pre></td></tr></table></figure>
+
+<h3 id="10-运行"><a href="#10-运行" class="headerlink" title="10. 运行"></a>10. 运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm run xxx</span></pre></td></tr></table></figure>
+<p><strong>注意:如果使用运行 80 端口必须要 root 权限用户。否则会报 <code>Port 80 requires elevated privileges</code></strong></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">nodejs 下载地址</a></li>
+<li><a href="http://www.cnblogs.com/dubaokun/p/3558848.html" target="_blank" rel="noopener">linux 部署 nodejs</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/05/30/2017-05-30-批量下载慕课网视频/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/05/21/2017-05-21-Linux-常用命令/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-05-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ajax 详解(三) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、监测进度XMLHttpRequest 提供了各种在请求被处理期间发生的事件以供监听。这包括定期进度通知、 错误通知，等等。
+支持 DOM 的 progress 事件监测之于 XMLHttpRequest 传输，遵循 Web API 进度事件规范 : 这些事件实现了 ProgressEvent 接">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Ajax 详解(三)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Ajax 详解(三)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h3 id="一、监测进度"><a href="#一、监测进度" class="headerlink" title="一、监测进度"></a>一、监测进度</h3><p>XMLHttpRequest 提供了各种在请求被处理期间发生的事件以供监听。这包括定期进度通知、 错误通知，等等。</p>
+<p>支持 DOM 的 progress 事件监测之于 XMLHttpRequest 传输，遵循 Web API 进度事件规范 : 这些事件实现了 ProgressEvent 接口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> req = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"progress"</span>, updateProgress, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"load"</span>, transferComplete, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"error"</span>, transferFailed, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"abort"</span>, transferCanceled, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">req.open();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// progress on transfers from the server to the client (downloads)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateProgress</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (evt.lengthComputable) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> percentComplete = evt.loaded / evt.total;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Unable to compute progress information since the total size is unknown</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferComplete</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"The transfer is complete."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferFailed</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"An error occurred while transferring the file."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferCanceled</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"The transfer has been canceled by the user."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>第 3-6 行为多种事件添加了事件监听，这些事件在使用 XMLHttpRequest 执行数据传输时被发出。</p>
+<p>注意： 你需要在请求调用 open() 之前添加事件监听。否则 progress 事件将不会被触发。<br>在上个例子中，progress 事件被指定由 updateProgress() 函数处理，并接收到传输的总字节数和已经传输的字节数，它们分别在事件对象的 <code>total</code> 和 <code>loaded</code> 属性里。但是如果 <code>lengthComputable</code> 属性的值是 false，那么意味着总字节数是未知并且 <code>total</code> 的值为零。</p>
+<p>progress 事件同时存在于下载和上传的传输。下载相关事件在 XMLHttpRequest 对象上被触发，就像上面的例子一样。上传相关事件在 XMLHttpRequest.upload 对象上被触发，像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> req = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">req.upload.addEventListener(<span class="string">"progress"</span>, updateProgress);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">req.upload.addEventListener(<span class="string">"load"</span>, transferComplete);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">req.upload.addEventListener(<span class="string">"error"</span>, transferFailed);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">req.upload.addEventListener(<span class="string">"abort"</span>, transferCanceled);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">req.open();</span></pre></td></tr></table></figure>
+
+<p>注意：progress 事件在使用 file: 协议的情况下是无效的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"loadend"</span>, loadEnd, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadEnd</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"The transfer finished (although we don't know if it succeeded or not)."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>需要注意的是，没有方法可以确切的知道 loadend 事件接收到的信息是来自何种条件引起的操作终止；但是你可以在所有传输结束的时候使用这个事件处理。</p>
+<h3 id="二、提交表单和上传文件"><a href="#二、提交表单和上传文件" class="headerlink" title="二、提交表单和上传文件"></a>二、提交表单和上传文件</h3><p>XMLHttpRequest 的实例有两种方式提交表单：</p>
+<ol>
+<li>使用 AJAX</li>
+<li>使用 FormData API</li>
+</ol>
+<p>第二种方式（ 使用 FormData API ）是最简单最快捷的，但是缺点是被收集的数据不是字符串形式的。<br>第一种方式反而是最复杂的但也是最灵活和最强大。</p>
+<p>只使用 XMLHttpRequest</p>
+<p>在大多数用例中，提交表单时即便不使用 FormData API 也不会要求其他的 API。唯一的例外情况是，如果你要上传一个或多个文件，你需要额外的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener">FileReader API</a>。</p>
+<p>提交方法简介</p>
+<p>一个 html <form> 可以用以下四种方式发送：</p>
+<ol>
+<li>使用 POST 方法，并设置 enctype 属性为 application/x-www-form-urlencoded (默认)</li>
+<li>使用 POST 方法，并设置 enctype 属性为 text/plain</li>
+<li>使用 POST 方法，并设置 enctype 属性为 multipart/form-data</li>
+<li>使用 GET 方法（这种情况下 enctype 属性会被忽略）</li>
+</ol>
+<p>现在，我们提交一个表单，它里面有两个字段，分别被命名为 foo 和 baz。如果你用 POST 方法，那么服务器将会接收到一个字符串类似于下面三种情况之一，其中的区别依赖于你采用何种编码类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">方法: POST;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">编码类型: application/x-www-form-urlencoded (<span class="keyword">default</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Content-Type: application/x-www-form-urlencoded</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">foo=bar&amp;baz=The+first+line.&amp;#37;0D%0AThe+second+line.%0D%0A</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">方法: POST;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">编码类型: text/plain:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Content-Type: text/plain</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">foo=bar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">baz=The first line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">The second line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">方法: POST;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">编码类型: multipart/form-data:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=--------------------------<span class="number">-314911788813839</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">----------------------------<span class="number">-314911788813839</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">"foo"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">bar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">----------------------------<span class="number">-314911788813839</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">Content-Disposition: form-data; name=<span class="string">"baz"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">The first line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">The second line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">----------------------------<span class="number">-314911788813839</span>--</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">相反的，如果你用 GET 方法，一个像下面这样的字符串将被简单的附加到 URL：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">?foo=bar&amp;baz=The%<span class="number">20</span>first%<span class="number">20</span>line.%<span class="number">0</span>AThe%<span class="number">20</span>second%<span class="number">20</span>line.</span></pre></td></tr></table></figure>
+
+<h3 id="三、绕过缓存"><a href="#三、绕过缓存" class="headerlink" title="三、绕过缓存"></a>三、绕过缓存</h3><p>一般地，如果缓存中有相应内容， XMLHttpRequest 会试图从缓存中读取内容。绕过缓存的方法见下述代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> req = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">req.open(<span class="string">'GET'</span>, url, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">req.channel.loadFlags |= Components.interfaces.nsIRequest.LOAD_BYPASS_CACHE;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">req.send(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Note: This approach will only work <span class="keyword">in</span> Gecko-based software, <span class="keyword">as</span> the channel attribute is Gecko-specific.</span></pre></td></tr></table></figure>
+
+<p>或者还有一个跨浏览器兼容的方法，就是给 URL 添加时间戳。请确保你酌情地添加了 “?” or “&amp;” 。例如，将：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//foo.com/bar.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">改为</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//foo.com/bar.html?12345</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">以及将</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//foo.com/bar.html?foobar=baz</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">改为</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//foo.com/bar.html?foobar=baz&amp;12345</span></span></pre></td></tr></table></figure>
+<p>因为本地缓存都是以 URL 作为索引的，这样就可以使每个请求都是唯一的，也就可以这样来绕开缓存。</p>
+<p>你也可以用下面的方法自动更改缓存：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> req = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">req.open(<span class="string">"GET"</span>, url += ((<span class="regexp">/\?/</span>).test(url) ? <span class="string">"&amp;"</span> : <span class="string">"?"</span>) + (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime(), <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">req.send(<span class="literal">null</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="四、Sending-and-Receiving-Binary-Data"><a href="#四、Sending-and-Receiving-Binary-Data" class="headerlink" title="四、Sending and Receiving Binary Data"></a>四、Sending and Receiving Binary Data</h3><h4 id="1-使用-JavaScript-类型数组接受二进制数据"><a href="#1-使用-JavaScript-类型数组接受二进制数据" class="headerlink" title="1. 使用 JavaScript 类型数组接受二进制数据"></a>1. 使用 JavaScript 类型数组接受二进制数据</h4><p>可以通过设置一个 XMLHttpRequest 对象的 <code>responseType</code> 属性来 <strong>改变一个从服务器上返回的响应的数据类型</strong>.可用的属性值为空字符串 (默认), “arraybuffer”, “blob”, “document”, 和 “text”. <strong>response 属性的值会根据 responseType 属性的值的不同而不同</strong>, 可能会是一个 ArrayBuffer, Blob, Document, string,或者为NULL(如果请求未完成或失败)</p>
+<p>下例读取了一个二进制图像文件,并且由该文件的二进制原生字节创建了一个8位无符号整数的数组.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oReq = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">oReq.open(<span class="string">"GET"</span>, <span class="string">"/myfile.png"</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">oReq.responseType = <span class="string">"arraybuffer"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">oReq.onload = <span class="function"><span class="keyword">function</span> (<span class="params">oEvent</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> arrayBuffer = oReq.response; <span class="comment">// 注意:不是oReq.responseText</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (arrayBuffer) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> byteArray = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(arrayBuffer);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteArray.byteLength; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 对数组中的每个字节进行操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">oReq.send(<span class="literal">null</span>);</span></pre></td></tr></table></figure>
+
+<p>除了上面的方法,还可以使用 BlobBuilder API 直接将 arraybuffer 数据添加进一个 Blob 对象中, 由于 <strong>该 API 还在试验阶段,所以需要加上特定的前缀</strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BlobBuilder = <span class="built_in">window</span>.MozBlobBuilder || <span class="built_in">window</span>.WebKitBlobBuilder || <span class="built_in">window</span>.MSBlobBuilder || <span class="built_in">window</span>.BlobBuilder;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oReq = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">oReq.open(<span class="string">"GET"</span>, <span class="string">"/myfile.png"</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">oReq.responseType = <span class="string">"arraybuffer"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">oReq.onload = <span class="function"><span class="keyword">function</span>(<span class="params">oEvent</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> blobBuilder = <span class="keyword">new</span> BlobBuilder();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  blobBuilder.append(oReq.response);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> blob = blobBuilder.getBlob(<span class="string">"image/png"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">oReq.send();</span></pre></td></tr></table></figure>
+
+<h4 id="2-在老的浏览器中接受二进制数据"><a href="#2-在老的浏览器中接受二进制数据" class="headerlink" title="2. 在老的浏览器中接受二进制数据"></a>2. 在老的浏览器中接受二进制数据</h4><p>下面的 load_binary_resource() 方法可以从指定的 URL 那里加载二进制数据,并将数据返回给调用者.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">load_binary_resource</span>(<span class="params">url</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> req = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  req.open(<span class="string">'GET'</span>, url, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">//XHR binary charset opt by Marcus Granado 2006 [http://mgran.blogspot.com]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  req.overrideMimeType(<span class="string">'text/plain; charset=x-user-defined'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  req.send(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (req.status != <span class="number">200</span>) <span class="keyword">return</span> <span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> req.responseText;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>** 最为奇妙的操作在第五行,该行重写了默认的 <code>MIME</code>类型,强制浏览器将该响应当成纯文本文件来对待, 使用一个用户自定义的字符集.这样就是告诉了浏览器,不要去解析数据,直接返回未处理过的字节码.**</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> filestream = load_binary_resource(url);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> abyte = filestream.charCodeAt(x) &amp; <span class="number">0xff</span>; <span class="comment">// 扔掉的高位字节(f7)</span></span></pre></td></tr></table></figure>
+
+<p>上例从请求回来的二进制数据中得到偏移量为 x 处的字节.有效的偏移量范围是 0 到 filestream.length-1.</p>
+<h4 id="3-发送二进制数据"><a href="#3-发送二进制数据" class="headerlink" title="3. 发送二进制数据"></a>3. 发送二进制数据</h4><p>XMLHttpRequest 对象的 send 方法已被增强,可以通过简单的传入一个 ArrayBuffer, Blob, 或者 File 对象来发送二进制数据.</p>
+<p>下例创建了一个文本文件,并使用 POST 方法将该文件发送到了服务器上.你也可以使用文本文件之外的其他二进制数据类型.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oReq = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">oReq.open(<span class="string">"POST"</span>, url, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">oReq.onload = <span class="function"><span class="keyword">function</span> (<span class="params">oEvent</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 上传完成后.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bb = <span class="keyword">new</span> BlobBuilder(); <span class="comment">// 需要合适的前缀: window.MozBlobBuilder 或者 window.WebKitBlobBuilder</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">bb.append(<span class="string">'abc123'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">oReq.send(bb.getBlob(<span class="string">'text/plain'</span>));</span></pre></td></tr></table></figure>
+
+<h4 id="4-将类型数组作为二进制数据发送"><a href="#4-将类型数组作为二进制数据发送" class="headerlink" title="4. 将类型数组作为二进制数据发送"></a>4. 将类型数组作为二进制数据发送</h4><p>你可以将 JavaScript 类型数组作为二进制数据发送出去.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myArray = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">512</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longInt8View = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(myArray);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt; longInt8View.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  longInt8View[i] = i % <span class="number">255</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"POST"</span>, url, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">xhr.send(myArray);</span></pre></td></tr></table></figure>
+
+<p>上例新建了一个 512 字节的 8 位整数数组并发送它,当然,你也可以发送任意的二进制数据.</p>
+<p>注意: 从Gecko 9.0 (Firefox 9.0 / Thunderbird 9.0 / SeaMonkey 2.6)开始,添加了使用XMLHttpRequest发送 ArrayBuffer对象的功能.</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">Using XMLHttpRequest</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Sending_and_Receiving_Binary_Data" target="_blank" rel="noopener">Sending and Receiving Binary Data</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/10/17/2016-10-17-jsonp-实现原理/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/10/16/2016-10-16-Ajax-详解(二)/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-10-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Ajax/">Ajax<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

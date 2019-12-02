@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>execCommand - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、概述当一个 HTML 文档切换到设计模式(designMode)时，文档对象暴露 execCommand 方法，该方法允许运行命令来操纵可编辑区域的内容。大多数命令影响文档的选择（粗体，斜体等），而其他命令插入新元素（添加链接）或影响整行（缩进）。当使用 contentEditable 时，调用">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="execCommand"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> execCommand</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>当一个 HTML 文档切换到设计模式(designMode)时，文档对象暴露 <code>execCommand</code> 方法，该方法允许运行命令来操纵可编辑区域的内容。大多数命令影响文档的选择（粗体，斜体等），而其他命令插入新元素（添加链接）或影响整行（缩进）。当使用 <code>contentEditable</code> 时，调用 <code>execCommand()</code> 将影响当前活动的可编辑元素。</p>
+<h2 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bool = <span class="built_in">document</span>.execCommand(aCommandName, aShowDefaultUI, aValueArgument)</span></pre></td></tr></table></figure>
+<h3 id="1-返回值"><a href="#1-返回值" class="headerlink" title="1. 返回值"></a>1. 返回值</h3><p>一个 <code>Boolean</code> ，如果是 <code>false</code> 则表示操作不被支持或未被启用。</p>
+<h3 id="2-参数"><a href="#2-参数" class="headerlink" title="2. 参数"></a>2. 参数</h3><h4 id="2-1-aCommandName"><a href="#2-1-aCommandName" class="headerlink" title="2.1 aCommandName"></a>2.1 aCommandName</h4><p>一个 DOMString ，命令的名称。可用命令列表请参阅 命令 。</p>
+<h4 id="2-2-aShowDefaultUI"><a href="#2-2-aShowDefaultUI" class="headerlink" title="2.2 aShowDefaultUI"></a>2.2 aShowDefaultUI</h4><p>一个 Boolean 是否展示用户界面，一般为 false。Mozilla 没有实现。</p>
+<h4 id="2-3-aValueArgument"><a href="#2-3-aValueArgument" class="headerlink" title="2.3 aValueArgument"></a>2.3 aValueArgument</h4><p>一些命令需要一些额外的参数值（如insertimage需要提供这个image的url）。默认为null。</p>
+<h3 id="3-命令"><a href="#3-命令" class="headerlink" title="3. 命令"></a>3. 命令</h3><h4 id="3-1-backColor"><a href="#3-1-backColor" class="headerlink" title="3.1 backColor"></a>3.1 backColor</h4><p>修改文档的背景颜色。在 <code>styleWithCss</code> 模式下，则只影响容器元素的背景颜色。这需要一个 <code>&lt;color&gt;</code> 类型的字符串值作为参数传入。注意，IE 浏览器用这个设置文字的背景颜色。</p>
+<h4 id="3-2-bold"><a href="#3-2-bold" class="headerlink" title="3.2 bold"></a>3.2 bold</h4><p>开启或关闭选中文字或插入点的粗体字效果。IE 浏览器使用 <code>&lt;strong&gt;</code> 标签，而不是 <code>&lt;b&gt;</code> 标签。</p>
+<h4 id="3-3-contentReadOnly"><a href="#3-3-contentReadOnly" class="headerlink" title="3.3 contentReadOnly"></a>3.3 contentReadOnly</h4><p>通过传入一个布尔类型的参数来使能文档内容的可编辑性。(IE浏览器不支持)</p>
+<h4 id="3-4-copy"><a href="#3-4-copy" class="headerlink" title="3.4 copy"></a>3.4 copy</h4><p>拷贝当前选中内容到剪贴板。启用这个功能的条件因浏览器不同而不同，而且不同时期，其启用条件也不尽相同。使用之前请检查浏览器兼容表，以确定是否可用。</p>
+<h4 id="3-5-createLink"><a href="#3-5-createLink" class="headerlink" title="3.5 createLink"></a>3.5 createLink</h4><p>将选中内容创建为一个锚链接。这个命令需要一个 <code>HREF URI</code> 字符串作为参数值传入。URI 必须包含至少一个字符，例如一个空格。（浏览器会创建一个空链接）</p>
+<h4 id="3-6-cut"><a href="#3-6-cut" class="headerlink" title="3.6 cut"></a>3.6 cut</h4><p> 剪贴当前选中的文字并复制到剪贴板。启用这个功能的条件因浏览器不同而不同，而且不同时期，其启用条件也不尽相同。使用之前请检查浏览器兼容表，以确定是否可用。</p>
+<h4 id="3-7-decreaseFontSize"><a href="#3-7-decreaseFontSize" class="headerlink" title="3.7 decreaseFontSize"></a>3.7 decreaseFontSize</h4><p>给选中文字加上 <code>&lt;small&gt;</code> 标签，或在选中点插入该标签。(IE浏览器不支持)</p>
+<h4 id="3-8-delete"><a href="#3-8-delete" class="headerlink" title="3.8 delete"></a>3.8 delete</h4><p>删除选中部分.</p>
+<h4 id="3-9-enableInlineTableEditing"><a href="#3-9-enableInlineTableEditing" class="headerlink" title="3.9 enableInlineTableEditing"></a>3.9 enableInlineTableEditing</h4><p>启用或禁用表格行和列插入和删除控件。(IE浏览器不支持)</p>
+<h4 id="3-10-enableObjectResizing"><a href="#3-10-enableObjectResizing" class="headerlink" title="3.10 enableObjectResizing"></a>3.10 enableObjectResizing</h4><p>启用或禁用图像和其他对象的大小可调整大小手柄。(IE浏览器不支持)</p>
+<h4 id="3-11-fontName"><a href="#3-11-fontName" class="headerlink" title="3.11 fontName"></a>3.11 fontName</h4><p>在插入点或者选中文字部分修改字体名称. 需要提供一个字体名称字符串 (例如：”Arial”)作为参数。</p>
+<h4 id="3-12-fontSize"><a href="#3-12-fontSize" class="headerlink" title="3.12 fontSize"></a>3.12 fontSize</h4><p>在插入点或者选中文字部分修改字体大小. 需要提供一个HTML字体尺寸 (1-7) 作为参数。</p>
+<h4 id="3-13-foreColor"><a href="#3-13-foreColor" class="headerlink" title="3.13 foreColor"></a>3.13 foreColor</h4><p>在插入点或者选中文字部分修改字体颜色. 需要提供一个颜色值字符串作为参数。</p>
+<h4 id="3-14-formatBlock"><a href="#3-14-formatBlock" class="headerlink" title="3.14 formatBlock"></a>3.14 formatBlock</h4><p>添加一个HTML块式标签在包含当前选择的行, 如果已经存在了，更换包含该行的块元素 (在 Firefox中, BLOCKQUOTE 是一个例外 -它将包含任何包含块元素). 需要提供一个标签名称字符串作为参数。几乎所有的块样式标签都可以使用 <code>(例如. &quot;H1&quot;, &quot;P&quot;, &quot;DL&quot;, &quot;BLOCKQUOTE&quot;). (IE浏览器仅仅支持标题标签 H1 - H6, ADDRESS, 和 PRE,使用时还必须包含标签分隔符 &lt; &gt;, 例如 &quot;&lt;H1&gt;&quot;.)</code></p>
+<h4 id="3-15-forwardDelete"><a href="#3-15-forwardDelete" class="headerlink" title="3.15 forwardDelete"></a>3.15 forwardDelete</h4><p>删除光标所在位置的字符。 和按下删除键一样。</p>
+<h4 id="3-16-heading"><a href="#3-16-heading" class="headerlink" title="3.16 heading"></a>3.16 heading</h4><p>添加一个标题标签在光标处或者所选文字上。 需要提供标签名称字符串作为参数 (例如. “H1”, “H6”). (IE 和 Safari不支持)</p>
+<h4 id="3-17-hiliteColor"><a href="#3-17-hiliteColor" class="headerlink" title="3.17 hiliteColor"></a>3.17 hiliteColor</h4><p>更改选择或插入点的背景颜色。需要一个颜色值字符串作为值参数传递。 UseCSS 必须开启此功能。(IE浏览器不支持)</p>
+<h4 id="3-18-increaseFontSize"><a href="#3-18-increaseFontSize" class="headerlink" title="3.18 increaseFontSize"></a>3.18 increaseFontSize</h4><p>在选择或插入点周围添加一个BIG标签。(IE浏览器不支持)</p>
+<h4 id="3-19-indent"><a href="#3-19-indent" class="headerlink" title="3.19 indent"></a>3.19 indent</h4><p>缩进选择或插入点所在的行， 在 Firefox 中, 如果选择多行，但是这些行存在不同级别的缩进, 只有缩进最少的行被缩进。</p>
+<h4 id="3-20-insertBrOnReturn"><a href="#3-20-insertBrOnReturn" class="headerlink" title="3.20 insertBrOnReturn"></a>3.20 insertBrOnReturn</h4><p>控制当按下Enter键时，是插入 br 标签还是把当前块元素变成两个。(IE浏览器不支持)</p>
+<h4 id="3-21-insertHorizontalRule"><a href="#3-21-insertHorizontalRule" class="headerlink" title="3.21 insertHorizontalRule"></a>3.21 insertHorizontalRule</h4><p>在插入点插入一个水平线（删除选中的部分）</p>
+<h4 id="3-22-insertHTML"><a href="#3-22-insertHTML" class="headerlink" title="3.22 insertHTML"></a>3.22 insertHTML</h4><p>在插入点插入一个HTML字符串（删除选中的部分）。需要一个个HTML字符串作为参数。(IE浏览器不支持)</p>
+<h4 id="3-23-insertImage"><a href="#3-23-insertImage" class="headerlink" title="3.23 insertImage"></a>3.23 insertImage</h4><p>在插入点插入一张图片（删除选中的部分）。需要一个image SRC URI作为参数。这个URI至少包含一个字符。空白字符也可以（IE会创建一个链接其值为null）</p>
+<h4 id="3-24-insertOrderedList"><a href="#3-24-insertOrderedList" class="headerlink" title="3.24 insertOrderedList"></a>3.24 insertOrderedList</h4><p>在插入点或者选中文字上创建一个有序列表</p>
+<h4 id="3-25-insertUnorderedList"><a href="#3-25-insertUnorderedList" class="headerlink" title="3.25 insertUnorderedList"></a>3.25 insertUnorderedList</h4><p>在插入点或者选中文字上创建一个无序列表。</p>
+<h4 id="3-26-insertParagraph"><a href="#3-26-insertParagraph" class="headerlink" title="3.26 insertParagraph"></a>3.26 insertParagraph</h4><p>在选择或当前行周围插入一个段落。(IE会在插入点插入一个段落并删除选中的部分.)</p>
+<h4 id="3-27-insertText"><a href="#3-27-insertText" class="headerlink" title="3.27 insertText"></a>3.27 insertText</h4><p>在光标插入位置插入文本内容或者覆盖所选的文本内容。</p>
+<h4 id="3-28-italic"><a href="#3-28-italic" class="headerlink" title="3.28 italic"></a>3.28 italic</h4><p>在光标插入点开启或关闭斜体字。 (Internet Explorer 使用 EM 标签，而不是 I )</p>
+<h4 id="3-29-justifyCenter"><a href="#3-29-justifyCenter" class="headerlink" title="3.29 justifyCenter"></a>3.29 justifyCenter</h4><p>对光标插入位置或者所选内容进行文字居中。</p>
+<h4 id="3-30-justifyFull"><a href="#3-30-justifyFull" class="headerlink" title="3.30 justifyFull"></a>3.30 justifyFull</h4><p>对光标插入位置或者所选内容进行文本对齐。</p>
+<h4 id="3-31-justifyLeft"><a href="#3-31-justifyLeft" class="headerlink" title="3.31 justifyLeft"></a>3.31 justifyLeft</h4><p>对光标插入位置或者所选内容进行左对齐。</p>
+<h4 id="3-32-justifyRight"><a href="#3-32-justifyRight" class="headerlink" title="3.32 justifyRight"></a>3.32 justifyRight</h4><p>对光标插入位置或者所选内容进行右对齐。</p>
+<h4 id="3-33-outdent"><a href="#3-33-outdent" class="headerlink" title="3.33 outdent"></a>3.33 outdent</h4><p>对光标插入行或者所选行内容减少缩进量。</p>
+<h4 id="3-34-paste"><a href="#3-34-paste" class="headerlink" title="3.34 paste"></a>3.34 paste</h4><p>在光标位置粘贴剪贴板的内容，如果有被选中的内容，会被替换。</p>
+<h4 id="3-35-redo"><a href="#3-35-redo" class="headerlink" title="3.35 redo"></a>3.35 redo</h4><p>重做被撤销的操作。</p>
+<h4 id="3-36-removeFormat"><a href="#3-36-removeFormat" class="headerlink" title="3.36 removeFormat"></a>3.36 removeFormat</h4><p>对所选内容去除所有格式</p>
+<h4 id="3-37-selectAll"><a href="#3-37-selectAll" class="headerlink" title="3.37 selectAll"></a>3.37 selectAll</h4><p>选中编辑区里的全部内容。</p>
+<h4 id="3-38-strikeThrough"><a href="#3-38-strikeThrough" class="headerlink" title="3.38 strikeThrough"></a>3.38 strikeThrough</h4><p>在光标插入点开启或关闭删除线。</p>
+<h4 id="3-39-subscript"><a href="#3-39-subscript" class="headerlink" title="3.39 subscript"></a>3.39 subscript</h4><p>在光标插入点开启或关闭下角标。</p>
+<h4 id="3-40-superscript"><a href="#3-40-superscript" class="headerlink" title="3.40 superscript"></a>3.40 superscript</h4><p>在光标插入点开启或关闭上角标。</p>
+<h4 id="3-41-underline"><a href="#3-41-underline" class="headerlink" title="3.41 underline"></a>3.41 underline</h4><p>在光标插入点开启或关闭下划线。</p>
+<h4 id="3-42-undo"><a href="#3-42-undo" class="headerlink" title="3.42 undo"></a>3.42 undo</h4><p>撤销最近执行的命令。</p>
+<h4 id="3-43-unlink"><a href="#3-43-unlink" class="headerlink" title="3.43 unlink"></a>3.43 unlink</h4><p>去除所选的锚链接的 <code>&lt;a&gt;</code> 标签</p>
+<h4 id="3-44-useCSS"><a href="#3-44-useCSS" class="headerlink" title="3.44 useCSS"></a>3.44 useCSS</h4><p>切换使用 <code>HTML tags</code> 还是 <code>CSS</code> 来生成标记. 要求一个布尔值 <code>true/false</code> 作为参数。注: 这个属性是逻辑上的倒退 (例如. use false to use CSS, true to use HTML).(IE不支持)<br>该属性已经废弃，使用         <code>styleWithCSS</code> 代替。</p>
+<h4 id="3-45-styleWithCSS"><a href="#3-45-styleWithCSS" class="headerlink" title="3.45 styleWithCSS"></a>3.45 styleWithCSS</h4><p>用这个取代 useCSS 命令。 参数如预期的那样工作, <code>i.e. true modifies/generates</code> 风格的标记属性, false 生成格式化元素。</p>
+<h2 id="三、实例"><a href="#三、实例" class="headerlink" title="三、实例"></a>三、实例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;title&gt;Exec Command&lt;<span class="regexp">/title&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">&lt;/</span>head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;iframe id=<span class="string">'HtmlEdit'</span> style=<span class="string">"width:400px; height: 296px"</span> marginWidth=<span class="string">'2px'</span> marginHeight=<span class="string">'2px'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &lt;div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &lt;button id=<span class="string">"bold"</span>&gt;Bold&lt;<span class="regexp">/button&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        &lt;button id="copy"&gt;Copy&lt;/</span>button&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &lt;<span class="regexp">/div&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &lt;script language="javascript"&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    window.onload=function()&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        var editor,boldBtnEle,copyBtnEle;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        editor = document.getElementById("HtmlEdit").contentWindow;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        boldBtnEle = document.getElementById('bold');</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        copyBtnEle = document.getElementById('copy');</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        boldBtnEle.addEventListener('click',addBold,false);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        copyBtnEle.addEventListener('click',copy,false);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        /</span><span class="regexp">/只需键入以下设定，iframe立刻变成编辑器。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        editor.document.designMode = 'On';</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        editor.document.contentEditable = true;/</span><span class="regexp">/ 设置元素为可编辑</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        function copy()&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">            editor.focus();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">            editor.document.execCommand("copy", true, null);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="regexp"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        /</span><span class="regexp">/加粗方法一 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        function addBold() &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">            editor.focus();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">            /</span><span class="regexp">/所有字体特效只是使用 execComman() 就能完成。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">            editor.document.execCommand("Bold", true, null);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">        &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/body&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">&lt;/</span>html&gt;</span></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand?" target="_blank" rel="noopener">document.execCommand</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/03/23/2017-03-23-javascript-lib-json-server/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/03/16/2017-03-16-雅虎前端优化-35-条军规/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Document/">Document<span>8</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

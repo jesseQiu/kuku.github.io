@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 常用命令 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、用户和组1、Linux 使用 User 和 Group 控制使用者对文件的存取权限2、用户使用账号和口令登录 Linux3、每个文件都有 owner，并且 owner 属于某个 Group4、每个程序都有 owner 和 Group
+用户1、每个用户都有一个唯一的 UserID2、User 的信">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux 常用命令"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Linux 常用命令</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、用户和组"><a href="#一、用户和组" class="headerlink" title="一、用户和组"></a>一、用户和组</h2><p>1、Linux 使用 User 和 Group 控制使用者对文件的存取权限<br>2、用户使用账号和口令登录 Linux<br>3、每个文件都有 owner，并且 owner 属于某个 Group<br>4、每个程序都有 owner 和 Group</p>
+<h3 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h3><p>1、每个用户都有一个唯一的 UserID<br>2、User 的信息存储在 <code>/etc/passwd</code> <strong>文件</strong> 中，可以通过 <code>less /etc/passwd</code> 来查看<br>例如其中的一条：<code>kuku:x:1001:1002:handsome:/home/kuku:/bin/bash</code></p>
+<ul>
+<li>kuku: 用户名</li>
+<li>x: 表示登入时需要密码，可以编辑该文件，把 <code>x</code> 去掉，这样就不需要密码登入</li>
+<li>1001: 用户 id</li>
+<li>1002: 组 id</li>
+<li>handsome: 用户的描述信息</li>
+<li><code>/home/kuku</code>: 登入时默认进入的 <code>home</code> 目录</li>
+<li><code>/bin/bash</code>: 登入时默认允许的程序</li>
+</ul>
+<p>3、用户密码信息文件 <code>/etc/shadow</code>，也是一个文本文件，可用 <code>less</code> 打开查看<br>4、每个 User 都有一个 home 目录<br>5、User 未经授权将禁止读写或执行其他 User 的文件<br>6、root 用户解读</p>
+<ul>
+<li>超级管理员账号，具有至高无上的权限</li>
+<li>一般不要随便用 root 登录并操作系统</li>
+</ul>
+<h3 id="用户权限设置"><a href="#用户权限设置" class="headerlink" title="用户权限设置"></a>用户权限设置</h3><ul>
+<li><img src="http://od6sd4xau.bkt.clouddn.com/linux-1.png" alt="文件权限验证流程"></li>
+<li><img src="http://od6sd4xau.bkt.clouddn.com/linux-2.png" alt="设置文件权限"></li>
+<li>如果想一起设置文件夹和文件夹下所有文件的权限，可以加一个 <code>R</code> 参数，例如：<code>chmod -R 555 jesse</code>。注意这里的 <code>R</code> 是大写的，在 liunux 命令中是区分大小写</li>
+</ul>
+<h2 id="二、文件压缩打包"><a href="#二、文件压缩打包" class="headerlink" title="二、文件压缩打包"></a>二、文件压缩打包</h2><p>1、文件压缩<br>    通过压缩算法将文件的体积缩小，同时会将多个文件合并至一起方便交换、传输。<br>2、文件打包<br>    将多个文件或者整个目录合并成一个文件，用来进行文件的备份、分发、传输等。<br>3、Linux支持的压缩格式<br>    1）<em>.Z ，compress 程序压缩文件 // 目前已被淘汰<br>    2）</em>.gz ，gzip 程序压缩文件 // 目前使用最多<br>    3）<em>.bz2，bzip2 程序压缩文件 // 比 gz 有更好的压缩比，用来取代 gz<br>    4）</em>.tar，tar 程序打包文件，并未压缩<br>    5）<em>.tar.gz，tar 打包的档案，使用 gzip压缩<br>    6）</em>.tar.bz2，tar 打包的文件，使用 bzip2压缩</p>
+<h4 id="压缩指令"><a href="#压缩指令" class="headerlink" title="压缩指令"></a>压缩指令</h4><p>1、gzip [-cdtv#] 文件名称<br>    1）扩展名为*.gz<br>    2）-c：将压缩的数据输出到屏幕上<br>    3）-d：解压缩的参数<br>    4）-t：进行文件的一致性校验看是否损坏<br>    5）-v：显示和原文件相比的压缩比<br>    6）-#：压缩等级，-1最快，-9最慢，默认是-6<br>注意，默认压缩后会把原文件删除，可以通过：<code>gzip -c xxx &gt; xxx.gz</code> 其中的 <code>xxx</code> 是文件名</p>
+<p>2、bzip2 [-cdkzv#] 文件名称<br>    1）扩展名为*.bz2<br>    2）-c：将压缩的数据输出到屏幕上<br>    3）-d：解压缩的参数，该参数代表执行解压缩操作<br>    4）-k：保留原文件并不删除原始文件<br>    5）-z：压缩的参数，该参数代表是执行压缩操作<br>    6）-v：显示和原文件对比的压缩比<br>    7）-#：压缩等级，-1最快，-9最慢，默认是-6</p>
+<p>3、xz [-zk#] 文件名称<br>xz 是大部分 linux 默认的压缩工具，压缩利率比 bzip2 还好，是压缩率之王，就是会慢点<br>    1）扩展名为*.xz<br>    2）-c：将压缩的数据输出到屏幕上<br>    3）-d：解压缩的参数，该参数代表执行解压缩操作<br>    4）-k：保留原文件并不删除原始文件<br>    5）-z：压缩的参数，该参数代表是执行压缩操作<br>    6）-v：显示和原文件对比的压缩比<br>    7）-#：压缩等级，-1最快，-9最慢，默认是-6</p>
+<p>创建 *.tar.xz 压缩文件</p>
+<p>1) <code>tar cvf xxx.tar xxx</code> : 这样创建 xxx.tar 文件先<br>2) <code>xz -z xxx.tar</code> : 将 xxx.tar 压缩成为 xxx.tar.xz</p>
+<p>解压 *.tar.xz 压缩文件</p>
+<p>1) <code>xz -d xxx.tar.xz</code> : 将 xxx.tar.xz 解压成 xxx.tar<br>2) <code>tar xvf xxx.tar</code></p>
+<h4 id="打包指令"><a href="#打包指令" class="headerlink" title="打包指令"></a>打包指令</h4><p>1、tar [-jcv] –f finaname.tar.bz2 待压缩的档案或者目录名<br>将某个文件或者目录打包并使用 bzip2 压缩成一个文件</p>
+<p>2、tar [-jxv] –f filename.tar.bz2 –C 解压缩的目录<br>将压缩文件解压缩至特定的目录</p>
+<p>3、参数解释<br>    1）-c：建立打包档案<br>    2）-t：查看打包的文件都有哪些文件名<br>    3）-x：解压缩或者解打包文件，和-C搭配使用解压缩至特定目录<br>    4）-j：通过bz2支持进行压缩或者解压缩<br>    5）-z：使用gzip进行压缩或者解压缩<br>    6）-v：将正在处理的文件名显示出来<br>    7）-f：紧跟要被处理的文件名，建议单独写一个选项</p>
+<h2 id="三、linux-目录结构"><a href="#三、linux-目录结构" class="headerlink" title="三、linux 目录结构"></a>三、linux 目录结构</h2><h3 id="重要目录"><a href="#重要目录" class="headerlink" title="重要目录"></a>重要目录</h3><p>1、home 目录<br>    1）root 用户的 home 目录是 /root，只用 root 用户的家目录是在跟目录下，其它都在 home 下<br>    2）普通用户的目录是 /home/userx</p>
+<p>2、bin 目录<br>    1）常用的可执行文件<br>    2）/bin、/usr/bin、/sbin(该目录下主要是 root 权限的可执行文件) 等</p>
+<p>3、外部设备 mountpoint<br>    1）/media、/mnt<br>    2）当检测到设备接入会自动产生挂载点</p>
+<p>4、/etc，系统的配置文件<br>5、/tmp，临时文件<br>6、/boot，系统内核和开机必要文件<br>7、/dev，系统所有的设备文件<br>8、/usr<br>    1）unix system resource<br>    2）保存程序的相关文件<br>    ps：类似 window 系统中的 program 和 window 目录结合<br>9、/lost+found<br>1）每个分区都会自动创建<br>10、/var(用户运行时的数据存放点，例如数据库)、/srv<br>11、/proc(存在内存，主要是进程，网络等信息)<br>12、/lib、/usr/lib、/usr/locat/lib</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li><p>set 查看用户自定义变量，如果是要定义变量: <code>key=value</code> 方式，删除变量使用，<code>unset key</code><br>ps: 自定义变量只在当前 <code>shell</code> 环境中有效，如果要把自定义变量转为环境变量使用 <code>export</code>,例如要将 <code>/home/rongdeguo/Code</code> 加入到环境变量中，可以在 shell 中输入<br><code>export PATH=$PATH:/home/rongdeguo/Code</code></p>
+</li>
+<li><p>env 查看环境变量<br>ps: 如果需要一行一行看可以使用 管道和 <code>more</code>，例如：<code>set | more</code>，在整理主机的 <code>shell</code> 环境下有效.如果要删除使用 <code>unset</code> 命令</p>
+</li>
+<li><p>echo 获取变量值，例如：<code>echo $name</code>，前面的 <code>$</code> 是对变量引用</p>
+</li>
+<li><p>设置别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> cls=<span class="string">'clear'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> cls</span></pre></td></tr></table></figure></li>
+<li><p>查看所以别名：<code>alias</code> 类似 <code>set</code> 和 <code>env</code>,删除使用 <code>unalias</code></p>
+</li>
+<li><p>显示当前日历：<code>cal</code>，注意这里是 <strong>日历</strong>信息</p>
+</li>
+<li><p>查看指令存在那个位置：<code>witch</code></p>
+</li>
+<li><p><code>/etc/profile</code> 文件是启动 shell 时自动运行文件，如果需要添加自启动程序，可以添加到该文件中。</p>
+</li>
+<li><p><code>source</code> 命令，重新加载指定脚本变更</p>
+</li>
+<li><p>目录切换</p>
+<ul>
+<li>切换到上次目录：<code>cd -</code></li>
+<li>切换到家目录：<code>cd ~</code></li>
+</ul>
+</li>
+<li><p>拷贝：<code>cp [option] finaname 目标路径</code></p>
+</li>
+<li><p>删除：<code>rm [option] finaname 目标路径</code></p>
+</li>
+<li><p>移动/重命名：<code>mv [option] finaname 目标路径</code><br>ps：上面三个命令参数：</p>
+<ul>
+<li>-i 交付式</li>
+<li>-r 递归，在拷贝删除目录时需要加该参数</li>
+<li>-f 强制，不出现提示，直接操作命令</li>
+</ul>
+</li>
+<li><p>新建：<code>touch、mkdir [option] finaname 目标路径</code></p>
+</li>
+<li><p>确定文件格式：<code>file [option] finaname</code></p>
+</li>
+<li><p>ls，ls[options][file_or_dirs]<br>  1）ls，列出当前目录内容<br>  2）ls / ，显示根目录的内容<br>  3）ls –a，显示隐藏文件<br>  4）ls –l，显示详细内容<br>  5）ls –ld，显示目录本身的属性<br>  6）ls –lh，文件大小可以显示为 <code>k</code> 单位</p>
+</li>
+<li><p>查看系统安装了哪些软件</p>
+<ul>
+<li>查看所有软件: <code>rpm -aq</code> </li>
+<li>查看指定名字的软件：rpm -aq|grep 软件名</li>
+</ul>
+</li>
+<li><p>查看内核/操作系统/CPU信息: <code>uname -a</code>  </p>
+</li>
+<li><p>查看端口占用：<code>netstat –apn | grep 8080</code></p>
+</li>
+<li><p>查看所有进程<br>1) ps aux/-le: 查看系统所有进程<br>2）pstree：查看进程树 </p>
+</li>
+<li><p>查看系统状态<br>top: 可以查看系统运行天数，内存大小，cup 占用率等系统状态信息。</p>
+</li>
+<li><p>杀进程<br>1) kill -HUB(1) 223: 重启进程<br>2) kill -9 223: 强制杀进程<br>2) killall httpd(进程名称): 根据进程名称杀(同时杀相同进程名下多个进程)<br>3) pkill -9 -t putt/1(登入的终端号): 除了具有 <code>killall</code> 的功能，还可以通过参数 <code>t</code> 来提出终端号。可以通过 <code>w</code>命令查看当前登入的用户。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://man.linuxde.net/" target="_blank" rel="noopener">Linux 命令大全</a></li>
+<li><a href="http://www.cnblogs.com/haore147/p/3633116.html" target="_blank" rel="noopener">Linux 设置环境变量</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/05/21/2017-05-21-Linux-部署-Nodejs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/05/20/2017-05-20-vim-常用命令/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-05-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

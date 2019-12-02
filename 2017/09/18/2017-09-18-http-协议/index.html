@@ -1,0 +1,400 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Http 协议 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="http：Hyper Text Transfer Protocol 超文本传输协议，是互联网应用最为广泛的一种网络协议，主要用于 Web服务。通过计算机处理文本信息，格式为HTML（Hyper Text Mark Language）超文本标记语言来实现。
+
+http 协议的版本
+http 0.9：仅">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Http 协议"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Http 协议</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>http：Hyper Text Transfer Protocol 超文本传输协议，是互联网应用最为广泛的一种网络协议，主要用于 Web服务。通过计算机处理文本信息，格式为HTML（Hyper Text Mark Language）超文本标记语言来实现。</p>
+</blockquote>
+<h2 id="http-协议的版本"><a href="#http-协议的版本" class="headerlink" title="http 协议的版本"></a>http 协议的版本</h2><ul>
+<li><p>http 0.9：仅于用户传输html文档</p>
+</li>
+<li><p>http 1.0<br>引入了MIME(Multipurpose Internet Mail Extesions)机制：多用途互联网邮件扩展，引入这个技术之后，http可以发送多媒体（比如视频、音频等）信息。此机制让http不在单单只支持html格式，还可以支持其他格式来进行发送了。<br>引入了keep-alive机制，支持持久连接的功能（但这个keep-alive原理是在首部添加了某个字段而形成的，并非原生就支持此功能）<br>引入支持缓存功能</p>
+</li>
+<li><p>http 1.1<br>支持更多的请求方法，更加精细的缓存控制，原生直接支持持久连接功能（presistent）。</p>
+</li>
+<li><p>http 2.0<br>提供了HTTP语义优化的传输<br>spdy : google引入了的一个技术，能够加速http数据交互，尤其是使用ssl 加速机制，但是spdy现在用的还不多。</p>
+</li>
+</ul>
+<p>这部分可以参考 <a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="noopener">HTTP 协议入门</a></p>
+<h2 id="一、静态页面服务器"><a href="#一、静态页面服务器" class="headerlink" title="一、静态页面服务器"></a>一、静态页面服务器</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_gif/IP70Vic417DPqq0ve4T1Rfj20HpwdamYphiczTS8vZhYJ4ZfhDQp0GVaOEuloSlTI8DMN8iabOu5crGTGf8Tu5gQA/0?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1" alt="静态服务器"></p>
+<h2 id="二、动态渲染服务器"><a href="#二、动态渲染服务器" class="headerlink" title="二、动态渲染服务器"></a>二、动态渲染服务器</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_gif/IP70Vic417DPqq0ve4T1Rfj20HpwdamYpxOpYUWsXel3bwmtrY7TAPzNK9SCWFPJrZN3ZniazDAl78sgUPdtdxdg/0?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1" alt="动态渲染服务器"></p>
+<h2 id="三、Http-请求资源类型"><a href="#三、Http-请求资源类型" class="headerlink" title="三、Http 请求资源类型"></a>三、Http 请求资源类型</h2><ul>
+<li>text/plain</li>
+<li>text/html</li>
+<li>text/css</li>
+<li>image/jpeg</li>
+<li>image/png</li>
+<li>image/svg+xml</li>
+<li>audio/mp4</li>
+<li>video/mp4</li>
+<li>application/javascript</li>
+<li>application/pdf</li>
+<li>application/zip</li>
+<li>application/atom+xml</li>
+</ul>
+<h2 id="四、http请求和响应步骤"><a href="#四、http请求和响应步骤" class="headerlink" title="四、http请求和响应步骤"></a>四、http请求和响应步骤</h2><p><img src="http://mmbiz.qpic.cn/mmbiz_png/eDpwXmSEM4F3IAoD7WeYljMY3vVV60zsg5iavLcjgvDZYzsBKDtIfhwYzUafJ5XicDq33xw3bBBrpC0F52C9f9Gg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1" alt="http请求和响应步骤"></p>
+<h2 id="五、HTTP-状态码"><a href="#五、HTTP-状态码" class="headerlink" title="五、HTTP 状态码"></a>五、HTTP 状态码</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/M8PxXODDKYlppuVaxz5GrMe8Unt41qFjLDfNlKiavb7ZBSt0Wf1mdAwszOXxpPFgvHP97L7vcVyulLCRdBykwFQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1" alt=""></p>
+<ul>
+<li>301—永久移动。被请求的资源已被永久移动位置；</li>
+<li>302—请求的资源现在临时从不同的 URI 响应请求；</li>
+<li>305—使用代理。被请求的资源必须通过指定的代理才能被访问；</li>
+<li>307—临时跳转。被请求的资源在临时从不同的URL响应请求；</li>
+<li>400—错误请求；</li>
+<li>402—需要付款。该状态码是为了将来可能的需求而预留的，用于一些数字货币或者是微支付；</li>
+<li>403—禁止访问。服务器已经理解请求，但是拒绝执行它；</li>
+<li>404—找不到对象。请求失败，资源不存在；</li>
+<li>406—不可接受的。请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体；</li>
+</ul>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_jpg/vqlbVFl5Jn2M1xc6zJEicZjCWHy5PjweI5XM1VQ3nibGjKYhvZK55ickPUCibqtvGbmKgoZTH4yZV6E15gMHPVdWpA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1" alt=""></p>
+<ul>
+<li>408—请求超时；</li>
+<li>409—冲突。由于和被请求的资源的当前状态之间存在冲突，请求无法完成；</li>
+<li>410—遗失的。被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址；</li>
+<li>413—响应实体太大。服务器拒绝处理当前请求，请求超过服务器所能处理和允许的最大值。</li>
+<li>417—期望失败。在请求头 Expect 中指定的预期内容无法被服务器满足；</li>
+<li>418—我是一个茶壶。超文本咖啡罐控制协议，但是并没有被实际的HTTP服务器实现；</li>
+<li>420—方法失效。</li>
+<li>422—不可处理的实体。请求格式正确，但是由于含有语义错误，无法响应；</li>
+<li>500—服务器内部错误。服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理；</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="noopener">HTTP 协议入门</a></li>
+<li><a href="https://mp.weixin.qq.com/s/u7SFJFgqKoUfsTSO9G-0sQ" target="_blank" rel="noopener">基础拾掇之——http基础</a></li>
+<li><a href="https://mp.weixin.qq.com/s/K1zw0J0AUBFnlxgMDd-6mQ" target="_blank" rel="noopener">理解Http请求与响应（补图版）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/e-moRFziCudrbH2z001GXg" target="_blank" rel="noopener">关于HTTP状态码的趣图</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/09/19/2017-09-18-linux-nginx-配置文件/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/09/18/2017-09-18-rem/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-09-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Ajax/">Ajax<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

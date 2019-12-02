@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS3 rem 单位 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、CSS3 remCSS3的出现，他同时引进了一些新的单位，包括我们今天所说的rem。在W3C官网上是这样描述rem的——“font size of the root element” 。
+而rem是相对于根元素，这样就意味着，我们只需要在根元素确定一个参考值，，在根元素中设置多大的字体，这完全可">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS3 rem 单位"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> CSS3 rem 单位</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、CSS3-rem"><a href="#一、CSS3-rem" class="headerlink" title="一、CSS3 rem"></a>一、CSS3 rem</h2><p><a href="http://www.w3.org/TR/css3-values/" target="_blank" rel="noopener">CSS3</a>的出现，他同时引进了一些新的<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">单位</a>，包括我们今天所说的<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>。在<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">W3C</a>官网上是这样描述<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>的——<strong>“font size of the root element”</strong> 。</p>
+<p>而<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>是相对于根元素<html>，这样就意味着，我们只需要在根元素确定一个参考值，，在根元素中设置多大的字体，这完全可以根据您自己的需，大家也可以参考下图：</p>
+<p><a href="http://pxtoem.com/" target="_blank" rel="noopener"><img src="http://www.w3cplus.com/sites/default/files/emTable.png" alt=""></a></p>
+<p>我们来看一个简单的代码实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">html &#123;font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">			body &#123;font-size: 1.4rem;/*1.4 × 10px = 14px */&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">			h1 &#123; font-size: 2.4rem;/*2.4 × 10px = 24px*/&#125;</span></pre></td></tr></table></figure>
+
+<p>我在根元素<html>中定义了一个基本字体大小为62.5%（也就是10px。设置这个值主要方便计算，如果没有设置，将是以“16px”为基准 ）。从上面的计算结果，我们使用“rem”就像使用“px”一样的方便，而且同时解决了“px”和“em”两者不同之处。</p>
+<h2 id="二、浏览器的兼容性"><a href="#二、浏览器的兼容性" class="headerlink" title="二、浏览器的兼容性"></a>二、浏览器的兼容性</h2><p><a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>是<a href="http://www.w3.org/TR/css3-values/" target="_blank" rel="noopener">CSS3</a>新引进来的一个度量单位，大家心里肯定会觉得心灰意冷呀，担心浏览器的支持情况。其实大家不用害怕，你可能会惊讶，支持的浏览器还是蛮多的，比如：<a href="http://firefox.com/" target="_blank" rel="noopener">Mozilla Firefox 3.6+</a>、<a href="http://apple.com/safari/" target="_blank" rel="noopener">Apple Safari 5+</a>、<a href="http://google.com/chrome" target="_blank" rel="noopener">Google Chrome</a>、<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home" target="_blank" rel="noopener">IE9+</a>和<a href="http://www.opera.com/" target="_blank" rel="noopener">Opera11+</a>。只是可怜的IE6-8无法，你们就把他们当透明了吧，我向来都是如此。</p>
+<h2 id="三、应用到手机端自适应"><a href="#三、应用到手机端自适应" class="headerlink" title="三、应用到手机端自适应"></a>三、应用到手机端自适应</h2><p>rem 作为一个低调的长度单位，由于手机端网页的兴起，在屏幕适配中得到重用。使用 rem 前端开发者可以很方便的在各种屏幕尺寸下，通过等比缩放的方式达到设计图要求的效果。</p>
+<p>以设计稿的宽度为<code>640px</code>，即：<code>designWidth = 640</code>，同时设定在640px屏宽下 <code>1rem=100px</code> ，即：<code>rem2px = 100</code>。</p>
+<blockquote>
+<p>设置 <code>1rem=100px</code> 的优点不言而喻。前端开发者在切图、重构页面的时候，通过直接位移小数点的方式，就可以将UI图中测量到的 <code>px</code> 值换算成对应的 <code>rem</code> 值，方便快捷。</p>
+</blockquote>
+<blockquote>
+<p>此外，在 <code>head</code> 中我们还设置了：<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0&quot; /&gt;</code><br><code>viewport</code> 的作用很重要，但不是本文的重点所以不展开，有兴趣的同学可以自行搜索。</p>
+</blockquote>
+<p>先来看看具体方案：</p>
+<blockquote>
+<p>下面四个方案，原理都是采用等比缩放的方式 —— <strong>获得目标屏幕宽度和设计稿宽度的比</strong>，作为 <code>rem</code> 的基值（缩放系数），设置为<code>html</code>标签的字体大小。不同的只是在于性能取舍和书写习惯。</p>
+</blockquote>
+<h3 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 320px) &#123;html&#123;font-size:50px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 360px) &#123;html&#123;font-size:56.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 375px) &#123;html&#123;font-size:58.59375px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 400px) &#123;html&#123;font-size:62.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 414px) &#123;html&#123;font-size:64.6875px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 440px) &#123;html&#123;font-size:68.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 480px) &#123;html&#123;font-size:75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 520px) &#123;html&#123;font-size:81.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 560px) &#123;html&#123;font-size:87.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;html&#123;font-size:93.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 640px) &#123;html&#123;font-size:100px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 680px) &#123;html&#123;font-size:106.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 720px) &#123;html&#123;font-size:112.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 760px) &#123;html&#123;font-size:118.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 800px) &#123;html&#123;font-size:125px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 960px) &#123;html&#123;font-size:150px;&#125;&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 320px) &#123;html&#123;font-size:312.5%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 360px) &#123;html&#123;font-size:351.5625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 375px) &#123;html&#123;font-size:366.211%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 400px) &#123;html&#123;font-size:390.625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 414px) &#123;html&#123;font-size:404.2969%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 440px) &#123;html&#123;font-size:429.6875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 480px) &#123;html&#123;font-size:468.75%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 520px) &#123;html&#123;font-size:507.8125%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 560px) &#123;html&#123;font-size:546.875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;html&#123;font-size:585.9375%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 640px) &#123;html&#123;font-size:625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 680px) &#123;html&#123;font-size:664.0625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 720px) &#123;html&#123;font-size:703.125%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 760px) &#123;html&#123;font-size:742.1875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 800px) &#123;html&#123;font-size:781.25%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 960px) &#123;html&#123;font-size:937.5%;&#125;&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="方案3"><a href="#方案3" class="headerlink" title="方案3"></a>方案3</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var designWidth =640, rem2px = 100;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">document.documentElement.style.fontSize = </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  ((window.innerWidth / designWidth) \* rem2px) + 'px';</span></pre></td></tr></table></figure>
+
+<h3 id="方案4"><a href="#方案4" class="headerlink" title="方案4"></a>方案4</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var designWidth =640, rem2px = 100;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">document.documentElement.style.fontSize = </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  ((((window.innerWidth / designWidth) \* rem2px) / 16) \* 100) + '%';</span></pre></td></tr></table></figure>
+
+<h3 id="终极解决方案"><a href="#终极解决方案" class="headerlink" title="终极解决方案"></a>终极解决方案</h3><p>由于有些 Android 手机上，浏览器或 webview 的默认字体是随着系统设置的字体改变的。这样就会导致默认字体大于或小于 16px,会导致上面的 方案3 和方案4 计算出现误差。下面是解决方案</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">adapt</span>(<span class="params">designWidth, rem2px</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> d = <span class="built_in">window</span>.document.createElement(<span class="string">'div'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  d.style.width = <span class="string">'1rem'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  d.style.display = <span class="string">"none"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> head = <span class="built_in">window</span>.document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  head.appendChild(d);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> defaultFontSize = <span class="built_in">parseFloat</span>(<span class="built_in">window</span>.getComputedStyle(d, <span class="literal">null</span>).getPropertyValue(<span class="string">'width'</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// d.remove();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> st = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> portrait = <span class="string">"@media screen and (min-width: "</span>+<span class="built_in">window</span>.innerWidth+<span class="string">"px) &#123;html&#123;font-size:"</span>+ ((<span class="built_in">window</span>.innerWidth/(designWidth/rem2px)/defaultFontSize)*<span class="number">100</span>) +<span class="string">"%;&#125;&#125;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> landscape = <span class="string">"@media screen and (min-width: "</span>+<span class="built_in">window</span>.innerHeight+<span class="string">"px) &#123;html&#123;font-size:"</span>+ ((<span class="built_in">window</span>.innerHeight/(designWidth/rem2px)/defaultFontSize)*<span class="number">100</span>) +<span class="string">"%;&#125;&#125;"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  st.innerHTML = portrait + landscape;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  head.appendChild(st);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> defaultFontSize</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> defaultFontSize = adapt(<span class="number">640</span>, <span class="number">100</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/hbxeagle/rem" target="_blank" rel="noopener">了解真实的『REM』手机屏幕适配</a></li>
+<li><a href="hhttp://www.w3cplus.com/css3/define-font-size-with-css3-rem" target="_blank" rel="noopener">CSS3的REM设置字体大小</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/09/18/2017-09-18-http-协议/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/09/07/2017-09-07-linux-nginx-安装/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-09-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Css3/">Css3<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

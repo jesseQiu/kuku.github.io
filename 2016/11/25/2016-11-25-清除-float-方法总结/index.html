@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>清除 float 方法总结 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、抛一块问题砖（display： block）先看现象
+分析 HTML 代码结构：
+1&amp;lt;div class=&#34;outer&#34;&amp;gt;2    &amp;lt;div class=&#34;div1&#34;&amp;gt;1&amp;lt;/div&amp;gt;3    &amp;lt;div class=&#34;div2&#34;&amp;gt;2&amp;lt;/div&amp;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="清除 float 方法总结"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 清除 float 方法总结</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、抛一块问题砖（display：-block）先看现象"><a href="#一、抛一块问题砖（display：-block）先看现象" class="headerlink" title="一、抛一块问题砖（display： block）先看现象"></a>一、抛一块问题砖（display： block）先看现象</h2><p><img src="http://static.oschina.net/uploads/space/2014/0411/212009_OUhA_1242866.jpg" alt=""></p>
+<p>分析 HTML 代码结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div3"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>分析CSS代码样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outer</span>&#123;<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;<span class="attribute">background</span>: <span class="number">#fc9</span>;<span class="attribute">color</span>: <span class="number">#fff</span>; <span class="attribute">margin</span>: <span class="number">50px</span> auto;<span class="attribute">padding</span>: <span class="number">50px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">80px</span>;<span class="attribute">height</span>: <span class="number">80px</span>;<span class="attribute">background</span>: red;<span class="attribute">float</span>: left;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div2</span>&#123;<span class="attribute">width</span>: <span class="number">80px</span>;<span class="attribute">height</span>: <span class="number">80px</span>;<span class="attribute">background</span>: blue;<span class="attribute">float</span>: left;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div3</span>&#123;<span class="attribute">width</span>: <span class="number">80px</span>;<span class="attribute">height</span>: <span class="number">80px</span>;<span class="attribute">background</span>: sienna;<span class="attribute">float</span>: left;&#125;</span></pre></td></tr></table></figure>
+
+<p>这里我没有给最外层的 DIV.outer 设置高度，但是我们知道如果它里面的元素不浮动的话，那么这个外层的高是会自动被撑开的。但是当内层元素浮动后，就出现了一下影响：</p>
+<ul>
+<li>背景不能显示</li>
+<li>边框不能撑开</li>
+<li>margin 设置值不能正确显示</li>
+</ul>
+<h2 id="二、清除-css-浮动"><a href="#二、清除-css-浮动" class="headerlink" title="二、清除 css 浮动"></a>二、清除 css 浮动</h2><h3 id="1-方法一：添加新的元素-、应用-clear：both"><a href="#1-方法一：添加新的元素-、应用-clear：both" class="headerlink" title="1. 方法一：添加新的元素 、应用 clear：both;"></a>1. 方法一：添加新的元素 、应用 <code>clear：both;</code></h3><p>HTML：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div3"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>CSS：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clear</span>&#123;<span class="attribute">clear</span>:both; <span class="attribute">height</span>: <span class="number">0</span>; <span class="attribute">line-height</span>: <span class="number">0</span>; <span class="attribute">font-size</span>: <span class="number">0</span>&#125;</span></pre></td></tr></table></figure>
+
+<p><strong>result： （纠正： padding 不会受影响）</strong></p>
+<p><img src="http://static.oschina.net/uploads/space/2014/0411/213640_hgsY_1242866.jpg" alt=""></p>
+<h3 id="2-方法二：父级-div-定义-overflow-auto-（注意：是父级div也就是这里的-div-outer）"><a href="#2-方法二：父级-div-定义-overflow-auto-（注意：是父级div也就是这里的-div-outer）" class="headerlink" title="2. 方法二：父级 div 定义 overflow: auto （注意：是父级div也就是这里的  div.outer）"></a>2. 方法二：父级 div 定义 <code>overflow: auto</code> （注意：是父级div也就是这里的  div.outer）</h3><p>HTML：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer over-flow"</span>&gt;</span> //这里添加了一个class</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div3"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!--&lt;div class="clear"&gt;&lt;/div&gt;--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>CSS：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.over-flow</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    overflow: auto; zoom: 1; //zoom: 1; 是在处理兼容性问题</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>结果：当然是实现了！  <code>img{display: none};</code> 略图</p>
+<p>原理：使用 overflow 属性来清除浮动有一点需要注意，overflow 属性共有三个属性值:<code>hidden,auto,visible</code>。我们可以使用 <code>hidden</code> 和 <code>auto</code> 值来清除浮动，但切记不能使用 <code>visible</code> 值，如果使用这个值将无法达到清除浮动效果，其他两个值都可以，其区据说在于一个对<code>seo</code> 比较友好，另个 <code>hidden</code> 对 <code>seo</code> 不是太友好。</p>
+<h3 id="3-方法三：-据说是最高大上的方法-after-方法：（注意：作用于浮动元素的父亲）"><a href="#3-方法三：-据说是最高大上的方法-after-方法：（注意：作用于浮动元素的父亲）" class="headerlink" title="3. 方法三： 据说是最高大上的方法 :after 方法：（注意：作用于浮动元素的父亲）"></a>3. 方法三： 据说是最高大上的方法 <code>:after</code> 方法：（注意：作用于浮动元素的父亲）</h3><p>先说原理：这种方法清除浮动是现在网上最拉风的一种清除浮动，他就是利用 <code>:after</code> 和 <code>:before</code> 来在元素内部插入两个元素块，从面达到清除浮动的效果。其实现原理类似于 <code>clear:both</code> 方法，只是区别在于 <code>:clear</code> 在 html 插入一个 <code>div.clear</code> 标签，而 <code>outer</code> 利用其伪类 <code>clear:after</code> 在元素内部增加一个类似于 <code>div.clear</code> 的效果。下面来看看其具体的使用方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">.outer &#123;zoom:1;&#125;    /*==for IE6/7 Maxthon2==*/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">.outer :after &#123;clear:both;content:'.';display:block;width: 0;height: 0;visibility:hidden;&#125;   /*==for FF/chrome/opera/IE8==*/</span></pre></td></tr></table></figure>
+
+<p>其中 <code>clear:both;</code> 指清除所有浮动；<code>content: &#39;.&#39;; display:block;</code> 对于 FF/chrome/opera/IE8 不能缺少，其中 <code>content()</code> 可以取值也可以为空。<code>visibility:hidden;</code> 的作用是允许浏览器渲染它，但是不显示出来，这样才能实现清楚浮动。</p>
+<h3 id="4-最后：但不是不重要，也不是不知道！"><a href="#4-最后：但不是不重要，也不是不知道！" class="headerlink" title="4. 最后：但不是不重要，也不是不知道！"></a>4. 最后：但不是不重要，也不是不知道！</h3><p>下一标签直接清浮动兄弟标签浮动时，在下一标签的属性中直接写入清除 <code>clear:both;</code> 这样就可以清除以上标签的浮动而不用加入空标签来清除浮动。</p>
+<p><code>$(&#39;.float&#39;).end().</code> </p>
+<p>结语：清除浮动的方式虽然是有很多种，但是不是每种都适合你，也不是每种都能很好的兼容所有浏览器，所以参照你觉得最好的方式去做，个人觉得方法三不错，不需多于的标签，而且也能很好的兼容。当一个内层元素是浮动的时候，如果没有关闭浮动时，其父元素也就不会再包含这个浮动的内层元素，因为此时浮动元素已经 <strong>脱离了</strong>文档流。也就是为什么外层不能被撑开了！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>引用 <a href="https://my.oschina.net/leipeng/blog/221125" target="_blank" rel="noopener">css清除浮动float的三种方法总结</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/11/25/2016-11-25-vue-组件/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/11/25/2016-11-25-float-属性详解/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-11-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Css/">Css<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue.js Study Notes - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是记录在学习 Vue.js 过程中的知识点。
+
+
+v-bind 和 v-on 缩写方法
+1&amp;lt;!-- 完整语法 --&amp;gt;2&amp;lt;a v-bind:href=&#34;url&#34;&amp;gt;&amp;lt;/a&amp;gt;3&amp;lt;!-- 缩写 --&amp;gt;4&amp;lt;a :href=&#34;url&#34;&amp;gt;&amp;lt;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Vue.js Study Notes"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Vue.js Study Notes</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>本文主要是记录在学习 <code>Vue.js</code> 过程中的知识点。</p>
+</blockquote>
+<ol>
+<li><p><code>v-bind</code> 和 <code>v-on</code> 缩写方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:disabled</span>=<span class="string">"someDynamicCondition"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">:disabled</span>=<span class="string">"someDynamicCondition"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+</li>
+<li><p><code>Vue.js</code> 本身不带 <strong>路由</strong> 和 <strong>Ajax</strong> 请求部分，需要使用相应的插件，<a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">vue-router</a> 和 <a href="https://github.com/vuejs/vue-resource" target="_blank" rel="noopener">vue-resource</a>。</p>
+</li>
+<li><p>使用 <strong>计算属性</strong> 替代 <code>$watch</code> 代码会更简洁。参考： <a href="http://cn.vuejs.org/guide/computed.html" target="_blank" rel="noopener">计算属性</a></p>
+</li>
+<li><p>条件渲染</p>
+<ul>
+<li>v-show 不支持 <template> 语法。</li>
+<li>v-show 用在组件上时，因为指令的优先级 v-else 会出现问题，可以改为  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">custom-component</span> <span class="attr">v-show</span>=<span class="string">"condition"</span>&gt;</span><span class="tag">&lt;/<span class="name">custom-component</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-show</span>=<span class="string">"!condition"</span>&gt;</span>这可能也是一个组件<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li>如果需要频繁切换 <code>v-show</code> 较好，如果在运行时条件不大可能改变 <code>v-if</code> 较好。</li>
+<li>参考 <a href="http://cn.vuejs.org/guide/conditional.html" target="_blank" rel="noopener">条件渲染</a></li>
+</ul>
+</li>
+<li><p>事件</p>
+<ul>
+<li>事件修饰符<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修饰符可以串联 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用 capture 模式 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li>按键修饰符<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 只有在 keyCode 是 13 时调用 vm.submit() --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.13</span>=<span class="string">"submit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 同上 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">// 自定义事件：可以使用 @keyup.f1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Vue.directive('on').keyCodes.f1 = 112</span></pre></td></tr></table></figure></li>
+<li>所有事件是绑定在 <code>ViewModel</code> 上，当一个 <code>ViewModel</code>被销毁时，所有的事件处理器都会自动被删除</li>
+<li>参考 <a href="http://cn.vuejs.org/guide/events.html#u65B9_u6CD5_u5904_u7406_u5668" target="_blank" rel="noopener">方法&amp;事件</a></li>
+</ul>
+</li>
+<li><p>表单绑定 -&gt; 参数特性</p>
+<ul>
+<li><code>lazy</code><br>  在默认情况下，<code>v-model</code> 在 <code>input</code> 事件中同步输入框值与数据，可以添加一个特性 <code>lazy</code>，从而改到在 <code>change</code> 事件中同步输入框值与数据，可以添加一个特性  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在 "change" 而不是 "input" 事件中更新 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;&#123;msg&#125;&#125; // 只有当按回车时，才会更新值到 DOM 中。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"msg"</span> <span class="attr">lazy</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><code>number</code><br>  自动将用户的输入转为 <code>Number</code> 类型（如果原值的转换结果为 <code>NaN</code> 则返回原值），可以添加一个特性 <code>number</code>  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"age"</span> <span class="attr">number</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><code>debounce</code><br>  设置一个最小的延时，在每次敲击之后延时同步输入框的值与数据。如果每次更新都要进行高耗操作（例如在输入提示中 <code>Ajax</code> 请求），它较为有用  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"age"</span> <span class="attr">debounce</span>=<span class="string">"500"</span>&gt;</span></span></pre></td></tr></table></figure>
+  注意 <code>debounce</code> 参数不会延迟 <code>input</code> 事件：它延迟“写入”底层数据。因此在使用 <code>debounce</code> 时应当用 <code>vm.$watch()</code> 响应数据的变化。若想延迟 <code>DOM</code> 事件，应当使用 <code>debounce</code> 过滤器。</li>
+</ul>
+</li>
+<li><p>cameCase vs kebab-case</p>
+<ul>
+<li>cameCase: <strong>myComponent</strong></li>
+<li>kebab-case: <strong>my-component</strong></li>
+</ul>
+</li>
+<li><p>Component(组件)</p>
+<ul>
+<li><p>组件（Component）是 <code>Vue.js</code> 最强大的功能之一。组件可以扩展 <code>HTML</code> 元素，封装可重用的代码。在较高层面上，组件是自定义元素，<code>Vue.js</code> 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 <code>HTML</code> 元素的形式，以 <code>is</code> 特性扩展</p>
+</li>
+<li><p>当同时存在 <code>$dispatch()</code> 和 <code>v-on</code> 时，会优先使用 <code>v-on</code>，切不会重复发送消息.</p>
+</li>
+<li><p>父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译。</p>
+</li>
+<li><p><code>Vue.js</code> 组件 <code>API</code> 来自三部分——prop，事件和 slot：</p>
+<ul>
+<li>prop 允许外部环境传递数据给组件；</li>
+<li>事件 允许组件触发外部环境的 <code>action</code>；</li>
+<li>slot 允许外部环境插入内容到组件的视图结构内。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态添加响应数据属性</p>
+<ul>
+<li>vm.$set(‘b’, 2);</li>
+<li>Vue.set(data,’b’,2);</li>
+<li>推荐在 data 对象上声明所有的响应属性，如果使用上面的方法在初始化后添加，会从新计算 <code>watch</code> 值，影响性能。</li>
+</ul>
+</li>
+<li><p><code>Vue.js</code> 默认异步更新 <code>DOM</code>.</p>
+</li>
+<li><p>在 <code>Vue.js</code> 中指令和组件分得更清晰。指令只封装 <code>DOM</code> 操作，而组件代表一个自给自足的独立单元 —— 有自己的视图和数据逻辑.</p>
+</li>
+<li><p><code>Vue.js</code> 使用基于** 依赖追踪** 的观察系统并且 <strong>异步列队更新</strong>，所有的数据变化都是独立地触发，除非它们之间有明确的依赖关系。唯一需要做的优化是在 v-for 上使用 track-by;<code>Angular 2</code> 和 <code>Vue</code> 用相似的设计解决了一些 <code>Angular 1</code> 中存在的问题;</p>
+</li>
+<li><p>Component 进阶</p>
+<ul>
+<li>如果刚看完官方教程对 <code>component</code> 理解还不够透彻，或者感觉理解了但是看代码例子时似是而非的感觉。可以看下下面两篇的文章，会对你有帮助的.<ul>
+<li><a href="http://www.cnblogs.com/keepfool/p/5625583.html" target="_blank" rel="noopener">Vue.js——60分钟组件快速入门（上篇）</a></li>
+<li><a href="http://www.cnblogs.com/keepfool/p/5637834.html" target="_blank" rel="noopener">Vue.js——60分钟组件快速入门（下篇）</a></li>
+</ul>
+</li>
+<li><code>Vue.js</code> 中的组件事件是独立于原生 <code>DOM</code> 的事件。</li>
+<li>Vue.js 组件的 API 来源于三部分——prop，slot 和 事件。<ul>
+<li>prop 允许外部环境传递数据给组件；</li>
+<li>事件 允许组件触发外部环境的 action；</li>
+<li>slot 允许外部环境插入内容到组件的视图结构内</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>vue-router<br><code>vue-router</code> 是 <code>Vue.js</code> 官方的路由插件，它和 <code>Vue.js</code> 是深度集成的，适合用于构建单页面应用。<code>Vue</code> 的单页面应用是基于路由和组件的，路由用于设定访问路径，并将路径和组件映射起来。传统的页面应用，是用一些超链接来实现页面切换和跳转的。在 <code>vue-router</code> 单页面应用中，则是路径之间的切换，也就是组件的切换.</p>
+<ul>
+<li><a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">github 仓库</a></li>
+<li><a href="http://router.vuejs.org/en/index.html" target="_blank" rel="noopener">vue-route 2</a> <em>目前只有英文版本教程</em></li>
+<li><a href="https://github.com/vuejs/vue-router/tree/1.0/docs/zh-cn" target="_blank" rel="noopener">vue-route 0.7</a> <em>有中文教程</em></li>
+<li><a href="http://www.cnblogs.com/keepfool/p/5690366.html" target="_blank" rel="noopener">vue-router 60 分钟入门</a> <em>以 0.7 版本讲解</em></li>
+</ul>
+</li>
+<li><p>vue-resource<br>vue-resource 是 Vue.js 的一款插件，它可以通过 XMLHttpRequest 或 JSONP 发起请求并处理响应。也就是说，$.ajax 能做的事情，vue-resource 插件一样也能做到，而且 vue-resource 的 API 更为简洁。另外，vue-resource 还提供了非常有用的 inteceptor 功能，使用 inteceptor 可以在请求前和请求后附加一些行为，比如使用 inteceptor 在 ajax 请求时显示 loading 界面。</p>
+<ul>
+<li><a href="http://www.cnblogs.com/keepfool/p/5657065.html" target="_blank" rel="noopener">vue-resource 全攻略</a></li>
+</ul>
+</li>
+<li><p>watch 监测对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">data() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">　　<span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">　　　　bet: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">　　　　　　pokerState: <span class="number">53</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">　　　　　　pokerHistory: <span class="string">'local'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">　　　　&#125;   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">watch: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">　　bet: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">　　　　handler(newValue, oldValue) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">　　　　　　<span class="built_in">console</span>.log(newValue)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">　　　　&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">　　　　deep: <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">　　&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组同上一样</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参考：http://www.cnblogs.com/hity-tt/p/6677753.html</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.jianshu.com/p/eff145fb815b" target="_blank" rel="noopener">vue 登入状态管理</a></li>
+<li><a href="https://router.vuejs.org/zh-cn/advanced/navigation-guards.html" target="_blank" rel="noopener">vue router</a></li>
+</ul>
+</li>
+</ol>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/28/2016-09-28-phantomjs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/09/20/2016-09-20-vue-js-FAQ/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Vue-js/">Vue.js<span>10</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

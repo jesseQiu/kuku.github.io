@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>History 对象 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="概述浏览器窗口有一个history对象，用来保存浏览历史。
+比如，当前窗口先后访问了三个地址，那么history对象就包括三项，history.length属性等于3。
+1history.length // 3
+
+history对象提供了一系列方法，允许在浏览历史之间移动。
+
+back()：移动到上">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="History 对象"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> History 对象</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>浏览器窗口有一个<code>history</code>对象，用来保存浏览历史。</p>
+<p>比如，当前窗口先后访问了三个地址，那么<code>history</code>对象就包括三项，<code>history.length</code>属性等于3。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+
+<p><code>history</code>对象提供了一系列方法，允许在浏览历史之间移动。</p>
+<ul>
+<li><code>back()</code>：移动到上一个访问页面，等同于浏览器的后退键。</li>
+<li><code>forward()</code>：移动到下一个访问页面，等同于浏览器的前进键。</li>
+<li><code>go()</code>：接受一个整数作为参数，移动到该整数指定的页面，比如<code>go(1)</code>相当于<code>forward()</code>，<code>go(-1)</code>相当于<code>back()</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.forward();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">-2</span>);</span></pre></td></tr></table></figure>
+
+<p>如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。</p>
+<p>以下命令相当于刷新当前页面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p>常见的“返回上一页”链接，代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'backLink'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>注意，返回上一页时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</p>
+<h2 id="history-pushState-，history-replaceState"><a href="#history-pushState-，history-replaceState" class="headerlink" title="history.pushState()，history.replaceState()"></a>history.pushState()，history.replaceState()</h2><p>HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!!(<span class="built_in">window</span>.history &amp;&amp; history.pushState))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持History API</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 不支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码可以用来检查，当前浏览器是否支持History API。如果不支持的话，可以考虑使用Polyfill库<a href="https://github.com/browserstate/history.js/" target="_blank" rel="noopener">History.js</a>。</p>
+<p>history.pushState方法接受三个参数，依次为：</p>
+<ul>
+<li><strong>state</strong>：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。</li>
+<li><strong>title</strong>：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。</li>
+<li><strong>url</strong>：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</li>
+</ul>
+<p>假定当前网址是<code>example.com/1.html</code>，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.pushState(stateObj, <span class="string">"page 2"</span>, <span class="string">"2.html"</span>);</span></pre></td></tr></table></figure>
+
+<p>添加上面这个新记录后，浏览器地址栏立刻显示<code>example.com/2.html</code>，但并不会跳转到2.html，甚至也不会检查2.html是否存在，它只是成为浏览历史中的最新记录。假定这时你访问了google.com，然后点击了倒退按钮，页面的url将显示2.html，但是内容还是原来的1.html。你再点击一次倒退按钮，url将显示1.html，内容不变。</p>
+<blockquote>
+<p>注意，pushState方法不会触发页面刷新。</p>
+</blockquote>
+<p>如果 pushState 的url参数，设置了一个当前网页的#号值（即hash），并不会触发hashchange事件。如果设置了一个非同域的网址，则会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'https://twitter.com/hello'</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，pushState想要插入一个非同域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。</p>
+<p><code>history.replaceState</code>方法的参数与<code>pushState</code>方法一模一样，区别是它修改浏览历史中当前页面的值。下面的例子假定当前网页是example.com/example.html。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html?page=1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">2</span>);  <span class="comment">// url显示为http://example.com/example.html?page=3</span></span></pre></td></tr></table></figure>
+
+<h2 id="history-state属性"><a href="#history-state属性" class="headerlink" title="history.state属性"></a>history.state属性</h2><p>history.state 属性保存当前页面的state对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.state</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123; page: 1 &#125;</span></span></pre></td></tr></table></figure>
+
+<h2 id="popstate-事件"><a href="#popstate-事件" class="headerlink" title="popstate 事件"></a>popstate 事件</h2><p>每当同一个文档的浏览历史（即history对象）出现变化时，就会触发 popstate 事件。需要注意的是，仅仅调用 pushState 方法或 replaceState 方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 back、forward、go 方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
+<p>使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>上面代码中的event.state，就是通过pushState和replaceState方法，为当前url绑定的state对象。</p>
+<p>这个state对象也可以直接通过history对象读取。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentState = history.state;</span></pre></td></tr></table></figure>
+
+<p>另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate 事件，而Firefox和IE浏览器不会。</p>
+<h3 id="如果要设置禁止浏览器后退和前进的按钮"><a href="#如果要设置禁止浏览器后退和前进的按钮" class="headerlink" title="如果要设置禁止浏览器后退和前进的按钮"></a>如果要设置禁止浏览器后退和前进的按钮</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止页面后退</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把当前的 url 地址设置的历史记录中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听 popstate 事件，每当页面切换时，触发更新设置历史记录中的记录为当前 url 地址，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样每次历史记录中永远都是当前页面，达到进制后退功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+<h2 id="URLSearchParams-API"><a href="#URLSearchParams-API" class="headerlink" title="URLSearchParams API"></a>URLSearchParams API</h2><p>URLSearchParams API用于处理URL之中的查询字符串，即问号之后的部分。没有部署这个API的浏览器，可以用<a href="https://github.com/WebReflection/url-search-params" target="_blank" rel="noopener">url-search-params</a>这个垫片库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">'q=URLUtils.searchParams&amp;topic=api'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr></table></figure>
+
+<p>URLSearchParams有以下方法，用来操作某个参数。</p>
+<ul>
+<li><code>has()</code>：返回一个布尔值，表示是否具有某个参数</li>
+<li><code>get（）</code>：返回指定参数的第一个值</li>
+<li><code>getAll()</code>：返回一个数组，成员是指定参数的所有值</li>
+<li><code>set()</code>：设置指定参数</li>
+<li><code>delete()</code>：删除指定参数</li>
+<li><code>append()</code>：在查询字符串之中，追加一个键值对</li>
+<li><code>toString()</code>：返回整个查询字符串</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">"q=URLUtils.searchParams&amp;topic=api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">searchParams.has(<span class="string">'topic'</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'topic'</span>) <span class="comment">// "api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'topic'</span>) <span class="comment">// ["api"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// null，注意Firefox返回空字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">searchParams.set(<span class="string">'foo'</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'topic'</span>, <span class="string">'webdev'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;topic=api&amp;foo=2&amp;topic=webdev"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'foo'</span>, <span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'foo'</span>) <span class="comment">// [2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">searchParams.delete(<span class="string">'topic'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;foo=2&amp;foo=3"</span></span></pre></td></tr></table></figure>
+
+<p>URLSearchParams还有三个方法，用来遍历所有参数。</p>
+<ul>
+<li><code>keys()</code>：遍历所有参数名</li>
+<li><code>values()</code>：遍历所有参数值</li>
+<li><code>entries()</code>：遍历所有参数的键值对</li>
+</ul>
+<p>上面三个方法返回的都是Iterator对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'key1=value1&amp;key2=value2'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">of</span> searchParams.keys()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> value <span class="keyword">of</span> searchParams.values()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> pair <span class="keyword">of</span> searchParams.entries()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(pair[<span class="number">0</span>]+ <span class="string">', '</span>+ pair[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1, value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2, value2</span></span></pre></td></tr></table></figure>
+
+<p>在Chrome浏览器之中，<code>URLSearchParams</code>实例本身就是Iterator对象，与<code>entries</code>方法返回值相同。所以，可以写成下面的样子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">of</span> searchParams) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>下面是一个替换当前URL的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> params = <span class="keyword">new</span> URLSearchParams(location.search.slice(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">params.set(<span class="string">'version'</span>, <span class="number">2.0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.replaceState(&#123;&#125;, <span class="string">''</span>, <span class="string">`<span class="subst">$&#123;location.pathname&#125;</span>?<span class="subst">$&#123;params&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=2.0</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>实例可以当作POST数据发送，所有数据都会URL编码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">params.append(<span class="string">'api_key'</span>, <span class="string">'1234567890'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'https://example.com/api'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  body: params</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;).then(...)</span></pre></td></tr></table></figure>
+
+<p>DOM的<code>a</code>元素节点的<code>searchParams</code>属性，就是一个<code>URLSearchParams</code>实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">a.href = <span class="string">'https://example.com?filter=api'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">a.searchParams.get(<span class="string">'filter'</span>) <span class="comment">// "api"</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>还可以与<code>URL</code>接口结合使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="keyword">new</span> URL(location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = url.searchParams.get(<span class="string">'foo'</span>) || <span class="string">'somedefault'</span>;</span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="noopener">Manipulating the browser history</a></li>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onpopstate" target="_blank" rel="noopener">window.onpopstate</a></li>
+<li>Johnny Simpson, <a href="http://www.inserthtml.com/2013/06/history-api/" target="_blank" rel="noopener">Controlling History: The HTML5 History API And ‘Selective’ Loading</a></li>
+<li>Louis Lazaris, <a href="http://www.impressivewebs.com/html5-history-api-syntax/" target="_blank" rel="noopener">HTML5 History API: A Syntax Primer</a></li>
+<li>Eric Bidelman, <a href="https://developers.google.com/web/updates/2016/01/urlsearchparams?hl=en" target="_blank" rel="noopener">Easy URL manipulation with URLSearchParams</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/03/04/2017-03-04-bom-indexeddb/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/03/04/2017-03-04-bom-cookie/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据类型转换 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="JavaScript是一种动态类型语言，变量没有类型限制，可以随时赋予任意值。
+1var x = y ? 1 : &#39;a&#39;;
+
+上面代码中，变量x到底是数值还是字符串，取决于另一个变量y的值。只有在代码运行时，才可能知道x的类型。
+虽然变量没有类型，但是数据本身和各种运算符是有类型的。如果运算符发现，">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据类型转换"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 数据类型转换</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>JavaScript是一种动态类型语言，变量没有类型限制，可以随时赋予任意值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = y ? <span class="number">1</span> : <span class="string">'a'</span>;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，变量<code>x</code>到底是数值还是字符串，取决于另一个变量<code>y</code>的值。只有在代码运行时，才可能知道<code>x</code>的类型。</p>
+<p>虽然变量没有类型，但是数据本身和各种运算符是有类型的。如果运算符发现，数据的类型与预期不符，就会自动转换类型。比如，减法运算符预期两侧的运算子应该是数值，如果不是，就会自动将它们转为数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'4'</span> - <span class="string">'3'</span> <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，虽然是两个字符串相减，但是依然会得到结果<code>1</code>，原因就在于JavaScript将它们自动转为了数值。</p>
+<p>本节讲解数据类型自动转换的规则，在此之前，先讲解如何手动强制转换数据类型。</p>
+<h2 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h2><p>强制转换主要指使用<code>Number</code>、<code>String</code>和<code>Boolean</code>三个构造函数，手动将各种类型的值，转换成数字、字符串或者布尔值。</p>
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p>使用<code>Number</code>函数，可以将任意类型的值转化成数值。</p>
+<p>下面分成两种情况讨论，一种是参数是原始类型的值，另一种是参数是对象。</p>
+<p><strong>（1）原始类型值的转换规则</strong></p>
+<p>原始类型的值主要是字符串、布尔值、<code>undefined</code>和<code>null</code>，它们都能被<code>Number</code>转成数值或<code>NaN</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值：转换后还是原来的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="number">324</span>) <span class="comment">// 324</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串：如果可以被解析为数值，则转换为相应的数值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'324'</span>) <span class="comment">// 324</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串：如果不可以被解析为数值，返回NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'324abc'</span>) <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 空字符串转为0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">''</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 布尔值：true 转成1，false 转成0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">false</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined：转成 NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// null：转成0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span></pre></td></tr></table></figure>
+
+<p><code>Number</code>函数将字符串转为数值，要比<code>parseInt</code>函数严格很多。基本上，只要有一个字符无法转成数值，整个字符串就会被转为<code>NaN</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'42 cats'</span>) <span class="comment">// 42</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'42 cats'</span>) <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>parseInt</code>逐个解析字符，而<code>Number</code>函数整体转换字符串的类型。</p>
+<p>另外，<code>Number</code>函数会自动过滤一个字符串前导和后缀的空格。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'\t\v\r12.34\n'</span>) <span class="comment">// 12.34</span></span></pre></td></tr></table></figure>
+
+<p><strong>（2）对象的转换规则</strong></p>
+<p>简单的规则是，<code>Number</code>方法的参数是对象时，将返回<code>NaN</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
+
+<p>实际上，<code>Number</code>背后的真正规则复杂得多，内部处理步骤如下。</p>
+<ol>
+<li><p>调用对象自身的<code>valueOf</code>方法。如果返回原始类型的值，则直接对该值使用<code>Number</code>函数，不再进行后续步骤。</p>
+</li>
+<li><p>如果<code>valueOf</code>方法返回的还是对象，则改为调用对象自身的<code>toString</code>方法。如果返回原始类型的值，则对该值使用<code>Number</code>函数，不再进行后续步骤。</p>
+</li>
+<li><p>如果<code>toString</code>方法返回的是对象，就报错。</p>
+</li>
+</ol>
+<p>请看下面的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(obj)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> obj.valueOf() === <span class="string">'object'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">Number</span>(obj.toString());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">Number</span>(obj.valueOf());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>Number</code>函数将<code>obj</code>对象转为数值。首先，调用<code>obj.valueOf</code>方法, 结果返回对象本身；于是，继续调用<code>obj.toString</code>方法，这时返回字符串<code>[object Object]</code>，对这个字符串使用<code>Number</code>函数，得到<code>NaN</code>。</p>
+<p>默认情况下，对象的<code>valueOf</code>方法返回对象本身，所以一般总是会调用<code>toString</code>方法，而<code>toString</code>方法返回对象的类型字符串（比如<code>[object Object]</code>）。所以，会有下面的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;&#125;) <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
+
+<p>如果<code>toString</code>方法返回的不是原始类型的值，结果就会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(obj)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeError: Cannot convert object to primitive value</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的<code>valueOf</code>和<code>toString</code>方法，返回的都是对象，所以转成数值时会报错。</p>
+<p>从上面的例子可以看出，<code>valueOf</code>和<code>toString</code>方法，都是可以自定义的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span></pre></td></tr></table></figure>
+
+<p>上面代码对三个对象使用<code>Number</code>函数。第一个对象返回<code>valueOf</code>方法的值，第二个对象返回<code>toString</code>方法的值，第三个对象表示<code>valueOf</code>方法先于<code>toString</code>方法执行。</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p>使用<code>String</code>函数，可以将任意类型的值转化成字符串。转换规则如下。</p>
+<p><strong>（1）原始类型值的转换规则</strong></p>
+<ul>
+<li><strong>数值</strong>：转为相应的字符串。</li>
+<li><strong>字符串</strong>：转换后还是原来的值。</li>
+<li><strong>布尔值</strong>：<code>true</code>转为<code>&quot;true&quot;</code>，<code>false</code>转为<code>&quot;false&quot;</code>。</li>
+<li><strong>undefined</strong>：转为<code>&quot;undefined&quot;</code>。</li>
+<li><strong>null</strong>：转为<code>&quot;null&quot;</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="number">123</span>) <span class="comment">// "123"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="string">'abc'</span>) <span class="comment">// "abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="literal">true</span>) <span class="comment">// "true"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="literal">undefined</span>) <span class="comment">// "undefined"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="literal">null</span>) <span class="comment">// "null"</span></span></pre></td></tr></table></figure>
+
+<p><strong>（2）对象的转换规则</strong></p>
+<p><code>String</code>方法的参数如果是对象，返回一个类型字符串；如果是数组，返回该数组的字符串形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// "[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// "1,2,3"</span></span></pre></td></tr></table></figure>
+
+<p><code>String</code>方法背后的转换规则，与<code>Number</code>方法基本相同，只是互换了<code>valueOf</code>方法和<code>toString</code>方法的执行顺序。</p>
+<ol>
+<li><p>先调用对象自身的<code>toString</code>方法。如果返回原始类型的值，则对该值使用<code>String</code>函数，不再进行以下步骤。</p>
+</li>
+<li><p>如果<code>toString</code>方法返回的是对象，再调用<code>valueOf</code>方法。如果返回原始类型的值，则对该值使用<code>String</code>函数，不再进行以下步骤。</p>
+</li>
+<li><p>如果<code>valueOf</code>方法返回的是对象，就报错。</p>
+</li>
+</ol>
+<p>下面是一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;.toString())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "[object Object]"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码先调用对象的<code>toString</code>方法，发现返回的是字符串<code>[object Object]</code>，就不再调用<code>valueOf</code>方法了。</p>
+<p>如果<code>toString</code>法和<code>valueOf</code>方法，返回的都是对象，就会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'valueOf'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'toString'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(obj)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeError: Cannot convert object to primitive value</span></span></pre></td></tr></table></figure>
+
+<p>下面是通过自定义<code>toString</code>方法，改变转换成字符串时的返回值的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">toString</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">valueOf</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  valueOf: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "3"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码对三个对象使用<code>String</code>函数。第一个对象返回<code>toString</code>方法的值（数值3），第二个对象返回的还是<code>toString</code>方法的值（<code>[object Object]</code>），第三个对象表示<code>toString</code>方法先于<code>valueOf</code>方法执行。</p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p>使用<code>Boolean</code>函数，可以将任意类型的变量转为布尔值。</p>
+<p>它的转换规则相对简单：除了以下六个值的转换结果为<code>false</code>，其他的值全部为<code>true</code>。</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>-0</code></li>
+<li><code>0</code>或<code>+0</code></li>
+<li><code>NaN</code></li>
+<li><code>&#39;&#39;</code>（空字符串）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) <span class="comment">// false</span></span></pre></td></tr></table></figure>
+
+<p>注意，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>([]) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p>所有对象的布尔值都是<code>true</code>，这是因为JavaScript语言设计的时候，出于性能的考虑，如果对象需要计算才能得到布尔值，对于<code>obj1 &amp;&amp; obj2</code>这样的场景，可能会需要较多的计算。为了保证性能，就统一规定，对象的布尔值为<code>true</code>。</p>
+<h2 id="自动转换"><a href="#自动转换" class="headerlink" title="自动转换"></a>自动转换</h2><p>下面介绍自动转换，它是以强制转换为基础的。</p>
+<p>遇到以下三种情况时，JavaScript会自动转换数据类型，即转换是自动完成的，对用户不可见。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 不同类型的数据互相运算</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">123</span> + <span class="string">'abc'</span> <span class="comment">// "123abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2. 对非布尔值类型的数据求布尔值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'abc'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'hello'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;  <span class="comment">// "hello"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3. 对非数值类型的数据使用一元运算符（即“+”和“-”）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">+ &#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125; <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">- [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
+
+<p>自动转换的规则是这样的：预期什么类型的值，就调用该类型的转换函数。比如，某个位置预期为字符串，就调用<code>String</code>函数进行转换。如果该位置即可以是字符串，也可能是数值，那么默认转为数值。</p>
+<p>由于自动转换具有不确定性，而且不易除错，建议在预期为布尔值、数值、字符串的地方，全部使用<code>Boolean</code>、<code>Number</code>和<code>String</code>函数进行显式转换。</p>
+<h3 id="自动转换为布尔值"><a href="#自动转换为布尔值" class="headerlink" title="自动转换为布尔值"></a>自动转换为布尔值</h3><p>当JavaScript遇到预期为布尔值的地方（比如<code>if</code>语句的条件部分），就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用<code>Boolean</code>函数。</p>
+<p>因此除了以下六个值，其他都是自动转为<code>true</code>。</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>-0</code></li>
+<li><code>0</code>或<code>+0</code></li>
+<li><code>NaN</code></li>
+<li><code>&#39;&#39;</code>（空字符串）</li>
+</ul>
+<p>下面这个例子中，条件部分的每个值都相当于<code>false</code>，使用否定运算符后，就变成了<code>true</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( !<span class="literal">undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &amp;&amp; !<span class="literal">null</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &amp;&amp; !<span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &amp;&amp; !<span class="literal">NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &amp;&amp; !<span class="string">''</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p>下面两种写法，有时也用于将一个表达式转为布尔值。它们内部调用的也是<code>Boolean</code>函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">expression ? <span class="literal">true</span> : <span class="literal">false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法二</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">!! expression</span></pre></td></tr></table></figure>
+
+<h3 id="自动转换为字符串"><a href="#自动转换为字符串" class="headerlink" title="自动转换为字符串"></a>自动转换为字符串</h3><p>当JavaScript遇到预期为字符串的地方，就会将非字符串的数据自动转为字符串。系统内部会自动调用<code>String</code>函数。</p>
+<p>字符串的自动转换，主要发生在加法运算时。当一个值为字符串，另一个值为非字符串，则后者转为字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="number">1</span> <span class="comment">// '51'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="literal">true</span> <span class="comment">// "5true"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="literal">false</span> <span class="comment">// "5false"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + &#123;&#125; <span class="comment">// "5[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + [] <span class="comment">// "5"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125; <span class="comment">// "5function ()&#123;&#125;"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="literal">undefined</span> <span class="comment">// "5undefined"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> + <span class="literal">null</span> <span class="comment">// "5null"</span></span></pre></td></tr></table></figure>
+
+<p>这种自动转换很容易出错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  width: <span class="string">'100'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">obj.width + <span class="number">20</span> <span class="comment">// "10020"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，开发者可能期望返回<code>120</code>，但是由于自动转换，实际上返回了一个字符<code>10020</code>。</p>
+<h3 id="自动转换为数值"><a href="#自动转换为数值" class="headerlink" title="自动转换为数值"></a>自动转换为数值</h3><p>当JavaScript遇到预期为数值的地方，就会将参数值自动转换为数值。系统内部会自动调用<code>Number</code>函数。</p>
+<p>除了加法运算符有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> - <span class="string">'2'</span> <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> * <span class="string">'2'</span> <span class="comment">// 10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> - <span class="number">1</span>  <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="literal">false</span> - <span class="number">1</span> <span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'1'</span> - <span class="number">1</span>   <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">'5'</span> * []    <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="literal">false</span> / <span class="string">'5'</span> <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span> - <span class="number">1</span>   <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，运算符两侧的运算子，都被转成了数值。</p>
+<p>一元运算符也会把运算子转成数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">+<span class="string">'abc'</span> <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">-<span class="string">'abc'</span> <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">+<span class="literal">true</span> <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">-<span class="literal">false</span> <span class="comment">// 0</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2012/01/object-plus-object.html" target="_blank" rel="noopener">What is {} + {} in JavaScript?</a></li>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2013/04/quirk-implicit-conversion.html" target="_blank" rel="noopener">JavaScript quirk 1: implicit conversion of values</a></li>
+<li>Benjie Gillam, <a href="http://www.benjiegillam.com/2013/06/quantum-javascript/" target="_blank" rel="noopener">Quantum JavaScript?</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/12/01/2016-12-01-error/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/12/01/2016-12-01-basic/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-12-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

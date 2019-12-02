@@ -1,0 +1,501 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Npm Script 使用指南 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="npm scripts 使用指南Node 开发离不开 npm，而脚本功能是 npm 最强大、最常用的功能之一。
+本文介绍如何使用 npm 脚本（npm scripts）。
+
+一、什么是 npm 脚本？npm 允许在package.json文件里面，使用scripts字段定义脚本命令。
+1&amp;#123;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Npm Script 使用指南"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Npm Script 使用指南</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="npm-scripts-使用指南"><a href="#npm-scripts-使用指南" class="headerlink" title="npm scripts 使用指南"></a>npm scripts 使用指南</h1><p>Node 开发离不开 npm，而脚本功能是 npm 最强大、最常用的功能之一。</p>
+<p>本文介绍如何使用 npm 脚本（npm scripts）。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016101101.jpg" alt=""></p>
+<h2 id="一、什么是-npm-脚本？"><a href="#一、什么是-npm-脚本？" class="headerlink" title="一、什么是 npm 脚本？"></a>一、什么是 npm 脚本？</h2><p>npm 允许在<code>package.json</code>文件里面，使用<code>scripts</code>字段定义脚本命令。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"build"</span>: <span class="string">"node build.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码是<code>package.json</code>文件的一个片段，里面的<code>scripts</code>字段是一个对象。它的每一个属性，对应一段脚本。比如，<code>build</code>命令对应的脚本是<code>node build.js</code>。</p>
+<p>命令行下使用<code>npm run</code>命令，就可以执行这段脚本。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run build</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"># 等同于执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ node build.js</span></pre></td></tr></table></figure>
+
+<p>这些定义在<code>package.json</code>里面的脚本，就称为 npm 脚本。它的优点很多。</p>
+<ul>
+<li>项目的相关脚本，可以集中在一个地方。</li>
+<li>不同项目的脚本命令，只要功能相同，就可以有同样的对外接口。用户不需要知道怎么测试你的项目，只要运行<code>npm run test</code>即可。</li>
+<li>可以利用 npm 提供的很多辅助功能。</li>
+</ul>
+<p>查看当前项目的所有 npm 脚本命令，可以使用不带任何参数的<code>npm run</code>命令。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run</span></pre></td></tr></table></figure>
+
+<h2 id="二、原理"><a href="#二、原理" class="headerlink" title="二、原理"></a>二、原理</h2><p>npm 脚本的原理非常简单。每当执行<code>npm run</code>，就会自动新建一个 Shell，在这个 Shell 里面执行指定的脚本命令。因此，只要是 Shell（一般是 Bash）可以运行的命令，就可以写在 npm 脚本里面。</p>
+<p>比较特别的是，<code>npm run</code>新建的这个 Shell，会将当前目录的<code>node_modules/.bin</code>子目录加入<code>PATH</code>变量，执行结束后，再将<code>PATH</code>变量恢复原样。</p>
+<p>这意味着，当前目录的<code>node_modules/.bin</code>子目录里面的所有脚本，都可以直接用脚本名调用，而不必加上路径。比如，当前项目的依赖里面有 Mocha，只要直接写<code>mocha test</code>就可以了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"mocha test"</span></span></pre></td></tr></table></figure>
+
+<p>而不用写成下面这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"./node_modules/.bin/mocha test"</span></span></pre></td></tr></table></figure>
+
+<p>由于 npm 脚本的唯一要求就是可以在 Shell 执行，因此它不一定是 Node 脚本，任何可执行文件都可以写在里面。</p>
+<p>npm 脚本的退出码，也遵守 Shell 脚本规则。如果退出码不是<code>0</code>，npm 就认为这个脚本执行失败。</p>
+<h2 id="三、通配符"><a href="#三、通配符" class="headerlink" title="三、通配符"></a>三、通配符</h2><p>由于 npm 脚本就是 Shell 脚本，因为可以使用 Shell 通配符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint *.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **/*.js"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>*</code>表示任意文件名，<code>**</code>表示任意一层子目录。</p>
+<p>如果要将通配符传入原始命令，防止被 Shell 转义，要将星号转义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"tap test/\*.js"</span></span></pre></td></tr></table></figure>
+
+<h2 id="四、传参"><a href="#四、传参" class="headerlink" title="四、传参"></a>四、传参</h2><p>向 npm 脚本传入参数，要使用<code>--</code>标明。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **.js"</span></span></pre></td></tr></table></figure>
+
+<p>向上面的<code>npm run lint</code>命令传入参数，必须写成下面这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run lint --  --reporter checkstyle checkstyle.xml</span></pre></td></tr></table></figure>
+
+<p>也可以在<code>package.json</code>里面再封装一个命令。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **.js"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint:checkstyle"</span>: <span class="string">"npm run lint -- --reporter checkstyle checkstyle.xml"</span></span></pre></td></tr></table></figure>
+
+<h2 id="五、执行顺序"><a href="#五、执行顺序" class="headerlink" title="五、执行顺序"></a>五、执行顺序</h2><p>如果 npm 脚本里面需要执行多个任务，那么需要明确它们的执行顺序。</p>
+<p>如果是并行执行（即同时的平行执行），可以使用<code>&amp;</code>符号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run script1.js &amp; npm run script2.js</span></pre></td></tr></table></figure>
+
+<p>如果是继发执行（即只有前一个任务成功，才执行下一个任务），可以使用<code>&amp;&amp;</code>符号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run script1.js &amp;&amp; npm run script2.js</span></pre></td></tr></table></figure>
+
+
+<p>这两个符号是 Bash 的功能。此外，还可以使用 node 的任务管理模块：<a href="https://github.com/paulpflug/script-runner" target="_blank" rel="noopener">script-runner</a>、<a href="https://github.com/mysticatea/npm-run-all" target="_blank" rel="noopener">npm-run-all</a>、<a href="https://github.com/coderaiser/redrun" target="_blank" rel="noopener">redrun</a>。</p>
+<h2 id="六、默认值"><a href="#六、默认值" class="headerlink" title="六、默认值"></a>六、默认值</h2><p>一般来说，npm 脚本由用户提供。但是，npm 对两个脚本提供了默认值。也就是说，这两个脚本不用定义，就可以直接使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"start"</span>: <span class="string">"node server.js"</span>，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"install"</span>: <span class="string">"node-gyp rebuild"</span></span></pre></td></tr></table></figure>
+
+
+<p>上面代码中，<code>npm run start</code>的默认值是<code>node server.js</code>，前提是项目根目录下有<code>server.js</code>这个脚本；<code>npm run install</code>的默认值是<code>node-gyp rebuild</code>，前提是项目根目录下有<code>binding.gyp</code>文件。</p>
+<h2 id="七、钩子"><a href="#七、钩子" class="headerlink" title="七、钩子"></a>七、钩子</h2><p>npm 脚本有<code>pre</code>和<code>post</code>两个钩子。举例来说，<code>build</code>脚本命令的钩子就是<code>prebuild</code>和<code>postbuild</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"prebuild"</span>: <span class="string">"echo I run before the build script"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build"</span>: <span class="string">"cross-env NODE_ENV=production webpack"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">"postbuild"</span>: <span class="string">"echo I run after the build script"</span></span></pre></td></tr></table></figure>
+
+
+<p>用户执行<code>npm run build</code>的时候，会自动按照下面的顺序执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm run prebuild &amp;&amp; npm run build &amp;&amp; npm run postbuild</span></pre></td></tr></table></figure>
+
+
+<p>因此，可以在这两个钩子里面，完成一些准备工作和清理工作。下面是一个例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"clean"</span>: <span class="string">"rimraf ./dist &amp;&amp; mkdir dist"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"prebuild"</span>: <span class="string">"npm run clean"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build"</span>: <span class="string">"cross-env NODE_ENV=production webpack"</span></span></pre></td></tr></table></figure>
+
+
+<p>npm 默认提供下面这些钩子。</p>
+<ul>
+<li>prepublish，postpublish</li>
+<li>preinstall，postinstall</li>
+<li>preuninstall，postuninstall</li>
+<li>preversion，postversion</li>
+<li>pretest，posttest</li>
+<li>prestop，poststop</li>
+<li>prestart，poststart</li>
+<li>prerestart，postrestart</li>
+</ul>
+<p>自定义的脚本命令也可以加上<code>pre</code>和<code>post</code>钩子。比如，<code>myscript</code>这个脚本命令，也有<code>premyscript</code>和<code>postmyscript</code>钩子。不过，双重的<code>pre</code>和<code>post</code>无效，比如<code>prepretest</code>和<code>postposttest</code>是无效的。</p>
+<p>npm 提供一个<code>npm_lifecycle_event</code>变量，返回当前正在运行的脚本名称，比如<code>pretest</code>、<code>test</code>、<code>posttest</code>等等。所以，可以利用这个变量，在同一个脚本文件里面，为不同的<code>npm scripts</code>命令编写代码。请看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TARGET = process.env.npm_lifecycle_event;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'test'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the test task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'pretest'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the pretest task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'posttest'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the posttest task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+<p>注意，<code>prepublish</code>这个钩子不仅会在<code>npm publish</code>命令之前运行，还会在<code>npm install</code>（不带任何参数）命令之前运行。这种行为很容易让用户感到困惑，所以 npm 4 引入了一个新的钩子<code>prepare</code>，行为等同于<code>prepublish</code>，而从 npm 5 开始，<code>prepublish</code>将只在<code>npm publish</code>命令之前运行。</p>
+<h2 id="八、简写形式"><a href="#八、简写形式" class="headerlink" title="八、简写形式"></a>八、简写形式</h2><p>四个常用的 npm 脚本有简写形式。</p>
+<ul>
+<li><code>npm start</code>是<code>npm run start</code></li>
+<li><code>npm stop</code>是<code>npm run stop</code>的简写</li>
+<li><code>npm test</code>是<code>npm run test</code>的简写</li>
+<li><code>npm restart</code>是<code>npm run stop &amp;&amp; npm run restart &amp;&amp; npm run start</code>的简写</li>
+</ul>
+<p><code>npm start</code>、<code>npm stop</code>和<code>npm restart</code>都比较好理解，而<code>npm restart</code>是一个复合命令，实际上会执行三个脚本命令：<code>stop</code>、<code>restart</code>、<code>start</code>。具体的执行顺序如下。</p>
+<ol>
+<li>prerestart</li>
+<li>prestop</li>
+<li>stop</li>
+<li>poststop</li>
+<li>restart</li>
+<li>prestart</li>
+<li>start</li>
+<li>poststart</li>
+<li>postrestart </li>
+</ol>
+<h2 id="九、变量"><a href="#九、变量" class="headerlink" title="九、变量"></a>九、变量</h2><p>npm 脚本有一个非常强大的功能，就是可以使用 npm 的内部变量。</p>
+<p>首先，通过<code>npm_package_</code>前缀，npm 脚本可以拿到<code>package.json</code>里面的字段。比如，下面是一个<code>package.json</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span>: <span class="string">"foo"</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span>: <span class="string">"1.2.5"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"view"</span>: <span class="string">"node view.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+<p>那么，变量<code>npm_package_name</code>返回<code>foo</code>，变量<code>npm_package_version</code>返回<code>1.2.5</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// view.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_name); <span class="comment">// foo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_version); <span class="comment">// 1.2.5</span></span></pre></td></tr></table></figure>
+
+
+<p>上面代码中，我们通过环境变量<code>process.env</code>对象，拿到<code>package.json</code>的字段值。如果是 Bash 脚本，可以用<code>$npm_package_name</code>和<code>$npm_package_version</code>取到这两个值。</p>
+<p><code>npm_package_</code>前缀也支持嵌套的<code>package.json</code>字段。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"repository"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"type"</span>: <span class="string">"git"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"url"</span>: <span class="string">"xxx"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  scripts: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"view"</span>: <span class="string">"echo $npm_package_repository_type"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr></table></figure>
+
+
+<p>上面代码中，<code>repository</code>字段的<code>type</code>属性，可以通过<code>npm_package_repository_type</code>取到。</p>
+<p>下面是另外一个例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"install"</span>: <span class="string">"foo.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+<p>上面代码中，<code>npm_package_scripts_install</code>变量的值等于<code>foo.js</code>。</p>
+<p>然后，npm 脚本还可以通过<code>npm_config_</code>前缀，拿到 npm 的配置变量，即<code>npm config get xxx</code>命令返回的值。比如，当前模块的发行标签，可以通过<code>npm_config_tag</code>取到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"view"</span>: <span class="string">"echo $npm_config_tag"</span>,</span></pre></td></tr></table></figure>
+
+
+<p>注意，<code>package.json</code>里面的<code>config</code>对象，可以被环境变量覆盖。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span> : <span class="string">"foo"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"config"</span> : &#123; <span class="string">"port"</span> : <span class="string">"8080"</span> &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span> : &#123; <span class="string">"start"</span> : <span class="string">"node server.js"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+<p>上面代码中，<code>npm_package_config_port</code>变量返回的是<code>8080</code>。这个值可以用下面的方法覆盖。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="keyword">set</span> foo:port 80</span></pre></td></tr></table></figure>
+
+
+<p>最后，<code>env</code>命令可以列出所有环境变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"env"</span>: <span class="string">"env"</span></span></pre></td></tr></table></figure>
+
+
+<h2 id="十、常用脚本示例"><a href="#十、常用脚本示例" class="headerlink" title="十、常用脚本示例"></a>十、常用脚本示例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除目录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"clean"</span>: <span class="string">"rimraf dist/*"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地搭建一个 HTTP 服务</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">"serve"</span>: <span class="string">"http-server -p 9090 dist/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">"open:dev"</span>: <span class="string">"opener http://localhost:9090"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实时刷新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> <span class="string">"livereload"</span>: <span class="string">"live-reload --port 9091 dist/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建 HTML 文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build:html"</span>: <span class="string">"jade index.jade dist/index.html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要 CSS 文件有变动，就重新执行构建</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="string">"watch:css"</span>: <span class="string">"watch 'npm run build:css' assets/styles/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要 HTML 文件有变动，就重新执行构建</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="string">"watch:html"</span>: <span class="string">"watch 'npm run build:html' assets/html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 部署到 Amazon S3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="string">"deploy:prod"</span>: <span class="string">"s3-cli sync ./dist/ s3://example-com/prod-site/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建 favicon</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build:favicon"</span>: <span class="string">"node scripts/favicon.js"</span>,</span></pre></td></tr></table></figure>
+
+
+<h2 id="十一、参考链接"><a href="#十一、参考链接" class="headerlink" title="十一、参考链接"></a>十一、参考链接</h2><ul>
+<li><a href="https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/" target="_blank" rel="noopener">How to Use npm as a Build Tool</a>, by Keith Cirkel</li>
+<li><a href="https://github.com/RyanZim/awesome-npm-scripts#articles" target="_blank" rel="noopener">Awesome npm scripts</a>, by Ryan Zimmerman</li>
+</ul>
+<h2 id="十二、引用"><a href="#十二、引用" class="headerlink" title="十二、引用"></a>十二、引用</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html" target="_blank" rel="noopener">阮一峰 npm scripts 使用指南</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/11/08/2016-11-08-fetch()-方法使用/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/11/02/2016-11-02-vue-数据变化检测解析/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-11-07 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Node-js/">Node.js<span>40</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

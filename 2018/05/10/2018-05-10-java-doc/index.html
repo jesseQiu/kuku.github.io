@@ -1,0 +1,565 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaDoc - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、常用的 JavaDoc 参数1. 句号为什么是句号而不是其他的标点符号呢？因为这涉及到一个 JDK 文档生成的规则：  
+
+The first sentence of each doc comment should be a summary sentence, containing a conc">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JavaDoc"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> JavaDoc</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、常用的-JavaDoc-参数"><a href="#一、常用的-JavaDoc-参数" class="headerlink" title="一、常用的 JavaDoc 参数"></a>一、常用的 JavaDoc 参数</h2><h3 id="1-句号"><a href="#1-句号" class="headerlink" title="1. 句号"></a>1. 句号</h3><p>为什么是句号而不是其他的标点符号呢？因为这涉及到一个 JDK 文档生成的规则：  </p>
+<blockquote>
+<p>The first sentence of each doc comment should be a summary sentence, containing a concise but complete description of the API item. This means the first sentence of each member, class, interface or package description. （成员、类、接口或包注释的第一个句子将作为该注释项的总结，这个句子应该是言简意赅的）    </p>
+</blockquote>
+<p>既然提到了句子，那就说明应该用标准的方式——句号来进行第一个句子的断句识别。也许是为了简洁，Javadoc 工具并没有“多语言句号识别”这个特性，所以不管我们用什么语言撰写文档注释，断句符号都必须是英文状态下的句号——.  </p>
+<p>比如在 NetBeans IDE 里（默认编辑器配置）可以很直观的看到用于总结的第一个句子和后面描述的区别：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2p5S5BWi5Trv27KDTDHjYqwMIo0q7G-2213JLLC24bgGcXFMgipHSTSu9rKMA7fEi1EfaRmKQOiwT-zdEEKiRmbkjT5MVZ0cyHQU5PIY7_BMc%2Ffirst-sentence.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2p5S5BWi5Trv27KDTDHjYqwMIo0q7G-2213JLLC24bgGcXFMgipHSTSu9rKMA7fEi1EfaRmKQOiwT-zdEEKiRmbkjT5MVZ0cyHQU5PIY7_BMc/first-sentence.png?psid=1" alt="first-sentence"></a>  </p>
+<p>在生成 Javadoc 后，类概要页面我们可以看到最终的效果：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2peA4JAgPOEgPewxNZIw6lVCzd-IHNOozsmmwVh_WjvXdZ5GJFZICgSeBkOsuNQVxOmkTrQLmhnV9FRAwqL0rvymqP2puNZlxN-Oig_sF3EB4%2Fclass-summary.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2peA4JAgPOEgPewxNZIw6lVCzd-IHNOozsmmwVh_WjvXdZ5GJFZICgSeBkOsuNQVxOmkTrQLmhnV9FRAwqL0rvymqP2puNZlxN-Oig_sF3EB4/class-summary.png?psid=1" alt="class-summery"></a>  </p>
+<p>在使用中文撰写文档注释时，为了保持整体风格一致，在所有需要使用句号的地方有两种策略可选择：  </p>
+<ul>
+<li><p>都使用英文句号：这样做可以让生成的文档句号统一，但缺点是看上去有点别扭  </p>
+</li>
+<li><p>只有第一个句子使用英文句号，其余地方都是要中文句号：这样做后生成的文档看上去比较顺眼，但别人可能会奇怪为什么第一个句号是 .    </p>
+</li>
+</ul>
+<p>当然，最彻底的解决方案是不用中文写文档注释，这样就不存在要统一的问题了！  </p>
+<p>下面我们重点介绍各种你熟悉的或是不熟悉的 Javadoc 文档标记（它们很有内涵）  </p>
+<h3 id="2-author"><a href="#2-author" class="headerlink" title="2. @author"></a>2. <code>@author</code></h3><p>该标记使用频率是所有文档标记中最高的，我想这是因为：  </p>
+<ul>
+<li><p>做好事要留名  </p>
+</li>
+<li><p>使用超简单，就像在填表格（姓名： ）一样自然    </p>
+</li>
+</ul>
+<p>来看看大牛怎么写的：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2p_oXGAVLGdkskphXOjyuQjFpTSgEmOcHdRHXvRddiy26L6DUhOX-Wv34uVXrg7dqFHO1dMvt5PsQeeP6LdwxQBVV-zA49B2kijLJF2fNy9sU%2Fcommons-lang-stringutils.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2p_oXGAVLGdkskphXOjyuQjFpTSgEmOcHdRHXvRddiy26L6DUhOX-Wv34uVXrg7dqFHO1dMvt5PsQeeP6LdwxQBVV-zA49B2kijLJF2fNy9sU/commons-lang-stringutils.png?psid=1" alt="commons-lang-stringutils"></a>  </p>
+<p>（from Commons Lang 2.5 StringUtils）  </p>
+<p>总结下来有三种写法：  </p>
+<ul>
+<li><p>纯文本  </p>
+</li>
+<li><p>带邮箱链接  </p>
+</li>
+<li><p>带 HTTP 链接    </p>
+</li>
+</ul>
+<p>（个人建议用 HTTP 链接：打码时可以顺便推广一下自己的博客，哈哈）  </p>
+<p>另外，在 JDK 代码中我们经常看到 @author unascribed，意思是：“该代码第一原作者不是我，但我实在也不知道是谁，就记作无名氏吧”（这是多么严肃的一种版权意识啊）  </p>
+<h3 id="3-value"><a href="#3-value" class="headerlink" title="3. @value"></a>3. <code>@value</code></h3><p>这个文档标记非常实用（不光好用），可以用于生成被标记的常量字段的值。  </p>
+<p>直接用于常量字段时：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pnvWxihuLOEnImS8xyuaWK-Eht_JyEOF7hDWrpcwmiXRcteuAs2sUnTzMAYmZmAv-Y1cZjy6EFmoHiG126eG53J03k9KSuT4wj1RhAGJyJVw%2Fvalue-code.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pnvWxihuLOEnImS8xyuaWK-Eht_JyEOF7hDWrpcwmiXRcteuAs2sUnTzMAYmZmAv-Y1cZjy6EFmoHiG126eG53J03k9KSuT4wj1RhAGJyJVw/value-code.png?psid=1" alt="value-code"></a>  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pLtQMm5FoWU02cixAJoH8QEBCyo_I_9ssqvPiF-Tl8mIlxdT9fyWuLELes8HJMgh9xxVepLQEASxtBSYPeR093VTE-Tmvqk3tgfAqd8FqLoM%2Fvalue-html.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pLtQMm5FoWU02cixAJoH8QEBCyo_I_9ssqvPiF-Tl8mIlxdT9fyWuLELes8HJMgh9xxVepLQEASxtBSYPeR093VTE-Tmvqk3tgfAqd8FqLoM/value-html.png?psid=1" alt="value-html"></a>  </p>
+<p>也可以使用引用方式：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2p0JF14tRuSfjarfg9QuYSOCdvpLC-LzY73CTKqLlrxpxZmO1SH9y5aqDv4WOdIhOdhAY2TZulhTswAocMoL5o8sveStzfFjxuZnWCTYutXYI%2Fvalue-ref-code.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2p0JF14tRuSfjarfg9QuYSOCdvpLC-LzY73CTKqLlrxpxZmO1SH9y5aqDv4WOdIhOdhAY2TZulhTswAocMoL5o8sveStzfFjxuZnWCTYutXYI/value-ref-code.png?psid=1" alt="value-ref-code"></a>  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pG-6eXeG1fRAO1O1AbGzMofB3uyMPxd-q1Zvu680JceRBttDJjUhpeYqNhyMVu4B_ky6rVnCk7Q9YwfK8pRdjFAmmZSlRWY9DOvrtQlVztX4%2Fvalue-ref-html.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pG-6eXeG1fRAO1O1AbGzMofB3uyMPxd-q1Zvu680JceRBttDJjUhpeYqNhyMVu4B_ky6rVnCk7Q9YwfK8pRdjFAmmZSlRWY9DOvrtQlVztX4/value-ref-html.png?psid=1" alt="value-ref-html"></a>  </p>
+<h3 id="4-inheritDoc"><a href="#4-inheritDoc" class="headerlink" title="4. {@inheritDoc}"></a>4. <code>{@inheritDoc}</code></h3><p>这个标签体现了 Java 面向对象的精辟所在：不但可以类可以集成，连文档都可以继承（足见 Java 在经典面向对象概念上的完备与圆润）。  </p>
+<p>比如有个计算面积的接口：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pJKJ6CL0KWglqfNdV73U3dySu1SAeX0uMpMBe2GK3rRrX-AgsbdveU5nkUY4ofiPvWt8K-3Fddkuxr9cQMmkrnOnexiBHVsvCskw9p0G0L58%2Finheritdoc-interface-code.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pJKJ6CL0KWglqfNdV73U3dySu1SAeX0uMpMBe2GK3rRrX-AgsbdveU5nkUY4ofiPvWt8K-3Fddkuxr9cQMmkrnOnexiBHVsvCskw9p0G0L58/inheritdoc-interface-code.png?psid=1" alt="inheritdoc-interface-code"></a>  </p>
+<p>它的实现方法标注了 {@inheritDoc}_（处女座阅读提示：无 .）_：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pEBtBhvFFNe_z3L-5JNzWcaa6_B-6NcwY24ljeAhkUpOU5Mx4NYZetayMfP-3DwXrd9uL1mmqQw9q-pJU9K2nATNWL5fSHodgvCDrgAzxfqc%2Finheritdoc-impl-code.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pEBtBhvFFNe_z3L-5JNzWcaa6_B-6NcwY24ljeAhkUpOU5Mx4NYZetayMfP-3DwXrd9uL1mmqQw9q-pJU9K2nATNWL5fSHodgvCDrgAzxfqc/inheritdoc-impl-code.png?psid=1" alt="inheritdoc-impl-code"></a>  </p>
+<p>最后生成的文档：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pAfyk_fIGUC6Sh1GnOZREbXoB0tnBEIB79GxsaZNeLUkzmE0n-uobEFXIqVaclv4bChzpqOOn2wapcsEq4vELKaA99sDb7obypbSjkykPSd4%2Finheritdoc-html.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pAfyk_fIGUC6Sh1GnOZREbXoB0tnBEIB79GxsaZNeLUkzmE0n-uobEFXIqVaclv4bChzpqOOn2wapcsEq4vELKaA99sDb7obypbSjkykPSd4/inheritdoc-html.png?psid=1" alt="inheritdoc-html"></a>  </p>
+<ul>
+<li><p>基类的文档注释被继承到了子类  </p>
+</li>
+<li><p>子类可以再加入自己的注释（特殊化扩展）  </p>
+</li>
+<li><p>@return @param @throws 也会被继承    </p>
+</li>
+</ul>
+<p>其实在不写 {@inheritDoc} 的情况下也存在文档注释的继承，具体规则请看<a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23inheritingcomments" target="_blank" rel="noopener">这里</a>。  </p>
+<h3 id="5-link-linkplain"><a href="#5-link-linkplain" class="headerlink" title="5. {@link} {@linkplain}"></a>5. <code>{@link} {@linkplain}</code></h3><p>这两个链接标记大家用 / 见的应该比较多，但它们有什么区别、在什么场景下该怎么使用很少有人能够区分开（我猜你要用的时候一般也都是用 link 吧）。  </p>
+<p>看看官网的标准解释：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2psbvmx2xRhV7NF38YP_Od56KwjR19yZ_fXjbR6fxa5Df4QGKrC85--iWgYIioNLZ5vK8tol2bQQ-YI2DfaWZlLkqkmm0gn2YlU4w78q8jmMs%2Flink.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2psbvmx2xRhV7NF38YP_Od56KwjR19yZ_fXjbR6fxa5Df4QGKrC85--iWgYIioNLZ5vK8tol2bQQ-YI2DfaWZlLkqkmm0gn2YlU4w78q8jmMs/link.png?psid=1" alt="link"></a>  </p>
+<p>link 和 linkplain 的实参都是 <strong><em>package.class#member label</em></strong> 。唯一的不同就是因为字体不同，如果 label 是个纯文本，那就使用 linkplain 吧。（根据这点，我严重怀疑 Javadoc 文档标记的设计者是处女座，~ ~）  </p>
+<h3 id="6-pre"><a href="#6-pre" class="headerlink" title="6. pre"></a>6. <code>pre</code></h3><p>没错，这就是那个 HTML 标签，用于显示“原始样子”的。这个标签在写 Javadoc 的时候非常有用，用或者不使用在打码的时候看上去差别不大：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2p43U983cfZ-13wUPO3HoElbzhwERyGlv8obqaKt_ChrXO2yH-T_SzYQTma4_CdDZszFVsjq1JV4oBxTMwzWx2DQeL9K28fFsb577oZ5qZp3E%2Fpre-code.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2p43U983cfZ-13wUPO3HoElbzhwERyGlv8obqaKt_ChrXO2yH-T_SzYQTma4_CdDZszFVsjq1JV4oBxTMwzWx2DQeL9K28fFsb577oZ5qZp3E/pre-code.png?psid=1" alt="pre-code"></a>  </p>
+<p>但最终生成 apidocs 之后差别一目了然<em>（处女座阅读提示：在源码文档注释中特别需要注意 pre 后 { 的位置，紧跟 <em>，无空格）_：</em></em>  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pQ7YGtOOaZLPNHNXvar56b304Eyp8QAeyFEvtQo1QhicFR3CiPutcDyCTvMm2juc6d8yImclF72TW9lbajvfwhIEf24Y2OiGTtINSDodobyo%2Fpre-html.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pQ7YGtOOaZLPNHNXvar56b304Eyp8QAeyFEvtQo1QhicFR3CiPutcDyCTvMm2juc6d8yImclF72TW9lbajvfwhIEf24Y2OiGTtINSDodobyo/pre-html.png?psid=1" alt="pre-html"></a>  </p>
+<h3 id="7-since"><a href="#7-since" class="headerlink" title="7. @since"></a>7. <code>@since</code></h3><p>这个从字面的意思上很好理解，所以使用的比较多（如同 @author、@version 一样）。但问题是大家写的时候表达的意思五花八门，常见的有：  </p>
+<ol start="2">
+<li><p>想表达日期 / 时间<br>@since 2014-01-01<br>@since 2014-01-01 14:00:00  </p>
+</li>
+<li><p>想表达可运行的 JDK 版本<br>@since JDK1.5  </p>
+</li>
+<li><p>想表达加入这个元素的版本<br>@since 1.0.0    </p>
+</li>
+</ol>
+<p>根据官方文档解释，@since 表达的是被标记元素是哪个发布版本引入的（3）。比如别人在我们的文档注释中看到  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pJWYTK3eXMyb-5BrNEav_0kpZ1yOAgBEdUW8hWyeOKRutVC6XkjTwdYaMK-9uu5zIGQRs0BAPUNnYZBeQt_du2ycM0VGmTwJ_gW0a_Hu_vX8%2Fsince.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pJWYTK3eXMyb-5BrNEav_0kpZ1yOAgBEdUW8hWyeOKRutVC6XkjTwdYaMK-9uu5zIGQRs0BAPUNnYZBeQt_du2ycM0VGmTwJ_gW0a_Hu_vX8/since.png?psid=1" alt="since"></a>  </p>
+<p>那他可以（应该）认为这个类是在该程序对外发布 1.0.0 版本时已经引入的。如果他要做二次开发，那他就可以很清晰的向后兼容了（我们在用 JDK 的时候就是这个场景）。  </p>
+<h3 id="8-version"><a href="#8-version" class="headerlink" title="8. @version"></a>8. <code>@version</code></h3><p>提到了 @since 就自然会联想到 @version，因为它们的实参都是版本相关的。@version 要表达的是被标记元素自己的版本（注意对比 @since），也就是说这个版本只要代码改过就应该发生变化，而 @since 是不会变的。  </p>
+<p>官方文档也解释了<a href="https://hacpai.com/forward?goto=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdocumentation%2Findex-137868.html%23%40version" target="_blank" rel="noopener">怎么用好</a>这个文档标记：通过 SCCS 字符 “%I%, %G%”，例如 1.39, 02/28/97（文件版本号, 日期）生成。但实际上很少有项目这么做（至少目前 Oracle JDK 没这么做，甚至都没有使用 @version，或者是使用了但最后由于特殊原因总体移除了），大家一般都是 @version 1.0.0 然后就再也不修改了，不管被标记的元素改了多少次（这样的做法还不如不写）。  </p>
+<p>当然，通过版本控制系统 hook 来做是比较经典的做法，不过这样总感觉没有把这个标记的能力完全发挥出来。在<a href="https://hacpai.com/forward?goto=https%3A%2F%2Fgithub.com%2Fb3log" target="_blank" rel="noopener">我们的项目</a>里是这样使用的：@version 1.2.3.4, Jun 9, 2014  </p>
+<p>重点是版本号部分，在这个例子中从左到右（1.2.3.4）分别表示：  </p>
+<ul>
+<li><p>兼容性位 1，表示兼容性，如果 +1 了说明这个修改是不兼容的  </p>
+</li>
+<li><p>特性位 2，表示已引入了两个特性，每次 +1 说明引入一个新特性  </p>
+</li>
+<li><p>缺陷修复位 3，表示已经修复了 3 个缺陷，每次 +1 说明修复了一个缺陷  </p>
+</li>
+<li><p>重构位 4，表示已经进行了 4 次重构，每次 +1 说明重构了一次    </p>
+</li>
+</ul>
+<p>前面 3 位表达的意义和 <a href="https://hacpai.com/forward?goto=http%3A%2F%2Fsemver.org" target="_blank" rel="noopener">Semantic Versioning</a> 建议的一致，重构我觉得非常重要，所以也加了进来。  </p>
+<h3 id="9-exception-throws"><a href="#9-exception-throws" class="headerlink" title="9. @exception @throws"></a>9. <code>@exception @throws</code></h3><p>这两兄弟的情况比 @<a href="https://hacpai.com/member/link" target="_blank" rel="noopener">link</a> @linkplain 更纠结（人家 link 兄弟最起码可以区分出来使用场景）。按照官方文档解释：它们完全是同义词，没有任何区分。那当年 Sun 在 JDK1.2 的时候为什么要加入 @throws 呢——答案是起名失误了，词性没弄匹配：@throws Exception 比 @exception Exception 更符合语法，代入感更好！（细节：<a href="https://hacpai.com/forward?goto=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F5510170%2Fin-javadoc-what-is-the-difference-between-the-tags-throws-and-exception" target="_blank" rel="noopener">In javadoc, what is the difference between the tags @throws and @exception?</a>）  </p>
+<h3 id="10-标记总表"><a href="#10-标记总表" class="headerlink" title="10. 标记总表"></a>10. 标记总表</h3><p>来张 Javadoc 文档标记总表：  </p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Introduced in JDK/SDK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23author" target="_blank" rel="noopener"><code>@author</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23code" target="_blank" rel="noopener"><code>{@code}</code></a></td>
+<td>1.5</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23docRoot" target="_blank" rel="noopener"><code>{@docRoot}</code></a></td>
+<td>1.3</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23deprecated" target="_blank" rel="noopener"><code>@deprecated</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23exception" target="_blank" rel="noopener"><code>@exception</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23inheritDoc" target="_blank" rel="noopener"><code>{@inheritDoc}</code></a></td>
+<td>1.4</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23link" target="_blank" rel="noopener"><code>{@link}</code></a></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23linkplain" target="_blank" rel="noopener"><code>{@linkplain}</code></a></td>
+<td>1.4</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23literal" target="_blank" rel="noopener"><code>{@literal}</code></a></td>
+<td>1.5</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23param" target="_blank" rel="noopener"><code>@param</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23return" target="_blank" rel="noopener"><code>@return</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23see" target="_blank" rel="noopener"><code>@see</code></a></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23serial" target="_blank" rel="noopener"><code>@serial</code></a></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23serialData" target="_blank" rel="noopener"><code>@serialData</code></a></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23serialField" target="_blank" rel="noopener"><code>@serialField</code></a></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23since" target="_blank" rel="noopener"><code>@since</code></a></td>
+<td>1.1</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23throws" target="_blank" rel="noopener"><code>@throws</code></a></td>
+<td>1.2</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23value" target="_blank" rel="noopener"><code>{@value}</code></a></td>
+<td>1.4</td>
+</tr>
+<tr>
+<td><a href="https://hacpai.com/forward?goto=http%3A%2F%2Fdocs.oracle.com%2Fjavase%2F7%2Fdocs%2Ftechnotes%2Ftools%2Fwindows%2Fjavadoc.html%23version" target="_blank" rel="noopener"><code>@version</code></a></td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+<p>这个表是 JDK7 技术手册里的，从中我们可以看出，自 JDK1.5 以后就没有加过新的文档标记了，目测有两个原因：</p>
+<ul>
+<li><p>Oracle：“这些已经足够开发人员使用了，没必要加新的了”  </p>
+</li>
+<li><p>Sun：“看吧，Oracle 严重缺乏折腾精神，当初不应该卖给它的”  _  </p>
+</li>
+</ul>
+<p>文档标记介绍完了，下面我们来聊聊 Javadoc 相关的其他侃点。  </p>
+<h3 id="11-对齐"><a href="#11-对齐" class="headerlink" title="11. 对齐"></a>11. 对齐</h3><p>Javadoc 文档注释也有对齐（不是前面 pre 例子那种），这里说的对齐主要指的是以源码视图看到的，最典型的场景就是在给方法添加文档注释的时候，我们经常看到两种风格：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pYDTzzMXOqGBvjzfpI05LLv010MGJEegleDkUcNgy0ykwWyDU4Ze9knP8RusW5NM0h26984EueVPm_13iD_KyLXmg7xiJ6h8QMtD-rOq2OPM%2Falign-para.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pYDTzzMXOqGBvjzfpI05LLv010MGJEegleDkUcNgy0ykwWyDU4Ze9knP8RusW5NM0h26984EueVPm_13iD_KyLXmg7xiJ6h8QMtD-rOq2OPM/align-para.png?psid=1" alt="align-para"></a>  </p>
+<p>第一眼看上去是不是风格 2 要顺眼得多？但最好还是使用风格 1，因为：  </p>
+<ul>
+<li><p>这和编辑器配置的字体有关，如果不是（适合的）等宽字体，那会非常的参差不齐  </p>
+</li>
+<li><p>浪费空间，特别是当注释内容多了需要换行的时候会很别扭  </p>
+</li>
+<li><p>最后生成的 apidocs 效果是一模一样的（无对齐）    </p>
+</li>
+</ul>
+<p>（一些 IDE 默认格式化文档注释的时候也是使用风格 1 进行格式化的，强烈建议使用风格 1）  </p>
+<h3 id="12-包注释"><a href="#12-包注释" class="headerlink" title="12. 包注释"></a>12. 包注释</h3><p>和前面几点打码风格相关的细节比起来，包注释是具有一定的实用性的。虽然大家可能用得很少，但看得应该比较多，就是这部分：  </p>
+<p><a href="https://hacpai.com/forward?goto=https%3A%2F%2Fplokra.dm2301.livefilestore.com%2Fy2pxjXlPHiuouivoM_I4eK9QzBSFj8bhvXX0Q5RWPyt-XYRKNi0Wy3iFFHe14jr9NkTZXjSIpXHEPKZ1ZurUX6dRbyz-jZBtqyzEaNFAKCZDvo%2Fpackage.png%3Fpsid%3D1" target="_blank" rel="noopener"><img src="https://plokra.dm2301.livefilestore.com/y2pxjXlPHiuouivoM_I4eK9QzBSFj8bhvXX0Q5RWPyt-XYRKNi0Wy3iFFHe14jr9NkTZXjSIpXHEPKZ1ZurUX6dRbyz-jZBtqyzEaNFAKCZDvo/package.png?psid=1" alt="package"></a>  </p>
+<p>这里我们使用了两种方式来生成包文档：  </p>
+<ul>
+<li><p>package.html：这是 JDK1.5 以前的方式，现在已经不推荐使用  </p>
+</li>
+<li><p>package-info.java：目前推荐方式，因为这样可以<strong><em>使用注解</em></strong>    </p>
+</li>
+</ul>
+<p>在包上面使用注解？这个用法和在其他地方使用注解一样，只是被标注的元素变成了包，在运行时可以获取到包的注解，然后做你想做的事情吧！  </p>
+<h3 id="13-中文"><a href="#13-中文" class="headerlink" title="13. 中文"></a>13. 中文</h3><p>一开始我们提到了句号的问题（那的确是一个问题），最后我们来看看中文在写文档注释的时候也非常值得注意的一点（其实不只是 Javadoc 文档注释，该建议也适用于其他一些情况）：在中文和英文、数字中间插入一个空格（本文就是这样排版的）。  </p>
+<p>比如说：  </p>
+<ul>
+<li><p>我觉得 Java 非常 cool，特别是 JDK8 中的 lambda，真希望 9 能带来更多实用特性  </p>
+</li>
+<li></li>
+<li><p>我觉得 Java 非常 cool，特别是 JDK8 中的 lambda，真希望 9 能带来更多实用特性    </p>
+</li>
+</ul>
+<p>后者看上去就比前者更舒服一些，这样的排版方式适合纯文本编辑器，如果使用的是 Office 之类的工具就不需要手动空格了，因为它们默认已经处理的很好了。  </p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://hacpai.com/article/1402537988442" target="_blank" rel="noopener">细节见真功之 Javadoc</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html" target="_blank" rel="noopener">JavaDoc</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/05/11/2018-05-11-android-aidl/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/05/01/2018-05-01-html-iframe/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-05-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>17</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

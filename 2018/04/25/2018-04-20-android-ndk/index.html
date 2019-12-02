@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android NDK - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、Android NDK？Android NDK 是在 SDK 前面又加上了“原生”二字，即 Native Development Kit，因此又被 Google 称为 “NDK”。众所周知，Android 程序运行在 Dalvik 虚拟机中，NDK 允许用户使用类似 C/C++ 之类的原生代码语">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Android NDK"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Android NDK</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/android-ndk.jpg" alt=""></p>
+<h2 id="一、Android-NDK？"><a href="#一、Android-NDK？" class="headerlink" title="一、Android NDK？"></a>一、Android NDK？</h2><p>Android NDK 是在 SDK 前面又加上了“原生”二字，即 Native Development Kit，因此又被 Google 称为 “NDK”。<br>众所周知，Android 程序运行在 Dalvik 虚拟机中，NDK 允许用户使用类似 C/C++ 之类的原生代码语言执行部分程序。</p>
+<h3 id="1-NDK-包括"><a href="#1-NDK-包括" class="headerlink" title="1. NDK 包括"></a>1. NDK 包括</h3><ul>
+<li>从 C/C++ 生成原生代码库所需要的工具和 build files</li>
+<li>将一致的原生库嵌入可以在 Android 设备上部署的应用程序包文件（application packages files ，即 .apk 文件）中</li>
+<li>支持所有未来 Android 平台的一系列原生系统头文件和库</li>
+</ul>
+<h3 id="2-为何要用到-NDK"><a href="#2-为何要用到-NDK" class="headerlink" title="2. 为何要用到 NDK?"></a>2. 为何要用到 NDK?</h3><ul>
+<li>代码的保护，由于 apk 的 java 层代码很容易被反编译，而 C/C++ 库被反编译的难度较大</li>
+<li>在 NDK 中调用第三方 C/C++ 库，因为大部分的开源库都是用 C/C++ 代码编写的</li>
+<li>便于移植，用 C/C++ 写的库可以方便在其他的嵌入式平台上再次使用</li>
+</ul>
+<h2 id="二、JNI"><a href="#二、JNI" class="headerlink" title="二、JNI"></a>二、JNI</h2><p>JNI 是 Java Native Interface 的缩写，它提供了若干的 API 实现了 Java 和其他语言的通信（主要是 C&amp;C++ ）。从 Java1.1 开始，JNI 标准成为 java 平台的一部分，它允许 Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是 C 和 C++ 而设计的，但是它并不妨碍你使用其他编程语言，只要调用约定受支持就可以了。使用 java 与本地已编译的代码交互，通常会丧失平台可移植性。但是，有些情况下这样做是可以接受的，甚至是必须的。例如，使用一些旧的库，与硬件、操作系统进行交互，或者为了提高程序的性能。<strong>JNI 标准至少要保证本地代码能工作在任何 Java 虚拟机环境</strong>。</p>
+<h2 id="三、创建-NDK-工程"><a href="#三、创建-NDK-工程" class="headerlink" title="三、创建 NDK 工程"></a>三、创建 NDK 工程</h2><h3 id="1-创建一个空的-Activity-工程"><a href="#1-创建一个空的-Activity-工程" class="headerlink" title="1. 创建一个空的 Activity 工程"></a>1. 创建一个空的 Activity 工程</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-1.png" alt=""><br><em>AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish</em><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-2.png" alt=""><br>工程会自动创建 Ndk 环境配置<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-3.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-4.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-5.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-6.png" alt=""></p>
+<h3 id="2-创建生成-so-库和对应-jar-包模块"><a href="#2-创建生成-so-库和对应-jar-包模块" class="headerlink" title="2. 创建生成 .so 库和对应 jar 包模块"></a>2. 创建生成 .so 库和对应 jar 包模块</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-7.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-8.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-9.png" alt=""></p>
+<h3 id="3-把第一步中的-NDK-代码移到新创建的模块中"><a href="#3-把第一步中的-NDK-代码移到新创建的模块中" class="headerlink" title="3. 把第一步中的 NDK 代码移到新创建的模块中"></a>3. 把第一步中的 NDK 代码移到新创建的模块中</h3><p>这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-10.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-11.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-12.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-13.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-14.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-15.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-16.png" alt=""></p>
+<h3 id="4-在其他工程中使用-NDK-的-so-文件和-jar-包"><a href="#4-在其他工程中使用-NDK-的-so-文件和-jar-包" class="headerlink" title="4. 在其他工程中使用 NDK 的 so 文件和 jar 包"></a>4. 在其他工程中使用 NDK 的 so 文件和 jar 包</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-17.png" alt=""></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://www.jianshu.com/p/a37782b56770" target="_blank" rel="noopener">Android studio3.0 JNI/NDK开发流程</a></li>
+<li><a href="https://www.jianshu.com/p/ac00d59993aa" target="_blank" rel="noopener">Android NDK开发：JNI 基础篇</a></li>
+<li><a href="https://www.jianshu.com/p/18a8a4e6af3f" target="_blank" rel="noopener">Android ABI issue analysis</a></li>
+<li><a href="https://www.imooc.com/learn/411" target="_blank" rel="noopener">Android NDK 入门</a></li>
+<li><a href="https://www.imooc.com/learn/918" target="_blank" rel="noopener">Android NDK 进阶</a></li>
+<li><strong>推荐</strong> <a href="http://pvphero.github.io/2018/02/08/AS3NDKEnvironment/" target="_blank" rel="noopener">AndroidStudio 3.0 NDK 环境搭建</a></li>
+<li><a href="https://blog.csdn.net/pvpheroszw/article/details/79296257" target="_blank" rel="noopener">AndroidStudio项目之CmakeLists解析</a></li>
+<li><a href="https://www.cnblogs.com/chenxibobo/p/7678389.html" target="_blank" rel="noopener">AndroidStudio项目CMakeLists解析</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/04/30/2018-04-30-html-image-in-html/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/04/25/2018-04-25-android-so-cup/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-04-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Android/">Android<span>12</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MongoDB Starting - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、MongoDB Windows 环境安装1. 首先到官网下载合适的安装包, 根据操作系统类型选择相应的版本,只要下载下来解压即可，不需要安装。2. 使用命令行指定参数运行
+在解压后的 bin 文件夹下打开 cmd 运行下面的命令1mongod --dbpath D:\MongoDB\data
+上">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="MongoDB Starting"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> MongoDB Starting</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、MongoDB-Windows-环境安装"><a href="#一、MongoDB-Windows-环境安装" class="headerlink" title="一、MongoDB Windows 环境安装"></a>一、MongoDB Windows 环境安装</h2><h3 id="1-首先到官网下载合适的安装包-根据操作系统类型选择相应的版本-只要下载下来解压即可，不需要安装。"><a href="#1-首先到官网下载合适的安装包-根据操作系统类型选择相应的版本-只要下载下来解压即可，不需要安装。" class="headerlink" title="1. 首先到官网下载合适的安装包, 根据操作系统类型选择相应的版本,只要下载下来解压即可，不需要安装。"></a>1. 首先到<a href="http://www.mongodb.org/downloads" target="_blank" rel="noopener">官网</a>下载合适的安装包, 根据操作系统类型选择相应的版本,只要下载下来解压即可，不需要安装。</h3><h3 id="2-使用命令行指定参数运行"><a href="#2-使用命令行指定参数运行" class="headerlink" title="2. 使用命令行指定参数运行"></a>2. 使用命令行指定参数运行</h3><ul>
+<li>在解压后的 bin 文件夹下打开 <code>cmd</code> 运行下面的命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mongod --dbpath D:\MongoDB\data</span></pre></td></tr></table></figure>
+上面的 <code>--dbpath</code> 参数是指定数据库存放目录<blockquote>
+<p>如果运行这步出现 “msvcp120.dll 错误”，则需要下载相应的库放到 系统目录下。这个主要是 vs2013 编译的软件运行时需要相应的运行库，在没有装 vs2013 的机子上会报这个错误。具体解决方法<a href="http://www.cr173.com/soft/103918.html" target="_blank" rel="noopener">参考</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-使用配置文件方式运行"><a href="#3-使用配置文件方式运行" class="headerlink" title="3. 使用配置文件方式运行"></a>3. 使用配置文件方式运行</h3><p>mongodb.conf 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据库路径</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">dbpath=E:\program\mongodb\mongodb-data</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#日志输出文件路径</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#logappend=true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">logpath=E:\program\mongodb\mongodb-logs\mongodb.log</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#启用日志文件，默认启用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#journal=true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">quiet=<span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#端口号 默认为27017 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">port=27017</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#开启用户名密码,如果开启需要增加 --auth 参数打开</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">auth=<span class="literal">true</span></span></pre></td></tr></table></figure>
+<h3 id="4-启动数据库"><a href="#4-启动数据库" class="headerlink" title="4. 启动数据库"></a>4. 启动数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 未开启用户密码验证方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mongod --config E:\program\mongodb\mongodb.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// 开启用户密码验证方式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mongod --auth --config E:\program\mongodb\mongodb.conf</span></pre></td></tr></table></figure>
+<p>上面的 <code>--config</code> 是指定了运行时的配置文件。</p>
+<h3 id="5-命令行方式连接服务"><a href="#5-命令行方式连接服务" class="headerlink" title="5. 命令行方式连接服务"></a>5. 命令行方式连接服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mongo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">MongoDB shell version: 3.0.7-pre-</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">connecting to: <span class="built_in">test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// 使用用户名和密码登入 --authenticationDatabase <span class="string">"admin"</span> 是验证授权对应的数据库</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mongo -u root -p root --authenticationDatabase <span class="string">"admin"</span></span></pre></td></tr></table></figure>
+
+<h3 id="6-Nodejs-方式连接服务器"><a href="#6-Nodejs-方式连接服务器" class="headerlink" title="6. Nodejs 方式连接服务器"></a>6. Nodejs 方式连接服务器</h3><p>这里以 Node.js 代码为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// config.js 文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> packageJson = <span class="built_in">require</span>(<span class="string">'../../package.json'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> config = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 无密码，连接 admin 数据库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	mongodbUrl: <span class="string">'mongodb://127.0.0.1:27017'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 使用用户名和密码，连接 kuku 数据库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  mongodbUrl: <span class="string">'mongodb://kuku:kuku@127.0.0.1:27017/kuku'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	version: packageJson.version</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = config</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// mongodb.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> config = <span class="built_in">require</span>(<span class="string">'../config/index.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// mongoose 链接</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">mongoose.connect(config.mongodbUrl,&#123;<span class="attr">useMongoClient</span>: <span class="literal">true</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链接错误</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> db = mongoose.connection;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">db.on(<span class="string">'error'</span>, <span class="built_in">console</span>.error.bind(<span class="built_in">console</span>, <span class="string">'connection error:'</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">db.once(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`mongodb are connected!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<h3 id="7-命令行查看数据库"><a href="#7-命令行查看数据库" class="headerlink" title="7. 命令行查看数据库"></a>7. 命令行查看数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> x:\xx\mongodb\bin\</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mongo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">use blog // blog 是数据库 名称</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">db.users.find() //users 是集合数据库中的 集合 名称。</span></pre></td></tr></table></figure>
+
+<h3 id="8-使用图形工具查看"><a href="#8-使用图形工具查看" class="headerlink" title="8. 使用图形工具查看"></a>8. 使用图形工具查看</h3><p>使用 <a href="https://robomongo.org/" target="_blank" rel="noopener">Robomongo</a> 工具查看，是一个基于 Shell 的跨平台开源 MongoDB 的视图管理工具.</p>
+<h2 id="二、MongoDB-Linux-环境安装"><a href="#二、MongoDB-Linux-环境安装" class="headerlink" title="二、MongoDB Linux 环境安装"></a>二、MongoDB Linux 环境安装</h2><h3 id="1-查看-linux-服务器版本"><a href="#1-查看-linux-服务器版本" class="headerlink" title="1. 查看 linux 服务器版本"></a>1. 查看 linux 服务器版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[root@fapiao ~]<span class="comment"># cat /proc/version</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Linux version 3.10.0-514.2.2.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-11) (GCC) ) <span class="comment">#1 SMP Tue Dec 6 23:06:41 UTC 2016</span></span></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://www.mongodb.com/download-center#community" target="_blank" rel="noopener">选择版本下载</a><blockquote>
+<p>如果没有匹配的版本，可以选择 <code>legacy Linux 64</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-解压"><a href="#2-解压" class="headerlink" title="2. 解压"></a>2. 解压</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tar -zxvf mongodb-linux-x86_64-3.0.6.tgz </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// 将解压包拷贝到指定目录</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mv  mongodb-linux-x86_64-3.0.6/ /usr/<span class="built_in">local</span>/mongodb </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// 可执行文件加入环境变量-永久有效</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">// 在文件的尾部添加：PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/mongodb/bin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile // 可以让刚设置马上生效</span></pre></td></tr></table></figure>
+
+<h3 id="3-创建数据和日志存放目录"><a href="#3-创建数据和日志存放目录" class="headerlink" title="3. 创建数据和日志存放目录"></a>3. 创建数据和日志存放目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mkdir /var/mongodb           // 软件安装位置</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mkdir /var/mongodb/data      // 数据存放位置</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mkdir /var/mongodb/logs      // 日志存放位置</span></pre></td></tr></table></figure>
+
+<h3 id="4-添加-MongoDB-到-CentOS-开机启动项："><a href="#4-添加-MongoDB-到-CentOS-开机启动项：" class="headerlink" title="4. 添加 MongoDB 到 CentOS 开机启动项："></a>4. 添加 MongoDB 到 CentOS 开机启动项：</h3><p>打开 <code>rc.local</code> 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">vim /etc/rc.d/rc.local</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">//将 mongodb 启动命令追加到本文件中，让 mongodb 开机自启动：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 这里通过 --dbpath 设置了 mongodb 数据存放位置,上面的步骤已经把 mongodb 的 bin 目录加到了环境变量中，所以可以直接使用 mongod，否则需要用绝对路径代替(/usr/<span class="built_in">local</span>/mongodb/bin/mongod)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mongod --dbpath=/var/mongodb/data --logpath /var/mongodb/logs/log.log -fork</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">//关闭 vim(:wq) 后，直接手动启动 mongodb</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">mongod --dbpath=/var/mongodb/data --logpath /var/mongodb/logs/log.log -fork</span></pre></td></tr></table></figure>
+<blockquote>
+<p>MongoDB 的数据存储在 data 目录的  db目录下，但是这个目录在安装过程不会自动创建，所以你需要手动创建data目录，并在data目录中创建db目录。<br>以下实例中我们将 data 目录创建于 <strong>根目录下(/)</strong>。<br>注意：/data/db 是 MongoDB 默认的启动的数据库路径(–dbpath)。</p>
+</blockquote>
+<h2 id="三、MongoDB-用户管理"><a href="#三、MongoDB-用户管理" class="headerlink" title="三、MongoDB 用户管理"></a>三、MongoDB 用户管理</h2><blockquote>
+<ol>
+<li>MongoDB 是没有默认管理员账号，所以要先添加管理员账号，再开启权限认证</li>
+<li>切换到 admin 数据库，添加的账号才是管理员账号</li>
+<li>用户只能在用户所在数据库登录，包括管理员账号</li>
+<li>管理员可以管理所有数据库，但是不能直接管理其他数据库，要先在 admin 数据库认证后才可以</li>
+<li>MongoDB 默认会创建 <code>admin</code> 和 <code>local</code> 两个数据库</li>
+</ol>
+</blockquote>
+<h3 id="1-角色概念"><a href="#1-角色概念" class="headerlink" title="1. 角色概念"></a>1. 角色概念</h3><h4 id="1-读写权限-read-readWrite-读写库的权限"><a href="#1-读写权限-read-readWrite-读写库的权限" class="headerlink" title="1. 读写权限: read/readWrite 读写库的权限"></a>1. 读写权限: read/readWrite 读写库的权限</h4><h4 id="2-数据库管理角色："><a href="#2-数据库管理角色：" class="headerlink" title="2. 数据库管理角色："></a>2. 数据库管理角色：</h4><ul>
+<li>dbAdmin  某数据库管理权限</li>
+<li>userAdmin  某数据库用户的管理权限，包括创建用户，授权的管理</li>
+<li>dbOwner 某数据库的所有者，拥有该库的所有权限，包括 readWrite，dbAdmin 和 userAdmin 权限</li>
+</ul>
+<h4 id="3-集群权限"><a href="#3-集群权限" class="headerlink" title="3. 集群权限"></a>3. 集群权限</h4><ul>
+<li>备份和恢复角色：bakcup/restore</li>
+<li>所有数据库角色：    <ul>
+<li>readAnyDatabase</li>
+<li>readWriteAnyDatabase</li>
+<li>dbAdminAnyDatabase</li>
+<li>userAdminAnyDatabase</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-超级用户角色：root"><a href="#4-超级用户角色：root" class="headerlink" title="4. 超级用户角色：root"></a>4. 超级用户角色：root</h4><h4 id="5-内部角色-：-system-不建议使用"><a href="#5-内部角色-：-system-不建议使用" class="headerlink" title="5. 内部角色 ：__system  不建议使用"></a>5. 内部角色 ：__system  不建议使用</h4><h3 id="2-用户操作"><a href="#2-用户操作" class="headerlink" title="2. 用户操作"></a>2. 用户操作</h3><h4 id="1-创建管理用户"><a href="#1-创建管理用户" class="headerlink" title="1. 创建管理用户"></a>1. 创建管理用户</h4><p>语法：<code>db.createUser({user:&quot;UserName&quot;,pwd:&quot;Password&quot;,roles:[{role:&quot;RoleName&quot;,db:&quot;Target_DBName&quot;}]})</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">use admin //admin 数据库</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	user: <span class="string">"root"</span>, // 用户名</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">pwd</span>:<span class="string">"root"</span>,// 密码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	roles:[&#123;role:<span class="string">"root"</span>,db:<span class="string">"admin"</span>&#125;] //超级管理员</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+<h4 id="2-创建普通用户"><a href="#2-创建普通用户" class="headerlink" title="2. 创建普通用户"></a>2. 创建普通用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">use <span class="built_in">test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	user: <span class="string">"test"</span>, // 用户名</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">pwd</span>:<span class="string">"test"</span>,// 密码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	roles:[&#123;role:<span class="string">"readWrite"</span>,db:<span class="string">"test"</span>&#125;] //超级管理员</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+<p><strong>创建完用户密码，需要重新启动数据库服务才能生效</strong></p>
+<h4 id="3-使用账号密码登入"><a href="#3-使用账号密码登入" class="headerlink" title="3. 使用账号密码登入"></a>3. 使用账号密码登入</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 方式一</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mongo -u root -p root --authenticationDatabase <span class="string">"admin"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// 方式二</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mongo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">use admin // 默认链接的是 <span class="built_in">test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">db.auth(<span class="string">"用户名"</span>,<span class="string">"密码"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">1 // 返回 1 表示验证成功，其它值失败</span></pre></td></tr></table></figure>
+
+<h4 id="4-修改密码"><a href="#4-修改密码" class="headerlink" title="4. 修改密码"></a>4. 修改密码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">db.changeUserPassword(<span class="string">"root"</span>,<span class="string">"ROOT"</span>)</span></pre></td></tr></table></figure>
+
+<h4 id="5-添加角色"><a href="#5-添加角色" class="headerlink" title="5. 添加角色"></a>5. 添加角色</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">db.grantRolesToUser(<span class="string">"test"</span>, [&#123; role:<span class="string">"write"</span>,db:<span class="string">"test"</span>&#125;])</span></pre></td></tr></table></figure>
+
+<h4 id="6-回收角色"><a href="#6-回收角色" class="headerlink" title="6. 回收角色"></a>6. 回收角色</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">db.revokeRolesFromUser(<span class="string">"test"</span>,[&#123; role: <span class="string">"read"</span>,db:<span class="string">"admin"</span>&#125;])</span></pre></td></tr></table></figure>
+
+<h4 id="7-删除用户"><a href="#7-删除用户" class="headerlink" title="7. 删除用户"></a>7. 删除用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">首先进入目标库：use <span class="built_in">test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.dropUser(<span class="string">"test"</span>)</span></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://docs.mongodb.com/manual/reference/built-in-roles/#built-in-roles" target="_blank" rel="noopener">mongodb role 权限定义</a></p>
+</blockquote>
+<h2 id="四、常用命令"><a href="#四、常用命令" class="headerlink" title="四、常用命令"></a>四、常用命令</h2><p>通过 <code>mongo</code> 工具进入 mongodb 后台管理 shell</p>
+<h3 id="1-查看所有数据库"><a href="#1-查看所有数据库" class="headerlink" title="1. 查看所有数据库"></a>1. 查看所有数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 显示所有数据库</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">show dbs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 显示某个数据库下 -&gt; 表数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">use xxx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">show tables</span></pre></td></tr></table></figure>
+
+<h3 id="2-切换数据库"><a href="#2-切换数据库" class="headerlink" title="2. 切换数据库"></a>2. 切换数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 如果数据库不存在则会自动创建一个,这时通过　`show dbs` 查看并没有显示，需要插入数据时才会实际创建。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">use kuku(数据库名称)</span></pre></td></tr></table></figure>
+
+<h3 id="3-删除数据库数据"><a href="#3-删除数据库数据" class="headerlink" title="3. 删除数据库数据"></a>3. 删除数据库数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 删除当前选择的数据库所有数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">use <span class="built_in">test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">db.dropDatabase() // 删除的是 <span class="built_in">test</span> 整个数据库</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// 删除数据库下的 -&gt; 某个表数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.drop();</span></pre></td></tr></table></figure>
+<blockquote>
+<p><code>kuku_collection</code> 是表名称，下面实例中相同</p>
+</blockquote>
+<h3 id="4-查询数据"><a href="#4-查询数据" class="headerlink" title="4. 查询数据"></a>4. 查询数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 查询所有</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 只查询 name:<span class="string">'jesse'</span>,age:18 符合的数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;name:<span class="string">'jesse'</span>,age:18&#125;); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">// 查询跳过前面 2 条，并限制输出 4 条数据,并使用 age 进行排序(&#123;x:1&#125; 升序，&#123;x:-1&#125; 降序)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find().skip(2).<span class="built_in">limit</span>(4).sort(&#123;age:1&#125;);</span></pre></td></tr></table></figure>
+
+<h3 id="5-数据更新"><a href="#5-数据更新" class="headerlink" title="5. 数据更新"></a>5. 数据更新</h3><p>数据更新需要两个条件，一个查询条件，一个是更新数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 这里会把新的数据覆盖掉原有的数据(原来的数据全部没了)。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.update(&#123;age:18&#125;,&#123;age:10,name:<span class="string">'jesse'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 如果更新的数据不存在，需要创建，需要设置第 三 个参数为 <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.update(&#123;age:99&#125;,&#123;age:100&#125;,<span class="literal">true</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">WriteResult(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"nMatched"</span> : 0,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"nUpserted"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"nModified"</span> : 0,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"_id"</span> : ObjectId(<span class="string">"59b869a779a1211c60e23f00"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">// 如果更新是查询结果有多条满足条件，只会更新第一条，这是为了避免误操作，如果需要更新全部满足条件的数据，只能用 <span class="variable">$set</span> 操作符，并设置第 四 个参数为 <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.update(&#123;age:18&#125;,&#123;<span class="variable">$set</span>:&#123;age:10,name:<span class="string">'jesse'</span>&#125;&#125;,<span class="literal">false</span>,<span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">// 使用 <span class="variable">$set</span> 操作符可以只更新存在的数据，其它值保存不变;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.update(&#123;age:18&#125;,&#123;<span class="variable">$set</span>:&#123;age:10,name:<span class="string">'jesse'</span>&#125;&#125;);</span></pre></td></tr></table></figure>
+
+<h3 id="6-数据删除"><a href="#6-数据删除" class="headerlink" title="6. 数据删除"></a>6. 数据删除</h3><p>删除操作必须带 <code>参数</code>,且会删除所有满足条件的数据(和更新操作有所差别)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 不带参数会报错</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.remove();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">2017-09-13T07:19:21.139+0800 E QUERY    Error: remove needs a query</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  at Error (&lt;anonymous&gt;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  at DBCollection._parseRemove (src/mongo/shell/collection.js:305:32)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  at DBCollection.remove (src/mongo/shell/collection.js:328:23)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  at (shell):1:20 at src/mongo/shell/collection.js:305</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">// 正确使用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.remove(&#123;age:18&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : 2 &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">// 删除数据库中某个 -&gt; 表数据</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.drop();</span></pre></td></tr></table></figure>
+
+<h3 id="7-数据索引"><a href="#7-数据索引" class="headerlink" title="7. 数据索引"></a>7. 数据索引</h3><p>默认的只 <code>_id</code> 一个索引，如果数据库过大，查询某个值时就会变得缓慢，这时就需要更加查询的值建立新的索引。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// 查看当前索引值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.getIndexes();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"v"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"key"</span> : &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                      <span class="string">"_id"</span> : 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">              &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"name"</span> : <span class="string">"_id_"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"ns"</span> : <span class="string">"kuku.kuku_collection"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">// 创建索引,1:安装升序 -1:降序(类似 sort 参数)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.ensureIndex(&#123;age:1&#125;); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"createdCollectionAutomatically"</span> : <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"numIndexesBefore"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"numIndexesAfter"</span> : 2,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"ok"</span> : 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">// 再次查看索引值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.getIndexes()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">[</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"v"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"key"</span> : &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                        <span class="string">"_id"</span> : 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"name"</span> : <span class="string">"_id_"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"ns"</span> : <span class="string">"kuku.kuku_collection"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"v"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"key"</span> : &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">                        <span class="string">"age"</span> : 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">                &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"name"</span> : <span class="string">"age_1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"ns"</span> : <span class="string">"kuku.kuku_collection"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">// 创建复合索引名字</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.ensureIndex(&#123;name:1,age:1,weight:1&#125;,&#123;name:<span class="string">'haha'</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"v"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"key"</span> : &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"name"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"age"</span> : 1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">              <span class="string">"weight"</span> : 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">      &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"name"</span> : <span class="string">"haha"</span>, // 复合索引名称</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">      <span class="string">"ns"</span> : <span class="string">"kuku.kuku_collection"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">// 删除索引</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.dropIndex(<span class="string">'haha'</span>); // 通过索引名称</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">// 创建唯一索引</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">// 可以实现，如果已经存在则不插入，不存在则插入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.ensureIndex(&#123;age:1&#125;,&#123;unique:<span class="literal">true</span>&#125;);</span></pre></td></tr></table></figure>
+
+<h3 id="8-过期索引"><a href="#8-过期索引" class="headerlink" title="8. 过期索引"></a>8. 过期索引</h3><ol>
+<li>过期索引字段值必须是指定的时间类型(ISODate或者ISODate 数组),不能是时间戳。例如: {time:new Date()}</li>
+<li>如果指定了 ISODate 数组，则按照最小的时间进行删除。</li>
+<li>过期索引不能是复合索引。</li>
+<li>删除时间不是精确的，删除过程是有后台程序每 60S 跑一次，且删除需要一些时间，所有存在误差。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 创建 loginTime 字段索引，过期时间为 10S</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.ensureIndex(&#123;loginTime:1&#125;,&#123;expireAfterSeconds:10&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.insert(&#123;loginTime:new Date(),age:888,name:<span class="string">'haha'</span>&#125;);</span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="9-全文索引"><a href="#9-全文索引" class="headerlink" title="9. 全文索引"></a>9. 全文索引</h3><p>当我们需要根据页面中的文字信息查询数据库时，就需要用到全文索引;<br>一张表只能创建一个全文索引。<br><strong>注意这里创建的全文索 引，是在数据下面，不是 <code>_collection</code> 下面</strong></p>
+<ul>
+<li>db.kuku_collection.ensureIndex({key:’text’}); // 创建当个全文索引</li>
+<li>db.kuku_collection.ensureIndex({key_1:’text’,key_2:’text’});// 创建符号全文索引</li>
+<li>db.kuku_collection.ensureIndex({‘$**’:’text’});// 创建不同 key 之间的全文索引</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 创建了 name 字段的全文索引</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.ensureIndex(&#123;name:<span class="string">'text'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 全文索引查询</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'phone'</span>&#125;&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'aa bb cc'</span>&#125;&#125;); // aa bb cc 是或的关系</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'"aa" "bb" "cc"'</span>&#125;&#125;);// <span class="string">"aa"</span> <span class="string">"bb"</span> <span class="string">"cc"</span> 是与的关系(多了一层引号)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'aa bb -cc'</span>&#125;&#125;);// aa||bb 不包含 cc</span></pre></td></tr></table></figure>
+
+<h3 id="10-全文搜索相似度"><a href="#10-全文搜索相似度" class="headerlink" title="10. 全文搜索相似度"></a>10. 全文搜索相似度</h3><p>类似百度搜索排名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 查询结果中会多一个相似度数值 score:xx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'aa bb'</span>&#125;&#125;,&#123;score:&#123;<span class="variable">$meta</span>:<span class="string">'textScore'</span>&#125;&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb35988ad826faef97d"</span>), <span class="string">"name"</span> : <span class="string">"aa bb"</span>, <span class="string">"score"</span> : 1.5&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb65988ad826faef97e"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc"</span>, <span class="string">"score"</span> : 1.3333333333333333 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878b45988ad826faef975"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc"</span>, <span class="string">"score"</span> : 1.3333333333333333 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bbd5988ad826faef980"</span>), <span class="string">"name"</span> : <span class="string">"aa rr cc dd"</span>, <span class="string">"score"</span>: 0.625 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb85988ad826faef97f"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd"</span>, <span class="string">"score"</span>: 1.25 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878bb5988ad826faef976"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd "</span>, <span class="string">"score"</span>: 1.25 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878ca5988ad826faef979"</span>), <span class="string">"name"</span> : <span class="string">"aa xx uu dd rr"</span>, <span class="string">"score"</span> : 0.6 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878c15988ad826faef978"</span>), <span class="string">"name"</span> : <span class="string">"aa xx cc dd rr"</span>, <span class="string">"score"</span> : 0.6 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878be5988ad826faef977"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd rr"</span>, <span class="string">"score"</span> : 1.2 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">// 可以按相似度排序</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">db.kuku_collection.find(&#123;<span class="variable">$text</span>:&#123;<span class="variable">$search</span>:<span class="string">'aa bb'</span>&#125;&#125;,&#123;score:&#123;<span class="variable">$meta</span>:<span class="string">'textScore'</span>&#125;&#125;).sort(score:&#123;<span class="variable">$meta</span>:<span class="string">'textScore'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb35988ad826faef97d"</span>), <span class="string">"name"</span> : <span class="string">"aa bb"</span>, <span class="string">"score"</span> : 1.5&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878b45988ad826faef975"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc"</span>, <span class="string">"score"</span> : 1.3333333333333333 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb65988ad826faef97e"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc"</span>, <span class="string">"score"</span> : 1.3333333333333333 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878bb5988ad826faef976"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd "</span>, <span class="string">"score"</span>: 1.25 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bb85988ad826faef97f"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd"</span>, <span class="string">"score"</span>: 1.25 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878be5988ad826faef977"</span>), <span class="string">"name"</span> : <span class="string">"aa bb cc dd rr"</span>, <span class="string">"score"</span> : 1.2 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b87bbd5988ad826faef980"</span>), <span class="string">"name"</span> : <span class="string">"aa rr cc dd"</span>, <span class="string">"score"</span>: 0.625 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878c15988ad826faef978"</span>), <span class="string">"name"</span> : <span class="string">"aa xx cc dd rr"</span>, <span class="string">"score"</span> : 0.6 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59b878ca5988ad826faef979"</span>), <span class="string">"name"</span> : <span class="string">"aa xx uu dd rr"</span>, <span class="string">"score"</span> : 0.6 &#125;</span></pre></td></tr></table></figure>
+
+<h3 id="11-全文索引限制"><a href="#11-全文索引限制" class="headerlink" title="11. 全文索引限制"></a>11. 全文索引限制</h3><ul>
+<li>每次查询只能指定一个 <code>$text</code></li>
+<li><code>$text</code> 查询不能出现在 <code>$nor</code> 查询中</li>
+<li>查询中包含 <code>$text</code>,则 <code>hint</code> 不再起作用</li>
+<li>不支持 中文</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.jianshu.com/p/0496ef49b2a5" target="_blank" rel="noopener">Nodejs 部署到阿里云全过程</a></li>
+<li><a href="http://www.cnblogs.com/lzrabbit/p/3682510.html" target="_blank" rel="noopener">MongoDB Windows 环境安装及配置</a></li>
+<li><a href="http://www.mongoing.com/archives/3651" target="_blank" rel="noopener">MongoDB 生态 – 可视化管理工具</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/08/27/2017-08-27-Node.js-部署-ALI-ECS/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/08/24/2017-08-24-mongoose-学习札记/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-08-24 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Database/">Database<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

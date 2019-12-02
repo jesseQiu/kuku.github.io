@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字符串 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="概述定义字符串就是零个或多个排在一起的字符，放在单引号或双引号之中。
+1&#39;abc&#39;2&#34;abc&#34;
+
+单引号字符串的内部，可以使用双引号。双引号字符串的内部，可以使用单引号。
+1&#39;key = &#34;value&#34;&#39;2&#34;It&#39;s a long journey&#34;
+
+上面两个都是合法的字符串。
+如果要在单引号字符串">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="字符串"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 字符串</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>字符串就是零个或多个排在一起的字符，放在单引号或双引号之中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"abc"</span></span></pre></td></tr></table></figure>
+
+<p>单引号字符串的内部，可以使用双引号。双引号字符串的内部，可以使用单引号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'key = "value"'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"It's a long journey"</span></span></pre></td></tr></table></figure>
+
+<p>上面两个都是合法的字符串。</p>
+<p>如果要在单引号字符串的内部，使用单引号（或者在双引号字符串的内部，使用双引号），就必须在内部的单引号（或者双引号）前面加上反斜杠，用来转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Did she say \'Hello\'?'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Did she say 'Hello'?"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">"Did she say \"Hello\"?"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Did she say "Hello"?"</span></span></pre></td></tr></table></figure>
+
+<p>由于HTML语言的属性值使用双引号，所以很多项目约定JavaScript语言的字符串只使用单引号，本教程就遵守这个约定。当然，只使用双引号也完全可以。重要的是，坚持使用一种风格，不要两种风格混合。</p>
+<p>字符串默认只能写在一行内，分成多行将会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">b</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">c'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// SyntaxError: Unexpected token ILLEGAL</span></span></pre></td></tr></table></figure>
+
+<p>上面代码将一个字符串分成三行，JavaScript就会报错。</p>
+<p>如果长字符串必须分成多行，可以在每一行的尾部使用反斜杠。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longString = <span class="string">"Long \</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">long \</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">long \</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">string"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">longString</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Long long long string"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码表示，加了反斜杠以后，原来写在一行的字符串，可以分成多行书写。但是，输出的时候还是单行，效果与写在同一行完全一样。注意，反斜杠的后面必须是换行符，而不能有其他字符（比如空格），否则会报错。</p>
+<p>连接运算符（<code>+</code>）可以连接多个单行字符串，将长字符串拆成多行书写，输出的时候也是单行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> longString = <span class="string">'Long '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'long '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'long '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'string'</span>;</span></pre></td></tr></table></figure>
+
+<p>如果想输出多行字符串，有一种利用多行注释的变通方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">line 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">line 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">line 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span>&#125;).toString().split(<span class="string">'\n'</span>).slice(<span class="number">1</span>, <span class="number">-1</span>).join(<span class="string">'\n'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "line 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// line 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// line 3"</span></span></pre></td></tr></table></figure>
+
+<p>上面的例子中，输出的字符串就是多行。</p>
+<h3 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h3><p>反斜杠（\）在字符串内有特殊含义，用来表示一些特殊字符，所以又称为转义符。</p>
+<p>需要用反斜杠转义的特殊字符，主要有下面这些：</p>
+<ul>
+<li><code>\0</code> null（\u0000）</li>
+<li><code>\b</code> 后退键（\u0008）</li>
+<li><code>\f</code> 换页符（\u000C）</li>
+<li><code>\n</code> 换行符（\u000A）</li>
+<li><code>\r</code> 回车键（\u000D）</li>
+<li><code>\t</code> 制表符（\u0009）</li>
+<li><code>\v</code> 垂直制表符（\u000B）</li>
+<li><code>\&#39;</code> 单引号（\u0027）</li>
+<li><code>\&quot;</code> 双引号（\u0022）</li>
+<li>\ 反斜杠（\u005C）</li>
+</ul>
+<p>上面这些字符前面加上反斜杠，都表示特殊含义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1\n2'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>\n</code>表示换行，输出的时候就分成了两行。</p>
+<p>反斜杠还有三种特殊用法。</p>
+<p>（1）<code>\HHH</code></p>
+<p>反斜杠后面紧跟三个八进制数（<code>000</code>到<code>377</code>），代表一个字符。<code>HHH</code>对应该字符的Unicode码点，比如<code>\251</code>表示版权符号。显然，这种方法只能输出256种字符。</p>
+<p>（2）<code>\xHH</code></p>
+<p><code>\x</code>后面紧跟两个十六进制数（<code>00</code>到<code>FF</code>），代表一个字符。<code>HH</code>对应该字符的Unicode码点，比如<code>\xA9</code>表示版权符号。这种方法也只能输出256种字符。</p>
+<p>（3）<code>\uXXXX</code></p>
+<p><code>\u</code>后面紧跟四个十六进制数（<code>0000</code>到<code>FFFF</code>），代表一个字符。<code>HHHH</code>对应该字符的Unicode码点，比如<code>\u00A9</code>表示版权符号。</p>
+<p>下面是这三种字符特殊写法的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\251'</span> <span class="comment">// "©"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\xA9'</span> <span class="comment">// "©"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\u00A9'</span> <span class="comment">// "©"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p>如果在非特殊字符前面使用反斜杠，则反斜杠会被省略。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\a'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "a"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>a</code>是一个正常字符，前面加反斜杠没有特殊含义，反斜杠会被自动省略。</p>
+<p>如果字符串的正常内容之中，需要包含反斜杠，则反斜杠前面需要再加一个反斜杠，用来对自身转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"Prev \\ Next"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Prev \ Next"</span></span></pre></td></tr></table></figure>
+
+<h3 id="字符串与数组"><a href="#字符串与数组" class="headerlink" title="字符串与数组"></a>字符串与数组</h3><p>字符串可以被视为字符数组，因此可以使用数组的方括号运算符，用来返回某个位置的字符（位置编号从0开始）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">s[<span class="number">0</span>] <span class="comment">// "h"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>] <span class="comment">// "e"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s[<span class="number">4</span>] <span class="comment">// "o"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接对字符串使用方括号运算符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello'</span>[<span class="number">1</span>] <span class="comment">// "e"</span></span></pre></td></tr></table></figure>
+
+<p>如果方括号中的数字超过字符串的长度，或者方括号中根本不是数字，则返回<code>undefined</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>[<span class="number">3</span>] <span class="comment">// undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>[<span class="number">-1</span>] <span class="comment">// undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>[<span class="string">'x'</span>] <span class="comment">// undefined</span></span></pre></td></tr></table></figure>
+
+<p>但是，字符串与数组的相似性仅此而已。实际上，无法改变字符串之中的单个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> s[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s <span class="comment">// "hello"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>] = <span class="string">'a'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">s <span class="comment">// "hello"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">s[<span class="number">5</span>] = <span class="string">'!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">s <span class="comment">// "hello"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码表示，字符串内部的单个字符无法改变和增删，这些操作会默默地失败。</p>
+<p>字符串也无法直接使用数组的方法，必须通过<code>call</code>方法间接使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.join(<span class="string">' '</span>) <span class="comment">// TypeError: s.join is not a function</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.join.call(s, <span class="string">' '</span>) <span class="comment">// "h e l l o"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，如果直接对字符串使用数组的<code>join</code>方法，会报错不存在该方法。但是，可以通过<code>call</code>方法，间接对字符串使用<code>join</code>方法。</p>
+<p>不过，由于字符串是只读的，那些会改变原数组的方法，比如<code>push()</code>、<code>sort()</code>、<code>reverse()</code>、<code>splice()</code>都对字符串无效，只有将字符串显式转为数组后才能使用，参见《标准库》一章的数组部分。</p>
+<h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p><code>length</code>属性返回字符串的长度，该属性也是无法改变的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">s.length <span class="comment">// 5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.length = <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">s.length <span class="comment">// 5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">s.length = <span class="number">7</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">s.length <span class="comment">// 5</span></span></pre></td></tr></table></figure>
+
+<p>上面代码表示字符串的<code>length</code>属性无法改变，但是不会报错。</p>
+<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p>JavaScript使用Unicode字符集。也就是说，在JavaScript引擎内部，所有字符都用Unicode表示。</p>
+<p>JavaScript不仅以Unicode储存字符，还允许直接在程序中使用Unicode编号表示字符，即将字符写成<code>\uxxxx</code>的形式，其中<code>xxxx</code>代表该字符的Unicode编码。比如，<code>\u00A9</code>代表版权符号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'\u00A9'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">s <span class="comment">// "©"</span></span></pre></td></tr></table></figure>
+
+<p>解析代码的时候，JavaScript会自动识别一个字符是字面形式表示，还是Unicode形式表示。输出给用户的时候，所有字符都会转成字面形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f\u006F\u006F = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">foo <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，第一行的变量名<code>foo</code>是Unicode形式表示，第二行是字面形式表示。JavaScript会自动识别。</p>
+<p>我们还需要知道，每个字符在JavaScript内部都是以16位（即2个字节）的UTF-16格式储存。也就是说，JavaScript的单位字符长度固定为16位长度，即2个字节。</p>
+<p>但是，UTF-16有两种长度：对于<code>U+0000</code>到<code>U+FFFF</code>之间的字符，长度为16位（即2个字节）；对于<code>U+10000</code>到<code>U+10FFFF</code>之间的字符，长度为32位（即4个字节），而且前两个字节在<code>0xD800</code>到<code>0xDBFF</code>之间，后两个字节在<code>0xDC00</code>到<code>0xDFFF</code>之间。举例来说，<code>U+1D306</code>对应的字符为<code>𝌆，</code>它写成UTF-16就是<code>0xD834 0xDF06</code>。浏览器会正确将这四个字节识别为一个字符，但是JavaScript内部的字符长度总是固定为16位，会把这四个字节视为两个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'\uD834\uDF06'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s <span class="comment">// "𝌆"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.length <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">/^.$/.test(s) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">s.charAt(<span class="number">0</span>) <span class="comment">// ""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">s.charAt(<span class="number">1</span>) <span class="comment">// ""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">s.charCodeAt(<span class="number">0</span>) <span class="comment">// 55348</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">s.charCodeAt(<span class="number">1</span>) <span class="comment">// 57094</span></span></pre></td></tr></table></figure>
+
+<p>上面代码说明，对于于<code>U+10000</code>到<code>U+10FFFF</code>之间的字符，JavaScript总是视为两个字符（字符的<code>length</code>属性为2），用来匹配单个字符的正则表达式会失败（JavaScript认为这里不止一个字符），<code>charAt</code>方法无法返回单个字符，<code>charCodeAt</code>方法返回每个字节对应的十进制值。</p>
+<p>所以处理的时候，必须把这一点考虑在内。对于4个字节的Unicode字符，假定<code>C</code>是字符的Unicode编号，<code>H</code>是前两个字节，<code>L</code>是后两个字节，则它们之间的换算关系如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将大于U+FFFF的字符，从Unicode转为UTF-16</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">H = <span class="built_in">Math</span>.floor((C - <span class="number">0x10000</span>) / <span class="number">0x400</span>) + <span class="number">0xD800</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">L = (C - <span class="number">0x10000</span>) % <span class="number">0x400</span> + <span class="number">0xDC00</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将大于U+FFFF的字符，从UTF-16转为Unicode</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">C = (H - <span class="number">0xD800</span>) * <span class="number">0x400</span> + L - <span class="number">0xDC00</span> + <span class="number">0x10000</span></span></pre></td></tr></table></figure>
+
+<p>下面的正则表达式可以识别所有UTF-16字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">([\<span class="number">0</span>-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF])</span></pre></td></tr></table></figure>
+
+<p>由于JavaScript引擎（严格说是ES5规格）不能自动识别辅助平面（编号大于0xFFFF）的Unicode字符，导致所有字符串处理函数遇到这类字符，都会产生错误的结果（详见《标准库》一章的<code>String</code>对象章节）。如果要完成字符串相关操作，就必须判断字符是否落在<code>0xD800</code>到<code>0xDFFF</code>这个区间。</p>
+<p>下面是能够正确处理字符串遍历的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSymbols</span>(<span class="params">string</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> length = string.length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> index = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> output = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> character;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> charCode;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span> (++index &lt; length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    character = string.charAt(index);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    charCode = character.charCodeAt(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (charCode &gt;= <span class="number">0xD800</span> &amp;&amp; charCode &lt;= <span class="number">0xDBFF</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      output.push(character + string.charAt(++index));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      output.push(character);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> output;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> symbols = getSymbols(<span class="string">'𝌆'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">symbols.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">symbol</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>替换（<code>String.prototype.replace</code>）、截取子字符串（<code>String.prototype.substring</code>, <code>String.prototype.slice</code>）等其他字符串操作，都必须做类似的处理。</p>
+<h2 id="Base64转码"><a href="#Base64转码" class="headerlink" title="Base64转码"></a>Base64转码</h2><p>Base64是一种编码方法，可以将任意字符转成可打印字符。使用这种编码方法，主要不是为了加密，而是为了不出现特殊字符，简化程序的处理。</p>
+<p>JavaScript原生提供两个Base64相关方法。</p>
+<ul>
+<li>btoa()：字符串或二进制值转为Base64编码</li>
+<li>atob()：Base64编码转为原来的编码</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> string = <span class="string">'Hello World!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">btoa(string) <span class="comment">// "SGVsbG8gV29ybGQh"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">atob(<span class="string">'SGVsbG8gV29ybGQh'</span>) <span class="comment">// "Hello World!"</span></span></pre></td></tr></table></figure>
+
+<p>这两个方法不适合非ASCII码的字符，会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">btoa(<span class="string">'你好'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Uncaught DOMException: The string to be encoded contains characters outside of the Latin1 range.</span></span></pre></td></tr></table></figure>
+
+<p>要将非ASCII码字符转为Base64编码，必须中间插入一个转码环节，再使用这两个方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b64Encode</span>(<span class="params">str</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> btoa(<span class="built_in">encodeURIComponent</span>(str));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b64Decode</span>(<span class="params">str</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">decodeURIComponent</span>(atob(str));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">b64Encode(<span class="string">'你好'</span>) <span class="comment">// "JUU0JUJEJUEwJUU1JUE1JUJE"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">b64Decode(<span class="string">'JUU0JUJEJUEwJUU1JUE1JUJE'</span>) <span class="comment">// "你好"</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Mathias Bynens, <a href="http://mathiasbynens.be/notes/javascript-encoding" target="_blank" rel="noopener">JavaScript’s internal character encoding: UCS-2 or UTF-16?</a></li>
+<li>Mathias Bynens, <a href="http://mathiasbynens.be/notes/javascript-unicode" target="_blank" rel="noopener">JavaScript has a Unicode problem</a></li>
+<li>Mozilla Developer Network, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa" target="_blank" rel="noopener">Window.btoa</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/12/01/2016-12-01-array/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/11/30/2016-11-30-document-element/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-12-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

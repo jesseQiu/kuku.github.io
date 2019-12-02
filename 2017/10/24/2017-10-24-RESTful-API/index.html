@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RESTful API 设计指南 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、协议API 与用户的通信协议，总是使用 HTTPs协议。
+二、域名应该尽量将API部署在专用域名之下。
+1https:&amp;#x2F;&amp;#x2F;api.example.com
+
+如果确定API很简单，不会有进一步扩展，可以考虑放在主域名下。
+1https:&amp;#x2F;&amp;#x2F;example.o">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="RESTful API 设计指南"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> RESTful API 设计指南</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、协议"><a href="#一、协议" class="headerlink" title="一、协议"></a>一、协议</h2><p>API 与用户的通信协议，总是使用 <a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="noopener">HTTPs协议</a>。</p>
+<h2 id="二、域名"><a href="#二、域名" class="headerlink" title="二、域名"></a>二、域名</h2><p>应该尽量将API部署在专用域名之下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;api.example.com</span></pre></td></tr></table></figure>
+
+<p>如果确定API很简单，不会有进一步扩展，可以考虑放在主域名下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;example.org&#x2F;api&#x2F;</span></pre></td></tr></table></figure>
+
+<h2 id="三、版本（Versioning）"><a href="#三、版本（Versioning）" class="headerlink" title="三、版本（Versioning）"></a>三、版本（Versioning）</h2><p>应该将API的版本号放入URL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;api.example.com&#x2F;v1&#x2F;</span></pre></td></tr></table></figure>
+
+<p>另一种做法是，将版本号放在HTTP头信息中，但不如放入URL方便和直观。<a href="https://developer.github.com/v3/media/#request-specific-version" target="_blank" rel="noopener">Github</a>采用这种做法。</p>
+<h2 id="四、路径（Endpoint）"><a href="#四、路径（Endpoint）" class="headerlink" title="四、路径（Endpoint）"></a>四、路径（Endpoint）</h2><p>路径又称”终点”（endpoint），表示API的具体网址。</p>
+<p>在RESTful架构中，每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的”集合”（collection），所以API中的名词也应该使用复数。</p>
+<p>举例来说，有一个API提供动物园（zoo）的信息，还包括各种动物和雇员的信息，则它的路径应该设计成下面这样。</p>
+<ul>
+<li><a href="https://api.example.com/v1/zoos" target="_blank" rel="noopener">https://api.example.com/v1/zoos</a></li>
+<li><a href="https://api.example.com/v1/animals" target="_blank" rel="noopener">https://api.example.com/v1/animals</a></li>
+<li><a href="https://api.example.com/v1/employees" target="_blank" rel="noopener">https://api.example.com/v1/employees</a></li>
+</ul>
+<h2 id="五、HTTP-动词"><a href="#五、HTTP-动词" class="headerlink" title="五、HTTP 动词"></a>五、HTTP 动词</h2><p>对于资源的具体操作类型，由HTTP动词表示。</p>
+<p>常用的HTTP动词有下面五个（括号里是对应的SQL命令）。</p>
+<ul>
+<li>GET（SELECT）：从服务器取出资源（一项或多项）。</li>
+<li>POST（CREATE）：在服务器新建一个资源。</li>
+<li>PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。</li>
+<li>PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。</li>
+<li>DELETE（DELETE）：从服务器删除资源。</li>
+</ul>
+<p>还有两个不常用的HTTP动词。</p>
+<ul>
+<li>HEAD：获取资源的元数据。</li>
+<li>OPTIONS：获取信息，关于资源的哪些属性是客户端可以改变的。</li>
+</ul>
+<p>下面是一些例子。</p>
+<ul>
+<li>GET /zoos：列出所有动物园</li>
+<li>POST /zoos：新建一个动物园</li>
+<li>GET /zoos/ID：获取某个指定动物园的信息</li>
+<li>PUT /zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）</li>
+<li>PATCH /zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息）</li>
+<li>DELETE /zoos/ID：删除某个动物园</li>
+<li>GET /zoos/ID/animals：列出某个指定动物园的所有动物</li>
+<li>DELETE /zoos/ID/animals/ID：删除某个指定动物园的指定动物</li>
+</ul>
+<h2 id="六、过滤信息（Filtering）"><a href="#六、过滤信息（Filtering）" class="headerlink" title="六、过滤信息（Filtering）"></a>六、过滤信息（Filtering）</h2><p>如果记录数量很多，服务器不可能都将它们返回给用户。API应该提供参数，过滤返回结果。</p>
+<p>下面是一些常见的参数。</p>
+<ul>
+<li>?limit=10：指定返回记录的数量</li>
+<li>?offset=10：指定返回记录的开始位置。</li>
+<li>?page=2&amp;per_page=100：指定第几页，以及每页的记录数。</li>
+<li>?sortby=name&amp;order=asc：指定返回结果按照哪个属性排序，以及排序顺序。</li>
+<li>?animal_type_id=1：指定筛选条件</li>
+</ul>
+<p>参数的设计允许存在冗余，即允许API路径和URL参数偶尔有重复。比如，GET /zoo/ID/animals 与 GET /animals?zoo_id=ID 的含义是相同的。</p>
+<h2 id="七、状态码（Status-Codes）"><a href="#七、状态码（Status-Codes）" class="headerlink" title="七、状态码（Status Codes）"></a>七、状态码（Status Codes）</h2><p>服务器向用户返回的状态码和提示信息，常见的有以下一些（方括号中是该状态码对应的HTTP动词）。</p>
+<ul>
+<li>200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。</li>
+<li>201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。</li>
+<li>202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）</li>
+<li>204 NO CONTENT - [DELETE]：用户删除数据成功。</li>
+<li>400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</li>
+<li>401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。</li>
+<li>403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。</li>
+<li>404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</li>
+<li>406 Not  - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。</li>
+<li>410 Gone -[GAcceptableET]：用户请求的资源被永久删除，且不会再得到的。</li>
+<li>422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。</li>
+<li>500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</li>
+</ul>
+<p>状态码的完全列表参见<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="noopener">这里</a>。</p>
+<h2 id="八、错误处理（Error-handling）"><a href="#八、错误处理（Error-handling）" class="headerlink" title="八、错误处理（Error handling）"></a>八、错误处理（Error handling）</h2><p>如果状态码是4xx，就应该向用户返回出错信息。一般来说，返回的信息中将error作为键名，出错信息作为键值即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    error: &quot;Invalid API key&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="九、返回结果"><a href="#九、返回结果" class="headerlink" title="九、返回结果"></a>九、返回结果</h2><p>针对不同操作，服务器向用户返回的结果应该符合以下规范。</p>
+<ul>
+<li>GET /collection：返回资源对象的列表（数组）</li>
+<li>GET /collection/resource：返回单个资源对象</li>
+<li>POST /collection：返回新生成的资源对象</li>
+<li>PUT /collection/resource：返回完整的资源对象</li>
+<li>PATCH /collection/resource：返回完整的资源对象</li>
+<li>DELETE /collection/resource：返回一个空文档</li>
+</ul>
+<h2 id="十、Hypermedia-API"><a href="#十、Hypermedia-API" class="headerlink" title="十、Hypermedia API"></a>十、Hypermedia API</h2><p>RESTful API最好做到Hypermedia，即返回结果中提供链接，连向其他API方法，使得用户不查文档，也知道下一步应该做什么。</p>
+<p>比如，当用户向api.example.com的根目录发出请求，会得到这样一个文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;&quot;link&quot;: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &quot;rel&quot;:   &quot;collection https:&#x2F;&#x2F;www.example.com&#x2F;zoos&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &quot;href&quot;:  &quot;https:&#x2F;&#x2F;api.example.com&#x2F;zoos&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &quot;title&quot;: &quot;List of zoos&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &quot;type&quot;:  &quot;application&#x2F;vnd.yourformat+json&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码表示，文档中有一个link属性，用户读取这个属性就知道下一步该调用什么API了。rel表示这个API与当前网址的关系（collection关系，并给出该collection的网址），href表示API的路径，title表示API的标题，type表示返回类型。</p>
+<p>Hypermedia API的设计被称为<a href="http://en.wikipedia.org/wiki/HATEOAS" target="_blank" rel="noopener">HATEOAS</a>。Github的API就是这种设计，访问<a href="https://api.github.com/" target="_blank" rel="noopener">api.github.com</a>会得到一个所有可用API的网址列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &quot;current_user_url&quot;: &quot;https:&#x2F;&#x2F;api.github.com&#x2F;user&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &quot;authorizations_url&quot;: &quot;https:&#x2F;&#x2F;api.github.com&#x2F;authorizations&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#x2F;&#x2F; ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>从上面可以看到，如果想获取当前用户的信息，应该去访问<a href="https://api.github.com/user" target="_blank" rel="noopener">api.github.com/user</a>，然后就得到了下面结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &quot;message&quot;: &quot;Requires authentication&quot;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &quot;documentation_url&quot;: &quot;https:&#x2F;&#x2F;developer.github.com&#x2F;v3&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码表示，服务器给出了提示信息，以及文档的网址。</p>
+<h2 id="十一、其他"><a href="#十一、其他" class="headerlink" title="十一、其他"></a>十一、其他</h2><p>（1）API的身份认证应该使用<a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">OAuth 2.0</a>框架。</p>
+<p>（2）服务器返回的数据格式，应该尽量使用JSON，避免使用XML。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.bshare.cn/share" target="_blank" rel="noopener">RESTful API 设计指南</a></li>
+<li><a href="https://leancloud.cn/docs/rest_api.html" target="_blank" rel="noopener">REST API 使用详解</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/10/26/2017-10-26-yeoman/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/10/15/2017-10-15-git-starting/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-10-24 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/BackEnd/">BackEnd<span>5</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

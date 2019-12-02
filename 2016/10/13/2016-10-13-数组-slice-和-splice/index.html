@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数组 Slice() 和 Splice() - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="在开发中经常碰到 [].slice() 和 [].splice() 两个方法，但是总是不能很好的区分它们的差别和用法，今天刚好又碰到就查阅相关文档，做个小结，以便加深印象。
+
+一、Array.prototype.slice()slice() 方法会浅复制（shallow copy）数组的一部分到一个">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数组 Slice() 和 Splice()"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 数组 Slice() 和 Splice()</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>在开发中经常碰到 <code>[].slice()</code> 和 <code>[].splice()</code> 两个方法，但是总是不能很好的区分它们的差别和用法，今天刚好又碰到就查阅相关文档，做个小结，以便加深印象。</p>
+</blockquote>
+<h3 id="一、Array-prototype-slice"><a href="#一、Array-prototype-slice" class="headerlink" title="一、Array.prototype.slice()"></a>一、Array.prototype.slice()</h3><p>slice() 方法会浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组。</p>
+<ol>
+<li><p>单词意思<br>slice  美 [slaɪs]<br>vt.  切成片; 切下; 划分;<br>n.  薄片; 一部分; （因失误而打出的）曲线球;<br>vi.  斜击;</p>
+</li>
+<li><p>语法<br>arr.slice([begin[, end]])</p>
+<ul>
+<li><p>参数</p>
+<ul>
+<li><p>begin<br>  从该索引处开始提取原数组中的元素（从0开始）。<br>  如果该参数为负数，则表示从原数组中的倒数第几个元素开始提取，slice(-2)表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。<br>  如果省略 begin，则 slice 从索引 0 开始。</p>
+</li>
+<li><p>end<br>  在该索引处结束提取原数组元素（从0开始）。slice 会提取原数组中索引从 begin 到 end 的所有元素（包含 begin，但 <strong>不包含 end</strong>）。<br>  slice(1,4) 提取原数组中的第二个元素开始直到第四个元素的所有元素 （索引为 1, 2, 3的元素）。<br>  如果该参数为负数， 则它表示在原数组中的倒数第几个元素结束抽取。 slice(-2,-1)表示抽取了原数组中的倒数第二个元素到最后一个元素（不包含最后一个元素，也就是只有倒数第二个元素）。<br>  如果 end 被省略，则 slice 会一直提取到原数组末尾。<br>  返回值是一个含有提取元素的新数组</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>描述<br> slice <strong>不修改原数组</strong>，只会返回一个浅复制了原数组中的元素的一个新数组。原数组的元素会按照下述规则拷贝：</p>
+<p> 如果该元素是个对象引用 （不是实际的对象），slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。<br> 对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组。<br> 如果向两个数组任一中添加了新元素，则另一个不会受到影响。</p>
+</li>
+<li><p>示例</p>
+</li>
+</ol>
+<ul>
+<li><p>返回数组中的一部分</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Our good friend the citrus from fruits example</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Lemon"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> citrus = fruits.slice(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// 注意这里不包含下标 3("Apple") 的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// puts --&gt; ["Orange","Lemon"]</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>使用 slice<br>  在下例中, slice 从 myCar 中创建了一个新数组 newCar. 两个数组都包含了一个 myHonda 对象的引用. 当 myHonda 的 color 属性改变为 purple, 则两个数组中的对应元素都会随之改变.</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 slice方法从 myCar 中创建一个 newCar.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myHonda = &#123; <span class="attr">color</span>: <span class="string">"red"</span>, <span class="attr">wheels</span>: <span class="number">4</span>, <span class="attr">engine</span>: &#123; <span class="attr">cylinders</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">2.2</span> &#125; &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCar = [myHonda, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newCar = myCar.slice(<span class="number">0</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出myCar, newCar,以及各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar = "</span> + myCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar = "</span> + newCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变myHonda对象的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">myHonda.color = <span class="string">"purple"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"The new color of my Honda is "</span> + myHonda.color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出myCar, newCar中各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">上述代码输出:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">myCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">newCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = red </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = red</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">The <span class="keyword">new</span> color <span class="keyword">of</span> my Honda is purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = purple</span></pre></td></tr></table></figure>
+</li>
+<li><p>类数组（Array-like）对象<br>  slice 方法可以用来将一个类数组（Array-like）对象/集合转换成一个数组。你只需将该方法绑定到这个对象上。下述代码中 list 函数中的 arguments 就是一个类数组对象。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">除了使用 <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)，你也可以简单的使用 [].slice.call(<span class="built_in">arguments</span>) 来代替。另外，你可以使用 bind 来简化该过程。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unboundSlice = <span class="built_in">Array</span>.prototype.slice;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice = <span class="built_in">Function</span>.prototype.call.bind(unboundSlice);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> slice(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="二、Array-prototype-splice"><a href="#二、Array-prototype-splice" class="headerlink" title="二、Array.prototype.splice()"></a>二、Array.prototype.splice()</h3><p>splice() 方法用新元素替换旧元素，以此修改数组的内容。</p>
+<ol>
+<li><p>单词意思<br> splice 美 [splaɪs]<br> vt.  绞接; 捻接（两段绳子）; 胶接; 粘接（胶片、磁带等）;<br> n.  胶接处，粘接处，铰接处;</p>
+</li>
+<li><p>语法<br> array.splice(start, deleteCount[, item1[, item2[, …]]])</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li><p>start​<br>  从数组的哪一位开始修改内容。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位。</p>
+</li>
+<li><p>deleteCount<br>  整数，表示要移除的数组元素的个数。如果 deleteCount 是 0，则不移除元素。这种情况下，至少应添加一个新元素。如果 deleteCount 大于 start 之后的元素的总数，则从 start 后面的元素都将被删除（含第 start 位）。</p>
+</li>
+<li><p>itemN<br>  要添加进数组的元素。如果不指定，则 splice() 只删除数组元素。</p>
+</li>
+<li><p>返回值<br>  由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</p>
+</li>
+</ul>
+</li>
+<li><p>描述<br> 如果添加进数组的元素个数不等于被删除的元素个数，数组的长度会发生相应的改变。</p>
+</li>
+<li><p>提示和注释<br> 注释：请注意，splice() 方法与 slice() 方法的作用是不同的，splice() 方法会直接对数组进行修改。</p>
+</li>
+<li><p>示例<br> 使用 splice()</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下代码演示了 splice 的用法：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFish = [<span class="string">"angel"</span>, <span class="string">"clown"</span>, <span class="string">"mandarin"</span>, <span class="string">"surgeon"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 0 个元素，插入 "drum"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removed = myFish.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">"drum"</span>); <span class="comment">// 这里的 "drum" 是被插入到 下标 2("mandarin") 的前面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的 myFish:["angel", "clown", "drum", "mandarin", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：[]，没有元素被删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 1 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["angel", "clown", "drum", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["mandarin"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 1 个元素，然后插入 "trumpet"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">2</span>, <span class="number">1</span>, <span class="string">"trumpet"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["angel", "clown", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["drum"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 0 位开始删除 2 个元素，然后插入 "parrot", "anemone" 和 "blue"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">0</span>, <span class="number">2</span>, <span class="string">"parrot"</span>, <span class="string">"anemone"</span>, <span class="string">"blue"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["parrot", "anemone", "blue", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["angel", "clown"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 2 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="built_in">Number</span>.MAX_VALUE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["parrot", "anemone", "blue"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["trumpet", "surgeon"]</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="三、slice-Vs-splice"><a href="#三、slice-Vs-splice" class="headerlink" title="三、slice Vs splice"></a>三、slice Vs splice</h3><ol>
+<li>作用不同：<ul>
+<li>slice: 浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组</li>
+<li>splice: 用新元素替换旧元素，以此修改数组的内容</li>
+</ul>
+</li>
+<li>对原数组的影响不同<ul>
+<li>slice: 返回新数组，不影响原数组</li>
+<li>splice: 会更改原数组值</li>
+</ul>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="noopener">Array.prototype.slice()</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" target="_blank" rel="noopener">Array.prototype.splice()</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/10/13/2016-10-13-《编写可维护的 javascript》/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/10/13/2016-10-13-深入理解-bind-call-applay/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-10-13 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular copy、extend、merge - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="在开发中经常需要对数组或者对象进行拷贝，这时就会用到 angular.copy/extend/merge 这些 API 但是它们之间又有差别，本文主要是总结它们之间的用法和差别。在开始之前有必要先了解下， 浅拷贝 和 深拷贝 的差别。
+
+一、JS 的拷贝
+浅拷贝 JavaScript 存储对象都是存">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Angular copy、extend、merge"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Angular copy、extend、merge</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>在开发中经常需要对数组或者对象进行拷贝，这时就会用到 <code>angular.copy/extend/merge</code> 这些 <code>API</code> 但是它们之间又有差别，本文主要是总结它们之间的用法和差别。在开始之前有必要先了解下， <strong>浅拷贝</strong> 和 <strong>深拷贝</strong> 的差别。</p>
+</blockquote>
+<h4 id="一、JS-的拷贝"><a href="#一、JS-的拷贝" class="headerlink" title="一、JS 的拷贝"></a>一、JS 的拷贝</h4><ol>
+<li><p>浅拷贝<br> JavaScript 存储对象都是存地址的，所以浅拷贝就是复制一份引用，引用对象都指向同一份数据，并且都可以修改这份数据。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>,<span class="number">3</span>,<span class="string">'jesse'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	obj1 = &#123;<span class="attr">name</span>:<span class="string">'jesse'</span>,<span class="attr">sex</span>:<span class="string">'man'</span>&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	array2,obj2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 浅拷贝</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	array2 = array1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	obj2 = obj1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(array2); <span class="comment">// [1, 3, "jesse"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(obj2); <span class="comment">// Object &#123;name: "jesse", sex: "man"&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 改变原先对象值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	array1[<span class="number">2</span>] = <span class="string">'vivian'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	obj1.name = <span class="string">'vivian'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 拷贝的值也一起改变</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(array2);  <span class="comment">// [1, 3, "vivian"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(obj2); <span class="comment">// Object &#123;name: "vivian", sex: "man"&#125;</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>深拷贝<br> 深拷贝则是复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cloneObj = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> str, newobj = obj.constructor === <span class="built_in">Array</span> ? [] : &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !== <span class="string">'object'</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.JSON)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        str = <span class="built_in">JSON</span>.stringify(obj), <span class="comment">//序列化对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        newobj = <span class="built_in">JSON</span>.parse(str); <span class="comment">//还原</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> obj)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            newobj[i] = <span class="keyword">typeof</span> obj[i] === <span class="string">'object'</span> ? cloneObj(obj[i]) : obj[i]; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> newobj;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="string">'jesse'</span>,&#123;<span class="attr">name</span>:<span class="string">'vivian'</span>,<span class="attr">sex</span>:<span class="string">'girl'</span>&#125;],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	obj1 = &#123;<span class="attr">name</span>:<span class="string">'jesse'</span>,<span class="attr">sex</span>:<span class="string">'man'</span>,<span class="attr">addr</span>:[<span class="number">3</span>,<span class="number">4</span>,&#123;<span class="attr">name</span>:<span class="string">'kuku'</span>,<span class="attr">sex</span>:<span class="string">'man'</span>&#125;]&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	array2=[],obj2=&#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">	array2 = cloneObj(array1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">	obj2 = cloneObj(obj1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(array2); <span class="comment">// [1, 2, "jesse", Object]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(obj2); <span class="comment">// Object &#123;name: "jesse", sex: "man", addr: Array[3]&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(array1.obj === array2.obj); <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(obj1.obj === obj2.obj); <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 改变 boj1 和 array1 中的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">	array1[<span class="number">0</span>]=<span class="string">'beauty'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	obj1.name = <span class="string">'vivian'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(array2); <span class="comment">// [1, 2, "jesse", Object]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(obj2); <span class="comment">// Object &#123;name: "jesse", sex: "man", addr: Array[3]&#125;</span></span></pre></td></tr></table></figure>
+<p> 上面的深拷贝，改变了 <code>array1</code> 和 <code>obj1</code> 中的值后，<code>array2</code> 和 <code>obj2</code> 的值并未改变。</p>
+</li>
+</ol>
+<h4 id="二、angular-copy"><a href="#二、angular-copy" class="headerlink" title="二、angular.copy()"></a>二、angular.copy()</h4><p><code>angular.copy(source,destination)</code> 属于 <strong>深度拷贝</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource = &#123;<span class="string">'name'</span> : <span class="string">'sakshi'</span>, <span class="string">'age'</span> : <span class="string">'24'</span>, <span class="string">'obj'</span> :&#123;<span class="string">'key'</span>:<span class="string">'value'</span>&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDest = &#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深度拷贝</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">angular.copy(mySource, myDest);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// &#123;'name' : 'sakshi', 'age' : '24', 'obj' :&#123;'key':'value'&#125;&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource.obj === myDest.obj); <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变原始值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">mySource.name = <span class="string">'jesse'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// myDest 的值没有变</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// &#123;'name' : 'sakshi', 'age' : '24', 'obj' :&#123;'key':'value'&#125;&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource); <span class="comment">// &#123;'name' : 'jesse', 'age' : '24', 'obj' :&#123;'key':'value'&#125;&#125;</span></span></pre></td></tr></table></figure>
+<p>上面的 <code>myDest = {name:&#39;vivian&#39;,obj:{key:&#39;apple&#39;,size:100}}</code> 也就是不为空对象，运行后的结果还是一样。可以看出 <code>angular.copy(source,destination)</code> 是把 <code>source</code> 的值完整拷贝一份到 <code>destination</code>。</p>
+<h4 id="三、angular-extend"><a href="#三、angular-extend" class="headerlink" title="三、angular.extend()"></a>三、angular.extend()</h4><p><code>angular.extend(destination, src1, src2 …)</code> 是属于 <strong>浅拷贝</strong> (这里的浅拷贝是指 <code>src</code> 中的属性包含的 <strong>对象</strong>，如果属性不是对象则是复制拷贝)，也就是 <code>extend</code> 没有递归拷贝对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource1 = &#123;<span class="string">'name'</span> : <span class="string">'neha'</span>, <span class="string">'age'</span> : <span class="string">'26'</span>, <span class="attr">obj2</span> : &#123;<span class="attr">sex</span>:<span class="string">'man'</span>,<span class="attr">addr</span>:[<span class="string">'china'</span>,&#123;<span class="attr">city</span>:<span class="string">'fuzhou'</span>&#125;]&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource2 = &#123;<span class="string">'course'</span> : <span class="string">'MCA'</span>,<span class="attr">obj3</span>:&#123;<span class="attr">year</span>:<span class="number">2016</span>,<span class="attr">month</span>:<span class="number">9</span>&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDest = &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">angular.extend(myDest, mySource1,mySource2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// Object Object &#123;name: "neha", age: "26", obj2: Object, course: "MCA", obj3: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.addr[<span class="number">0</span>]); <span class="comment">// 'china'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.addr[<span class="number">1</span>].city); <span class="comment">// 'fuzhou'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj === mySource1.obj); <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj === mySource2.obj); <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变 mySource1 值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">mySource1.name = <span class="string">'jesse'</span>; <span class="comment">// 改变属性值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">mySource1.obj2.sex = <span class="string">'girl'</span>; <span class="comment">// 改变属性 -&gt; 对象 -&gt; 属性的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变 mySource2 值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">mySource2.course = <span class="string">'front-end'</span>; <span class="comment">// 改变属性值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">mySource2.obj3.year = <span class="number">2018</span>; <span class="comment">// 改变属性 -&gt; 对象 -&gt; 属性的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// Object &#123;name: "neha", age: "26", obj2: Object, course: "MCA", obj3: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.sex); <span class="comment">// 'girl'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj3.year); <span class="comment">// 2018</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource1); <span class="comment">// Object &#123;name: "jesse", age: "26", obj2: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource2); <span class="comment">// Object &#123;course: "front-end", obj3: Object&#125;</span></span></pre></td></tr></table></figure>
+<p>上面的代码可以看出，在 <code>extend()</code> 后，改变 <code>mySource1.name</code> 和 <code>mySource2.course</code> 的值后，<code>myDest</code> 中的值并没改变。但是改变其中属性值，<code>mySource1.obj2.sex = &#39;girl&#39;</code> 和 <code>mySource2.obj3.year = 2018;</code> 后 <code>myDest</code> 的值也一起变了。由此可以看出 <code>extend</code> 只是拷贝了第一层的值，当属性值为对象时则是引用。</p>
+<p>如果 myDest 和 mySource1 中有相同名称的属性值情况如何：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource = &#123;<span class="string">'name'</span> : <span class="string">'neha'</span>, <span class="string">'age'</span> : <span class="string">'26'</span>, <span class="attr">obj2</span> : &#123;<span class="attr">sex</span>:<span class="string">'man'</span>,<span class="attr">addr</span>:[<span class="string">'china'</span>,&#123;<span class="attr">city</span>:<span class="string">'fuzhou'</span>&#125;]&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDest = &#123;<span class="string">'name'</span>:<span class="string">'vivian'</span>,<span class="attr">obj2</span>:&#123;<span class="attr">sex</span>:<span class="string">'girl'</span>&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">angular.extend(myDest,mySource);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// Object &#123;name: "neha", obj2: Object, age: "26"&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.name); <span class="comment">// 'neha'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.sex); <span class="comment">// 'man'</span></span></pre></td></tr></table></figure>
+<p>由上面的例子可以看出，使用 <code>extend</code> 会覆盖相同属性名的值。</p>
+<h4 id="四、angular-merge"><a href="#四、angular-merge" class="headerlink" title="四、angular.merge()"></a>四、angular.merge()</h4><p>由于 <code>angular.extend()</code> 只能拷贝第一级的属性值，如果要递归拷贝属性中的对象，则需要用 <code>angular.merge()</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource1 = &#123;<span class="string">'name'</span> : <span class="string">'neha'</span>, <span class="string">'age'</span> : <span class="string">'26'</span>, <span class="attr">obj2</span> : &#123;<span class="attr">sex</span>:<span class="string">'man'</span>,<span class="attr">addr</span>:[<span class="string">'china'</span>,&#123;<span class="attr">city</span>:<span class="string">'fuzhou'</span>&#125;]&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySource2 = &#123;<span class="string">'course'</span> : <span class="string">'MCA'</span>,<span class="attr">obj3</span>:&#123;<span class="attr">year</span>:<span class="number">2016</span>,<span class="attr">month</span>:<span class="number">9</span>&#125;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDest = &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">angular.merge(myDest, mySource1,mySource2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// Object Object &#123;name: "neha", age: "26", obj2: Object, course: "MCA", obj3: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.addr[<span class="number">0</span>]); <span class="comment">// 'china'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.addr[<span class="number">1</span>].city); <span class="comment">// 'fuzhou'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj === mySource1.obj); <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj === mySource2.obj); <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变 mySource1 值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">mySource1.name = <span class="string">'jesse'</span>; <span class="comment">// 改变属性值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">mySource1.obj2.sex = <span class="string">'girl'</span>; <span class="comment">// 改变属性 -&gt; 对象 -&gt; 属性的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变 mySource2 值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">mySource2.course = <span class="string">'front-end'</span>; <span class="comment">// 改变属性值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">mySource2.obj3.year = <span class="number">2018</span>; <span class="comment">// 改变属性 -&gt; 对象 -&gt; 属性的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest); <span class="comment">// Object &#123;name: "neha", age: "26", obj2: Object, course: "MCA", obj3: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj2.sex); <span class="comment">// 'man'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(myDest.obj3.year); <span class="comment">// 2016</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource1); <span class="comment">// Object &#123;name: "jesse", age: "26", obj2: Object&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mySource2); <span class="comment">// Object &#123;course: "front-end", obj3: Object&#125;</span></span></pre></td></tr></table></figure>
+<p>上面代码可以看出，改变 <code>mySource1</code> 和 <code>mySource1</code> 中的属性对象的值，<code>myDest</code> 的值并没改变。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://www.zhihu.com/question/23031215" target="_blank" rel="noopener">js 深浅拷贝差别</a></li>
+<li><a href="http://www.tothenew.com/blog/angularjs-copy-vs-extend/" target="_blank" rel="noopener">AngularJS : copy vs extend</a></li>
+<li><a href="http://blog.csdn.net/itsonglin/article/details/47428955" target="_blank" rel="noopener">angular.extend</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/18/2016-09-18-angular-promise/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/09/15/2016-09-15-angular-provider/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

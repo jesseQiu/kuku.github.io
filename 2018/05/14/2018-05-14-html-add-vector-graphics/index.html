@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在 HTML 中添加矢量图片 (十二) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="矢量图形在很多情况下非常有用 — 它们拥有较小的文件尺寸，却高度可缩放，所以它们不会在镜头拉近或者放大图像时像素化。在这篇文章中，我们将为您呈现如何在网页中添加矢量图形。目标： | 了解如何嵌入 SVG (矢量) 图形到网页中。提示： 本文的目的并不是教你 SVG；仅仅是告诉你它是什么，以及如何在网">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在 HTML 中添加矢量图片 (十二)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 在 HTML 中添加矢量图片 (十二)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>矢量图形在很多情况下非常有用 — 它们拥有较小的文件尺寸，却高度可缩放，所以它们不会在镜头拉近或者放大图像时像素化。在这篇文章中，我们将为您呈现如何在网页中添加矢量图形。<br>目标： | 了解如何嵌入 SVG (矢量) 图形到网页中。<br><strong>提示：</strong> 本文的目的并不是教你 SVG；仅仅是告诉你它是什么，以及如何在网页中添加它。</p>
+</blockquote>
+<h2 id="一、什么是矢量图形？"><a href="#一、什么是矢量图形？" class="headerlink" title="一、什么是矢量图形？"></a>一、什么是矢量图形？</h2><p>在网上，你会和两种类型的图片打交道 — 位图和矢量图:</p>
+<ul>
+<li>位图使用像素网格来定义 — 一个位图文件精确得包含了每个像素的位置和它的色彩信息。流行的位图格式包括 Bitmap (<code>.bmp</code>), PNG (<code>.png</code>), JPEG (<code>.jpg</code>), and GIF (<code>.gif</code>.)</li>
+<li>矢量图使用算法来定义 — 一个矢量图文件包含了图形和路径的定义，电脑可以根据这些定义计算出当它们在屏幕上渲染时应该呈现的样子。 <a href="https://developer.mozilla.org/en-US/docs/Glossary/SVG" target="_blank" rel="noopener" title="SVG: Scalable Vector Graphics (SVG) is a 2D vector image format based on an XML syntax.">SVG</a> 格式可以让我们创造用于 Web 的精彩的矢量图形。</li>
+</ul>
+<p>为了让你清楚的认识到两者的区别，我们来一个例子。你可以在我们的 Github 仓库中在线查看这个例子：<a href="http://mdn.github.io/learning-area/html/multimedia-and-embedding/adding-vector-graphics-to-the-web/vector-versus-raster.html" target="_blank" rel="noopener">vector-versus-raster.html</a> — 它并排展示了两个看起来一致的图像，一个红色的五角星以及黑色的阴影。不同的是，左边的是 PNG，而右边的是 SVG 图像。</p>
+<p><img src="https://mdn.mozillademos.org/files/12866/raster-vector-default-size.png" alt="Two star images, one raster and one vector. At their default size they look identical"></p>
+<p>当你放大网页的时候，区别就会变得明显起来 — 随着你的放大，PNG 图片变得像素化了，因为它存储是每个像素的颜色和位置信息 — 当它被放大时，每个像素就被放大以填满屏幕上更多的像素，所以图像就会开始变得马赛克感觉。矢量图像看起来仍然效果很好且清晰，因为无论它的尺寸如何，都使用算法来计算出图像的形状，仅仅是根据放大的倍数来调整算法中的值。</p>
+<p><img src="https://mdn.mozillademos.org/files/12868/raster-vector-zoomed.png" alt="Two star images zoomed in. The raster one on the left starts to look pixellated, whereas the vector one still looks crisp."></p>
+<p>此外，矢量图形相较于同样的位图，通常拥有更小的体积，因为它们仅需储存少量的算法，而不是逐个储存每个像素的信息。</p>
+<h2 id="二、SVG-是什么？"><a href="#二、SVG-是什么？" class="headerlink" title="二、SVG 是什么？"></a>二、SVG 是什么？</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG" target="_blank" rel="noopener">SVG</a> 是用于描述矢量图像的<a href="https://developer.mozilla.org/en-US/docs/Glossary/XML" target="_blank" rel="noopener" title="XML: eXtensible Markup Language (XML) is a generic markup language specified by the W3C. The information technology (IT) industry uses many languages based on XML as data-description languages.">XML</a>语言。 它基本上是像HTML一样的标记，除了你有许多不同的元素来定义你想要出现在图像中的形状，以及你想要应用于这些形状的效果。 SVG用于标记图形，而不是内容。 非常简单，你有一些元素来创建简单图形，如<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/circle" target="_blank" rel="noopener" title="&lt;circle&gt; SVG 元素是一个SVG的基本形状，用来创建圆,基于一个圆心和一个半径。"><code>&lt;circle&gt;</code></a> 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/rect" target="_blank" rel="noopener" title="rect元素是SVG的一个基本形状，用来创建矩形，基于一个角位置以及它的宽和高。它还可以用来创建圆角矩形。"><code>&lt;rect&gt;</code></a>。更高级的SVG功能包括 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/feColorMatrix" target="_blank" rel="noopener" title="该滤镜基于转换矩阵对颜色进行变换。每一像素的颜色值(一个表示为[红,绿,蓝,透明度] 的矢量) 都经过矩阵乘法 (matrix multiplated) 计算出的新颜色。"><code>&lt;feColorMatrix&gt;</code></a>（使用变换矩阵转换颜色）<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/animate" target="_blank" rel="noopener" title="动画元素放在形状元素的内部，用来定义一个元素的某个属性如何踩着时点改变。在指定持续时间里，属性从开始值变成结束值。"><code>&lt;animate&gt;</code></a> （矢量图形的动画部分）和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/mask" target="_blank" rel="noopener" title="在SVG中，你可以指一个透明的遮罩层和当前对象合成，形成背景。透明遮罩层可以是任何其他图形对象或者&lt;g&gt;元素。mask元素用于定义这样的遮罩元素。属性mask用来引用一个遮罩元素。"><code>&lt;mask&gt;</code></a>（在图像顶部应用蒙版）</p>
+<p>作为一个简单的例子，以下代码创建一个圆和一个矩形：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">version</span>=<span class="string">"1.1"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">baseProfile</span>=<span class="string">"full"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"200"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">fill</span>=<span class="string">"black"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"150"</span> <span class="attr">cy</span>=<span class="string">"100"</span> <span class="attr">r</span>=<span class="string">"90"</span> <span class="attr">fill</span>=<span class="string">"blue"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>将创建如下输出:</p>
+<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/svg.png" alt=""></p>
+<p>从上面的例子可以看出，SVG很容易手工编码。 是的，您可以在文本编辑器中手动编写简单的SVG，但是对于复杂的图像，这很快就开始变得非常困难。 为了创建SVG图像，大多数人使用矢量图形编辑器，如 <a href="https://inkscape.org/en/" target="_blank" rel="noopener">Inkscape</a> 或 <a href="https://en.wikipedia.org/wiki/Adobe_Illustrator" target="_blank" rel="noopener">Illustrator</a>。 这些软件包允许您使用各种图形工具创建各种插图，并创建照片的近似值（例如Inkscape的跟踪位图功能）。</p>
+<p>SVG 除了迄今为止所描述的以外还有其他优点：</p>
+<ul>
+<li>矢量图像中的文本仍然可访问（这也有利于 <a href="https://developer.mozilla.org/en-US/docs/Glossary/SEO" target="_blank" rel="noopener" title="SEO: SEO (Search Engine Optimization) is the process of making a website more visible in search results, also termed improving search rankings.">SEO</a>)）。</li>
+<li>SVG 可以很好地适应样式/脚本，因为图像的每个组件都是可以通过CSS或通过JavaScript编写的样式的元素。</li>
+</ul>
+<p>那么为什么会有人想使用光栅图形而不是SVG？ 其实 SVG 确实有一些缺点：</p>
+<ul>
+<li>SVG非常容易变得复杂，这意味着文件大小会增加; 复杂的SVG也会在浏览器中占用很长的处理时间。</li>
+<li>SVG可能比栅格图像更难创建，具体取决于您尝试创建哪种图像。</li>
+<li>旧版浏览器不支持SVG，因此如果您需要在网站上支持旧版本的 IE，则可能不适合（SVG从IE9开始得到支持）。</li>
+</ul>
+<p>由于上述原因，光栅图形更适合照片那样复杂精密的图像。</p>
+<p><strong>注意：</strong>在Inkscape中，将文件保存为纯SVG以节省空间。 另请参阅<a href="http://tavmjong.free.fr/INKSCAPE/MANUAL/html/Web-Inkscape.html" target="_blank" rel="noopener">如何为Web准备SVG</a>。</p>
+<h2 id="三、将-SVG-添加到页面"><a href="#三、将-SVG-添加到页面" class="headerlink" title="三、将 SVG 添加到页面"></a>三、将 SVG 添加到页面</h2><p>在本节中，我们将介绍将SVG矢量图形添加到网页的不同方式。</p>
+<h3 id="1-快捷方式：-lt-img-gt"><a href="#1-快捷方式：-lt-img-gt" class="headerlink" title="1. 快捷方式：&lt;img&gt;"></a>1. 快捷方式：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img" target="_blank" rel="noopener" title="HTML Image 元素（ &lt;img&gt; ）代表文档中的一个图像。"><code>&lt;img&gt;</code></a></h3><p>要通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img" target="_blank" rel="noopener" title="HTML Image 元素（ &lt;img&gt; ）代表文档中的一个图像。"><code>&lt;img&gt;</code></a>元素嵌入SVG，你只需要按照预期的方式在 src 属性中引用它。你将需要一个<code>height</code>或<code>width</code>属性（或者如果您的SVG没有固有的宽高比）。如果还没有这样做，请阅读<a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML" target="_blank" rel="noopener">HTML中的图片</a> 。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">src</span>=<span class="string">"equilateral.svg"</span> </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">alt</span>=<span class="string">"triangle with all three sides equal"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">height</span>=<span class="string">"87px"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">width</span>=<span class="string">"100px"</span> /&gt;</span></span></pre></td></tr></table></figure>
+
+<h4 id="1-1-优点"><a href="#1-1-优点" class="headerlink" title="1.1 优点"></a>1.1 优点</h4><ul>
+<li>快速，熟悉的图像语法与<code>alt</code>属性中提供的内置文本等效。</li>
+<li>可以通过在<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素嵌套<code>&lt;img&gt;</code>，使图像轻松地成为超链接。</li>
+</ul>
+<h4 id="1-2-缺点"><a href="#1-2-缺点" class="headerlink" title="1.2 缺点"></a>1.2 缺点</h4><ul>
+<li>无法使用JavaScript操作图像。</li>
+<li>如果要使用CSS控制SVG内容，则必须在SVG代码中包含内联CSS样式。 （从SVG文件调用的外部样式表不起作用）</li>
+<li>不能用CSS伪类来重设图像样式（如<code>:focus</code>）。</li>
+</ul>
+<h3 id="2-疑难解答和跨浏览器支持"><a href="#2-疑难解答和跨浏览器支持" class="headerlink" title="2. 疑难解答和跨浏览器支持"></a>2. 疑难解答和跨浏览器支持</h3><p>对于不支持SVG（IE 8及更低版本，Android 2.3及更低版本）的浏览器，您可以从<code>src</code>属性引用PNG或JPG，并使用<code>[srcset](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img#attr-srcset)</code>属性 只有最近的浏览器才能识别）来引用SVG。 在这种情况下，仅支持浏览器将加载SVG - 较旧的浏览器将加载PNG：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"equilateral.png"</span> <span class="attr">alt</span>=<span class="string">"triangle with equal sides"</span> <span class="attr">srcset</span>=<span class="string">"equilateral.svg"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>您还可以使用SVG作为CSS背景图像，如下所示。 在下面的代码中，旧版浏览器会坚持他们理解的PNG，而较新的浏览器将加载SVG：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">background: url("fallback.png") no-repeat center;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">background-image: url("image.svg");</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">background-size: contain;</span></pre></td></tr></table></figure>
+
+<p>像上面描述的<code>&lt;img&gt;</code>方法一样，使用 CSS 背景图像插入SVG 意味着它不能被 JavaScript 操作，并且也受到相同的 CSS 限制。</p>
+<p>如果 SVG 根本没有显示，可能是因为你的服务器设置不正确。 如果是这个问题，<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Getting_Started#A_Word_on_Webservers" target="_blank" rel="noopener">这篇文章</a>将告诉你正确方向。</p>
+<h3 id="3-如何在-HTML-中引入-SVG-代码"><a href="#3-如何在-HTML-中引入-SVG-代码" class="headerlink" title="3. 如何在 HTML 中引入 SVG 代码"></a>3. 如何在 HTML 中引入 SVG 代码</h3><p>你还可以在文本编辑器中打开SVG文件，复制SVG代码，并将其粘贴到HTML文档中 - 这有时称为将<strong>SVG内联</strong>或<strong>内联SVG</strong>。确保您的SVG代码在<code>[&lt;svg&gt;&lt;/svg&gt;](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg)</code>标签中（不要在外面添加任何内容）。这是一个非常简单的示例，您可以粘贴到文档中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"200"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">fill</span>=<span class="string">"green"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h4 id="3-1-优点"><a href="#3-1-优点" class="headerlink" title="3.1 优点"></a>3.1 优点</h4><ul>
+<li>将 SVG 内联减少 HTTP 请求，可以减少加载时间。</li>
+<li>您可以为 SVG 元素分配<code>class</code>和<code>id</code>，并使用 CSS 修改样式，无论是在SVG中，还是 HTML 文档中的 CSS 样式规则。 实际上，您可以使用任何 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute#Presentation_attributes" target="_blank" rel="noopener">SVG外观属性</a> 作为CSS属性。</li>
+<li>内联SVG是唯一可以让您在SVG图像上使用CSS交互（如<code>:focus</code>）和CSS动画的方法（即使在常规样式表中）。</li>
+<li>您可以通过将 SVG 标记包在<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素中，使其成为超链接。</li>
+</ul>
+<h4 id="3-2-缺点"><a href="#3-2-缺点" class="headerlink" title="3.2 缺点"></a>3.2 缺点</h4><ul>
+<li>这种方法只适用于在一个地方使用的SVG。多次使用会导致资源密集型维护（resource-intensive maintenance）。</li>
+<li>额外的 SVG 代码会增加HTML文件的大小。</li>
+<li>浏览器不能像缓存普通图片一样缓存内联SVG。</li>
+<li>您可能会在<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/foreignObject" target="_blank" rel="noopener" title="foreignObject元素允许包含外来的XML命名空间，其图形内容是别的用户代理绘制的。这个被包含的外来图形内容服从SVG变形和合成。"><code>&lt;foreignObject&gt;</code></a> 元素中包含回退，但支持 SVG 的浏览器仍然会下载任何后备图像。你需要考虑仅仅为支持过时的浏览器，而增加额外开销是否真的值得。</li>
+</ul>
+<h3 id="4-如何使用-lt-iframe-gt-嵌入SVG"><a href="#4-如何使用-lt-iframe-gt-嵌入SVG" class="headerlink" title="4. 如何使用 &lt;iframe&gt; 嵌入SVG"></a>4. 如何使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML内联框架元素 &lt;iframe&gt; 表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。在HTML 4.01中，文档可能包含头部和正文，或头部和框架集，但不能包含正文和框架集。但是，&lt;iframe&gt;可以在正常的文档主体中使用。每个浏览上下文都有自己的会话历史记录和活动文档。包含嵌入内容的浏览上下文称为父浏览上下文。顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a> 嵌入SVG</h3><p>您可以在浏览器中打开 SVG 图像，就像网页一样。 因此，使用<code>&lt;iframe&gt;</code>嵌入 SVG 文档就像我们在 <a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/%E5%85%B6%E4%BB%96%E5%B5%8C%E5%85%A5%E6%8A%80%E6%9C%AF" target="_blank" rel="noopener">从对象到iframe - 其他嵌入技术</a> 中进行研究一样。</p>
+<p>这是一个快速回顾：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"triangle.svg"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">sandbox</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"triangle.png"</span> <span class="attr">alt</span>=<span class="string">"Triangle with three unequal sides"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>这绝对不是最好的方法：</p>
+<h4 id="4-1-缺点"><a href="#4-1-缺点" class="headerlink" title="4.1 缺点"></a>4.1 缺点</h4><ul>
+<li>如你所知， <code>iframe</code>有一个回退机制，如果浏览器不支持<code>iframe</code>，则只会显示回退。</li>
+<li>此外，除非 SVG 和您当前的网页具有相同的 <a href="https://developer.mozilla.org/en-US/docs/Glossary/origin" target="_blank" rel="noopener" title="origin: Web content&#39;s origin is defined by the scheme (protocol), host (domain), and port of the URL used to access it. Two objects have the same origin only when the scheme, host, and port all match.">origin</a>，否则你不能在主页面上使用 JavaScript 来操纵 SVG。</li>
+</ul>
+<h2 id="四、动手学习：使用SVG"><a href="#四、动手学习：使用SVG" class="headerlink" title="四、动手学习：使用SVG"></a>四、动手学习：使用SVG</h2><p>在这个动手学习部分中，我们希望你能够体验一下 SVG 的乐趣。 在下面的“input”部分，您将看到我们已经提供了一些样例来开始使用。 您还可以访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element" target="_blank" rel="noopener">SVG元素参考</a>，了解更多关于SVG可以使用的其他玩具的细节，也可以尝试一下。 这部分都是为了锻炼你的研究技巧，并且有一些乐趣。</p>
+<p>如果你卡住了，无法使你的代码工作，你可以随时使用 Reset 按钮进行重置。</p>
+<h6 id="Playable-code"><a href="#Playable-code" class="headerlink" title="Playable code"></a>Playable code</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Input<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">class</span>=<span class="string">"input"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"100%"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">fill</span>=<span class="string">"red"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"100%"</span> <span class="attr">cy</span>=<span class="string">"100%"</span> <span class="attr">r</span>=<span class="string">"150"</span> <span class="attr">fill</span>=<span class="string">"blue"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">"120,0 240,225 0,225"</span> <span class="attr">fill</span>=<span class="string">"green"</span>/&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">x</span>=<span class="string">"50"</span> <span class="attr">y</span>=<span class="string">"100"</span> <span class="attr">font-family</span>=<span class="string">"Verdana"</span> <span class="attr">font-size</span>=<span class="string">"55"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">        <span class="attr">fill</span>=<span class="string">"white"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">stroke-width</span>=<span class="string">"2"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    Hello!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">text</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Output<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"output"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"reset"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Reset"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">font-family</span>: <span class="string">'Open Sans Light'</span>,Helvetica,Arial,sans-serif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.input</span>, <span class="selector-class">.output</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">width</span>: <span class="number">90%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">10em</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#0095dd</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">overflow</span>: auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.output</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">14em</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">"code"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reset = <span class="built_in">document</span>.getElementById(<span class="string">"reset"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> code = textarea.value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> output = <span class="built_in">document</span>.querySelector(<span class="string">".output"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawOutput</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  output.innerHTML = textarea.value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">reset.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  textarea.value = code;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  drawOutput();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">textarea.addEventListener(<span class="string">"input"</span>, drawOutput);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, drawOutput);</span></pre></td></tr></table></figure>
+
+<iframe src="https://mdn.mozillademos.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Adding_vector_graphics_to_the_Web$samples/Playable_code?revision=1344124" class="live-sample-frame sample-code-frame" height="600" width="700" id="frame_Playable_code" frameborder="0"></iframe>
+
+<p><button class="open-in-host button neutral">在 CodePen 中打开 <i class="icon-codepen" aria-hidden="true"></i></button></p>
+<p><button class="open-in-host button neutral">在 JSFiddle 中打开 <i class="icon-jsfiddle" aria-hidden="true"></i></button></p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>本文提供了一个矢量图形和 SVG 的快速浏览，让你了解他们的作用，以及如何在网页中引入 SVG。 它从来没有打算成为学习 SVG 的完整教程，只是一个指南，让你在网上遇到 SVG 时知道它是什么。 所以不要觉得你不是一个 SVG 专家而担心。如果你想了解更多关于它的工作原理，我们在下面列出了一些可能会帮助您的信息。</p>
+<p>在本模块的最后一篇文章中，我们将详细探索响应式图像，查看 HTML 可以让您的图像在不同设备上更好地适配。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Adding_vector_graphics_to_the_Web" target="_blank" rel="noopener">在网页中添加矢量图形</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/05/15/2018-05-15-html-font-rending/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/05/11/2018-05-11-android-aidl/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-05-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Html/">Html<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

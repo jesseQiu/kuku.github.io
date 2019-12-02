@@ -1,0 +1,439 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Frameset、Frame、Iframe 区别 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、框架概念所谓框架便是网页画面分成几个框窗，同时取得多个 URL。只需要 &amp;lt;FRAMESET&amp;gt; &amp;lt;FRAME&amp;gt; 即可，而所有框架标记需要放在一个总起的 html 档，这个档案只记录了该框架 如何划分，不会显示任何资料，所以 不能 放入 &amp;lt;BODY&amp;gt; 标记，浏览这">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Frameset、Frame、Iframe 区别"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Frameset、Frame、Iframe 区别</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、框架概念"><a href="#一、框架概念" class="headerlink" title="一、框架概念"></a>一、框架概念</h2><p>所谓框架便是网页画面分成几个框窗，同时取得多个 URL。只需要 <code>&lt;FRAMESET&gt; &lt;FRAME&gt;</code> 即可，而所有框架标记需要放在一个总起的 html 档，这个档案只记录了该框架 如何划分，不会显示任何资料，所以 <strong>不能</strong> 放入 <code>&lt;BODY&gt;</code> 标记，浏览这框架必须读取这档 案而不是其它框窗的档案。<code>&lt;FRAMESET&gt;</code> 是用以划分框窗，每一框窗由一个 <code>&lt;FRAME&gt;</code> 标 记所标示，<code>&lt;FRAME&gt;</code> 必须在 <code>&lt;FRAMESET&gt;</code> 范围中使用。如下例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"50%,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"a"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"b"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>此例中  <code>&lt;FRAMESET&gt;</code> 把画面分成左右两相等部分，左便是显示 <code>a.html</code>，右边则会显示 <code>b.html</code> 这档案，<code>&lt;FRAME&gt;</code> 标记所标示的框窗永远是按由: 上 -&gt;下-&gt;左-&gt;右的次序。 </p>
+<h2 id="二、-lt-FRAMESET-gt-lt-FRAME-gt"><a href="#二、-lt-FRAMESET-gt-lt-FRAME-gt" class="headerlink" title="二、&lt;FRAMESET&gt; &lt;FRAME&gt;"></a>二、<code>&lt;FRAMESET&gt; &lt;FRAME&gt;</code></h2><ol>
+<li><p><code>&lt;FRAMESET&gt;</code> 称框架标记，用以宣告 HTML 文件为框架模式，并设定视窗如何分割。 <code>&lt;FRAME&gt;</code> 则只是设定某一个框窗内的参数属性。<br><code>&lt;FRAMESET&gt;</code> 参数设定：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">例子：<span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"90,*"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">border</span>=<span class="string">0</span> <span class="attr">framespacing</span>=<span class="string">"2"</span> <span class="attr">bordercolor</span>=<span class="string">"#008000"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>COLS=”90,*”<br>垂直切割画面(如分左右两个画面)，接受整数值、百分数， * 则代表占用馀下空 间。数值的个数代表分成的视窗数目且以逗号分隔。</p>
+</li>
+<li><p>ROWS=”120,*”<br>就是横向切割，将画面上下分开，数值设定同上。唯 COLS 与 ROWS 两参数尽量 不要同在一个  <code>&lt;FRAMESET&gt;</code> 标记中，因 Netacape 偶然不能显示这类形的框架，尽 采用多重分割。 </p>
+</li>
+<li><p>frameborder=”0”<br>设定框架的边框，其值只有 0 和 1 ， 0 表示不要边框， 1 表示要显示边框。(避 免使用 yes 或 no )</p>
+</li>
+<li><p>border=”0”<br>设定框架的边框厚度，以 pixels 为单位。   </p>
+</li>
+<li><p>bordercolor=”#008000”<br>设定框架的边框颜色。  </p>
+</li>
+<li><p>framespacing=”5”<br>表示框架与框架间的保留空白的距离。</p>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;FRAME&gt;</code> 参数设定： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">例子：<span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span> <span class="attr">marginwidth</span>=<span class="string">"5"</span> <span class="attr">marginheight</span>=<span class="string">"5"</span> <span class="attr">scrolling</span>=<span class="string">"Auto"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">noresize</span> <span class="attr">framespacing</span>=<span class="string">"6"</span> <span class="attr">bordercolor</span>=<span class="string">"#0000FF"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>SRC=”a.html”<br>设定此框窗中要显示的网页档案名称，每个框窗一定要对应着一个网页档案。你可 使用绝对路径或相对路径。   </p>
+</li>
+<li><p>NAME=”top”<br>设定这个框窗的名称，这样才能指定框架来作连结，必须但任意命名。</p>
+</li>
+<li><p>frameborder=0<br>设定框架的边框，其值只有 0 和 1 ， 0 表示不要边框， 1 表示要显示边框。</p>
+</li>
+<li><p>framespacing=”6”<br>表示框架与框架间的保留空白的距离。</p>
+</li>
+<li><p>bordercolor=”#008000”<br>设定框架的边框颜色。</p>
+</li>
+<li><p>scrolling=”Auto”<br>设定是否要显示卷轴，YES 表示要显示卷轴，NO 表示无论如何都不要显示， AUTO 是视情况显示。</p>
+</li>
+<li><p>noresize<br>设定不让使用者可以改变这个框框的大小，亦没有设定此参数，使用者可以很随 意地拉动框架，改变其大小。</p>
+</li>
+<li><p>marginhight=5<br>表示框架高度部份边缘所保留的空间。</p>
+</li>
+<li><p>marginwidth=5<br>表示框架宽度部份边缘所保留的空间。  </p>
+</li>
+<li><p>target<br>表示在指定的框架中打开网页</p>
+<ul>
+<li>blank   它表示在一个新的窗口中打开链接网页</li>
+<li>top      它表示在本窗口中打开链接网页</li>
+<li>parent 在上一层的框架中打开链接网页</li>
+<li>self      在超链接中打开链接网页</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>例子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">//例子 1   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">//例子 2   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*,80"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"middle"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">//例子 3   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"upper_left"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_left"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">//例子 4   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_left"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">//例子 5   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"upper_right"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="三、-lt-NOFRAMES-gt"><a href="#三、-lt-NOFRAMES-gt" class="headerlink" title="三、&lt;NOFRAMES&gt;"></a>三、<code>&lt;NOFRAMES&gt;</code></h2><p>当别人使用的浏览器太旧，不支援框架这个功能时，他看到的将会是一片空白。为了避免 这种情况，可使用 <code>&lt;NOFRAMES&gt;</code> 这个标记，当使用者的浏览器看不到框架时，他就会看到 <code>&lt;NOFRAMES&gt; 与 &lt;/NOFRAMES&gt;</code> 之间的内容，而不是一片空白。<br>应用方法：   </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">noframes</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  很抱歉，阁下使用的浏览器不支援框架功能，请转用新的浏览器。   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">noframes</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>若浏览器支援框架，那麽它不会理会 <code>&lt;noframes&gt;</code> 中的东西，但若浏览器不支援框架，由 於不认识所有框架标记，不明的标记会被略过，标记包围的东西便被解读出来，所以放在 <code>&lt;noframes&gt;</code> 范围内的文字会被显示。 </p>
+<h2 id="四、-lt-IFRAME-gt"><a href="#四、-lt-IFRAME-gt" class="headerlink" title="四、 &lt;IFRAME&gt;"></a>四、 <code>&lt;IFRAME&gt;</code></h2><p>这标记作用是在一页网页中间插入一个框窗以显示另一个文件。它是 一个围堵标记，但围着的字句只有在浏览器不支援 iframe 标记时才会显示，如 <code>&lt;noframes&gt;</code> 一样，可以放些提醒字句之类。通常 iframe 配合一个辨认浏览器的 JavaScript 会较好，若 JavaScript 认出该浏览器并非 Internet Explorer 便会切换至另一版本。PS：一定要使用 <code>&lt;/iframe&gt;</code> 关闭，否则后面的内容显示不出来。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span>&gt;</span> 的参数设定如下：   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">例子： <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"iframe.html"</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">align</span>=<span class="string">"MIDDLE"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"100"</span> <span class="attr">marginwidth</span>=<span class="string">"1"</span> <span class="attr">marginheight</span>=<span class="string">"1"</span> <span class="attr">frameborder</span>=<span class="string">"1"</span> <span class="attr">scrolling</span>=<span class="string">"Yes"</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>src=”iframe.html”<br>欲显示於此框窗的文件来源除档案名称，必要加上相对或绝对路径。</p>
+</li>
+<li><p>name=”test”<br>此框窗名称，这是连结标记的 target 参数所需要的。</p>
+</li>
+<li><p>align=”MIDDLE”<br>可选值为 left, right, top, middle, bottom，作用不大</p>
+</li>
+<li><p>width=”300” height=”100”<br>框窗的宽及长，以 pixels 为单位。</p>
+</li>
+<li><p>marginwidth=”1” marginheight=”1”<br>该插入的文件与框边所保留的空间。</p>
+</li>
+<li><p>frameborder=”1”<br>使用 1 表示显示边框， 0 则不显示。（可以是 yes 或 no） </p>
+</li>
+<li><p>scrolling=”Yes”<br>使用 Yes 表示容许卷动（内定）， No 则不容许卷动</p>
+</li>
+</ul>
+<h2 id="五、frame-和-iframe-的区别"><a href="#五、frame-和-iframe-的区别" class="headerlink" title="五、frame 和 iframe 的区别"></a>五、frame 和 iframe 的区别</h2><p>1、frame 不能脱离 frameSet 单独使用，iframe 可以；<br>2、frame 不能放在 <strong>body</strong> 中；如下可以正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>  <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>  <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+
+<p>如下不能正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>3、嵌套在 frameSet 中的 iframe 必需放在 body 中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下可以正常显示：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>如下不能正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span> <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span> <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+
+<p>4、不嵌套在 frameSet 中的 iframe 可以随意使用；<br>如下均可以正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">``` </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">``html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+<p>5、frame 的高度只能通过 frameSet 控制；iframe 可以自己控制，不能通过 frameSet 控制，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">height</span>=<span class="string">"30%"</span>  <span class="attr">name</span>=<span class="string">"frame1"</span>    <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">height</span>=<span class="string">"100"</span>  <span class="attr">name</span>=<span class="string">"frame2"</span>    <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.xuebuyuan.com/1385439.html" target="_blank" rel="noopener">frame,iframe,frameset 之间的关系与区别</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/11/20/2016-11-20-《成大事者不纠结》/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/11/19/2016-11-19-html-转义字符/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-11-19 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Html/">Html<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

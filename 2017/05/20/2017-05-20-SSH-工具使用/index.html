@@ -1,0 +1,399 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SSH 工具使用 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、什么是 SSH
+SSH 是英文 Secure Shell 简写，是一种加密协议
+是 C/S 架构
+可以把所有传输的数据进行加密
+防止攻击和 DNS\IP 欺骗
+传输的数据是经过压缩的，所以可以加快传输的速度
+可以代替Telnet，又可以为FTP、Pop、甚至为PPP提供一个安全的”通道”。
+
+二">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="SSH 工具使用"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> SSH 工具使用</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、什么是-SSH"><a href="#一、什么是-SSH" class="headerlink" title="一、什么是 SSH"></a>一、什么是 SSH</h2><ul>
+<li>SSH 是英文 Secure Shell 简写，是一种加密协议</li>
+<li>是 C/S 架构</li>
+<li>可以把所有传输的数据进行加密</li>
+<li>防止攻击和 DNS\IP 欺骗</li>
+<li>传输的数据是经过压缩的，所以可以加快传输的速度</li>
+<li>可以代替Telnet，又可以为FTP、Pop、甚至为PPP提供一个安全的”通道”。</li>
+</ul>
+<h2 id="二、SSH-配置文件"><a href="#二、SSH-配置文件" class="headerlink" title="二、SSH 配置文件"></a>二、SSH 配置文件</h2><h3 id="1-liunux-中-ssh-服务端配置文件"><a href="#1-liunux-中-ssh-服务端配置文件" class="headerlink" title="1. liunux 中 ssh 服务端配置文件"></a>1. liunux 中 ssh 服务端配置文件</h3><ul>
+<li>默认路径：<code>/etc/ssh/sshd_config</code></li>
+<li>注意，如果在该目录下有 <code>/etc/ssh/ssh_config</code> 少了一个 <code>d</code> 的文件，这个是 linux 服务器中也安装了 ssh 客户端，指的就是该客户端配置文件。</li>
+</ul>
+<h3 id="2-常用的配置项说明"><a href="#2-常用的配置项说明" class="headerlink" title="2. 常用的配置项说明"></a>2. 常用的配置项说明</h3><ul>
+<li><code>Port     22</code>                                          #SSH端口设置，这里默认使用的是22端口</li>
+<li><code>Protocol    2，1</code>                                #选择SSH协议版本</li>
+<li><code>ListenAddress     0.0.0.0</code>                  #监听的网卡IP</li>
+<li><code>PermitRootLogin     no</code>                        #是否允许root登入，默认是允许的</li>
+<li><code>PasswordAuthentication yes</code>            #是否开启密码验证</li>
+<li><code>PermitEmptyPasswords no</code>              #是否允许密码为空</li>
+<li><code>PrintMotd no</code>                                        #登入后是否显示一些信息，如上次登入时间及地点等。</li>
+<li><code>PrintLastLog yes</code>                                #显示上次登入的信息</li>
+<li><code>KeepAlive yes</code>                                        #发送KeepAlive信息给客户端</li>
+<li><code>MaxStartups 10</code>                                    #允许尚未登入的联机画面数</li>
+<li><code>DenyUsers *</code>                                            #禁止用户登录，*表示所有用户</li>
+<li><code>AllowUsers *</code>                                        #允许用户登录</li>
+</ul>
+<h2 id="三、操作实战"><a href="#三、操作实战" class="headerlink" title="三、操作实战"></a>三、操作实战</h2><h3 id="1-基于口令方式认证"><a href="#1-基于口令方式认证" class="headerlink" title="1. 基于口令方式认证"></a>1. 基于口令方式认证</h3><ul>
+<li><img src="http://od6sd4xau.bkt.clouddn.com/ssh-1.png" alt="putty 输入登入 ip 地址"><br>其中的 4，5 步骤可选择跳过，建议保存，这样下次只要点击保存的会话名称，就可以直接登入到 <code>cmd</code> 界面，不用每次都输入一串 id 地址。</li>
+<li><img src="http://od6sd4xau.bkt.clouddn.com/ssh-2.png" alt="输入用户名和密码"></li>
+</ul>
+<h3 id="2-基于密钥方式认证"><a href="#2-基于密钥方式认证" class="headerlink" title="2. 基于密钥方式认证"></a>2. 基于密钥方式认证</h3><p>在 SSH 2.0 协议中支持使用密钥方式登入</p>
+<ul>
+<li><p>在 linux 服务器中使用 <code>ssh-keygen</code> 命令生成公钥与密钥<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-3.png" alt="生成 rsa 密钥"><br>注意，在这步中生成的 <strong>authroized_keys</strong> 文件名称必须一样，不能错。</p>
+</li>
+<li><p>修改 <strong>authroized_keys</strong> 文件权限<br><code>chmod 600 authroized_keys</code>，不然会限制访问</p>
+</li>
+<li><p>通过 winscp 把生成的 <strong>id_rsa</strong> 文件拷贝到本地<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-4.png" alt="使用 winscp 拷贝文件"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-5.png" alt="使用 winscp 拷贝文件"></p>
+</li>
+<li><p>使用 <code>puttygen.exe</code> 软件转换上一步的 <code>id_rsa</code> 文件为 <code>*.ppk</code> 文件,因为 <code>putty</code> 不能识别 <code>ras</code> 文件，所有需要转换下<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-6.png" alt="puttygen.exe 转换文件"></p>
+</li>
+<li><p>设置 putty 为密钥认证方式登入<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-7.png" alt="密钥方式登入-1"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-8.png" alt="密钥方式登入-2"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-9.png" alt="密钥方式登入-3"></p>
+</li>
+<li><p>保存登入信息<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ssh-10.png" alt="保存登入会话信息"></p>
+</li>
+</ul>
+<h2 id="四、对应的客户端软件"><a href="#四、对应的客户端软件" class="headerlink" title="四、对应的客户端软件"></a>四、对应的客户端软件</h2><ul>
+<li><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="noopener">putty 官网下载地址</a></li>
+<li>[Xshell]</li>
+<li>[SecureCRT]</li>
+<li>[Plink] 如果安装了 putty 客户端，默认就有该文件</li>
+<li><a href="http://winscp.net/eng/docs/lang:chs" target="_blank" rel="noopener">winscp</a> windows 图形界面操作 linux 的文件传输</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://blog.csdn.net/macrossdzh/article/details/5691924" target="_blank" rel="noopener">ssh 协议介绍</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/05/20/2017-05-20-vim-常用命令/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/05/03/2017-05-03-微信-JSSDK-调用实例/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-05-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

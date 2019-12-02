@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>网页中的 Icon 图标显示方法介绍 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是介绍在网页显示图标的几种方式
+一、直接引用这种方式就是方法简单直观，但是每次都会发起 HTTP 请求，效率不高，影响性能。
+1// ...2&amp;lt;img src=&#34;../../img/xxx.png/jpg/gif/svg&#34;&amp;gt;&amp;lt;/img&amp;gt;3// ...
+
+二、CSS S">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="网页中的 Icon 图标显示方法介绍"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 网页中的 Icon 图标显示方法介绍</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>本文主要是介绍在网页显示图标的几种方式</p>
+<h2 id="一、直接引用"><a href="#一、直接引用" class="headerlink" title="一、直接引用"></a>一、直接引用</h2><p>这种方式就是方法简单直观，但是每次都会发起 HTTP 请求，效率不高，影响性能。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../../img/xxx.png/jpg/gif/svg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">// ...</span></pre></td></tr></table></figure>
+
+<h2 id="二、CSS-Sprites"><a href="#二、CSS-Sprites" class="headerlink" title="二、CSS Sprites"></a>二、CSS Sprites</h2><p>在国内很多人叫 Css 精灵，是一种网页图片应用处理方式。它允许你将一个页面涉及到的所有零星图片都包含到一张大图中去，再利用 CSS 的 <code>background-image</code>，<code>background-repeat</code>，<code>background-position</code> 的组合进行背景定位，<code>background-position</code> 可以用数字精确的定位出背景图片的位置。这样一来，当访问该页面时，载入的图片就不会像以前那样一幅一幅地慢慢显示出来了。对于当前网络流行的速度而言，不高于 200KB 的单张图片的所需载入时间基本是差不多的，所以无需顾忌这个问题。<br>这里需要注意的，在使用 <code>background-position</code> 时，使用的 x、y 的坐标都是相对与左上角 (0，0),来计算。所以要显示图片，坐标值都是 <strong>负数</strong>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.sprite</span> <span class="selector-tag">span</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	height: 40px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	width: 24px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	display: block;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	margin-left: 10px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	margin-right: 8px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	float: left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	background-image: url("../images/my-icon.png");</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.sprite</span> <span class="selector-tag">span</span><span class="selector-pseudo">:hover</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">background-color</span>: <span class="selector-id">#fff</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">border-color</span>: <span class="selector-id">#fff</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.sprite</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">color</span>: <span class="selector-id">#b51600</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.icon-music</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	background-position: 0 -40;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sprite"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"background-position: 0 -40;"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>图片显示在我前面<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">// 或者</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sprite"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon-music"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>图片显示在我前面<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="三、字体图标方式"><a href="#三、字体图标方式" class="headerlink" title="三、字体图标方式"></a>三、字体图标方式</h2><p>利用字体工具把我们平时 Web 上用的图形图标（icons）转换成 web fonts，就成了 icon fonts，它可以借助 CSS 的 @font-face 嵌入到网页里，用以显示 icons。因为字体是矢量化图形，它天生具有「分辨率无关」的特性，在任何分辨率和PPI下面，都可以做到完美缩放，不会像传统位图，如：png，jpeg，放大后有锯齿或模糊现象。<br>使用字体图标库和上面的 <code>css sprite</code> 一样可以避免发起多次 <code>HTTP</code> 请求的性能损耗问题，更重要的是，它是矢量图，放大不会失真，而且还可以改变它的颜色和添加动画，还有浏览器的兼容性也非常好。它在 <code>Web</code> 中的实现有下面三种方式。<br>下面的代码已经默认把我们要生成的图标转为字体文件，具体方法很多，简单方法可以通过在线生成。这里介绍个国外的网站 <a href="https://icomoon.io" target="_blank" rel="noopener">icomoon(图标在线生成工具)</a>，大部分都是免费的。<br>生成的字体文件的四种格式：</p>
+<ul>
+<li>my-icon.eot</li>
+<li>my-icon.woff</li>
+<li>my-icon.ttf</li>
+<li>my-icon.svg<br>上面的字体格式说明如果不清楚可以参考 <a href="/2016/09/04/网页字体替换/">网页字体替换</a> </li>
+</ul>
+<h3 id="1-font-html"><a href="#1-font-html" class="headerlink" title="1. font + html"></a>1. font + html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="css">@<span class="keyword">font-face</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  font-family: "my-icon";</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  src: url("../fonts/my-icon.eot");</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="comment">/* 添加: ? 是为了IE9 兼容模式，而 '#iefix' 是注释意思 */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  src: url("../fonts/my-icon.eot?#iefix") format("embedded-opentype"), </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  url("../fonts/my-icon.woff") format("woff"), </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  url("../fonts/my-icon.ttf") format("truetype"), </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  url("../fonts/my-icon.svg") format("svg");</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  font-weight: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  font-style: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.my-icon</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  font-family: "my-icon";</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  font-style: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  font-weight: normal;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  font-size: 64px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="comment">/*可以让如表更好的显示*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  -webkit-font-smoothing: antialiased;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  -moz-osx-font-smoothing: grayscale;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">&lt;!-- 可以重新设置图标显示的颜色和大小 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">i</span> <span class="attr">style</span>=<span class="string">"color: #efe0ce;font-size:30px;"</span> <span class="attr">class</span>=<span class="string">"my-icon"</span>&gt;</span>&amp;#xf048;<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>上面中显示的图标是通过字体中对应的 16 进制值来显示：<code>f048;</code>。在网页中要显示 16 进制值需要添加 <code>&amp;#x</code> 前缀。</p>
+<h3 id="2-font-css"><a href="#2-font-css" class="headerlink" title="2. font + css"></a>2. font + css</h3><h4 id="2-1-方式一"><a href="#2-1-方式一" class="headerlink" title="2.1 方式一"></a>2.1 方式一</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// ... 代码同上</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.icon-music</span><span class="selector-pseudo">:before</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">content</span>: "\<span class="selector-tag">f048</span>"; <span class="comment">/*前面的 `\` 是转义字符。*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"my-icon icon-music"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h4 id="2-2-方式二"><a href="#2-2-方式二" class="headerlink" title="2.2 方式二"></a>2.2 方式二</h4><p>上面 2.1 的方式唯一麻烦的是要一个一个的去写样式文件，肯定不是高效率的方法，有没有自动生成字体的同时把样式都一起写好？答案是肯定的，方法之一就是通过上面介绍的 <a href="https://icomoon.io" target="_blank" rel="noopener">icomoon(图标在线生成工具)</a> 网站生成。</p>
+<h4 id="2-3-优点"><a href="#2-3-优点" class="headerlink" title="2.3 优点"></a>2.3 优点</h4><ul>
+<li>文件小：相比图片几十几百KB的容量，icon fonts 几乎是羽翼级轻量。</li>
+<li>加载性能好：因为图标都被打包进一套字体内，http request 减少。这如同我们常用的 css sprites 技术。</li>
+<li>支持CSS样式：和普通字体一样，你可以利用CSS来定义大小、颜色、阴影、hover状态、透明度、渐变等等…</li>
+<li>兼容性好：web fonts 起源很早，别说主流浏览器，连IE6/7都能良好支持。除了一些老的移动端浏览器，如Android 2.1以下的初代浏览器，Opera mini 这类自限型浏览器。</li>
+</ul>
+<h4 id="2-4-不足点"><a href="#2-4-不足点" class="headerlink" title="2.4 不足点"></a>2.4 不足点</h4><ul>
+<li>样式单一，无法针对不同分辨率来调整icon 的细节，比如降低大尺寸icon 的线条粗细。</li>
+<li>颜色单一，CSS 无法方便的去定义彩色的 icon，倒是有通过叠加组合的方式来达到彩色图标的目的。</li>
+<li>移动端浏览器兼容性还不够完善，像Opera mini、Windows phone 7.0-7.8 都不能正常显示icon fonts。</li>
+<li>有少量的移动设备有可能会和 icon fonts 的字符编码冲突，导致icon 显示不正常.</li>
+</ul>
+<h2 id="四、各种显示方式对比"><a href="#四、各种显示方式对比" class="headerlink" title="四、各种显示方式对比"></a>四、各种显示方式对比</h2><p><img src="" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://baike.baidu.com/item/css%20sprite?fr=aladdin" target="_blank" rel="noopener">css sprite</a></li>
+<li><a href="http://www.infoq.com/cn/articles/icons-fonts-as-your-responsive-strategy" target="_blank" rel="noopener">响应式Web图形篇 —— icon fonts 的探析及应用</a></li>
+<li><a href="http://www.w3cplus.com/css3/how-to-turn-your-icons-into-a-web-font.html" target="_blank" rel="noopener">如何把你的图标转换成web字体</a></li>
+<li><a href="http://sanwen.net/a/qavwspo.html" target="_blank" rel="noopener">关于SVG与Icon Font的几点比较 | CSS</a></li>
+<li>在线图标生成网站<ul>
+<li><a href="https://icomoon.io" target="_blank" rel="noopener">icon 图标生成工具</a> 国外网站,可能会比较慢</li>
+<li><a href="http://www.iconfont.cn" target="_blank" rel="noopener">阿里的 iconfont</a>    </li>
+<li><a href="http://fontello.com/" target="_blank" rel="noopener">fontello</a>  </li>
+<li><a href="http://fontawesome.io/" target="_blank" rel="noopener">Font Awesome</a></li>
+</ul>
+</li>
+<li><a href="http://www.w3cplus.com/css3/learning-to-use-the-before-and-after-pseudo-elements-in-css.html" target="_blank" rel="noopener">before 和 after 伪元素</a></li>
+<li><a href="http://www.w3cplus.com/css3/css-reference/content.html" target="_blank" rel="noopener">css content</a></li>
+<li><a href="http://www.imooc.com/learn/243" target="_blank" rel="noopener">用字体在网页中画ICON图标</a> 慕课网视频教程，推荐</li>
+<li><a href="http://blog.csdn.net/xiaoermingn/article/details/53543001" target="_blank" rel="noopener">webpack中如何使用iconfont字体图标</a></li>
+<li><a href="http://www.tuicool.com/articles/6zMfIbF" target="_blank" rel="noopener">webpack多页应用架构系列（六）：听说webpack连图片和字体也能打包？</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/03/28/2017-03-28-yarn-vs-npm/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/03/23/2017-03-23-javascript-lib-json-server/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Css/">Css<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

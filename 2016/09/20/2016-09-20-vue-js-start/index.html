@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue.js Start - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是记录 Vue.js 的学习起步和相应的资料整合
+
+一、Install
+Vue.js 使用 ECMAScript 5 特性，不支持 IE8 及以下版本浏览器。 
+
+Vue.js 库下载
+
+官方推荐使用 npm 方式下载  1# latest stable2$ npm install vue3">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Vue.js Start"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Vue.js Start</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>本文主要是记录 <code>Vue.js</code> 的学习起步和相应的资料整合</p>
+</blockquote>
+<h3 id="一、Install"><a href="#一、Install" class="headerlink" title="一、Install"></a>一、Install</h3><ul>
+<li><p><code>Vue.js</code> 使用 <code>ECMAScript 5</code> 特性，不支持 <code>IE8</code> 及以下版本浏览器。 </p>
+</li>
+<li><p><code>Vue.js</code> 库下载</p>
+<ul>
+<li>官方推荐使用 <code>npm</code> 方式下载  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># latest stable</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm install vue</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># latest stable + CSP-compliant (支持 CSP 安全策略版本)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm install vue@csp</span></pre></td></tr></table></figure></li>
+<li><code>bower</code> 方式下载  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># latest stable</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ bower install vue</span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>Vue.js</code> 官方脚手架工具</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># install vue-cli</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm install -g vue-cli</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a new project using the "webpack" boilerplate</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ vue init webpack my-project</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># install dependencies and go!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> my-project</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$ npm install</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">$ npm run dev</span></pre></td></tr></table></figure>
+<p>  <a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">官方脚手架工具链接 vue-cli</a> </p>
+</li>
+</ul>
+<h3 id="二、Overview"><a href="#二、Overview" class="headerlink" title="二、Overview"></a>二、Overview</h3><ol>
+<li><p>Reactive Data Binding<br> <code>Vue.js</code> 是数据驱动视图(data-driven view)机制,如下图<br> <img src="http://od6sd4xau.bkt.clouddn.com/h5/vue-mvvm.png" alt="vue-mvvm"></p>
+<p> 对应上图各个模块代码</p>
+<p> HTML</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- this is our View --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	Hello &#123;&#123; name &#125;&#125;!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p> JS</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// this is our Model</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exampleData = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	name: <span class="string">'Vue.js'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// create a Vue instance, or, a "ViewModel"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// which links the View and the Model</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exampleVM = <span class="keyword">new</span> Vue(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	el: <span class="string">'#app'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	data: exampleData</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure></li>
+<li><p>Component System<br> <code>Vue.js</code> 采用组件方式搭建应用<br> <img src="http://od6sd4xau.bkt.clouddn.com/h5/vue-component.png" alt="vue-component"></p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">app-nav</span>&gt;</span><span class="tag">&lt;/<span class="name">app-nav</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">app-view</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">app-sidebar</span>&gt;</span><span class="tag">&lt;/<span class="name">app-sidebar</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">app-content</span>&gt;</span><span class="tag">&lt;/<span class="name">app-content</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">app-view</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="三、Vue-js-特点"><a href="#三、Vue-js-特点" class="headerlink" title="三、Vue.js 特点"></a>三、Vue.js 特点</h3><ul>
+<li>简洁： HTML 模板 + JSON 数据，再创建一个 Vue 实例，就这么简单。</li>
+<li>数据驱动： 自动追踪依赖的模板表达式和计算属性。</li>
+<li>组件化： 用解耦、可复用的组件来构造界面。</li>
+<li>轻量： ~24kb min+gzip，无依赖。</li>
+<li>快速： 精确有效的异步批量 DOM 更新。</li>
+<li>模块友好： 通过 NPM 或 Bower 安装，无缝融入你的工作流。</li>
+<li>如果你喜欢下面这些，那你一定会喜欢 Vue.js：<ul>
+<li>可扩展的数据绑定机制</li>
+<li>原生对象即模型</li>
+<li>简洁明了的 API</li>
+<li>组件化 UI 构建</li>
+<li>多个轻量库搭配使用</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
+<li><a href="http://vuejs.org/" target="_blank" rel="noopener">Vue.js 官网</a></li>
+<li><a href="https://github.com/vuejs/vue/" target="_blank" rel="noopener">Vue.js github</a></li>
+<li><a href="https://github.com/vuejs/vue/releases" target="_blank" rel="noopener">Release Notes</a> <em>发布版本履历</em></li>
+<li><a href="http://cn.vuejs.org/" target="_blank" rel="noopener">Vue.js 中文文档</a> <em>官方入门教程</em></li>
+<li><a href="http://www.vue-js.com/" target="_blank" rel="noopener">Vue.js 中文社区</a></li>
+<li><a href="http://vuejs.org/guide/comparison.html#Angular" target="_blank" rel="noopener">Comparison with Other Frameworks</a></li>
+<li><a href="http://vuejs.org/guide/application.html" target="_blank" rel="noopener">Building Large-Scale Apps</a></li>
+<li><a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="noopener">vue-devtools</a> <em>Vue.js 版的 Todolist 源码</em>  </li>
+<li><a href="http://wiki.jikexueyuan.com/project/vue-js/" target="_blank" rel="noopener">Vue.js 极客学员教程</a></li>
+<li><a href="http://www.runoob.com/w3cnote/vue-js-quickstart.html" target="_blank" rel="noopener">菜鸟教程</a></li>
+<li><a href="http://www.csdn.net/article/1970-01-01/2825439" target="_blank" rel="noopener">Vue.js：轻量高效的前端组件化方案</a></li>
+<li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">用 Vue.js 制作的 FWA/Awwwards 获奖站点</a> <em>里面收集了和 <code>Vue.js</code> 相关的网站和 <code>App</code></em></li>
+<li><a href="https://github.com/bhnddowinf/vuejs-learn" target="_blank" rel="noopener">讲解 Vue.js 官网 中文-含代码、百度云、youtube</a> </li>
+<li><a href="http://cn.vuejs.org/guide/comparison.html" target="_blank" rel="noopener">对比其它框架</a></li>
+<li><a href="https://github.com/vuejs/vue/tree/next/examples" target="_blank" rel="noopener">官方 2.0 例子源码</a> <em>Vue.js 源码自带的例子</em></li>
+<li><a href="https://github.com/vuejs/vue/issues/2873" target="_blank" rel="noopener">1.0 VS 2.0 特性</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20814761" target="_blank" rel="noopener">Vue 2.0 Pre-alpha 版本介绍</a> <em>尤雨溪知乎专栏</em></li>
+<li><a href="https://github.com/keepfool/vue-tutorials" target="_blank" rel="noopener">Vue.js 基础到进阶教程</a> <a href="http://www.cnblogs.com/keepfool/p/5690366.html" target="_blank" rel="noopener">对应的博客</a> <em>推荐学习</em></li>
+<li><a href="http://element.eleme.io/#/" target="_blank" rel="noopener">Element</a> <em>一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库</em></li>
+<li><a href="http://yuche.github.io/vue-strap/" target="_blank" rel="noopener">VueStrap</a> <em>基于 Vue.js 的 bootstrap 组件</em></li>
+<li><a href="http://wiki.jikexueyuan.com/project/vue-js/practices.html" target="_blank" rel="noopener">Vue.js 最佳实践</a></li>
+<li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">vue webpack 模板说明</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/20/2016-09-20-vue-js-FAQ/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/09/19/2016-09-19-Hexo-添加二级域名/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Vue-js/">Vue.js<span>10</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

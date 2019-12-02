@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue.js FAQ - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="本文主要是收集 Vue.js 的常见问题及解答
+
+一、Vue.js 为何不支持 IE8？Vue.js 内部使用 ES5 的 Object.defineProperty 来转化对象属性为 getter 和 setter，并在 getter 和 setter 中 emit 事件来实现对对象属性变化的观察">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Vue.js FAQ"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Vue.js FAQ</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>本文主要是收集 <code>Vue.js</code> 的常见问题及解答</p>
+</blockquote>
+<h3 id="一、Vue-js-为何不支持-IE8？"><a href="#一、Vue-js-为何不支持-IE8？" class="headerlink" title="一、Vue.js 为何不支持 IE8？"></a>一、Vue.js 为何不支持 IE8？</h3><p>Vue.js 内部使用 ES5 的 Object.defineProperty 来转化对象属性为 getter 和 setter，并在 getter 和 setter 中 emit 事件来实现对对象属性变化的观察。这是 Vue.js 简洁的语法和强劲的性能的基础。IE8 的该方法不能作用于 JS 对象，也没有办法模拟。</p>
+<h3 id="二、Vue-js-和-Backbone-有什么区别？"><a href="#二、Vue-js-和-Backbone-有什么区别？" class="headerlink" title="二、Vue.js 和 Backbone 有什么区别？"></a>二、Vue.js 和 Backbone 有什么区别？</h3><ol>
+<li>Vue.js 和 Backbone 在定位上不同。Backbone 提供了 Router, View, Model 和 Collection，而 Vue.js 只专注于 View 这一块。</li>
+<li>Backbone 的 Model 在原生数据对象上加了一层抽象，需要用 get() 和 set() 来触发事件，而在 Vue.js 里面，JS 对象即 Model, 数组就是 Collection，不需要学习额外的 API。</li>
+<li>Vue.js 自动将数据和 View 绑定，自动跟踪依赖，几乎可以让手动的 DOM 操作绝迹；这让代码由数据驱动，逻辑清晰。Backbone 完全没有数据绑定，需要手动添加事件回调来操作 DOM，复杂的视图逻辑很快就会难以维护。</li>
+</ol>
+<h3 id="三、Vue-js-和-AngularJS-有什么区别？"><a href="#三、Vue-js-和-AngularJS-有什么区别？" class="headerlink" title="三、Vue.js 和 AngularJS 有什么区别？"></a>三、Vue.js 和 AngularJS 有什么区别？</h3><p>Vue.js 向 Angular 学习了很多优秀的特性，最重要的就是用指令 (Directive) 来扩展 HTML 的语法，并实现 DOM 操作和数据逻辑的分离。但同时 Vue.js 也有以下优势：</p>
+<ol>
+<li>Vue.js 更轻巧，API 更友好，不强迫你所有的代码都遵循 Angular 的各种规定，使用场景更加灵活。</li>
+<li>Vue.js 比 Angular 简单易学得多。</li>
+<li>Vue.js 不依赖 dirty checking，性能比 Angular 高，在移动应用中尤其明显。</li>
+<li>Vue.js 的组件 (Component) 和指令 (Direcitve) 概念区分比较明确。指令只管数据绑定和 DOM 操作，而组件则是一个包含模版、数据逻辑、私有部件的独立单元。Angular 里两者之间的界限比较模糊。<br>当然，Vue.js 目前还是个新生项目，而 Angular 的生态系统更为成熟，本身也经历过足够的生产环境的考验，测试相关的工具也更加完善。</li>
+</ol>
+<h3 id="四、Vue-js-和-KnockoutJS-有什么区别？"><a href="#四、Vue-js-和-KnockoutJS-有什么区别？" class="headerlink" title="四、Vue.js 和 KnockoutJS 有什么区别？"></a>四、Vue.js 和 KnockoutJS 有什么区别？</h3><p>最明显的区别就是 KO 所有的可观测属性都必须手动用 ko.observable() 来初始化，并且需要用函数调用的方式来操作数据。相比之下，Vue.js 里拿到 JSON 数据直接就可以作为可观测模型，和操作原生对象没有区别。另外，KO 组合嵌套 ViewModel 比较复杂，也没有 ViewModel 之间作用域的继承。总的来说，Vue.js 通过只支持现代浏览器获得了更简洁的语法，并加入了更完善的组件机制。</p>
+<h3 id="五、Vue-js-和-React-js-有什么区别？"><a href="#五、Vue-js-和-React-js-有什么区别？" class="headerlink" title="五、Vue.js 和 React.js 有什么区别？"></a>五、Vue.js 和 React.js 有什么区别？</h3><p>React 在定位上和 Vue.js 很相近：都是专注于 View 层面，并且都是组件化的理念。但内部实现上两者有很大区别。React 链接数据的视图的方式是在内存中模拟 DOM ，在数据变化后比较分析两次渲染的不同，最后将变化施加在实际的 DOM 上。而 Vue.js 则是将实际的 DOM 作为模版，数据直接绑定到具体的 DOM node 上，当数据变化的时候只需要对绑定的 node 进行精确的操作即可。两者孰优孰劣很难说，要视具体使用场景而定。Vue.js 相对 React 有一个优点就是 Directive 的可扩展性，通过自定义 Directive，开发者可以在需要的时候对 DOM 进行复杂的操作，并且保持这些操作和数据逻辑的分离；而在 React 中，由于 HTML 是直接通过 JSX 格式包含在 JavaScript 代码中的，视图和逻辑很容易结合得非常紧密，个人觉得并不利于维护。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="http://wiki.jikexueyuan.com/project/vue-js/problem.html" target="_blank" rel="noopener">常见问题</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/20/2016-09-20-vue-js-study-notes/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/09/20/2016-09-20-vue-js-start/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Vue-js/">Vue.js<span>10</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,598 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ajax 基础 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="浏览器与服务器之间，采用 HTTP 协议通信。用户在浏览器地址栏键入一个网址，或者通过网页表单向服务器提交内容，这时浏览器就会向服务器发出 HTTP 请求。
+1999 年，微软公司发布 IE 浏览器 5.0 版，第一次引入新功能：允许 JavaScript 脚本向服务器发起 HTTP 请求。这个功能">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Ajax 基础"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Ajax 基础</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>浏览器与服务器之间，采用 HTTP 协议通信。用户在浏览器地址栏键入一个网址，或者通过网页表单向服务器提交内容，这时浏览器就会向服务器发出 HTTP 请求。</p>
+<p>1999 年，微软公司发布 IE 浏览器 5.0 版，第一次引入新功能：允许 JavaScript 脚本向服务器发起 HTTP 请求。这个功能当时并没有引起注意，直到 2004 年 Gmail 发布和 2005 年 Google Map 发布，才引起广泛重视。2005年2月，AJAX 这个词第一次正式提出，指围绕这个功能进行开发的一整套做法。从此，AJAX 成为脚本发起 HTTP 通信的代名词，W3C 也在 2006 年发布了它的国际标准。</p>
+<p>具体来说，AJAX 包括以下几个步骤。</p>
+<ol>
+<li>创建 AJAX 对象</li>
+<li>发出 HTTP 请求</li>
+<li>接收服务器传回的数据</li>
+<li>更新网页数据</li>
+</ol>
+<p>概括起来，就是一句话，AJAX 通过原生的 <code>XMLHttpRequest</code>对象发出 HTTP 请求，得到服务器返回的数据后，再进行处理。</p>
+<p>AJAX 可以是同步请求，也可以是异步请求。但是，大多数情况下，特指异步请求。因为同步的 Ajax 请求，对浏览器有“堵塞效应”。</p>
+<h2 id="一、XMLHttpRequest-对象"><a href="#一、XMLHttpRequest-对象" class="headerlink" title="一、XMLHttpRequest 对象"></a>一、XMLHttpRequest 对象</h2><p><code>XMLHttpRequest</code> 对象用来在浏览器与服务器之间传送数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ajax = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ajax.open(<span class="string">'GET'</span>, <span class="string">'http://www.example.com/page.php'</span>, <span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码向指定的服务器网址，发出 GET 请求。</p>
+<p>然后，AJAX 指定回调函数，监听通信状态（<code>readyState</code>属性）的变化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ajax.onreadystatechange = handleStateChange;</span></pre></td></tr></table></figure>
+
+<p>一旦拿到服务器返回的数据，AJAX 不会刷新整个网页，而是只更新相关部分，从而不打断用户正在做的事情。</p>
+<p>注意，AJAX 只能向同源网址（协议、域名、端口都相同）发出 HTTP 请求，如果发出跨源请求，就会报错。</p>
+<p>虽然名字里面有 <code>XML</code>，但是实际上，<code>XMLHttpRequest</code> 可以报送各种数据，包括字符串和二进制，而且除了 HTTP，它还支持通过其他协议传送（比如 File 和 FTP）。</p>
+<p>下面是 <code>XMLHttpRequest</code> 对象的典型用法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定通信过程中状态改变时的回调函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 通信成功时，状态值为 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (xhr.status === <span class="number">200</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.log(xhr.responseText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.error(xhr.statusText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">xhr.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.error(xhr.statusText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// open 方式用于指定 HTTP 动词、请求的网址、是否异步</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/endpoint'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送HTTP请求</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">xhr.send(<span class="literal">null</span>);</span></pre></td></tr></table></figure>
+
+<p><code>open</code>方法的第三个参数是一个布尔值，表示是否为异步请求。如果设为<code>false</code>，就表示这个请求是同步的，下面是一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">request.open(<span class="string">'GET'</span>, <span class="string">'/bar/foo.txt'</span>, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">request.send(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (request.status === <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(request.responseText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="二、XMLHttpRequest-实例的属性"><a href="#二、XMLHttpRequest-实例的属性" class="headerlink" title="二、XMLHttpRequest 实例的属性"></a>二、XMLHttpRequest 实例的属性</h2><h3 id="1-readyState"><a href="#1-readyState" class="headerlink" title="1. readyState"></a>1. readyState</h3><p><code>readyState</code> 是一个只读属性，用一个整数和对应的常量，表示 XMLHttpRequest 请求当前所处的状态。</p>
+<ul>
+<li>0，对应常量<code>UNSENT</code>，表示XMLHttpRequest实例已经生成，但是<code>open()</code>方法还没有被调用。</li>
+<li>1，对应常量<code>OPENED</code>，表示<code>send()</code>方法还没有被调用，仍然可以使用<code>setRequestHeader()</code>，设定HTTP请求的头信息。</li>
+<li>2，对应常量<code>HEADERS_RECEIVED</code>，表示<code>send()</code>方法已经执行，并且头信息和状态码已经收到。</li>
+<li>3，对应常量<code>LOADING</code>，表示正在接收服务器传来的body部分的数据，如果<code>responseType</code>属性是<code>text</code>或者空字符串，<code>responseText</code>就会包含已经收到的部分信息。</li>
+<li>4，对应常量<code>DONE</code>，表示服务器数据已经完全接收，或者本次接收已经失败了。</li>
+</ul>
+<p>在通信过程中，每当发生状态变化的时候，<code>readyState</code> 属性的值就会发生改变。这个值每一次变化，都会触发<code>readyStateChange</code>事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ajax.readyState == <span class="number">4</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Handle the response.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> <span class="comment">// Show the 'Loading...' message or do nothing.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码表示，只有 <code>readyState</code> 变为4时，才算确认请求已经成功，其他值都表示请求还在进行中。</p>
+<h3 id="2-onreadystatechange"><a href="#2-onreadystatechange" class="headerlink" title="2. onreadystatechange"></a>2. onreadystatechange</h3><p><code>onreadystatechange</code> 属性指向一个回调函数，当 <code>readystatechange</code>事件发生的时候，这个回调函数就会调用，并且 XMLHttpRequest 实例的 <code>readyState</code> 属性也会发生变化。</p>
+<p>另外，如果使用 <code>abort()</code> 方法，终止 XMLHttpRequest 请求，<code>onreadystatechange</code> 回调函数也会被调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xmlhttp.open( <span class="string">'GET'</span>, <span class="string">'http://example.com'</span> , <span class="literal">true</span> );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xmlhttp.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> ( XMLHttpRequest.DONE != xmlhttp.readyState ) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> ( <span class="number">200</span> != xmlhttp.status ) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log( xmlhttp.responseText );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">xmlhttp.send();</span></pre></td></tr></table></figure>
+
+<h3 id="3-response"><a href="#3-response" class="headerlink" title="3. response"></a>3. response</h3><p><code>response</code> 属性为只读，返回接收到的数据体（即body部分）。它的类型可以是 ArrayBuffer、Blob、Document、JSON 对象、或者一个字符串，这由 <code>XMLHttpRequest.responseType</code>属性的值决定。</p>
+<p>如果本次请求没有成功或者数据不完整，该属性就会等于 <code>null</code>。</p>
+<h3 id="4-responseType"><a href="#4-responseType" class="headerlink" title="4. responseType"></a>4. responseType</h3><p><code>responseType</code> 属性用来指定服务器返回数据（<code>xhr.response</code>）的类型。</p>
+<ul>
+<li>“”：字符串（默认值）</li>
+<li>“arraybuffer”：ArrayBuffer 对象</li>
+<li>“blob”：Blob 对象</li>
+<li>“document”：Document 对象</li>
+<li>“json”：JSON 对象</li>
+<li>“text”：字符串</li>
+</ul>
+<p>text 类型适合大多数情况，而且直接处理文本也比较方便，document 类型适合返回 XML 文档的情况，blob 类型适合读取二进制数据，比如图片文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/path/to/image.png'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([<span class="keyword">this</span>.response], &#123;<span class="attr">type</span>: <span class="string">'image/png'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> blob = oReq.response;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">xhr.send();</span></pre></td></tr></table></figure>
+
+<p>如果将这个属性设为 ArrayBuffer，就可以按照数组的方式处理二进制数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/path/to/image.png'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xhr.responseType = <span class="string">'arraybuffer'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> uInt8Array = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(<span class="keyword">this</span>.response);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = binStr.length; i &lt; len; ++i) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// var byte = uInt8Array[i];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">xhr.send();</span></pre></td></tr></table></figure>
+
+<p>如果将这个属性设为 “json”，支持 JSON 的浏览器（Firefox&gt;9，chrome&gt;30），就会自动对返回数据调用 <code>JSON.parse()</code>方法。也就是说，你从 xhr.response 属性（注意，不是xhr.responseText属性）得到的不是文本，而是一个JSON对象。</p>
+<p>XHR2 支持 Ajax 的返回类型为文档，即 xhr.responseType=”document” 。这意味着，对于那些打开 CORS 的网站，我们可以直接用 Ajax 抓取网页，然后不用解析 HTML 字符串，直接对XHR回应进行DOM操作。</p>
+<h3 id="5-responseText"><a href="#5-responseText" class="headerlink" title="5. responseText"></a>5. responseText</h3><p><code>responseText</code>属性返回从服务器接收到的字符串，该属性为只读。如果本次请求没有成功或者数据不完整，该属性就会等于 <code>null</code>。</p>
+<p>如果服务器返回的数据格式是 JSON，就可以使用 <code>responseText</code>属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = ajax.responseText;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">data = <span class="built_in">JSON</span>.parse(data);</span></pre></td></tr></table></figure>
+
+<h3 id="6-responseXML"><a href="#6-responseXML" class="headerlink" title="6. responseXML"></a>6. responseXML</h3><p><code>responseXML</code> 属性返回从服务器接收到的 Document 对象，该属性为只读。如果本次请求没有成功，或者数据不完整，或者不能被解析为 XML 或 HTML，该属性等于 <code>null</code>。</p>
+<p>返回的数据会被直接解析为 DOM 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 返回的XML文件如下</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">  &lt;?xml version="1.0" encoding="utf-8" standalone="yes" ?&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">  &lt;book&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">      &lt;chapter id="1"&gt;(Re-)Introducing JavaScript&lt;/chapter&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">      &lt;chapter id="2"&gt;JavaScript in Action&lt;/chapter&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">  &lt;/book&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = ajax.responseXML;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chapters = data.getElementsByTagName(<span class="string">'chapter'</span>);</span></pre></td></tr></table></figure>
+
+<p>如果服务器返回的数据，没有明示 <code>Content-Type</code> 头信息等于 <code>text/xml</code>，可以使用 <code>overrideMimeType()</code>方法，指定 XMLHttpRequest 对象将返回的数据解析为 XML。</p>
+<h3 id="7-status"><a href="#7-status" class="headerlink" title="7. status"></a>7. status</h3><p><code>status</code> 属性为只读属性，表示本次请求所得到的 HTTP 状态码，它是一个整数。一般来说，如果通信成功的话，这个状态码是 200。</p>
+<ul>
+<li>200, OK，访问正常</li>
+<li>301, Moved Permanently，永久移动</li>
+<li>302, Move temporarily，暂时移动</li>
+<li>304, Not Modified，未修改</li>
+<li>307, Temporary Redirect，暂时重定向</li>
+<li>401, Unauthorized，未授权</li>
+<li>403, Forbidden，禁止访问</li>
+<li>404, Not Found，未发现指定网址</li>
+<li>500, Internal Server Error，服务器发生错误</li>
+</ul>
+<p>基本上，只有 2xx 和 304 的状态码，表示服务器返回是正常状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ajax.readyState == <span class="number">4</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> ( (ajax.status &gt;= <span class="number">200</span> &amp;&amp; ajax.status &lt; <span class="number">300</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    || (ajax.status == <span class="number">304</span>) ) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Handle the response.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Status error!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="8-statusText"><a href="#8-statusText" class="headerlink" title="8. statusText"></a>8. statusText</h3><p><code>statusText</code> 属性为只读属性，返回一个字符串，表示服务器发送的状态提示。不同于 <code>status</code>属性，该属性包含整个状态信息，比如 ”200 OK“。</p>
+<h3 id="9-timeout"><a href="#9-timeout" class="headerlink" title="9. timeout"></a>9. timeout</h3><p><code>timeout</code> 属性等于一个整数，表示多少 <strong>毫秒</strong> 后，如果请求仍然没有得到结果，就会自动终止。如果该属性等于 0，就表示没有时间限制。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  xhr.ontimeout = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.error(<span class="string">"The request for "</span> + url + <span class="string">" timed out."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (xhr.status === <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        callback.apply(xhr, args);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">console</span>.error(xhr.statusText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  xhr.open(<span class="string">"GET"</span>, url, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  xhr.timeout = timeout;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  xhr.send(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="10-事件监听接口"><a href="#10-事件监听接口" class="headerlink" title="10. 事件监听接口"></a>10. 事件监听接口</h3><p>XMLHttpRequest 第一版，只能对 <code>onreadystatechange</code> 这一个事件指定回调函数。该事件对所有情况作出响应。 XMLHttpRequest 第二版允许对更多的事件指定回调函数。</p>
+<ul>
+<li>onloadstart 请求发出</li>
+<li>onprogress 正在发送和加载数据</li>
+<li>onabort 请求被中止，比如用户调用了<code>abort()</code>方法</li>
+<li>onerror 请求失败</li>
+<li>onload 请求成功完成</li>
+<li>ontimeout 用户指定的时限到期，请求还未完成</li>
+<li>onloadend 请求完成，不管成果或失败</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> responseText = xhr.responseText;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> <span class="built_in">console</span>.log(responseText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> <span class="comment">// process the response.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">xhr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'There was an error!'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>注意，如果发生网络错误（比如服务器无法连通），<code>onerror</code> 事件无法获取报错信息，所以只能显示报错。</p>
+<h3 id="11-withCredentials"><a href="#11-withCredentials" class="headerlink" title="11. withCredentials"></a>11. withCredentials</h3><p><code>withCredentials</code>属性是一个布尔值，表示跨域请求时，用户信息（比如Cookie和认证的HTTP头信息）是否会包含在请求之中，默认为<code>false</code>。即向 <code>example.com</code> 发出跨域请求时，不会发送 <code>example.com</code> 设置在本机上的Cookie（如果有的话）。</p>
+<p>如果你需要通过跨域 AJAX 发送 Cookie，需要打开 <code>withCredentials</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span></pre></td></tr></table></figure>
+
+<p>为了让这个属性生效，服务器必须显式返回 <code>Access-Control-Allow-Credentials</code> 这个头信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span></pre></td></tr></table></figure>
+
+<p><code>.withCredentials</code>属性打开的话，不仅会发送 Cookie，还会设置远程主机指定的 Cookie。<br>注意，此时你的脚本还是遵守同源政策，无法 从 <code>document.cookie</code> 或者 HTTP 回应的头信息之中，读取这些 Cookie。</p>
+<h2 id="三、-XMLHttpRequest-实例的方法"><a href="#三、-XMLHttpRequest-实例的方法" class="headerlink" title="三、 XMLHttpRequest 实例的方法"></a>三、 XMLHttpRequest 实例的方法</h2><h3 id="1-abort"><a href="#1-abort" class="headerlink" title="1. abort()"></a>1. abort()</h3><p><code>abort</code> 方法用来终止已经发出的 HTTP 请求。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ajax.open(<span class="string">'GET'</span>, <span class="string">'http://www.example.com/page.php'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ajaxAbortTimer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (ajax) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ajax.abort();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ajax = <span class="literal">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">5000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码在发出 5 秒之后，终止一个 AJAX 请求。</p>
+<h3 id="2-getAllResponseHeaders"><a href="#2-getAllResponseHeaders" class="headerlink" title="2. getAllResponseHeaders()"></a>2. getAllResponseHeaders()</h3><p><code>getAllResponseHeaders</code> 方法返回服务器发来的所有 HTTP 头信息。格式为字符串，每个头信息之间使用 <code>CRLF</code>分隔，如果没有受到服务器回应，该属性返回 <code>null</code>。</p>
+<h3 id="3-getResponseHeader"><a href="#3-getResponseHeader" class="headerlink" title="3. getResponseHeader()"></a>3. getResponseHeader()</h3><p><code>getResponseHeader</code>方法返回 HTTP 头信息指定字段的值，如果还没有收到服务器回应或者指定字段不存在，则该属性为 <code>null</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">function getHeaderTime () &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  console.log(this.getResponseHeader("Last-Modified"));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">var oReq = new XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">oReq.open("HEAD", "yourpage.html");</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">oReq.onload = getHeaderTime;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">oReq.send();</span></pre></td></tr></table></figure>
+
+<p>如果有多个字段同名，则它们的值会被连接为一个字符串，每个字段之间使用“逗号+空格”分隔。</p>
+<h3 id="4-open"><a href="#4-open" class="headerlink" title="4. open()"></a>4. open()</h3><p><code>XMLHttpRequest</code> 对象的 <code>open</code> 方法用于指定发送 HTTP 请求的参数，它的使用格式如下，一共可以接受五个参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   string method,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   string url,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   optional boolean <span class="keyword">async</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   optional string user,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">   optional string password</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
+
+<ul>
+<li><code>method</code>：表示HTTP动词，比如“GET”、“POST”、“PUT”和“DELETE”。</li>
+<li><code>url</code>: 表示请求发送的网址。</li>
+<li><code>async</code>: 格式为布尔值，默认为<code>true</code>，表示请求是否为异步。如果设为<code>false</code>，则<code>send()</code>方法只有等到收到服务器返回的结果，才会有返回值。</li>
+<li><code>user</code>：表示用于认证的用户名，默认为空字符串。</li>
+<li><code>password</code>：表示用于认证的密码，默认为空字符串。</li>
+</ul>
+<p>如果对使用过 <code>open()</code> 方法的请求，再次使用这个方法，等同于调用 <code>abort()</code>。</p>
+<p>下面发送 POST 请求的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="built_in">encodeURI</span>(<span class="string">'someURL'</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xhr.send(<span class="built_in">encodeURI</span>(<span class="string">'dataString'</span>));</span></pre></td></tr></table></figure>
+
+<p>上面方法中，open 方法向指定 URL 发出 POST 请求，send 方法送出实际的数据。</p>
+<p>下面是一个同步AJAX请求的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">request.open(<span class="string">'GET'</span>, <span class="string">'/bar/foo.txt'</span>, <span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">request.send(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (request.status === <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(request.responseText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="5-send"><a href="#5-send" class="headerlink" title="5. send()"></a>5. send()</h3><p><code>send</code> 方法用于实际发出 HTTP 请求。如果不带参数，就表示 HTTP 请求只包含头信息，也就是只有一个 URL，典型例子就是 GET 请求；如果带有参数，就表示除了头信息，还带有包含具体数据的信息体，典型例子就是 POST 请求。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ajax.open(<span class="string">'GET'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  , <span class="string">'http://www.example.com/somepage.php?id='</span> + <span class="built_in">encodeURIComponent</span>(id)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  , <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="string">'id='</span> + <span class="built_in">encodeURIComponent</span>(id));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">ajax.open(<span class="string">'GET'</span>, <span class="string">'http://www.example.com/somepage.php'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">ajax.send(data);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>GET</code>请求的参数，可以作为查询字符串附加在 URL 后面，也可以作为 <code>send</code> 方法的参数。</p>
+<p>下面是发送 POST 请求的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="string">'email='</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  + <span class="built_in">encodeURIComponent</span>(email)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'&amp;password='</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  + <span class="built_in">encodeURIComponent</span>(password);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">ajax.open(<span class="string">'POST'</span>, <span class="string">'http://www.example.com/somepage.php'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">ajax.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">ajax.send(data);</span></pre></td></tr></table></figure>
+
+<p>如果请求是异步的（默认为异步），该方法在发出请求后会立即返回。如果请求为同步，该方法只有等到收到服务器回应后，才会返回。</p>
+<p>注意，所有 XMLHttpRequest 的监听事件，都 <strong>必须</strong> 在 <code>send()</code> 方法调用之前设定。</p>
+<p><code>send</code> 方法的参数就是发送的数据。多种格式的数据，都可以作为它的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(ArrayBufferView data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(Blob data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(Document data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(<span class="built_in">String</span> data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> send(FormData data);</span></pre></td></tr></table></figure>
+
+<p>如果发送 <code>Document</code> 数据，在发送之前，数据会先被串行化。</p>
+<p>发送二进制数据，最好使用<code>ArrayBufferView</code>或<code>Blob</code>对象，这使得通过Ajax上传文件成为可能。</p>
+<p>下面是一个上传<code>ArrayBuffer</code>对象的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendArrayBuffer</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> uInt8Array = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  xhr.open(<span class="string">'POST'</span>, <span class="string">'/server'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; ... &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  xhr.send(uInt8Array.buffer);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>FormData 类型可以用于构造表单数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'张三'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">'email'</span>, <span class="string">'zhangsan@example.com'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">'birthDate'</span>, <span class="number">1940</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"POST"</span>, <span class="string">"/register"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">xhr.send(formData);</span></pre></td></tr></table></figure>
+
+<p>上面的代码构造了一个 <code>formData</code> 对象，然后使用 send 方法发送。它的效果与点击下面表单的 submit 按钮是一样的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">'registration'</span> <span class="attr">name</span>=<span class="string">'registration'</span> <span class="attr">action</span>=<span class="string">'/register'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">name</span>=<span class="string">'username'</span> <span class="attr">value</span>=<span class="string">'张三'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'email'</span> <span class="attr">name</span>=<span class="string">'email'</span> <span class="attr">value</span>=<span class="string">'zhangsan@example.com'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'number'</span> <span class="attr">name</span>=<span class="string">'birthDate'</span> <span class="attr">value</span>=<span class="string">'1940'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'submit'</span> <span class="attr">onclick</span>=<span class="string">'return sendForm(this.form);'</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>FormData 也可以将现有表单构造生成。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formElement = <span class="built_in">document</span>.querySelector(<span class="string">"form"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">request.open(<span class="string">"POST"</span>, <span class="string">"submitform.php"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">request.send(<span class="keyword">new</span> FormData(formElement));</span></pre></td></tr></table></figure>
+
+<p>FormData 对象还可以对现有表单添加数据，这为我们操作表单提供了极大的灵活性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendForm</span>(<span class="params">form</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(form);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    formData.append(<span class="string">'csrf'</span>, <span class="string">'e69a18d7db1286040586e6da1950128c'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    xhr.open(<span class="string">'POST'</span>, form.action, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    xhr.send(formData);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.querySelector(<span class="string">'#registration'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">sendForm(form);</span></pre></td></tr></table></figure>
+
+<p>FormData 对象也能用来模拟 File 控件，进行文件上传。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uploadFiles</span>(<span class="params">url, files</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, file; file = files[i]; ++i) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    formData.append(file.name, file); <span class="comment">// 可加入第三个参数，表示文件名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  xhr.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; ... &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  xhr.send(formData);  <span class="comment">// multipart/form-data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'input[type="file"]'</span>).addEventListener(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  uploadFiles(<span class="string">'/server'</span>, <span class="keyword">this</span>.files);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="literal">false</span>);</span></pre></td></tr></table></figure>
+
+<p>FormData 也可以加入 JavaScript 生成的文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加JavaScript生成的文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> content = <span class="string">'&lt;a id="a"&gt;&lt;b id="b"&gt;hey!&lt;/b&gt;&lt;/a&gt;'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([content], &#123; <span class="attr">type</span>: <span class="string">"text/xml"</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">"webmasterfile"</span>, blob);</span></pre></td></tr></table></figure>
+
+<h3 id="setRequestHeader"><a href="#setRequestHeader" class="headerlink" title="setRequestHeader()"></a>setRequestHeader()</h3><p><code>setRequestHeader</code>方法用于设置HTTP头信息。该方法必须在<code>open()</code>之后、<code>send()</code>之前调用。如果该方法多次调用，设定同一个字段，则每一次调用的值会被合并成一个单一的值发送。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'Content-Length'</span>, <span class="built_in">JSON</span>.stringify(data).length);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(data));</span></pre></td></tr></table></figure>
+
+<p>上面代码首先设置头信息<code>Content-Type</code>，表示发送JSON格式的数据；然后设置<code>Content-Length</code>，表示数据长度；最后发送JSON数据。</p>
+<h3 id="6-overrideMimeType"><a href="#6-overrideMimeType" class="headerlink" title="6. overrideMimeType()"></a>6. overrideMimeType()</h3><p>该方法用来指定服务器返回数据的 MIME 类型。该方法必须在 <code>send()</code> 之前调用。</p>
+<p>传统上，如果希望从服务器取回二进制数据，就要使用这个方法，人为将数据类型伪装成文本数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'/path/to/image.png'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 强制将MIME改为文本类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">xhr.overrideMimeType(<span class="string">'text/plain; charset=x-user-defined'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> binStr = <span class="keyword">this</span>.responseText;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = binStr.length; i &lt; len; ++i) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">var</span> c = binStr.charCodeAt(i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">var</span> byte = c &amp; <span class="number">0xff</span>;  <span class="comment">// 去除高位字节，留下低位字节</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">xhr.send();</span></pre></td></tr></table></figure>
+
+<p>上面代码中，因为传回来的是二进制数据，首先用<code>xhr.overrideMimeType</code>方法强制改变它的MIME类型，伪装成文本数据。字符集必需指定为 “x-user-defined”，如果是其他字符集，浏览器内部会强制转码，将其保存成 UTF-16 的形式。字符集 “x-user-defined” 其实也会发生转码，浏览器会在每个字节前面再加上一个字节（0xF700-0xF7ff），因此后面要对每个字符进行一次与运算（&amp;），将高位的8个位去除，只留下低位的8个位，由此逐一读出原文件二进制数据的每个字节。</p>
+<p>这种方法很麻烦，在 XMLHttpRequest 版本升级以后，一般采用指定 <code>responseType</code> 的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> arraybuffer = xhr.response;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">"GET"</span>, url);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">xhr.responseType = <span class="string">"arraybuffer"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xhr.send();</span></pre></td></tr></table></figure>
+
+<h2 id="四、-XMLHttpRequest-实例的事件"><a href="#四、-XMLHttpRequest-实例的事件" class="headerlink" title="四、 XMLHttpRequest 实例的事件"></a>四、 XMLHttpRequest 实例的事件</h2><h3 id="1-readyStateChange-事件"><a href="#1-readyStateChange-事件" class="headerlink" title="1. readyStateChange 事件"></a>1. readyStateChange 事件</h3><p><code>readyState</code> 属性的值发生改变，就会触发 readyStateChange 事件。</p>
+<p>我们可以通过 <code>onReadyStateChange</code> 属性，指定这个事件的回调函数，对不同状态进行不同处理。尤其是当状态变为4的时候，表示通信成功，这时回调函数就可以处理服务器传送回来的数据。</p>
+<h3 id="2-progress-事件"><a href="#2-progress-事件" class="headerlink" title="2. progress 事件"></a>2. progress 事件</h3><p>上传文件时，XMLHTTPRequest 对象的 upload 属性有一个 progress，会不断返回上传的进度。</p>
+<p>假定网页上有一个 progress 元素。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;progress min="0" max="100" value="0"&gt;0% complete&lt;/progress&gt;</span></pre></td></tr></table></figure>
+
+<p>文件上传时，对 upload 属性指定 progress 事件回调函数，即可获得上传的进度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">blobOrFile</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  xhr.open(<span class="string">'POST'</span>, <span class="string">'/server'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; ... &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Listen to the upload progress.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> progressBar = <span class="built_in">document</span>.querySelector(<span class="string">'progress'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  xhr.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (e.lengthComputable) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      progressBar.value = (e.loaded / e.total) * <span class="number">100</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      progressBar.textContent = progressBar.value; <span class="comment">// Fallback for unsupported browsers.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  xhr.send(blobOrFile);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">upload(<span class="keyword">new</span> Blob([<span class="string">'hello world'</span>], &#123;<span class="attr">type</span>: <span class="string">'text/plain'</span>&#125;));</span></pre></td></tr></table></figure>
+
+<h3 id="3-load-事件、error-事件、abort-事件"><a href="#3-load-事件、error-事件、abort-事件" class="headerlink" title="3. load 事件、error 事件、abort 事件"></a>3. load 事件、error 事件、abort 事件</h3><p>load事件表示服务器传来的数据接收完毕，error事件表示请求出错，abort事件表示请求被中断。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">xhr.addEventListener(<span class="string">"progress"</span>, updateProgress);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xhr.addEventListener(<span class="string">"load"</span>, transferComplete);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">xhr.addEventListener(<span class="string">"error"</span>, transferFailed);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xhr.addEventListener(<span class="string">"abort"</span>, transferCanceled);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">xhr.open();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateProgress</span> (<span class="params">oEvent</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (oEvent.lengthComputable) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> percentComplete = oEvent.loaded / oEvent.total;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 回应的总数据量未知，导致无法计算百分比</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferComplete</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"The transfer is complete."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferFailed</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"An error occurred while transferring the file."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferCanceled</span>(<span class="params">evt</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"The transfer has been canceled by the user."</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="4-loadend-事件"><a href="#4-loadend-事件" class="headerlink" title="4. loadend 事件"></a>4. loadend 事件</h3><p><code>abort</code>、<code>load</code>和<code>error</code>这三个事件，会伴随一个<code>loadend</code>事件，表示请求结束，但不知道其是否成功。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">req.addEventListener(<span class="string">"loadend"</span>, loadEnd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadEnd</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"请求结束（不知道是否成功）"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="五、文件上传"><a href="#五、文件上传" class="headerlink" title="五、文件上传"></a>五、文件上传</h2><p>HTML 网页的 <code>&lt;form&gt;</code> 元素能够以四种格式，向服务器发送数据。</p>
+<ul>
+<li>使用 <code>POST</code> 方法，将<code>enctype</code>属性设为<code>application/x-www-form-urlencoded</code>，这是默认方法。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"register.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">onsubmit</span>=<span class="string">"AJAXSubmit(this); return false;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>POST</code> 方法，将 <code>enctype</code> 属性设为<code>text/plain</code>。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"register.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"text/plain"</span> <span class="attr">onsubmit</span>=<span class="string">"AJAXSubmit(this); return false;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>POST</code>方法，将 <code>enctype</code> 属性设为 <code>multipart/form-data</code>。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"register.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span> <span class="attr">onsubmit</span>=<span class="string">"AJAXSubmit(this); return false;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>GET</code>方法，<code>enctype</code> 属性将被忽略。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"register.php"</span> <span class="attr">method</span>=<span class="string">"get"</span> <span class="attr">onsubmit</span>=<span class="string">"AJAXSubmit(this); return false;"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>某个表单有两个字段，分别是 <code>foo</code> 和 <code>baz</code>，其中<code>foo</code>字段的值等于<code>bar</code>，<code>baz</code>字段的值一个分为两行的字符串。上面四种方法，都可以将这个表单发送到服务器。</p>
+<p>第一种方法是默认方法，POST发送，Encoding type为application/x-www-form-urlencoded。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">foo=bar&amp;baz=The+first+line.&amp;#37;0D%0AThe+second+line.%0D%0A</span></pre></td></tr></table></figure>
+
+<p>第二种方法是POST发送，Encoding type为text/plain。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Content-Type: text/plain</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">foo=bar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">baz=The first line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">The second line.</span></pre></td></tr></table></figure>
+
+<p>第三种方法是POST发送，Encoding type 为 multipart/form-data。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span>: multipart/form-data; boundary=---------------------------314911788813839</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">-----------------------------314911788813839</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Disposition</span>: form-data; name="foo"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">bar</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">-----------------------------314911788813839</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Disposition</span>: form-data; name="baz"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">The first line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">The second line.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">-----------------------------314911788813839--</span></pre></td></tr></table></figure>
+
+<p>第四种方法是 GET 请求。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">?foo=bar&amp;baz=The%20first%20line.%0AThe%20second%20line.</span></pre></td></tr></table></figure>
+
+<p>通常，我们使用 file 控件实现文件上传。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"file-form"</span> <span class="attr">action</span>=<span class="string">"handler.php"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"file-select"</span> <span class="attr">name</span>=<span class="string">"photos[]"</span> <span class="attr">multiple</span>/&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">id</span>=<span class="string">"upload-button"</span>&gt;</span>上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面HTML代码中，file控件的multiple属性，指定可以一次选择多个文件；如果没有这个属性，则一次只能选择一个文件。</p>
+<p>file对象的files属性，返回一个FileList对象，包含了用户选中的文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileSelect = <span class="built_in">document</span>.getElementById(<span class="string">'file-select'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> files = fileSelect.files;</span></pre></td></tr></table></figure>
+
+<p>然后，新建一个FormData对象的实例，用来模拟发送到服务器的表单数据，把选中的文件添加到这个对象上面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; files.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> file = files[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (!file.type.match(<span class="string">'image.*'</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  formData.append(<span class="string">'photos[]'</span>, file, file.name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中的FormData对象的append方法，除了可以添加文件，还可以添加二进制对象（Blob）或者字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Files</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">formData.append(name, file, filename);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Blobs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">formData.append(name, blob, filename);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Strings</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">formData.append(name, value);</span></pre></td></tr></table></figure>
+
+<p>append 方法的第一个参数是表单的控件名，第二个参数是实际的值，第三个参数是可选的，通常是文件名。</p>
+<p>最后，使用 Ajax 方法向服务器上传文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'handler.php'</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (xhr.status !== <span class="number">200</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    alert(<span class="string">'An error occurred!'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">xhr.send(formData);</span></pre></td></tr></table></figure>
+
+<p>目前，各大浏览器（包括IE 10）都支持 Ajax 上传文件。</p>
+<p>除了使用 FormData 接口上传，也可以直接使用  File API 上传。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file = <span class="built_in">document</span>.getElementById(<span class="string">'test-input'</span>).files[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">'POST'</span>, <span class="string">'myserver/uploads'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, file.type);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">xhr.send(file);</span></pre></td></tr></table></figure>
+<p>可以看到，上面这种写法比 FormData 的写法，要简单很多。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>MDN, <a href="https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">Using XMLHttpRequest</a></li>
+<li>Mathias Bynens, <a href="http://mathiasbynens.be/notes/xhr-responsetype-json" target="_blank" rel="noopener">Loading JSON-formatted data with Ajax and xhr.responseType=’json’</a></li>
+<li>Eric Bidelman, <a href="http://www.html5rocks.com/en/tutorials/file/xhr2/" target="_blank" rel="noopener">New Tricks in XMLHttpRequest2</a></li>
+<li>Matt West, <a href="http://blog.teamtreehouse.com/uploading-files-ajax" target="_blank" rel="noopener">Uploading Files with AJAX</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/03/04/2017-03-04-bom-cookie/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/03/04/2017-03-04-bom-engine/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Ajax/">Ajax<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Number 对象 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="概述Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。
+作为构造函数时，它用于生成值为数值的对象。
+1var n = new Number(1);2typeof n // &#34;object&#34;
+
+上面代码中，Number对象作为构造函数使用，返回一个值为1的对象。
+作为">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Number 对象"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Number 对象</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。</p>
+<p>作为构造函数时，它用于生成值为数值的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> n <span class="comment">// "object"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>Number</code>对象作为构造函数使用，返回一个值为1的对象。</p>
+<p>作为工具函数时，它可以将任何类型的值转为数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码将布尔值<code>true</code>转为数值1。Number对象的工具方法，详细介绍参见上一章的《数据类型转换》一节。</p>
+<h2 id="Number对象的属性"><a href="#Number对象的属性" class="headerlink" title="Number对象的属性"></a>Number对象的属性</h2><p>Number对象拥有以下一些属性。</p>
+<ul>
+<li><code>Number.POSITIVE_INFINITY</code>：正的无限，指向<code>Infinity</code>。</li>
+<li><code>Number.NEGATIVE_INFINITY</code>：负的无限，指向<code>-Infinity</code>。</li>
+<li><code>Number.NaN</code>：表示非数值，指向<code>NaN</code>。</li>
+<li><code>Number.MAX_VALUE</code>：表示最大的正数，相应的，最小的负数为<code>-Number.MAX_VALUE</code>。</li>
+<li><code>Number.MIN_VALUE</code>：表示最小的正数（即最接近0的正数，在64位浮点数体系中为<code>5e-324</code>），相应的，最接近0的负数为<code>-Number.MIN_VALUE</code>。</li>
+<li><code>Number.MAX_SAFE_INTEGER</code>：表示能够精确表示的最大整数，即<code>9007199254740991</code>。</li>
+<li><code>Number.MIN_SAFE_INTEGER</code>：表示能够精确表示的最小整数，即<code>-9007199254740991</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.POSITIVE_INFINITY <span class="comment">// Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.NEGATIVE_INFINITY <span class="comment">// -Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.NaN <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_VALUE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.7976931348623157e+308</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_VALUE &lt; <span class="literal">Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_VALUE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5e-324</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_VALUE &gt; <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_SAFE_INTEGER <span class="comment">// 9007199254740991</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_SAFE_INTEGER <span class="comment">// -9007199254740991</span></span></pre></td></tr></table></figure>
+
+<h2 id="Number对象实例的方法"><a href="#Number对象实例的方法" class="headerlink" title="Number对象实例的方法"></a>Number对象实例的方法</h2><p><code>Number</code>对象有4个实例方法，都跟将数值转换成指定格式有关。</p>
+<h3 id="Number-prototype-toString"><a href="#Number-prototype-toString" class="headerlink" title="Number.prototype.toString()"></a>Number.prototype.toString()</h3><p><code>Number</code>对象部署了自己的<code>toString</code>方法，用来将一个数值转为字符串形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString() <span class="comment">// "10"</span></span></pre></td></tr></table></figure>
+
+<p><code>toString</code>方法可以接受一个参数，表示输出的进制。如何省略这个参数，默认将数值先转为十进制，再输出字符串；否则，就根据参数指定的进制，将一个数字转化成某个进制的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">8</span>) <span class="comment">// "12"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">16</span>) <span class="comment">// "a"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，之所以要把10放在括号里，是为了表明10是一个单独的数值，后面的点表示调用对象属性。如果不加括号，这个点会被JavaScript引擎解释成小数点，从而报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.</span>toString(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// SyntaxError: Unexpected token ILLEGAL</span></span></pre></td></tr></table></figure>
+
+<p>只要能够让JavaScript引擎不混淆小数点和对象的点运算符，各种写法都能用。除了为<code>10</code>加上括号，还可以在<code>10</code>后面加两个点，JavaScript会把第一个点理解成小数点（即<code>10.0</code>），把第二个点理解成调用对象属性，从而得到正确结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.</span>.toString(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其他方法还包括</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> .toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.0</span>.toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr></table></figure>
+
+<p>这实际上意味着，可以直接对一个小数使用<code>toString</code>方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString() <span class="comment">// "10.5"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">2</span>) <span class="comment">// "1010.1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">8</span>) <span class="comment">// "12.4"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">16</span>) <span class="comment">// "a.8"</span></span></pre></td></tr></table></figure>
+
+<p>通过方括号运算符也可以调用<code>toString</code>方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span>[<span class="string">'toString'</span>](<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr></table></figure>
+
+<p>将其他进制的数，转回十进制，需要使用<code>parseInt</code>方法。</p>
+<h3 id="Number-prototype-toFixed"><a href="#Number-prototype-toFixed" class="headerlink" title="Number.prototype.toFixed()"></a>Number.prototype.toFixed()</h3><p><code>toFixed</code>方法用于将一个数转为指定位数的小数，返回这个小数对应的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toFixed(<span class="number">2</span>) <span class="comment">// "10.00"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.005</span>.toFixed(<span class="number">2</span>) <span class="comment">// "10.01"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码分别将<code>10</code>和<code>10.005</code>转成2位小数的格式。其中，<code>10</code>必须放在括号里，否则后面的点运算符会被处理小数点，而不是表示调用对象的方法；而<code>10.005</code>就不用放在括号里，因为第一个点被解释为小数点，第二个点就只能解释为点运算符。</p>
+<p><code>toFixed</code>方法的参数为指定的小数位数，有效范围为0到20，超出这个范围将抛出RangeError错误。</p>
+<h3 id="Number-prototype-toExponential"><a href="#Number-prototype-toExponential" class="headerlink" title="Number.prototype.toExponential()"></a>Number.prototype.toExponential()</h3><p><code>toExponential</code>方法用于将一个数转为科学计数法形式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential()  <span class="comment">// "1e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential(<span class="number">1</span>) <span class="comment">// "1.0e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential(<span class="number">2</span>) <span class="comment">// "1.00e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential()  <span class="comment">// "1.234e+3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential(<span class="number">1</span>) <span class="comment">// "1.2e+3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential(<span class="number">2</span>) <span class="comment">// "1.23e+3"</span></span></pre></td></tr></table></figure>
+
+<p><code>toExponential</code>方法的参数表示小数点后有效数字的位数，范围为0到20，超出这个范围，会抛出一个RangeError。</p>
+<h3 id="Number-prototype-toPrecision"><a href="#Number-prototype-toPrecision" class="headerlink" title="Number.prototype.toPrecision()"></a>Number.prototype.toPrecision()</h3><p><code>toPrecision</code>方法用于将一个数转为指定位数的有效数字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">1</span>) <span class="comment">// "1e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">2</span>) <span class="comment">// "12"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">4</span>) <span class="comment">// "12.34"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">5</span>) <span class="comment">// "12.340"</span></span></pre></td></tr></table></figure>
+
+<p><code>toPrecision</code>方法的参数为有效数字的位数，范围是1到21，超出这个范围会抛出RangeError错误。</p>
+<p><code>toPrecision</code>方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.35</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.25</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.15</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.2"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.45</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.4"</span></span></pre></td></tr></table></figure>
+
+<h2 id="自定义方法"><a href="#自定义方法" class="headerlink" title="自定义方法"></a>自定义方法</h2><p>与其他对象一样，<code>Number.prototype</code>对象上面可以自定义方法，被<code>Number</code>的实例继承。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>上面代码为<code>Number</code>对象实例定义了一个<code>add</code>方法。</p>
+<p>在数值上调用某个方法，数值会自动转为<code>Number</code>的实例对象，所以就得到了下面的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">8</span>[<span class="string">'add'</span>](<span class="number">2</span>) <span class="comment">// 10</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，调用方法之所以写成<code>8[&#39;add&#39;]</code>，而不是<code>8.add</code>，是因为数值后面的点，会被解释为小数点，而不是点运算符。将数值放在圆括号中，就可以使用点运算符调用方法了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).add(<span class="number">2</span>) <span class="comment">// 10</span></span></pre></td></tr></table></figure>
+
+<p>由于add方法返回的还是数值，所以可以链式运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.subtract = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span> - x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).add(<span class="number">2</span>).subtract(<span class="number">4</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 6</span></span></pre></td></tr></table></figure>
+
+<p>上面代码在<code>Number</code>对象的实例上部署了<code>subtract</code>方法，它可以与<code>add</code>方法链式调用。</p>
+<p>我们还可以部署更复杂的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.iterate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> result = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="keyword">this</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    result.push(i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> result;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).iterate()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8]</span></span></pre></td></tr></table></figure>
+
+<p>上面代码在<code>Number</code>对象的原型上部署了<code>iterate</code>方法，可以将一个数值自动遍历为一个数组。</p>
+<p>需要注意的是，数值的自定义方法，只能定义在它的原型对象<code>Number.prototype</code>上面，数值本身是无法自定义属性的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">n.x = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">n.x <span class="comment">// undefined</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>n</code>是一个原始类型的数值。直接在它上面新增一个属性x，不会报错，但毫无作用，总是返回undefined。这是因为一旦被调用属性，n就自动转为Number的实例对象，调用结束后，该对象自动销毁。所以，下一次调用n的属性时，实际取到的是另一个对象，属性x当然就读不出来。</p>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/12/13/2016-12-13-object/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/12/13/2016-12-13-math/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-12-13 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

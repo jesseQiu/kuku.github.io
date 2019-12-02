@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>px、pt、ppi、dpi、dp、sp 之间的关系 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="做了几个移动端的项目之后，深感移动端尺寸换算的必要性，在此做个总结。
+先介绍下各自的定义：
+
+px：pixel，像素，电子屏幕上组成一幅图画或照片的最基本单元
+pt: point，点，印刷行业常用单位，等于1/72英寸
+ppi: pixel per inch，每英寸像素数，该值越高，则屏幕越细腻
+d">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="px、pt、ppi、dpi、dp、sp 之间的关系"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> px、pt、ppi、dpi、dp、sp 之间的关系</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><img src="http://image.woshipm.com/wp-files/2015/07/QQ20150717160352.png" alt="QQ20150717160352"></p>
+<p>做了几个移动端的项目之后，深感移动端尺寸换算的必要性，在此做个总结。</p>
+<p>先介绍下各自的定义：</p>
+<ul>
+<li><strong>px：</strong>pixel，像素，电子屏幕上组成一幅图画或照片的最基本单元</li>
+<li><strong>pt:</strong> point，点，印刷行业常用单位，等于1/72英寸</li>
+<li><strong>ppi:</strong> pixel per inch，每英寸像素数，该值越高，则屏幕越细腻</li>
+<li><strong>dpi:</strong> dot per inch，每英寸多少点，该值越高，则图片越细腻</li>
+<li><strong>dp:</strong> dip，Density-independent pixel, 是安卓开发用的长度单位，1dp表示在屏幕像素点密度为160ppi时1px长度</li>
+<li><strong>sp:</strong> scale-independent pixel，安卓开发用的字体大小单位。</li>
+</ul>
+<p>以下是换算关系：</p>
+<h3 id="一、pt和px"><a href="#一、pt和px" class="headerlink" title="一、pt和px"></a>一、pt和px</h3><p><strong>公式一： 1pt= (DPI / 72) px</strong></p>
+<p>当photoshop中新建画布的分辨率为72ppi( 即 72dpi时 )， 1pt=1px； 当新建画布分辨率为72*2=144ppi时，1pt=2px</p>
+<h3 id="二、ppi和dpi"><a href="#二、ppi和dpi" class="headerlink" title="二、ppi和dpi"></a>二、ppi和dpi</h3><p>dpi最初用于衡量打印物上每英寸的点数密度。DPI值越小图片越不精细。当DPI的概念用在计算机屏幕上时，就应称之为ppi。同理： PPI就是计算机屏幕上每英寸可以显示的像素点的数量。因此，在电子屏幕显示中提到的ppi和dpi是一样的，可认为</p>
+<p><strong>公式二：dpi=ppi</strong></p>
+<h3 id="三、ppi计算方法"><a href="#三、ppi计算方法" class="headerlink" title="三、ppi计算方法"></a>三、ppi计算方法</h3><p>ppi是指屏幕上的像素密度，其计算方法为：</p>
+<p><strong>公式三： ppi= 屏幕对角线上的像素点数/对角线长度 = √ （屏幕横向像素点^2 + 屏幕纵向像素点^2）/对角线长度</strong></p>
+<p>以小米2s为例，该屏幕分辨率为720px*1280px，4.3英寸。则点密度为 √ (720^2 +1280^2) /4.3 = 342ppi。</p>
+<h3 id="四、px-和-dp"><a href="#四、px-和-dp" class="headerlink" title="四、px 和 dp"></a>四、px 和 dp</h3><p>dp为安卓开发时的长度单位，根据不同的屏幕分辨率，与px有不同的对应关系。</p>
+<p>安卓端屏幕大小各不相同，根据其像素密度，分为以下几种规格：</p>
+<p><img src="http://image.woshipm.com/wp-files/2015/07/QQ20150717160404.png" alt="QQ20150717160404"></p>
+<p>1dp定义为屏幕密度值为160ppi时的1px，即，在mdpi时，1dp = 1px。 以mdpi为标准，这些屏幕的密度值比为：ldpi : mdpi : hdpi : xhdpi : xxhdpi = 0.75 : 1 : 1.5 : 2 : 3；即，在xhdpi的密度下，1dp=2px；在hdpi情况下，1dp=1.5px。其他类推。</p>
+<p><strong>公式四： 1dp=（屏幕ppi/ 160）px</strong></p>
+<p>以WVGA屏为例，该屏幕为480px*800px，按3.8寸屏算，点密度 √ (480^2 + 800^2) / 3.8 = 245，约等于240，对应于hdpi屏幕，所以该屏幕1dp=1.5px</p>
+<h3 id="五、dp和sp"><a href="#五、dp和sp" class="headerlink" title="五、dp和sp"></a>五、dp和sp</h3><p>dp和sp都是安卓的开发单位，dp是长度单位，sp是字体单位。sp与dp类似，但是可以根据用户的字体大小首选项进行缩放。Android系统允许用户自定义文字尺寸大小（小、正常、大、超大等等），</p>
+<p><strong>公式五：当文字尺寸是“正常”时1sp=1dp，而当文字尺寸是“大”或“超大”时，1sp&gt;1dp。</strong></p>
+<p>一般情况下可认为sp=dp。</p>
+<p>总结：由于做设计时以xhdpi为模板，xhdpi条件下，1dp=2px。若新建画布时，将画布分辨率设为144ppi，则1pt=2px=1dp。此时，即可将pt等同于dp。标注长度的时候，将长度像素除以2即为dp值。</p>
+<p>PS：在photoshop cc中切图时，可直接在.png 图片图层名称前加上200%获得2倍大小的图，其他比例的切图以此类推。输出的两倍图不模糊的前提是，该图是photoshop中用形状工具画出来的未被栅格化的图形，而不是已被栅格化的图层或外部导入的图片。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="http://www.woshipm.com/pmd/176328.html" target="_blank" rel="noopener">八一八那些px、pt、ppi、dpi、dp、sp之间的关系</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/06/21/2018-06-21-android-databind/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/05/18/2018-05-18-html-responsive-img/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-06-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Design/">Design<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

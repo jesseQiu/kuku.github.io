@@ -1,0 +1,468 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java Starting - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、Java 分类
+JavaSE（J2SE）（Java2 Platform Standard Edition，java 平台标准版） // 基础核心版本(面向对象、API、JVM…)
+JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java 平台企业版">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java Starting"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Java Starting</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="一、Java-分类"><a href="#一、Java-分类" class="headerlink" title="一、Java 分类"></a>一、Java 分类</h2><ul>
+<li>JavaSE（J2SE）（Java2 Platform Standard Edition，java 平台标准版） // 基础核心版本(面向对象、API、JVM…)</li>
+<li>JavaEE(J2EE)(Java 2 Platform,Enterprise Edition，java 平台企业版) // 企业版(JSP、EJB、服务…)</li>
+<li>JavaME(J2ME)(Java 2 Platform Micro Edition，java 平台微型版) // 手机(移动设备、游戏、通信、…)</li>
+</ul>
+<h2 id="二、Java-环境变量配置"><a href="#二、Java-环境变量配置" class="headerlink" title="二、Java 环境变量配置"></a>二、Java 环境变量配置</h2><ul>
+<li><a href="https://www.oracle.com/technetwork/cn/java/javase/downloads/index.html" target="_blank" rel="noopener">Java 官网 JDK 下载地址</a></li>
+<li><em>现在下载需要注册账号</em></li>
+</ul>
+<h3 id="1-Java-Windows-环境配置"><a href="#1-Java-Windows-环境配置" class="headerlink" title="1. Java Windows 环境配置"></a>1. Java Windows 环境配置</h3><ul>
+<li><p>新建一个环境变量: JAVA_HOME<br>例如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Java\jdk.xxx  // JDK 相应的版本安装目录</span></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个环节变量：CLASSPATH</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar // 类库目录(*.jar 文件)</span></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>如果下载的 JDK 版本 &gt; 10.x 的可以不需要配置这一步</strong></p>
+<ul>
+<li><p>在 PATH 环境变量中添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">%JAVA_HOME%\bin;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">``` </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">- 测试是否配置成功</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">```bash</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">java -version</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">java version <span class="string">"11.0.5"</span> 2019-10-15 LTS</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Java(TM) SE Runtime Environment 18.9 (build 11.0.5+10-LTS)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.5+10-LTS, mixed mode)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">javac -version</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">javac 11.0.5</span></pre></td></tr></table></figure>
+<p>如果正常显示上面信息表示设置成</p>
+</li>
+<li><p>编写代码测试<br>新建一个 HelloJava.java 文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloJava</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>编译测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="variable">$javac</span> HelloJava.java</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ java HelloJava</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Hello World</span></pre></td></tr></table></figure>
+<p>如果正常显示表示可以正常编译 Java 文件</p>
+</li>
+</ul>
+<h2 id="三、Java-组成"><a href="#三、Java-组成" class="headerlink" title="三、Java 组成"></a>三、Java 组成</h2><ul>
+<li><p>JDK(Java Development Kit) 是 Java 语言的软件开发工具包(SDK)。在 JDK 的安装目录下有一个 jre 目录，里面有两个文件夹 bin 和 lib，在这里可以认为 bin 里的就是 jvm，lib 中则是 jvm 工作所需要的类库，而 jvm 和 lib 合起来就称为 jre。</p>
+</li>
+<li><p>JRE（Java Runtime Environment，Java 运行环境），包含 JVM 标准实现及 Java 核心类库。JRE 是 Java 运行环境，并不是一个开发环境，所以没有包含任何开发工具（如编译器和调试器）<br>最后 JVM 也一目了然了</p>
+</li>
+<li><p>JVM 是 Java Virtual Machine（Java虚拟机）的缩写，JVM 是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。</p>
+</li>
+<li><p>包含关系: JDK &gt; JRE &gt; JVM</p>
+</li>
+<li><p>java 语言执行流程<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/java-20180420.png" alt=""></p>
+</li>
+</ul>
+<h2 id="四、Eclipse"><a href="#四、Eclipse" class="headerlink" title="四、Eclipse"></a>四、Eclipse</h2><ul>
+<li><a href="http://www.eclipse.org" target="_blank" rel="noopener">http://www.eclipse.org</a></li>
+<li><a href="http://www.my-eclipse.cn" target="_blank" rel="noopener">http://www.my-eclipse.cn</a> // 拓展工具包</li>
+<li>创建工程 -&gt; 创建包 -&gt; 创建文件 -&gt; 运行</li>
+<li>自动创建 <code>setter</code>和<code>getter</code>:在创建类的 <code>superclass 点击选择，输入要继承的类名</code></li>
+<li>自动创建 <code>toString()</code> 方法: <code>菜单 -&gt; Source -&gt; Generat toString()</code></li>
+<li>自动创建 <code>equals() 和 hashCode()</code> 方法: <code>菜单 -&gt; Source -&gt; Generat toString()</code></li>
+</ul>
+<h2 id="五、基本语法"><a href="#五、基本语法" class="headerlink" title="五、基本语法"></a>五、基本语法</h2><ul>
+<li><a href="/2018/04/09/java-simple-grammar/">参考</a></li>
+</ul>
+<h2 id="六、UML"><a href="#六、UML" class="headerlink" title="六、UML()"></a>六、UML()</h2><h3 id="建模工具"><a href="#建模工具" class="headerlink" title="建模工具"></a>建模工具</h3><ul>
+<li>Visio(Micorsoft)</li>
+<li>Rational Rose(IBM)</li>
+<li>Power Designer</li>
+</ul>
+<h2 id="七、JUnit"><a href="#七、JUnit" class="headerlink" title="七、JUnit"></a>七、JUnit</h2><blockquote>
+<p>是一个 Java 语言的单元测试框架。它由 Kent Beck 和 Erich Gamma 建立，逐渐成为源于 Kent Beck 的 sUnit 的 xUnit 家族中最为成功的一个。 JUnit 有它自己的 JUnit 扩展生态圈。多数 Java 的开发环境都已经集成了 JUnit 作为单元测试的工具。<br>JUnit 是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing framework）。Junit 测试是程序员测试，即所谓 <strong>白盒测试</strong>，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。Junit 是一套框架，继承 TestCase 类，就可以用 Junit 进行自动测试了。</p>
+</blockquote>
+<h2 id="八、Tomcat"><a href="#八、Tomcat" class="headerlink" title="八、Tomcat"></a>八、Tomcat</h2><blockquote>
+<p>Tomcat 服务器是一个免费的开放源代码的 Web 应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试 JSP 程序的首选。对于一个初学者来说，可以这样认为，当在一台机器上配置好 Apache 服务器，可利用它响应 HTML（标准通用标记语言下的一个应用）页面的访问请求。实际上 Tomcat 是 Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行 tomcat 时，它实际上作为一个与 Apache 独立的进程单独运行的。</p>
+</blockquote>
+<h2 id="九、Jetty"><a href="#九、Jetty" class="headerlink" title="九、Jetty"></a>九、Jetty</h2><p>Jetty 是一个开源的 servlet 容器，它为基于 Java 的 web 容器，例如 JSP 和 servlet 提供运行环境。Jetty 是使用 Java 语言编写的，它的 API 以一组 JAR 包的形式发布。开发人员可以将 Jetty 容器实例化成一个对象，可以迅速为一些独立运行（stand-alone）的 Java 应用提供网络和 web 连接。</p>
+<h2 id="十、Maven"><a href="#十、Maven" class="headerlink" title="十、Maven"></a>十、Maven</h2><blockquote>
+<p>Maven 项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。<br>Maven 除了以程序构建能力为特色之外，还提供高级项目管理工具。由于 Maven 的缺省构建规则有较高的可重用性，所以常常用两三行 Maven 构建脚本就可以构建简单的项目。由于 Maven 的面向项目的方法，许多 Apache Jakarta 项目发文时使用 Maven，而且公司项目采用 Maven 的比例在持续增长。</p>
+</blockquote>
+<h3 id="10-1-相应的命令"><a href="#10-1-相应的命令" class="headerlink" title="10.1 相应的命令"></a>10.1 相应的命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mvn -v // 查看 maven 版本</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mvn compile // 编译</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mvn <span class="built_in">test</span> // 测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mvn package // 打包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mvn clean // 删除 target 包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mvn install // 安装 jar 包到本地仓库</span></pre></td></tr></table></figure>
+<h3 id="10-2-常见错误处理"><a href="#10-2-常见错误处理" class="headerlink" title="10.2 常见错误处理"></a>10.2 常见错误处理</h3><ul>
+<li><code>Could not create the Java Virtual Machine</code><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/maven-02.png" alt="maven-02"><br>主要是由于 java 默认的最大内存不够 maven 使用，需要在启动 maven 时重新指定参数。<br>可以在环境变量 PATH 中手动加入 <code>MAVEN_OPTS:-Xms128m-Xmx512m</code> 参数值,如下图<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/maven-01.png" alt="maven-01"></li>
+</ul>
+<h3 id="10-3-学习资源-项目管理利器——maven"><a href="#10-3-学习资源-项目管理利器——maven" class="headerlink" title="10.3 学习资源: 项目管理利器——maven"></a>10.3 学习资源: <a href="http://www.imooc.com/learn/443" target="_blank" rel="noopener">项目管理利器——maven</a></h3><h2 id="十一、Spring"><a href="#十一、Spring" class="headerlink" title="十一、Spring"></a>十一、Spring</h2><blockquote>
+<p>Spring 是一个开放源代码的设计层面框架，他解决的是业务逻辑层和其他各层的松耦合问题，因此它将面向接口的编程思想贯穿整个系统应用。Spring 是于 2003 年兴起的一个轻量级的 Java 开发框架，由 Rod Johnson 创建。简单来说，Spring 是一个分层的 JavaSE/EEfull-stack(一站式) 轻量级开源框架。<br>Spring MVC 属于 SpringFrameWork 的后续产品，已经融合在 Spring Web Flow 里面。Spring </p>
+</blockquote>
+<h3 id="11-1-IOC"><a href="#11-1-IOC" class="headerlink" title="11.1 IOC"></a>11.1 IOC</h3><ul>
+<li>IOC: 控制反转</li>
+<li>DI: 依赖注入</li>
+</ul>
+<h3 id="11-2-Bean"><a href="#11-2-Bean" class="headerlink" title="11.2 Bean"></a>11.2 Bean</h3><p>EJB 是 Enterprise Java Bean 的缩写，一个 Bean 扮演着应用程序 <strong>素材</strong> 的角色。它包含有一个 functional interface，一个 life-cycle interface，以及一个实现它所支援的商业方法的类别。<br>JavaBean 是描述 Java 的软件组件模型，有点类似于 Microsoft 的 COM 组件概念。在 Java 模型中，通过 JavaBean 可以无限扩充 Java 程序的功能，通过 JavaBean 的组合可以快速的生成新的应用程序。对于程序员来说，最好的一点就是 JavaBean 可以实现代码的重复利用，另外对于程序的易维护性等等也有很重大的意义。</p>
+<h3 id="11-3-Spring-MVC"><a href="#11-3-Spring-MVC" class="headerlink" title="11.3 Spring MVC"></a>11.3 Spring MVC</h3><p>Spring MVC 属于 SpringFrameWork 的后续产品，已经融合在 Spring Web Flow 里面。Spring 框架提供了构建 Web 应用程序的全功能 MVC 模块。使用 Spring 可插入的 MVC 架构，从而在使用 Spring 进行 WEB 开发时，可以选择使用 Spring 的 SpringMVC 框架或集成其他 MVC 开发框架，如 Struts1，Struts2 等。</p>
+<h4 id="11-3-1-Spring-MVC-拦截器"><a href="#11-3-1-Spring-MVC-拦截器" class="headerlink" title="11.3.1 Spring MVC 拦截器"></a>11.3.1 Spring MVC 拦截器</h4><ul>
+<li>解决乱码问题</li>
+<li>解决权限问题</li>
+</ul>
+<h2 id="十二、JDBC"><a href="#十二、JDBC" class="headerlink" title="十二、JDBC"></a>十二、JDBC</h2><blockquote>
+<p>JDBC（Java DataBase Connectivity,jav 数据库连接）是一种用于执行 SQL 语句的 Java API，可以为多种 <strong>关系数据库</strong> 提供统一访问，它由一组用 Java 语言编写的类和接口组成。JDBC 提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序，同时，JDBC 也是个商标名。</p>
+</blockquote>
+<h2 id="十三、ORM"><a href="#十三、ORM" class="headerlink" title="十三、ORM"></a>十三、ORM</h2><blockquote>
+<p>对象关系映射（英语：(Object Relational Mapping，简称ORM，或O/RM，或O/R mapping），是一种程序技术，<strong>用于实现面向对象编程语言里不同类型系统的数据之间的转换</strong> 。从效果上说，它其实是创建了一个可在编程语言里使用的–“虚拟对象数据库”。<br>面向对象是从软件工程基本原则（如耦合、聚合、封装）的基础上发展起来的，而关系数据库则是从数学理论发展而来的，两套理论存在显著的区别。为了解决这个不匹配的现象，对象关系映射技术应运而生。<br>对象关系映射（Object-Relational Mapping）提供了概念性的、易于理解的模型化数据的方法。ORM 方法论基于三个核心原则： </p>
+</blockquote>
+<ul>
+<li>简单：以最基本的形式建模数据。 </li>
+<li>传达性：数据库结构被任何人都能理解的语言文档化。 </li>
+<li>精确性：基于数据模型创建正确标准化的结构。<br>典型地，建模者通过收集来自那些熟悉应用程序但不熟练的数据建模者的人的信息开发信息模型。建模者必须能够用非技术企业专家可以理解的术语在概念层次上与数据结构进行通讯。建模者也必须能以简单的单元分析信息，对样本数据进行处理。ORM 专门被设计为改进这种联系。<br>简单的说：ORM 相当于中继数据。具体到产品上，例如 ADO.NET Entity Framework。DLINQ 中实体类的属性[Table] 就算是一种中继数据。</li>
+</ul>
+<h3 id="13-1-为什么使用-ORM"><a href="#13-1-为什么使用-ORM" class="headerlink" title="13.1 为什么使用 ORM"></a>13.1 为什么使用 ORM</h3><ul>
+<li>SQL 语法版本不同: PL/SQL(Orical) 和 T/SQL(Microsoft)</li>
+<li>同样的功能不同的数据库有不同的表现</li>
+<li>不利于维护和扩展</li>
+</ul>
+<h3 id="13-2-主流框架"><a href="#13-2-主流框架" class="headerlink" title="13.2. 主流框架"></a>13.2. 主流框架</h3><ul>
+<li>Mybatis</li>
+<li>Hibernate</li>
+<li>TopLink</li>
+</ul>
+<h2 id="十四、TopLink"><a href="#十四、TopLink" class="headerlink" title="十四、TopLink"></a>十四、TopLink</h2><blockquote>
+<p>是位居第一的 Java 对象关系可持续性体系结构，原署 WebGain 公司的产品，后被 Oracle 收购，并重新包装为 Oracle AS TopLink。TOPLink 为在关系数据库表中存储 Java 对象和企业 Java 组件 (EJB) 提供高度灵活和高效的机制。TopLink 为开发人员提供极佳的性能和选择，可以与任何数据库、任何应用服务器、任何开发工具集和过程以及任何 J2EE 体系结构协同工作。</p>
+</blockquote>
+<h2 id="十五、Mybatis"><a href="#十五、Mybatis" class="headerlink" title="十五、Mybatis"></a>十五、Mybatis</h2><blockquote>
+<p>MyBatis 本是 apache 的一个开源项目 iBatis, 2010 年这个项目由 apache software foundation 迁移到了google code，并且改名为 MyBatis 。2013年11月迁移到 Github。<br>iBATIS 一词来源于 “internet” 和 “abatis” 的组合，是一个基于 Java 的持久层框架。iBATIS 提供的持久层框架包括 SQL Maps 和 Data Access Objects（sDAO）</p>
+</blockquote>
+<h2 id="十六、Hibernate"><a href="#十六、Hibernate" class="headerlink" title="十六、Hibernate"></a>十六、Hibernate</h2><blockquote>
+<p>Hibernate 是一个开放源代码的对象关系映射框架，它对 JDBC 进行了非常轻量级的对象封装，它将 POJO 与数据库表建立映射关系，是一个全自动的 orm 框架，hibernate 可以自动生成 SQL 语句，自动执行，使得 Java 程序员可以随心所欲的使用对象编程思维来操纵数据库。 Hibernate 可以应用在任何使用 JDBC 的场合，既可以在 Java 的客户端程序使用，也可以在 Servlet/JSP 的 Web 应用中使用，最具革命意义的是，Hibernate 可以在应用 EJB 的 J2EE 架构中取代 CMP，完成数据持久化的重任</p>
+</blockquote>
+<h2 id="十七、JSTL"><a href="#十七、JSTL" class="headerlink" title="十七、JSTL"></a>十七、JSTL</h2><blockquote>
+<p>JSTL（JavaServer Pages Standard Tag Library，JSP 标准标签库)是一个不断完善的开放源代码的 JSP 标签库，是由 apache 的 jakarta 小组来维护的。JSTL 只能运行在支持 JSP1.2 和 Servlet2.3 规范的容器上，如 tomcat 4.x。在 JSP 2.0 中也是作为标准支持的。<br>JSTL 1.0 发布于 2002 年 6 月，由四个定制标记库（core、format、xml 和 sql）和一对通用标记库验证器（ScriptFreeTLV 和 PermittedTaglibsTLV）组成。core 标记库提供了定制操作，通过限制了作用域的变量管理数据，以及执行页面内容的迭代和条件操作。它还提供了用来生成和操作 URL 的标记。顾名思义，format 标记库定义了用来格式化数据（尤其是数字和日期）的操作。它还支持使用本地化资源束进行 JSP 页面的国际化。xml 库包含一些标记，这些标记用来操作通过 XML 表示的数据，而 sql 库定义了用来查询关系数据库的操作。<br>如果要使用JSTL，则必须将 jstl.jar 和 standard.jar 文件放到 classpath 中，如果你还需要使用 XML processing 及 Database access (SQL)标签，还要将相关 JAR 文件放到 classpath 中，这些 JAR 文件全部存在于下载回来的 zip 文件中。</p>
+</blockquote>
+<h2 id="十八、EL"><a href="#十八、EL" class="headerlink" title="十八、EL"></a>十八、EL</h2><blockquote>
+<p>EL（Expression Language） 是为了使 JSP 写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让 Jsp 的代码更加简化。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
+<li><a href="http://www.imooc.com/course/programdetail/pid/31" target="_blank" rel="noopener">Java工程师 技术栈系列视频教程</a></li>
+<li><a href="http://www.imooc.com/learn/85" target="_blank" rel="noopener">Java入门第一季</a></li>
+<li><a href="http://www.imooc.com/learn/124" target="_blank" rel="noopener">Java入门第二季</a></li>
+<li><a href="http://www.imooc.com/learn/110" target="_blank" rel="noopener">Java入门第三季</a></li>
+<li><a href="http://www.imooc.com/learn/196" target="_blank" rel="noopener">Spring 入门篇</a></li>
+<li><a href="http://www.imooc.com/learn/478" target="_blank" rel="noopener">Spring 事物管理</a></li>
+<li><a href="http://www.imooc.com/learn/47" target="_blank" rel="noopener">Spring MVC 起步</a></li>
+<li><a href="http://www.imooc.com/learn/498" target="_blank" rel="noopener">Spring MVC 拦截器</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/11/09/2017-11-09-mysql/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/11/03/2017-11-13-jsp-starting/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-11-06 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>17</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

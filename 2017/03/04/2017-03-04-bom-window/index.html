@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Window 对象 - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="概述在浏览器中，window对象（注意，w为小写）指当前的浏览器窗口。它也是所有对象的顶层对象。
+
+“顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，都是window对象的属性。
+1var a = 1;2window.a // 1
+
+上面">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Window 对象"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Window 对象</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在浏览器中，<code>window</code>对象（注意，<code>w</code>为小写）指当前的浏览器窗口。它也是所有对象的顶层对象。</p>
+<p><img src="http://www.dreamdu.com/images/browser_objects.png" alt=""></p>
+<p>“顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，<br>都是<code>window</code>对象的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，变量<code>a</code>是一个全局变量，但是实质上它是<code>window</code>对象的属性。声明一个全局变量，就是为<code>window</code>对象的同名属性赋值。</p>
+<p>从语言设计的角度看，所有变量都是<code>window</code>对象的属性，其实不是很合理。因为<code>window</code>对象有自己的实体含义，不适合当作最高一层的顶层对象。这个设计失误与JavaScript语言匆忙的设计过程有关，最早的设想是语言内置的对象越少越好，这样可以提高浏览器的性能。因此，语言设计者Brendan Eich就把<code>window</code>对象当作顶层对象，所有未声明就赋值的变量都自动变成<code>window</code>对象的属性。这种设计使得编译阶段无法检测出未声明变量，但到了今天已经没有办法纠正了。</p>
+<h2 id="window对象的属性"><a href="#window对象的属性" class="headerlink" title="window对象的属性"></a>window对象的属性</h2><h3 id="window-window"><a href="#window-window" class="headerlink" title="window.window"></a>window.window</h3><p><code>window</code>对象的<code>window</code>属性指向自身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.window === <span class="keyword">this</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-closed"><a href="#window-closed" class="headerlink" title="window.closed"></a>window.closed</h3><p><code>window.closed</code>属性返回一个布尔值，表示窗口是否关闭。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.closed <span class="comment">// false</span></span></pre></td></tr></table></figure>
+
+<p>上面代码检查当前窗口是否关闭。这种检查意义不大，因为只要能运行代码，当前窗口肯定没有关闭。这个属性一般用来检查，使用脚本打开的新窗口是否关闭。</p>
+<h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p><code>window.opener</code>属性返回打开当前窗口的父窗口。如果当前窗口没有父窗口，则返回<code>null</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowA = <span class="built_in">window</span>.opener;</span></pre></td></tr></table></figure>
+
+<p>通过<code>opener</code>属性，可以获得父窗口的的全局变量和方法，比如<code>windowA.window.propertyName</code>和<code>windowA.window.functionName()</code>。</p>
+<p>该属性只适用于两个窗口属于同源的情况（参见《<a href="/bom/same-origin.html">同源政策</a>》一节），且其中一个窗口由另一个打开。</p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p><code>window.name</code>属性用于设置当前浏览器窗口的名字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">'Hello World!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Hello World!"</span></span></pre></td></tr></table></figure>
+
+<p>各个浏览器对这个值的储存容量有所不同，但是一般来说，可以高达几MB。</p>
+<p>它有一个重要特点，就是只要是本窗口打开的网页，都能读写该属性，不管这些网页是否属于同一个网站。所以，可以把值存放在该属性内，然后让另一个网页读取，从而实现跨域通信（详见《<a href="/bom/same-origin.html">同源政策</a>》一节）。</p>
+<p>该属性只能保存字符串，且当浏览器窗口关闭后，所保存的值就会消失。因此局限性比较大，但是与iframe窗口通信时，非常有用。</p>
+<h3 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h3><p><code>window.location</code>返回一个<code>location</code>对象，用于获取窗口当前的URL信息。它等同于<code>document.location</code>对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location === <span class="built_in">document</span>.location <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-frames"><a href="#window-frames" class="headerlink" title="window.frames"></a>window.frames</h3><p><code>window.frames</code>属性返回一个类似数组的对象，成员为页面内所有框架窗口，包括<code>frame</code>元素和<code>iframe</code>元素。<code>window.frames[0]</code>表示页面中第一个框架窗口，<code>window.frames[&#39;someName&#39;]</code>则是根据框架窗口的<code>name</code>属性的值（不是<code>id</code>属性），返回该窗口。另外，通过<code>document.getElementById()</code>方法也可以引用指定的框架窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frame = <span class="built_in">document</span>.getElementById(<span class="string">'theFrame'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameWindow = frame.contentWindow;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于 frame.contentWindow.document</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameDoc = frame.contentDocument;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取子窗口的变量和属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">frameWindow<span class="function">.<span class="keyword">function</span>(<span class="params"></span>)</span></span></pre></td></tr></table></figure>
+
+<p><code>window.length</code>属性返回当前页面中所有框架窗口总数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames.length === <span class="built_in">window</span>.length <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p><code>window.frames.length</code>与<code>window.length</code>应该是相等的。</p>
+<p>由于传统的<code>frame</code>窗口已经不建议使用了，这里主要介绍<code>iframe</code>窗口。</p>
+<p>需要注意的是，<code>window.frames</code>的每个成员对应的是框架内的窗口（即框架的<code>window</code>对象）。如果要获取每个框架内部的DOM树，需要使用<code>window.frames[0].document</code>的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">window</span>.getElementsByTagName(<span class="string">'iframe'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe_title = iframe.contentWindow.title;</span></pre></td></tr></table></figure>
+
+<p>上面代码用于获取<code>iframe</code>页面的标题。</p>
+<p><code>iframe</code>元素遵守同源政策，只有当父页面与框架页面来自同一个域名，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。</p>
+<p><code>iframe</code>窗口内部，使用<code>window.parent</code>引用父窗口。如果当前页面没有父窗口，则<code>window.parent</code>属性返回自身。因此，可以通过<code>window.parent</code>是否等于<code>window.self</code>，判断当前窗口是否为<code>iframe</code>窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.parent != <span class="built_in">window</span>.self) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 当前窗口是子窗口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-screenX，window-screenY"><a href="#window-screenX，window-screenY" class="headerlink" title="window.screenX，window.screenY"></a>window.screenX，window.screenY</h3><p><code>window.screenX</code>和<code>window.screenY</code>属性，返回浏览器窗口左上角相对于当前屏幕左上角（<code>(0, 0)</code>）的水平距离和垂直距离，单位为像素。</p>
+<h3 id="window-innerHeight，window-innerWidth"><a href="#window-innerHeight，window-innerWidth" class="headerlink" title="window.innerHeight，window.innerWidth"></a>window.innerHeight，window.innerWidth</h3><p><code>window.innerHeight</code>和<code>window.innerWidth</code>属性，返回网页在当前窗口中可见部分的高度和宽度，即“视口”（viewport），单位为像素。</p>
+<p>当用户放大网页的时候（比如将网页从100%的大小放大为200%），这两个属性会变小。因为这时网页的像素大小不变（比如宽度还是960像素），只是每个像素占据的屏幕空间变大了，因为可见部分（视口）就变小了。</p>
+<p>注意，这两个属性值包括滚动条的高度和宽度。</p>
+<h3 id="window-outerHeight，window-outerWidth"><a href="#window-outerHeight，window-outerWidth" class="headerlink" title="window.outerHeight，window.outerWidth"></a>window.outerHeight，window.outerWidth</h3><p><code>window.outerHeight</code>和<code>window.outerWidth</code>属性返回浏览器窗口的高度和宽度，包括浏览器菜单和边框，单位为像素。</p>
+<h3 id="window-pageXOffset，window-pageYOffset"><a href="#window-pageXOffset，window-pageYOffset" class="headerlink" title="window.pageXOffset，window.pageYOffset"></a>window.pageXOffset，window.pageYOffset</h3><p><code>window.pageXOffset</code>属性返回页面的水平滚动距离，<code>window.pageYOffset</code>属性返回页面的垂直滚动距离，单位都为像素。</p>
+<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><p><code>window</code>对象的<code>navigator</code>属性，指向一个包含浏览器相关信息的对象。</p>
+<h3 id="navigator-userAgent"><a href="#navigator-userAgent" class="headerlink" title="navigator.userAgent"></a>navigator.userAgent</h3><p><code>navigator.userAgent</code>属性返回浏览器的User-Agent字符串，用来标示浏览器的种类。下面是Chrome浏览器的<code>userAgent</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">navigator.userAgent</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"</span></span></pre></td></tr></table></figure>
+
+<p>通过<code>userAgent</code>属性识别浏览器，不是一个好办法。因为必须考虑所有的情况（不同的浏览器，不同的版本），非常麻烦，而且无法保证未来的适用性，更何况各种上网设备层出不穷，难以穷尽。所以，现在一般不再识别浏览器了，而是使用“功能识别”方法，即逐一测试当前浏览器是否支持要用到的JavaScript功能。</p>
+<p>不过，通过<code>userAgent</code>可以大致准确地识别手机浏览器，方法就是测试是否包含<code>mobi</code>字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ua = navigator.userAgent.toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/mobi/i</span>.test(ua)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 非手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如果想要识别所有移动设备的浏览器，可以测试更多的特征字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/mobi|android|touch|mini/i.test(ua)</span></pre></td></tr></table></figure>
+
+<h3 id="navigator-plugins"><a href="#navigator-plugins" class="headerlink" title="navigator.plugins"></a>navigator.plugins</h3><p><code>navigator.plugins</code>属性返回一个类似数组的对象，成员是浏览器安装的插件，比如Flash、ActiveX等。</p>
+<h2 id="window-screen对象"><a href="#window-screen对象" class="headerlink" title="window.screen对象"></a>window.screen对象</h2><p><code>window.screen</code>对象包含了显示设备的信息。</p>
+<p><code>screen.height</code>和<code>screen.width</code>两个属性，一般用来了解设备的分辨率。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的高度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">screen.height <span class="comment">// 1920</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的宽度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">screen.width <span class="comment">// 1080</span></span></pre></td></tr></table></figure>
+
+<p>上面代码显示，某设备的分辨率是1920x1080。</p>
+<p>除非调整显示器的分辨率，否则这两个值可以看作常量，不会发生变化。显示器的分辨率与浏览器设置无关，缩放网页并不会改变分辨率。</p>
+<p>下面是根据屏幕分辨率，将用户导向不同网页的代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((screen.width &lt;= <span class="number">800</span>) &amp;&amp; (screen.height &lt;= <span class="number">600</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'small.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'wide.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>screen.availHeight</code>和<code>screen.availWidth</code>属性返回屏幕可用的高度和宽度，单位为像素。它们的值为屏幕的实际大小减去操作系统某些功能占据的空间，比如系统的任务栏。</p>
+<p><code>screen.colorDepth</code>属性返回屏幕的颜色深度，一般为16（表示16-bit）或24（表示24-bit）。</p>
+<h2 id="window对象的方法"><a href="#window对象的方法" class="headerlink" title="window对象的方法"></a>window对象的方法</h2><h3 id="window-moveTo-，window-moveBy"><a href="#window-moveTo-，window-moveBy" class="headerlink" title="window.moveTo()，window.moveBy()"></a>window.moveTo()，window.moveBy()</h3><p><code>window.moveTo</code>方法用于移动浏览器窗口到指定位置。它接受两个参数，分别是窗口左上角距离屏幕左上角的水平距离和垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">100</span>, <span class="number">200</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口移动到屏幕<code>(100, 200)</code>的位置。</p>
+<p><code>window.moveBy</code>方法将窗口移动到一个相对位置。它接受两个参数，分布是窗口左上角向右移动的水平距离和向下移动的垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">25</span>, <span class="number">50</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口向右移动25像素、向下移动50像素。</p>
+<h3 id="window-open-window-close"><a href="#window-open-window-close" class="headerlink" title="window.open(), window.close()"></a>window.open(), window.close()</h3><p><code>window.open</code>方法用于新建另一个浏览器窗口，并且返回该窗口对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(<span class="string">'somefile.html'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>open</code>方法的第一个参数是新窗口打开的网址，此外还可以加上第二个参数，表示新窗口的名字，以及第三个参数用来指定新窗口的参数，形式是一个逗号分隔的<code>property=value</code>字符串。</p>
+<p>下面是一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'somepage.html'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'DefinitionsWindows'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'height=200,width=200,location=no,resizable=yes,scrollbars=yes'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
+
+<p>注意，如果在第三个参数中设置了一部分参数，其他没有被设置的<code>yes/no</code>参数都会被设成No，只有<code>titlebar</code>和关闭按钮除外（它们的值默认为yes）。</p>
+<p><code>open</code>方法返回新窗口的引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowB = <span class="built_in">window</span>.open(<span class="string">'windowB.html'</span>, <span class="string">'WindowB'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">windowB.window.name <span class="comment">// "WindowB"</span></span></pre></td></tr></table></figure>
+
+<p>由于<code>open</code>这个方法很容易被滥用，许多浏览器默认都不允许脚本新建窗口。因此，有必要检查一下打开新窗口是否成功。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (popup === <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 新建窗口失败</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>window.close</code>方法用于关闭当前窗口，一般用来关闭<code>window.open</code>方法新建的窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">popup.close()</span></pre></td></tr></table></figure>
+
+<p><code>window.closed</code>属性用于检查当前窗口是否被关闭了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 窗口仍然打开着</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-print"><a href="#window-print" class="headerlink" title="window.print()"></a>window.print()</h3><p><code>print</code>方法会跳出打印对话框，同用户点击菜单里面的“打印”命令效果相同。</p>
+<p>页面上的打印按钮代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'printLink'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.print();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>非桌面设备（比如手机）可能没有打印功能，这时可以这样判断。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.print === <span class="string">'function'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持打印功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h3><p><code>getComputedStyle</code>方法接受一个HTML元素作为参数，返回一个包含该HTML元素的最终样式信息的对象。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-matchMedia"><a href="#window-matchMedia" class="headerlink" title="window.matchMedia()"></a>window.matchMedia()</h3><p><code>window.matchMedia</code>方法用来检查CSS的mediaQuery语句。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-focus"><a href="#window-focus" class="headerlink" title="window.focus()"></a>window.focus()</h3><p><code>focus</code>方法会激活指定当前窗口，使其获得焦点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  popup.focus();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码先检查<code>popup</code>窗口是否依然存在，确认后激活该窗口。</p>
+<p>当前窗口获得焦点时，会触发<code>focus</code>事件；当前窗口失去焦点时，会触发<code>blur</code>事件。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p><code>window</code>对象可以接收以下事件。</p>
+<h3 id="load事件和onload属性"><a href="#load事件和onload属性" class="headerlink" title="load事件和onload属性"></a>load事件和onload属性</h3><p><code>load</code>事件发生在文档在浏览器窗口加载完毕时。<code>window.onload</code>属性可以指定这个事件的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> elements = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'example'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> elt = elements[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>上面代码在网页加载完毕后，获取指定元素并进行处理。</p>
+<h3 id="error事件和onerror属性"><a href="#error事件和onerror属性" class="headerlink" title="error事件和onerror属性"></a>error事件和onerror属性</h3><p>浏览器脚本发生错误时，会触发window对象的<code>error</code>事件。我们可以通过<code>window.onerror</code>属性对该事件指定回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">message, filename, lineno, colno, error</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"出错了！--&gt; %s"</span>, error.stack);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p><code>error</code>事件的回调函数，一共可以有五个参数，它们的含义依次如下。</p>
+<ul>
+<li>出错信息</li>
+<li>出错脚本的网址</li>
+<li>行号</li>
+<li>列号</li>
+<li>错误对象</li>
+</ul>
+<p>老式浏览器只支持前三个参数。</p>
+<p>需要注意的是，如果脚本网址与网页网址不在同一个域（比如使用了CDN），浏览器根本不会提供详细的出错信息，只会提示出错，错误类型是“Script error.”，行号为0，其他信息都没有。这是浏览器防止向外部脚本泄漏信息。一个解决方法是在脚本所在的服务器，设置Access-Control-Allow-Origin的HTTP头信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin:*</span></pre></td></tr></table></figure>
+
+<p>然后，在网页的<code>&lt;script&gt;</code>标签中设置<code>crossorigin</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span> <span class="attr">src</span>=<span class="string">"//example.com/file.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的<code>crossorigin=&quot;anonymous&quot;</code>表示，读取文件不需要身份信息，即不需要cookie和HTTP认证信息。如果设为<code>crossorigin=&quot;use-credentials&quot;</code>，就表示浏览器会上传cookie和HTTP认证信息，同时还需要服务器端打开HTTP头信息Access-Control-Allow-Credentials。</p>
+<p>并不是所有的错误，都会触发JavaScript的<code>error</code>事件（即让JavaScript报错），只限于以下三类事件。</p>
+<ul>
+<li>JavaScript语言错误</li>
+<li>JavaScript脚本文件不存在</li>
+<li>图像文件不存在</li>
+</ul>
+<p>以下两类事件不会触发JavaScript的error事件。</p>
+<ul>
+<li>CSS文件不存在</li>
+<li>iframe文件不存在</li>
+</ul>
+<h2 id="URL的编码-解码方法"><a href="#URL的编码-解码方法" class="headerlink" title="URL的编码/解码方法"></a>URL的编码/解码方法</h2><p>网页URL的合法字符分成两类。</p>
+<ul>
+<li>URL元字符：分号（<code>;</code>），逗号（’,’），斜杠（<code>/</code>），问号（<code>?</code>），冒号（<code>:</code>），at（<code>@</code>），<code>&amp;</code>，等号（<code>=</code>），加号（<code>+</code>），美元符号（<code>$</code>），井号（<code>#</code>）</li>
+<li>语义字符：<code>a-z</code>，<code>A-Z</code>，<code>0-9</code>，连词号（<code>-</code>），下划线（<code>_</code>），点（<code>.</code>），感叹号（<code>!</code>），波浪线（<code>~</code>），星号（<code>*</code>），单引号（<code>\``），圆括号（</code>()`）</li>
+</ul>
+<p>除了以上字符，其他字符出现在URL之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（<code>%</code>）加上两个大写的十六进制字母。比如，UTF-8的操作系统上，<code>http://www.example.com/q=春节</code>这个URL之中，汉字“春节”不是URL的合法字符，所以被浏览器自动转成<code>http://www.example.com/q=%E6%98%A5%E8%8A%82</code>。其中，“春”转成了<code>%E6%98%A5</code>，“节”转成了“%E8%8A%82”。这是因为“春”和”节“的UTF-8编码分别是<code>E6 98 A5</code>和<code>E8 8A 82</code>，将每个字节前面加上百分号，就构成了URL编码。</p>
+<p>JavaScript提供四个URL的编码/解码方法。</p>
+<ul>
+<li><code>encodeURI()</code></li>
+<li><code>encodeURIComponent()</code></li>
+<li><code>decodeURI()</code></li>
+<li><code>decodeURIComponent()</code></li>
+</ul>
+<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h3><p><code>encodeURI</code> 方法的参数是一个字符串，代表整个URL。它会将元字符和语义字符之外的字符，都进行转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURI</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h3><p><code>encodeURIComponent</code>只转除了语义字符之外的字符，元字符也会被转义。因此，它的参数通常是URL的路径或参数值，而不是整个URL。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "%E6%98%A5%E8%8A%82"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http%3A%2F%2Fwww.example.com%2Fq%3D%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>encodeURIComponent</code>会连URL元字符一起转义，所以通常只用它转URL的片段。</p>
+<h3 id="decodeURI"><a href="#decodeURI" class="headerlink" title="decodeURI"></a>decodeURI</h3><p><code>decodeURI</code>用于还原转义后的URL。它是<code>encodeURI</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">'http://www.example.com/q=%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=春节"</span></span></pre></td></tr></table></figure>
+
+<h3 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="decodeURIComponent"></a>decodeURIComponent</h3><p><code>decodeURIComponent</code>用于还原转义后的URL片段。它是<code>encodeURIComponent</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">'%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "春节"</span></span></pre></td></tr></table></figure>
+
+<h2 id="alert-，prompt-，confirm"><a href="#alert-，prompt-，confirm" class="headerlink" title="alert()，prompt()，confirm()"></a>alert()，prompt()，confirm()</h2><p><code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。</p>
+<p>需要注意的是，<code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>这三个方法弹出的对话框，都是浏览器统一规定的式样，是无法定制的。</p>
+<p><code>alert</code>方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">alert(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World'</span>);</span></pre></td></tr></table></figure>
+
+<p>用户只有点击“确定”按钮，对话框才会消失。在对话框弹出期间，浏览器窗口处于冻结状态，如果不点“确定”按钮，用户什么也干不了。</p>
+<p><code>alert</code>方法的参数只能是字符串，没法使用CSS样式，但是可以用<code>\n</code>指定换行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'本条提示\n分成两行'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>prompt</code>方法弹出的对话框，在提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(text[, <span class="keyword">default</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(<span class="string">'您的年龄？'</span>, <span class="number">25</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码会跳出一个对话框，文字提示为“您的年龄？”，要求用户在对话框中输入自己的年龄（默认显示25）。</p>
+<p><code>prompt</code>方法的返回值是一个字符串（有可能为空）或者<code>null</code>，具体分成三种情况。</p>
+<ol>
+<li>用户输入信息，并点击“确定”，则用户输入的信息就是返回值。</li>
+<li>用户没有输入信息，直接点击“确定”，则输入框的默认值就是返回值。</li>
+<li>用户点击了“取消”（或者按了Esc按钮），则返回值是<code>null</code>。</li>
+</ol>
+<p><code>prompt</code>方法的第二个参数是可选的，但是如果不提供的话，IE浏览器会在输入框中显示<code>undefined</code>。因此，最好总是提供第二个参数，作为输入框的默认值。</p>
+<p><code>confirm</code>方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”两个按钮，往往用来征询用户的意见。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(<span class="string">"你最近好吗？"</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码弹出一个对话框，上面只有一行文字“你最近好吗？”，用户选择点击“确定”或“取消”。</p>
+<p><code>confirm</code>方法返回一个布尔值，如果用户点击“确定”，则返回<code>true</code>；如果用户点击“取消”，则返回<code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> okay = confirm(<span class="string">'Please confirm this message.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (okay) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“确定”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“取消”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>confirm</code>的一个用途是，当用户离开当前页面时，弹出一个对话框，问用户是否真的要离开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> confirm(<span class="string">'你确定要离开当面页面吗？'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Karl Dubost, <a href="https://hacks.mozilla.org/2013/09/user-agent-detection-history-and-checklist/" target="_blank" rel="noopener">User-Agent detection, history and checklist</a></li>
+<li>Conrad Irwin, <a href="https://bugsnag.com/blog/js-stacktraces/" target="_blank" rel="noopener">JS stacktraces. The good, the bad, and the ugly</a></li>
+<li>Daniel Lee, <a href="http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/" target="_blank" rel="noopener">How to catch JavaScript Errors with window.onerror (even on Chrome and Firefox)</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/03/09/2017-03-09-单线程模型/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2017/03/04/2017-03-04-bom-webstorage/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/JavaScript/">JavaScript<span>82</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

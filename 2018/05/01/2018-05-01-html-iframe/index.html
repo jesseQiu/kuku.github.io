@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTML 嵌入技术(十一) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="到目前为止，您应该掌握了将图像\视频和音频嵌入到网页上的诀窍了。此刻，让我们进行深入学习，来看一些能让您在网页中嵌入各种内容类型的元素：&amp;lt;iframe&amp;gt;, &amp;lt;embed&amp;gt; 和&amp;lt;object&amp;gt; 元素。&amp;lt;iframe&amp;gt; 用于嵌入其他网页，另外两个元素则允许">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTML 嵌入技术(十一)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> HTML 嵌入技术(十一)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>到目前为止，您应该掌握了将图像\视频和音频嵌入到网页上的诀窍了。此刻，让我们进行深入学习，来看一些能让您在网页中嵌入各种内容类型的元素：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML内联框架元素 &lt;iframe&gt; 表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。在HTML 4.01中，文档可能包含头部和正文，或头部和框架集，但不能包含正文和框架集。但是，&lt;iframe&gt;可以在正常的文档主体中使用。每个浏览上下文都有自己的会话历史记录和活动文档。包含嵌入内容的浏览上下文称为父浏览上下文。顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/embed" target="_blank" rel="noopener" title="HTML &lt;embed&gt; 元素将外部内容嵌入文档中的指定位置。此内容由外部应用程序或其他交互式内容源（如浏览器插件）提供。"><code>&lt;embed&gt;</code></a> 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/object" target="_blank" rel="noopener" title="HTML &lt;object&gt; 元素（或者称作 HTML 嵌入对象元素）表示引入一个外部资源，这个资源可能是一张图片，一个嵌入的浏览上下文，亦或是一个插件所使用的资源。"><code>&lt;object&gt;</code></a> 元素。<code>&lt;iframe&gt;</code> 用于嵌入其他网页，另外两个元素则允许您嵌入 PDF，SVG，甚至 Flash——一种正在被淘汰的技术，但您仍然会时不时的看到它。</p>
+</blockquote>
+<p>目的:   | 要了解如何使用嵌入物品进入网页<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object" target="_blank" rel="noopener" title="HTML &lt;object&gt;元素表示外部资源，可以将其视为图像，嵌套浏览上下文或要由插件处理的资源。"><code>&lt;object&gt;</code></a>，&nbsp;&nbsp;<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener" title="HTML &lt;embed&gt;元素表示外部应用程序或交互式内容（换句话说，插件）的集成点。"><code>&lt;embed&gt;</code></a>以及<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML &lt;iframe&gt;元素表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。 在HTML 4.01中，文档可能包含一个头部和一个主体或头部和框架集，但不包括主体和框架集。 但是，一个&lt;iframe&gt;可以在普通文档正文中使用。 每个浏览上下文都有自己的会话历史和活动文档。 包含嵌入内容的浏览上下文称为父浏览上下文。 顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a>，像Flash电影和其他网页。</p>
+<h2 id="一、嵌入的简史"><a href="#一、嵌入的简史" class="headerlink" title="一、嵌入的简史"></a>一、嵌入的简史</h2><p>很久以前，在网络上使用 <strong>框架</strong><br>创建网站 - 有一小部分存储于个人 HTML 页面的网站是受欢迎的。这些嵌入在一个称为 <strong>框架集</strong><br>的主文档中，允许您指定每个框架填充的屏幕上的区域，而不是像表格的列和行的大小。这些被认为是 90 年代中期至 90 年代的凉爽的高度，有证据表明，将网页分解成较小的块，这样更适合下载速度 - 尤其是网络连接如此缓慢。然而，他们有很多问题，远远超过网络速度更快的任何积极因素，所以你看不到它们被使用了。过了一段时间后（20世纪90年代末，21世纪初），插件技术变得非常受欢迎，例如 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Java" target="_blank" rel="noopener">Java Applet</a>和 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Adobe_Flash" target="_blank" rel="noopener">Flash</a>- 这些允许网络开发者将丰富的内容嵌入到视频和动画等网页中，这些网页只能通过 HTML 单独使用。嵌入这些技术是通过诸如 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object" target="_blank" rel="noopener" title="HTML &lt;object&gt;元素表示外部资源，可以将其视为图像，嵌套浏览上下文或要由插件处理的资源。"><code>&lt;object&gt;</code></a>和较少使用 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener" title="HTML &lt;cke:embed&gt;&lt;/cke:embed&gt;元素表示外部应用程序或交互式内容（换句话说，插件）的集成点。"><code>&lt;embed&gt;</code></a>的元素来实现的，当时它们非常有用。由于许多问题，包括可访问性、安全性、文件大小等，它们已经过时了;&nbsp;现如今，大多数移动设备不再支持这样的插件，桌面也逐渐不再支持。最后，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML &lt;iframe&gt;元素表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。 在HTML 4.01中，文档可能包含一个头部和一个主体或头部和框架集，但不包括主体和框架集。 但是，一个&lt;iframe&gt;可以在普通文档正文中使用。 每个浏览上下文都有自己的会话历史和活动文档。 包含嵌入内容的浏览上下文称为父浏览上下文。 顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a>元素出现了（连同其他嵌入内容的方式，如<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank" rel="noopener" title="使用HTML &lt;canvas&gt;元素与canvas脚本API来绘制图形和动画。"><code>&lt;canvas&gt;</code></a>，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video" target="_blank" rel="noopener" title="使用HTML &lt;video&gt;元素将视频内容嵌入到文档中。"><code>&lt;video&gt;</code></a>等），它提供了一种将整个 web 页嵌入到另一个网页的方法，看起来就像那个 web 页是另一个网页的一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img" target="_blank" rel="noopener" title="HTML Image 元素（ &lt;img&gt;）代表文档中的一个图像。"><code>&lt;img&gt;</code></a>或其他元素一样。<a href="https://developer.mozilla.org/zh-CN/ocs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML内联框架元素 &lt;iframe&gt;表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。在HTML 4.01中，文档可能包含头部和正文，或头部和框架集，但不能包含正文和框架集。但是，&lt;iframe&gt;可以在正常的文档主体中使用。每个浏览上下文都有自己的会话历史记录和活动文档。包含嵌入内容的浏览上下文称为父浏览上下文。顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a>现在经常被使用。了解完历史之后，让我们继续往下看以了解如何使用它们。</p>
+<h2 id="二、自主学习：嵌入类型的使用"><a href="#二、自主学习：嵌入类型的使用" class="headerlink" title="二、自主学习：嵌入类型的使用"></a>二、自主学习：嵌入类型的使用</h2><p>在这篇文章中，我们将直接进入自主学习部分，立即让你体会到嵌入技术的实用性。大家都非常熟悉<a href="https://www.youtube.com/" target="_blank" rel="noopener">Youtube</a><br>，但很多人不了解它所提供的一些分享功能。让我们来看看 Youtube 如何让我们通过 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML &lt;iframe&gt;元素表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。 在HTML 4.01中，文档可能包含一个头部和一个主体或头部和框架集，但不包括主体和框架集。 但是，一个&lt;iframe&gt;可以在普通文档正文中使用。 每个浏览上下文都有自己的会话历史和活动文档。 包含嵌入内容的浏览上下文称为父浏览上下文。 顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a><br>在页面中嵌入喜欢的视频。</p>
+<ol>
+<li>首先，去Youtube找一个喜欢的视频。</li>
+<li>在视频下方，您会看到一个_共享_按钮 - 点击查看共享选项。</li>
+<li>选择“&nbsp;_嵌入”_选项卡，您将得到一些<code>&lt;iframe&gt;</code>代码 - 复制一下。</li>
+<li>粘贴到下面的_输入_框里，看看_输出_结果是什么。</li>
+</ol>
+<p>此外，您还可以试试在示例中嵌入<a href="https://www.google.com/maps/" target="_blank" rel="noopener">Google地图</a></p>
+<ol>
+<li>去Google地图找一个喜欢的地图。</li>
+<li>点击UI左上角的“汉堡菜单”（三条水平线）。</li>
+<li>选择_共享或嵌入地图_选项。</li>
+<li>选择嵌入地图选项，这将给你一些<code>&lt;iframe&gt;</code>代码 - 复制一下。</li>
+<li>粘贴到下面的_输入_框，看看_输出_结果是什么。</li>
+</ol>
+<p>如果你犯了某些错误，你可以点击_Reset按钮以重置编辑器。_如果你确实被卡住了， 按下Show _solution按钮以借鉴答案</p>
+<h6 id="Playable-code"><a href="#Playable-code" class="headerlink" title="Playable code"></a>Playable code</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Input<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">class</span>=<span class="string">"input"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Output<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"output"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"reset"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Reset"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"solution"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Show solution"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">font-family</span>: <span class="string">'Open Sans Light'</span>,Helvetica,Arial,sans-serif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.input</span>, <span class="selector-class">.output</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">width</span>: <span class="number">90%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">10em</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#0095dd</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">overflow</span>: auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.output</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">height</span>: <span class="number">14em</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">"code"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reset = <span class="built_in">document</span>.getElementById(<span class="string">"reset"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> code = textarea.value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> output = <span class="built_in">document</span>.querySelector(<span class="string">".output"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> solution = <span class="built_in">document</span>.getElementById(<span class="string">"solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawOutput</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  output.innerHTML = textarea.value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">reset.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  textarea.value = code;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  drawOutput();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">solution.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">textarea.value = <span class="string">'&lt;iframe width="420" height="315" src="https://www.youtube.com/embed/QH2-TGUlwu4" frameborder="0" allowfullscreen&gt;\n&lt;/iframe&gt;'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  drawOutput();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">textarea.addEventListener(<span class="string">"input"</span>, drawOutput);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, drawOutput);</span></pre></td></tr></table></figure>
+
+<iframe src="https://mdn.mozillademos.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/%E5%85%B6%E4%BB%96%E5%B5%8C%E5%85%A5%E6%8A%80%E6%9C%AF$samples/Playable_code?revision=1347732" class="live-sample-frame sample-code-frame" height="600" width="700" id="frame_Playable_code" frameborder="0"></iframe>
+
+<p><button class="open-in-host button neutral">在 CodePen 中打开 <i class="icon-codepen" aria-hidden="true"></i></button></p>
+<p><button class="open-in-host button neutral">在 JSFiddle 中打开 <i class="icon-jsfiddle" aria-hidden="true"></i></button></p>
+<h2 id="三、Iframe-详解"><a href="#三、Iframe-详解" class="headerlink" title="三、Iframe 详解"></a>三、Iframe 详解</h2><p>是不是很简单又有趣呢？<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener" title="HTML &lt;iframe&gt;元素表示嵌套的浏览上下文，有效地将另一个HTML页面嵌入到当前页面中。 在HTML 4.01中，文档可能包含一个头部和一个主体或头部和框架集，但不包括主体和框架集。 但是，一个&lt;iframe&gt;可以在普通文档正文中使用。 每个浏览上下文都有自己的会话历史和活动文档。 包含嵌入内容的浏览上下文称为父浏览上下文。 顶级浏览上下文（没有父级）通常是浏览器窗口。"><code>&lt;iframe&gt;</code></a><br>元素旨在允许您将其他Web文档嵌入到当前文档中。这很适合将第三方内容纳入您的网站，您可能无法直接控制，也不希望实现自己的版本 - 例如来自在线视频提供商的视频，<a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a><br>等评论系统，在线地图提供商，广告横幅等。您通过本课程使用的实时可编辑示例使用<code>&lt;iframe&gt;</code>实现。我<br>们会在后面提到，关于<code>&lt;iframe&gt;</code>有一些严重的<a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/%E5%85%B6%E4%BB%96%E5%B5%8C%E5%85%A5%E6%8A%80%E6%9C%AF#安全隐患" target="_blank" rel="noopener">安全隐患</a>需要考虑，但这并不意味着你不应该在你的网站上使用它们 - 它只需要一些知识和仔细的思考。让我们更详细地探索这些代码。假设您想在其中一个网页上加入 MDN 词汇表，您可以尝试以下方式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"https://developer.mozilla.org/en-US/docs/Glossary"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">        <span class="attr">allowfullscreen</span> <span class="attr">sandbox</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://developer.mozilla.org/en-US/docs/Glossary"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    Fallback link for browsers that don't support iframes</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>此示例包括使用以下所需的基本要素 <code>&lt;iframe&gt;</code></p>
+<ul>
+<li><code>[allowfullscreen](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-allowfullscreen)</code> 如果设置，<code>&lt;iframe&gt;</code> 则可以使用<a href="https://developer.mozilla.org/en-US/docs/Web/Apps/Fundamentals/User_notifications/Full_screen_api" target="_blank" rel="noopener">全屏API</a>放置在全屏模式（稍微超出本文的范围）。</li>
+<li><code>[frameborder](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-frameborder)</code> 如果设置为 1，则会告诉浏览器在此框架和其他框架之间绘制边框，这是默认行为。0 删除边框。不推荐这样设置，因为在 <code>&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/CSS&quot; title=&quot;CSS：CSS（Cascading Style Sheets）是一种声明式语言，用于控制浏览器中网页的外观。&quot;&gt;CSS中&lt;/a&gt;</code> 可以更好地实现相同的效果。<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" target="_blank" rel="noopener" title="边框CSS属性是用于一次设置所有单个边框属性值的缩写属性：border-width，border-style和border-color。 与所有速记属性一样，未指定的任何单个值都将设置为其对应的初始值。 重要的是，边框不能用于指定border-image的自定义值，而是将其设置为其初始值，即none。"><code>border</code></a><code>: none;</code></li>
+<li><code>[src](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src)</code><br>该属性与<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video" target="_blank" rel="noopener" title="使用HTML &lt;video&gt;元素将视频内容嵌入到文档中。"><code>&lt;video&gt;</code></a></li>
+<li><code>[&lt;img&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img &quot;HTML &lt;img&gt;元素表示文档中的图像。&quot;)</code>一样包含指向要嵌入的文档的URL的路径。</li>
+<li><code>[width](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-width)</code>和<code>[height](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-height)</code>这些属性指定您想要的iframe的宽度和高度。</li>
+<li>备选内容与<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video" target="_blank" rel="noopener" title="使用HTML &lt;video&gt;元素将视频内容嵌入到文档中。"><code>&lt;video&gt;</code></a>等其他类似元素相同，您可以在打开和关闭<code>&lt;iframe&gt;&lt;/iframe&gt;</code>标签之间包含备选内容，如果浏览器不支持，将会显示 <code>&lt;iframe&gt;</code>。在这种情况下，我们已经添加了一个链接到页面。您几乎不可能遇到任何不支持<code>&lt;iframe&gt;</code>的浏览器。</li>
+<li><code>[sandbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox)</code>该属性比其他<code>&lt;iframe&gt;</code>功能（例如IE 10及更高版本）稍微更现代的浏览器工作，要求提高安全性设置;我们将在下一节中再说一遍。</li>
+</ul>
+<p><strong>注意</strong>：为了提高速度，在主内容完成加载后，使用 JavaScript 设置 iframe 的 <code>src</code>属性是个好主意。这使您的页面可以更快地使用，并减少您的官方页面加载时间（重要的<a href="https://developer.mozilla.org/en-US/docs/Glossary/SEO" target="_blank" rel="noopener" title="SEO：SEO（搜索引擎优化）是使网站在搜索结果中更加可见的过程，也称为提高搜索排名。">SEO</a>指标）。</p>
+<h3 id="3-1-安全隐患"><a href="#3-1-安全隐患" class="headerlink" title="3.1 安全隐患"></a>3.1 安全隐患</h3><p>以上我们提到了安全问题 - 现在我们来详细介绍一下这一点。我们并不期望您第一次完全理解所有这些内容;我们只想让您意识到这一问题，并为您提供参考，让您更有经验，并开始考虑 <code>&lt;iframe&gt;</code><br>在您的实验和工作中使用。此外，没有必要害怕和不使用 <code>&lt;iframe&gt;</code> - 你只需要谨慎一点。继续看下去…<br>浏览器制造商和 Web 开发人员已经学会了如何使用 iframe 作为网络上的坏人（通常被称为<strong>黑客</strong>，或更准确地说是<strong>破解者</strong>）的共同目标（官方术语：<strong>攻击向量</strong><br>），如果他们试图恶意修改您的网页或欺骗人们进行不想做的事情，例如显示用户名和密码等敏感信息。因此，规范工程师和浏览器开发人员已经开发了各种安全机制，使其更加安全，并且还有最佳实践要考虑 - 我们将在下面介绍其中的一些。<code>&lt;iframe&gt;</code> <a href="https://en.wikipedia.org/wiki/Clickjacking" target="_blank" rel="noopener" title="点击劫持">单击劫持</a>是一种常见的 iframe 攻击，黑客将隐藏的 iframe 嵌入到您的文档中（或将您的文档嵌入自己的恶意网站），并使用它来捕获用户的交互。这是误导用户或窃取敏感数据的常见方式。一个快速的例子，尽管如此 - 尝试加载在浏览器中上面的例子 - 你可以<a href="http://mdn.github.io/learning-area/html/multimedia-and-embedding/other-embedding-technologies/iframe-detail.html" target="_blank" rel="noopener">在Github上找到它</a><br>（<a href="https://github.com/mdn/learning-area/blob/gh-pages/html/multimedia-and-embedding/other-embedding-technologies/iframe-detail.html" target="_blank" rel="noopener">参见源代码</a><br>）。你不会看到页面上显示的内容，如果你点击<code>&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools&quot;&gt;浏览器开发者工具&lt;/a&gt;</code>中的控制台<br>，你会看到一条消息，告诉你为什么。在 Firefox 中，您会<em>被 X-Frame-Options 拒绝加载：<code>https://developer.mozilla.org/en-US/docs/Glossary</code> 不允许框架化</em><br>。这是因为构建 MDN 的开发人员已经在服务于网站页面的服务器上设置了一个不允许嵌入 <code>&lt;iframe&gt;</code><br>的设置（请参阅<a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#配置CSP指令" target="_blank" rel="noopener">配置CSP指令</a><br>）这是有必要的 - 整个 MDN 页面嵌入在其他页面中并不真实，除非您想要将其嵌入到您的网站上并将其声称为自己的内容，或尝试通过以下方式窃取数据：点击劫持，这两个都是非常糟糕的事情。此外，如果每个人都开始这样做，所有额外的带宽将开始花费 Mozilla 很多资金。</p>
+<h4 id="3-1-1-只有在必要时嵌入"><a href="#3-1-1-只有在必要时嵌入" class="headerlink" title="3.1.1 只有在必要时嵌入"></a>3.1.1 只有在必要时嵌入</h4><p>有时嵌入第三方内容（例如YouTube视频和地图）是有意义的，但如果您只在完全需要时嵌入第三方内容，您可以省去很多麻烦。网络安全的一个很好的经验法则是_“你怎么谨慎都不为过，如果你决定要做这件事，多检查一遍；如果是别人做的，在被证明是安全的之前，都假设这是危险的。”_除了安全问题，你还应该意识到知识产权问题。无论在线内容还是离线内容，绝大部分内容都是有版权的，甚至是一些你没想到有版权的内容（例如，<a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank" rel="noopener">Wikimedia Commons</a>上的大多数图片）。不要在网页上展示一些不属于你的内容，除非你是所有者或所有者给了你明确的、书面的许可。对于侵犯版权的惩罚是严厉的。再说一次，你再小心也不为过。如果内容获得许可，你必须遵守许可条款。例如，MDN 上的内容是<a href="https://developer.mozilla.org/zh-CN/docs/MDN/About#%E7%89%88%E6%9D%83%E5%92%8C%E8%AE%B8%E5%8F%AF" target="_blank" rel="noopener">在CC-BY-SA下许可的</a>，这意味着，如果你要引用我们的内容，就必须<a href="https://wiki.creativecommons.org/wiki/Best_practices_for_attribution" target="_blank" rel="noopener">用适当的方式注明来源</a>，即使你对内容做了实质性的修改。</p>
+<h4 id="3-1-2-使用-HTTPS"><a href="#3-1-2-使用-HTTPS" class="headerlink" title="3.1.2 使用 HTTPS"></a>3.1.2 使用 HTTPS</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTTPS" target="_blank" rel="noopener" title="HTTPS：HTTPS（HTTP Secure）是HTTP协议的加密版本。 它通常使用SSL或TLS来加密客户端和服务器之间的所有通信。 这种安全连接允许客户端安全地与服务器交换敏感数据，例如用于银行活动或在线购物。">HTTPS</a>是<a href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP" target="_blank" rel="noopener" title="HTTP：HTTP（超文本传输​​协议）是启用Web上文件传输的基本协议。 HTTP是文本的（所有的通信都是以纯文本形式进行的）和无状态的（没有通信知道以前的通信）。">HTTP</a>的加密版本。您应该尽可能使用 HTTPS 为您的网站提供服务：</p>
+<ol>
+<li>HTTPS 减少了远程内容在传输过程中被篡改的机会，</li>
+<li>HTTPS 防止嵌入式内容访问您的父文档中的内容，反之亦然。</li>
+</ol>
+<p>使用 HTTPS 需要一个安全证书，这可能是昂贵的（尽管<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a>让这件事变得更容易），如果你没有，可以使用 HTTP 来为你的父文档提供服务。但是，由于 HTTPS 的第二个好处，_无论成本如何，您绝对不能使用 HTTP 嵌入第三方内容_（在最好的情况下，您的用户的 Web 浏览器会给他们一个可怕的警告）。所有有声望的公司，例如 Google Maps 或 Youtube，当您嵌入内容时，<code>&lt;iframe&gt;</code> 将通过 HTTPS 提供 - 查看 <code>&lt;iframe&gt;</code> <code>src</code> 属性内的 URL。</p>
+<p><strong>注意</strong><br>：<a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Using_Github_pages" target="_blank" rel="noopener">Github页面</a>允许默认情况下通过 HTTPS 提供内容，因此对托管内容很有用。如果您正在使用不同的托管，并且不确定，请向您的托管服务商询问。</p>
+<h4 id="3-1-3-始终使用-sandbox"><a href="#3-1-3-始终使用-sandbox" class="headerlink" title="3.1.3 始终使用 sandbox"></a>3.1.3 始终使用 <code>sandbox</code></h4><p>属性你想给攻击者尽可能少的机会在你的网站上做坏事，那么你应该只给嵌入式内容<em>工作所需的权限。</em><br>当然，这也适用于你自己的内容。一个代码可以适当使用或用于测试的容器，但不能对其他代码库（意外或恶意）造成任何损害称为<a href="https://en.wikipedia.org/wiki/Sandbox_(computer_security)" target="_blank" rel="noopener">沙箱</a>。未沙盒化(Unsandboxed)内容可以做得太多（执行 JavaScript，提交表单，弹出窗口等）默认情况下，您应该使用没有参数的 <code>sandbox</code>属性来强制执行所有可用的限制，如我们前面的示例所示。如果绝对需要，您可以逐个添加权限（<code>sandbox=&quot;&quot;</code>属性值内） - 请参阅<code>[sandbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox)</code>所有可用选项的参考条目。其中重要的一点是，你_永远不_应该同时添加<code>allow-scripts</code>和<code>allow-same-origin</code>到你的<code>sandbox</code>属性中-在这种情况下，嵌入的内容可以绕过，从执行脚本停止网站同源安全策略，并使用 JavaScript 来关闭完全沙箱。<br><strong>注意</strong>：如果攻击者可以直接（外部<code>iframe</code>）愚弄人们访问恶意内容，Sandboxing 不提供任何保护。如果某些内容有可能是恶意的（例如，用户生成的内容），请将其从不同的<a href="https://developer.mozilla.org/en-US/docs/Glossary/domain" target="_blank" rel="noopener" title="域：域是计算机网络的一部分，其中一个实体控制数据处理资源，例如网站。">域服务</a>到您的主要网站。</p>
+<h4 id="3-1-4-配置-CSP-指令"><a href="#3-1-4-配置-CSP-指令" class="headerlink" title="3.1.4 配置 CSP 指令"></a>3.1.4 配置 CSP 指令</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSP" target="_blank" rel="noopener" title="CSP：CSP（内容安全策略）用于检测和减轻某些类型的网站相关攻击，如XSS和数据注入。">CSP</a>代表<strong><a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP" target="_blank" rel="noopener">内容安全策略</a></strong><br>，它提供<a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives" target="_blank" rel="noopener">一组HTTP标头</a>（由web服务器发送时与元数据一起发送的元数据），旨在提高HTML文档的安全性。在<code>&lt;iframe&gt;</code>安全性方面，您可以_<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options" target="_blank" rel="noopener">将服务器配置为发送适当的 <code>X-Frame-Options</code>标题。</a>这样做可以防止其他网站在其网页中嵌入您的内容（这将导致<a href="https://en.wikipedia.org/wiki/clickjacking" target="_blank" rel="noopener" title="点击劫持">点击</a>和一系列其他攻击），正如我们之前看到的那样，MDN 开发人员已经做了这些工作。</p>
+<p><strong>注意</strong><br>：您可以阅读 Frederik Braun 的帖子<br><code>&lt;a href=&quot;https://blog.mozilla.org/security/2013/12/12/on-the-x-frame-options-security-header/&quot; class=&quot;external external-icon&quot; rel=&quot;noopener&quot;&gt;在X-Frame-Options安全性头上&lt;/a&gt;</code>获取有关此主题的更多背景信息。显然，在这篇文章中已经解释得很清楚了。</p>
+<h2 id="四、-lt-embed-gt-和-lt-object-gt-元素"><a href="#四、-lt-embed-gt-和-lt-object-gt-元素" class="headerlink" title="四、&lt;embed&gt; 和 &lt;object&gt; 元素"></a>四、&lt;embed&gt; 和 &lt;object&gt; 元素</h2><p><a href="https:/`/developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener">embed</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object" target="_blank" rel="noopener">object</a> 元素的功能不同于<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener">iframe</a>——这些元素是用来嵌入多种类型的外部内容的通用嵌入工具，其中包括像 Java 小程序和 Flash，PDF（可在浏览器中显示为一个 PDF 插件）这样的插件技术，甚至像视频，SVG 和图像的内容！</p>
+<p><strong>注意</strong>：<strong>插件</strong>是一种对浏览器原生无法读取的内容提供访问权限的软件。然而，您不太可能使用这些元素 - Applet 几年来一直没有被使用；由于许多原因，Flash 不再受欢迎（见下面的<a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#The_case_against_plugins" target="_blank" rel="noopener">插件案例</a>）；PDF 更倾向于被链接而不是被嵌入；其他内容，如图像和视频都有更优秀、更容易元素来处理。插件和这些嵌入方法真的是一种传统技术，我们提及它们主要是为了以防您在某些情况下遇到问题，比如内部网或企业项目等。如果您发现自己需要嵌入插件内容，那么您至少需要一些这样的信息：</p>
+<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/embed-object.png" alt=""></p>
+<p><strong>注意</strong>：&lt;<code>object&gt;``需要</code>data<code>属性，</code>type<code>属性或两者。如果您同时使用这两个，您也可以使用该</code><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object#attr-typemustmatch" target="_blank" rel="noopener">typemustmatch</a><code>属性（仅在Firefox中实现，在本文中）。</code>typemustmatch<code>保持嵌入文件不运行，除非</code>type<code>属性提供正确的媒体类型。</code>typemustmatch`因此，当您嵌入来自不同<a href="https://developer.mozilla.org/en-US/docs/Glossary/origin" target="_blank" rel="noopener" title="来源：Web内容的起源由方案（协议），主机（域）和用于访问它的URL的端口定义。 只有当方案，主机和端口都匹配时，两个对象具有相同的原点。">来源的</a>内容（可以防止攻击者通过插件运行任意脚本）时，可以赋予重要的安全优势。</p>
+<p>下面是一个使用该<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener" title="HTML &lt;embed&gt;元素表示外部应用程序或交互式内容（换句话说，插件）的集成点。"><code>&lt;embed&gt;</code></a>元素嵌入 Flash 影片的示例（请参阅此处的<a href="http://mdn.github.io/learning-area/html/multimedia-and-embedding/other-embedding-technologies/embed-flash.html" target="_blank" rel="noopener">Github</a>，并<a href="https://github.com/mdn/learning-area/blob/gh-pages/html/multimedia-and-embedding/other-embedding-technologies/embed-flash.html" target="_blank" rel="noopener">检查源代码</a>）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">"whoosh.swf"</span> <span class="attr">quality</span>=<span class="string">"medium"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">bgcolor</span>=<span class="string">"#ffffff"</span> <span class="attr">width</span>=<span class="string">"550"</span> <span class="attr">height</span>=<span class="string">"400"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">name</span>=<span class="string">"whoosh"</span> <span class="attr">align</span>=<span class="string">"middle"</span> <span class="attr">allowScriptAccess</span>=<span class="string">"sameDomain"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">allowFullScreen</span>=<span class="string">"false"</span> <span class="attr">type</span>=<span class="string">"application/x-shockwave-flash"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">pluginspage</span>=<span class="string">"http://www.macromedia.com/go/getflashplayer"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>很可怕，不是吗 。Adobe Flash 工具生成的 HTML 往往更糟糕，使用嵌入 <code>&lt;object&gt;</code> 元素的 <code>&lt;embed&gt;</code><br>元素来覆盖所有的基础（查看一个例子）。甚至有一段时间，Flash 被成功地用作 HTML5 视频的备用内容，但是这种情况越来越被认为是不必要的。现在来看一个 <code>&lt;object&gt;</code><br>将 PDF 嵌入一个页面的例子（参见 <code>&lt;a href=&quot;http://mdn.github.io/learning-area/html/multimedia-and-embedding/other-embedding-technologies/object-pdf.html&quot; class=&quot;external external-icon&quot; rel=&quot;noopener&quot;&gt;实例&lt;/a&gt;</code>和<a href="https://github.com/mdn/learning-area/blob/gh-pages/html/multimedia-and-embedding/other-embedding-technologies/object-pdf.html" target="_blank" rel="noopener">源代码</a><br>）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"mypdf.pdf"</span> <span class="attr">type</span>=<span class="string">"application/pdf"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">"800"</span> <span class="attr">height</span>=<span class="string">"1200"</span> <span class="attr">typemustmatch</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>You don't have a PDF plugin, but you can <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"myfile.pdf"</span>&gt;</span>download the PDF file.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>PDF 是纸与数据之间重要的阶梯，但它们<a href="http://webaim.org/techniques/acrobat/acrobat" target="_blank" rel="noopener">在可访问性上有些问题</a><br><code>&lt;a href=&quot;http://webaim.org/techniques/acrobat/acrobat&quot; class=&quot;external external-icon&quot; rel=&quot;noopener&quot;&gt;，&lt;/a&gt;</code>并且可能难以在小屏幕上阅读。它们在一些圈子中仍然受欢迎，我们最好是用链接指向它们，而不是将其嵌入到网页中，以便它们可以在单独的页面上被下载或被阅读。</p>
+<h3 id="4-1-针对插件的情况"><a href="#4-1-针对插件的情况" class="headerlink" title="4.1 针对插件的情况"></a>4.1 针对插件的情况</h3><p>以前，插件在网络上是不可或缺的。还记得你必须安装 Adobe Flash Player 才能在线观看电影的日子吗？并且你还会不断地收到关于更新 Flash Player 和 Java 运行环境的烦人警报。Web 技术已经变得更加强大，那些日子已经结束了。对于大多数应用程序，现在是停止依赖插件传播内容，开始利用 Web 技术的时候了。</p>
+<ul>
+<li><p><strong>扩大你对大家的影响力。</strong></p>
+<p>  每个人都有一个浏览器，但插件越来越少，特别是在移动用户中。由于 Web 在很大程度上不需要依赖插件而运行，所以人们宁愿只是去竞争对手的网站而不是安装插件。</p>
+</li>
+<li><p><strong>从 Flash 和其他插件附带的<a href="http://webaim.org/techniques/flash/" target="_blank" rel="noopener">额外辅助功能头痛</a><br>中脱颖而出。</strong></p>
+</li>
+<li><p><strong>避免额外的安全隐患。</strong></p>
+<p>  即使经过无数次补丁<a href="http://www.cvedetails.com/product/6761/Adobe-Flash-Player.html?vendor_id=53" target="_blank" rel="noopener">，</a>&nbsp;Adobe Flash也是<a href="http://www.cvedetails.com/product/6761/Adobe-Flash-Player.html?vendor_id=53" target="_blank" class="external external-icon" rel="noopener noopener">非常不安全的</a>。2015年，Facebook的首席安全官Alex Stamos甚至<a href="http://www.theverge.com/2015/7/13/8948459/adobe-flash-insecure-says-facebook-cso" target="_blank" rel="noopener">要求Adobe停止Flash。</a></p>
+</li>
+</ul>
+<p>那你该怎么办？如果您需要交互性，HTML 和 <a href="https://developer.mozilla.org/en-US/docs/Glossary/JavaScript" target="_blank" rel="noopener" title="JavaScript：JavaScript（JS）是一种编程语言，主要用于客户端来动态地脚本化网页，但也常常是服务器端的。">JavaScript</a>可以轻松地为您完成工作，而不需要 Java 小程序或过时的 ActiveX / BHO 技术。您可以使用<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Add_audio_or_video_content_to_a_webpage" target="_blank" rel="noopener">HTML5视频</a>来满足媒体需求，矢量图形<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Add_vector_image_to_a_webpage" target="_blank" rel="noopener">SVG</a><br>，以及复杂图像和动画<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="noopener">画布</a>。<a href="https://plus.google.com/+PeterElst/posts/P5t4pFhptvp" target="_blank" rel="noopener">彼得·埃尔斯特（Peter Elst）几年前已经在写</a>，对于工作Adobe Flash 极少是正确的工具，除了专门的游戏和商业应用。对于 ActiveX，即使微软的<a href="https://developer.mozilla.org/en-US/docs/Glossary/Microsoft_Edge" target="_blank" rel="noopener" title="Edge：Microsoft Edge是一种免费的图形Web浏览器，与Microsoft Windows捆绑在一起，由Microsoft自2014年开始。最初称为Spartan，Edge取代了长期以来的Microsoft浏览器Internet Explorer。">Edge</a><br>浏览器也不再支持。</p>
+<h2 id="五、概要"><a href="#五、概要" class="headerlink" title="五、概要"></a>五、概要</h2><p>在 Web 文档中嵌入其他内容的主题可能会变得非常复杂，因此在本文中，我们尝试以一种简单而熟悉的方式来介绍它，它们有直接的关系，同时仍然暗示了一些涉及更高级功能的技术。首先，您不可能在包含第三方内容（如地图和视频）的网页上使用嵌入式广告。当你变得更有经验的时候，你可能会开始为他们找到更多的用途。除了我们在这里讨论的那些外，还有许多涉及嵌入外部内容的技术。我们看到了一些在前面的文章中出现的，如<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video" target="_blank" rel="noopener" title="使用HTML &lt;video&gt;元素将视频内容嵌入到文档中。"><code>&lt;video&gt;</code></a><br>，<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio" target="_blank" rel="noopener" title="HTML &lt;audio&gt;元素用于在文档中嵌入声音内容。 它可能包含一个或多个音频源，使用src属性或&lt;source&gt;元素表示：浏览器将选择最合适的一个。 它也可以是流媒体的目的地，使用MediaStream。"><code>&lt;audio&gt;</code></a><br>和<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img" target="_blank" rel="noopener" title="HTML &lt;img&gt;元素表示文档中的图像。"><code>&lt;img&gt;</code></a>，但也有其它的有待关注，如&nbsp;&nbsp;<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank" rel="noopener" title="使用HTML &lt;canvas&gt;元素与canvas脚本API来绘制图形和动画。"><code>&lt;canvas&gt;</code></a>用于 JavaScript 生成的 2D 和 3D 图形，<code>[&lt;svg&gt;](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg &quot;关于此的文件尚未写入;  请考虑贡献！&quot;)</code>用于嵌入矢量图形。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/%E5%85%B6%E4%BB%96%E5%B5%8C%E5%85%A5%E6%8A%80%E6%9C%AF" target="_blank" rel="noopener"><br>从对象到iframe - 其他嵌入技术</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/05/10/2018-05-10-java-doc/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/05/01/2018-05-01-html-video-and-audio/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-05-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Html/">Html<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

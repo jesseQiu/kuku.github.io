@@ -1,0 +1,775 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Css Start - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="一、CSS 基础知识
+Css 全称为 层叠样式表 (Cascading Style Sheets)，它主要是用于定义 HTML 内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等在英文大括号 {} 中的的就是声明，属性和值之间用英文冒号  : 分隔。当有多条声明时，中间可以英文分号 ; 分隔，如">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Css Start"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Css Start</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><img src="http://od6sd4xau.bkt.clouddn.com/css-%E8%AF%AD%E6%B3%95.jpg" alt="css 语法"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-%E9%80%89%E6%8B%A9%E5%99%A8.jpg" alt="css 选择器"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-%E5%86%85%E5%AE%B9%E6%8E%92%E7%89%88.jpg" alt="css 内容排版"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B.jpg" alt="css 盒子模型"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-%E5%B8%83%E5%B1%80%E6%A8%A1%E5%9E%8B.jpg" alt="css 布局模型"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-%E5%B8%83%E5%B1%80%E6%96%B9%E5%BC%8F.jpg" alt="css 布局方式"><br><img src="http://od6sd4xau.bkt.clouddn.com/css-display.jpg" alt="css display"></p>
+<h2 id="一、CSS-基础知识"><a href="#一、CSS-基础知识" class="headerlink" title="一、CSS 基础知识"></a>一、CSS 基础知识</h2><ol>
+<li>Css 全称为 <em>层叠样式表 (Cascading Style Sheets)</em>，它主要是用于定义 HTML 内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等<br>在英文大括号 <code>{}</code> 中的的就是声明，属性和值之间用英文冒号  <code>:</code> 分隔。当有多条声明时，中间可以英文分号 <code>;</code> 分隔，如下所示：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	font-size:12px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	color:red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>最后一条声明可以没有分号，但是为了以后修改方便，一般也加上分号。</li>
+</ul>
+<ol start="2">
+<li><p>在 Css 中也有注释语句：用 <code>/*注释语句*/</code> 来标明 <code>(Html中使用&lt;!--注释语句--&gt;)</code>。</p>
+</li>
+<li><p>内联式 Css 样式：</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red;font-size:12px"</span>&gt;</span> 这里文字是红色。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>嵌入式 Css 样式</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">span&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>外部式 Css 样式：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"base.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></span></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>优先级</li>
+</ol>
+<ul>
+<li>内联式 &gt; 嵌入式 &gt; 外部式</li>
+<li>嵌入式 &gt; 外部式有一个前提：嵌入式 css 样式的位置一定在外部式的后面<br>其实总结来说，就是 <strong>就近原则(离被设置元素越近优先级别越高)</strong>。</li>
+</ul>
+<h2 id="二、选择器"><a href="#二、选择器" class="headerlink" title="二、选择器"></a>二、选择器</h2><ol>
+<li>选择器<br>每一条 css 样式声明（定义）由两部分组成，形式如下：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  样式;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>在 {} 之前的部分就是 “选择器”，“选择器” 指明了 {} 中的 “样式” 的作用 <em>对象</em>，也就是“样式”作用于网页中的哪些元素</p>
+<ol start="2">
+<li>标签选择器</li>
+</ol>
+<p>其实就是 html 代码中的 <strong>标签</strong>。如 <code>&lt;html&gt;、&lt;body&gt;、&lt;h1&gt;、&lt;p&gt;、&lt;img&gt;</code></p>
+<ol start="3">
+<li>类选择器</li>
+</ol>
+<ul>
+<li>英文圆点开头</li>
+<li>其中类选器名称可以任意起名。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.center</span> &#123;<span class="attribute">text-align</span>:center;&#125;</span></pre></td></tr></table></figure>
+<p>你也可以指定特定的 HTML 元素使用 class。<br>在以下实例中, 所有的 <code>p</code> 元素使用 class=”center” 让该元素的文本居中:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>菜鸟教程(runoob.com)<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="css">		<span class="selector-tag">p</span><span class="selector-class">.center</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="css">		    <span class="selector-tag">text-align</span><span class="selector-pseudo">:center</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span>这个标题不受影响<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span>这个段落居中对齐。<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>ID 选择器</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#setGreen&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> color:green;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>类 和 ID 选择器的区别</li>
+</ol>
+<ul>
+<li>相同点：可以应用于任何元素  </li>
+<li>不同点：类选择器词可以为一个元素同时设置多个样式，ID 选择器是不可以。<br>正确代码:</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Css<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-class">.stress</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        color: red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-class">.bigsize</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        font-size: 25px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-id">#stressid</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        color: red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-id">#bigsizeid</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        font-size: 25px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">i</span>&gt;</span>样式有效:<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>到了<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"stress bigsize"</span>&gt;</span>三年级<span class="tag">&lt;/<span class="name">span</span>&gt;</span>下学期时，我们班上了一节公开课...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">i</span>&gt;</span>样式无效:<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>到了<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"stressid bigsizeid"</span>&gt;</span>三年级<span class="tag">&lt;/<span class="name">span</span>&gt;</span>下学期时，我们班上了一节公开课...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>子选择器</li>
+</ol>
+<p>还有一个比较有用的选择器 <strong>子选择器</strong>，即大于符号 <code>&gt;</code>,用于选择指定标签元素的<strong>第一代子元素。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.food</span>&gt;<span class="selector-tag">li</span>&#123;<span class="attribute">border</span>:<span class="number">1px</span> solid red;&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"food"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>水果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>梨<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>蔬菜</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>白菜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>油菜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>卷心菜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>上面代码会使 class 名为 food 下的子元素 li（水果、蔬菜）加入红色实线边框，当时里层的 li 确没有加。</p>
+<ol start="7">
+<li>包含(后代)选择器</li>
+</ol>
+<p><strong>包含选择器</strong>，即加入 <strong>空格</strong>,用于选择指定标签元素下的 <strong>后辈元素。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">.first  span&#123;color:red;&#125;</span></pre></td></tr></table></figure>
+<p>请注意这个选择器与子选择器的区别，子选择器（child selector）仅是指它的直接后代，或者你可以理解为作用于子元素的第一代后代。而后代选择器是作用于所有子后代元素。后代选择器通过空格来进行选择，而子选择器是通过 <code>&gt;</code> 进行选择。</p>
+<p>总结：<code>&gt;</code> 作用于元素的第一代后代，<strong>空格</strong> 作用于元素的所有后代。</p>
+<ol start="8">
+<li>通用选择器</li>
+</ol>
+<p>通用选择器是功能最强大的选择器，它使用一个 <code>*</code> 号指定，它的作用是匹配 html 中所有标签元素，如下使用下面代码使用 html 中任意标签元素字体颜色全部设置为红色：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">* &#123;color:red;&#125;</span></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>伪类选择符</li>
+</ol>
+<p>更有趣的是伪类选择符，为什么叫做伪类选择符，它允许给 html 不存在的标签（标签的某种状态）设置样式，比如说我们给 html 中一个标签元素的鼠标滑过的状态来设置字体颜色：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a:hover&#123;color:red;&#125;</span></pre></td></tr></table></figure>
+
+<p>上面一行代码就是为 a 标签鼠标滑过的状态设置字体颜色变红。</p>
+<ol start="10">
+<li>分组选择符</li>
+</ol>
+<p>当你想为 html 中多个标签元素设置同一个样式时，可以使用分组选择符 <code>,</code>，如下代码为 <code>h1、span</code> 标签同时设置字体颜色为红色：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">h1,span&#123;color:red;&#125;</span></pre></td></tr></table></figure>
+<p>它相当于下面两行代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">h1&#123;color:red;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">span&#123;color:red;&#125;</span></pre></td></tr></table></figure>
+
+<ol start="11">
+<li>继承</li>
+</ol>
+<p>Css 的某些 <strong>样式</strong> 是具有继承性的，那么什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定 html 标签元素，而且应用于其 <strong>后代</strong>。比如下面代码：如某种颜色应用于 <code>p</code> 标签，这个颜色设置不仅应用 <code>p</code>标签，还应用于 <code>p</code> 标签中的所有子元素文本，这里子元素为 <code>span</code> 标签。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:red;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>可见<code>p</code> 中的文本与 <code>span</code>中的文本都设置为了红色。但注意有一些 css 样式是不具有继承性的。<br>如:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;border:1px solid red;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>在上面例子中它代码的作用只是给 <code>p</code> 标签设置了边框为 1 像素、红色、实心边框线，而对于子元素 <code>span</code> 是没用起到作用的。</p>
+<ol start="12">
+<li>特殊性</li>
+</ol>
+<p>有的时候我们为同一个元素设置了不同的 CSS 样式代码，那么元素会启用哪一个 CSS 样式呢?我们来看一下面的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:red;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">.first&#123;color:green;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"first"</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>p 和 .first 都匹配到了 p 这个标签上，那么会显示哪种颜色呢？green 是正确的颜色，那么为什么呢？是因为浏览器是根据权值来判断使用哪种css样式的，权值高的就使用哪种 css 样式。</p>
+<p>下面是权值的规则：</p>
+<ul>
+<li>标签的权值为 1</li>
+<li>类选择符的权值为 10</li>
+<li>ID 选择符的权值最高为 100</li>
+</ul>
+<p>例如下面的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:red;&#125; /*权值为1*/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">p span&#123;color:green;&#125; /*权值为1+1=2*/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">.warning&#123;color:white;&#125; /*权值为10*/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">p span .warning&#123;color:purple;&#125; /*权值为1+1+10=12*/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">#footer .note p&#123;color:yellow;&#125; /*权值为100+10+1=111*/</span></pre></td></tr></table></figure>
+<p>注意：还有一个权值比较特殊–继承也有权值但很低，有的文献提出它只有 0.1，所以可以理解为继承的权值最低。</p>
+<ol start="13">
+<li>最高权值</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:red!important;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">p span&#123;color:green;&#125;</span></pre></td></tr></table></figure>
+<p>注意：<code>!important</code> 要写在分号的前面</p>
+<h2 id="三、文字排版"><a href="#三、文字排版" class="headerlink" title="三、文字排版"></a>三、文字排版</h2><ol>
+<li>字体</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">body&#123;font-family:"Microsoft Yahei";&#125; // 兼容性更好</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">或</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">body&#123;font-family:"微软雅黑";&#125;</span></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>字号、颜色</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">body&#123;font-size:12px;color:#666&#125;</span></pre></td></tr></table></figure></li>
+<li><p>粗体</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p span&#123;font-weight:bold;&#125; // <span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">b</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><p>斜体</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p a&#123;font-style:italic;&#125;// <span class="tag">&lt;<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><p>下划线</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p a&#123;text-decoration:underline;&#125;  // <span class="tag">&lt;<span class="name">u</span>&gt;</span><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><p>删除线</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">.oldPrice&#123;text-decoration:line-through;&#125; // <span class="tag">&lt;<span class="name">strike</span>&gt;</span><span class="tag">&lt;/<span class="name">strike</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><p>缩进</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;text-indent:2em;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>1922年的春天，一个想要成名名叫尼克卡拉威（托比?马奎尔Tobey Maguire 饰）的作家，离开了美国中西部，来到了纽约。那是一个道德感渐失，爵士乐流行，走私为王，股票飞涨的时代。为了追寻他的美国梦，他搬入纽约附近一海湾居住。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>注意：2em 的意思就是文字的 2 倍大小。</p>
+</li>
+<li><p>行间距</p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">line-height</span>:<span class="number">1.5em</span>;&#125;</span></pre></td></tr></table></figure>
+<ol start="9">
+<li>字母间距</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">letter-spacing</span>:<span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>单词间距</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">word-spacing</span>:<span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ol start="11">
+<li>对齐</li>
+</ol>
+<p>为块 <strong>状元素</strong> 中的文本、图片设置</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">text-align</span>:center/left/right;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="四、盒子模型"><a href="#四、盒子模型" class="headerlink" title="四、盒子模型"></a>四、盒子模型</h2><ol>
+<li><p>常用的块状元素<br><code>&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;...&lt;h6&gt;、&lt;ol&gt;、&lt;ul&gt;、&lt;dl&gt;、&lt;table&gt;、&lt;address&gt;、&lt;blockquote&gt; 、&lt;form&gt;</code></p>
+</li>
+<li><p>常用的内联元素<br><code>&lt;a&gt;、&lt;span&gt;、&lt;br&gt;、&lt;i&gt;、&lt;em&gt;、&lt;strong&gt;、&lt;label&gt;、&lt;q&gt;、&lt;var&gt;、&lt;cite&gt;、&lt;code&gt;</code></p>
+</li>
+<li><p>常用的内联块状元素<br><code>&lt;img&gt;、&lt;input&gt;</code></p>
+</li>
+<li><p>设置块级元素</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a&#123;display:block;&#125;</span></pre></td></tr></table></figure>
+<p>块级元素特点：</p>
+<ul>
+<li>每个块级元素都从新的一行开始，并且其后的元素也另起一行</li>
+<li>元素的高度、宽度、行高以及顶和底边距都可设置</li>
+<li>元素宽度在不设置的情况下，是它本身父容器的 <strong>100%</strong>（和父元素的宽度一致），除非设定一个宽度。</li>
+</ul>
+<ol start="5">
+<li>设置内联元素</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">a&#123;display:inline;&#125;</span></pre></td></tr></table></figure>
+<p>内联元素特点：</p>
+<ul>
+<li>和其他元素都在一行上</li>
+<li>元素的高度、宽度及顶部和底部边距不可设置</li>
+<li>元素的宽度就是它包含的文字或图片的宽度，<strong>不可改变</strong></li>
+</ul>
+<ol start="6">
+<li>设置内联<em>块</em>元素</li>
+</ol>
+<p><code>inline-block</code> 元素特点：</p>
+<ul>
+<li>和其他元素都在一行上</li>
+<li>元素的高度、宽度、行高以及顶和底边距都可设置</li>
+</ul>
+<ol start="7">
+<li><p>标准盒子模型的计算方式如图所示：</p>
+</li>
+<li><p>IE盒子模型的计算方式如图所示：<br><img src="http://img.blog.csdn.net/20140725102923126?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd3pxbmxz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="标准盒子模型"></p>
+</li>
+<li><p>边框</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    border:2px  solid  red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>上面是 border 代码的缩写形式，可以分开写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    border-width:2px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    border-style:solid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border-color:red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>** 注意：**</p>
+<ul>
+<li>border-style（边框样式）常见样式有：<ul>
+<li>dashed（虚线）</li>
+<li>dotted（点线）</li>
+<li>solid（实线）</li>
+</ul>
+</li>
+<li>border-color（边框颜色）中的颜色可设置为十六进制颜色，如:<br>  <code>border-color:#888;</code> //前面的井号不要忘掉。</li>
+<li>border-width（边框宽度）中的宽度也可以设置为：<ul>
+<li>thin </li>
+<li>medium </li>
+<li>thick（但不是很常用），最常还是用象素（px）。</li>
+</ul>
+</li>
+<li>也可以当都设置其中的一边 <code>border-top/right/bottom/left</code></li>
+</ul>
+<ol start="10">
+<li>宽度和高度</li>
+</ol>
+<p>盒模型宽度和高度和我们平常所说的物体的宽度和高度理解是不一样的，css 内定义的宽（width）和高（height），指的是 <strong>填充的内容范围</strong>。</p>
+<ul>
+<li><p>宽度（盒子的宽度）= 左边界 + 左边框 + 左填充 + 内容宽度 + 右填充 + 右边框 + 右边界。<br><img src="http://img.mukewang.com/539fbb3a0001304305570259.jpg" alt=""></p>
+</li>
+<li><p>高度:同上</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    padding:20px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border:1px solid red;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    margin:10px;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>文本内容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>元素的实际长度为：10px+1px+20px+200px+20px+1px+10px=262px。在 chrome 浏览器下可查看元素盒模型，如下图：<br><img src="http://img.mukewang.com/543b4cae0001b34304300350.jpg" alt=""></p>
+<ol start="11">
+<li>填充(padding)</li>
+</ol>
+<p>元素内容与边框之间是可以设置距离的，称之为“填充”。填充也可分为上、右、下、左(顺时针)。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;padding:20px 10px 15px 30px;&#125;</span></pre></td></tr></table></figure>
+<p>顺序一定不要搞混。可以分开写上面代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   padding-top:20px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   padding-right:10px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   padding-bottom:15px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   padding-left:30px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>如果上、右、下、左的填充都为 10px; 可以这么写</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;padding:10px;&#125;</span></pre></td></tr></table></figure>
+<p>如果上下填充一样为 10px，左右一样为 20px，可以这么写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;padding:10px 20px;&#125;</span></pre></td></tr></table></figure>
+
+<ol start="12">
+<li>边界(margin) 同填充类似</li>
+</ol>
+<h2 id="五、Css-布局模型"><a href="#五、Css-布局模型" class="headerlink" title="五、Css 布局模型"></a>五、Css 布局模型</h2><p>布局模型是建立在 <strong>盒模型</strong> 基础之上，又不同于我们常说的 CSS 布局样式或 CSS 布局模板。如果说布局模型是本，那么 CSS 布局模板就是末了，是外在的表现形式。<br>CSS 包含 3 种基本的布局模型，用英文概括为：Flow、Layer 和 Float。</p>
+<p>1、流动模型（Flow）</p>
+<ul>
+<li>块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为 100%。实际上，块状元素都会以行的形式占据位置。</li>
+<li>在流动模型下，内联元素都会在所处的包含元素内从 <strong>左到右</strong> 水平分布显示。</li>
+</ul>
+<p>2、浮动模型 (Float)<br>让两个块状元素并排显示，怎么办呢？设置元素浮动就可以实现。<br>任何元素在默认情况下是不能浮动的，但可以用 CSS 定义为浮动，如 div、p、table、img 等元素都可以被定义为浮动。如下代码可以实现两个 div 元素一行显示。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    height:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border:2px red solid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    float:left;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>3、层模型（Layer）<br>层布局模型就像是图像软件 PhotoShop 中非常流行的图层编辑功能一样，每个图层能够精确定位操作，但在网页设计领域，由于网页大小的活动性，层布局没能受到热捧。但是在网页上局部使用层布局还是有其方便之处的。CSS 定义了一组定位（positioning）属性来支持层布局模型。<br>层模型有三种形式：</p>
+<ul>
+<li>绝对定位(position: absolute)<br>作用将元素从文档流中拖出来，然后使用 left、right、top、bottom 属性相对于其 <strong>最接近的一个具有定位属性的父包含块</strong> 进行绝对定位。如果不存在这样的包含块，则相对于 body 元素，即相对于浏览器窗口。<br>如下面代码可以实现 div 元素相对于浏览器窗口向右移动 100px，向下移动 50px。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    height:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border:2px red solid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    position:absolute;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    left:100px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    top:50px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p><img src="http://img.mukewang.com/53a00b130001e86707360547.jpg" alt=""></p>
+<ul>
+<li>相对定位(position: relative)<br>通过 left、right、top、bottom 属性确定元素在 <strong>正常文档流中</strong> 的偏移位置。相对定位完成的过程是首先按 static(float) 方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于 <strong>以前的位置移动</strong>, 移动的方向和幅度由 left、right、top、bottom 属性确定，偏移前的位置保留不动。<br>如下代码实现相对于以前位置向下移动 50px，向右移动 100px;</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#div1&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    height:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border:2px red solid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    position:relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    left:100px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    top:50px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p><img src="http://img.mukewang.com/53a00d2b00015c4b06190509.jpg" alt="效果图"></p>
+<p>什么叫做 <strong>偏移前的位置保留不动</strong> 呢？</p>
+<p>大家可以做一个实验：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>偏移前的位置还保留不动，覆盖不了前面的 div 没有偏移前的位置<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+<p><img src="http://img.mukewang.com/541a4bfc0001abef05940489.jpg" alt="效果图"></p>
+<p>从效果图中可以明显的看出，虽然 div 元素相对于<br> <strong>以前</strong> 的位置产生了偏移，但是 div 元素 <strong>以前的位置还是保留着</strong>，所以后面的 span 元素是显示在了 div 元素以前位置的后面。</p>
+<ul>
+<li>固定定位(position: fixed)<br>与 absolute 定位类型类似，但它的相对移动的坐标是  <strong>视图（屏幕内的网页窗口）</strong> 本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响，这与 <code>background-attachment:fixed;</code> 属性功能相同。以下代码可以实现相对于浏览器视图向右移动 100px，向下移动 50px。并且拖动滚动条时位置固定不变。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#div1&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    height:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    border:2px red solid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    position:fixed;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    left:100px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    top:50px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>4、Relative 与 Absolute 组合使用</p>
+<ul>
+<li><p>参照定位的元素必须是相对定位元素的前辈元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span>&gt;</span><span class="comment">&lt;!--参照定位的元素--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span>&gt;</span>相对参照元素进行定位<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="comment">&lt;!--相对定位元素--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>从上面代码可以看出 box1 是 box2 的父元素（父元素当然也是前辈元素了）。</p>
+</li>
+<li><p>参照定位的元素必须加入 position:relative;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#box1&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    width:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    height:200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    position:relative; // 使 box1 包含的元素脱离原来的文档流       </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li><p>定位元素加入 position:absolute，便可以使用 top、bottom、left、right 来进行偏移定位了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#box2&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    position:absolute; // 可以根据父元素的相对位置定位</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    top:20px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    left:30px;         </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>这样 box2 就可以相对于父元素 box1 定位了（这里注意参照物就可以不是浏览器了，而可以自由设置了）。</p>
+</li>
+</ul>
+<h2 id="六、代码缩写"><a href="#六、代码缩写" class="headerlink" title="六、代码缩写"></a>六、代码缩写</h2><ol>
+<li>盒子模型代码缩写</li>
+</ol>
+<ul>
+<li><p>上: 10px、右: 15px、下: 12px、左: 14px</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    padding:10px 15px 12px 14px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</li>
+<li><p>如果 top 和 bottom 值相同、left 和 right 的值相同</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">margin:10px 20px 10px 20px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">可缩写为：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">margin:10px 20px;</span></pre></td></tr></table></figure>
+</li>
+<li><p>如果 left 和 right 的值相同，如下面代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">margin:10px 20px 30px 20px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">可缩写为：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">margin:10px 20px 30px;</span></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="2">
+<li>颜色值缩写</li>
+</ol>
+<p>当你设置的颜色是 16 进制的色彩值时，如果每两位的值相同，可以缩写一半。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">//例子1：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">p&#123;color:#000000;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">可以缩写为：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">p&#123;color: #000;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">//例子2：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">p&#123;color: #336699;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">可以缩写为：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">p&#123;color: #369;&#125;</span></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>字体缩写<br>网页中的字体 css 样式代码也有他自己的缩写方式，下面是给网页设置字体的代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">body&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    font-style:italic;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    font-variant:small-caps; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    font-weight:bold; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    font-size:12px; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    line-height:1.5em; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    font-family:"宋体",sans-serif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">这么多行的代码其实可以缩写为一句：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">body&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    font:italic  small-caps  bold  12px/1.5em  "宋体",sans-serif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+注意：</li>
+</ol>
+<ul>
+<li>使用这一简写方式你至少要指定 <code>font-size</code> 和 <code>font-family</code> 属性，其他的属性(如 <code>font-weight</code>、<code>font-style</code>、<code>font-varient</code>、<code>line-height</code>)如未指定将自动使用默认值。</li>
+<li>在缩写时 <code>font-size</code> 与 <code>line-height</code> 中间要加入 <strong>/</strong> 斜扛。<br>一般情况下因为对于中文网站，英文还是比较少的，所以下面缩写代码比较常用：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">body&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    font:12px/1.5em  "宋体",sans-serif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+只是有字号、行间距、中文字体、英文字体设置。</li>
+</ul>
+<h2 id="七、单位和值"><a href="#七、单位和值" class="headerlink" title="七、单位和值"></a>七、单位和值</h2><ol>
+<li>颜色值<br>在网页中的颜色设置是非常重要，有字体颜色（color）、背景颜色（background-color）、边框颜色（border）等，设置颜色的方法也有很多种：</li>
+</ol>
+<ul>
+<li>英文命令颜色<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:red;&#125;</span></pre></td></tr></table></figure></li>
+<li>RGB 颜色<br>这个与 photoshop 中的 RGB 颜色是一致的，由 R(red)、G(green)、B(blue) 三种颜色的比例来配色。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:rgb(133,45,200);&#125;</span></pre></td></tr></table></figure>
+每一项的值可以是 0<del>255 之间的整数，也可以是 0%</del>100% 的百分数。如：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:rgb(20%,33%,25%);&#125;</span></pre></td></tr></table></figure></li>
+<li>十六进制颜色<br>这种颜色设置方法是现在比较普遍使用的方法，其原理其实也是 RGB 设置，但是其每一项的值由 0-255 变成了十六进制 00-ff。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;color:#00ffff;&#125;</span></pre></td></tr></table></figure>
+<img src="http://img.mukewang.com/54c5b4120001f20808000902.jpg" alt="颜色值图片"></li>
+</ul>
+<ol start="2">
+<li>长度值<br>长度单位总结一下，目前比较常用到 px（像素）、em、% 百分比，要注意其实这三种单位都是相对单位。</li>
+</ol>
+<ul>
+<li><p>像素<br>像素为什么是相对单位呢？因为像素指的是显示器上的小点（CSS 规范中假设 “90像素=1英寸”）。实际情况是浏览器会使用显示器的实际像素值有关，在目前大多数的设计者都倾向于使用像素（px）作为单位。</p>
+</li>
+<li><p>em<br>就是本元素给定字体的 <code>font-size</code> 值，如果元素的 <code>font-size</code> 为 14px ，那么 1em = 14px；如果 <code>font-size</code> 为 18px，那么 1em = 18px。如下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;font-size:12px;text-indent:2em;&#125;</span></pre></td></tr></table></figure>
+<p>上面代码就是可以实现段落首行缩进 24px（也就是两个字体大小的距离）。</p>
+</li>
+</ul>
+<p>下面注意一个特殊情况：<br>但当给 <code>font-size</code> 设置单位为 <code>em</code> 时，此时计算的标准以 <code>p</code> 的父元素的 <code>font-size</code> 为基础。如下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;font-size:14px&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">span&#123;font-size:0.8em;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>以这个<span class="tag">&lt;<span class="name">span</span>&gt;</span>例子<span class="tag">&lt;/<span class="name">span</span>&gt;</span>为例。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>结果 span 中的字体“例子”字体大小就为 11.2px（14 * 0.8 = 11.2px）。</p>
+<ul>
+<li>百分比<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">p&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	font-size:12px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	line-height:130%</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+设置行高（行间距）为字体的130%（12 * 1.3 = 15.6px）。</li>
+</ul>
+<h2 id="八、Css-设置小技巧"><a href="#八、Css-设置小技巧" class="headerlink" title="八、Css 设置小技巧"></a>八、Css 设置小技巧</h2><ol>
+<li>水平居中</li>
+</ol>
+<ul>
+<li>行内元素<br>如果被设置元素为文本、图片等 <strong>行内元素</strong> 时，水平居中是通过给父元素设置 <code>text-align:center</code> 来实现的。(父元素和子元素：如下代码中，div 是“我想要在父容器中水平居中显示”这个文本的父元素。反之这个文本是 div 的子元素 )</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"txtCenter"</span>&gt;</span>我想要在父容器中水平居中显示。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-class">.txtCenter</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">text-align</span><span class="selector-pseudo">:center</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+<ul>
+<li><p>定宽 和 不定宽 块状元素</p>
+<ul>
+<li>定宽块状元素：通过 css 样式设置其宽度（width：500px），块状元素的宽度不随浏览器窗口大小而改变</li>
+<li>不定宽元素：css样式中没有设置其宽度或者宽度表示为（width：百分数；），块状元素的宽度会随着该元素的父元素的大小而发生改变</li>
+</ul>
+</li>
+<li><p>定宽块状元素<br>满足 <strong>定宽</strong> 和 <strong>块状</strong> 两个条件的元素是可以通过设置 <strong>左右</strong> <code>margin</code> 值为 <code>auto</code> 来实现居中的。我们来看个例子就是设置 <code>div</code> 这个块状元素水平居中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是定宽块状元素，哈哈，我要水平居中显示。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">border</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-tag">red</span>;<span class="comment">/*为了显示居中效果明显为 div 设置了边框*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">width</span><span class="selector-pseudo">:200px</span>;<span class="comment">/*定宽*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">margin</span><span class="selector-pseudo">:20px</span> <span class="selector-tag">auto</span>;<span class="comment">/* margin-left 与 margin-right 设置为 auto */</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">也可以写成：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">margin-left:auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">margin-right:auto;</span></pre></td></tr></table></figure>
+<p>注意：元素的 <strong>上下</strong> <code>margin</code> 是可以随意设置的。</p>
+</li>
+<li><p>不定宽 <strong>块状元素</strong></p>
+<ul>
+<li><p><code>table</code><br>是利用 <code>table</code> 标签的长度自适应性—即不定义其长度也不默认父元素 body 的长度（table 其长度根据其内文本长度决定），因此可以看做一个定宽度块元素，然后再利用定宽度块状居中的 margin 的方法，使其水平居中。<br>第一步：设置的居中的元素外面加入一个 <code>table</code> 标签 ( 包括 <code>&lt;tbody&gt;、&lt;tr&gt;、&lt;td&gt;</code> )。<br>第二步：为这个 <code>table</code> 设置 <code>左右 margin 居中</code>（这个和定宽块状元素的方法一样）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">table</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第一行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第二行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第三行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">table&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">border</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">margin</span><span class="selector-pseudo">:0</span> <span class="selector-tag">auto</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure></li>
+<li><p>改变块级元素的 display 为 inline 类型（设置为 行内元素 显示），然后使用 <code>text-align:center</code> 来实现居中效果。如下例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">text-align</span><span class="selector-pseudo">:center</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="comment">/* margin:0;padding:0（消除文本与 div 边框之间的间隙）*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span> <span class="selector-tag">ul</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">list-style</span><span class="selector-pseudo">:none</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">margin</span><span class="selector-pseudo">:0</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">padding</span><span class="selector-pseudo">:0</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">display</span><span class="selector-pseudo">:inline</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="comment">/* margin-right:8px（设置li文本之间的间隔）*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span> <span class="selector-tag">li</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">margin-right</span><span class="selector-pseudo">:8px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">display</span><span class="selector-pseudo">:inline</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>这种方法相比第一种方法的优势是不用增加无语义标签，但也存在着一些问题：它将块状元素的 display 类型改为 inline，变成了行内元素，所以少了一些功能，比如设定长度值。</p>
+</li>
+<li><p>通过给父元素设置 <code>float</code>，然后给父元素设置 <code>position:relative</code> 和 <code>left:50%</code>，子元素设置 <code>position:relative</code> 和 <code>left: -50%</code> 来实现水平居中。</p>
+<p>我们可以这样理解：假想 <code>ul</code> 层的父层（即下面例子中的 <code>div</code> 层）中间有条平分线将 div 平均分为两份，ul 层的 css 代码是将 ul 层的最左端与 ul 层的父层（div层）的平分线对齐；而 li 层的 css 代码则是将 li 层的平分线与 ul 层的最左端（也是div层的平分线）对齐，从而实现 li 层的居中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">position</span><span class="selector-pseudo">:relative</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">left</span><span class="selector-pseudo">:50</span>%</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span> <span class="selector-tag">ul</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">list-style</span><span class="selector-pseudo">:none</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">margin</span><span class="selector-pseudo">:0</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">padding</span><span class="selector-pseudo">:0</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">position</span><span class="selector-pseudo">:relative</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">left</span><span class="selector-pseudo">:-50</span>%;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span> <span class="selector-tag">li</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">display</span><span class="selector-pseudo">:inline</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="css">	<span class="selector-tag">margin-right</span><span class="selector-pseudo">:8px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>垂直居中</li>
+</ol>
+<ul>
+<li>父元素高度确定的 <strong>单行</strong> 文本的竖直居中<br>通过设置父元素的 height 和 line-height 高度一致来实现的。(height: 该元素的高度，line-height: 顾名思义，行高（行间距），指在文本中，行与行之间的 基线间的距离 )。</li>
+</ul>
+<p>line-height 与 font-size 的计算值之差，在 CSS 中成为 <strong>行间距</strong>。分为两半，分别加到一个文本行内容的顶部和底部。</p>
+<p>这种文字行高与块高一致带来了一个弊端：当文字内容的长度大于块的宽时，就有内容脱离了块。</p>
+<p>如下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    hi,jesse!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">height</span><span class="selector-pseudo">:100px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">line-height</span><span class="selector-pseudo">:100px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">background</span>:<span class="selector-id">#999</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+<ul>
+<li>父元素高度确定的 <strong>多行</strong> 文本、图片等的竖直居中的方法有两种：<br>方法一：使用插入 table  (包括tbody、tr、td)标签，同时设置 <code>vertical-align：middle</code>。<br>css 中有一个用于竖直居中的属性 vertical-align，在父元素设置此样式时，会对 inline-block 类型的子元素都有用。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;<span class="name">tbody</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">css代码：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">table td&#123;height:500px;background:#ccc&#125;</span></pre></td></tr></table></figure>
+因为 td 标签默认情况下就默认设置了 vertical-align 为 middle，所以我们不需要显式地设置了。</li>
+</ul>
+<p>方法二<br>这种方法兼容性比较差，只是提供大家学习参考。<br>在 chrome、firefox 及 IE8 以上的浏览器下可以设置块级元素的 display 为 table-cell（设置为表格单元显示），激活 vertical-align 属性，但注意 IE6、7 并不支持这个样式, 兼容性比较差。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">height</span><span class="selector-pseudo">:300px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">background</span>:<span class="selector-id">#ccc</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">display</span><span class="selector-pseudo">:table-cell</span>;<span class="comment">/*IE8以上及Chrome、Firefox*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">vertical-align</span><span class="selector-pseudo">:middle</span>;<span class="comment">/*IE8以上及Chrome、Firefox*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>这种方法的好处是不用添加多余的无意义的标签，但缺点也很明显，它的兼容性不是很好，不兼容 IE6、7 而且这样修改 display 的 block 变成了 table-cell，破坏了原有的块状元素的性质。</p>
+<h2 id="九、隐性改变-display-类型"><a href="#九、隐性改变-display-类型" class="headerlink" title="九、隐性改变 display 类型"></a>九、隐性改变 display 类型</h2><p>有一个有趣的现象就是当为元素（不论之前是什么类型元素，display:none 除外）设置以下 2 个句之一：</p>
+<ul>
+<li>position:absolute </li>
+<li>float:left 或 float:right </li>
+</ul>
+<p>简单来说，只要 html 代码中出现以上两句之一，元素的 display 显示类型就会自动变为以 <code>display:inline-block</code>（块状元素）的方式显示，当然就可以设置元素的 width 和 height 了，且默认宽度不占满父元素。</p>
+<p>如下面的代码，小伙伴们都知道 a 标签是 行内元素 ，所以设置它的 width 是 没有效果的，但是设置为 position:absolute 以后，就可以了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">title</span>=<span class="string">""</span>&gt;</span>进入课程请单击这里<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.container</span> <span class="selector-tag">a</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">width</span><span class="selector-pseudo">:200px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="css">    <span class="selector-tag">background</span>:<span class="selector-id">#ccc</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="十、学习资源"><a href="#十、学习资源" class="headerlink" title="十、学习资源"></a>十、学习资源</h2><h3 id="1-图书"><a href="#1-图书" class="headerlink" title="1. 图书"></a>1. 图书</h3><ul>
+<li>《CSS 权威指南》</li>
+<li>《精通 CSS 高级 WEB 标准解决方案》</li>
+<li>《CSS SECRETS》推荐</li>
+</ul>
+<h3 id="2-视频资源"><a href="#2-视频资源" class="headerlink" title="2. 视频资源"></a>2. 视频资源</h3><ul>
+<li><a href="http://www.imooc.com/video/1329" target="_blank" rel="noopener">页面布局基础</a></li>
+<li><a href="http://www.imooc.com/learn/57" target="_blank" rel="noopener">如何用CSS进行网页布局</a> 实例讲解</li>
+<li><a href="http://www.imooc.com/learn/20" target="_blank" rel="noopener">网页简单布局之结构与表现原则</a> 高一个层次来设计</li>
+<li><a href="http://www.imooc.com/learn/256" target="_blank" rel="noopener">CSS深入理解之overflow</a> 干货很多，有点深度。</li>
+<li><a href="http://www.imooc.com/learn/588" target="_blank" rel="noopener">重拾CSS的乐趣</a> 从另一个侧面看 css 技术</li>
+<li><a href="http://www.imooc.com/learn/680" target="_blank" rel="noopener">CSS深入理解之margin</a></li>
+<li><a href="http://www.imooc.com/learn/33" target="_blank" rel="noopener">十天精通CSS3</a> 文字版，不是视频讲解</li>
+<li><a href="http://www.csszengarden.com/tr/zh-cn/" target="_blank" rel="noopener">css zen garden</a></li>
+<li><a href="http://www.mezzoblue.com/zengarden/resources/" target="_blank" rel="noopener">css 学习资源列表</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/11/17/2016-11-17-mocha-实例教程/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/11/17/2016-11-17-html-start/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-11-17 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Css/">Css<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>

@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>文件和网站结构(六) - Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="除了定义网页的各个部分（例如“段落”或“图片”）外，HTML 还拥有一些用于定义网站区域的块级元素(例如“头部”，“导航菜单”，“主要内容列”)。本文将探讨如何规划基本的网站结构，并通过编写HTML来表示这种网站结构。目标: | 了解如何使用语义标签来构建文档，以及如何制定简单网站的结构
+
+一、文档">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="文件和网站结构(六)"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 文件和网站结构(六)</h1>
+		</div>		
+	
+
+
+
+本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>除了定义网页的各个部分（例如“段落”或“图片”）外，<a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML" target="_blank" rel="noopener" title="HTML: HTML (HyperText Markup Language) is a descriptive language that specifies webpage structure.">HTML</a> 还拥有一些用于定义网站区域的块级元素(例如“头部”，“导航菜单”，“主要内容列”)。本文将探讨如何规划基本的网站结构，并通过编写HTML来表示这种网站结构。<br>目标: | 了解如何使用语义标签来构建文档，以及如何制定简单网站的结构</p>
+</blockquote>
+<h2 id="一、文档的基本部分"><a href="#一、文档的基本部分" class="headerlink" title="一、文档的基本部分"></a>一、文档的基本部分</h2><p>网页可以看起来彼此不同，但它们都倾向于使用类似的标准组件，除非页面显示全屏视频或游戏，或是某种艺术项目的一部分，或者是结构不当：</p>
+<dl>
+    <dt>标题</dt>
+    <dd>通常在顶部有一个大标题和（或）图标。 这是一个网站的主要常见信息，通常存在于每一个网页。</dd>
+    <dt>导航</dt>
+    <dd>链接到网站的主要部分；通常由菜单按钮、链接或选项卡表示。与标题一样，这些内容通常在一个网页与另一个网页之间保持一致——在您的网站上导航不一致只会使人疑惑和恼火。许多网页设计师认为导航栏是标题的一部分，而不是独立的组件，但这并不是一个硬性规定；实际上有些人认为，两个独立的会有更好的 [可访问性](https://developer.mozilla.org/zh-CN/docs/learn/Accessibility)，因为如果它们互相独立，屏幕阅读器可以更好地阅读两个功能。</dd>
+    <dt>主要内容</dt>
+    <dd>中心的一个大区域，包含给定网页的大部分独特内容，例如您要观看的视频，或您正在阅读的主要故事，或您要查看的地图，或新闻标题等......这是网站的一部分，绝对会因页面而异。</dd>
+    <dt>侧栏</dt>
+    <dd>一些次要信息、链接、引言、广告等。通常这是与主要内容中包含的内容相关（例如在新闻文章页面上，侧边栏可能包含作者的个人信息或相关文章的链接），但有在一些情况下，你会发现一些重复的元素，如辅助导航系统。</dd>
+    <dt>页脚</dt>
+    <dd>横跨页面底部的条纹，通常包含精美的打印、版权通知或联系信息。 它是一个放置公共信息（如标题）的地方，但通常该信息对网站来说不是特别重要。 通过提供用于快速访问热门内容的链接，页脚有时也用于[SEO](https://developer.mozilla.org/en-US/docs/Glossary/SEO "SEO: SEO (Search Engine Optimization) is the process of making a website more visible in search results, also termed improving search rankings.")目的。</dd>
+</dl>
+
+<p>一个“典型的网站”可能会这样布局：</p>
+<p><img src="https://mdn.mozillademos.org/files/12417/sample-website.png" alt="a simple website structure example featuring a main heading, navigation menu, main content, side bar, and footer."></p>
+<h2 id="二、用于结构化网站的-HTML"><a href="#二、用于结构化网站的-HTML" class="headerlink" title="二、用于结构化网站的 HTML"></a>二、用于结构化网站的 HTML</h2><p>上面显示的简单示例不是很漂亮，但是非常适合用于说明典型的网站布局。 一些网站有更多的列，有些网站更复杂，但你会有你的想法。使用正确的 CSS，您可以使用几乎任何元素来装饰不同的部分，并得到您想要的结果，但如前所述，我们需要遵守语义，并<strong>使用正确的元素进行语义化工作</strong>。</p>
+<p>这是因为视觉效果并不能说明一切。 我们可以对内容最有用的部分使用颜色和字体大小来吸引用户的关注，例如导航菜单和相关链接，但是视觉障碍的人该怎么办，这难道也对那些没有“粉红色”和“大”的概念的人来说非常有用吗？</p>
+<blockquote>
+<p><strong>Note</strong>: 色盲患者大概<a href="http://www.color-blindness.com/2006/04/28/colorblind-population/" target="_blank" rel="noopener">占了世界人口的 8%</a>，盲人和视障人士占世界人口的4-5％左右（2012年全球<a href="https://en.wikipedia.org/wiki/Visual_impairment" target="_blank" rel="noopener">有2.85亿人</a>, 总人口<a href="https://en.wikipedia.org/wiki/World_human_population#/media/File:World_population_history.svg" target="_blank" rel="noopener">约70亿</a>）。</p>
+</blockquote>
+<p>在您的HTML代码中，您可以根据其功能标记内容部分 - 您可以明确地使用表示上述内容部分的元素，屏幕阅读器等辅助技术可以识别这些元素，并帮助执行“找到主导航 “或”找到主要内容“。 正如我们前面提到的那样，<a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/HTML_text_fundamentals#为什么我们需要结构化" target="_blank" rel="noopener">没有使用正确的元素结构和语义去构建网页会有很多的不良影响</a>。</p>
+<p>为了实现这样的语义标记，HTML提供了可以用来表示这些部分的专用标签，例如：</p>
+<ul>
+<li><strong>标题:</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header" target="_blank" rel="noopener" title="&lt;header&gt;元素表示一组引导性的帮助，可能包含标题元素，也可以包含其他元素，像logo、分节头部、搜索表单等。"><code>&lt;header&gt;</code></a>.</li>
+<li><strong>导航栏:</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/nav" target="_blank" rel="noopener" title="HTML导航栏 (&lt;nav&gt;) 描绘一个含有多个超链接的区域，这个区域包含转到其他页面，或者页面内部其他部分的链接列表."><code>&lt;nav&gt;</code></a>.</li>
+<li><strong>主要内容:</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/main" target="_blank" rel="noopener" title="HTML Main元素()呈现了文档&lt;body&gt;或应用的主体部分。主体部分由与文档直接相关，或者扩展于文档的中心主题、应用的主要功能部分的内容组成。这部分内容在文档中应当是独一无二的，不包含任何在一系列文档中重复的内容，比如侧边栏，导航栏链接，版权信息，网站logo，搜索框（除非搜索框作为文档的主要功能）。"><code>&lt;main&gt;</code></a>, 具有代表性的内容段落主题可以使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article" target="_blank" rel="noopener" title="&lt;article&gt;元素表示文档、页面、应用或网站中的独立结构，其意在成为可独立分配的或可复用的结构，如在发布中，它可能是论坛帖子、杂志或新闻文章、博客、用户提交的评论、交互式组件，或者其他独立的内容项目。"><code>&lt;article&gt;</code></a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section" target="_blank" rel="noopener" title="HTML Section 元素 (&lt;section&gt;) 表示文档中的一个区域（或节），比如，内容中的一个专题组，一般来说会有包含一个标题（heading）。一般通过是否包含一个标题 (&lt;h1&gt;-&lt;h6&gt; element) 作为子节点 来 辨识每一个&lt;section&gt;。"><code>&lt;section&gt;</code></a>, 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div" target="_blank" rel="noopener" title="HTML &lt;div&gt; 元素 (或 HTML 文档分区元素) 是一个通用型的流内容容器，它在语义上不代表任何特定类型的内容，它可以被用来对其它元素进行分组，一般用于样式化相关的需求（使用 class 或 id 特性) 或者对具有相同特性的一组元素进行分组 (比如 lang)，它应该在没有任何其它语义元素可用时才使用 (比如 &lt;article&gt; 或 &lt;nav&gt;) 。"><code>&lt;div&gt;</code></a> 元素.</li>
+<li><strong>侧栏:</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside" target="_blank" rel="noopener" title="&lt;aside&gt; 元素表示一个和其余页面内容几乎无关的部分，被认为是独立于该内容的一部分并且可以被单独的拆分出来而不会使整体受影响。其通常表现为侧边栏或者嵌入内容。他们通常包含在工具条，例如来自词汇表的定义。也可能有其他类型的信息，例如相关的广告、笔者的传记、web 应用程序、个人资料信息，或在博客上的相关链接。"><code>&lt;aside&gt;</code></a>; 经常嵌套在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/main" target="_blank" rel="noopener" title="HTML Main元素()呈现了文档&lt;body&gt;或应用的主体部分。主体部分由与文档直接相关，或者扩展于文档的中心主题、应用的主要功能部分的内容组成。这部分内容在文档中应当是独一无二的，不包含任何在一系列文档中重复的内容，比如侧边栏，导航栏链接，版权信息，网站logo，搜索框（除非搜索框作为文档的主要功能）。"><code>&lt;main&gt;</code></a> 中.</li>
+<li><strong>页脚:</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer" target="_blank" rel="noopener" title="HTML &lt;footer&gt; 元素表示最近一个章节内容或者根节点（sectioning root ）元素的页脚。一个页脚通常包含该章节作者、版权数据或者与文档相关的链接等信息。"><code>&lt;footer&gt;</code></a>.</li>
+</ul>
+<h3 id="2-1-自主学习-探索例子的代码"><a href="#2-1-自主学习-探索例子的代码" class="headerlink" title="2.1 自主学习: 探索例子的代码"></a>2.1 自主学习: 探索例子的代码</h3><p>我们上面所看到的例子用下面的代码表示（你也可以在<a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/document_and_website_structure/index.html" target="_blank" rel="noopener">我们的GitHub repo</a>上找到），我们希望你看看上面的例子，然后看看下面的列表，观察哪些部分组成上面所讨论的内容（标题、导航栏、主要内容、侧栏、页脚）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>My page title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!--[if lt IE 9]&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">      &lt;script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">    &lt;![endif]--&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- Here is our main header that is used accross all the pages of our website --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Header<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Our team<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Projects<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Contact<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">       <span class="comment">&lt;!-- A Search form is another commmon non-linear way to navigate through a website. --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"search"</span> <span class="attr">name</span>=<span class="string">"q"</span> <span class="attr">placeholder</span>=<span class="string">"Search query"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">         <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Go!"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">       <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">     <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- Here is our page's main content --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">main</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">&lt;!-- It contains an article --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">article</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Article heading<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a diam lectus. Set sit amet ipsum mauris. Maecenas congue ligula as quam viverra nec consectetur ant hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>subsection<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Donec ut librero sed accu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Pelientesque auctor nisi id magna consequat sagittis. Curabitur dapibus, enim sit amet elit pharetra tincidunt feugiat nist imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Another subsection<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum soclis natoque penatibus et manis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Vivamus fermentum semper porta. Nunc diam velit, adipscing ut tristique vitae sagittis vel odio. Maecenas convallis ullamcorper ultricied. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, is fringille sem nunc vet mi.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">&lt;!-- the aside content can also be nested within the main content --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">aside</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Related<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Oh I do like to be beside the seaside<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Oh I do like to be beside the sea<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Although in the North of England<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>It never stops raining<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Oh well...<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- And here is our main footer that is used across all the pages of our website --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>©Copyright 2050 by nobody. All rights reversed.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>花一些时间来查看代码并理解它 - 代码中的注释也应该帮助您理解它。 我们不要求你在这篇文章中做很多其他事情，因为理解文档布局的关键是编写一个完整的 HTML 结构，然后用CSS布局。等你学习到 CSS 部分的时候才能完全理解上面代码。</p>
+<h2 id="三、HTML布局元素细节"><a href="#三、HTML布局元素细节" class="headerlink" title="三、HTML布局元素细节"></a>三、HTML布局元素细节</h2><p>从总体详细的理解HTML的元素是不错的——随着你web开发经验的逐渐积累，你将会逐渐理解 HTML 的元素。你可以通过查阅<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element" target="_blank" rel="noopener">HTML元素参考</a>找到更多的细节。现在，你需要理解这些主要的元素定义：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/main" target="_blank" rel="noopener" title="HTML Main元素()呈现了文档&lt;body&gt;或应用的主体部分。主体部分由与文档直接相关，或者扩展于文档的中心主题、应用的主要功能部分的内容组成。这部分内容在文档中应当是独一无二的，不包含任何在一系列文档中重复的内容，比如侧边栏，导航栏链接，版权信息，网站logo，搜索框（除非搜索框作为文档的主要功能）。"><code>&lt;main&gt;</code></a> 展现了页面内容的独特性。只可以在每一个页面上使用一次<main>，直接把它放到<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body" target="_blank" rel="noopener" title="HTML &lt;body&gt; 元素表示HTML文档内容所在之处。一个文档中只允许有一个 &lt;body&gt; 元素。"><code>&lt;body&gt;</code></a>中。在理想情况下，不应该把它嵌套进其他的元素中。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article" target="_blank" rel="noopener" title="&lt;article&gt;元素表示文档、页面、应用或网站中的独立结构，其意在成为可独立分配的或可复用的结构，如在发布中，它可能是论坛帖子、杂志或新闻文章、博客、用户提交的评论、交互式组件，或者其他独立的内容项目。"><code>&lt;article&gt;</code></a> 闭合一块与自身相关的内容，这块内容能够解释它自身而不是页面上其他的内容（例如一篇单独的博客）。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section" target="_blank" rel="noopener" title="HTML Section 元素 (&lt;section&gt;) 表示文档中的一个区域（或节），比如，内容中的一个专题组，一般来说会有包含一个标题（heading）。一般通过是否包含一个标题 (&lt;h1&gt;-&lt;h6&gt; element) 作为子节点 来 辨识每一个&lt;section&gt;。"><code>&lt;section&gt;</code></a> 近似于<article>，但是它更多的是伴随着由一个单独功能构成的页面（例如一个小型的地图，或者是一组文章的标题和摘要）。它被认为最好的实际应用是用<a href="https://developer.mozilla.org/en-US/Learn/HTML/Howto/Set_up_a_proper_title_hierarchy" target="_blank" rel="noopener">标题</a>作为每一部分（section）的开头；也要注意的是你可以把不同的<article>分到不同的<section>中，或者把不同的<section>分到不同的<article>中，这要取决于内容。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside" target="_blank" rel="noopener" title="&lt;aside&gt; 元素表示一个和其余页面内容几乎无关的部分，被认为是独立于该内容的一部分并且可以被单独的拆分出来而不会使整体受影响。其通常表现为侧边栏或者嵌入内容。他们通常包含在工具条，例如来自词汇表的定义。也可能有其他类型的信息，例如相关的广告、笔者的传记、web 应用程序、个人资料信息，或在博客上的相关链接。"><code>&lt;aside&gt;</code></a> 包含的内容并不与主要内容有直接的联系，但是它可以提供额外的不直接有联系的信息（术语表条目，作者简介，相关链接等等）。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header" target="_blank" rel="noopener" title="&lt;header&gt;元素表示一组引导性的帮助，可能包含标题元素，也可以包含其他元素，像logo、分节头部、搜索表单等。"><code>&lt;header&gt;</code></a> 展现了一系列的介绍性内容。如果它是<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body" target="_blank" rel="noopener" title="HTML &lt;body&gt; 元素表示HTML文档内容所在之处。一个文档中只允许有一个 &lt;body&gt; 元素。"><code>&lt;body&gt;</code></a> 的子元素,它就定义了网站的全局页眉。但是如果它是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article" target="_blank" rel="noopener" title="&lt;article&gt;元素表示文档、页面、应用或网站中的独立结构，其意在成为可独立分配的或可复用的结构，如在发布中，它可能是论坛帖子、杂志或新闻文章、博客、用户提交的评论、交互式组件，或者其他独立的内容项目。"><code>&lt;article&gt;</code></a> 或<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section" target="_blank" rel="noopener" title="HTML Section 元素 (&lt;section&gt;) 表示文档中的一个区域（或节），比如，内容中的一个专题组，一般来说会有包含一个标题（heading）。一般通过是否包含一个标题 (&lt;h1&gt;-&lt;h6&gt; element) 作为子节点 来 辨识每一个&lt;section&gt;。"><code>&lt;section&gt;</code></a> 的子元素，它就定义了这些部分的特定的页眉(不要把这些与<a href="https://developer.mozilla.org/en-US/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML#Adding_a_title" target="_blank" rel="noopener">titles and headings</a>混淆)。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/nav" target="_blank" rel="noopener" title="HTML导航栏 (&lt;nav&gt;) 描绘一个含有多个超链接的区域，这个区域包含转到其他页面，或者页面内部其他部分的链接列表."><code>&lt;nav&gt;</code></a> 包含了页面主要的导航功能。二级链接等，不会进入导航功能部分。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer" target="_blank" rel="noopener" title="HTML &lt;footer&gt; 元素表示最近一个章节内容或者根节点（sectioning root ）元素的页脚。一个页脚通常包含该章节作者、版权数据或者与文档相关的链接等信息。"><code>&lt;footer&gt;</code></a> 包含了页面的页脚部分。</li>
+</ul>
+<h3 id="3-1-没有特定语义的装饰元素"><a href="#3-1-没有特定语义的装饰元素" class="headerlink" title="3.1 没有特定语义的装饰元素"></a>3.1 没有特定语义的装饰元素</h3><p>有时候，你会遇到一种情况——你找不到理想的语义元素来包含项目或内容。有时候你可能只想仅仅用<a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS" target="_blank" rel="noopener" title="CSS: CSS (Cascading Style Sheets) is a declarative language that controls how webpages look in the browser.">CSS</a>或<a href="https://developer.mozilla.org/en-US/docs/Glossary/JavaScript" target="_blank" rel="noopener" title="JavaScript: JavaScript (JS) is a programming language mostly used to dynamically script webpages on the client side, but it is also often utilized on the server-side, using packages such as Node.js.">JavaScript</a>将一组元素作为一个单独的实体来修饰。为了应对这种情况，HTML提供了<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div" target="_blank" rel="noopener" title="HTML &lt;div&gt; 元素 (或 HTML 文档分区元素) 是一个通用型的流内容容器，它在语义上不代表任何特定类型的内容，它可以被用来对其它元素进行分组，一般用于样式化相关的需求（使用 class 或 id 特性) 或者对具有相同特性的一组元素进行分组 (比如 lang)，它应该在没有任何其它语义元素可用时才使用 (比如 &lt;article&gt; 或 &lt;nav&gt;) 。"><code>&lt;div&gt;</code></a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/span" target="_blank" rel="noopener" title="HTML &lt;span&gt; 元素是短语内容的通用行内容器，并没有任何特殊语义。可以使用它来编组元素以达到某种样式意图（通过使用类或者Id属性），或者这些元素有着共同的属性，比如lang。应该在没有其他合适的语义元素时才使用它。&lt;span&gt; 与 &lt;div&gt; 元素很相似，但 &lt;div&gt; 是一个 块元素 而 &lt;span&gt; 则是  行内元素 ."><code>&lt;span&gt;</code></a>元素。你应该最好使用<code>[class](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#attr-class)</code>属性来提供一些标签，这样他们就能容易的被找到。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/span" target="_blank" rel="noopener" title="HTML &lt;span&gt; 元素是短语内容的通用行内容器，并没有任何特殊语义。可以使用它来编组元素以达到某种样式意图（通过使用类或者Id属性），或者这些元素有着共同的属性，比如lang。应该在没有其他合适的语义元素时才使用它。&lt;span&gt; 与 &lt;div&gt; 元素很相似，但 &lt;div&gt; 是一个 块元素 而 &lt;span&gt; 则是  行内元素 ."><code>&lt;span&gt;</code></a> 是一个行内无语义元素，你应该仅仅当无法找到更好的语义元素包含内容时使用，或者不想增加特定的含义。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The King walked drunkenly back to his room at 01:00, the beer doing nothing to aid</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">him as he staggered through the door <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"editor-note"</span>&gt;</span>[Editor's note: At this point in the</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">play, the lights should be down low]<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>在这种情况中，the editor’s note 应该仅仅是提供额外的对导演戏剧的说明；它没有额外的语义。对于用户来说，CSS可能用于从主文本中抽离这些note。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div" target="_blank" rel="noopener" title="HTML &lt;div&gt; 元素 (或 HTML 文档分区元素) 是一个通用型的流内容容器，它在语义上不代表任何特定类型的内容，它可以被用来对其它元素进行分组，一般用于样式化相关的需求（使用 class 或 id 特性) 或者对具有相同特性的一组元素进行分组 (比如 lang)，它应该在没有任何其它语义元素可用时才使用 (比如 &lt;article&gt; 或 &lt;nav&gt;) 。"><code>&lt;div&gt;</code></a> 是一个块级无语义元素，你应该仅仅当找不到更好的块级元素时使用，或者不想增加特定的意义。例如，想象当你浏览一个电子商务网站时，有一个购物车部件一直都在你可以选择的地方。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shopping-cart"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Shopping cart<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Silver earrings<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>: $99.95.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../products/3333-0985/"</span> <span class="attr">alt</span>=<span class="string">"Silver earrings"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Total cost: $237.89<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>这并不是一个 <code>&lt;aside&gt;</code>, 因为它和主要内容并没有必要的联系（你想在任何地方都能看到它。它甚至不能用<code>&lt;section&gt;</code>来特定的指定，因为它不是页面上主要内容的一部分。所以在这种情况下用<code>&lt;div&gt;</code>是合适的, 我们还需添加一个head标签帮助屏幕阅读者找到它。</p>
+<p><strong>警告</strong>: Divs用起来非常便利以至于很容易被滥用。因为它们不携带语义值，所以会让你的HTML代码变的混乱。要小心的使用它们，只有当没有更好的语义解决方案才能使用，而且要尽可能把它的使用量降到最低，否则，当你升级和维护你的文档时会非常困难。</p>
+<h3 id="3-2-换行与水平分割线"><a href="#3-2-换行与水平分割线" class="headerlink" title="3.2 换行与水平分割线"></a>3.2 换行与水平分割线</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/br" target="_blank" rel="noopener" title="HTML &lt;br&gt; 元素在文本中生成一个换行（回车）符号。此元素在写诗和地址时很有用，这些地方的换行都非常重要。"><code>&lt;br&gt;</code></a> 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/hr" target="_blank" rel="noopener" title="HTML &lt;hr&gt; 元素表示段落级元素之间的主题转换（例如，一个故事中的场景的改变，或一个章节的主题的改变）。在HTML的早期版本中，它是一个水平线。现在它仍能在可视化浏览器中表现为水平线，但目前被定义为语义上的，而不是表现层面上。"><code>&lt;hr&gt;</code></a>将会是你偶尔使用并且想要了解的两个元素:</p>
+<p><code>&lt;br&gt;</code>在一个段落中创建一个换行；在你想要生成一系列的短行的地方，<code>&lt;br&gt;</code>是唯一能够生成这种结构的元素。例如一个邮寄地址或一首诗。比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>There once was a girl called Nell<span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Who loved to write HTML<span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">But her structure was bad, her semantics were sad<span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">and her markup didn't read very well.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>没有 <code>&lt;br&gt;</code> 元素，这一段会直接表示在一行中（正如我们之前在课程中看到的，<a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/Getting_started#HTML中的空白" target="_blank" rel="noopener">HTML会忽视大部分空格</a>）；有了 <code>&lt;br&gt;</code> 元素，会生成下面这样的：</p>
+<p>There once was a girl called Nell<br>Who loved to write HTML<br>But her structure was bad, her semantics were sad<br>and her markup didn’t read very well.</p>
+<p><code>&lt;hr&gt;</code> 元素在文档中生成一条水平分割线，表示文本中主题的变化（例如主题或场景的变化）。看起来就是一条水平线。像下面的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Ron was backed into a corner by the marauding netherbeasts. Scared, but determined to protect his friends, he raised his wand and prepared to do battle, hoping that his distress call had made it through.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Meanwhile, Harry was sitting at home, staring at his royalty statement and pondering when the next spin off series would come out, when an enchanted distress letter flew through his window and landed in his lap. He read it hasily, and lept to his feet; "better get back to work then", he mused.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>将会表示成这样：</p>
+<p>Ron was backed into a corner by the marauding netherbeasts. Scared, but determined to protect his friends, he raised his wand and prepared to do battle, hoping that his distress call had made it through.</p>
+<hr>
+<p>Meanwhile, Harry was sitting at home, staring at his royalty statement and pondering when the next spin off series would come out, when an enchanted distress letter flew through his window and landed in his lap. He read it hasily and sighed; “better get back to work then”, he mused.</p>
+<h2 id="四、设计一个简单的网站"><a href="#四、设计一个简单的网站" class="headerlink" title="四、设计一个简单的网站"></a>四、设计一个简单的网站</h2><p>一旦你设计好了一个简单网站的所有内容，按照正常的逻辑思维，我们应该尝试制定出你想要放在整个网站上的 <strong>内容</strong>，哪些页面是你需要的，这些页面应该如何排列，以及如何互相链接，带给用户最好的使用体验。这就是所谓的 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Information_architecture" target="_blank" rel="noopener" title="Information architecture: Information architecture, as applied to web design and development, is the practice of organizing the information / content / functionality of a web site so that it presents the best user experience it can, with information and services being easily usable and findable.">Information architecture</a>.。在一个结构庞大、复杂的网站里，大多数设计都可以参照上述的 information architecture（信息架构），不过对于一个只有几个页面的简单网站，设计过程可以更简单，更有趣！</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>通过本文，你应该对于如何构建一个网页/网站有了更好的理解。在本单元的最后一篇文章中，我们将学习如何调试 HTML。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/%E6%96%87%E4%BB%B6%E5%92%8C%E7%BD%91%E7%AB%99%E7%BB%93%E6%9E%84" target="_blank" rel="noopener">文件和网站结构</a></li>
+</ul>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2018/04/21/2018-04-21-html-debugging/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/04/21/2018-04-21-html-advanced-text-formatting/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-04-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Html/">Html<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+本站访问量: <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> 次
+
+<span>
+  &copy; 2019 John Doe
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>
