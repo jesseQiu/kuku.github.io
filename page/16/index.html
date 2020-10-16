@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 16 - Hexo</title>
-  <meta name="author" content="John Doe">
+  <title>Page 16 - Cease to struggle and you cease to live</title>
+  <meta name="author" content="JesseChiu">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta property="og:site_name" content="Hexo"/>
+  <meta property="og:site_name" content="Cease to struggle and you cease to live"/>
 
   
     <meta property="og:image" content=""/>
   
 
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Cease to struggle and you cease to live" type="application/atom+xml">
   
   
     <link href="/favicon.ico" rel="icon">
@@ -53,7 +53,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">Hexo</a>
+       <a class="navbar-brand" href="/">Cease to struggle and you cease to live</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
@@ -102,7 +102,7 @@
   <div class="container">
   	<div class="content">
     	 <div class="page-header page-header-inverse ">
-  <h1 class="title title-inverse ">Hexo</h1>
+  <h1 class="title title-inverse ">Cease to struggle and you cease to live</h1>
 </div>
 
 <div class="row page">
@@ -123,6 +123,47 @@
         
         <!-- render other articles -->
         
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-09 </div>
+			<div class="article-title"><a href="/2017/03/09/2017-03-09-javascript-解析器/" >JavaScript 解释器</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>JavaScript解释器的作用，是执行JavaScript源码。它通常可以包含四个组成部分。</p>
+<ul>
+<li>词法分析器（Lexical Analyser）</li>
+<li>句法解析器（Syntax Parser）</li>
+<li>字节码生成器（Bytecode generator）</li>
+<li>字节码解释器（Bytecode interpreter）</li>
+</ul>
+<h2 id="词法分析器"><a href="#词法分析器" class="headerlink" title="词法分析器"></a>词法分析器</h2><p>词法分析器的作用，是将一行行的源码拆解成一个个词义单位（token）。所谓“词义单位”，指的是语法上不可能再分的、最小的单个字符或字符组合。</p>
+<p>首先，词法分析器会扫描（scanning）代码，提取词义单位；然后，会进行评估（evaluating），判断词义单位属于哪一类的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="number">30</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 词法分析后的结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"var"</span> : <span class="string">"keyword"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"sum"</span> : <span class="string">"identifier"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"="</span>   : <span class="string">"assignment"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"30"</span>  : <span class="string">"integer"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="string">";"</span>   : <span class="string">"eos"</span> (end <span class="keyword">of</span> statement)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+
+<p>上面代码中，源代码经过词法分析后，返回一组词义单位，以及它们各自的词类。</p>
+<h2 id="句法解析器"><a href="#句法解析器" class="headerlink" title="句法解析器"></a>句法解析器</h2><p>句法解析器的作用，是将上一步生成的数组，根据语法规则，转为抽象语法树（Abstract Syntax Tree，简称AST）。如果源码符合语法规则，这一步就会顺利完成，生成一个抽象语法树；如果源码存在语法错误，这一步就会终止，抛出一个“语法错误”。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  operation: <span class="string">"="</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  left: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    keyword: <span class="string">"var"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    right: <span class="string">"sum"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  right: <span class="string">"30"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，抽象语法树的一个节点是赋值操作符（=），它两侧的词义单位，分别成左侧子节点和右侧子节&gt;点。</p>
+<p>通常，这一步是整个JavaScript代码执行过程中最慢的。</p>
+<h2 id="字节码生成器"><a href="#字节码生成器" class="headerlink" title="字节码生成器"></a>字节码生成器</h2><p>字节码生成器的作用，是将抽象语法树转为JavaScript引擎可以执行的二进制代码。目前，还没有统一的JavaScript字节码的格式标准，每种JavaScript引擎都有自己的字节码格式。最简单的做法，就是将语义单位翻成对应的二进制命令。</p>
+<h2 id="字节码解释器"><a href="#字节码解释器" class="headerlink" title="字节码解释器"></a>字节码解释器</h2><p>字节码解释器的作用是读取并执行字节码。</p>
+
+	
+	</div>
+</div>
+
+           
+		
            
 			  
 	
@@ -196,6 +237,182 @@
 <p>Javascript Finite State Machine的基本用法就是上面这些，更详细的介绍可以参见它的<a href="https://github.com/jakesgordon/javascript-state-machine" target="_blank" rel="noopener">主页</a>。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li>Jim Cowart, <a href="http://tech.pro/blog/1402/five-patterns-to-help-you-tame-asynchronous-javascript" target="_blank" rel="noopener">Five Patterns to Help You Tame Asynchronous JavaScript</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-09 </div>
+			<div class="article-title"><a href="/2017/03/09/2017-03-09-bom-timer/" >定时器</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>js提供定时执行代码的功能，叫做定时器（timer），主要由<code>setTimeout()</code>和<code>setInterval()</code>这两个函数来完成。它们向任务队列添加定时任务。</p>
+<h2 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout()"></a>setTimeout()</h2><p><code>setTimeout</code>函数用来指定某个函数或某段代码，在多少毫秒之后执行。它返回一个整数，表示定时器的编号，以后可以用来取消这个定时器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timerId = setTimeout(func|code, delay)</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>setTimeout</code>函数接受两个参数，第一个参数<code>func|code</code>是将要推迟执行的函数名或者一段代码，第二个参数<code>delay</code>是推迟执行的毫秒数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="string">'console.log(2)'</span>,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码的输出结果就是1，3，2，因为<code>setTimeout</code>指定第二行语句推迟1000毫秒再执行。</p>
+<p>需要注意的是，推迟执行的代码必须以字符串的形式，放入<code>setTimeout</code>，因为引擎内部使用<code>eval</code>函数，将字符串转为代码。如果推迟执行的是函数，则可以直接将函数名，放入<code>setTimeout</code>。一方面<code>eval</code>函数有安全顾虑，另一方面为了便于js引擎优化代码，<code>setTimeout</code>方法一般总是采用函数名的形式，就像下面这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">setTimeout(f,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;,<span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>如果省略<code>setTimeout</code>的第二个参数，则该参数默认为0。</p>
+<p>除了前两个参数，<code>setTimeout</code>还允许添加更多的参数。它们将被传入推迟执行的函数（回调函数）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(a+b);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="number">1000</span>,<span class="number">1</span>,<span class="number">1</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>setTimeout</code>共有4个参数。最后那两个参数，将在1000毫秒之后回调函数执行时，作为回调函数的参数。</p>
+<p>IE 9.0及以下版本，只允许<code>setTimeout</code>有两个参数，不支持更多的参数。这时有三种解决方法。第一种是在一个匿名函数里面，让回调函数带参数运行，再把匿名函数输入<code>setTimeout</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  myFunc(<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，myFunc是真正要推迟执行的函数，有三个参数。如果直接放入<code>setTimeout</code>，低版本的IE不能带参数，所以可以放在一个匿名函数。</p>
+<p>第二种解决方法是使用<code>bind</code>方法，把多余的参数绑定在回调函数上面，生成一个新的函数输入<code>setTimeout</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">arg1</span>)</span>&#123;&#125;.bind(<span class="literal">undefined</span>, <span class="number">10</span>), <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>bind</code>方法第一个参数是<code>undefined</code>，表示将原函数的<code>this</code>绑定全局作用域，第二个参数是要传入原函数的参数。它运行后会返回一个新函数，该函数不带参数。</p>
+<p>第三种解决方法是自定义<code>setTimeout</code>，使用<code>apply</code>方法将参数输入回调函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lte IE 9]&gt;&lt;script&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">(function(f)&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">window.setTimeout =f(window.setTimeout);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">window.setInterval =f(window.setInterval);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&#125;)(function(f)&#123;return function(c,t)&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">var a=[].slice.call(arguments,2);return f(function()&#123;c.apply(this,a)&#125;,t)&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&#125;);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;/script&gt;&lt;![endif]--&gt;</span></span></pre></td></tr></table></figure>
+
+<p>除了参数问题，<code>setTimeout</code>还有一个需要注意的地方：如果被<code>setTimeout</code>推迟执行的回调函数是某个对象的方法，那么该方法中的<code>this</code>关键字将指向全局环境，而不是定义时所在的那个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  x: <span class="number">2</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  y: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">setTimeout(o.y,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码输出的是1，而不是2，这表示<code>o.y</code>的this所指向的已经不是o，而是全局环境了。</p>
+<p>再看一个不容易发现错误的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">login</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.login = login;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.login);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User(<span class="string">'John'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">setTimeout(user.sayHi, <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码只会显示<code>undefined</code>，因为等到user.sayHi执行时，它是在全局对象中执行，所以this.login取不到值。</p>
+<p>为了防止出现这个问题，一种解决方法是将user.sayHi放在函数中执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  user.sayHi();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，sayHi是在user作用域内执行，而不是在全局作用域内执行，所以能够显示正确的值。</p>
+<p>另一种解决方法是，使用bind方法，将绑定sayHi绑定在user上面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(user.sayHi.bind(user), <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>HTML 5标准规定，<code>setTimeout</code>的最短时间间隔是4毫秒。为了节电，对于那些不处于当前窗口的页面，浏览器会将时间间隔扩大到1000毫秒。另外，如果笔记本电脑处于电池供电状态，Chrome和IE 9以上的版本，会将时间间隔切换到系统定时器，大约是15.6毫秒。</p>
+<h2 id="setInterval"><a href="#setInterval" class="headerlink" title="setInterval()"></a>setInterval()</h2><p><code>setInterval</code>函数的用法与<code>setTimeout</code>完全一致，区别仅仅在于<code>setInterval</code>指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"clearInterval(timer)"</span> <span class="attr">value</span>=<span class="string">"stop"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">  <span class="keyword">var</span> i = <span class="number">1</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">  <span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;, 1000);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码表示每隔1000毫秒就输出一个2，直到用户点击了停止按钮。</p>
+<p>与<code>setTimeout</code>一样，除了前两个参数，<code>setInterval</code>方法还可以接受更多的参数，它们会传入回调函数，下面是一个例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="built_in">arguments</span>.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">setInterval(f, <span class="number">1000</span>, <span class="string">"Hello World"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hello World</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hello World</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hello World</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr></table></figure>
+
+<p>如果网页不在浏览器的当前窗口（或tab），许多浏览器限制setInteral指定的反复运行的任务最多每秒执行一次。</p>
+<p>下面是一个通过<code>setInterval</code>方法实现网页动画的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">'someDiv'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> opacity = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fader = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  opacity -= <span class="number">0.1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (opacity &gt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    div.style.opacity = opacity;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    clearInterval(fader);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">100</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码每隔100毫秒，设置一次<code>div</code>元素的透明度，直至其完全透明为止。</p>
+<p><code>setInterval</code>的一个常见用途是实现轮询。下面是一个轮询URL的Hash值是否发生变化的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hash = <span class="built_in">window</span>.location.hash;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hashWatcher = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.location.hash != hash) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    updatePage();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>setInterval指定的是“开始执行”之间的间隔，并不考虑每次任务执行本身所消耗的时间。因此实际上，两次执行之间的间隔会小于指定的时间。比如，setInterval指定每100ms执行一次，每次执行需要5ms，那么第一次执行结束后95毫秒，第二次执行就会开始。如果某次执行耗时特别长，比如需要105毫秒，那么它结束后，下一次执行就会立即开始。</p>
+<p>为了确保两次执行之间有固定的间隔，可以不用setInterval，而是每次执行结束后，使用setTimeout指定下一次执行的具体时间。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  alert(i++);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  timer = setTimeout(<span class="built_in">arguments</span>.callee, <span class="number">2000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">2000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码可以确保，下一个对话框总是在关闭上一个对话框之后2000毫秒弹出。</p>
+<p>根据这种思路，可以自己部署一个函数，实现间隔时间确定的setInterval的效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interval</span>(<span class="params">func, wait</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> interv = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    func.call(<span class="literal">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    setTimeout(interv, wait);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  setTimeout(interv, wait);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="number">1000</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码部署了一个interval函数，用循环调用setTimeout模拟了setInterval。</p>
+<p>HTML 5标准规定，setInterval的最短间隔时间是10毫秒，也就是说，小于10毫秒的时间间隔会被调整到10毫秒。</p>
+<h2 id="clearTimeout-，clearInterval"><a href="#clearTimeout-，clearInterval" class="headerlink" title="clearTimeout()，clearInterval()"></a>clearTimeout()，clearInterval()</h2><p>setTimeout和setInterval函数，都返回一个表示计数器编号的整数值，将该整数传入clearTimeout和clearInterval函数，就可以取消对应的定时器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id1 = setTimeout(f,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id2 = setInterval(f,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">clearTimeout(id1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">clearInterval(id2);</span></pre></td></tr></table></figure>
+
+<p>setTimeout和setInterval返回的整数值是连续的，也就是说，第二个setTimeout方法返回的整数值，将比第一个的整数值大1。利用这一点，可以写一个函数，取消当前所有的setTimeout。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> gid = setInterval(clearAllTimeouts, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">clearAllTimeouts</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> id = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (id &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (id !== gid) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        clearTimeout(id);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      id--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr></table></figure>
+
+<p>运行上面代码后，实际上再设置任何setTimeout都无效了。</p>
+<p>下面是一个clearTimeout实际应用的例子。有些网站会实时将用户在文本框的输入，通过Ajax方法传回服务器，jQuery的写法如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$(<span class="string">'textarea'</span>).on(<span class="string">'keydown'</span>, ajaxAction);</span></pre></td></tr></table></figure>
+
+<p>这样写有一个很大的缺点，就是如果用户连续击键，就会连续触发keydown事件，造成大量的Ajax通信。这是不必要的，而且很可能会发生性能问题。正确的做法应该是，设置一个门槛值，表示两次Ajax通信的最小间隔时间。如果在设定的时间内，发生新的keydown事件，则不触发Ajax通信，并且重新开始计时。如果过了指定时间，没有发生新的keydown事件，将进行Ajax通信将数据发送出去。</p>
+<p>这种做法叫做debounce（防抖动）方法，用来返回一个新函数。只有当两次触发之间的时间间隔大于事先设定的值，这个新函数才会运行实际的任务。假定两次Ajax通信的间隔不小于2500毫秒，上面的代码可以改写成下面这样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$(<span class="string">'textarea'</span>).on(<span class="string">'keydown'</span>, debounce(ajaxAction, <span class="number">2500</span>))</span></pre></td></tr></table></figure>
+
+<p>利用setTimeout和clearTimeout，可以实现debounce方法，该方法用于防止某个函数在短时间内被密集调用。具体来说，debounce方法返回一个新版的该函数，这个新版函数调用后，只有在指定时间内没有新的调用，才会执行，否则就重新计时。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> timer = <span class="literal">null</span>; <span class="comment">// 声明计时器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> context = <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    clearTimeout(timer);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      fn.apply(context, args);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;, delay);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用法示例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> todoChanges = _.debounce(batchLog, <span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.observe(models.todo, todoChanges);</span></pre></td></tr></table></figure>
+
+<p>现实中，最好不要设置太多个setTimeout和setInterval，它们耗费CPU。比较理想的做法是，将要推迟执行的代码都放在一个函数里，然后只对这个函数使用setTimeout或setInterval。</p>
+<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><p>setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。</p>
+<p>每一轮Event Loop时，都会将“任务队列”中需要执行的任务，一次执行完。setTimeout和setInterval都是把任务添加到“任务队列”的尾部。因此，它们实际上要等到当前脚本的所有同步任务执行完，然后再等到本次Event Loop的“任务队列”的所有任务执行完，才会开始执行。由于前面的任务到底需要多少时间执行完，是不确定的，所以没有办法保证，setTimeout和setInterval指定的任务，一定会按照预定时间执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(someTask,<span class="number">100</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">veryLongTask();</span></pre></td></tr></table></figure>
+
+<p>上面代码的setTimeout，指定100毫秒以后运行一个任务。但是，如果后面立即运行的任务（当前脚本的同步任务））非常耗时，过了100毫秒还无法结束，那么被推迟运行的someTask就只有等着，等到前面的veryLongTask运行结束，才轮到它执行。</p>
+<p>这一点对于setInterval影响尤其大。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  sleeping(<span class="number">3000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;)();</span></pre></td></tr></table></figure>
+
+<p>上面的第一行语句要求每隔1000毫秒，就输出一个2。但是，第二行语句需要3000毫秒才能完成，请问会发生什么结果？</p>
+<p>结果就是等到第二行语句运行完成以后，立刻连续输出三个2，然后开始每隔1000毫秒，输出一个2。也就是说，setIntervel具有累积效应，如果某个操作特别耗时，超过了setInterval的时间间隔，排在后面的操作会被累积起来，然后在很短的时间内连续触发，这可能或造成性能问题（比如集中发出Ajax请求）。</p>
+<p>为了进一步理解js的单线程模型，请看下面这段伪代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &#123; 耗时<span class="number">5</span>ms的某个操作 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  触发mouseClickEvent事件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#123; 耗时<span class="number">5</span>ms的某个操作 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  setInterval(timerTask,<span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#123; 耗时<span class="number">5</span>ms的某个操作 &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseClick</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  耗时<span class="number">8</span>ms的某个操作</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timerTask</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  耗时<span class="number">2</span>ms的某个操作</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>请问调用init函数后，这段代码的运行顺序是怎样的？</p>
+<ul>
+<li><p><strong>0-15ms</strong>：运行init函数。</p>
+</li>
+<li><p><strong>15-23ms</strong>：运行handleMouseClick函数。请注意，这个函数是在5ms时触发的，应该在那个时候就立即运行，但是由于单线程的关系，必须等到init函数完成之后再运行。</p>
+</li>
+<li><p><strong>23-25ms</strong>：运行timerTask函数。这个函数是在10ms时触发的，规定每10ms运行一次，即在20ms、30ms、40ms等时候运行。由于20ms时，js线程还有任务在运行，因此必须延迟到前面任务完成时再运行。</p>
+</li>
+<li><p><strong>30-32ms</strong>：运行timerTask函数。</p>
+</li>
+<li><p><strong>40-42ms</strong>：运行timerTask函数。</p>
+</li>
+</ul>
+<h2 id="setTimeout-f-0"><a href="#setTimeout-f-0" class="headerlink" title="setTimeout(f,0)"></a>setTimeout(f,0)</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p><code>setTimeout</code>的作用是将代码推迟到指定时间执行，如果指定时间为<code>0</code>，即<code>setTimeout(f, 0)</code>，那么会立刻执行吗？</p>
+<p>答案是不会。因为上一段说过，必须要等到当前脚本的同步任务和“任务队列”中已有的事件，全部处理完以后，才会执行<code>setTimeout</code>指定的任务。也就是说，setTimeout的真正作用是，在“消息队列”的现有消息的后面再添加一个消息，规定在指定时间执行某段代码。<code>setTimeout</code>添加的事件，会在下一次<code>Event Loop</code>执行。</p>
+<p><code>setTimeout(f, 0)</code>将第二个参数设为<code>0</code>，作用是让<code>f</code>在现有的任务（脚本的同步任务和“消息队列”指定的任务）一结束就立刻执行。也就是说，<code>setTimeout(f, 0)</code>的作用是，尽可能早地执行指定的任务。而并不是会立刻就执行这个任务。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'你好！'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码的含义是，尽可能早地显示“你好！”。</p>
+<p><code>setTimeout(f, 0)</code>指定的任务，最早也要到下一次Event Loop才会执行。请看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Timeout"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"a() 开始运行"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  b(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"a() 结束运行"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"b() 开始运行"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"传入的值为"</span> + y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"b() 结束运行"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"当前任务开始"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">a(<span class="number">42</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"当前任务结束"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前任务开始</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// a() 开始运行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// b() 开始运行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入的值为42</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// b() 结束运行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// a() 结束运行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前任务结束</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Timeout</span></span></pre></td></tr></table></figure>
+
+<p>上面代码说明，<code>setTimeout(f, 0)</code>必须要等到当前脚本的所有同步任务结束后才会执行。</p>
+<p>即使消息队列是空的，0毫秒实际上也是达不到的。根据<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#timers" target="_blank" rel="noopener">HTML 5标准</a>，<code>setTimeout</code>推迟执行的时间，最少是4毫秒。如果小于这个值，会被自动增加到4。这是为了防止多个<code>setTimeout(f, 0)</code>语句连续执行，造成性能问题。</p>
+<p>另一方面，浏览器内部使用32位带符号的整数，来储存推迟执行的时间。这意味着<code>setTimeout</code>最多只能推迟执行2147483647毫秒（24.8天），超过这个时间会发生溢出，导致回调函数将在当前任务队列结束后立即执行，即等同于<code>setTimeout(f, 0)</code>的效果。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><code>setTimeout(f, 0)</code>有几个非常重要的用途。它的一大应用是，可以调整事件的发生顺序。比如，网页开发中，某个事件先发生在子元素，然后冒泡到父元素，即子元素的事件回调函数，会早于父元素的事件回调函数触发。如果，我们先让父元素的事件回调函数先发生，就要用到setTimeout(f, 0)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input[type=button]'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">input.onclick = <span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    input.value +=<span class="string">' input'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;, <span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.onclick = <span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  input.value += <span class="string">' body'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>上面代码在点击按钮后，先触发回调函数A，然后触发函数C。在函数A中，setTimeout将函数B推迟到下一轮Loop执行，这样就起到了，先触发父元素的回调函数C的目的了。</p>
+<p>用户自定义的回调函数，通常在浏览器的默认动作之前触发。比如，用户在输入框输入文本，keypress事件会在浏览器接收文本之前触发。因此，下面的回调函数是达不到目的的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'input-box'</span>).onkeypress = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.toUpperCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码想在用户输入文本后，立即将字符转为大写。但是实际上，它只能将上一个字符转为大写，因为浏览器此时还没接收到文本，所以<code>this.value</code>取不到最新输入的那个字符。只有用setTimeout改写，上面的代码才能发挥作用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'my-ok'</span>).onkeypress = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    self.value = self.value.toUpperCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码将代码放入setTimeout之中，就能使得它在浏览器接收到文本之后触发。</p>
+<p>由于setTimeout(f,0)实际上意味着，将任务放到浏览器最早可得的空闲时段执行，所以那些计算量大、耗时长的任务，常常会被放到几个小部分，分别放到setTimeout(f,0)里面执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0xA00000</span>; i &lt; <span class="number">0xFFFFFF</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  div.style.backgroundColor = <span class="string">'#'</span> + i.toString(<span class="number">16</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法二</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i=<span class="number">0x100000</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  timer = setTimeout(func, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  div.style.backgroundColor = <span class="string">'#'</span> + i.toString(<span class="number">16</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (i++ == <span class="number">0xFFFFFF</span>) clearTimeout(timer);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">timer = setTimeout(func, <span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为js执行速度远高于DOM，会造成大量DOM操作“堆积”，而写法二就不会，这就是<code>setTimeout(f, 0)</code>的好处。</p>
+<p>另一个使用这种技巧的例子是代码高亮的处理。如果代码块很大，一次性处理，可能会对性能造成很大的压力，那么将其分成一个个小块，一次处理一块，比如写成<code>setTimeout(highlightNext, 50)</code>的样子，性能压力就会减轻。</p>
+<h2 id="正常任务与微任务"><a href="#正常任务与微任务" class="headerlink" title="正常任务与微任务"></a>正常任务与微任务</h2><p>正常情况下，js的任务是同步执行的，即执行完前一个任务，然后执行后一个任务。只有遇到异步任务的情况下，执行顺序才会改变。</p>
+<p>这时，需要区分两种任务：正常任务（task）与微任务（microtask）。它们的区别在于，“正常任务”在下一轮Event Loop执行，“微任务”在本轮Event Loop的所有任务结束后执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的执行结果说明，<code>setTimeout(fn, 0)</code>在<code>Promise.resolve</code>之后执行。</p>
+<p>这是因为<code>setTimeout</code>语句指定的是“正常任务”，即不会在当前的Event Loop执行。而Promise会将它的回调函数，在状态改变后的那一轮Event Loop指定为微任务。所以，3和4输出在5之后、2之前。</p>
+<p>除了<code>setTimeout</code>，正常任务还包括各种事件（比如鼠标单击事件）的回调函数。微任务目前主要就是Promise。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Ilya Kantor, <a href="http://js.info/tutorial/settimeout-setinterval" target="_blank" rel="noopener">Understanding timers: setTimeout and setInterval</a></li>
+<li>Ilya Kantor, <a href="http://js.info/tutorial/events-and-timing-depth" target="_blank" rel="noopener">Events and timing in-depth</a></li>
+<li>MDN, <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers.setTimeout" target="_blank" rel="noopener">WindowTimers.setTimeout()</a></li>
+<li>Artem Tyurin, <a href="http://agentcooper.ghost.io/being-evil-with-settimeout/" target="_blank" rel="noopener">Being evil with setTimeout</a></li>
+<li>Jake Archibald, <a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="noopener">Tasks, microtasks, queues and schedules</a></li>
 </ul>
 
 	
@@ -884,73 +1101,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-webstorage/" >Web Storage：浏览器端数据储存机制</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这个API的作用是，使得网页可以在浏览器端储存数据。它分成两类：sessionStorage和localStorage。</p>
-<p>sessionStorage保存的数据用于浏览器的一次会话，当会话结束（通常是该窗口关闭），数据被清空；localStorage保存的数据长期存在，下一次访问该网站的时候，网页可以直接读取以前保存的数据。除了保存期限的长短不同，这两个对象的属性和方法完全一样。</p>
-<p>它们很像cookie机制的强化版，能够动用大得多的存储空间。目前，每个域名的存储上限视浏览器而定，Chrome是2.5MB，Firefox和Opera是5MB，IE是10MB。其中，Firefox的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，在Firefox中，<code>a.example.com</code>和<code>b.example.com</code>共享5MB的存储空间。另外，与Cookie一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取。</p>
-<p>通过检查window对象是否包含sessionStorage和localStorage属性，可以确定浏览器是否支持这两个对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStorageSupport</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// sessionStorage</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.sessionStorage) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// localStorage</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.localStorage) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="存入-读取数据"><a href="#存入-读取数据" class="headerlink" title="存入/读取数据"></a>存入/读取数据</h3><p>sessionStorage和localStorage保存的数据，都以“键值对”的形式存在。也就是说，每一项数据都有一个键名和对应的值。所有的数据都是以文本格式保存。</p>
-<p>存入数据使用setItem方法。它接受两个参数，第一个是键名，第二个是保存的数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"key"</span>,<span class="string">"value"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">"key"</span>,<span class="string">"value"</span>);</span></pre></td></tr></table></figure>
-
-<p>读取数据使用getItem方法。它只有一个参数，就是键名。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> valueSession = sessionStorage.getItem(<span class="string">"key"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> valueLocal = localStorage.getItem(<span class="string">"key"</span>);</span></pre></td></tr></table></figure>
-
-<h3 id="清除数据"><a href="#清除数据" class="headerlink" title="清除数据"></a>清除数据</h3><p>removeItem方法用于清除某个键名对应的数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.removeItem(<span class="string">'key'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.removeItem(<span class="string">'key'</span>);</span></pre></td></tr></table></figure>
-
-<p>clear方法用于清除所有保存的数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.clear();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.clear();</span></pre></td></tr></table></figure>
-
-<h3 id="遍历操作"><a href="#遍历操作" class="headerlink" title="遍历操作"></a>遍历操作</h3><p>利用length属性和key方法，可以遍历所有的键。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; localStorage.length; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(localStorage.key(i));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>其中的key方法，根据位置（从0开始）获得键值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">localStorage.key(<span class="number">1</span>);</span></pre></td></tr></table></figure>
-
-<h2 id="storage事件"><a href="#storage事件" class="headerlink" title="storage事件"></a>storage事件</h2><p>当储存的数据发生变化时，会触发storage事件。我们可以指定这个事件的回调函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"storage"</span>,onStorageChange);</span></pre></td></tr></table></figure>
-
-<p>回调函数接受一个event对象作为参数。这个event对象的key属性，保存发生变化的键名。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onStorageChange</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     <span class="built_in">console</span>.log(e.key);    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>除了key属性，event对象的属性还有三个：</p>
-<ul>
-<li>oldValue：更新前的值。如果该键为新增加，则这个属性为null。</li>
-<li>newValue：更新后的值。如果该键被删除，则这个属性为null。</li>
-<li>url：原始触发storage事件的那个网页的网址。</li>
-</ul>
-<p>值得特别注意的是，该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信。所有浏览器之中，只有IE浏览器除外，它会在所有页面触发storage事件。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Ryan Stewart，<a href="http://www.adobe.com/devnet/html5/articles/html5-storage-apis.html" target="_blank" rel="noopener">Introducing the HTML5 storage APIs</a></li>
-<li><a href="http://codular.com/localstorage" target="_blank" rel="noopener">Getting Started with LocalStorage</a></li>
-<li>Feross Aboukhadijeh, <a href="http://feross.org/fill-disk/" target="_blank" rel="noopener">Introducing the HTML5 Hard Disk Filler™ API</a></li>
-<li>Ben Summers, <a href="http://bens.me.uk/2013/localstorage-inter-window-messaging" target="_blank" rel="noopener">Inter-window messaging using localStorage</a></li>
-<li>Stack Overflow, <a href="http://stackoverflow.com/questions/18265556/why-does-internet-explorer-fire-the-window-storage-event-on-the-window-that-st" target="_blank" rel="noopener">Why does Internet Explorer fire the window “storage” event on the window that stored the data?</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-03-04 </div>
 			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-window/" >Window 对象</a></div>						
 		</h3>
 	
@@ -1184,6 +1334,73 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-webstorage/" >Web Storage：浏览器端数据储存机制</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这个API的作用是，使得网页可以在浏览器端储存数据。它分成两类：sessionStorage和localStorage。</p>
+<p>sessionStorage保存的数据用于浏览器的一次会话，当会话结束（通常是该窗口关闭），数据被清空；localStorage保存的数据长期存在，下一次访问该网站的时候，网页可以直接读取以前保存的数据。除了保存期限的长短不同，这两个对象的属性和方法完全一样。</p>
+<p>它们很像cookie机制的强化版，能够动用大得多的存储空间。目前，每个域名的存储上限视浏览器而定，Chrome是2.5MB，Firefox和Opera是5MB，IE是10MB。其中，Firefox的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，在Firefox中，<code>a.example.com</code>和<code>b.example.com</code>共享5MB的存储空间。另外，与Cookie一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取。</p>
+<p>通过检查window对象是否包含sessionStorage和localStorage属性，可以确定浏览器是否支持这两个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStorageSupport</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// sessionStorage</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.sessionStorage) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// localStorage</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.localStorage) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="存入-读取数据"><a href="#存入-读取数据" class="headerlink" title="存入/读取数据"></a>存入/读取数据</h3><p>sessionStorage和localStorage保存的数据，都以“键值对”的形式存在。也就是说，每一项数据都有一个键名和对应的值。所有的数据都是以文本格式保存。</p>
+<p>存入数据使用setItem方法。它接受两个参数，第一个是键名，第二个是保存的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"key"</span>,<span class="string">"value"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">"key"</span>,<span class="string">"value"</span>);</span></pre></td></tr></table></figure>
+
+<p>读取数据使用getItem方法。它只有一个参数，就是键名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> valueSession = sessionStorage.getItem(<span class="string">"key"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> valueLocal = localStorage.getItem(<span class="string">"key"</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="清除数据"><a href="#清除数据" class="headerlink" title="清除数据"></a>清除数据</h3><p>removeItem方法用于清除某个键名对应的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.removeItem(<span class="string">'key'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.removeItem(<span class="string">'key'</span>);</span></pre></td></tr></table></figure>
+
+<p>clear方法用于清除所有保存的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sessionStorage.clear();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">localStorage.clear();</span></pre></td></tr></table></figure>
+
+<h3 id="遍历操作"><a href="#遍历操作" class="headerlink" title="遍历操作"></a>遍历操作</h3><p>利用length属性和key方法，可以遍历所有的键。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; localStorage.length; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(localStorage.key(i));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>其中的key方法，根据位置（从0开始）获得键值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">localStorage.key(<span class="number">1</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="storage事件"><a href="#storage事件" class="headerlink" title="storage事件"></a>storage事件</h2><p>当储存的数据发生变化时，会触发storage事件。我们可以指定这个事件的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"storage"</span>,onStorageChange);</span></pre></td></tr></table></figure>
+
+<p>回调函数接受一个event对象作为参数。这个event对象的key属性，保存发生变化的键名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onStorageChange</span>(<span class="params">e</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     <span class="built_in">console</span>.log(e.key);    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>除了key属性，event对象的属性还有三个：</p>
+<ul>
+<li>oldValue：更新前的值。如果该键为新增加，则这个属性为null。</li>
+<li>newValue：更新后的值。如果该键被删除，则这个属性为null。</li>
+<li>url：原始触发storage事件的那个网页的网址。</li>
+</ul>
+<p>值得特别注意的是，该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信。所有浏览器之中，只有IE浏览器除外，它会在所有页面触发storage事件。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Ryan Stewart，<a href="http://www.adobe.com/devnet/html5/articles/html5-storage-apis.html" target="_blank" rel="noopener">Introducing the HTML5 storage APIs</a></li>
+<li><a href="http://codular.com/localstorage" target="_blank" rel="noopener">Getting Started with LocalStorage</a></li>
+<li>Feross Aboukhadijeh, <a href="http://feross.org/fill-disk/" target="_blank" rel="noopener">Introducing the HTML5 Hard Disk Filler™ API</a></li>
+<li>Ben Summers, <a href="http://bens.me.uk/2013/localstorage-inter-window-messaging" target="_blank" rel="noopener">Inter-window messaging using localStorage</a></li>
+<li>Stack Overflow, <a href="http://stackoverflow.com/questions/18265556/why-does-internet-explorer-fire-the-window-storage-event-on-the-window-that-st" target="_blank" rel="noopener">Why does Internet Explorer fire the window “storage” event on the window that stored the data?</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-04 </div>
 			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-same-origin/" >同源政策</a></div>						
 		</h3>
 	
@@ -1365,80 +1582,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-notification/" >Web Notifications API</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Notification API是浏览器的通知接口，用于在用户的桌面（而不是网页上）显示通知信息，桌面电脑和手机都适用，比如通知用户收到了一封Email。具体的实现形式由浏览器自行部署，对于手机来说，一般显示在顶部的通知栏。</p>
-<p>如果网页代码调用这个API，浏览器会询问用户是否接受。只有在用户同意的情况下，通知信息才会显示。</p>
-<p>下面的代码用于检查浏览器是否支持这个API。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.Notification) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 不支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>目前，Chrome和Firefox在桌面端部署了这个API，Firefox和Blackberry在手机端部署了这个API。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.Notification &amp;&amp; Notification.permission !== <span class="string">"denied"</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	Notification.requestPermission(<span class="function"><span class="keyword">function</span>(<span class="params">status</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">'通知标题'</span>, &#123; <span class="attr">body</span>: <span class="string">'这里是通知内容！'</span> &#125;); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码检查当前浏览器是否支持Notification对象，并且当前用户准许使用该对象，然后调用Notification.requestPermission方法，向用户弹出一条通知。</p>
-<h2 id="Notification对象的属性和方法"><a href="#Notification对象的属性和方法" class="headerlink" title="Notification对象的属性和方法"></a>Notification对象的属性和方法</h2><h3 id="Notification-permission"><a href="#Notification-permission" class="headerlink" title="Notification.permission"></a>Notification.permission</h3><p>Notification.permission属性，用于读取用户给予的权限，它是一个只读属性，它有三种状态。</p>
-<ul>
-<li>default：用户还没有做出任何许可，因此不会弹出通知。</li>
-<li>granted：用户明确同意接收通知。</li>
-<li>denied：用户明确拒绝接收通知。</li>
-</ul>
-<h3 id="Notification-requestPermission"><a href="#Notification-requestPermission" class="headerlink" title="Notification.requestPermission()"></a>Notification.requestPermission()</h3><p>Notification.requestPermission方法用于让用户做出选择，到底是否接收通知。它的参数是一个回调函数，该函数可以接收用户授权状态作为参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Notification.requestPermission(<span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (status === <span class="string">"granted"</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">"Hi!"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    alert(<span class="string">"Hi!"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<p>上面代码表示，如果用户拒绝接收通知，可以用alert方法代替。</p>
-<h2 id="Notification实例对象"><a href="#Notification实例对象" class="headerlink" title="Notification实例对象"></a>Notification实例对象</h2><h3 id="Notification构造函数"><a href="#Notification构造函数" class="headerlink" title="Notification构造函数"></a>Notification构造函数</h3><p>Notification对象作为构造函数使用时，用来生成一条通知。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notification = <span class="keyword">new</span> Notification(title, options);</span></pre></td></tr></table></figure>
-
-<p>Notification构造函数的title属性是必须的，用来指定通知的标题，格式为字符串。options属性是可选的，格式为一个对象，用来设定各种设置。该对象的属性如下：</p>
-<ul>
-<li>dir：文字方向，可能的值为auto、ltr（从左到右）和rtl（从右到左），一般是继承浏览器的设置。</li>
-<li>lang：使用的语种，比如en-US、zh-CN。</li>
-<li>body：通知内容，格式为字符串，用来进一步说明通知的目的。。</li>
-<li>tag：通知的ID，格式为字符串。一组相同tag的通知，不会同时显示，只会在用户关闭前一个通知后，在原位置显示。</li>
-<li>icon：图表的URL，用来显示在通知上。</li>
-</ul>
-<p>上面这些属性，都是可读写的。</p>
-<p>下面是一个生成Notification实例对象的例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> notification = <span class="keyword">new</span> Notification(<span class="string">'收到新邮件'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  body: <span class="string">'您总共有3封未读邮件。'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">notification.title <span class="comment">// "收到新邮件"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">notification.body <span class="comment">// "您总共有3封未读邮件。"</span></span></pre></td></tr></table></figure>
-
-<h3 id="实例对象的事件"><a href="#实例对象的事件" class="headerlink" title="实例对象的事件"></a>实例对象的事件</h3><p>Notification实例会触发以下事件。</p>
-<ul>
-<li>show：通知显示给用户时触发。</li>
-<li>click：用户点击通知时触发。</li>
-<li>close：用户关闭通知时触发。</li>
-<li>error：通知出错时触发（大多数发生在通知无法正确显示时）。</li>
-</ul>
-<p>这些事件有对应的onshow、onclick、onclose、onerror方法，用来指定相应的回调函数。addEventListener方法也可以用来为这些事件指定回调函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">notification.onshow = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Notification shown'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<h3 id="close方法"><a href="#close方法" class="headerlink" title="close方法"></a>close方法</h3><p>Notification实例的close方法用于关闭通知。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">"Hi!"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 手动关闭</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">n.close();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自动关闭</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">n.onshow = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  setTimeout(n.close.bind(n), <span class="number">5000</span>); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码说明，并不能从通知的close事件，判断它是否为用户手动关闭。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Aurelio De Rosa, <a href="http://www.sitepoint.com/introduction-web-notifications-api/" target="_blank" rel="noopener">An Introduction to the Web Notifications API</a></li>
-<li>MDN, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notification" target="_blank" rel="noopener">Notification</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-03-04 </div>
 			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-performance/" >Performance API</a></div>						
 		</h3>
 	
@@ -1558,121 +1701,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-cookie/" >Cookie</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Cookie是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB。浏览器每次向服务器发出请求，就会自动附上这段信息。</p>
-<p>Cookie保存以下几方面的信息。</p>
-<ul>
-<li>Cookie的名字</li>
-<li>Cookie的值</li>
-<li>到期时间</li>
-<li>所属域名（默认是当前域名）</li>
-<li>生效的路径（默认是当前网址）</li>
-</ul>
-<p>举例来说，如果当前URL是<code>www.example.com</code>，那么Cookie的路径就是根目录<code>/</code>。这意味着，这个Cookie对该域名的根路径和它的所有子路径都有效。如果路径设为<code>/forums</code>，那么这个Cookie只有在访问<code>www.example.com/forums</code>及其子路径时才有效。</p>
-<p>浏览器可以设置不接受Cookie，也可以设置不向服务器发送Cookie。<code>window.navigator.cookieEnabled</code>属性返回一个布尔值，表示浏览器是否打开Cookie功能。</p>
-<p><code>document.cookie</code>属性返回当前网页的Cookie。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取当前网页的所有cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> allCookies = <span class="built_in">document</span>.cookie;</span></pre></td></tr></table></figure>
-
-<p>由于<code>document.cookie</code>返回的是分号分隔的所有Cookie，所以必须手动还原，才能取出每一个Cookie的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// cookies[i] name=value形式的单个Cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p><code>document.cookie</code>属性是可写的，可以通过它为当前网站添加Cookie。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14'</span>;</span></pre></td></tr></table></figure>
-
-<p>Cookie的值必须写成<code>key=value</code>的形式。注意，等号两边不能有空格。另外，写入Cookie的时候，必须对分号、逗号和空格进行转义（它们都不允许作为Cookie的值），这可以用<code>encodeURIComponent</code>方法达到。</p>
-<p>但是，<code>document.cookie</code>一次只能写入一个Cookie，而且写入并不是覆盖，而是添加。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test1=hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test2=world'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// test1=hello;test2=world</span></span></pre></td></tr></table></figure>
-
-<p><code>document.cookie</code>属性读写行为的差异（一次可以读出全部Cookie，但是只能写入一个Cookie），与服务器与浏览器之间的Cookie通信格式有关。浏览器向服务器发送Cookie的时候，是一行将所有Cookie全部发送。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sample_page.html</span> HTTP/1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Host</span>: www.example.org</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: cookie_name1=cookie_value1; cookie_name2=cookie_value2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept</span>: */*</span></pre></td></tr></table></figure>
-
-<p>上面的头信息中，<code>Cookie</code>字段是浏览器向服务器发送的Cookie。</p>
-<p>服务器告诉浏览器需要储存Cookie的时候，则是分行指定。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.0 <span class="number">200</span> OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-type</span>: text/html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name1=cookie_value1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name2=cookie_value2; expires=Sun, 16 Jul 3567 06:23:41 GMT</span></pre></td></tr></table></figure>
-
-<p>上面的头信息中，<code>Set-Cookie</code>字段是服务器写入浏览器的Cookie，一行一个。</p>
-<p>如果仔细看浏览器向服务器发送的Cookie，就会意识到，Cookie协议存在问题。对于服务器来说，有两点是无法知道的。</p>
-<ul>
-<li>Cookie的各种属性，比如何时过期。</li>
-<li>哪个域名设置的Cookie，因为Cookie可能是一级域名设的，也可能是任意一个二级域名设的。</li>
-</ul>
-<h2 id="Cookie的属性"><a href="#Cookie的属性" class="headerlink" title="Cookie的属性"></a>Cookie的属性</h2><p>除了Cookie本身的内容，还有一些可选的属性也是可以写入的，它们都必须以分号开头。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: value[; expires=date][; domain=domain][; path=path][; secure]</span></pre></td></tr></table></figure>
-
-<p>上面的<code>Set-Cookie</code>字段，用分号分隔多个属性。它们的含义如下。</p>
-<p>（1）value属性</p>
-<p><code>value</code>属性是必需的，它是一个键值对，用于指定Cookie的值。</p>
-<p>（2）expires属性</p>
-<p><code>expires</code>属性用于指定Cookie过期时间。它的格式采用<code>Date.toUTCString()</code>的格式。</p>
-<p>如果不设置该属性，或者设为<code>null</code>，Cookie只在当前会话（session）有效，浏览器窗口一旦关闭，当前Session结束，该Cookie就会被删除。</p>
-<p>浏览器根据本地时间，决定Cookie是否过期，由于本地时间是不精确的，所以没有办法保证Cookie一定会在服务器指定的时间过期。</p>
-<p>（3）domain属性</p>
-<p><code>domain</code>属性指定Cookie所在的域名，比如<code>example.com</code>或<code>.example.com</code>（这种写法将对所有子域名生效）、<code>subdomain.example.com</code>。</p>
-<p>如果未指定，默认为设定该Cookie的域名。所指定的域名必须是当前发送Cookie的域名的一部分，比如当前访问的域名是<code>example.com</code>，就不能将其设为<code>google.com</code>。只有访问的域名匹配domain属性，Cookie才会发送到服务器。</p>
-<p>（4）path属性</p>
-<p><code>path</code>属性用来指定路径，必须是绝对路径（比如<code>/</code>、<code>/mydir</code>），如果未指定，默认为请求该Cookie的网页路径。</p>
-<p>只有<code>path</code>属性匹配向服务器发送的路径，Cookie才会发送。这里的匹配不是绝对匹配，而是从根路径开始，只要<code>path</code>属性匹配发送路径的一部分，就可以发送。比如，<code>path</code>属性等于<code>/blog</code>，则发送路径是<code>/blog</code>或者<code>/blogroll</code>，Cookie都会发送。<code>path</code>属性生效的前提是<code>domain</code>属性匹配。</p>
-<p>（5）secure</p>
-<p><code>secure</code>属性用来指定Cookie只能在加密协议HTTPS下发送到服务器。</p>
-<p>该属性只是一个开关，不需要指定值。如果通信是HTTPS协议，该开关自动打开。</p>
-<p>（6）max-age</p>
-<p><code>max-age</code>属性用来指定Cookie有效期，比如<code>60 * 60 * 24 * 365</code>（即一年31536e3秒）。</p>
-<p>（7）HttpOnly</p>
-<p><code>HttpOnly</code>属性用于设置该Cookie不能被JavaScript读取，详见下文的说明。</p>
-<p>以上属性可以同时设置一个或多个，也没有次序的要求。如果服务器想改变一个早先设置的Cookie，必须同时满足四个条件：Cookie的<code>key</code>、<code>domain</code>、<code>path</code>和<code>secure</code>都匹配。也就是说，如果原始的Cookie是用如下的<code>Set-Cookie</code>设置的。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value1; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
-
-<p>改变上面这个cookie的值，就必须使用同样的<code>Set-Cookie</code>。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
-
-<p>只要有一个属性不同，就会生成一个全新的Cookie，而不是替换掉原来那个Cookie。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/</span></pre></td></tr></table></figure>
-
-<p>上面的命令设置了一个全新的同名Cookie，但是<code>path</code>属性不一样。下一次访问<code>example.com/blog</code>的时候，浏览器将向服务器发送两个同名的Cookie。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: key1=value1; key1=value2</span></pre></td></tr></table></figure>
-
-<p>上面代码的两个Cookie是同名的，匹配越精确的Cookie排在越前面。</p>
-<p>浏览器设置这些属性的写法如下。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'expires='</span> + someDate.toGMTString() + <span class="string">'; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'path=/subdirectory; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'domain=*.example.com'</span>;</span></pre></td></tr></table></figure>
-
-<p>另外，这些属性只能用来设置Cookie。一旦设置完成，就没有办法读取这些属性的值。</p>
-<p>删除一个Cookie的简便方法，就是设置<code>expires</code>属性等于0，或者等于一个过去的日期。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT'</span>;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，名为<code>fontSize</code>的Cookie的值为空，过期时间设为1970年1月1月零点，就等同于删除了这个Cookie。</p>
-<h2 id="Cookie的限制"><a href="#Cookie的限制" class="headerlink" title="Cookie的限制"></a>Cookie的限制</h2><p>浏览器对Cookie数量的限制，规定不一样。目前，Firefox是每个域名最多设置50个Cookie，而Safari和Chrome没有域名数量的限制。</p>
-<p>所有Cookie的累加长度限制为4KB。超过这个长度的Cookie，将被忽略，不会被设置。</p>
-<p>由于Cookie可能存在数量限制，有时为了规避限制，可以将cookie设置成下面的形式。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">name=a=b&amp;c=d&amp;e=f&amp;g=h</span></pre></td></tr></table></figure>
-
-<p>上面代码实际上是设置了一个Cookie，但是这个Cookie内部使用<code>&amp;</code>符号，设置了多部分的内容。因此，读取这个Cookie的时候，就要自行解析，得到多个键值对。这样就规避了cookie的数量限制。</p>
-<h2 id="同源政策"><a href="#同源政策" class="headerlink" title="同源政策"></a>同源政策</h2><p>浏览器的同源政策规定，两个网址只要域名相同和端口相同，就可以共享Cookie。</p>
-<p>注意，这里不要求协议相同。也就是说，<code>http://example.com</code>设置的Cookie，可以被<code>https://example.com</code>读取。</p>
-<h2 id="Http-Only-Cookie"><a href="#Http-Only-Cookie" class="headerlink" title="Http-Only Cookie"></a>Http-Only Cookie</h2><p>设置Cookie的时候，如果服务器加上了<code>HttpOnly</code>属性，则这个Cookie无法被JavaScript读取（即<code>document.cookie</code>不会返回这个Cookie的值），只用于向服务器发送。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key=value; HttpOnly</span></pre></td></tr></table></figure>
-
-<p>上面的这个Cookie将无法用JavaScript获取。进行AJAX操作时，<code>XMLHttpRequest</code>对象也无法包括这个Cookie。这主要是为了防止XSS攻击盗取Cookie。</p>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1725,7 +1753,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>12</span></a></li>
+			<li><a href="/categories/Android/">Android<span>13</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1794,48 +1822,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
 			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
 			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>1</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1848,6 +1876,14 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
+      </li>
+    
+      <li>
+        <a href="/2019/12/05/2019-12-05-android-rxjava/" ><i class="fa fa-file-o"></i>Android-rxjava</a>
+      </li>
+    
+      <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
       </li>
     
@@ -1857,14 +1893,6 @@
     
       <li>
         <a href="/2019/10/03/2019-10-02.car/" ><i class="fa fa-file-o"></i>Car Parameters</a>
-      </li>
-    
-      <li>
-        <a href="/2019/10/02/2019-10--02.android/" ><i class="fa fa-file-o"></i>Android Notes</a>
-      </li>
-    
-      <li>
-        <a href="/2019/09/20/2019-09--20.hadoop/" ><i class="fa fa-file-o"></i>Hadoop</a>
       </li>
     
   </ul>
@@ -1913,7 +1941,7 @@
 
 
 <span>
-  &copy; 2019 John Doe
+  &copy; 2020 JesseChiu
   
 </span>
 

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CompileSdkVersion、TargetSdkVersion、MinSdkVersion - Cease to struggle and you cease to live</title>
+  <meta name="author" content="JesseChiu">
+  
+  <meta name="description" content="CompileSdkVersion*定义应用程序编译选择哪个 Android SDK版本，通常 compileSDKVersion 属性值被设置为最新的API版本，例如：25，改变 compileSDKVersion 的属性值不会影响 Android 系统运行行为，比如说，将属性值设置为 25，ta">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CompileSdkVersion、TargetSdkVersion、MinSdkVersion"/>
+  <meta property="og:site_name" content="Cease to struggle and you cease to live"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Cease to struggle and you cease to live" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/spacelab.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Cease to struggle and you cease to live</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="">
+			  <i class="fa fa-rss"></i>Rss
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/sitemap.xml" title="">
+			  <i class="fa fa-sitemap"></i>Sitemap
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> CompileSdkVersion、TargetSdkVersion、MinSdkVersion</h1>
+		</div>		
+	
+
+
+
+<!-- 不蒜子统计 -->
+
+        <span id="busuanzi_container_page_pv" style='display:none'>
+              <i class="icon-smile icon"></i> 本文总阅读量: <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> 次
+        </span>
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="CompileSdkVersion"><a href="#CompileSdkVersion" class="headerlink" title="CompileSdkVersion"></a>CompileSdkVersion</h2><p>*定义应用程序编译选择哪个 Android SDK版本，通常 compileSDKVersion 属性值被设置为最新的API版本，例如：25，改变 compileSDKVersion 的属性值不会影响 Android 系统运行行为，比如说，将属性值设置为 25，targetSdkVersion 属性值为 23，代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">compileSdkVersion 25</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">buildToolsVersion "25.0.2"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    applicationId "cn.teachcourse.demos"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    minSdkVersion 11</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    targetSdkVersion 23</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    versionCode 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    versionName "1.0"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>开发的应用程序在 Android 7.0 系统运行，不会以 Android 7.0 新增的行为运行，<strong>决定 Android 系统行为的仍然是 targetSDKVersion</strong>，那么 compileSDKVersion 有什么用呢？选择最新的 API 版本，在编译的时候检查代码的错误和警告，提示开发者修改和优化，因为通常在 Android 项目中会引入第三方的支持库，支持库使用了 23.1.1 版本，compileSdkVersion 的属性值至少为 23.0.0，新版本的支持库的发布紧跟着对应的Android系统平台，能够更好的兼容。</p>
+<h2 id="MinSdkVersion"><a href="#MinSdkVersion" class="headerlink" title="MinSdkVersion"></a>MinSdkVersion</h2><p>定义应用程序支持的最低 API 版本，最低版本设置为 API 11，目标版本设置为 API 24，那么应用程序调用使用 API 14 提供的方法时，Android Studio 或 Eclipse 开发工具将提醒开发者引用一个未定义的方法，使用该方法需要将 minSdkVersion 设置为 API 14 以上，如下图：</p>
+<p><img src="https://blog.csdn.net/u012345683/article/details/81286989" alt=""></p>
+<p>造成的结果大于或等于 Android 4.0(API 14) 的系统可以正常执行，小于 Android 4.0 的系统将在运行时尝试访问不可用的 API 时发生崩溃。</p>
+<h2 id="TargetSdkVersion"><a href="#TargetSdkVersion" class="headerlink" title="TargetSdkVersion"></a>TargetSdkVersion</h2><p>目标软件开发版本，在创建每一个 Android 项目的时候都需要选择 targetSdkVersion 和 minSdkVersion，一个 targetSdkVersion 的属性值表示创建的 Android 项目使用哪个 API 版本，一个 API 版本使用一个整型数字表示，API 的全称是 Application Programming Interface，即应用程序编程接口，API 19 对应的编程接口和 API 23 定义的编程接口存在差别，因为使用整型数字表示 targetSdkVersion 的属性值，容易记忆和便于比较它们之间的大小，高版本 API 编程接口可以兼容低版本 API 编程接口，反之则不行。</p>
+<p>需要区别 Android 7.0 和 API 24 之间的关系，Android 7.0 定义的手机系统的版本，该系统的版本对外开放的应用程序接口被定义为 API 24，如果开发者想要在开发的 APP 中使用 Android 7.0 系统提供的功能，这些功能包括：多窗口支持、通知显示变更、JIT/AOT 编译、快速的应用安装路径等等，那么新手在创建的 Android 项目的时候就需要选择 API 24 的应用程序接口。</p>
+<p>简单来说就代表着你的 App 能够适配的系统版本，意味着你的 App 在这个版本的手机上做了充分的 前向 兼容性处理和实际测试。其实我们写代码时都是经常干这么一件事，就是 <code>if(Build.VERSION.SDK_INT &gt;= 23) { … }</code> ，这就是兼容性处理最典型的一个例子。如果你的 target 设置得越高，其实调用系统提供的 API 时，所得到的处理也是不一样的，甚至有些新的 API 是只有新的系统才有的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来我们就可以知道，版本号的大小关系就是：compileSdkVersion &gt; targetSdkVersion &gt; minSdkVersion</p>
+<ul>
+<li>compileSdkVersion: 代表着编译的时候，会采用该 API 的规范进行代码检查和警告，但是并不会编译进 APK 中</li>
+<li>targetSdkVersion: 代表着目标版本，在编译的时候会将该版本的 API 编译进 APK 中</li>
+<li>minSdkVersion: 代表着最低版本，在编译的时候<strong>兼容</strong>到该参数指定最低版本 API</li>
+</ul>
+<p>安卓中的兼容其实是，各个 API 接口中通过判断系统的版本来兼容的，比如最常见的 View 的创建过程，就是在创建之前判断当前运行的安卓系统版本是多少，然后调用对应的 API 接口进行创建。targetSdkVersion，minSdkVersion 的版本问题就迎刃而解了，说明打包的时候将最高版本的 API 接口到最低版本之间的 API 打包进 APK 中，如果安装到范围之外的安卓系统中，那么运行程序肯定就是找不到方法的错误出现。而如果 targetSdkVersion 版本低于 23，但是装在了 6.0 以上的系统中的话，那么动态权限申请的 API 没有打包进 APK 中，所以自然还是走低版本的权限流程，不需要动态申请就可以获得权限了。安卓系统至于为什么会兼容低于自己系统的 targetSdkVersion 版本，也是因为源码里面对 API 接口调用做了版本判断，用于向下兼容。</p>
+<p>Android6.0普通权限normal permission 和 危险权限dangerous permission<br>Normal Permission：写在xml文件里，那么App安装时就会默认获得这些权限，即使是在Android6.0系统的手机上，用户也无法在安装后动态取消这些normal权限，这和以前的权限系统是一样的，不变。</p>
+<h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><p>Dangerous Permission：还是得写在 xml 文件里，但是 App 安装时具体如果执行授权分以下几种情况：<br>1、targetSDKVersion &lt; 23 &amp; API(手机系统) &lt; 6.0 ：安装时默认获得权限，且用户无法在安装 App 之后取消权限。<br>2、targetSDKVersion &lt; 23 &amp; API(手机系统) &gt;= 6.0 ：安装时默认获得权限，但是用户可以在安装 App 完成后动态取消授权（ 取消时手机会弹出提醒，告诉用户这个是为旧版手机打造的应用，让用户谨慎操作 ）。<br>3、targetSDKVersion &gt;= 23 &amp; API(手机系统) &lt; 6.0 ：安装时默认获得权限，且用户无法在安装 App 之后取消权限<br>4、targetSDKVersion &gt;= 23 &amp; API(手机系统) &gt;= 6.0 ：安装时不会获得权限，可以在运行时向用户申请权限。用户授权以后仍然可以在设置界面中取消授权，用户主动在设置界面取消后，在 app 运行过程中可能会出现 crash。</p>
+<h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><p>现在有一个类 Icon，这个类是在 api 版本 23 加入到 android frame 源码中的，如果 compileSdkVersion=28，targetSdkVersion=23 ，minSdkVersion=16 的话，编译是不会有任何问题的，因为我的 targetSdkVersion 版本就包含了 Icon 这个类，如果我将其设置为 22 就会报错，说找不到这个类，因为 android.jar 架包内不存在这个类，如果我将 targetSdkVersion 设置为 23，并且打包出来的 apk 安装到 5.0 的手机上的时候，会发现程序闪退，之所这样是因为，android.jar 只参与编译（frame层代码是手机自带的，不会从外部打包进 apk 的），并不会打包进 apk，这样 apk 在调用 Ico 类的时候，使用的是安卓手机自带的 frame 层代码，Icon 在 api23 引入，5.0 的手机自然就没有，程序自然就会 crash 掉。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/u012345683/article/details/81286989" target="_blank" rel="noopener">compileSdkVersion、targetSdkVersion、minSdkVersion 三者的关系</a></p>
+	  
+
+		<!-- 微信公众号关注 logo -->
+		<div class="text-center">
+			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<span class="text-danger">全栈开发者微信公众号</span>
+		</div>
+
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2019/12/05/2019-12-05-android-rxjava/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+  <!-- share -->
+  
+
+	</div> 
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-12-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Android/">Android<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+  <hr>
+
+<!-- 淘宝广告 -->
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+
+			
+
+				
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				
+
+			
+		</ol>   
+
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+			
+
+				
+					<div class="item active">
+						<a href="https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.25911debHjpm1G&ft=t&id=573820740653" title="汽车用增高坐垫司机女士座垫主驾驶员单座矮个子加高加厚座椅" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i4/76548092/TB22E6hF_JYBeNjy1zeXXahzVXa_!!76548092.jpg_400x400.jpg" alt="驾考增高坐垫" class="nofancybox">
+							<div class="carousel-caption">驾考增高坐垫</div>
+						</a>
+					</div>	
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
+							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
+							<div class="carousel-caption">鼻腔冲洗器</div>
+						</a>
+					</div>
+				
+
+			
+
+				
+					<div class="item">
+						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
+							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
+							<div class="carousel-caption">标价贴</div>
+						</a>
+					</div>
+				
+
+			
+		</div>
+
+  </div> 
+
+
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+	</div>
+  </div>
+
+  <div class="container-narrow">
+  <footer> 
+<!-- 不蒜子统计 -->
+
+    <span id="busuanzi_container_site_pv">
+            本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+            本站访客数 <span id="busuanzi_value_site_uv"> </span>人
+    </span>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<span>
+  &copy; 2020 JesseChiu
+  
+</span>
+
+<span>
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>.    
+</span>
+ </footer>
+</div> <!-- container-narrow -->
+
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+  
+</body>
+
+   </html>
