@@ -882,6 +882,188 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-12-13 </div>
+			<div class="article-title"><a href="/2016/12/13/2016-12-13-string/" >String 对象</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>String</code>对象是JavaScript原生提供的三个包装对象之一，用来生成字符串的包装对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> s1 <span class="comment">// "string"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> s2 <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">s2.valueOf() <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，变量<code>s1</code>是字符串，<code>s2</code>是对象。由于<code>s2</code>是对象，所以有自己的方法，<code>valueOf</code>方法返回的就是它所包装的那个字符串。</p>
+<p>实际上，字符串的包装对象是一个类似数组的对象（即很像数组，但是实质上不是数组）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"abc"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// String &#123;0: "a", 1: "b", 2: "c", length: 3&#125;</span></span></pre></td></tr></table></figure>
+
+<p>除了用作构造函数，<code>String</code>对象还可以当作工具方法使用，将任意类型的值转为字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="literal">true</span>) <span class="comment">// "true"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="number">5</span>) <span class="comment">// "5"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码将布尔值<code>ture</code>和数值<code>5</code>，分别转换为字符串。</p>
+<h2 id="String-fromCharCode"><a href="#String-fromCharCode" class="headerlink" title="String.fromCharCode()"></a>String.fromCharCode()</h2><p>String对象提供的静态方法（即定义在对象本身，而不是定义在对象实例的方法），主要是<code>fromCharCode()</code>。该方法的参数是一系列Unicode码点，返回对应的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>fromCharCode</code>方法接受5个Unicode码点作为参数，返回它们组成的字符串。</p>
+<p>注意，该方法不支持Unicode码点大于<code>0xFFFF</code>的字符，即传入的参数不能大于<code>0xFFFF</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0x20BB7</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "ஷ"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码返回字符的编号是<code>0x0BB7</code>，而不是<code>0x20BB7</code>。它的根本原因在于，码点大于<code>0xFFFF</code>的字符占用四个字节，而JavaScript只支持两个字节的字符。这种情况下，必须把<code>0x20BB7</code>拆成两个字符表示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0xD842</span>, <span class="number">0xDFB7</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "𠮷"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>0x20BB7</code>拆成两个字符<code>0xD842</code>和<code>0xDFB7</code>（即两个两字节字符，合成一个四字节字符），就能得到正确的结果。码点大于<code>0xFFFF</code>的字符的四字节表示法，由UTF-16编码方法决定。</p>
+<h2 id="实例对象的属性和方法"><a href="#实例对象的属性和方法" class="headerlink" title="实例对象的属性和方法"></a>实例对象的属性和方法</h2><h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p><code>length</code>属性返回字符串的长度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+
+<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><p><code>charAt</code>方法返回指定位置的字符，参数是从<code>0</code>开始编号的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.charAt(<span class="number">1</span>) <span class="comment">// "b"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.charAt(s.length - <span class="number">1</span>) <span class="comment">// "c"</span></span></pre></td></tr></table></figure>
+
+<p>这个方法完全可以用数组下标替代。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">1</span>) <span class="comment">// "b"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>[<span class="number">1</span>] <span class="comment">// "b"</span></span></pre></td></tr></table></figure>
+
+<p>如果参数为负数，或大于等于字符串的长度，<code>charAt</code>返回空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">-1</span>) <span class="comment">// ""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">3</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
+
+<h3 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt()"></a>charCodeAt()</h3><p><code>charCodeAt</code>方法返回给定位置字符的Unicode码点（十进制表示），相当于<code>String.fromCharCode()</code>的逆操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charCodeAt(<span class="number">1</span>) <span class="comment">// 98</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>abc</code>的<code>1</code>号位置的字符是<code>b</code>，它的Unicode码点是<code>98</code>。</p>
+<p>如果没有任何参数，<code>charCodeAt</code>返回首字符的Unicode码点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charCodeAt() <span class="comment">// 97</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，首字符<code>a</code>的Unicode编号是97。</p>
+<p>需要注意的是，<code>charCodeAt</code>方法返回的Unicode码点不大于65536（0xFFFF），也就是说，只返回两个字节的字符的码点。如果遇到Unicode码点大于65536的字符，必需连续使用两次<code>charCodeAt</code>，不仅读入<code>charCodeAt(i)</code>，还要读入<code>charCodeAt(i+1)</code>，将两个16字节放在一起，才能得到准确的字符。</p>
+<p>如果参数为负数，或大于等于字符串的长度，<code>charCodeAt</code>返回<code>NaN</code>。</p>
+<h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p><code>concat</code>方法用于连接两个字符串，返回一个新字符串，不改变原字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s2 = <span class="string">'def'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s1.concat(s2) <span class="comment">// "abcdef"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">s1 <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
+
+<p>该方法可以接受多个参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a'</span>.concat(<span class="string">'b'</span>, <span class="string">'c'</span>) <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
+
+<p>如果参数不是字符串，<code>concat</code>方法会将其先转为字符串，然后再连接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> two = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> three = <span class="string">'3'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">''</span>.concat(one, two, three) <span class="comment">// "123"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">one + two + three <span class="comment">// "33"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>concat</code>方法将参数先转成字符串再连接，所以返回的是一个三个字符的字符串。作为对比，加号运算符在两个运算数都是数值时，不会转换类型，所以返回的是一个两个字符的字符串。</p>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p><code>slice</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。</p>
+<p>它的第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">0</span>, <span class="number">4</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
+
+<p>如果省略第二个参数，则表示子字符串一直到原字符串结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
+
+<p>如果参数是负值，表示从结尾开始倒数计算的位置，即 <strong>该负值加上字符串长度</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">-6</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">0</span>, <span class="number">-6</span>) <span class="comment">// "Java"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">-2</span>, <span class="number">-1</span>) <span class="comment">// "p"</span></span></pre></td></tr></table></figure>
+
+<p>如果第一个参数大于第二个参数，<code>slice</code>方法返回一个空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">2</span>, <span class="number">1</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
+
+<h3 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h3><p><code>substring</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。它与<code>slice</code>作用相同，但有一些奇怪的规则，因此不建议使用这个方法，优先使用<code>slice</code>。</p>
+<p><code>substring</code>方法的第一个参数表示子字符串的开始位置，第二个位置表示结束位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">0</span>, <span class="number">4</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
+
+<p>如果省略第二个参数，则表示子字符串一直到原字符串的结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
+
+<p>如果第二个参数大于第一个参数，<code>substring</code>方法会自动更换两个参数的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">10</span>, <span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>, <span class="number">10</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，调换<code>substring</code>方法的两个参数，都得到同样的结果。</p>
+<p>如果参数是负数，<code>substring</code>方法会自动将负数转为0。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Javascript'</span>.substring(<span class="number">-3</span>) <span class="comment">// "JavaScript"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>, <span class="number">-3</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的第二个例子，参数<code>-3</code>会自动变成0，等同于<code>&#39;JavaScript&#39;.substring(4, 0)</code>。由于第二个参数小于第一个参数，会自动互换位置，所以返回<code>Java</code>。</p>
+<h3 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h3><p><code>substr</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。</p>
+<p><code>substr</code>方法的第一个参数是子字符串的开始位置，第二个参数是子字符串的长度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>, <span class="number">6</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
+
+<p>如果省略第二个参数，则表示子字符串一直到原字符串的结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
+
+<p>如果第一个参数是负数，表示倒数计算的字符位置。如果第二个参数是负数，将被自动转为0，因此会返回空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">-6</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>, <span class="number">-1</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的第二个例子，由于参数<code>-1</code>自动转为<code>0</code>，表示子字符串长度为0，所以返回空字符串。</p>
+<h3 id="indexOf-，lastIndexOf"><a href="#indexOf-，lastIndexOf" class="headerlink" title="indexOf()，lastIndexOf()"></a>indexOf()，lastIndexOf()</h3><p>这两个方法用于确定一个字符串在另一个字符串中的位置，都返回一个整数，表示匹配开始的位置。如果返回<code>-1</code>，就表示不匹配。两者的区别在于，<code>indexOf</code>从字符串头部开始匹配，<code>lastIndexOf</code>从尾部开始匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.indexOf(<span class="string">'o'</span>) <span class="comment">// 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.indexOf(<span class="string">'script'</span>) <span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.lastIndexOf(<span class="string">'o'</span>) <span class="comment">// 7</span></span></pre></td></tr></table></figure>
+
+<p>它们还可以接受第二个参数，对于<code>indexOf</code>方法，第二个参数表示从该位置开始向后匹配；对于<code>lastIndexOf</code>，第二个参数表示从该位置起向前匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.indexOf(<span class="string">'o'</span>, <span class="number">6</span>) <span class="comment">// 7</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.lastIndexOf(<span class="string">'o'</span>, <span class="number">6</span>) <span class="comment">// 4</span></span></pre></td></tr></table></figure>
+
+<h3 id="trim"><a href="#trim" class="headerlink" title="trim()"></a>trim()</h3><p><code>trim</code>方法用于去除字符串两端的空格，返回一个新字符串，不改变原字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'  hello world  '</span>.trim()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello world"</span></span></pre></td></tr></table></figure>
+
+<p>该方法去除的不仅是空格，还包括制表符（<code>\t</code>）、换行符（<code>\n</code>）和回车符（<code>\r</code>）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\r\nabc \t'</span>.trim() <span class="comment">// 'abc'</span></span></pre></td></tr></table></figure>
+
+<h3 id="toLowerCase-，toUpperCase"><a href="#toLowerCase-，toUpperCase" class="headerlink" title="toLowerCase()，toUpperCase()"></a>toLowerCase()，toUpperCase()</h3><p><code>toLowerCase</code>方法用于将一个字符串全部转为小写，<code>toUpperCase</code>则是全部转为大写。它们都返回一个新字符串，不改变原字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello World'</span>.toLowerCase()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello world"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello World'</span>.toUpperCase()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "HELLO WORLD"</span></span></pre></td></tr></table></figure>
+
+<p>这个方法也可以将布尔值或数组转为大写字符串，但是需要通过<code>call</code>方法使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.toUpperCase.call(<span class="literal">true</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'TRUE'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.toUpperCase.call([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'A,B,C'</span></span></pre></td></tr></table></figure>
+
+<h3 id="localeCompare"><a href="#localeCompare" class="headerlink" title="localeCompare()"></a>localeCompare()</h3><p><code>localeCompare</code>方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'apple'</span>.localeCompare(<span class="string">'banana'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'apple'</span>.localeCompare(<span class="string">'apple'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0</span></span></pre></td></tr></table></figure>
+
+<p>该方法的最大特点，就是会考虑自然语言的顺序。举例来说，正常情况下，大写的英文字母小于小写字母。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'B'</span> &gt; <span class="string">'a'</span> <span class="comment">// false</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，字母<code>B</code>小于字母<code>a</code>。这是因为JavaScript采用的是Unicode码点比较，<code>B</code>的码点是66，而<code>a</code>的码点是97。</p>
+<p>但是，<code>localeCompare</code>方法会考虑自然语言的排序情况，将<code>B</code>排在<code>a</code>的前面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'B'</span>.localeCompare(<span class="string">'a'</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>localeCompare</code>方法返回整数1（也有可能返回其他正整数），表示<code>B</code>较大。</p>
+<h3 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h3><p><code>match</code>方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回<code>null</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'at'</span>) <span class="comment">// ["at"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'xt'</span>) <span class="comment">// null</span></span></pre></td></tr></table></figure>
+
+<p>返回数组还有<code>index</code>属性和<code>input</code>属性，分别表示匹配字符串开始的位置和原始字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> matches = <span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'at'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">matches.index <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">matches.input <span class="comment">// "cat, bat, sat, fat"</span></span></pre></td></tr></table></figure>
+
+<p><code>match</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
+<h3 id="search"><a href="#search" class="headerlink" title="search()"></a>search()</h3><p><code>search</code>方法的用法等同于<code>match</code>，但是返回值为匹配的第一个位置。如果没有找到匹配，则返回<code>-1</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.search(<span class="string">'at'</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p><code>search</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h3><p><code>replace</code>方法用于替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有<code>g</code>修饰符的正则表达式）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa'</span>.replace(<span class="string">'a'</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span></pre></td></tr></table></figure>
+
+<p><code>replace</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
+<h3 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h3><p><code>split</code>方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr></table></figure>
+
+<p>如果分割规则为空字符串，则返回数组的成员是原字符串的每一个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">''</span>) <span class="comment">// ["a", "|", "b", "|", "c"]</span></span></pre></td></tr></table></figure>
+
+<p>如果省略参数，则返回数组的唯一成员就是原字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split() <span class="comment">// ["a|b|c"]</span></span></pre></td></tr></table></figure>
+
+<p>如果满足分割规则的两个部分紧邻着（即中间没有其他字符），则返回数组之中会有一个空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a||c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ['a', '', 'c']</span></span></pre></td></tr></table></figure>
+
+<p>如果满足分割规则的部分处于字符串的开头或结尾（即它的前面或后面没有其他字符），则返回数组的第一个或最后一个成员是一个空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'|b|c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["", "b", "c"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["a", "b", ""]</span></span></pre></td></tr></table></figure>
+
+<p><code>split</code>方法还可以接受第二个参数，限定返回数组的最大成员数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">0</span>) <span class="comment">// []</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">1</span>) <span class="comment">// ["a"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">2</span>) <span class="comment">// ["a", "b"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">3</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">4</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>split</code>方法的第二个参数，决定了返回数组的成员数。</p>
+<p><code>split</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Ariya Hidayat, <a href="http://ariya.ofilabs.com/2014/02/javascript-string-substring-substr-slice.html" target="_blank" rel="noopener">JavaScript String: substring, substr, slice</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-12-13 </div>
 			<div class="article-title"><a href="/2016/12/13/2016-12-13-regexp/" >RegExp 对象</a></div>						
 		</h3>
 	
@@ -1285,188 +1467,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-12-13 </div>
-			<div class="article-title"><a href="/2016/12/13/2016-12-13-string/" >String 对象</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>String</code>对象是JavaScript原生提供的三个包装对象之一，用来生成字符串的包装对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> s1 <span class="comment">// "string"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> s2 <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">s2.valueOf() <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，变量<code>s1</code>是字符串，<code>s2</code>是对象。由于<code>s2</code>是对象，所以有自己的方法，<code>valueOf</code>方法返回的就是它所包装的那个字符串。</p>
-<p>实际上，字符串的包装对象是一个类似数组的对象（即很像数组，但是实质上不是数组）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"abc"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// String &#123;0: "a", 1: "b", 2: "c", length: 3&#125;</span></span></pre></td></tr></table></figure>
-
-<p>除了用作构造函数，<code>String</code>对象还可以当作工具方法使用，将任意类型的值转为字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="literal">true</span>) <span class="comment">// "true"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="number">5</span>) <span class="comment">// "5"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码将布尔值<code>ture</code>和数值<code>5</code>，分别转换为字符串。</p>
-<h2 id="String-fromCharCode"><a href="#String-fromCharCode" class="headerlink" title="String.fromCharCode()"></a>String.fromCharCode()</h2><p>String对象提供的静态方法（即定义在对象本身，而不是定义在对象实例的方法），主要是<code>fromCharCode()</code>。该方法的参数是一系列Unicode码点，返回对应的字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>fromCharCode</code>方法接受5个Unicode码点作为参数，返回它们组成的字符串。</p>
-<p>注意，该方法不支持Unicode码点大于<code>0xFFFF</code>的字符，即传入的参数不能大于<code>0xFFFF</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0x20BB7</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "ஷ"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码返回字符的编号是<code>0x0BB7</code>，而不是<code>0x20BB7</code>。它的根本原因在于，码点大于<code>0xFFFF</code>的字符占用四个字节，而JavaScript只支持两个字节的字符。这种情况下，必须把<code>0x20BB7</code>拆成两个字符表示。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0xD842</span>, <span class="number">0xDFB7</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "𠮷"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>0x20BB7</code>拆成两个字符<code>0xD842</code>和<code>0xDFB7</code>（即两个两字节字符，合成一个四字节字符），就能得到正确的结果。码点大于<code>0xFFFF</code>的字符的四字节表示法，由UTF-16编码方法决定。</p>
-<h2 id="实例对象的属性和方法"><a href="#实例对象的属性和方法" class="headerlink" title="实例对象的属性和方法"></a>实例对象的属性和方法</h2><h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p><code>length</code>属性返回字符串的长度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
-
-<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><p><code>charAt</code>方法返回指定位置的字符，参数是从<code>0</code>开始编号的位置。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.charAt(<span class="number">1</span>) <span class="comment">// "b"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.charAt(s.length - <span class="number">1</span>) <span class="comment">// "c"</span></span></pre></td></tr></table></figure>
-
-<p>这个方法完全可以用数组下标替代。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">1</span>) <span class="comment">// "b"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>[<span class="number">1</span>] <span class="comment">// "b"</span></span></pre></td></tr></table></figure>
-
-<p>如果参数为负数，或大于等于字符串的长度，<code>charAt</code>返回空字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">-1</span>) <span class="comment">// ""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt(<span class="number">3</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
-
-<h3 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt()"></a>charCodeAt()</h3><p><code>charCodeAt</code>方法返回给定位置字符的Unicode码点（十进制表示），相当于<code>String.fromCharCode()</code>的逆操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charCodeAt(<span class="number">1</span>) <span class="comment">// 98</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>abc</code>的<code>1</code>号位置的字符是<code>b</code>，它的Unicode码点是<code>98</code>。</p>
-<p>如果没有任何参数，<code>charCodeAt</code>返回首字符的Unicode码点。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charCodeAt() <span class="comment">// 97</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，首字符<code>a</code>的Unicode编号是97。</p>
-<p>需要注意的是，<code>charCodeAt</code>方法返回的Unicode码点不大于65536（0xFFFF），也就是说，只返回两个字节的字符的码点。如果遇到Unicode码点大于65536的字符，必需连续使用两次<code>charCodeAt</code>，不仅读入<code>charCodeAt(i)</code>，还要读入<code>charCodeAt(i+1)</code>，将两个16字节放在一起，才能得到准确的字符。</p>
-<p>如果参数为负数，或大于等于字符串的长度，<code>charCodeAt</code>返回<code>NaN</code>。</p>
-<h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p><code>concat</code>方法用于连接两个字符串，返回一个新字符串，不改变原字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s2 = <span class="string">'def'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s1.concat(s2) <span class="comment">// "abcdef"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">s1 <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
-
-<p>该方法可以接受多个参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a'</span>.concat(<span class="string">'b'</span>, <span class="string">'c'</span>) <span class="comment">// "abc"</span></span></pre></td></tr></table></figure>
-
-<p>如果参数不是字符串，<code>concat</code>方法会将其先转为字符串，然后再连接。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> two = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> three = <span class="string">'3'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">''</span>.concat(one, two, three) <span class="comment">// "123"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">one + two + three <span class="comment">// "33"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>concat</code>方法将参数先转成字符串再连接，所以返回的是一个三个字符的字符串。作为对比，加号运算符在两个运算数都是数值时，不会转换类型，所以返回的是一个两个字符的字符串。</p>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p><code>slice</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。</p>
-<p>它的第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">0</span>, <span class="number">4</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
-
-<p>如果省略第二个参数，则表示子字符串一直到原字符串结束。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
-
-<p>如果参数是负值，表示从结尾开始倒数计算的位置，即 <strong>该负值加上字符串长度</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">-6</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">0</span>, <span class="number">-6</span>) <span class="comment">// "Java"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">-2</span>, <span class="number">-1</span>) <span class="comment">// "p"</span></span></pre></td></tr></table></figure>
-
-<p>如果第一个参数大于第二个参数，<code>slice</code>方法返回一个空字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.slice(<span class="number">2</span>, <span class="number">1</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
-
-<h3 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h3><p><code>substring</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。它与<code>slice</code>作用相同，但有一些奇怪的规则，因此不建议使用这个方法，优先使用<code>slice</code>。</p>
-<p><code>substring</code>方法的第一个参数表示子字符串的开始位置，第二个位置表示结束位置。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">0</span>, <span class="number">4</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
-
-<p>如果省略第二个参数，则表示子字符串一直到原字符串的结束。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
-
-<p>如果第二个参数大于第一个参数，<code>substring</code>方法会自动更换两个参数的位置。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">10</span>, <span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>, <span class="number">10</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，调换<code>substring</code>方法的两个参数，都得到同样的结果。</p>
-<p>如果参数是负数，<code>substring</code>方法会自动将负数转为0。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Javascript'</span>.substring(<span class="number">-3</span>) <span class="comment">// "JavaScript"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substring(<span class="number">4</span>, <span class="number">-3</span>) <span class="comment">// "Java"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码的第二个例子，参数<code>-3</code>会自动变成0，等同于<code>&#39;JavaScript&#39;.substring(4, 0)</code>。由于第二个参数小于第一个参数，会自动互换位置，所以返回<code>Java</code>。</p>
-<h3 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h3><p><code>substr</code>方法用于从原字符串取出子字符串并返回，不改变原字符串。</p>
-<p><code>substr</code>方法的第一个参数是子字符串的开始位置，第二个参数是子字符串的长度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>, <span class="number">6</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
-
-<p>如果省略第二个参数，则表示子字符串一直到原字符串的结束。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>) <span class="comment">// "Script"</span></span></pre></td></tr></table></figure>
-
-<p>如果第一个参数是负数，表示倒数计算的字符位置。如果第二个参数是负数，将被自动转为0，因此会返回空字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">-6</span>) <span class="comment">// "Script"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.substr(<span class="number">4</span>, <span class="number">-1</span>) <span class="comment">// ""</span></span></pre></td></tr></table></figure>
-
-<p>上面代码的第二个例子，由于参数<code>-1</code>自动转为<code>0</code>，表示子字符串长度为0，所以返回空字符串。</p>
-<h3 id="indexOf-，lastIndexOf"><a href="#indexOf-，lastIndexOf" class="headerlink" title="indexOf()，lastIndexOf()"></a>indexOf()，lastIndexOf()</h3><p>这两个方法用于确定一个字符串在另一个字符串中的位置，都返回一个整数，表示匹配开始的位置。如果返回<code>-1</code>，就表示不匹配。两者的区别在于，<code>indexOf</code>从字符串头部开始匹配，<code>lastIndexOf</code>从尾部开始匹配。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.indexOf(<span class="string">'o'</span>) <span class="comment">// 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'JavaScript'</span>.indexOf(<span class="string">'script'</span>) <span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.lastIndexOf(<span class="string">'o'</span>) <span class="comment">// 7</span></span></pre></td></tr></table></figure>
-
-<p>它们还可以接受第二个参数，对于<code>indexOf</code>方法，第二个参数表示从该位置开始向后匹配；对于<code>lastIndexOf</code>，第二个参数表示从该位置起向前匹配。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.indexOf(<span class="string">'o'</span>, <span class="number">6</span>) <span class="comment">// 7</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.lastIndexOf(<span class="string">'o'</span>, <span class="number">6</span>) <span class="comment">// 4</span></span></pre></td></tr></table></figure>
-
-<h3 id="trim"><a href="#trim" class="headerlink" title="trim()"></a>trim()</h3><p><code>trim</code>方法用于去除字符串两端的空格，返回一个新字符串，不改变原字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'  hello world  '</span>.trim()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello world"</span></span></pre></td></tr></table></figure>
-
-<p>该方法去除的不仅是空格，还包括制表符（<code>\t</code>）、换行符（<code>\n</code>）和回车符（<code>\r</code>）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'\r\nabc \t'</span>.trim() <span class="comment">// 'abc'</span></span></pre></td></tr></table></figure>
-
-<h3 id="toLowerCase-，toUpperCase"><a href="#toLowerCase-，toUpperCase" class="headerlink" title="toLowerCase()，toUpperCase()"></a>toLowerCase()，toUpperCase()</h3><p><code>toLowerCase</code>方法用于将一个字符串全部转为小写，<code>toUpperCase</code>则是全部转为大写。它们都返回一个新字符串，不改变原字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello World'</span>.toLowerCase()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "hello world"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello World'</span>.toUpperCase()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "HELLO WORLD"</span></span></pre></td></tr></table></figure>
-
-<p>这个方法也可以将布尔值或数组转为大写字符串，但是需要通过<code>call</code>方法使用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.toUpperCase.call(<span class="literal">true</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'TRUE'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.toUpperCase.call([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'A,B,C'</span></span></pre></td></tr></table></figure>
-
-<h3 id="localeCompare"><a href="#localeCompare" class="headerlink" title="localeCompare()"></a>localeCompare()</h3><p><code>localeCompare</code>方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'apple'</span>.localeCompare(<span class="string">'banana'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'apple'</span>.localeCompare(<span class="string">'apple'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0</span></span></pre></td></tr></table></figure>
-
-<p>该方法的最大特点，就是会考虑自然语言的顺序。举例来说，正常情况下，大写的英文字母小于小写字母。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'B'</span> &gt; <span class="string">'a'</span> <span class="comment">// false</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，字母<code>B</code>小于字母<code>a</code>。这是因为JavaScript采用的是Unicode码点比较，<code>B</code>的码点是66，而<code>a</code>的码点是97。</p>
-<p>但是，<code>localeCompare</code>方法会考虑自然语言的排序情况，将<code>B</code>排在<code>a</code>的前面。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'B'</span>.localeCompare(<span class="string">'a'</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>localeCompare</code>方法返回整数1（也有可能返回其他正整数），表示<code>B</code>较大。</p>
-<h3 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h3><p><code>match</code>方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回<code>null</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'at'</span>) <span class="comment">// ["at"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'xt'</span>) <span class="comment">// null</span></span></pre></td></tr></table></figure>
-
-<p>返回数组还有<code>index</code>属性和<code>input</code>属性，分别表示匹配字符串开始的位置和原始字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> matches = <span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'at'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">matches.index <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">matches.input <span class="comment">// "cat, bat, sat, fat"</span></span></pre></td></tr></table></figure>
-
-<p><code>match</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
-<h3 id="search"><a href="#search" class="headerlink" title="search()"></a>search()</h3><p><code>search</code>方法的用法等同于<code>match</code>，但是返回值为匹配的第一个位置。如果没有找到匹配，则返回<code>-1</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'cat, bat, sat, fat'</span>.search(<span class="string">'at'</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
-
-<p><code>search</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
-<h3 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h3><p><code>replace</code>方法用于替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有<code>g</code>修饰符的正则表达式）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa'</span>.replace(<span class="string">'a'</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span></pre></td></tr></table></figure>
-
-<p><code>replace</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
-<h3 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h3><p><code>split</code>方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr></table></figure>
-
-<p>如果分割规则为空字符串，则返回数组的成员是原字符串的每一个字符。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">''</span>) <span class="comment">// ["a", "|", "b", "|", "c"]</span></span></pre></td></tr></table></figure>
-
-<p>如果省略参数，则返回数组的唯一成员就是原字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split() <span class="comment">// ["a|b|c"]</span></span></pre></td></tr></table></figure>
-
-<p>如果满足分割规则的两个部分紧邻着（即中间没有其他字符），则返回数组之中会有一个空字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a||c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ['a', '', 'c']</span></span></pre></td></tr></table></figure>
-
-<p>如果满足分割规则的部分处于字符串的开头或结尾（即它的前面或后面没有其他字符），则返回数组的第一个或最后一个成员是一个空字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'|b|c'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["", "b", "c"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|'</span>.split(<span class="string">'|'</span>) <span class="comment">// ["a", "b", ""]</span></span></pre></td></tr></table></figure>
-
-<p><code>split</code>方法还可以接受第二个参数，限定返回数组的最大成员数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">0</span>) <span class="comment">// []</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">1</span>) <span class="comment">// ["a"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">2</span>) <span class="comment">// ["a", "b"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">3</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'a|b|c'</span>.split(<span class="string">'|'</span>, <span class="number">4</span>) <span class="comment">// ["a", "b", "c"]</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>split</code>方法的第二个参数，决定了返回数组的成员数。</p>
-<p><code>split</code>方法还可以使用正则表达式作为参数，详见《正则表达式》一节。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Ariya Hidayat, <a href="http://ariya.ofilabs.com/2014/02/javascript-string-substring-substr-slice.html" target="_blank" rel="noopener">JavaScript String: substring, substr, slice</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-12-13 </div>
 			<div class="article-title"><a href="/2016/12/13/2016-12-13-object/" >Object 对象</a></div>						
 		</h3>
 	
@@ -1729,7 +1729,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-12-13 </div>
-			<div class="article-title"><a href="/2016/12/13/2016-12-13-wrapper/" >包装对象 和 Boolean 对象</a></div>						
+			<div class="article-title"><a href="/2016/12/13/2016-12-13-math/" >Math 对象</a></div>						
 		</h3>
 	
 
@@ -1738,74 +1738,101 @@
   <div class="row">
 	
 	
-		<h2 id="包装对象的定义"><a href="#包装对象的定义" class="headerlink" title="包装对象的定义"></a>包装对象的定义</h2><p>有人说，JavaScript语言“一切皆对象”，数组和函数本质上都是对象，就连三种原始类型的值——数值、字符串、布尔值——在一定条件下，也会自动转为对象，也就是原始类型的“包装对象”。</p>
-<p>所谓“包装对象”，就是分别与数值、字符串、布尔值相对应的<code>Number</code>、<code>String</code>、<code>Boolean</code>三个原生对象。这三个原生对象可以把原始类型的值变成（包装成）对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v2 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v3 = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span></pre></td></tr></table></figure>
+		<p><code>Math</code>是JavaScript的内置对象，提供一系列数学常数和数学方法。该对象不是构造函数，不能生成实例，所有的属性和方法都必须在<code>Math</code>对象上调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Math</span>()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeError: object is not a function</span></span></pre></td></tr></table></figure>
 
-<p>上面代码根据原始类型的值，生成了三个对象，与原始值的类型不同。这用<code>typeof</code>运算符就可以看出来。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> v1 <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> v2 <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> v3 <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">v1 === <span class="number">123</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">v2 === <span class="string">'abc'</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">v3 === <span class="literal">true</span> <span class="comment">// false</span></span></pre></td></tr></table></figure>
+<p>上面代码表示，<code>Math</code>不能当作构造函数用。</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><code>Math</code>对象提供以下一些只读的数学常数。</p>
+<ul>
+<li><code>Math.E</code>：常数e。</li>
+<li><code>Math.LN2</code>：2的自然对数。</li>
+<li><code>Math.LN10</code>：10的自然对数。</li>
+<li><code>Math.LOG2E</code>：以2为底的e的对数。</li>
+<li><code>Math.LOG10E</code>：以10为底的e的对数。</li>
+<li><code>Math.PI</code>：常数Pi。</li>
+<li><code>Math.SQRT1_2</code>：0.5的平方根。</li>
+<li><code>Math.SQRT2</code>：2的平方根。</li>
+</ul>
+<p>这些常数的值如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.E <span class="comment">// 2.718281828459045</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.LN2 <span class="comment">// 0.6931471805599453</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.LN10 <span class="comment">// 2.302585092994046</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.LOG2E <span class="comment">// 1.4426950408889634</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.LOG10E <span class="comment">// 0.4342944819032518</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.PI <span class="comment">// 3.141592653589793</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.SQRT1_2 <span class="comment">// 0.7071067811865476</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.SQRT2 <span class="comment">// 1.4142135623730951</span></span></pre></td></tr></table></figure>
 
-<p>JavaScript设计包装对象的最大目的，首先是使得JavaScript的“对象”涵盖所有的值。其次，使得原始类型的值可以方便地调用特定方法。</p>
-<p><code>Number</code>、<code>String</code>和<code>Boolean</code>如果不作为构造函数调用（即调用时不加<code>new</code>），常常用于将任意类型的值转为数值、字符串和布尔值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="number">123</span>) <span class="comment">// 123</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>(<span class="string">'abc'</span>) <span class="comment">// "abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">true</span>) <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><code>Math</code>对象提供以下一些数学方法。</p>
+<ul>
+<li><code>Math.abs()</code>：绝对值</li>
+<li><code>Math.ceil()</code>：向上取整</li>
+<li><code>Math.floor()</code>：向下取整</li>
+<li><code>Math.max()</code>：最大值</li>
+<li><code>Math.min()</code>：最小值</li>
+<li><code>Math.pow()</code>：指数运算</li>
+<li><code>Math.sqrt()</code>：平方根</li>
+<li><code>Math.log()</code>：自然对数</li>
+<li><code>Math.exp()</code>：e的指数</li>
+<li><code>Math.round()</code>：四舍五入</li>
+<li><code>Math.random()</code>：随机数</li>
+</ul>
+<p><code>Math.abs</code>方法返回参数值的绝对值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.abs(<span class="number">1</span>) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.abs(<span class="number">-1</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
 
-<p>上面这种数据类型的转换，详见《数据类型转换》一节。</p>
-<p>总之，这三个对象作为构造函数使用（带有<code>new</code>）时，可以将原始类型的值转为对象；作为普通函数使用时（不带有<code>new</code>），可以将任意类型的值，转为原始类型的值。</p>
-<h2 id="包装对象实例的方法"><a href="#包装对象实例的方法" class="headerlink" title="包装对象实例的方法"></a>包装对象实例的方法</h2><p>包装对象实例可以使用Object对象提供的原生方法，主要是<code>valueOf</code>方法和<code>toString</code>方法。</p>
-<h3 id="valueOf-NaN"><a href="#valueOf-NaN" class="headerlink" title="valueOf()"></a>valueOf()</h3><p><code>valueOf</code>方法返回包装对象实例对应的原始类型的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>).valueOf()  <span class="comment">// 123</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"abc"</span>).valueOf() <span class="comment">// "abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="string">"true"</span>).valueOf() <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<p><code>Math.max</code>方法和<code>Math.min</code>方法都可以接受多个参数，<code>Math.max</code>返回其中最大的参数，<code>Math.min</code>返回最小的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.max(<span class="number">2</span>, <span class="number">-1</span>, <span class="number">5</span>) <span class="comment">// 5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.min(<span class="number">2</span>, <span class="number">-1</span>, <span class="number">5</span>) <span class="comment">// -1</span></span></pre></td></tr></table></figure>
 
-<h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h3><p><code>toString</code>方法返回实例对应的字符串形式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>).toString() <span class="comment">// "123"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"abc"</span>).toString() <span class="comment">// "abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="string">"true"</span>).toString() <span class="comment">// "true"</span></span></pre></td></tr></table></figure>
+<p><code>Math.floor</code>方法接受一个参数，返回小于该参数的最大整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="number">3.2</span>) <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="number">-3.2</span>) <span class="comment">// -4</span></span></pre></td></tr></table></figure>
 
-<h2 id="原始类型的自动转换"><a href="#原始类型的自动转换" class="headerlink" title="原始类型的自动转换"></a>原始类型的自动转换</h2><p>原始类型的值，可以自动当作对象调用，即调用各种对象的方法和参数。这时，JavaScript引擎会自动将原始类型的值转为包装对象，在使用后立刻销毁。</p>
-<p>比如，字符串可以调用<code>length</code>属性，返回字符串的长度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+<p><code>Math.ceil</code>方法接受一个参数，返回大于该参数的最小整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">3.2</span>) <span class="comment">// 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">-3.2</span>) <span class="comment">// -3</span></span></pre></td></tr></table></figure>
 
-<p>上面代码中，<code>abc</code>是一个字符串，本身不是对象，不能调用<code>length</code>属性。JavaScript引擎自动将其转为包装对象，在这个对象上调用<code>length</code>属性。调用结束后，这个临时对象就会被销毁。这就叫原始类型的自动转换。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">str.length <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strObj = <span class="keyword">new</span> <span class="built_in">String</span>(str)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// String &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">strObj.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+<p>如果需要一个总是返回某个数值整数部分的函数，可以自己实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ToInteger</span>(<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  x = <span class="built_in">Number</span>(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> x &lt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(x) : <span class="built_in">Math</span>.floor(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">3.2</span>) <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">3.5</span>) <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">3.8</span>) <span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">-3.2</span>) <span class="comment">// -3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">-3.5</span>) <span class="comment">// -3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">ToInteger(<span class="number">-3.8</span>) <span class="comment">// -3</span></span></pre></td></tr></table></figure>
 
-<p>上面代码中，字符串<code>abc</code>的包装对象有每个位置的值、有<code>length</code>属性、还有一个内部属性<code>[[PrimitiveValue]]</code>保存字符串的原始值。这个<code>[[PrimitiveValue]]</code>内部属性，外部是无法调用，仅供<code>ValueOf</code>或<code>toString</code>这样的方法内部调用。</p>
-<p>这个临时对象是只读的，无法修改。所以，字符串无法添加新属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'Hello World'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">s.x = <span class="number">123</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.x <span class="comment">// undefined</span></span></pre></td></tr></table></figure>
+<p>上面代码中，不管正数或负数，<code>ToInteger</code>函数总是返回一个数值的整数部分。</p>
+<p><code>Math.round</code>方法用于四舍五入。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">0.1</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">0.5</span>) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">0.6</span>) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.ceil(x + <span class="number">0.5</span>)</span></pre></td></tr></table></figure>
 
-<p>上面代码为字符串<code>s</code>添加了一个<code>x</code>属性，结果无效，总是返回<code>undefined</code>。</p>
-<p>另一方面，调用结束后，临时对象会自动销毁。这意味着，下一次调用字符串的属性时，实际是调用一个新生成的对象，而不是上一次调用时生成的那个对象，所以取不到赋值在上一个对象的属性。如果想要为字符串添加属性，只有在它的原型对象<code>String.prototype</code>上定义（参见《面向对象编程》一章）。</p>
-<p>这种原始类型值可以直接调用的方法还有很多（详见后文对各包装对象的介绍），除了前面介绍过的<code>valueOf</code>和<code>toString</code>方法，还包括三个包装对象各自定义在实例上的方法。。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.charAt === <span class="built_in">String</span>.prototype.charAt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr></table></figure>
+<p>注意，它对负数的处理，主要是对<code>0.5</code>的处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">-1.1</span>) <span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">-1.5</span>) <span class="comment">// -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.round(<span class="number">-1.6</span>) <span class="comment">// -2</span></span></pre></td></tr></table></figure>
 
-<p>上面代码表示，字符串<code>abc</code>的<code>charAt</code>方法，实际上就是定义在<code>String</code>对象实例上的方法（关于<code>prototype</code>对象的介绍参见《面向对象编程》一章）。</p>
-<p>如果包装对象与原始类型值进行混合运算，包装对象会转化为原始类型（实际是调用自身的<code>valueOf</code>方法）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>) + <span class="number">123</span> <span class="comment">// 246</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>) + <span class="string">'abc'</span> <span class="comment">// "abcabc"</span></span></pre></td></tr></table></figure>
+<p><code>Math.pow</code>方法返回以第一个参数为底数、第二个参数为幂的指数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">2</span>) <span class="comment">// 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">3</span>) <span class="comment">// 8</span></span></pre></td></tr></table></figure>
 
-<h2 id="自定义方法"><a href="#自定义方法" class="headerlink" title="自定义方法"></a>自定义方法</h2><p>三种包装对象还可以在原型上添加自定义方法和属性，供原始类型的值直接调用。</p>
-<p>比如，我们可以新增一个<code>double</code>方法，使得字符串和数字翻倍。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.double = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.valueOf() + <span class="keyword">this</span>.valueOf();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">'abc'</span>.double()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// abcabc</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.double = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.valueOf() + <span class="keyword">this</span>.valueOf();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">(<span class="number">123</span>).double()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 246</span></span></pre></td></tr></table></figure>
+<p>下面是计算圆面积的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> radius = <span class="number">20</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> area = <span class="built_in">Math</span>.PI * <span class="built_in">Math</span>.pow(radius, <span class="number">2</span>);</span></pre></td></tr></table></figure>
 
-<p>上面代码在<code>123</code>外面必须要加上圆括号，否则后面的点运算符（<code>.</code>）会被解释成小数点。</p>
-<p>但是，这种自定义方法和属性的机制，只能定义在包装对象的原型上，如果直接对原始类型的变量添加属性，则无效。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'abc'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.p = <span class="number">123</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.p <span class="comment">// undefined</span></span></pre></td></tr></table></figure>
+<p><code>Math.sqrt</code>方法返回参数值的平方根。如果参数是一个负值，则返回NaN。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sqrt(<span class="number">4</span>) <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sqrt(<span class="number">-4</span>) <span class="comment">// NaN</span></span></pre></td></tr></table></figure>
 
-<p>上面代码直接对支付串<code>abc</code>添加属性，结果无效。主要原因是上面说的，这里的包装对象是自动生成的，赋值后自动销毁，所以最后一行实际上调用的是一个新的包装对象。</p>
-<h2 id="Boolean对象"><a href="#Boolean对象" class="headerlink" title="Boolean对象"></a>Boolean对象</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>Boolean</code>对象是JavaScript的三个包装对象之一。作为构造函数，它主要用于生成布尔值的包装对象的实例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> b <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">b.valueOf() <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<p><code>Math.log</code>方法返回以e为底的自然对数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="built_in">Math</span>.E) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="number">10</span>) <span class="comment">// 2.302585092994046</span></span></pre></td></tr></table></figure>
 
-<p>上面代码的变量<code>b</code>是一个<code>Boolean</code>对象的实例，它的类型是对象，值为布尔值<code>true</code>。这种写法太繁琐，几乎无人使用，直接对变量赋值更简单清晰。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="literal">true</span>;</span></pre></td></tr></table></figure>
+<p>如果要计算以10为底的对数，可以先用<code>Math.log</code>求出自然对数，然后除以<code>Math.LN10</code>；求以2为底的对数，可以除以<code>Math.LN2</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="number">100</span>)/<span class="built_in">Math</span>.LN10 <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="number">8</span>)/<span class="built_in">Math</span>.LN2 <span class="comment">// 3</span></span></pre></td></tr></table></figure>
 
-<p>注意，<code>false</code>对应的包装对象实例，布尔运算结果也是<code>true</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).valueOf()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// 无输出</span></span></pre></td></tr></table></figure>
+<p><code>Math.exp</code>方法返回常数e的参数次方。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.exp(<span class="number">1</span>) <span class="comment">// 2.718281828459045</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.exp(<span class="number">3</span>) <span class="comment">// 20.085536923187668</span></span></pre></td></tr></table></figure>
 
-<p>上面代码的第一个例子之所以得到<code>true</code>，是因为<code>false</code>对应的包装对象实例是一个对象，进行逻辑运算时，被自动转化成布尔值<code>true</code>（因为所有对象对应的布尔值都是<code>true</code>）。而实例的<code>valueOf</code>方法，则返回实例对应的原始值，本例为<code>false</code>。</p>
-<h3 id="Boolean函数的类型转换作用"><a href="#Boolean函数的类型转换作用" class="headerlink" title="Boolean函数的类型转换作用"></a>Boolean函数的类型转换作用</h3><p><code>Boolean</code>对象除了可以作为构造函数，还可以单独使用，将任意值转为布尔值。这时<code>Boolean</code>就是一个单纯的工具方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>) <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="number">1</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="string">'false'</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>([]) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="regexp">/foo/</span>) <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<h3 id="Math-random"><a href="#Math-random" class="headerlink" title="Math.random()"></a>Math.random()</h3><p><code>Math.random()</code>返回0到1之间的一个伪随机数，可能等于0，但是一定小于1。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.random() <span class="comment">// 0.7151307314634323</span></span></pre></td></tr></table></figure>
 
-<p>上面代码中几种得到<code>true</code>的情况，都值得认真记住。</p>
-<p>使用双重的否运算符（<code>!</code>）也可以将任意值转为对应的布尔值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">!!<span class="literal">undefined</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">!!<span class="literal">null</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">!!<span class="number">0</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">!!<span class="string">''</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">!!<span class="literal">NaN</span> <span class="comment">// false</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">!!<span class="number">1</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">!!<span class="string">'false'</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">!![] <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">!!&#123;&#125; <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">!!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">!!<span class="regexp">/foo/</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<p>任意范围的随机数生成函数如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomArbitrary</span>(<span class="params">min, max</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * (max - min) + min;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">getRandomArbitrary(<span class="number">1.5</span>, <span class="number">6.5</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.4942810038223864</span></span></pre></td></tr></table></figure>
 
-<p>最后，对于一些特殊值，<code>Boolean</code>对象前面加不加<code>new</code>，会得到完全相反的结果，必须小心。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// 无输出</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// 无输出</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">null</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="comment">// true</span></span></pre></td></tr></table></figure>
+<p>任意范围的随机整数生成函数如下。<br>// min &lt;= 随机整数 &lt;= max</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomInt</span>(<span class="params">min, max</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>)) + min;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">getRandomInt(<span class="number">1</span>, <span class="number">6</span>) <span class="comment">// 5</span></span></pre></td></tr></table></figure>
+
+<p>返回随机字符的例子如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">random_str</span>(<span class="params">length</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> ALPHABET = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  ALPHABET += <span class="string">'abcdefghijklmnopqrstuvwxyz'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  ALPHABET += <span class="string">'0123456789-_'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> str = <span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; length; ++i) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> rand = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * ALPHABET.length);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    str += ALPHABET.substring(rand, rand + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> str;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">random_str(<span class="number">6</span>) <span class="comment">// "NdQKOr"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>random_str</code>函数接受一个整数作为参数，返回变量<code>ALPHABET</code>内的随机字符所组成的指定长度的字符串。</p>
+<h3 id="三角函数方法"><a href="#三角函数方法" class="headerlink" title="三角函数方法"></a>三角函数方法</h3><p><code>Math</code>对象还提供一系列三角函数方法。</p>
+<ul>
+<li><code>Math.sin()</code>：返回参数的正弦</li>
+<li><code>Math.cos()</code>：返回参数的余弦</li>
+<li><code>Math.tan()</code>：返回参数的正切</li>
+<li><code>Math.asin()</code>：返回参数的反正弦（弧度值）</li>
+<li><code>Math.acos()</code>：返回参数的反余弦（弧度值）</li>
+<li><code>Math.atan()</code>：返回参数的反正切（弧度值）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sin(<span class="number">0</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.cos(<span class="number">0</span>) <span class="comment">// 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.tan(<span class="number">0</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.asin(<span class="number">1</span>) <span class="comment">// 1.5707963267948966</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.acos(<span class="number">1</span>) <span class="comment">// 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.atan(<span class="number">1</span>) <span class="comment">// 0.7853981633974483</span></span></pre></td></tr></table></figure>
 
 	
 	</div>
@@ -2101,7 +2128,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>13</span></a></li>
+			<li><a href="/categories/Android/">Android<span>14</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -2170,45 +2197,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
 			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
+			<li><a href="/tags/Android/">Android<span>2</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
 			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
 			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>1</span></a></li>
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>22</span></a></li>
@@ -2224,6 +2251,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
+      </li>
+    
+      <li>
         <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
       </li>
     
@@ -2237,10 +2268,6 @@
     
       <li>
         <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
-      </li>
-    
-      <li>
-        <a href="/2019/10/03/2019-10-02.car/" ><i class="fa fa-file-o"></i>Car Parameters</a>
       </li>
     
   </ul>

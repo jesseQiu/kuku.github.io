@@ -688,6 +688,112 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2020-11-09 </div>
+			<div class="article-title"><a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" >性能优化:使用SparseArray和ArrayMap代替HashMap</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>在 Android 开发时，我们使用的大部分都是Java的api，比如HashMap这个api，使用率非常高，但是对于Android这种对内存非常敏感的移动平台，很多时候使用一些java的api并不能达到更好的性能，相反反而更消耗内存，所以针对Android这种移动平台，也推出了更符合自己的api，比如SparseArray、ArrayMap用来代替HashMap在有些情况下能带来更好的性能提升。</p>
+<p>介绍它们之前先来介绍一下HashMap的内部存储结构，就明白为什么推荐使用SparseArray和ArrayMap</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><strong>HashMap</strong></h2><p>HashMap内部是使用一个默认容量为16的数组来存储数据的，而数组中每一个元素却又是一个链表的头结点，所以，更准确的来说，HashMap内部存储结构是使用哈希表的拉链结构（数组+链表），如图：<br>这种存储数据的方法叫做拉链法<br><img src="https://img-blog.csdn.net/20150820130200565" alt="这里写图片描述"><br>且每一个结点都是Entry类型，那么Entry是什么呢？我们来看看HashMap中Entry的属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">final K key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">V value;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">final int hash;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">HashMapEntry&lt;K, V&gt; next;</span></pre></td></tr></table></figure>
+
+<p>从中我们得知Entry存储的内容有key、value、hash值、和next下一个Entry，那么，这些Entry数据是按什么规则进行存储的呢？就是通过计算元素key的hash值，然后对HashMap中数组长度取余得到该元素存储的位置，计算公式为hash(key)%len，比如：假设hash(14)=14,hash(30)=30,hash(46)=46，我们分别对len取余，得到<br>hash(14)%16=14，hash(30)%16=14，hash(46)%16=14，所以key为14、30、46的这三个元素存储在数组下标为14的位置，如：<br><img src="https://img-blog.csdn.net/20150820133048242" alt="这里写图片描述"><br>从中可以看出，如果有多个元素key的hash值相同的话，后一个元素并不会覆盖上一个元素，而是采取链表的方式，把之后加进来的元素加入链表末尾，从而解决了hash冲突的问题，由此我们知道HashMap中处理hash冲突的方法是链地址法，在此补充一个知识点，处理hash冲突的方法有以下几种：</p>
+<ol>
+<li>开放地址法</li>
+<li>再哈希法</li>
+<li>链地址法</li>
+<li>建立公共溢出区</li>
+</ol>
+<p>讲到这里，重点来了，我们知道HashMap中默认的存储大小就是一个容量为16的数组，所以当我们创建出一个HashMap对象时，即使里面没有任何元素，也要分别一块内存空间给它，而且，我们再不断的向HashMap里put数据时，当达到一定的容量限制时（这个容量满足这样的一个关系时候将会扩容：HashMap中的数据量&gt;容量*加载因子，而HashMap中默认的加载因子是0.75），HashMap的空间将会扩大，而且扩大后新的空间一定是原来的2倍，我们可以看put()方法中有这样的一行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int newCapacity &#x3D; oldCapacity * 2;</span></pre></td></tr></table></figure>
+
+<p>所以，重点就是这个，只要一满足扩容条件，HashMap的空间将会以2倍的规律进行增大。假如我们有几十万、几百万条数据，那么HashMap要存储完这些数据将要不断的扩容，而且在此过程中也需要不断的做hash运算，这将对我们的内存空间造成很大消耗和浪费，而且HashMap获取数据是通过遍历Entry[]数组来得到对应的元素，在数据量很大时候会比较慢，所以在Android中，HashMap是比较费内存的，我们在一些情况下可以使用SparseArray和ArrayMap来代替HashMap。</p>
+<h2 id="SparseArray"><a href="#SparseArray" class="headerlink" title="SparseArray"></a><strong>SparseArray</strong></h2><p>SparseArray比HashMap更省内存，在某些条件下性能更好，主要是因为它避免了对key的自动装箱（int转为Integer类型），它内部则是通过两个数组来进行数据存储的，一个存储key，另外一个存储value，为了优化性能，它内部对数据还采取了压缩的方式来表示稀疏数组的数据，从而节约内存空间，我们从源码中可以看到key和value分别是用数组表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">private int[] mKeys;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">private Object[] mValues;</span></pre></td></tr></table></figure>
+
+
+<p>我们可以看到，SparseArray只能存储key为int类型的数据，同时，SparseArray在存储和读取数据时候，使用的是二分查找法，我们可以看看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public void put(int key, E value) &#123;        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    int i &#x3D; ContainerHelpers.binarySearch(mKeys, mSize, key);        ...        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    public E get(int key, E valueIfKeyNotFound) &#123;        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        int i &#x3D; ContainerHelpers.binarySearch(mKeys, mSize, key);        ...        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr></table></figure>
+
+
+<p>也就是在put添加数据的时候，会使用二分查找法和之前的key比较当前我们添加的元素的key的大小，然后按照从小到大的顺序排列好，所以，SparseArray存储的元素都是按元素的key值从小到大排列好的。<br>而在获取数据的时候，也是使用二分查找法判断元素的位置，所以，在获取数据的时候非常快，比HashMap快的多，因为HashMap获取数据是通过遍历Entry[]数组来得到对应的元素。</p>
+<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public void put(int key, E value)</span></pre></td></tr></table></figure>
+
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public void remove(int key)</span></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public void delete(int key)</span></pre></td></tr></table></figure>
+
+<p>其实remove内部还是通过调用delete来删除数据的</p>
+<h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public E get(int key)</span></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public E get(int key, E valueIfKeyNotFound)</span></pre></td></tr></table></figure>
+
+<p>该方法可设置如果key不存在的情况下默认返回的value</p>
+<h3 id="特有方法"><a href="#特有方法" class="headerlink" title="特有方法"></a>特有方法</h3><p>在此之外，SparseArray还提供了两个特有方法，更方便数据的查询：<br>获取对应的key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public int keyAt(int index)</span></pre></td></tr></table></figure>
+
+
+<p>获取对应的value：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public E valueAt(int index)</span></pre></td></tr></table></figure>
+
+<h3 id="SparseArray应用场景："><a href="#SparseArray应用场景：" class="headerlink" title="SparseArray应用场景："></a><strong>SparseArray应用场景：</strong></h3><p>虽说SparseArray性能比较好，但是由于其添加、查找、删除数据都需要先进行一次二分查找，所以在数据量大的情况下性能并不明显，将降低至少50%。</p>
+<p>满足下面两个条件我们可以使用SparseArray代替HashMap：</p>
+<ul>
+<li>数据量不大，最好在千级以内</li>
+<li>key必须为int类型，这中情况下的HashMap可以用SparseArray代替：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HashMap&lt;Integer, Object&gt; map &#x3D; new HashMap&lt;&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">用SparseArray代替:SparseArray&lt;Object&gt; array &#x3D; new SparseArray&lt;&gt;();</span></pre></td></tr></table></figure>
+
+
+<h2 id="ArrayMap"><a href="#ArrayMap" class="headerlink" title="ArrayMap"></a><strong>ArrayMap</strong></h2><p>这个api的资料在网上可以说几乎没有，然并卵，只能看文档了<br>ArrayMap是一个&lt;<strong>key,value</strong>&gt;映射的数据结构，它设计上更多的是考虑内存的优化，内部是使用两个数组进行数据存储，一个数组记录key的hash值，另外一个数组记录Value值，它和SparseArray一样，也会对key使用二分法进行从小到大排序，在添加、删除、查找数据的时候都是先使用二分查找法得到相应的index，然后通过index来进行添加、查找、删除等操作，所以，应用场景和SparseArray的一样，如果在数据量比较大的情况下，那么它的性能将退化至少50%。</p>
+<h3 id="添加数据-1"><a href="#添加数据-1" class="headerlink" title="添加数据"></a>添加数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public V put(K key, V value)</span></pre></td></tr></table></figure>
+
+<h3 id="获取数据-1"><a href="#获取数据-1" class="headerlink" title="获取数据"></a>获取数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public V get(Object key)</span></pre></td></tr></table></figure>
+
+<h3 id="删除数据-1"><a href="#删除数据-1" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public V remove(Object key)</span></pre></td></tr></table></figure>
+
+
+<h3 id="特有方法-1"><a href="#特有方法-1" class="headerlink" title="特有方法"></a>特有方法</h3><p>它和SparseArray一样同样也有两个更方便的获取数据方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">public K keyAt(int index)public V valueAt(int index)</span></pre></td></tr></table></figure>
+
+<h3 id="ArrayMap应用场景"><a href="#ArrayMap应用场景" class="headerlink" title="ArrayMap应用场景"></a><strong>ArrayMap应用场景</strong></h3><ul>
+<li>数据量不大，最好在千级以内</li>
+<li>数据结构类型为Map类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ArrayMap&lt;Key, Value&gt; arrayMap &#x3D; new ArrayMap&lt;&gt;();</span></pre></td></tr></table></figure>
+
+<p>【注】：如果我们要兼容aip19以下版本的话，那么导入的包需要为v4包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">import android.support.v4.util.ArrayMap;</span></pre></td></tr></table></figure>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>SparseArray和ArrayMap都差不多，使用哪个呢？<br>假设数据量都在千级以内的情况下：</p>
+<blockquote>
+<p>1、如果key的类型已经确定为int类型，那么使用SparseArray，因为它避免了自动装箱的过程，如果key为long类型，它还提供了一个LongSparseArray来确保key为long类型时的使用</p>
+<p>2、如果key类型为其它的类型，则使用ArrayMap</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://blog.csdn.net/aptentity/article/details/65449959" target="_blank" rel="noopener">性能优化：使用SparseArray和ArrayMap代替HashMap</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2019-12-10 </div>
 			<div class="article-title"><a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" >CompileSdkVersion、TargetSdkVersion、MinSdkVersion</a></div>						
 		</h3>
@@ -938,93 +1044,6 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
-			<div class="date"> 2019-10-02 </div>
-			<div class="article-title"><a href="/2019/10/02/2019-10--02.android/" >Android Notes</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="用户界面"><a href="#用户界面" class="headerlink" title="用户界面"></a>用户界面</h2><h3 id="下拉刷新控件"><a href="#下拉刷新控件" class="headerlink" title="下拉刷新控件"></a>下拉刷新控件</h3><ul>
-<li><a href="https://github.com/chrisbanes/ActionBar-PullToRefresh" target="_blank" rel="noopener">ActionBar-PullToRefresh</a></li>
-</ul>
-<h3 id="侧边滑动菜单"><a href="#侧边滑动菜单" class="headerlink" title="侧边滑动菜单"></a>侧边滑动菜单</h3><ul>
-<li><a href="https://github.com/jfeinstein10/SlidingMenu" target="_blank" rel="noopener">SlideMenu</a></li>
-<li>DrawerLayout</li>
-</ul>
-<h3 id="ActionBar"><a href="#ActionBar" class="headerlink" title="ActionBar"></a>ActionBar</h3><ul>
-<li><a href="https://github.com/JakeWharton/ActionBarSherlock" target="_blank" rel="noopener">ActionBarSherlock</a></li>
-</ul>
-<h2 id="系统功能"><a href="#系统功能" class="headerlink" title="系统功能"></a>系统功能</h2><h3 id="ASF-Android-Sensor-Framework-传感器系统"><a href="#ASF-Android-Sensor-Framework-传感器系统" class="headerlink" title="ASF(Android Sensor Framework) 传感器系统"></a>ASF(Android Sensor Framework) 传感器系统</h3><h3 id="NFC-Near-Field-Comunication-近场通讯"><a href="#NFC-Near-Field-Comunication-近场通讯" class="headerlink" title="NFC(Near Field Comunication) 近场通讯"></a>NFC(Near Field Comunication) 近场通讯</h3><ul>
-<li>Android Beam 在两个 Android 手机中通过 NFC 芯片传输数据</li>
-<li>如果传输大的文件，内部自动转为蓝牙模式</li>
-</ul>
-<h2 id="AR-amp-amp-VR"><a href="#AR-amp-amp-VR" class="headerlink" title="AR &amp;&amp; VR"></a>AR &amp;&amp; VR</h2><ul>
-<li>AR:Augmented Reality 增强现实</li>
-<li>VR: Virtial Reality 虚拟现实</li>
-<li><a href="https://www.layar.com/" target="_blank" rel="noopener">Layar是全球第一款增强现实感的手机浏览器</a></li>
-<li><a href="https://developer.vuforia.com/" target="_blank" rel="noopener">高通 AR 开发包</a></li>
-</ul>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><ul>
-<li>Effective UID: 权利标识</li>
-<li>Real UID: 身份标识</li>
-</ul>
-<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><h3 id="创建文件和文件夹"><a href="#创建文件和文件夹" class="headerlink" title="创建文件和文件夹"></a>创建文件和文件夹</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"xxx.xx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(！file.exists())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    file.createNewFile();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建文一级件夹</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">File folder = <span class="keyword">new</span> File(<span class="string">"xxx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!folder.exists())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    folder.mkdir();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建文多级件夹</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">File folder = <span class="keyword">new</span> File(<span class="string">"xxx/ddd/eee"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!folder.exists())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    older.mkdirs();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="读取-assets-文件夹中读取文件"><a href="#读取-assets-文件夹中读取文件" class="headerlink" title="读取 assets 文件夹中读取文件"></a>读取 <code>assets</code> 文件夹中读取文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字节流数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">InputStream is = getResources().getAssets().open(<span class="string">"xxx.xx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是文本可以转为字符流</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(is,<span class="string">"UTF_8"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以进一步包装方便读取</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">BufferedReader bfr = <span class="keyword">new</span> BufferedReader(isr);</span></pre></td></tr></table></figure>
-
-
-<h3 id="读取-res-gt-raw-文件夹下的文件"><a href="#读取-res-gt-raw-文件夹下的文件" class="headerlink" title="读取 res-&gt;raw 文件夹下的文件"></a>读取 <code>res-&gt;raw</code> 文件夹下的文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字节流数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">InputStream is = getResources().openRawResource.(R.raw.xxxx);</span></pre></td></tr></table></figure>
-
-<h3 id="读写应用内部文件存储空间"><a href="#读写应用内部文件存储空间" class="headerlink" title="读写应用内部文件存储空间"></a>读写应用内部文件存储空间</h3><p>内部文件存储空间在 <code>/data/data/xxxxx/</code></p>
-<ul>
-<li><p>写入文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">FileOutputStream fos = openFileOutput(<span class="string">"xxx.xx"</span>,Context.MODE_PRIVATE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(fos,<span class="string">"UTF_8"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">osw.write(<span class="string">"xxxxxx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">osw.flush();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">fos.flush();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">osw.close();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">fos.close();</span></pre></td></tr></table></figure>
-</li>
-<li><p>读取文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">FileInputStream fis = openFileOutput(<span class="string">"xxx.xx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">InputStreamReader is = <span class="keyword">new</span> InputStreamReader(is,<span class="string">"UTF_8"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> input[] = <span class="keyword">new</span> <span class="keyword">char</span>[fis.available()];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">is.read(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">is.close();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">fis.close();</span></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="读取外部存储文件"><a href="#读取外部存储文件" class="headerlink" title="读取外部存储文件"></a>读取外部存储文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">File sdcard = Environment.getExternalStorageDirectory();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">File myfile = <span class="keyword">new</span> File(sdcard,<span class="string">"xxx.xx"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(myfile.exists())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// TODO...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="Preference-存储"><a href="#Preference-存储" class="headerlink" title="Preference 存储"></a>Preference 存储</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SharePreferences pre = getPreferences(Activity.MODE_PRIVATE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Editor editor = pre.edit();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存储</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">editor.putString(<span class="string">"myKey"</span>,<span class="string">"xxxxxs"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">editor.commit();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">String str = pre.getString(<span class="string">"myKey"</span>,<span class="string">"default value"</span>);</span></pre></td></tr></table></figure>
-
-<h3 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h3><ul>
-<li><a href="https://www.jianshu.com/p/94b8582d089a" target="_blank" rel="noopener">Android四大组件——ContentProvider（基础篇）</a></li>
-</ul>
-<h3 id="XML-文件读写"><a href="#XML-文件读写" class="headerlink" title="XML 文件读写"></a>XML 文件读写</h3><p>-<a href="https://blog.csdn.net/u011967006/article/details/78173620" target="_blank" rel="noopener">Android Xml文件生成,Xml数据格式写入</a></p>
-<ul>
-<li><a href="https://www.cnblogs.com/xiobai/p/10826568.html" target="_blank" rel="noopener">Android—–解析xml文件的三种方式</a></li>
-</ul>
-<h3 id="JSON-操作"><a href="#JSON-操作" class="headerlink" title="JSON 操作"></a>JSON 操作</h3><ul>
-<li><a href="https://www.jianshu.com/p/1409eec214d0" target="_blank" rel="noopener">Android Json介绍和Gson使用</a></li>
-</ul>
-<h2 id="网络通讯"><a href="#网络通讯" class="headerlink" title="网络通讯"></a>网络通讯</h2><h3 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h3><ul>
-<li><a href="https://www.jianshu.com/p/13ce5e205122" target="_blank" rel="noopener">Android AsyncTask 详解</a><h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="创建文件-1"><a href="#创建文件-1" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr></table></figure>
-
-
-
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
 			<div class="date"> 2019-09-20 </div>
 			<div class="article-title"><a href="/2019/09/20/2019-09--20.hadoop/" >Hadoop</a></div>						
 		</h3>
@@ -1207,7 +1226,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>13</span></a></li>
+			<li><a href="/categories/Android/">Android<span>14</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1276,45 +1295,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
 			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/Android/">Android<span>2</span></a></li>
 		
 			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
 			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>1</span></a></li>
-		
 			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>22</span></a></li>
@@ -1330,6 +1349,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
+      </li>
+    
+      <li>
         <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
       </li>
     
@@ -1343,10 +1366,6 @@
     
       <li>
         <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
-      </li>
-    
-      <li>
-        <a href="/2019/10/03/2019-10-02.car/" ><i class="fa fa-file-o"></i>Car Parameters</a>
       </li>
     
   </ul>

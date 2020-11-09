@@ -144,6 +144,9 @@
 <ul>
 <li>[Android 检测权限的三种写法]<a href="https://www.jianshu.com/p/11d99a9be7d9" target="_blank" rel="noopener">https://www.jianshu.com/p/11d99a9be7d9</a>)</li>
 </ul>
+<h2 id="显示内存"><a href="#显示内存" class="headerlink" title="显示内存"></a>显示内存</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ActivityManager activityManager = (ActivityManager)ArkeApplication.getContext().getSystemService(Context.ACTIVITY_SERVICE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 系统分配一个应用的内存大小(M)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> memClass = activityManager.getMemoryClass();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 系统分配一个应用最大内存大小(M),可以通过 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// AndroidManifest.xml -&gt; application -&gt; android:largeHeap="true" 开启</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> largememClass = activityManager.getLargeMemoryClass();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Timber.d(<span class="string">"memClass:%d largememClass:%d"</span>,memClass,largememClass);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态获取显示运行时内存</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Float totalMemory = Runtime.getRuntime().totalMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Float freeMemory = Runtime.getRuntime().freeMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">Float maxMemory = Runtime.getRuntime().maxMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">Timber.d(<span class="string">"totalMemory:%f freeMemory:%f maxMemory:%f"</span>,totalMemory,freeMemory,maxMemory);</span></pre></td></tr></table></figure>
+
+
 <h2 id="主线程和子线程之间传递消息"><a href="#主线程和子线程之间传递消息" class="headerlink" title="主线程和子线程之间传递消息"></a>主线程和子线程之间传递消息</h2><ul>
 <li><a href="https://www.cnblogs.com/laughingQing/p/5436998.html" target="_blank" rel="noopener">android 主线程和子线程之间的消息传递</a></li>
 </ul>
@@ -199,13 +202,13 @@
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/2018/06/26/2018-06-26-android-recyclerview-divider/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+    	<li class="prev"><a href="/2018/06/21/2018-06-21-android-databind/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2018/06/21/2018-06-21-android-databind/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2018/06/14/2018-06-14-px-pt-ppi-dpi-dp-sp/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -238,7 +241,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Android/">Android<span>13</span></a></li>
+    <li><a href="/categories/Android/">Android<span>14</span></a></li>
   </li>
 
     </ul>
@@ -268,18 +271,6 @@
 				
 
 			
-
-				
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-				
-
-			
-
-				
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				
-
-			
 		</ol>   
 
 		<!-- 轮播（Carousel）项目 -->
@@ -293,28 +284,6 @@
 							<div class="carousel-caption">驾考增高坐垫</div>
 						</a>
 					</div>	
-				
-
-			
-
-				
-					<div class="item">
-						<a href="https://item.taobao.com/item.htm?ft=t&id=575971596783" title="鼻器洗鼻壶家用瑜伽鼻腔冲洗器成人儿童洗鼻盐喷雾" target="blank">
-							<img src="https://gd3.alicdn.com/imgextra/i3/76548092/TB2JQ5bs5AnBKNjSZFvXXaTKXXa_!!76548092.jpg" alt="鼻腔冲洗器" class="nofancybox">
-							<div class="carousel-caption">鼻腔冲洗器</div>
-						</a>
-					</div>
-				
-
-			
-
-				
-					<div class="item">
-						<a href="https://item.taobao.com/item.htm?ft=t&id=573821912854" title="10卷单排标价贴价格价钱打价签纸贴打码机器标价纸纸卷超市价签机" target="blank">
-							<img src="https://gd4.alicdn.com/imgextra/i3/76548092/TB2yiAxFKuSBuNjy1XcXXcYjFXa_!!76548092.jpg" alt="标价贴" class="nofancybox">
-							<div class="carousel-caption">标价贴</div>
-						</a>
-					</div>
 				
 
 			
