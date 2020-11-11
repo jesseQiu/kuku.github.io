@@ -129,6 +129,298 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-11-17 </div>
+			<div class="article-title"><a href="/2016/11/17/2016-11-17-mocha-实例教程/" >Mocha 实例教程</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="测试框架-Mocha-实例教程"><a href="#测试框架-Mocha-实例教程" class="headerlink" title="测试框架 Mocha 实例教程"></a>测试框架 Mocha 实例教程</h1><p><a href="http://www.bshare.cn/share" target="_blank" rel="noopener"></a></p>
+<p><a href="https://mochajs.org/" target="_blank" rel="noopener"><code>Mocha</code></a>（发音”摩卡”）诞生于2011年，是现在最流行的JavaScript测试框架之一，在浏览器和Node环境都可以使用。</p>
+<p>所谓”测试框架”，就是运行测试的工具。通过它，可以为JavaScript应用添加测试，从而保证代码的质量。</p>
+<p>本文全面介绍如何使用<code>Mocha</code>，让你轻松上手。如果你以前对测试一无所知，本文也可以当作JavaScript单元测试入门。值得说明的是，除了Mocha以外，类似的测试框架还有<a href="http://jasmine.github.io/" target="_blank" rel="noopener"><code>Jasmine</code></a>、<a href="http://karma-runner.github.io/" target="_blank" rel="noopener"><code>Karma</code></a>、<a href="https://github.com/substack/tape/" target="_blank" rel="noopener"><code>Tape</code></a>等，也很值得学习。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120301.png" alt=""></p>
+<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>我为本文写了一个示例库<a href="https://github.com/ruanyf/mocha-demos" target="_blank" rel="noopener"><code>Mocha-demos</code></a>，请先安装这个库。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;ruanyf&#x2F;mocha-demos.git</span></pre></td></tr></table></figure>
+</blockquote>
+<p>如果你的电脑没装Git，可以直接下载<a href="https://github.com/ruanyf/mocha-demos/archive/master.zip" target="_blank" rel="noopener">zip压缩包</a>，进行解压。</p>
+<p>然后，进入<a href="https://github.com/ruanyf/mocha-demos" target="_blank" rel="noopener"><code>mocha-demos</code></a>目录，安装依赖（你的电脑必须有Node）。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ cd mocha-demos</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm install</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码会在目录内部安装<code>Mocha</code>，为了操作的方便，请在全面环境也安装一下<code>Mocha</code>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install --global mocha</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="二、测试脚本的写法"><a href="#二、测试脚本的写法" class="headerlink" title="二、测试脚本的写法"></a>二、测试脚本的写法</h2><p><code>Mocha</code>的作用是运行测试脚本，首先必须学会写测试脚本。所谓”测试脚本”，就是用来测试源码的脚本。</p>
+<p>下面是一个加法模块<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo01/add.js" target="_blank" rel="noopener"><code>add.js</code></a>的代码。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; add.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">function add(x, y) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  return x + y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; add;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>要测试这个加法模块是否正确，就要写测试脚本。</p>
+<p>通常，测试脚本与所要测试的源码脚本同名，但是后缀名为<code>.test.js</code>（表示测试）或者<code>.spec.js</code>（表示规格）。比如，<code>add.js</code>的测试脚本名字就是<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo01/add.test.js" target="_blank" rel="noopener"><code>add.test.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; add.test.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">var add &#x3D; require(&#39;.&#x2F;add.js&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">var expect &#x3D; require(&#39;chai&#39;).expect;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">describe(&#39;加法函数的测试&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  it(&#39;1 加 1 应该等于 2&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    expect(add(1, 1)).to.be.equal(2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面这段代码，就是测试脚本，它可以独立执行。测试脚本里面应该包括一个或多个<code>describe</code>块，每个<code>describe</code>块应该包括一个或多个<code>it</code>块。</p>
+<p><code>describe</code>块称为”测试套件”（test suite），表示一组相关的测试。它是一个函数，第一个参数是测试套件的名称（”加法函数的测试”），第二个参数是一个实际执行的函数。</p>
+<p><code>it</code>块称为”测试用例”（test case），表示一个单独的测试，是测试的最小单位。它也是一个函数，第一个参数是测试用例的名称（”1 加 1 应该等于 2”），第二个参数是一个实际执行的函数。</p>
+<h2 id="三、断言库的用法"><a href="#三、断言库的用法" class="headerlink" title="三、断言库的用法"></a>三、断言库的用法</h2><p>上面的测试脚本里面，有一句断言。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">expect(add(1, 1)).to.be.equal(2);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>所谓”断言”，就是判断源码的实际执行结果与预期结果是否一致，如果不一致就抛出一个错误。上面这句断言的意思是，调用<code>add(1, 1)</code>，结果应该等于2。</p>
+<p>所有的测试用例（it块）都应该含有一句或多句的断言。它是编写测试用例的关键。断言功能由断言库来实现，Mocha本身不带断言库，所以必须先引入断言库。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var expect &#x3D; require(&#39;chai&#39;).expect;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>断言库有很多种，Mocha并不限制使用哪一种。上面代码引入的断言库是<a href="http://chaijs.com/" target="_blank" rel="noopener"><code>chai</code></a>，并且指定使用它的<a href="http://chaijs.com/api/bdd/" target="_blank" rel="noopener"><code>expect</code></a>断言风格。</p>
+<p><code>expect</code>断言的优点是很接近自然语言，下面是一些例子。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 相等或不相等</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">expect(4 + 5).to.be.equal(9);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">expect(4 + 5).to.be.not.equal(10);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">expect(foo).to.be.deep.equal(&#123; bar: &#39;baz&#39; &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 布尔值为true</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">expect(&#39;everthing&#39;).to.be.ok;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">expect(false).to.not.be.ok;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; typeof</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">expect(&#39;test&#39;).to.be.a(&#39;string&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">expect(&#123; foo: &#39;bar&#39; &#125;).to.be.an(&#39;object&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">expect(foo).to.be.an.instanceof(Foo);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; include</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">expect([1,2,3]).to.include(2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">expect(&#39;foobar&#39;).to.contain(&#39;foo&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">expect(&#123; foo: &#39;bar&#39;, hello: &#39;universe&#39; &#125;).to.include.keys(&#39;foo&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; empty</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">expect([]).to.be.empty;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">expect(&#39;&#39;).to.be.empty;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">expect(&#123;&#125;).to.be.empty;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; match</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">expect(&#39;foobar&#39;).to.match(&#x2F;^foo&#x2F;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>基本上，<code>expect</code>断言的写法都是一样的。头部是<code>expect</code>方法，尾部是断言方法，比如<code>equal</code>、<code>a</code>/<code>an</code>、<code>ok</code>、<code>match</code>等。两者之间使用<code>to</code>或<code>to.be</code>连接。</p>
+<p>如果<code>expect</code>断言不成立，就会抛出一个错误。事实上，只要不抛出错误，测试用例就算通过。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it(&#39;1 加 1 应该等于 2&#39;, function() &#123;&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的这个测试用例，内部没有任何代码，由于没有抛出了错误，所以还是会通过。</p>
+<h2 id="四、Mocha的基本用法"><a href="#四、Mocha的基本用法" class="headerlink" title="四、Mocha的基本用法"></a>四、Mocha的基本用法</h2><p>有了测试脚本以后，就可以用Mocha运行它。请进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo01" target="_blank" rel="noopener"><code>demo01</code></a>子目录，执行下面的命令。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha add.test.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  加法函数的测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ✓ 1 加 1 应该等于 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  1 passing (8ms)</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的运行结果表示，测试脚本通过了测试，一共只有1个测试用例，耗时是8毫秒。</p>
+<p><code>mocha</code>命令后面紧跟测试脚本的路径和文件名，可以指定多个测试脚本。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha file1 file2 file3</span></pre></td></tr></table></figure>
+</blockquote>
+<p>Mocha默认运行<code>test</code>子目录里面的测试脚本。所以，一般都会把测试脚本放在<code>test</code>目录里面，然后执行<code>mocha</code>就不需要参数了。请进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo02" target="_blank" rel="noopener"><code>demo02</code></a>子目录，运行下面的命令。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  加法函数的测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ✓ 1 加 1 应该等于 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ✓ 任何数加0应该等于自身</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  2 passing (9ms)</span></pre></td></tr></table></figure>
+</blockquote>
+<p>这时可以看到，<code>test</code>子目录里面的测试脚本执行了。但是，你打开<code>test</code>子目录，会发现下面还有一个<code>test/dir</code>子目录，里面还有一个测试脚本<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo02/test/dir/multiply.test.js" target="_blank" rel="noopener"><code>multiply.test.js</code></a>，并没有得到执行。原来，Mocha默认只执行<code>test</code>子目录下面第一层的测试用例，不会执行更下层的用例。</p>
+<p>为了改变这种行为，就必须加上<code>--recursive</code>参数，这时<code>test</code>子目录下面所有的测试用例—-不管在哪一层—-都会执行。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --recursive</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  加法函数的测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ✓ 1 加 1 应该等于 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ✓ 任何数加0应该等于自身</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  乘法函数的测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    ✓ 1 乘 1 应该等于 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  3 passing (9ms)</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="五、通配符"><a href="#五、通配符" class="headerlink" title="五、通配符"></a>五、通配符</h2><p>命令行指定测试脚本时，可以使用通配符，同时指定多个文件。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha spec&#x2F;&#123;my,awesome&#125;.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ mocha test&#x2F;unit&#x2F;*.js</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的第一行命令，指定执行<code>spec</code>目录下面的<code>my.js</code>和<code>awesome.js</code>。第二行命令，指定执行<code>test/unit</code>目录下面的所有js文件。</p>
+<p>除了使用Shell通配符，还可以使用Node通配符。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha &#39;test&#x2F;**&#x2F;*.@(js|jsx)&#39;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码指定运行<code>test</code>目录下面任何子目录中、文件后缀名为<code>js</code>或<code>jsx</code>的测试脚本。注意，Node的通配符要放在单引号之中，否则星号（<code>*</code>）会先被Shell解释。</p>
+<p>上面这行Node通配符，如果改用Shell通配符，要写成下面这样。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha test&#x2F;&#123;,**&#x2F;&#125;*.&#123;js,jsx&#125;</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="六、命令行参数"><a href="#六、命令行参数" class="headerlink" title="六、命令行参数"></a>六、命令行参数</h2><p>除了前面介绍的<code>--recursive</code>，Mocha还可以加上其他命令行参数。请在<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo02" target="_blank" rel="noopener"><code>demo02</code></a>子目录里面，运行下面的命令，查看效果。</p>
+<h3 id="6-1-–help-h"><a href="#6-1-–help-h" class="headerlink" title="6.1 –help, -h"></a>6.1 –help, -h</h3><p><code>--help</code>或<code>-h</code>参数，用来查看Mocha的所有命令行参数。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --help</span></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="6-2-–reporter-R"><a href="#6-2-–reporter-R" class="headerlink" title="6.2 –reporter, -R"></a>6.2 –reporter, -R</h3><p><code>--reporter</code>参数用来指定测试报告的格式，默认是<code>spec</code>格式。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"># 等同于</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ mocha --reporter spec</span></pre></td></tr></table></figure>
+</blockquote>
+<p>除了<code>spec</code>格式，官方网站还提供了其他许多<a href="http://mochajs.org/#reporters" target="_blank" rel="noopener">报告格式</a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --reporter tap</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">1..2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ok 1 加法函数的测试 1 加 1 应该等于 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ok 2 加法函数的测试 任何数加0应该等于自身</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"># tests 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"># pass 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"># fail 0</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面是<code>tap</code>格式报告的显示结果。</p>
+<p><code>--reporters</code>参数可以显示所有内置的报告格式。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --reporters</span></pre></td></tr></table></figure>
+</blockquote>
+<p>使用<a href="http://adamgruber.github.io/mochawesome/" target="_blank" rel="noopener"><code>mochawesome</code></a>模块，可以生成漂亮的HTML格式的报告。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120303.png" alt=""></p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev mochawesome</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ ..&#x2F;node_modules&#x2F;.bin&#x2F;mocha --reporter mochawesome</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码中，<code>mocha</code>命令使用了项目内安装的版本，而不是全局安装的版本，因为<code>mochawesome</code>模块是安装在项目内的。</p>
+<p>然后，测试结果报告就在<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo02/mochawesome-reports" target="_blank" rel="noopener"><code>mochaawesome-reports</code></a>子目录生成。</p>
+<h3 id="6-3-–growl-G"><a href="#6-3-–growl-G" class="headerlink" title="6.3 –growl, -G"></a>6.3 –growl, -G</h3><p>打开<a href="http://growl.info/" target="_blank" rel="noopener"><code>--growl</code></a>参数，就会将测试结果在桌面显示。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --growl</span></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120304.png" alt=""></p>
+<h3 id="6-4-–watch，-w"><a href="#6-4-–watch，-w" class="headerlink" title="6.4 –watch，-w"></a>6.4 –watch，-w</h3><p><code>--watch</code>参数用来监视指定的测试脚本。只要测试脚本有变化，就会自动运行Mocha。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --watch</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令执行以后，并不会退出。你可以另外打开一个终端窗口，修改<code>test</code>目录下面的测试脚本<code>add.test.js</code>，比如删除一个测试用例，一旦保存，Mocha就会再次自动运行。</p>
+<h3 id="6-5-–bail-b"><a href="#6-5-–bail-b" class="headerlink" title="6.5 –bail, -b"></a>6.5 –bail, -b</h3><p><code>--bail</code>参数指定只要有一个测试用例没有通过，就停止执行后面的测试用例。这对<a href="http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html" target="_blank" rel="noopener">持续集成</a>很有用。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --bail</span></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="6-6-–grep-g"><a href="#6-6-–grep-g" class="headerlink" title="6.6 –grep, -g"></a>6.6 –grep, -g</h3><p><code>--grep</code>参数用于搜索测试用例的名称（即<code>it</code>块的第一个参数），然后只执行匹配的测试用例。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --grep &quot;1 加 1&quot;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码只测试名称中包含”1 加 1”的测试用例。</p>
+<h3 id="6-7-–invert-i"><a href="#6-7-–invert-i" class="headerlink" title="6.7 –invert, -i"></a>6.7 –invert, -i</h3><p><code>--invert</code>参数表示只运行不符合条件的测试脚本，必须与<code>--grep</code>参数配合使用。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --grep &quot;1 加 1&quot; --invert</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="七，配置文件mocha-opts"><a href="#七，配置文件mocha-opts" class="headerlink" title="七，配置文件mocha.opts"></a>七，配置文件mocha.opts</h2><p>Mocha允许在<code>test</code>目录下面，放置配置文件<code>mocha.opts</code>，把命令行参数写在里面。请先进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo03" target="_blank" rel="noopener"><code>demo03</code></a>目录，运行下面的命令。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --recursive --reporter tap --growl</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面这个命令有三个参数<code>--recursive</code>、<code>--reporter tap</code>、<code>--growl</code>。</p>
+<p>然后，把这三个参数写入<code>test</code>目录下的<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo03/test/mocha.opts" target="_blank" rel="noopener"><code>mocha.opts</code></a>文件。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">--reporter tap</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">--recursive</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">--growl</span></pre></td></tr></table></figure>
+</blockquote>
+<p>然后，执行<code>mocha</code>就能取得与第一行命令一样的效果。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha</span></pre></td></tr></table></figure>
+</blockquote>
+<p>如果测试用例不是存放在test子目录，可以在<code>mocha.opts</code>写入以下内容。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">server-tests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">--recursive</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码指定运行<code>server-tests</code>目录及其子目录之中的测试脚本。</p>
+<h2 id="八、ES6测试"><a href="#八、ES6测试" class="headerlink" title="八、ES6测试"></a>八、ES6测试</h2><p>如果测试脚本是用ES6写的，那么运行测试之前，需要先用Babel转码。进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo04" target="_blank" rel="noopener"><code>demo04</code></a>目录，打开<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo04/test/add.test.js" target="_blank" rel="noopener"><code>test/add.test.js</code></a>文件，可以看到这个测试用例是用ES6写的。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">import add from &#39;..&#x2F;src&#x2F;add.js&#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">import chai from &#39;chai&#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">let expect &#x3D; chai.expect;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">describe(&#39;加法函数的测试&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  it(&#39;1 加 1 应该等于 2&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    expect(add(1, 1)).to.be.equal(2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>ES6转码，需要安装Babel。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install babel-core babel-preset-es2015 --save-dev</span></pre></td></tr></table></figure>
+</blockquote>
+<p>然后，在项目目录下面，新建一个<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo04/.babelrc" target="_blank" rel="noopener"><code>.babelrc</code></a>配置文件。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  &quot;presets&quot;: [ &quot;es2015&quot; ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>最后，使用<code>--compilers</code>参数指定测试脚本的转码器。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ ..&#x2F;node_modules&#x2F;mocha&#x2F;bin&#x2F;mocha --compilers js:babel-core&#x2F;register</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码中，<code>--compilers</code>参数后面紧跟一个用冒号分隔的字符串，冒号左边是文件的后缀名，右边是用来处理这一类文件的模块名。上面代码表示，运行测试之前，先用<code>babel-core/register</code>模块，处理一下<code>.js</code>文件。由于这里的转码器安装在项目内，所以要使用项目内安装的Mocha；如果转码器安装在全局，就可以使用全局的Mocha。</p>
+<p>下面是另外一个例子，使用Mocha测试CoffeeScript脚本。测试之前，先将<code>.coffee</code>文件转成<code>.js</code>文件。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --compilers coffee:coffee-script&#x2F;register</span></pre></td></tr></table></figure>
+</blockquote>
+<p>注意，Babel默认不会对Iterator、Generator、Promise、Map、Set等全局对象，以及一些全局对象的方法（比如<code>Object.assign</code>）转码。如果你想要对这些对象转码，就要安装<code>babel-polyfill</code>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install babel-polyfill --save</span></pre></td></tr></table></figure>
+</blockquote>
+<p>然后，在你的脚本头部加上一行。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">import &#39;babel-polyfill&#39;</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="九、异步测试"><a href="#九、异步测试" class="headerlink" title="九、异步测试"></a>九、异步测试</h2><p>Mocha默认每个测试用例最多执行2000毫秒，如果到时没有得到结果，就报错。对于涉及异步操作的测试用例，这个时间往往是不够的，需要用<code>-t</code>或<code>--timeout</code>参数指定超时门槛。</p>
+<p>进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo05" target="_blank" rel="noopener"><code>demo05</code></a>子目录，打开测试脚本<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo05/timeout.test.js" target="_blank" rel="noopener"><code>timeout.test.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it(&#39;测试应该5000毫秒后结束&#39;, function(done) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  var x &#x3D; true;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  var f &#x3D; function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    x &#x3D; false;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    expect(x).to.be.not.ok;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    done(); &#x2F;&#x2F; 通知Mocha测试结束</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  setTimeout(f, 4000);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的测试用例，需要4000毫秒之后，才有运行结果。所以，需要用<code>-t</code>或<code>--timeout</code>参数，改变默认的超时设置。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha -t 5000 timeout.test.js</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令将测试的超时时限指定为5000毫秒。</p>
+<p>另外，上面的测试用例里面，有一个<code>done</code>函数。<code>it</code>块执行的时候，传入一个<code>done</code>参数，当测试结束的时候，必须显式调用这个函数，告诉Mocha测试结束了。否则，Mocha就无法知道，测试是否结束，会一直等到超时报错。你可以把这行删除试试看。</p>
+<p>Mocha默认会高亮显示超过75毫秒的测试用例，可以用<code>-s</code>或<code>--slow</code>调整这个参数。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha -t 5000 -s 1000 timeout.test.js</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令指定高亮显示耗时超过1000毫秒的测试用例。</p>
+<p>下面是另外一个异步测试的例子<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo05/async.test.js" target="_blank" rel="noopener"><code>async.test.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it(&#39;异步请求应该返回一个对象&#39;, function(done)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  request</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    .get(&#39;https:&#x2F;&#x2F;api.github.com&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    .end(function(err, res)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      expect(res).to.be.an(&#39;object&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      done();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>运行下面命令，可以看到这个测试会通过。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha -t 10000 async.test.js</span></pre></td></tr></table></figure>
+</blockquote>
+<p>另外，Mocha内置对Promise的支持，允许直接返回Promise，等到它的状态改变，再执行断言，而不用显式调用<code>done</code>方法。请看<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo05/promise.test.js" target="_blank" rel="noopener"><code>promise.test.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it(&#39;异步请求应该返回一个对象&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  return fetch(&#39;https:&#x2F;&#x2F;api.github.com&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    .then(function(res) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      return res.json();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;).then(function(json) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      expect(json).to.be.an(&#39;object&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="十、测试用例的钩子"><a href="#十、测试用例的钩子" class="headerlink" title="十、测试用例的钩子"></a>十、测试用例的钩子</h2><p>Mocha在<code>describe</code>块之中，提供测试用例的四个钩子：<code>before()</code>、<code>after()</code>、<code>beforeEach()</code>和<code>afterEach()</code>。它们会在指定时间执行。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">describe(&#39;hooks&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  before(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 在本区块的所有测试用例之前执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  after(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 在本区块的所有测试用例之后执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  beforeEach(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 在本区块的每个测试用例之前执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  afterEach(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F; 在本区块的每个测试用例之后执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &#x2F;&#x2F; test cases</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo06" target="_blank" rel="noopener"><code>demo06</code></a>子目录，可以看到下面两个例子。首先是<code>beforeEach</code>的例子<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo06/beforeEach.test.js" target="_blank" rel="noopener"><code>beforeEach.test.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; beforeEach.test.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">describe(&#39;beforeEach示例&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  var foo &#x3D; false;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  beforeEach(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    foo &#x3D; true;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  it(&#39;修改全局变量应该成功&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    expect(foo).to.be.equal(true);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码中，<code>beforeEach</code>会在<code>it</code>之前执行，所以会修改全局变量。</p>
+<p>另一个例子<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo06/beforeEach-async.test.js" target="_blank" rel="noopener"><code>beforeEach-async.test.js</code></a>则是演示，如何在<code>beforeEach</code>之中使用异步操作。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; beforeEach-async.test.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">describe(&#39;异步 beforeEach 示例&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  var foo &#x3D; false;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  beforeEach(function(done) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    setTimeout(function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      foo &#x3D; true;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      done();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;, 50);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  it(&#39;全局变量异步修改应该成功&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    expect(foo).to.be.equal(true);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="十一、测试用例管理"><a href="#十一、测试用例管理" class="headerlink" title="十一、测试用例管理"></a>十一、测试用例管理</h2><p>大型项目有很多测试用例。有时，我们希望只运行其中的几个，这时可以用<code>only</code>方法。<code>describe</code>块和<code>it</code>块都允许调用<code>only</code>方法，表示只运行某个测试套件或测试用例。</p>
+<p>进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo07" target="_blank" rel="noopener"><code>demo07</code></a>子目录，测试脚本<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo07/test/add.test.js" target="_blank" rel="noopener"><code>test/add.test.js</code></a>就使用了<code>only</code>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it.only(&#39;1 加 1 应该等于 2&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  expect(add(1, 1)).to.be.equal(2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">it(&#39;任何数加0应该等于自身&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  expect(add(1, 0)).to.be.equal(1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码中，只有带有<code>only</code>方法的测试用例会运行。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha test&#x2F;add.test.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  加法函数的测试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ✓ 1 加 1 应该等于 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  1 passing (10ms)</span></pre></td></tr></table></figure>
+</blockquote>
+<p>此外，还有<code>skip</code>方法，表示跳过指定的测试套件或测试用例。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">it.skip(&#39;任何数加0应该等于自身&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  expect(add(1, 0)).to.be.equal(1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码的这个测试用例不会执行。</p>
+<h2 id="十二、浏览器测试"><a href="#十二、浏览器测试" class="headerlink" title="十二、浏览器测试"></a>十二、浏览器测试</h2><p>除了在命令行运行，Mocha还可以在浏览器运行。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120305.png" alt=""></p>
+<p>首先，使用<code>mocha init</code>命令在指定目录生成初始化文件。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha init demo08</span></pre></td></tr></table></figure>
+</blockquote>
+<p>运行上面命令，就会在<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo08" target="_blank" rel="noopener"><code>demo08</code></a>目录下生成<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo08/index.html" target="_blank" rel="noopener"><code>index.html</code></a>文件，以及配套的脚本和样式表。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &lt;body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &lt;h1&gt;Unit.js tests in the browser with Mocha&lt;&#x2F;h1&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &lt;div id&#x3D;&quot;mocha&quot;&gt;&lt;&#x2F;div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;script src&#x3D;&quot;mocha.js&quot;&gt;&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">      mocha.setup(&#39;bdd&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;script src&#x3D;&quot;tests.js&quot;&gt;&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      mocha.run();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  &lt;&#x2F;body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;html&gt;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>然后，新建一个源码文件<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo08/add.js" target="_blank" rel="noopener"><code>add.js</code></a>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; add.js</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">function add(x, y) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  return x + y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>然后，把这个文件，以及断言库<code>chai.js</code>，加入<code>index.html</code>。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  mocha.setup(&#39;bdd&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;add.js&quot;&gt;&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;http:&#x2F;&#x2F;chaijs.com&#x2F;chai.js&quot;&gt;&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;tests.js&quot;&gt;&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  mocha.run();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&lt;&#x2F;script&gt;</span></pre></td></tr></table></figure>
+</blockquote>
+<p>最后，在<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo08/tests.js" target="_blank" rel="noopener"><code>tests.js</code></a>里面写入测试脚本。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var expect &#x3D; chai.expect;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">describe(&#39;加法函数的测试&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  it(&#39;1 加 1 应该等于 2&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    expect(add(1, 1)).to.be.equal(2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  it(&#39;任何数加0等于自身&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    expect(add(1, 0)).to.be.equal(1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    expect(add(0, 0)).to.be.equal(0);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</blockquote>
+<p>现在，在浏览器里面打开<code>index.html</code>，就可以看到测试脚本的运行结果。</p>
+<h2 id="十三、生成规格文件"><a href="#十三、生成规格文件" class="headerlink" title="十三、生成规格文件"></a>十三、生成规格文件</h2><p>Mocha支持从测试用例生成规格文件。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120306.png" alt=""></p>
+<p>进入<a href="https://github.com/ruanyf/mocha-demos/tree/master/demo09" target="_blank" rel="noopener"><code>demo09</code></a>子目录，运行下面的命令。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --recursive -R markdown &gt; spec.md</span></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令根据<code>test</code>目录的所有测试脚本，生成一个规格文件<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo09/spec.md" target="_blank" rel="noopener"><code>spec.md</code></a>。<code>-R markdown</code>参数指定规格报告是markdown格式。</p>
+<p>如果想生成HTML格式的报告<a href="https://github.com/ruanyf/mocha-demos/blob/master/demo09/spec.html" target="_blank" rel="noopener"><code>spec.html</code></a>，使用下面的命令。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ mocha --recursive -R doc &gt; spec.html</span></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li>阮一峰 <a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">测试框架 Mocha 实例教程</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-11-17 </div>
 			<div class="article-title"><a href="/2016/11/17/2016-11-17-css-start/" >Css Start</a></div>						
 		</h3>
 	
@@ -1474,181 +1766,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-11-07 </div>
-			<div class="article-title"><a href="/2016/11/07/2016-11-07-npm-script/" >Npm Script 使用指南</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="npm-scripts-使用指南"><a href="#npm-scripts-使用指南" class="headerlink" title="npm scripts 使用指南"></a>npm scripts 使用指南</h1><p>Node 开发离不开 npm，而脚本功能是 npm 最强大、最常用的功能之一。</p>
-<p>本文介绍如何使用 npm 脚本（npm scripts）。</p>
-<p><img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016101101.jpg" alt=""></p>
-<h2 id="一、什么是-npm-脚本？"><a href="#一、什么是-npm-脚本？" class="headerlink" title="一、什么是 npm 脚本？"></a>一、什么是 npm 脚本？</h2><p>npm 允许在<code>package.json</code>文件里面，使用<code>scripts</code>字段定义脚本命令。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"build"</span>: <span class="string">"node build.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码是<code>package.json</code>文件的一个片段，里面的<code>scripts</code>字段是一个对象。它的每一个属性，对应一段脚本。比如，<code>build</code>命令对应的脚本是<code>node build.js</code>。</p>
-<p>命令行下使用<code>npm run</code>命令，就可以执行这段脚本。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run build</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"># 等同于执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ node build.js</span></pre></td></tr></table></figure>
-
-<p>这些定义在<code>package.json</code>里面的脚本，就称为 npm 脚本。它的优点很多。</p>
-<ul>
-<li>项目的相关脚本，可以集中在一个地方。</li>
-<li>不同项目的脚本命令，只要功能相同，就可以有同样的对外接口。用户不需要知道怎么测试你的项目，只要运行<code>npm run test</code>即可。</li>
-<li>可以利用 npm 提供的很多辅助功能。</li>
-</ul>
-<p>查看当前项目的所有 npm 脚本命令，可以使用不带任何参数的<code>npm run</code>命令。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run</span></pre></td></tr></table></figure>
-
-<h2 id="二、原理"><a href="#二、原理" class="headerlink" title="二、原理"></a>二、原理</h2><p>npm 脚本的原理非常简单。每当执行<code>npm run</code>，就会自动新建一个 Shell，在这个 Shell 里面执行指定的脚本命令。因此，只要是 Shell（一般是 Bash）可以运行的命令，就可以写在 npm 脚本里面。</p>
-<p>比较特别的是，<code>npm run</code>新建的这个 Shell，会将当前目录的<code>node_modules/.bin</code>子目录加入<code>PATH</code>变量，执行结束后，再将<code>PATH</code>变量恢复原样。</p>
-<p>这意味着，当前目录的<code>node_modules/.bin</code>子目录里面的所有脚本，都可以直接用脚本名调用，而不必加上路径。比如，当前项目的依赖里面有 Mocha，只要直接写<code>mocha test</code>就可以了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"mocha test"</span></span></pre></td></tr></table></figure>
-
-<p>而不用写成下面这样。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"./node_modules/.bin/mocha test"</span></span></pre></td></tr></table></figure>
-
-<p>由于 npm 脚本的唯一要求就是可以在 Shell 执行，因此它不一定是 Node 脚本，任何可执行文件都可以写在里面。</p>
-<p>npm 脚本的退出码，也遵守 Shell 脚本规则。如果退出码不是<code>0</code>，npm 就认为这个脚本执行失败。</p>
-<h2 id="三、通配符"><a href="#三、通配符" class="headerlink" title="三、通配符"></a>三、通配符</h2><p>由于 npm 脚本就是 Shell 脚本，因为可以使用 Shell 通配符。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint *.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **/*.js"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>*</code>表示任意文件名，<code>**</code>表示任意一层子目录。</p>
-<p>如果要将通配符传入原始命令，防止被 Shell 转义，要将星号转义。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"test"</span>: <span class="string">"tap test/\*.js"</span></span></pre></td></tr></table></figure>
-
-<h2 id="四、传参"><a href="#四、传参" class="headerlink" title="四、传参"></a>四、传参</h2><p>向 npm 脚本传入参数，要使用<code>--</code>标明。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **.js"</span></span></pre></td></tr></table></figure>
-
-<p>向上面的<code>npm run lint</code>命令传入参数，必须写成下面这样。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run lint --  --reporter checkstyle checkstyle.xml</span></pre></td></tr></table></figure>
-
-<p>也可以在<code>package.json</code>里面再封装一个命令。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint"</span>: <span class="string">"jshint **.js"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"lint:checkstyle"</span>: <span class="string">"npm run lint -- --reporter checkstyle checkstyle.xml"</span></span></pre></td></tr></table></figure>
-
-<h2 id="五、执行顺序"><a href="#五、执行顺序" class="headerlink" title="五、执行顺序"></a>五、执行顺序</h2><p>如果 npm 脚本里面需要执行多个任务，那么需要明确它们的执行顺序。</p>
-<p>如果是并行执行（即同时的平行执行），可以使用<code>&amp;</code>符号。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run script1.js &amp; npm run script2.js</span></pre></td></tr></table></figure>
-
-<p>如果是继发执行（即只有前一个任务成功，才执行下一个任务），可以使用<code>&amp;&amp;</code>符号。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm run script1.js &amp;&amp; npm run script2.js</span></pre></td></tr></table></figure>
-
-
-<p>这两个符号是 Bash 的功能。此外，还可以使用 node 的任务管理模块：<a href="https://github.com/paulpflug/script-runner" target="_blank" rel="noopener">script-runner</a>、<a href="https://github.com/mysticatea/npm-run-all" target="_blank" rel="noopener">npm-run-all</a>、<a href="https://github.com/coderaiser/redrun" target="_blank" rel="noopener">redrun</a>。</p>
-<h2 id="六、默认值"><a href="#六、默认值" class="headerlink" title="六、默认值"></a>六、默认值</h2><p>一般来说，npm 脚本由用户提供。但是，npm 对两个脚本提供了默认值。也就是说，这两个脚本不用定义，就可以直接使用。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"start"</span>: <span class="string">"node server.js"</span>，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"install"</span>: <span class="string">"node-gyp rebuild"</span></span></pre></td></tr></table></figure>
-
-
-<p>上面代码中，<code>npm run start</code>的默认值是<code>node server.js</code>，前提是项目根目录下有<code>server.js</code>这个脚本；<code>npm run install</code>的默认值是<code>node-gyp rebuild</code>，前提是项目根目录下有<code>binding.gyp</code>文件。</p>
-<h2 id="七、钩子"><a href="#七、钩子" class="headerlink" title="七、钩子"></a>七、钩子</h2><p>npm 脚本有<code>pre</code>和<code>post</code>两个钩子。举例来说，<code>build</code>脚本命令的钩子就是<code>prebuild</code>和<code>postbuild</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"prebuild"</span>: <span class="string">"echo I run before the build script"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build"</span>: <span class="string">"cross-env NODE_ENV=production webpack"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">"postbuild"</span>: <span class="string">"echo I run after the build script"</span></span></pre></td></tr></table></figure>
-
-
-<p>用户执行<code>npm run build</code>的时候，会自动按照下面的顺序执行。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm run prebuild &amp;&amp; npm run build &amp;&amp; npm run postbuild</span></pre></td></tr></table></figure>
-
-
-<p>因此，可以在这两个钩子里面，完成一些准备工作和清理工作。下面是一个例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"clean"</span>: <span class="string">"rimraf ./dist &amp;&amp; mkdir dist"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"prebuild"</span>: <span class="string">"npm run clean"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build"</span>: <span class="string">"cross-env NODE_ENV=production webpack"</span></span></pre></td></tr></table></figure>
-
-
-<p>npm 默认提供下面这些钩子。</p>
-<ul>
-<li>prepublish，postpublish</li>
-<li>preinstall，postinstall</li>
-<li>preuninstall，postuninstall</li>
-<li>preversion，postversion</li>
-<li>pretest，posttest</li>
-<li>prestop，poststop</li>
-<li>prestart，poststart</li>
-<li>prerestart，postrestart</li>
-</ul>
-<p>自定义的脚本命令也可以加上<code>pre</code>和<code>post</code>钩子。比如，<code>myscript</code>这个脚本命令，也有<code>premyscript</code>和<code>postmyscript</code>钩子。不过，双重的<code>pre</code>和<code>post</code>无效，比如<code>prepretest</code>和<code>postposttest</code>是无效的。</p>
-<p>npm 提供一个<code>npm_lifecycle_event</code>变量，返回当前正在运行的脚本名称，比如<code>pretest</code>、<code>test</code>、<code>posttest</code>等等。所以，可以利用这个变量，在同一个脚本文件里面，为不同的<code>npm scripts</code>命令编写代码。请看下面的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TARGET = process.env.npm_lifecycle_event;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'test'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the test task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'pretest'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the pretest task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TARGET === <span class="string">'posttest'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Running the posttest task!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<p>注意，<code>prepublish</code>这个钩子不仅会在<code>npm publish</code>命令之前运行，还会在<code>npm install</code>（不带任何参数）命令之前运行。这种行为很容易让用户感到困惑，所以 npm 4 引入了一个新的钩子<code>prepare</code>，行为等同于<code>prepublish</code>，而从 npm 5 开始，<code>prepublish</code>将只在<code>npm publish</code>命令之前运行。</p>
-<h2 id="八、简写形式"><a href="#八、简写形式" class="headerlink" title="八、简写形式"></a>八、简写形式</h2><p>四个常用的 npm 脚本有简写形式。</p>
-<ul>
-<li><code>npm start</code>是<code>npm run start</code></li>
-<li><code>npm stop</code>是<code>npm run stop</code>的简写</li>
-<li><code>npm test</code>是<code>npm run test</code>的简写</li>
-<li><code>npm restart</code>是<code>npm run stop &amp;&amp; npm run restart &amp;&amp; npm run start</code>的简写</li>
-</ul>
-<p><code>npm start</code>、<code>npm stop</code>和<code>npm restart</code>都比较好理解，而<code>npm restart</code>是一个复合命令，实际上会执行三个脚本命令：<code>stop</code>、<code>restart</code>、<code>start</code>。具体的执行顺序如下。</p>
-<ol>
-<li>prerestart</li>
-<li>prestop</li>
-<li>stop</li>
-<li>poststop</li>
-<li>restart</li>
-<li>prestart</li>
-<li>start</li>
-<li>poststart</li>
-<li>postrestart </li>
-</ol>
-<h2 id="九、变量"><a href="#九、变量" class="headerlink" title="九、变量"></a>九、变量</h2><p>npm 脚本有一个非常强大的功能，就是可以使用 npm 的内部变量。</p>
-<p>首先，通过<code>npm_package_</code>前缀，npm 脚本可以拿到<code>package.json</code>里面的字段。比如，下面是一个<code>package.json</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span>: <span class="string">"foo"</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span>: <span class="string">"1.2.5"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"view"</span>: <span class="string">"node view.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<p>那么，变量<code>npm_package_name</code>返回<code>foo</code>，变量<code>npm_package_version</code>返回<code>1.2.5</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// view.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_name); <span class="comment">// foo</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_version); <span class="comment">// 1.2.5</span></span></pre></td></tr></table></figure>
-
-
-<p>上面代码中，我们通过环境变量<code>process.env</code>对象，拿到<code>package.json</code>的字段值。如果是 Bash 脚本，可以用<code>$npm_package_name</code>和<code>$npm_package_version</code>取到这两个值。</p>
-<p><code>npm_package_</code>前缀也支持嵌套的<code>package.json</code>字段。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"repository"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"type"</span>: <span class="string">"git"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"url"</span>: <span class="string">"xxx"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  scripts: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"view"</span>: <span class="string">"echo $npm_package_repository_type"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr></table></figure>
-
-
-<p>上面代码中，<code>repository</code>字段的<code>type</code>属性，可以通过<code>npm_package_repository_type</code>取到。</p>
-<p>下面是另外一个例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"install"</span>: <span class="string">"foo.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<p>上面代码中，<code>npm_package_scripts_install</code>变量的值等于<code>foo.js</code>。</p>
-<p>然后，npm 脚本还可以通过<code>npm_config_</code>前缀，拿到 npm 的配置变量，即<code>npm config get xxx</code>命令返回的值。比如，当前模块的发行标签，可以通过<code>npm_config_tag</code>取到。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"view"</span>: <span class="string">"echo $npm_config_tag"</span>,</span></pre></td></tr></table></figure>
-
-
-<p>注意，<code>package.json</code>里面的<code>config</code>对象，可以被环境变量覆盖。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span> : <span class="string">"foo"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"config"</span> : &#123; <span class="string">"port"</span> : <span class="string">"8080"</span> &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span> : &#123; <span class="string">"start"</span> : <span class="string">"node server.js"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-
-<p>上面代码中，<code>npm_package_config_port</code>变量返回的是<code>8080</code>。这个值可以用下面的方法覆盖。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="keyword">set</span> foo:port 80</span></pre></td></tr></table></figure>
-
-
-<p>最后，<code>env</code>命令可以列出所有环境变量。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"env"</span>: <span class="string">"env"</span></span></pre></td></tr></table></figure>
-
-
-<h2 id="十、常用脚本示例"><a href="#十、常用脚本示例" class="headerlink" title="十、常用脚本示例"></a>十、常用脚本示例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除目录</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">"clean"</span>: <span class="string">"rimraf dist/*"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地搭建一个 HTTP 服务</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">"serve"</span>: <span class="string">"http-server -p 9090 dist/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">"open:dev"</span>: <span class="string">"opener http://localhost:9090"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实时刷新</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> <span class="string">"livereload"</span>: <span class="string">"live-reload --port 9091 dist/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建 HTML 文件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build:html"</span>: <span class="string">"jade index.jade dist/index.html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要 CSS 文件有变动，就重新执行构建</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="string">"watch:css"</span>: <span class="string">"watch 'npm run build:css' assets/styles/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要 HTML 文件有变动，就重新执行构建</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="string">"watch:html"</span>: <span class="string">"watch 'npm run build:html' assets/html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 部署到 Amazon S3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="string">"deploy:prod"</span>: <span class="string">"s3-cli sync ./dist/ s3://example-com/prod-site/"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建 favicon</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="string">"build:favicon"</span>: <span class="string">"node scripts/favicon.js"</span>,</span></pre></td></tr></table></figure>
-
-
-<h2 id="十一、参考链接"><a href="#十一、参考链接" class="headerlink" title="十一、参考链接"></a>十一、参考链接</h2><ul>
-<li><a href="https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/" target="_blank" rel="noopener">How to Use npm as a Build Tool</a>, by Keith Cirkel</li>
-<li><a href="https://github.com/RyanZim/awesome-npm-scripts#articles" target="_blank" rel="noopener">Awesome npm scripts</a>, by Ryan Zimmerman</li>
-</ul>
-<h2 id="十二、引用"><a href="#十二、引用" class="headerlink" title="十二、引用"></a>十二、引用</h2><ul>
-<li><a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html" target="_blank" rel="noopener">阮一峰 npm scripts 使用指南</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1723,7 +1840,7 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>2</span></a></li>
 		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
@@ -1770,48 +1887,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
 			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
 			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
 			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>2</span></a></li>
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1822,6 +1939,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker</a>
+      </li>
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
@@ -1837,10 +1958,6 @@
     
       <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
-      </li>
-    
-      <li>
-        <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
       </li>
     
   </ul>

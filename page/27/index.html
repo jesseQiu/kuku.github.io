@@ -128,6 +128,70 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2016-10-09 </div>
+			<div class="article-title"><a href="/2016/10/09/2016-10-09-VanillaJs/" >VanillaJs</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><img src="http://od6sd4xau.bkt.clouddn.com/h5/vanillajs.png" alt="VanillaJs"></p>
+<p>上图是一张框架性能对比图，如果细心的会发现用红色框起来的 <code>VanillaJs</code> ，那这个是什么框架？下面为你逐步解答。</p>
+<h3 id="一、stackoverflow-上的提问"><a href="#一、stackoverflow-上的提问" class="headerlink" title="一、stackoverflow 上的提问"></a>一、stackoverflow 上的提问</h3><blockquote>
+<p>What is VanillaJS?</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>I have one simple question, that got stuck in my mind for a few days: What is VanillaJS? Some people refer to it as a framework, you can download a library from the official pages.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>But when I check some examples or TodoMVC, they just use classic raw JavaScript functions without even including the library from the official pages or anything. Also the link “Docs” on the official webpage leads to the Mozilla specification of JavaScript.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>My question is: Is VanillaJS raw JavaScript? And if yes, why people refer to it as “framework” when all you need is a browser without any special included scripts?</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>I am sorry for a probably stupid question but I have no idea what people are talking about when they say “VanillaJS”.</p>
+</blockquote>
+</blockquote>
+<h3 id="二、官网说明"><a href="#二、官网说明" class="headerlink" title="二、官网说明"></a>二、官网说明</h3><blockquote>
+<p>The Vanilla JS team maintains every byte of code in the framework and works hard each day to make sure it is small and intuitive. Who’s using Vanilla JS? Glad you asked! Here are a few:</p>
+</blockquote>
+<blockquote>
+<p>Facebook    Google    YouTube    Yahoo    Wikipedia    Windows Live    Twitter    Amazon    LinkedIn    MSN<br>eBay    Microsoft    Tumblr    Apple    Pinterest    PayPal    Reddit    Netflix    Stack Overflow<br>In fact, Vanilla JS is already used on more websites than jQuery, Prototype JS, MooTools, YUI, and Google Web Toolkit - combined.</p>
+</blockquote>
+<p>看了官网说明是不是很冲动，怎么早没用这个框架呢？</p>
+<h3 id="三、VanillaJs-和-jQuery-例子"><a href="#三、VanillaJs-和-jQuery-例子" class="headerlink" title="三、VanillaJs 和 jQuery 例子"></a>三、VanillaJs 和 jQuery 例子</h3><ul>
+<li>Fade an element out and then remove it<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vanillajs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="built_in">document</span>.getElementById(<span class="string">'thing'</span>).style;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.opacity = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">fade</span>(<span class="params"></span>)</span>&#123;(s.opacity-=<span class="number">.1</span>)&lt;<span class="number">0</span>?s.display=<span class="string">"none"</span>:setTimeout(fade,<span class="number">40</span>)&#125;)();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery	</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#thing'</span>).fadeOut();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/script&gt;</span></span></pre></td></tr></table></figure></li>
+<li>Make an AJAX call<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// vanillajs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> XMLHttpRequest();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">r.open(<span class="string">"POST"</span>, <span class="string">"path/to/api"</span>, <span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">r.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (r.readyState != <span class="number">4</span> || r.status != <span class="number">200</span>) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  alert(<span class="string">"Success: "</span> + r.responseText);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">r.send(<span class="string">"banana=yellow"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery	</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  type: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  url: <span class="string">"path/to/api"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  data: <span class="string">"banana=yellow"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    alert(<span class="string">"Success: "</span> + data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/script&gt;</span></span></pre></td></tr></table></figure>
+看了上面官网的例子，是不是觉得很熟，不就是原生 <code>javascript</code> 码？</li>
+</ul>
+<h3 id="四、VanillaJs-真身"><a href="#四、VanillaJs-真身" class="headerlink" title="四、VanillaJs 真身?"></a>四、VanillaJs 真身?</h3><p>带着上面第 3 点留下的疑问，继续解密。<br>在 <code>stackoverflow</code> 上找到了解答: <em>The plain and simple answer is yes, VanillaJS === JavaScript, as prescribed by Dr B. Eich</em>，为了进一步确认，找到了一个视频 <a href="https://www.youtube.com/watch?v=-OqZzV__hts" target="_blank" rel="noopener">What is Vanilla JS?</a>。现在可以很确认 <code>VanillaJS === JavaScript</code>,至于它的 <a href="http://vanilla-js.com/" target="_blank" rel="noopener">vanillajs 官网</a> 只是以一种轻松搞怪的方式介绍，不要被误导了，不行可以下载 Vanillajs 的库，其实就是一个空文件。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://stackoverflow.com/questions/20435653/what-is-vanillajs" target="_blank" rel="noopener">stackoverflow 相关解答</a></li>
+<li><a href="http://vanilla-js.com/" target="_blank" rel="noopener">vanillajs <em>官网</em></a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-10-08 </div>
 			<div class="article-title"><a href="/2016/10/08/2016-10-08-设置-npm-镜像方法/" >设置 Npm 镜像方法</a></div>						
 		</h3>
@@ -662,41 +726,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-09-15 </div>
-			<div class="article-title"><a href="/2016/09/15/2016-09-15-angular-provider/" >Angular Provider</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<!-- [AngularJs](http://od6sd4xau.bkt.clouddn.com/h5/AngularJs.jpg) -->
-
-<blockquote>
-<p><code>provider()</code> 是创建 <code>service</code>最底层的方式，这也是唯一一个可以使用 <code>.config()</code>方法配置创建 <code>service</code> 的方法</p>
-</blockquote>
-<h4 id="一、创建一个可配置的服务"><a href="#一、创建一个可配置的服务" class="headerlink" title="一、创建一个可配置的服务"></a>一、创建一个可配置的服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'myApp'</span>, []);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 constant 对象 "constantInput" 并传递数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">app.constant(<span class="string">"constantInput"</span>, &#123;<span class="attr">name</span>:<span class="string">'Vivian'</span>,<span class="attr">sex</span>:<span class="string">'Girl'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建可以在　config 阶段注入的服务</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">app.provider(<span class="string">'whatMyName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> self = <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 用于在 config 阶段设置值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	self.setName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 这里可以注入其它依赖的服务</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	self.$<span class="keyword">get</span> = function (constantInput)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">var</span> factory = &#123;&#125;;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">		factory.myName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">var</span> name=<span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">if</span>(self.setName)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">				<span class="keyword">return</span> self.setName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">			&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">return</span> constantInput.name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">return</span> factory;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 config 阶段设置默认值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">app.config(<span class="function"><span class="keyword">function</span>(<span class="params">whatMyNameProvider</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(whatMyNameProvider.setName); <span class="comment">//  undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 这里改变了 whatMyName 中的 setName 的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">	whatMyNameProvider.setName = <span class="string">'kuku'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 controller 注入使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">   app.controller(<span class="string">'myCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope,whatMyName</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">	$scope.myNmae = whatMyName.myName();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-<p>上面中需要注意，在注入到 <code>config</code> 时需要在服务名称后面 <code>Provider</code>,例如上面的 <code>whatMyName</code> 在 注入 <code>config</code> 时为 <code>whatMyNameProvider</code>。在注入其它 <strong>服务</strong> 或者 <strong>控制器</strong> 则不需要。</p>
-<h4 id="二、在配置阶段创建服务"><a href="#二、在配置阶段创建服务" class="headerlink" title="二、在配置阶段创建服务"></a>二、在配置阶段创建服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">app.config(<span class="function"><span class="keyword">function</span>(<span class="params">$provide</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	$provide.provider(<span class="string">'MathProvider'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">this</span>.$<span class="keyword">get</span> = function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">var</span> factory = &#123;&#125;;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">			factory.multiply = <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">				<span class="keyword">return</span> a * b; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">			&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">return</span> factory;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><ul>
-<li><a href="https://my.oschina.net/tanweijie/blog/295067" target="_blank" rel="noopener">AngularJS中service，factory，provider的区别</a></li>
-<li><a href="http://www.cnblogs.com/powertoolsteam/p/AngularJs_Providers.html" target="_blank" rel="noopener">AngularJS Providers 详解</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -771,7 +800,7 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>2</span></a></li>
 		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
@@ -818,48 +847,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>2</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
 			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
 			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
 			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
@@ -870,6 +899,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker</a>
+      </li>
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
@@ -885,10 +918,6 @@
     
       <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
-      </li>
-    
-      <li>
-        <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
       </li>
     
   </ul>

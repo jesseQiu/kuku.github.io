@@ -128,6 +128,59 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2018-03-12 </div>
+			<div class="article-title"><a href="/2018/03/12/2018-03-12-https/" >Https</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="一、https-概述"><a href="#一、https-概述" class="headerlink" title="一、https 概述"></a>一、<a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="noopener">https 概述</a></h2><h3 id="1-历史"><a href="#1-历史" class="headerlink" title="1. 历史"></a>1. 历史</h3><ul>
+<li>1994年，NetScape公司设计了SSL协议（Secure Sockets Layer）的1.0版，但是未发布。</li>
+<li>1995年，NetScape公司发布SSL 2.0版，很快发现有严重漏洞。</li>
+<li>1996年，SSL 3.0版问世，得到大规模应用。</li>
+<li>1999年，互联网标准化组织ISOC接替NetScape公司，发布了SSL的升级版TLS 1.0版。</li>
+<li>2006年和2008年，TLS进行了两次升级，分别为TLS 1.1版和TLS 1.2版。最新的变动是2011年TLS 1.2的修订版。</li>
+</ul>
+<p>目前，应用最广泛的是 TLS 1.0，接下来是 SSL 3.0。但是，主流浏览器都已经实现了 TLS 1.2 的支持。</p>
+<ul>
+<li>TLS 1.0 通常被标示为 SSL 3.1</li>
+<li>TLS 1.1 为 SSL 3.2</li>
+<li>TLS 1.2 为 SSL 3.3</li>
+</ul>
+<h3 id="2-运行原理"><a href="#2-运行原理" class="headerlink" title="2. 运行原理"></a>2. 运行原理</h3><p>SSL/TLS 协议的基本思路是采用公钥加密法，也就是说，客户端先向服务器端索要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密(总共有<strong>四次</strong>通信)。</p>
+<h2 id="二、申请-https-证书"><a href="#二、申请-https-证书" class="headerlink" title="二、申请 https 证书"></a>二、申请 https 证书</h2><ul>
+<li><p>到 <a href="https://freessl.org/" target="_blank" rel="noopener">FreeSsl</a> 申请免费的证书，具体步骤可以参考 <a href="https://blog.freessl.org/apply-for-a-free-ssl-certificate/" target="_blank" rel="noopener">HTTPS 免费证书，免费 ssl 证书，FreeSSL.org 申请多种免费证书</a></p>
+</li>
+<li><p>申请验证可以使用 DNS 方式，在域名服务器地方添加相应的 TXT 值，验证完之后可以删除。</p>
+</li>
+<li><p>下载证书，上传到服务器上，配置 nginx 文件即可</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    listen <span class="number">80</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    server_name  xxxx.xxxx.com;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    #charset koi8-r;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    # library</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    location / &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        proxy_pass http:<span class="comment">//127.0.0.1:xxxx;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header Host $host;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    listen <span class="number">443</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    server_name  xxxx.xxxx.com;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    ssl on;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    ssl_certificate      /etc/pki/tls/private/library.crt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    ssl_certificate_key  /etc/pki/tls/private/library.key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    ssl_session_cache    shared:SSL:<span class="number">1</span>m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    ssl_session_timeout  <span class="number">5</span>m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    ssl_protocols       TLSv1 TLSv1<span class="number">.1</span> TLSv1<span class="number">.2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    ssl_ciphers  HIGH:!aNULL:!MD5;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    # ssl_prefer_server_ciphers  on;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    fastcgi_param HTTPS on; #attention!#</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    location / &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        proxy_pass http:<span class="comment">//127.0.0.1:xxxx;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header Host $host;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">图解SSL/TLS协议</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html" target="_blank" rel="noopener">HTTPS的七个误解（译文）</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html" target="_blank" rel="noopener">SSL延迟有多大？</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/08/migrate-from-http-to-https.html" target="_blank" rel="noopener">HTTPS 升级指南</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2018-02-05 </div>
 			<div class="article-title"><a href="/2018/02/05/2018-02-05-bearer-token/" >Bearer Token</a></div>						
 		</h3>
@@ -596,53 +649,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-11-22 </div>
-			<div class="article-title"><a href="/2017/11/22/2017-11-23-node-js-query-string/" >Query String 接口</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Query-String"><a href="#Query-String" class="headerlink" title="Query String"></a>Query String</h2><p>从名字就可以看出是一个和参数相关的帮助类,node.js 原生自带,直接 require(‘querystring’) 即可使用.<br>此类一共包括 4 个方法:</p>
-<ul>
-<li>querystring.stringify(obj, [sep], [eq]) </li>
-<li>querystring.parse(str, [sep], [eq], [options])</li>
-<li>querystring.escape    </li>
-<li>querystring.unescape<br>[内参数]表示可选参数, [sep]指分隔符 默认&amp; , [eq]指分配符 默认=</li>
-</ul>
-<h2 id="一、querystring-stringify-obj-sep-eq"><a href="#一、querystring-stringify-obj-sep-eq" class="headerlink" title="一、querystring.stringify(obj,[sep],[eq])"></a>一、querystring.stringify(obj,[sep],[eq])</h2><p>对象格式化成参数字符串 ,obj 就是要格式化的对象,必选参数.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">name</span>:<span class="string">"一介布衣"</span>,<span class="attr">url</span>:<span class="string">"http://yijiebuyi.com"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//没有指定分隔符和分配符,并且自动编码汉字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param= querystring.stringify(obj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定了分隔符和分配符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr></table></figure>
-
-<h2 id="二、querystring-parse-str-sep-eq-options"><a href="#二、querystring-parse-str-sep-eq-options" class="headerlink" title="二、querystring.parse(str, [sep], [eq], [options])"></a>二、querystring.parse(str, [sep], [eq], [options])</h2><p>参数字符串格式化成对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">name</span>:<span class="string">"一介布衣"</span>,<span class="attr">url</span>:<span class="string">"http://yijiebuyi.com"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们把 param 字符串格式化成对象,使用默认分隔分配符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param= querystring.stringify(obj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newobj=querystring.parse(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印出来格式化后的数据类型 和 内容.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> newobj,newobj);</span></pre></td></tr></table></figure>
-
-<p>可以看到格式化以后是 object 类型,并且汉字自动解码显示出来.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当覆盖分割和分配符,如下:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//然后解析:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr></table></figure>
-
-<h2 id="三、querystring-escape"><a href="#三、querystring-escape" class="headerlink" title="三、querystring.escape"></a>三、querystring.escape</h2><p>参数编码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param=<span class="string">"一介布衣&amp;"</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.escape(param));</span></pre></td></tr></table></figure>
-
-<h2 id="四、querystring-unescape"><a href="#四、querystring-unescape" class="headerlink" title="四、querystring.unescape"></a>四、querystring.unescape</h2><p>参数解码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param=<span class="string">"一介布衣&amp;http://yijiebuyi.com"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.escape(param));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.unescape(querystring.escape(param)));</span></pre></td></tr></table></figure>
-<p>直接对上面编码后的参数字符串进行解码</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
-<li><a href="https://nodejs.org/dist/latest-v8.x/docs/api/querystring.html" target="_blank" rel="noopener">QueryString</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -717,7 +723,7 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>2</span></a></li>
 		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
@@ -764,48 +770,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>2</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
 			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
@@ -816,6 +822,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker</a>
+      </li>
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
@@ -831,10 +841,6 @@
     
       <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
-      </li>
-    
-      <li>
-        <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
       </li>
     
   </ul>

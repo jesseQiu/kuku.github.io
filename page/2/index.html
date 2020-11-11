@@ -128,6 +128,44 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2019-03-25 </div>
+			<div class="article-title"><a href="/2019/03/25/2019-03--25.gantt.project.start/" >Gantt Project Start</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>GanttProject 是以 JAVA 编写的开源软件。可让你轻松绘出甘特图，可输出 PNG/JPG 图片格式、HTML 网页，或是 PDF 档案格式。你能输入项目的可用资源、里程碑、任务/子任务，以及任务的起始日期、持续时间、相依性、进度、备注等等，并且在甘特图上显示出来。</p>
+</blockquote>
+<h2 id="文章介绍"><a href="#文章介绍" class="headerlink" title="文章介绍"></a>文章介绍</h2><ul>
+<li><a href="https://www.mifengtd.cn/articles/creat-a-gantt-chart-with-ganttproject.html" target="_blank" rel="noopener">甘特图绘制软件GanttProject</a></li>
+</ul>
+<h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h2><ul>
+<li><a href="https://www.youtube.com/watch?v=MEIYzfDGHCw" target="_blank" rel="noopener">GanttProject操作方法教學影片 (Part 1)</a></li>
+<li><a href="https://www.youtube.com/watch?v=p7Rhbknsf2g" target="_blank" rel="noopener">GanttProject操作方法教學影片 (Part 2)</a></li>
+</ul>
+<h2 id="常用布局"><a href="#常用布局" class="headerlink" title="常用布局"></a>常用布局</h2><ul>
+<li>左边栏: 名称-产出-期间-开始时间-结束时间-资源</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.ganttproject.biz/" target="_blank" rel="noopener">官网</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2018-12-03 </div>
 			<div class="article-title"><a href="/2018/12/03/2019-01-22.powershell.skill/" >Powershell Skill</a></div>						
 		</h3>
@@ -371,36 +409,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2018-07-23 </div>
-			<div class="article-title"><a href="/2018/07/23/2018-07-23-rxjava-map/" >RxJava Map</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="一、变换"><a href="#一、变换" class="headerlink" title="一、变换"></a>一、变换</h2><h3 id="1-Map"><a href="#1-Map" class="headerlink" title="1. Map"></a>1. Map</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String[] str1 = &#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(str1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 这里用了 Function 包装接口，返回一个新的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        .map(<span class="keyword">new</span> Function&lt;String, String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="string">"apply: "</span> + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">3</span>]</span></pre></td></tr></table></figure>
-
-<h3 id="2-FlatMap"><a href="#2-FlatMap" class="headerlink" title="2. FlatMap"></a>2. FlatMap</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String [] course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, String[] course)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.name = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.course = course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> String[] getCourse() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">String[] course1 = &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">String[] course2 = &#123;<span class="string">"d"</span>,<span class="string">"e"</span>,<span class="string">"f"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">Student[] students = &#123;<span class="keyword">new</span> Student(<span class="string">"kuku"</span>,course1),<span class="keyword">new</span> Student(<span class="string">"lili"</span>,course2)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里通过 flatMap 获取每个学生的课程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(students)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        .flatMap(<span class="keyword">new</span> Function&lt;Student, ObservableSource&lt;String&gt;&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 多了一层 Observable 来处理</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> ObservableSource&lt;String&gt; <span class="title">apply</span><span class="params">(Student student)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> Observable.fromArray(student.getCourse());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">s = [a]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">s = [b]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">s = [c]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">s = [d]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">s = [e]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">s = [f]</span></pre></td></tr></table></figure>
-
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="noopener">给 Android 开发者的 RxJava 详解</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-07-23 </div>
 			<div class="article-title"><a href="/2018/07/23/2018-07-23-rxjava-encapsulation-fun/" >RxJava 函数封装</a></div>						
 		</h3>
 	
@@ -418,6 +426,36 @@
 <p>封装那些使用了监听器的方法时，<code>Observable.just()</code> 并不管用，因为它一般没有返回值。我们必须使用 <code>Observable.create()</code>,这样我们就可以将监听器的结果回调给  emitter</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0413/4141.html" target="_blank" rel="noopener">使用 RxJava 封装现有的库</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2018-07-23 </div>
+			<div class="article-title"><a href="/2018/07/23/2018-07-23-rxjava-map/" >RxJava Map</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="一、变换"><a href="#一、变换" class="headerlink" title="一、变换"></a>一、变换</h2><h3 id="1-Map"><a href="#1-Map" class="headerlink" title="1. Map"></a>1. Map</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String[] str1 = &#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(str1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 这里用了 Function 包装接口，返回一个新的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        .map(<span class="keyword">new</span> Function&lt;String, String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="string">"apply: "</span> + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">3</span>]</span></pre></td></tr></table></figure>
+
+<h3 id="2-FlatMap"><a href="#2-FlatMap" class="headerlink" title="2. FlatMap"></a>2. FlatMap</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String [] course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, String[] course)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.name = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.course = course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> String[] getCourse() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">String[] course1 = &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">String[] course2 = &#123;<span class="string">"d"</span>,<span class="string">"e"</span>,<span class="string">"f"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">Student[] students = &#123;<span class="keyword">new</span> Student(<span class="string">"kuku"</span>,course1),<span class="keyword">new</span> Student(<span class="string">"lili"</span>,course2)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里通过 flatMap 获取每个学生的课程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(students)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        .flatMap(<span class="keyword">new</span> Function&lt;Student, ObservableSource&lt;String&gt;&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 多了一层 Observable 来处理</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> ObservableSource&lt;String&gt; <span class="title">apply</span><span class="params">(Student student)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> Observable.fromArray(student.getCourse());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">s = [a]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">s = [b]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">s = [c]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">s = [d]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">s = [e]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">s = [f]</span></pre></td></tr></table></figure>
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="noopener">给 Android 开发者的 RxJava 详解</a></li>
 </ul>
 
 	
@@ -591,78 +629,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-06-21 </div>
-			<div class="article-title"><a href="/2018/06/21/2018-06-21-android-skill-code/" >Android 代码实例</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="显示弹框"><a href="#显示弹框" class="headerlink" title="显示弹框"></a>显示弹框</h2><h3 id="1-普通弹框"><a href="#1-普通弹框" class="headerlink" title="1. 普通弹框"></a>1. 普通弹框</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showInputTimeDialog</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(MainActivity.<span class="keyword">this</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    builder.setIcon(R.mipmap.ic_launcher);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    builder.setTitle(<span class="string">"请输入采集日志持续时间"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//  通过 LayoutInflater 来加载一个 xml 的布局文件作为一个 View 对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    View view = LayoutInflater.from(MainActivity.<span class="keyword">this</span>).inflate(R.layout.dialog_time_value, <span class="keyword">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 设置我们自己定义的布局文件作为弹出框的 Content</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    builder.setView(view);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">final</span> EditText durationTime = (EditText)view.findViewById(R.id.duriationTime);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    builder.setPositiveButton(<span class="string">"确定"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            String time = durationTime.getText().toString().trim();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(time.equals(<span class="string">""</span>))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"Please enter the value"</span>,Toast.LENGTH_SHORT).show();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            initAcquisitionLog(Integer.parseInt(time));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    builder.setNegativeButton(<span class="string">"取消"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    builder.show();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h3 id="2-设置系统级别弹框"><a href="#2-设置系统级别弹框" class="headerlink" title="2. 设置系统级别弹框"></a>2. 设置系统级别弹框</h3><p>有的时候我们需要非 Activity 的类下面弹框，例如在广播接收器(receiver)中弹框，这时只能是系统级别的弹框才行。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showInputTimeDialog</span><span class="params">(<span class="keyword">final</span> Context context,<span class="keyword">final</span> String filePath)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(context);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    builder.setIcon(R.mipmap.ic_launcher);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    builder.setTitle(<span class="string">"请输入发送的邮箱地址"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//  通过 LayoutInflater 来加载一个 xml 的布局文件作为一个 View 对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    View view = LayoutInflater.from(context).inflate(R.layout.dialog_send,<span class="keyword">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 设置我们自己定义的布局文件作为弹出框的 Content</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    builder.setView(view);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">final</span> EditText emailText = (EditText)view.findViewById(R.id.email);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    builder.setPositiveButton(<span class="string">"确定"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            String emailAddress = emailText.getText().toString().trim();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (!MailHelper.verifyEmailAddress(emailAddress)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                Toast.makeText(context, <span class="string">"请输入正确的邮箱地址"</span>, Toast.LENGTH_SHORT).show();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            sendLogEmail(filePath, emailAddress);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    AlertDialog alertDialog = builder.create();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 需要设置为系统基本弹框</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    alertDialog.show();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>在 <code>AndroidManifest.xml</code> 文件中添加 <code>&lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot; /&gt;</code></p>
-<h2 id="权限检查三种方法"><a href="#权限检查三种方法" class="headerlink" title="权限检查三种方法"></a>权限检查三种方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkPermission1</span><span class="params">(Context context, String[] permissions)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    PackageManager packageManager = context.getPackageManager();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    String packageName = context.getPackageName();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (String permission : permissions) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> per = packageManager.checkPermission(permission, packageName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (PackageManager.PERMISSION_DENIED == per) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            Log.w(TAG, <span class="string">"required permission not granted . permission = "</span> + permission);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkPermission2</span><span class="params">(Context context, String[] permissions)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (String permission : permissions) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> per =context.checkPermission(permission, Process.myPid(),Process.myUid());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (PackageManager.PERMISSION_GRANTED != per) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            Log.w(TAG, <span class="string">"required permission not granted . permission = "</span> + permission);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkPermission3</span><span class="params">(Context context, String[] permissions)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (String permission : permissions) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> per = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (PackageManager.PERMISSION_GRANTED != per) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            Log.w(TAG, <span class="string">"required permission not granted . permission = "</span> + permission);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<ul>
-<li>[Android 检测权限的三种写法]<a href="https://www.jianshu.com/p/11d99a9be7d9" target="_blank" rel="noopener">https://www.jianshu.com/p/11d99a9be7d9</a>)</li>
-</ul>
-<h2 id="显示内存"><a href="#显示内存" class="headerlink" title="显示内存"></a>显示内存</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ActivityManager activityManager = (ActivityManager)ArkeApplication.getContext().getSystemService(Context.ACTIVITY_SERVICE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 系统分配一个应用的内存大小(M)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> memClass = activityManager.getMemoryClass();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 系统分配一个应用最大内存大小(M),可以通过 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// AndroidManifest.xml -&gt; application -&gt; android:largeHeap="true" 开启</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> largememClass = activityManager.getLargeMemoryClass();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Timber.d(<span class="string">"memClass:%d largememClass:%d"</span>,memClass,largememClass);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态获取显示运行时内存</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Float totalMemory = Runtime.getRuntime().totalMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Float freeMemory = Runtime.getRuntime().freeMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">Float maxMemory = Runtime.getRuntime().maxMemory() * <span class="number">1.0f</span>/(<span class="number">1024</span>*<span class="number">1024</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">Timber.d(<span class="string">"totalMemory:%f freeMemory:%f maxMemory:%f"</span>,totalMemory,freeMemory,maxMemory);</span></pre></td></tr></table></figure>
-
-
-<h2 id="主线程和子线程之间传递消息"><a href="#主线程和子线程之间传递消息" class="headerlink" title="主线程和子线程之间传递消息"></a>主线程和子线程之间传递消息</h2><ul>
-<li><a href="https://www.cnblogs.com/laughingQing/p/5436998.html" target="_blank" rel="noopener">android 主线程和子线程之间的消息传递</a></li>
-</ul>
-<h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><h3 id="Activity-之间传值"><a href="#Activity-之间传值" class="headerlink" title="Activity 之间传值"></a>Activity 之间传值</h3><ul>
-<li><a href="https://blog.csdn.net/qq_37169103/article/details/80406441" target="_blank" rel="noopener">android 之Activity的五种传值方式</a></li>
-</ul>
-<h3 id="Activity-四种启动模式"><a href="#Activity-四种启动模式" class="headerlink" title="Activity 四种启动模式"></a>Activity 四种启动模式</h3><ul>
-<li><a href="https://blog.csdn.net/zy_jibai/article/details/80587083" target="_blank" rel="noopener">细谈 Activity 四种启动模式</a></li>
-<li><a href="https://www.jianshu.com/p/50264d6cccb3?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation" target="_blank" rel="noopener">终于懂了之 Activity 的四种启动模式</a></li>
-</ul>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>服务和广播都是运行在 UI 线程中，如果需要操作耗时操作，需要在里面创建一个新的线程来运行</p>
-<h3 id="服务类型"><a href="#服务类型" class="headerlink" title="服务类型"></a>服务类型</h3><ol>
-<li>不可交互的后台服务：onCreate() -&gt; onStartCommand() -&gt; onDestroy()</li>
-<li>可交互的后台服务： onCreate() -&gt; onBind() -&gt; onUnbind() -&gt; onDestory()</li>
-<li>前台服务</li>
-<li>IntentService</li>
-</ol>
-<h3 id="跨应用-Service-通讯"><a href="#跨应用-Service-通讯" class="headerlink" title="跨应用 Service 通讯"></a>跨应用 Service 通讯</h3><h4 id="通过-Intent"><a href="#通过-Intent" class="headerlink" title="通过 Intent"></a>通过 Intent</h4><p>通过 Action 的隐式 Intent 启动 Service 在安卓 5.0 以前的版本是可以实现跨应用启动 Service 的，安卓 5.0 以后的版本若想实现跨应用启动 Service 的功能必须使用显示 Intent</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">serviceIntent = <span class="keyword">new</span> Intent();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">serviceIntent.setComponent(<span class="keyword">new</span> ComponentName(<span class="string">"com.example.service1"</span>, <span class="string">"com.example.service1.MyService"</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">startService(serviceIntent);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">stopService(serviceIntent);</span></pre></td></tr></table></figure>
-<ul>
-<li><a href="https://blog.csdn.net/gaopeng0071/article/details/46048159" target="_blank" rel="noopener">Android – 跨应用启动Service</a></li>
-</ul>
-<h4 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h4><ul>
-<li>[Android 通过 AIDL 在两个 APP之 间 Service 通信]方式(<a href="https://www.cnblogs.com/xqz0618/p/aidl_service.html" target="_blank" rel="noopener">https://www.cnblogs.com/xqz0618/p/aidl_service.html</a>)</li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://blog.csdn.net/weixin_41101173/article/details/79684183" target="_blank" rel="noopener">Service 精炼详解</a></li>
-<li><a href="https://www.jianshu.com/p/8c4181049564" target="_blank" rel="noopener">Android IntentService 使用介绍以及原理分析</a></li>
-<li><a href="https://blog.csdn.net/xiaanming/article/details/9750689" target="_blank" rel="noopener">Android Service 与 Activity 之间通信的几种方式</a></li>
-</ul>
-<h2 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h2><ul>
-<li><a href="https://www.jianshu.com/p/11c8ced79193" target="_blank" rel="noopener">《Android Fragment 非常详细的一篇》</a></li>
-</ul>
-<h2 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h2><ul>
-<li><a href="https://www.jianshu.com/p/b4bb52cdbeb7" target="_blank" rel="noopener">RecyclerView</a></li>
-</ul>
-<h2 id="FrameLayout"><a href="#FrameLayout" class="headerlink" title="FrameLayout"></a>FrameLayout</h2><ul>
-<li><a href="https://www.runoob.com/w3cnote/android-tutorial-framelayout.html" target="_blank" rel="noopener">FrameLayout</a></li>
-</ul>
-<h2 id="Activity-界面自动弹出软键盘"><a href="#Activity-界面自动弹出软键盘" class="headerlink" title="Activity 界面自动弹出软键盘"></a>Activity 界面自动弹出软键盘</h2><h3 id="1-zai-AndroidManifest-xml"><a href="#1-zai-AndroidManifest-xml" class="headerlink" title="1. zai AndroidManifest.xml"></a>1. zai AndroidManifest.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">".setting.xxx.xxxActivity"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">    <span class="attr">android:windowSoftInputMode</span>=<span class="string">"stateVisible"</span> /&gt;</span></span></pre></td></tr></table></figure>
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -737,7 +703,7 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>2</span></a></li>
 		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
@@ -784,48 +750,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
 			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
 			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
 			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
@@ -836,6 +802,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker</a>
+      </li>
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
@@ -851,10 +821,6 @@
     
       <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
-      </li>
-    
-      <li>
-        <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
       </li>
     
   </ul>

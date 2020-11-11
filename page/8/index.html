@@ -128,6 +128,53 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2017-11-22 </div>
+			<div class="article-title"><a href="/2017/11/22/2017-11-23-node-js-query-string/" >Query String 接口</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Query-String"><a href="#Query-String" class="headerlink" title="Query String"></a>Query String</h2><p>从名字就可以看出是一个和参数相关的帮助类,node.js 原生自带,直接 require(‘querystring’) 即可使用.<br>此类一共包括 4 个方法:</p>
+<ul>
+<li>querystring.stringify(obj, [sep], [eq]) </li>
+<li>querystring.parse(str, [sep], [eq], [options])</li>
+<li>querystring.escape    </li>
+<li>querystring.unescape<br>[内参数]表示可选参数, [sep]指分隔符 默认&amp; , [eq]指分配符 默认=</li>
+</ul>
+<h2 id="一、querystring-stringify-obj-sep-eq"><a href="#一、querystring-stringify-obj-sep-eq" class="headerlink" title="一、querystring.stringify(obj,[sep],[eq])"></a>一、querystring.stringify(obj,[sep],[eq])</h2><p>对象格式化成参数字符串 ,obj 就是要格式化的对象,必选参数.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">name</span>:<span class="string">"一介布衣"</span>,<span class="attr">url</span>:<span class="string">"http://yijiebuyi.com"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//没有指定分隔符和分配符,并且自动编码汉字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param= querystring.stringify(obj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定了分隔符和分配符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr></table></figure>
+
+<h2 id="二、querystring-parse-str-sep-eq-options"><a href="#二、querystring-parse-str-sep-eq-options" class="headerlink" title="二、querystring.parse(str, [sep], [eq], [options])"></a>二、querystring.parse(str, [sep], [eq], [options])</h2><p>参数字符串格式化成对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">name</span>:<span class="string">"一介布衣"</span>,<span class="attr">url</span>:<span class="string">"http://yijiebuyi.com"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们把 param 字符串格式化成对象,使用默认分隔分配符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param= querystring.stringify(obj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newobj=querystring.parse(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//打印出来格式化后的数据类型 和 内容.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> newobj,newobj);</span></pre></td></tr></table></figure>
+
+<p>可以看到格式化以后是 object 类型,并且汉字自动解码显示出来.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当覆盖分割和分配符,如下:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//然后解析:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">param=querystring.stringify(obj,<span class="string">'|'</span>,<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(param);</span></pre></td></tr></table></figure>
+
+<h2 id="三、querystring-escape"><a href="#三、querystring-escape" class="headerlink" title="三、querystring.escape"></a>三、querystring.escape</h2><p>参数编码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param=<span class="string">"一介布衣&amp;"</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.escape(param));</span></pre></td></tr></table></figure>
+
+<h2 id="四、querystring-unescape"><a href="#四、querystring-unescape" class="headerlink" title="四、querystring.unescape"></a>四、querystring.unescape</h2><p>参数解码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param=<span class="string">"一介布衣&amp;http://yijiebuyi.com"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.escape(param));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(querystring.unescape(querystring.escape(param)));</span></pre></td></tr></table></figure>
+<p>直接对上面编码后的参数字符串进行解码</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
+<li><a href="https://nodejs.org/dist/latest-v8.x/docs/api/querystring.html" target="_blank" rel="noopener">QueryString</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2017-11-09 </div>
 			<div class="article-title"><a href="/2017/11/09/2017-11-09-mysql/" >MySQL</a></div>						
 		</h3>
@@ -838,63 +885,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-09-18 </div>
-			<div class="article-title"><a href="/2017/09/18/2017-09-18-rem/" >CSS3 rem 单位</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="一、CSS3-rem"><a href="#一、CSS3-rem" class="headerlink" title="一、CSS3 rem"></a>一、CSS3 rem</h2><p><a href="http://www.w3.org/TR/css3-values/" target="_blank" rel="noopener">CSS3</a>的出现，他同时引进了一些新的<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">单位</a>，包括我们今天所说的<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>。在<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">W3C</a>官网上是这样描述<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>的——<strong>“font size of the root element”</strong> 。</p>
-<p>而<a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>是相对于根元素<html>，这样就意味着，我们只需要在根元素确定一个参考值，，在根元素中设置多大的字体，这完全可以根据您自己的需，大家也可以参考下图：</p>
-<p><a href="http://pxtoem.com/" target="_blank" rel="noopener"><img src="http://www.w3cplus.com/sites/default/files/emTable.png" alt=""></a></p>
-<p>我们来看一个简单的代码实例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">html &#123;font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">			body &#123;font-size: 1.4rem;/*1.4 × 10px = 14px */&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">			h1 &#123; font-size: 2.4rem;/*2.4 × 10px = 24px*/&#125;</span></pre></td></tr></table></figure>
-
-<p>我在根元素<html>中定义了一个基本字体大小为62.5%（也就是10px。设置这个值主要方便计算，如果没有设置，将是以“16px”为基准 ）。从上面的计算结果，我们使用“rem”就像使用“px”一样的方便，而且同时解决了“px”和“em”两者不同之处。</p>
-<h2 id="二、浏览器的兼容性"><a href="#二、浏览器的兼容性" class="headerlink" title="二、浏览器的兼容性"></a>二、浏览器的兼容性</h2><p><a href="http://www.w3.org/TR/css3-values/#rem-unit" target="_blank" rel="noopener">rem</a>是<a href="http://www.w3.org/TR/css3-values/" target="_blank" rel="noopener">CSS3</a>新引进来的一个度量单位，大家心里肯定会觉得心灰意冷呀，担心浏览器的支持情况。其实大家不用害怕，你可能会惊讶，支持的浏览器还是蛮多的，比如：<a href="http://firefox.com/" target="_blank" rel="noopener">Mozilla Firefox 3.6+</a>、<a href="http://apple.com/safari/" target="_blank" rel="noopener">Apple Safari 5+</a>、<a href="http://google.com/chrome" target="_blank" rel="noopener">Google Chrome</a>、<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home" target="_blank" rel="noopener">IE9+</a>和<a href="http://www.opera.com/" target="_blank" rel="noopener">Opera11+</a>。只是可怜的IE6-8无法，你们就把他们当透明了吧，我向来都是如此。</p>
-<h2 id="三、应用到手机端自适应"><a href="#三、应用到手机端自适应" class="headerlink" title="三、应用到手机端自适应"></a>三、应用到手机端自适应</h2><p>rem 作为一个低调的长度单位，由于手机端网页的兴起，在屏幕适配中得到重用。使用 rem 前端开发者可以很方便的在各种屏幕尺寸下，通过等比缩放的方式达到设计图要求的效果。</p>
-<p>以设计稿的宽度为<code>640px</code>，即：<code>designWidth = 640</code>，同时设定在640px屏宽下 <code>1rem=100px</code> ，即：<code>rem2px = 100</code>。</p>
-<blockquote>
-<p>设置 <code>1rem=100px</code> 的优点不言而喻。前端开发者在切图、重构页面的时候，通过直接位移小数点的方式，就可以将UI图中测量到的 <code>px</code> 值换算成对应的 <code>rem</code> 值，方便快捷。</p>
-</blockquote>
-<blockquote>
-<p>此外，在 <code>head</code> 中我们还设置了：<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0&quot; /&gt;</code><br><code>viewport</code> 的作用很重要，但不是本文的重点所以不展开，有兴趣的同学可以自行搜索。</p>
-</blockquote>
-<p>先来看看具体方案：</p>
-<blockquote>
-<p>下面四个方案，原理都是采用等比缩放的方式 —— <strong>获得目标屏幕宽度和设计稿宽度的比</strong>，作为 <code>rem</code> 的基值（缩放系数），设置为<code>html</code>标签的字体大小。不同的只是在于性能取舍和书写习惯。</p>
-</blockquote>
-<h3 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 320px) &#123;html&#123;font-size:50px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 360px) &#123;html&#123;font-size:56.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 375px) &#123;html&#123;font-size:58.59375px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 400px) &#123;html&#123;font-size:62.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 414px) &#123;html&#123;font-size:64.6875px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 440px) &#123;html&#123;font-size:68.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 480px) &#123;html&#123;font-size:75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 520px) &#123;html&#123;font-size:81.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 560px) &#123;html&#123;font-size:87.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;html&#123;font-size:93.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 640px) &#123;html&#123;font-size:100px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 680px) &#123;html&#123;font-size:106.25px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 720px) &#123;html&#123;font-size:112.5px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 760px) &#123;html&#123;font-size:118.75px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 800px) &#123;html&#123;font-size:125px;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 960px) &#123;html&#123;font-size:150px;&#125;&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 320px) &#123;html&#123;font-size:312.5%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@mediascreenand (min-width: 360px) &#123;html&#123;font-size:351.5625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 375px) &#123;html&#123;font-size:366.211%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 400px) &#123;html&#123;font-size:390.625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 414px) &#123;html&#123;font-size:404.2969%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 440px) &#123;html&#123;font-size:429.6875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 480px) &#123;html&#123;font-size:468.75%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 520px) &#123;html&#123;font-size:507.8125%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 560px) &#123;html&#123;font-size:546.875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;html&#123;font-size:585.9375%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 640px) &#123;html&#123;font-size:625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 680px) &#123;html&#123;font-size:664.0625%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 720px) &#123;html&#123;font-size:703.125%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 760px) &#123;html&#123;font-size:742.1875%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 800px) &#123;html&#123;font-size:781.25%;&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 960px) &#123;html&#123;font-size:937.5%;&#125;&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="方案3"><a href="#方案3" class="headerlink" title="方案3"></a>方案3</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var designWidth =640, rem2px = 100;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">document.documentElement.style.fontSize = </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  ((window.innerWidth / designWidth) \* rem2px) + 'px';</span></pre></td></tr></table></figure>
-
-<h3 id="方案4"><a href="#方案4" class="headerlink" title="方案4"></a>方案4</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var designWidth =640, rem2px = 100;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">document.documentElement.style.fontSize = </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  ((((window.innerWidth / designWidth) \* rem2px) / 16) \* 100) + '%';</span></pre></td></tr></table></figure>
-
-<h3 id="终极解决方案"><a href="#终极解决方案" class="headerlink" title="终极解决方案"></a>终极解决方案</h3><p>由于有些 Android 手机上，浏览器或 webview 的默认字体是随着系统设置的字体改变的。这样就会导致默认字体大于或小于 16px,会导致上面的 方案3 和方案4 计算出现误差。下面是解决方案</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">adapt</span>(<span class="params">designWidth, rem2px</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> d = <span class="built_in">window</span>.document.createElement(<span class="string">'div'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  d.style.width = <span class="string">'1rem'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  d.style.display = <span class="string">"none"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> head = <span class="built_in">window</span>.document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  head.appendChild(d);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> defaultFontSize = <span class="built_in">parseFloat</span>(<span class="built_in">window</span>.getComputedStyle(d, <span class="literal">null</span>).getPropertyValue(<span class="string">'width'</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// d.remove();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> st = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> portrait = <span class="string">"@media screen and (min-width: "</span>+<span class="built_in">window</span>.innerWidth+<span class="string">"px) &#123;html&#123;font-size:"</span>+ ((<span class="built_in">window</span>.innerWidth/(designWidth/rem2px)/defaultFontSize)*<span class="number">100</span>) +<span class="string">"%;&#125;&#125;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> landscape = <span class="string">"@media screen and (min-width: "</span>+<span class="built_in">window</span>.innerHeight+<span class="string">"px) &#123;html&#123;font-size:"</span>+ ((<span class="built_in">window</span>.innerHeight/(designWidth/rem2px)/defaultFontSize)*<span class="number">100</span>) +<span class="string">"%;&#125;&#125;"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  st.innerHTML = portrait + landscape;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  head.appendChild(st);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> defaultFontSize</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> defaultFontSize = adapt(<span class="number">640</span>, <span class="number">100</span>);</span></pre></td></tr></table></figure>
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/hbxeagle/rem" target="_blank" rel="noopener">了解真实的『REM』手机屏幕适配</a></li>
-<li><a href="hhttp://www.w3cplus.com/css3/define-font-size-with-css3-rem" target="_blank" rel="noopener">CSS3的REM设置字体大小</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -969,7 +959,7 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>2</span></a></li>
 		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
@@ -1016,48 +1006,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
 			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
 			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>2</span></a></li>
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1068,6 +1058,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker</a>
+      </li>
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
@@ -1083,10 +1077,6 @@
     
       <li>
         <a href="/2019/11/14/2019-11-14-java-NIO/" ><i class="fa fa-file-o"></i>NIO</a>
-      </li>
-    
-      <li>
-        <a href="/2019/11/06/2019-11-06-flutter/" ><i class="fa fa-file-o"></i>Flutter</a>
       </li>
     
   </ul>
