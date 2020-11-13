@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Docker - Cease to struggle and you cease to live</title>
+  <title>Docker Starting - Cease to struggle and you cease to live</title>
   <meta name="author" content="JesseChiu">
   
   <meta name="description" content="Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Docker"/>
+  <meta property="og:title" content="Docker Starting"/>
   <meta property="og:site_name" content="Cease to struggle and you cease to live"/>
 
   
@@ -108,7 +108,7 @@
 
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> Docker</h1>
+			<h1 class="title title-inverse "> Docker Starting</h1>
 		</div>		
 	
 
@@ -173,9 +173,12 @@
 
 <h3 id="4-6-查看容器日志"><a href="#4-6-查看容器日志" class="headerlink" title="4.6 查看容器日志"></a>4.6 查看容器日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// -f: 让 docker logs 像使用 tail -f 一样来输出容器内部的标准输出</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">docker logs -f &lt;容器 ID&gt;</span></pre></td></tr></table></figure>
 
-<h3 id="4-7-容器互联"><a href="#4-7-容器互联" class="headerlink" title="4.7 容器互联"></a>4.7 <a href="https://www.runoob.com/docker/docker-container-connection.html" target="_blank" rel="noopener">容器互联</a></h3><h3 id="4-8-其它"><a href="#4-8-其它" class="headerlink" title="4.8 其它"></a>4.8 其它</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 导出容器快照</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> &lt;容器 ID&gt; &gt; ubuntu.tar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 导入容器快照</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// 下面是将快照文件 ubuntu.tar 导入到镜像 <span class="built_in">test</span>/ubuntu:v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">cat docker/ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">// 也可以通过指定 URL 或者某个目录来导入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">docker import http://example.com/exampleimage.tgz example/imagerepo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">// 从镜像归档文件my_ubuntu_v3.tar创建镜像，命名为runoob/ubuntu:v4</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">docker import  my_ubuntu_v3.tar runoob/ubuntu:v4 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">// 删除容器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">docker rm -f &lt;容器 ID&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">// 容器内部的 5000 端口映射到我们本地主机的 5000 端口上</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">// -P :是容器内部端口随机映射到主机的高端口。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">// -p :是容器内部端口绑定到指定的主机端口。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 training/webapp python app.py</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">// 查看端口映射</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">docker port &lt;容器 ID&gt;</span></pre></td></tr></table></figure>
+<h3 id="4-7-容器互联"><a href="#4-7-容器互联" class="headerlink" title="4.7 容器互联"></a>4.7 <a href="https://www.runoob.com/docker/docker-container-connection.html" target="_blank" rel="noopener">容器互联</a></h3><h3 id="4-8-容器中安装-vi-命令"><a href="#4-8-容器中安装-vi-命令" class="headerlink" title="4.8 容器中安装 vi 命令"></a>4.8 容器中安装 vi 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">apt-get update</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">apt-get install vim</span></pre></td></tr></table></figure>
+
+<h3 id="4-9-其它"><a href="#4-9-其它" class="headerlink" title="4.9 其它"></a>4.9 其它</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 导出容器快照</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> &lt;容器 ID&gt; &gt; ubuntu.tar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 导入容器快照</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">// 下面是将快照文件 ubuntu.tar 导入到镜像 <span class="built_in">test</span>/ubuntu:v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">cat docker/ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">// 也可以通过指定 URL 或者某个目录来导入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">docker import http://example.com/exampleimage.tgz example/imagerepo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">// 从镜像归档文件my_ubuntu_v3.tar创建镜像，命名为runoob/ubuntu:v4</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">docker import  my_ubuntu_v3.tar runoob/ubuntu:v4 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">// 删除容器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">docker rm -f &lt;容器 ID&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">// 容器内部的 5000 端口映射到我们本地主机的 5000 端口上</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">// -P :是容器内部端口随机映射到主机的高端口。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">// -p :是容器内部端口绑定到指定的主机端口。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 training/webapp python app.py</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">// 查看端口映射</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">docker port &lt;容器 ID&gt;</span></pre></td></tr></table></figure>
 
 <h2 id="5-本地和容器之间内容拷贝"><a href="#5-本地和容器之间内容拷贝" class="headerlink" title="5. 本地和容器之间内容拷贝"></a>5. 本地和容器之间内容拷贝</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 将主机 /www/runoob 目录 拷贝到容器 96f7f14e99ab的/www 目录下</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">docker cp /www/runoob 96f7f14e99ab:/www/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">// 将主机 /www/runoob 目录 拷贝到容器 96f7f14e99ab中，目录重命名为 www</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">docker cp /www/runoob 96f7f14e99ab:/www</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">// 将容器 96f7f14e99a b的 /www 目录拷贝到主机的 /tmp 目录中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">docker cp  96f7f14e99ab:/www /tmp/</span></pre></td></tr></table></figure>
+
 
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://www.docker.com/" target="_blank" rel="noopener">docker 官网</a></li>
@@ -199,9 +202,9 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-		
-          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
-        
+				
+    	<li class="prev"><a href="/2020/11/12/2020-11-10-django.starting/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
@@ -239,7 +242,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Docker/">Docker<span>2</span></a></li>
+    <li><a href="/categories/Python/">Python<span>3</span></a></li>
   </li>
 
     </ul>
