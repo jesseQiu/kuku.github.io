@@ -684,8 +684,6 @@
 		
             
 		
-            
-		
         
         <!-- render other articles -->
         
@@ -945,7 +943,9 @@
 <li><a href="https://post.smzdm.com/p/623268/" target="_blank" rel="noopener">audio station 添加网易歌词插件</a></li>
 <li><a href="https://www.zhihu.com/question/31480960" target="_blank" rel="noopener">群晖 nas 有些什么基本和好玩的功能？</a></li>
 <li><a href="https://www.huakings.cn/post/150.html" target="_blank" rel="noopener">Lychee 搭建图床</a></li>
-<li><a href="https://www.chrno.cn/nas/1326.html" target="_blank" rel="noopener">Chevereto 搭建图床</a></li>
+</ul>
+<h2 id="图床搭建"><a href="#图床搭建" class="headerlink" title="图床搭建"></a>图床搭建</h2><h3 id="Chevereto-搭建图床"><a href="#Chevereto-搭建图床" class="headerlink" title="Chevereto 搭建图床"></a><a href="https://www.chrno.cn/nas/1326.html" target="_blank" rel="noopener">Chevereto 搭建图床</a></h3><ul>
+<li>根据教程，如果出现 <code>SQLSTATE[HY000] [2002] Connection refused</code> 错误，可以检查下 MariaDB10 -&gt; 启用 TCP/IP 连接 是否打勾</li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://www.docker.com/" target="_blank" rel="noopener">docker 官网</a></li>
@@ -1019,12 +1019,16 @@
   <div class="row">
 	
 	
-		<h2 id="Android-Studio-rxjava-环境配置"><a href="#Android-Studio-rxjava-环境配置" class="headerlink" title="Android Studio rxjava 环境配置"></a>Android Studio rxjava 环境配置</h2><p>由于 Android 的仓库有两个，默认创建工程中的 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 <code>build.grade</code> 中添加下面的语句</p>
+		<h2 id="Android-Studio-环境搭建"><a href="#Android-Studio-环境搭建" class="headerlink" title="Android Studio 环境搭建"></a>Android Studio 环境搭建</h2><h3 id="1-Android-Studio-rxjava-环境配置"><a href="#1-Android-Studio-rxjava-环境配置" class="headerlink" title="1. Android Studio rxjava 环境配置"></a>1. Android Studio rxjava 环境配置</h3><p>由于 Android 的仓库有两个，默认创建工程中的是 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 <code>build.grade</code> 中添加下面的语句</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    repositories &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        google()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        jcenter()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        maven &#123; url <span class="string">"https://jitpack.io"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        mavenCentral()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
-<h2 id="配置支持-Lambda-表达式"><a href="#配置支持-Lambda-表达式" class="headerlink" title="配置支持 Lambda 表达式"></a>配置支持 Lambda 表达式</h2><ul>
+<h3 id="2-配置支持-Lambda-表达式"><a href="#2-配置支持-Lambda-表达式" class="headerlink" title="2. 配置支持 Lambda 表达式"></a>2. 配置支持 Lambda 表达式</h3><ul>
 <li>Android Studio 3.x 默认支持</li>
-<li>在 app 文件夹下的 <code>build.grade</code> 文件中添加下面语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">android &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    // ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    compileOptions &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>在 app 文件夹下的 <code>build.grade</code> 文件中添加下面语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">android &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    // ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    compileOptions &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+</li>
 </ul>
 
 	
@@ -1314,8 +1318,6 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
-		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
 			<li><a href="/categories/Git/">Git<span>1</span></a></li>
@@ -1363,45 +1365,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
-		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
 			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
 			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>25</span></a></li>

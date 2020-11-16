@@ -128,66 +128,6 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
-			<div class="date"> 2016-10-20 </div>
-			<div class="article-title"><a href="/2016/10/20/2016-10-20-webpack-原理解析(一)/" >Webpack 原理解析(一)</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p>Webpack 可以识别 CommonJS 和 AMD 方式定义的模块，并且会自动根据代码的依赖关系，分别打包，按需自动加载。下面是对这个部分原理的解析。</p>
-</blockquote>
-<h2 id="一、测试工程"><a href="#一、测试工程" class="headerlink" title="一、测试工程"></a>一、测试工程</h2><ol>
-<li><p>CommonJS 模块文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="string">'Hello i am a.js'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里省略了多余代码，主要是增加文件大小，为后面的测试用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="string">"Hello i am b.js"</span>;</span></pre></td></tr></table></figure>
-</li>
-<li><p>AMD 模块文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// c.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a.js'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		sayHello: <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(<span class="string">'Hello i am c.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式二</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		sayHello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(<span class="string">'Hello i am c.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在打包 c.js 模块是会包含 a.js 模块。</span></span></pre></td></tr></table></figure>
-<p> 上面的两种方式定义效果是一样的，只不过 <strong>方式二</strong> 是 <strong>方式一</strong> 的语法糖写法</p>
-</li>
-<li><p>入口文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// main1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.ensure([<span class="string">'./a'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">require</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// webpack 会根据下面的语句单独打包生成 1.bundle-1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> content = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.open();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.write(<span class="string">'&lt;h1&gt;'</span> + content + <span class="string">'&lt;/h1&gt;'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	script.innerText = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">		<span class="comment">// webpack 会根据下面的语句单独打包生成 2.bundle-2.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">		<span class="comment">// 初始时并没加载，过了 2 秒后才会加载</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">		<span class="built_in">require</span>([<span class="string">'./b.js'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(a);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	&#125;, <span class="number">2000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.close();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据配置文件 webpack.config.js 的入口参数对象 main1.js 中的 require </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 个数自动分别打相应个数的包，改文件打了 2 个包(1.bundle-1.js，2.bundle-2.js)和一个 bundle-main1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// main2.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据下面的语句单独打包生成 4.bundle-4.js,包含了 a.js 的内容。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">'./c.js'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	c.sayHello();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据配置文件 webpack.config.js 的入口参数对象 main2.js 中的 require </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 个数自动分别打相应个数的包，改文件打了 1 个包(4.bundle-4.js)和一个 bundle-main2.js</span></span></pre></td></tr></table></figure>
-</li>
-<li><p>webpack 配置文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  entry: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  	main1: <span class="string">'./main1.js'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  	main2: <span class="string">'./main2.js'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  output: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    filename: <span class="string">'bundle-[name].js'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-</li>
-<li><p>index.html 文件</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle-main1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle-main2.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="二、使用-webpack-命令打包"><a href="#二、使用-webpack-命令打包" class="headerlink" title="二、使用 webpack 命令打包"></a>二、使用 webpack 命令打包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; webpack</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// 如果使用 webpack -p 生产方式打包，生成的分包名称会有所差别</span></pre></td></tr></table></figure>
-<p>在同级目录下回多出 5 文件</p>
-<ul>
-<li><code>1.bundle-1.js</code>  // a.js</li>
-<li><code>2.bundle-2.js</code>  // b.js</li>
-<li><code>4.bundle-4.js</code>  // c.js a.js</li>
-<li><code>bundle-main1.js</code> // main1.js</li>
-<li><code>bundle-main2.js</code> // main2.js</li>
-</ul>
-<p>可以看到 webpack 生成两个 5 个包文件，其中两个 <code>bundle-main1.js</code> 和 <code>bundle-main2.js</code> 两个主文件，也是我们 <code>index.html</code> 文件引用的文件，其它三个文件是 <code>webpack</code> 根据 <code>main1.js</code> 和 <code>main2.js</code> 中使用 <code>require(moduleName,callback)</code> 自动分别打包生成，在 <code>index.html</code> 运行时按需自动加载。例如上面测试代码 <code>main1.js</code> 中有设置了一个定时器，2 秒后加载 <code>b.js</code>,也就是 <code>2.bundle-2.js</code>(<code>b.js</code> 打包生成) 文件是在加载完 <code>index.html</code> 文件 2 秒后才运行。</p>
-<h2 id="三、运行测试代码"><a href="#三、运行测试代码" class="headerlink" title="三、运行测试代码"></a>三、运行测试代码</h2><p>使用浏览器打开 <code>index.html</code> 文件，打开控制台查看日志信息变化。</p>
-<div>
-<iframe width="100%" height="300" src="http://od6sd4xau.bkt.clouddn.com/webpack-1.gif">
-</div>
-
-<p>从上面的视频可以看到在刷新页面后，过了 2 秒 <code>2.bundle-2.js</code> 才加载。</p>
-<h4 id="下载完整测试代码"><a href="#下载完整测试代码" class="headerlink" title="下载完整测试代码"></a><a href="http://od6sd4xau.bkt.clouddn.com/Webpack-%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%28%E4%B8%80%29-code.rar" target="_blank" rel="noopener">下载完整测试代码</a></h4>
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
 			<div class="date"> 2016-10-19 </div>
 			<div class="article-title"><a href="/2016/10/19/2016-10-19-webpack-start/" >Webpack Start</a></div>						
 		</h3>
@@ -1156,6 +1096,109 @@
 
            
 		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-10-13 </div>
+			<div class="article-title"><a href="/2016/10/13/2016-10-13-数组-slice-和-splice/" >数组 Slice() 和 Splice()</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>在开发中经常碰到 <code>[].slice()</code> 和 <code>[].splice()</code> 两个方法，但是总是不能很好的区分它们的差别和用法，今天刚好又碰到就查阅相关文档，做个小结，以便加深印象。</p>
+</blockquote>
+<h3 id="一、Array-prototype-slice"><a href="#一、Array-prototype-slice" class="headerlink" title="一、Array.prototype.slice()"></a>一、Array.prototype.slice()</h3><p>slice() 方法会浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组。</p>
+<ol>
+<li><p>单词意思<br>slice  美 [slaɪs]<br>vt.  切成片; 切下; 划分;<br>n.  薄片; 一部分; （因失误而打出的）曲线球;<br>vi.  斜击;</p>
+</li>
+<li><p>语法<br>arr.slice([begin[, end]])</p>
+<ul>
+<li><p>参数</p>
+<ul>
+<li><p>begin<br>  从该索引处开始提取原数组中的元素（从0开始）。<br>  如果该参数为负数，则表示从原数组中的倒数第几个元素开始提取，slice(-2)表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。<br>  如果省略 begin，则 slice 从索引 0 开始。</p>
+</li>
+<li><p>end<br>  在该索引处结束提取原数组元素（从0开始）。slice 会提取原数组中索引从 begin 到 end 的所有元素（包含 begin，但 <strong>不包含 end</strong>）。<br>  slice(1,4) 提取原数组中的第二个元素开始直到第四个元素的所有元素 （索引为 1, 2, 3的元素）。<br>  如果该参数为负数， 则它表示在原数组中的倒数第几个元素结束抽取。 slice(-2,-1)表示抽取了原数组中的倒数第二个元素到最后一个元素（不包含最后一个元素，也就是只有倒数第二个元素）。<br>  如果 end 被省略，则 slice 会一直提取到原数组末尾。<br>  返回值是一个含有提取元素的新数组</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>描述<br> slice <strong>不修改原数组</strong>，只会返回一个浅复制了原数组中的元素的一个新数组。原数组的元素会按照下述规则拷贝：</p>
+<p> 如果该元素是个对象引用 （不是实际的对象），slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。<br> 对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组。<br> 如果向两个数组任一中添加了新元素，则另一个不会受到影响。</p>
+</li>
+<li><p>示例</p>
+</li>
+</ol>
+<ul>
+<li><p>返回数组中的一部分</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Our good friend the citrus from fruits example</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Lemon"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> citrus = fruits.slice(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// 注意这里不包含下标 3("Apple") 的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// puts --&gt; ["Orange","Lemon"]</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>使用 slice<br>  在下例中, slice 从 myCar 中创建了一个新数组 newCar. 两个数组都包含了一个 myHonda 对象的引用. 当 myHonda 的 color 属性改变为 purple, 则两个数组中的对应元素都会随之改变.</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 slice方法从 myCar 中创建一个 newCar.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myHonda = &#123; <span class="attr">color</span>: <span class="string">"red"</span>, <span class="attr">wheels</span>: <span class="number">4</span>, <span class="attr">engine</span>: &#123; <span class="attr">cylinders</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">2.2</span> &#125; &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCar = [myHonda, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newCar = myCar.slice(<span class="number">0</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出myCar, newCar,以及各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar = "</span> + myCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar = "</span> + newCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变myHonda对象的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">myHonda.color = <span class="string">"purple"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"The new color of my Honda is "</span> + myHonda.color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出myCar, newCar中各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">上述代码输出:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">myCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">newCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = red </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = red</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">The <span class="keyword">new</span> color <span class="keyword">of</span> my Honda is purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = purple</span></pre></td></tr></table></figure>
+</li>
+<li><p>类数组（Array-like）对象<br>  slice 方法可以用来将一个类数组（Array-like）对象/集合转换成一个数组。你只需将该方法绑定到这个对象上。下述代码中 list 函数中的 arguments 就是一个类数组对象。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">除了使用 <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)，你也可以简单的使用 [].slice.call(<span class="built_in">arguments</span>) 来代替。另外，你可以使用 bind 来简化该过程。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unboundSlice = <span class="built_in">Array</span>.prototype.slice;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice = <span class="built_in">Function</span>.prototype.call.bind(unboundSlice);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> slice(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="二、Array-prototype-splice"><a href="#二、Array-prototype-splice" class="headerlink" title="二、Array.prototype.splice()"></a>二、Array.prototype.splice()</h3><p>splice() 方法用新元素替换旧元素，以此修改数组的内容。</p>
+<ol>
+<li><p>单词意思<br> splice 美 [splaɪs]<br> vt.  绞接; 捻接（两段绳子）; 胶接; 粘接（胶片、磁带等）;<br> n.  胶接处，粘接处，铰接处;</p>
+</li>
+<li><p>语法<br> array.splice(start, deleteCount[, item1[, item2[, …]]])</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li><p>start​<br>  从数组的哪一位开始修改内容。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位。</p>
+</li>
+<li><p>deleteCount<br>  整数，表示要移除的数组元素的个数。如果 deleteCount 是 0，则不移除元素。这种情况下，至少应添加一个新元素。如果 deleteCount 大于 start 之后的元素的总数，则从 start 后面的元素都将被删除（含第 start 位）。</p>
+</li>
+<li><p>itemN<br>  要添加进数组的元素。如果不指定，则 splice() 只删除数组元素。</p>
+</li>
+<li><p>返回值<br>  由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</p>
+</li>
+</ul>
+</li>
+<li><p>描述<br> 如果添加进数组的元素个数不等于被删除的元素个数，数组的长度会发生相应的改变。</p>
+</li>
+<li><p>提示和注释<br> 注释：请注意，splice() 方法与 slice() 方法的作用是不同的，splice() 方法会直接对数组进行修改。</p>
+</li>
+<li><p>示例<br> 使用 splice()</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下代码演示了 splice 的用法：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFish = [<span class="string">"angel"</span>, <span class="string">"clown"</span>, <span class="string">"mandarin"</span>, <span class="string">"surgeon"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 0 个元素，插入 "drum"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removed = myFish.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">"drum"</span>); <span class="comment">// 这里的 "drum" 是被插入到 下标 2("mandarin") 的前面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的 myFish:["angel", "clown", "drum", "mandarin", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：[]，没有元素被删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 1 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["angel", "clown", "drum", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["mandarin"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 1 个元素，然后插入 "trumpet"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">2</span>, <span class="number">1</span>, <span class="string">"trumpet"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["angel", "clown", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["drum"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 0 位开始删除 2 个元素，然后插入 "parrot", "anemone" 和 "blue"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">0</span>, <span class="number">2</span>, <span class="string">"parrot"</span>, <span class="string">"anemone"</span>, <span class="string">"blue"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["parrot", "anemone", "blue", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["angel", "clown"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 2 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="built_in">Number</span>.MAX_VALUE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["parrot", "anemone", "blue"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["trumpet", "surgeon"]</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="三、slice-Vs-splice"><a href="#三、slice-Vs-splice" class="headerlink" title="三、slice Vs splice"></a>三、slice Vs splice</h3><ol>
+<li>作用不同：<ul>
+<li>slice: 浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组</li>
+<li>splice: 用新元素替换旧元素，以此修改数组的内容</li>
+</ul>
+</li>
+<li>对原数组的影响不同<ul>
+<li>slice: 返回新数组，不影响原数组</li>
+<li>splice: 会更改原数组值</li>
+</ul>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="noopener">Array.prototype.slice()</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" target="_blank" rel="noopener">Array.prototype.splice()</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
 
 		</div>
 
@@ -1230,8 +1273,6 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
-		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
 			<li><a href="/categories/Git/">Git<span>1</span></a></li>
@@ -1279,45 +1320,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
-		
 			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
 			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
 			<li><a href="/tags/synology/">synology<span>1</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>25</span></a></li>

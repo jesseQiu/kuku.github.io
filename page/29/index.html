@@ -129,90 +129,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-09-04 </div>
-			<div class="article-title"><a href="/2016/09/04/2016-09-04-使用-Hexo-搭建属于自己的博客/" >使用 Hexo 搭建属于自己的博客</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h3 id="网上的教程很多，我这里就不做信息的搬运工了，下面只是记录下需要注意点"><a href="#网上的教程很多，我这里就不做信息的搬运工了，下面只是记录下需要注意点" class="headerlink" title="网上的教程很多，我这里就不做信息的搬运工了，下面只是记录下需要注意点"></a>网上的教程很多，我这里就不做信息的搬运工了，下面只是记录下需要注意点</h3><ol>
-<li><p>建立与你用户名对应的仓库，仓库名必须为(your_user_name.github.io),<strong>而且只能建立一个和你的 <a href="https://github.com/" target="_blank" rel="noopener">github</a> 账户同名的仓库</strong></p>
-</li>
-<li><p>安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>,按照官网的说明成功安装后,本地就可以运行一个 demo 博客页面</p>
-</li>
-<li><p>注册域名，我是在 <a href="https://www.namesilo.com/login.php" target="_blank" rel="noopener">namesilo</a> 注册的 .COM 域名(不用备案,这个省了不少麻烦),价格实惠,而且可以用支付宝支付。具体的教程可 <a href="http://52namesilo.com/" target="_blank" rel="noopener">参考</a> 的博客介绍。<strong>注意</strong>：需要修下 DNS 服务器，我使用的国内的 <a href="https://www.dnspod.cn" target="_blank" rel="noopener">DNSPOD</a></p>
-</li>
-<li><p>域名绑定，具体可以 <a href="http://www.isetsuna.com/hexo/domain-dns/" target="_blank" rel="noopener">参考</a></p>
-</li>
-</ol>
-<p><strong>注意点</strong>:<br>    - CNAME 文件是在 source 目录下,里面地址是没有 <em>www</em> 和 <em>http://</em>,例如: <strong>xxx.com</strong><br>    - 在 dnspod 的设置 @ 和 www 值时,github 主页地址后要带小点，例如：<strong>yourname.github.io.</strong><br>    - 绑定好后，域名生效时间需要 72 小时，我实际测试差不多 24 小时即可,所以请耐心等待。</p>
-<hr>
-<h3 id="在上面的步骤都完成后，已经可以正常在公网上访问了，下面就是添加插件功能"><a href="#在上面的步骤都完成后，已经可以正常在公网上访问了，下面就是添加插件功能" class="headerlink" title="在上面的步骤都完成后，已经可以正常在公网上访问了，下面就是添加插件功能"></a>在上面的步骤都完成后，已经可以正常在公网上访问了，下面就是添加插件功能</h3><ol>
-<li><p>选择下载自己喜欢的主题</p>
-</li>
-<li><p>添加 Rss 和 Sitmap 插件</p>
-</li>
-<li><p>添加评论(多说、disqus)</p>
-<ul>
-<li><a href="http://www.cnblogs.com/Lemostic/p/5493407.html" target="_blank" rel="noopener">添加多说评论插件</a></li>
-</ul>
-</li>
-<li><p>注册 <a href="https://portal.qiniu.com/signup?code=3lpwnfrzicuaa" target="_blank" rel="noopener">七牛</a> 图库</p>
-<ul>
-<li><a href="http://developer.qiniu.com/article/kodo/kodo-first/quickstart.html#step1" target="_blank" rel="noopener">官网入门教程</a></li>
-<li><a href="http://developer.qiniu.com/code/v6/tool/qrsbox.html#download" target="_blank" rel="noopener">图形界面同步上传工具</a>  <em>不知什么原因上传文件一直失败</em></li>
-<li><a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="noopener">Hexo 七牛插件</a></li>
-<li><a href="http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/" target="_blank" rel="noopener">使用七牛为 Hexo 存储图片</a></li>
-</ul>
-</li>
-<li><p>添加网站访问次数<br> 可以参考 <a href="/2016/09/10/Hexo-添加访问统计量方法/">Hexo-添加访问统计量方法</a></p>
-</li>
-<li><p>为 Hexo 添加二级域名<br> 可以参考 <a href="/2016/09/19/Hexo-添加二级域名/">Hexo-添加二级域名</a></p>
-</li>
-</ol>
-<hr>
-<h3 id="Hexo-使用过程中的技巧"><a href="#Hexo-使用过程中的技巧" class="headerlink" title="Hexo 使用过程中的技巧"></a>Hexo 使用过程中的技巧</h3><ol>
-<li><p>引用本网站的文章</p>
-<ul>
-<li>可以使用 <a href="/年/月/日/文章名/"></a>,例如我要引用本站的 <em>Hexo-添加访问统计量方法</em> 文章，可以写成 <code>[Hexo 添加访问统计量方法](/2016/09/10/Hexo-添加访问统计量方法/)</code></li>
-</ul>
-</li>
-<li><p>如果修改了已经发布过的文件名称，需要把之前在 <code>github</code> 上对应的文件删除掉，再重新生成上传，否则在博客内部点击链接会找不到。</p>
-</li>
-<li><p>编写草稿<br> 当我们在编写比较长的文章时，或者断断续续的写，不能马上完成。这中间又有新的文章需要发布，就可以用到 <code>draft</code> 参数.</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo new draft title</span></pre></td></tr></table></figure>
-<p> 这时生成的文章存放在 <code>source/_drafts</code> 目录下，如果需要在本地查看效果：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo server --draft</span></pre></td></tr></table></figure>
-
-<p> 如果文章已经写好，需要发布，也就是需要移到 <code>source/_psts</code> 目录下，可以使用 <code>publish</code> 参数</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo publish darft title</span></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="http://www.cnblogs.com/zhcncn/p/4097881.html" target="_blank" rel="noopener">Hexo 搭建 Github 静态博客</a></li>
-<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="noopener">hexo 你的博客</a></li>
-<li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/" target="_blank" rel="noopener">为 hexo 博客添加访问次数统计功能</a></li>
-<li><a href="https://yq.aliyun.com/articles/8608" target="_blank" rel="noopener">Hexo 性能优化</a></li>
-<li><a href="http://www.jianshu.com/p/86557c34b671" target="_blank" rel="noopener">Hexo Seo优化让你的博客在 google 搜索排名第一</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-09-04 </div>
 			<div class="article-title"><a href="/2016/09/04/2016-09-04-网页字体替换/" >网页字体替换</a></div>						
 		</h3>
 	
@@ -338,8 +254,6 @@
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
-		
 			<li><a href="/categories/Flutter/">Flutter<span>1</span></a></li>
 		
 			<li><a href="/categories/Git/">Git<span>1</span></a></li>
@@ -387,45 +301,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
 			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
 			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>25</span></a></li>

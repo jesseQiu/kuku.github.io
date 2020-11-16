@@ -166,7 +166,7 @@ cookie
 <h4 id="1-3-图像映射"><a href="#1-3-图像映射" class="headerlink" title="1.3 图像映射"></a>1.3 图像映射</h4><p>可以把多张图片合并成单张图片，总大小是一样的，但减少了请求数并加速了页面加载。图片映射只有在图像在页面中连续的时候才有用，比如导航条。给 <code>image map</code> 设置坐标的过程既无聊又容易出错，用 <code>image map</code> 来做导航也不容易，所以不推荐用这种方式。</p>
 <h4 id="1-4-行内图片（Base64编码）"><a href="#1-4-行内图片（Base64编码）" class="headerlink" title="1.4 行内图片（Base64编码）"></a>1.4 行内图片（Base64编码）</h4><p>用<a href="http://tools.ietf.org/html/rfc2397" target="_blank" rel="noopener"><code>data:</code> URL模式</a>来把图片嵌入页面。这样会增加 HTML 文件的大小，把行内图片放在（缓存的）样式表中是个好办法，而且成功避免了页面变“重”。但目前主流浏览器并不能很好地支持行内图片。</p>
 <p>减少页面的 HTTP 请求数是个起点，这是提升站点首次访问速度的重要指导原则。</p>
-<h3 id="2-减少-DNS-查找"><a href="#2-减少-DNS-查找" class="headerlink" title="2. 减少 DNS 查找"></a>2. 减少 DNS 查找</h3><p>域名系统建立了 <strong>主机名</strong> 和 <strong>IP</strong> 地址间的映射，就像电话簿上人名和号码的映射一样。当你在浏览器输入 <code>http://blog.luckykuku.com</code> 的时候，浏览器就会联系 DNS 解析器返回服务器的 IP 地址。DNS 是有成本的，它需要 20 到 120 毫秒去查找给定 主机名 的 IP 地址。在 DNS 查找完成之前，浏览器无法从主机名下载任何东西。</p>
+<h3 id="2-减少-DNS-查找"><a href="#2-减少-DNS-查找" class="headerlink" title="2. 减少 DNS 查找"></a>2. 减少 DNS 查找</h3><p>域名系统建立了 <strong>主机名</strong> 和 <strong>IP</strong> 地址间的映射，就像电话簿上人名和号码的映射一样。当你在浏览器输入 <code>http://blog.jessechiu.com</code> 的时候，浏览器就会联系 DNS 解析器返回服务器的 IP 地址。DNS 是有成本的，它需要 20 到 120 毫秒去查找给定 主机名 的 IP 地址。在 DNS 查找完成之前，浏览器无法从主机名下载任何东西。</p>
 <p>DNS 查找被缓存起来更高效，由用户的 ISP（网络服务提供商）或者本地网络存在一个特殊的缓存服务器上，但还可以缓存在个人用户的计算机上。DNS 信息被保存在操作系统的 DNS cache(微软Windows上的”DNS客户端服务”)里。大多数浏览器有独立于操作系统的自己的 cache。只要浏览器在自己的 cache 里还保留着这条记录，它就不会向操作系统查询 DNS。</p>
 <p>IE 默认缓存 DNS 查找 30 分钟，写在 <code>DnsCacheTimeout</code> 注册表设置中。Firefox 缓存 1 分钟，可以用<code>network.dnsCacheExpiration</code> 配置项设置。(Fasterfox 把缓存时间改成了 1 小时 P.S. Fasterfox 是 FF 的一个提速插件)</p>
 <p>如果客户端的 DNS cache 是空的（包括浏览器的和操作系统的），DNS 查找数等于页面上不同的主机名数，包括页面 URL，图片，脚本文件，样式表，Flash 对象等等组件中的主机名，减少不同的主机名就可以减少 DNS 查找。</p>
@@ -343,7 +343,7 @@ cookie
 
 		<!-- 微信公众号关注 logo -->
 		<div class="text-center">
-			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<img src="http://jessechiu.synology.me:5959/images/2020/11/13/wechat-subscribe.jpg">
 			<span class="text-danger">全栈开发者微信公众号</span>
 		</div>
 

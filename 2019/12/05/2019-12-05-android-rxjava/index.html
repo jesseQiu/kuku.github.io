@@ -6,8 +6,7 @@
   <title>Android-rxjava - Cease to struggle and you cease to live</title>
   <meta name="author" content="JesseChiu">
   
-  <meta name="description" content="Android Studio rxjava 环境配置由于 Android 的仓库有两个，默认创建工程中的 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 build.grade 中添加下面的语句
-1allprojects &amp;#123;">
+  <meta name="description" content="Android Studio 环境搭建1. Android Studio rxjava 环境配置由于 Android 的仓库有两个，默认创建工程中的是 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 build.grade 中添加下面">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -137,18 +136,22 @@
 	<div class="mypage">		
 	  		
 
-	  <h2 id="Android-Studio-rxjava-环境配置"><a href="#Android-Studio-rxjava-环境配置" class="headerlink" title="Android Studio rxjava 环境配置"></a>Android Studio rxjava 环境配置</h2><p>由于 Android 的仓库有两个，默认创建工程中的 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 <code>build.grade</code> 中添加下面的语句</p>
+	  <h2 id="Android-Studio-环境搭建"><a href="#Android-Studio-环境搭建" class="headerlink" title="Android Studio 环境搭建"></a>Android Studio 环境搭建</h2><h3 id="1-Android-Studio-rxjava-环境配置"><a href="#1-Android-Studio-rxjava-环境配置" class="headerlink" title="1. Android Studio rxjava 环境配置"></a>1. Android Studio rxjava 环境配置</h3><p>由于 Android 的仓库有两个，默认创建工程中的是 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 <code>build.grade</code> 中添加下面的语句</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    repositories &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        google()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        jcenter()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        maven &#123; url <span class="string">"https://jitpack.io"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        mavenCentral()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
-<h2 id="配置支持-Lambda-表达式"><a href="#配置支持-Lambda-表达式" class="headerlink" title="配置支持 Lambda 表达式"></a>配置支持 Lambda 表达式</h2><ul>
+<h3 id="2-配置支持-Lambda-表达式"><a href="#2-配置支持-Lambda-表达式" class="headerlink" title="2. 配置支持 Lambda 表达式"></a>2. 配置支持 Lambda 表达式</h3><ul>
 <li>Android Studio 3.x 默认支持</li>
-<li>在 app 文件夹下的 <code>build.grade</code> 文件中添加下面语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">android &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    // ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    compileOptions &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>在 app 文件夹下的 <code>build.grade</code> 文件中添加下面语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">android &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    // ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    compileOptions &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+</li>
 </ul>
 	  
 
 		<!-- 微信公众号关注 logo -->
 		<div class="text-center">
-			<img src="https://s2.ax1x.com/2019/11/27/Qp86qH.jpg">
+			<img src="http://jessechiu.synology.me:5959/images/2020/11/13/wechat-subscribe.jpg">
 			<span class="text-danger">全栈开发者微信公众号</span>
 		</div>
 
