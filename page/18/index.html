@@ -128,6 +128,409 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2017-03-04 </div>
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-window/" >Window 对象</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在浏览器中，<code>window</code>对象（注意，<code>w</code>为小写）指当前的浏览器窗口。它也是所有对象的顶层对象。</p>
+<p><img src="http://www.dreamdu.com/images/browser_objects.png" alt=""></p>
+<p>“顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，<br>都是<code>window</code>对象的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，变量<code>a</code>是一个全局变量，但是实质上它是<code>window</code>对象的属性。声明一个全局变量，就是为<code>window</code>对象的同名属性赋值。</p>
+<p>从语言设计的角度看，所有变量都是<code>window</code>对象的属性，其实不是很合理。因为<code>window</code>对象有自己的实体含义，不适合当作最高一层的顶层对象。这个设计失误与JavaScript语言匆忙的设计过程有关，最早的设想是语言内置的对象越少越好，这样可以提高浏览器的性能。因此，语言设计者Brendan Eich就把<code>window</code>对象当作顶层对象，所有未声明就赋值的变量都自动变成<code>window</code>对象的属性。这种设计使得编译阶段无法检测出未声明变量，但到了今天已经没有办法纠正了。</p>
+<h2 id="window对象的属性"><a href="#window对象的属性" class="headerlink" title="window对象的属性"></a>window对象的属性</h2><h3 id="window-window"><a href="#window-window" class="headerlink" title="window.window"></a>window.window</h3><p><code>window</code>对象的<code>window</code>属性指向自身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.window === <span class="keyword">this</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-closed"><a href="#window-closed" class="headerlink" title="window.closed"></a>window.closed</h3><p><code>window.closed</code>属性返回一个布尔值，表示窗口是否关闭。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.closed <span class="comment">// false</span></span></pre></td></tr></table></figure>
+
+<p>上面代码检查当前窗口是否关闭。这种检查意义不大，因为只要能运行代码，当前窗口肯定没有关闭。这个属性一般用来检查，使用脚本打开的新窗口是否关闭。</p>
+<h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p><code>window.opener</code>属性返回打开当前窗口的父窗口。如果当前窗口没有父窗口，则返回<code>null</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowA = <span class="built_in">window</span>.opener;</span></pre></td></tr></table></figure>
+
+<p>通过<code>opener</code>属性，可以获得父窗口的的全局变量和方法，比如<code>windowA.window.propertyName</code>和<code>windowA.window.functionName()</code>。</p>
+<p>该属性只适用于两个窗口属于同源的情况（参见《<a href="/bom/same-origin.html">同源政策</a>》一节），且其中一个窗口由另一个打开。</p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p><code>window.name</code>属性用于设置当前浏览器窗口的名字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">'Hello World!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Hello World!"</span></span></pre></td></tr></table></figure>
+
+<p>各个浏览器对这个值的储存容量有所不同，但是一般来说，可以高达几MB。</p>
+<p>它有一个重要特点，就是只要是本窗口打开的网页，都能读写该属性，不管这些网页是否属于同一个网站。所以，可以把值存放在该属性内，然后让另一个网页读取，从而实现跨域通信（详见《<a href="/bom/same-origin.html">同源政策</a>》一节）。</p>
+<p>该属性只能保存字符串，且当浏览器窗口关闭后，所保存的值就会消失。因此局限性比较大，但是与iframe窗口通信时，非常有用。</p>
+<h3 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h3><p><code>window.location</code>返回一个<code>location</code>对象，用于获取窗口当前的URL信息。它等同于<code>document.location</code>对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location === <span class="built_in">document</span>.location <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-frames"><a href="#window-frames" class="headerlink" title="window.frames"></a>window.frames</h3><p><code>window.frames</code>属性返回一个类似数组的对象，成员为页面内所有框架窗口，包括<code>frame</code>元素和<code>iframe</code>元素。<code>window.frames[0]</code>表示页面中第一个框架窗口，<code>window.frames[&#39;someName&#39;]</code>则是根据框架窗口的<code>name</code>属性的值（不是<code>id</code>属性），返回该窗口。另外，通过<code>document.getElementById()</code>方法也可以引用指定的框架窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frame = <span class="built_in">document</span>.getElementById(<span class="string">'theFrame'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameWindow = frame.contentWindow;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于 frame.contentWindow.document</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameDoc = frame.contentDocument;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取子窗口的变量和属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">frameWindow<span class="function">.<span class="keyword">function</span>(<span class="params"></span>)</span></span></pre></td></tr></table></figure>
+
+<p><code>window.length</code>属性返回当前页面中所有框架窗口总数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames.length === <span class="built_in">window</span>.length <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p><code>window.frames.length</code>与<code>window.length</code>应该是相等的。</p>
+<p>由于传统的<code>frame</code>窗口已经不建议使用了，这里主要介绍<code>iframe</code>窗口。</p>
+<p>需要注意的是，<code>window.frames</code>的每个成员对应的是框架内的窗口（即框架的<code>window</code>对象）。如果要获取每个框架内部的DOM树，需要使用<code>window.frames[0].document</code>的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">window</span>.getElementsByTagName(<span class="string">'iframe'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe_title = iframe.contentWindow.title;</span></pre></td></tr></table></figure>
+
+<p>上面代码用于获取<code>iframe</code>页面的标题。</p>
+<p><code>iframe</code>元素遵守同源政策，只有当父页面与框架页面来自同一个域名，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。</p>
+<p><code>iframe</code>窗口内部，使用<code>window.parent</code>引用父窗口。如果当前页面没有父窗口，则<code>window.parent</code>属性返回自身。因此，可以通过<code>window.parent</code>是否等于<code>window.self</code>，判断当前窗口是否为<code>iframe</code>窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.parent != <span class="built_in">window</span>.self) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 当前窗口是子窗口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-screenX，window-screenY"><a href="#window-screenX，window-screenY" class="headerlink" title="window.screenX，window.screenY"></a>window.screenX，window.screenY</h3><p><code>window.screenX</code>和<code>window.screenY</code>属性，返回浏览器窗口左上角相对于当前屏幕左上角（<code>(0, 0)</code>）的水平距离和垂直距离，单位为像素。</p>
+<h3 id="window-innerHeight，window-innerWidth"><a href="#window-innerHeight，window-innerWidth" class="headerlink" title="window.innerHeight，window.innerWidth"></a>window.innerHeight，window.innerWidth</h3><p><code>window.innerHeight</code>和<code>window.innerWidth</code>属性，返回网页在当前窗口中可见部分的高度和宽度，即“视口”（viewport），单位为像素。</p>
+<p>当用户放大网页的时候（比如将网页从100%的大小放大为200%），这两个属性会变小。因为这时网页的像素大小不变（比如宽度还是960像素），只是每个像素占据的屏幕空间变大了，因为可见部分（视口）就变小了。</p>
+<p>注意，这两个属性值包括滚动条的高度和宽度。</p>
+<h3 id="window-outerHeight，window-outerWidth"><a href="#window-outerHeight，window-outerWidth" class="headerlink" title="window.outerHeight，window.outerWidth"></a>window.outerHeight，window.outerWidth</h3><p><code>window.outerHeight</code>和<code>window.outerWidth</code>属性返回浏览器窗口的高度和宽度，包括浏览器菜单和边框，单位为像素。</p>
+<h3 id="window-pageXOffset，window-pageYOffset"><a href="#window-pageXOffset，window-pageYOffset" class="headerlink" title="window.pageXOffset，window.pageYOffset"></a>window.pageXOffset，window.pageYOffset</h3><p><code>window.pageXOffset</code>属性返回页面的水平滚动距离，<code>window.pageYOffset</code>属性返回页面的垂直滚动距离，单位都为像素。</p>
+<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><p><code>window</code>对象的<code>navigator</code>属性，指向一个包含浏览器相关信息的对象。</p>
+<h3 id="navigator-userAgent"><a href="#navigator-userAgent" class="headerlink" title="navigator.userAgent"></a>navigator.userAgent</h3><p><code>navigator.userAgent</code>属性返回浏览器的User-Agent字符串，用来标示浏览器的种类。下面是Chrome浏览器的<code>userAgent</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">navigator.userAgent</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"</span></span></pre></td></tr></table></figure>
+
+<p>通过<code>userAgent</code>属性识别浏览器，不是一个好办法。因为必须考虑所有的情况（不同的浏览器，不同的版本），非常麻烦，而且无法保证未来的适用性，更何况各种上网设备层出不穷，难以穷尽。所以，现在一般不再识别浏览器了，而是使用“功能识别”方法，即逐一测试当前浏览器是否支持要用到的JavaScript功能。</p>
+<p>不过，通过<code>userAgent</code>可以大致准确地识别手机浏览器，方法就是测试是否包含<code>mobi</code>字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ua = navigator.userAgent.toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/mobi/i</span>.test(ua)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 非手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如果想要识别所有移动设备的浏览器，可以测试更多的特征字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/mobi|android|touch|mini/i.test(ua)</span></pre></td></tr></table></figure>
+
+<h3 id="navigator-plugins"><a href="#navigator-plugins" class="headerlink" title="navigator.plugins"></a>navigator.plugins</h3><p><code>navigator.plugins</code>属性返回一个类似数组的对象，成员是浏览器安装的插件，比如Flash、ActiveX等。</p>
+<h2 id="window-screen对象"><a href="#window-screen对象" class="headerlink" title="window.screen对象"></a>window.screen对象</h2><p><code>window.screen</code>对象包含了显示设备的信息。</p>
+<p><code>screen.height</code>和<code>screen.width</code>两个属性，一般用来了解设备的分辨率。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的高度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">screen.height <span class="comment">// 1920</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的宽度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">screen.width <span class="comment">// 1080</span></span></pre></td></tr></table></figure>
+
+<p>上面代码显示，某设备的分辨率是1920x1080。</p>
+<p>除非调整显示器的分辨率，否则这两个值可以看作常量，不会发生变化。显示器的分辨率与浏览器设置无关，缩放网页并不会改变分辨率。</p>
+<p>下面是根据屏幕分辨率，将用户导向不同网页的代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((screen.width &lt;= <span class="number">800</span>) &amp;&amp; (screen.height &lt;= <span class="number">600</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'small.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'wide.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>screen.availHeight</code>和<code>screen.availWidth</code>属性返回屏幕可用的高度和宽度，单位为像素。它们的值为屏幕的实际大小减去操作系统某些功能占据的空间，比如系统的任务栏。</p>
+<p><code>screen.colorDepth</code>属性返回屏幕的颜色深度，一般为16（表示16-bit）或24（表示24-bit）。</p>
+<h2 id="window对象的方法"><a href="#window对象的方法" class="headerlink" title="window对象的方法"></a>window对象的方法</h2><h3 id="window-moveTo-，window-moveBy"><a href="#window-moveTo-，window-moveBy" class="headerlink" title="window.moveTo()，window.moveBy()"></a>window.moveTo()，window.moveBy()</h3><p><code>window.moveTo</code>方法用于移动浏览器窗口到指定位置。它接受两个参数，分别是窗口左上角距离屏幕左上角的水平距离和垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">100</span>, <span class="number">200</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口移动到屏幕<code>(100, 200)</code>的位置。</p>
+<p><code>window.moveBy</code>方法将窗口移动到一个相对位置。它接受两个参数，分布是窗口左上角向右移动的水平距离和向下移动的垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">25</span>, <span class="number">50</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口向右移动25像素、向下移动50像素。</p>
+<h3 id="window-open-window-close"><a href="#window-open-window-close" class="headerlink" title="window.open(), window.close()"></a>window.open(), window.close()</h3><p><code>window.open</code>方法用于新建另一个浏览器窗口，并且返回该窗口对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(<span class="string">'somefile.html'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>open</code>方法的第一个参数是新窗口打开的网址，此外还可以加上第二个参数，表示新窗口的名字，以及第三个参数用来指定新窗口的参数，形式是一个逗号分隔的<code>property=value</code>字符串。</p>
+<p>下面是一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'somepage.html'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'DefinitionsWindows'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'height=200,width=200,location=no,resizable=yes,scrollbars=yes'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
+
+<p>注意，如果在第三个参数中设置了一部分参数，其他没有被设置的<code>yes/no</code>参数都会被设成No，只有<code>titlebar</code>和关闭按钮除外（它们的值默认为yes）。</p>
+<p><code>open</code>方法返回新窗口的引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowB = <span class="built_in">window</span>.open(<span class="string">'windowB.html'</span>, <span class="string">'WindowB'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">windowB.window.name <span class="comment">// "WindowB"</span></span></pre></td></tr></table></figure>
+
+<p>由于<code>open</code>这个方法很容易被滥用，许多浏览器默认都不允许脚本新建窗口。因此，有必要检查一下打开新窗口是否成功。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (popup === <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 新建窗口失败</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>window.close</code>方法用于关闭当前窗口，一般用来关闭<code>window.open</code>方法新建的窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">popup.close()</span></pre></td></tr></table></figure>
+
+<p><code>window.closed</code>属性用于检查当前窗口是否被关闭了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 窗口仍然打开着</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-print"><a href="#window-print" class="headerlink" title="window.print()"></a>window.print()</h3><p><code>print</code>方法会跳出打印对话框，同用户点击菜单里面的“打印”命令效果相同。</p>
+<p>页面上的打印按钮代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'printLink'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.print();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>非桌面设备（比如手机）可能没有打印功能，这时可以这样判断。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.print === <span class="string">'function'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持打印功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h3><p><code>getComputedStyle</code>方法接受一个HTML元素作为参数，返回一个包含该HTML元素的最终样式信息的对象。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-matchMedia"><a href="#window-matchMedia" class="headerlink" title="window.matchMedia()"></a>window.matchMedia()</h3><p><code>window.matchMedia</code>方法用来检查CSS的mediaQuery语句。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-focus"><a href="#window-focus" class="headerlink" title="window.focus()"></a>window.focus()</h3><p><code>focus</code>方法会激活指定当前窗口，使其获得焦点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  popup.focus();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码先检查<code>popup</code>窗口是否依然存在，确认后激活该窗口。</p>
+<p>当前窗口获得焦点时，会触发<code>focus</code>事件；当前窗口失去焦点时，会触发<code>blur</code>事件。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p><code>window</code>对象可以接收以下事件。</p>
+<h3 id="load事件和onload属性"><a href="#load事件和onload属性" class="headerlink" title="load事件和onload属性"></a>load事件和onload属性</h3><p><code>load</code>事件发生在文档在浏览器窗口加载完毕时。<code>window.onload</code>属性可以指定这个事件的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> elements = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'example'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> elt = elements[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>上面代码在网页加载完毕后，获取指定元素并进行处理。</p>
+<h3 id="error事件和onerror属性"><a href="#error事件和onerror属性" class="headerlink" title="error事件和onerror属性"></a>error事件和onerror属性</h3><p>浏览器脚本发生错误时，会触发window对象的<code>error</code>事件。我们可以通过<code>window.onerror</code>属性对该事件指定回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">message, filename, lineno, colno, error</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"出错了！--&gt; %s"</span>, error.stack);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p><code>error</code>事件的回调函数，一共可以有五个参数，它们的含义依次如下。</p>
+<ul>
+<li>出错信息</li>
+<li>出错脚本的网址</li>
+<li>行号</li>
+<li>列号</li>
+<li>错误对象</li>
+</ul>
+<p>老式浏览器只支持前三个参数。</p>
+<p>需要注意的是，如果脚本网址与网页网址不在同一个域（比如使用了CDN），浏览器根本不会提供详细的出错信息，只会提示出错，错误类型是“Script error.”，行号为0，其他信息都没有。这是浏览器防止向外部脚本泄漏信息。一个解决方法是在脚本所在的服务器，设置Access-Control-Allow-Origin的HTTP头信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin:*</span></pre></td></tr></table></figure>
+
+<p>然后，在网页的<code>&lt;script&gt;</code>标签中设置<code>crossorigin</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span> <span class="attr">src</span>=<span class="string">"//example.com/file.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的<code>crossorigin=&quot;anonymous&quot;</code>表示，读取文件不需要身份信息，即不需要cookie和HTTP认证信息。如果设为<code>crossorigin=&quot;use-credentials&quot;</code>，就表示浏览器会上传cookie和HTTP认证信息，同时还需要服务器端打开HTTP头信息Access-Control-Allow-Credentials。</p>
+<p>并不是所有的错误，都会触发JavaScript的<code>error</code>事件（即让JavaScript报错），只限于以下三类事件。</p>
+<ul>
+<li>JavaScript语言错误</li>
+<li>JavaScript脚本文件不存在</li>
+<li>图像文件不存在</li>
+</ul>
+<p>以下两类事件不会触发JavaScript的error事件。</p>
+<ul>
+<li>CSS文件不存在</li>
+<li>iframe文件不存在</li>
+</ul>
+<h2 id="URL的编码-解码方法"><a href="#URL的编码-解码方法" class="headerlink" title="URL的编码/解码方法"></a>URL的编码/解码方法</h2><p>网页URL的合法字符分成两类。</p>
+<ul>
+<li>URL元字符：分号（<code>;</code>），逗号（’,’），斜杠（<code>/</code>），问号（<code>?</code>），冒号（<code>:</code>），at（<code>@</code>），<code>&amp;</code>，等号（<code>=</code>），加号（<code>+</code>），美元符号（<code>$</code>），井号（<code>#</code>）</li>
+<li>语义字符：<code>a-z</code>，<code>A-Z</code>，<code>0-9</code>，连词号（<code>-</code>），下划线（<code>_</code>），点（<code>.</code>），感叹号（<code>!</code>），波浪线（<code>~</code>），星号（<code>*</code>），单引号（<code>\``），圆括号（</code>()`）</li>
+</ul>
+<p>除了以上字符，其他字符出现在URL之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（<code>%</code>）加上两个大写的十六进制字母。比如，UTF-8的操作系统上，<code>http://www.example.com/q=春节</code>这个URL之中，汉字“春节”不是URL的合法字符，所以被浏览器自动转成<code>http://www.example.com/q=%E6%98%A5%E8%8A%82</code>。其中，“春”转成了<code>%E6%98%A5</code>，“节”转成了“%E8%8A%82”。这是因为“春”和”节“的UTF-8编码分别是<code>E6 98 A5</code>和<code>E8 8A 82</code>，将每个字节前面加上百分号，就构成了URL编码。</p>
+<p>JavaScript提供四个URL的编码/解码方法。</p>
+<ul>
+<li><code>encodeURI()</code></li>
+<li><code>encodeURIComponent()</code></li>
+<li><code>decodeURI()</code></li>
+<li><code>decodeURIComponent()</code></li>
+</ul>
+<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h3><p><code>encodeURI</code> 方法的参数是一个字符串，代表整个URL。它会将元字符和语义字符之外的字符，都进行转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURI</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h3><p><code>encodeURIComponent</code>只转除了语义字符之外的字符，元字符也会被转义。因此，它的参数通常是URL的路径或参数值，而不是整个URL。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "%E6%98%A5%E8%8A%82"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http%3A%2F%2Fwww.example.com%2Fq%3D%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>encodeURIComponent</code>会连URL元字符一起转义，所以通常只用它转URL的片段。</p>
+<h3 id="decodeURI"><a href="#decodeURI" class="headerlink" title="decodeURI"></a>decodeURI</h3><p><code>decodeURI</code>用于还原转义后的URL。它是<code>encodeURI</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">'http://www.example.com/q=%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=春节"</span></span></pre></td></tr></table></figure>
+
+<h3 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="decodeURIComponent"></a>decodeURIComponent</h3><p><code>decodeURIComponent</code>用于还原转义后的URL片段。它是<code>encodeURIComponent</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">'%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "春节"</span></span></pre></td></tr></table></figure>
+
+<h2 id="alert-，prompt-，confirm"><a href="#alert-，prompt-，confirm" class="headerlink" title="alert()，prompt()，confirm()"></a>alert()，prompt()，confirm()</h2><p><code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。</p>
+<p>需要注意的是，<code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>这三个方法弹出的对话框，都是浏览器统一规定的式样，是无法定制的。</p>
+<p><code>alert</code>方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">alert(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World'</span>);</span></pre></td></tr></table></figure>
+
+<p>用户只有点击“确定”按钮，对话框才会消失。在对话框弹出期间，浏览器窗口处于冻结状态，如果不点“确定”按钮，用户什么也干不了。</p>
+<p><code>alert</code>方法的参数只能是字符串，没法使用CSS样式，但是可以用<code>\n</code>指定换行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'本条提示\n分成两行'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>prompt</code>方法弹出的对话框，在提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(text[, <span class="keyword">default</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(<span class="string">'您的年龄？'</span>, <span class="number">25</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码会跳出一个对话框，文字提示为“您的年龄？”，要求用户在对话框中输入自己的年龄（默认显示25）。</p>
+<p><code>prompt</code>方法的返回值是一个字符串（有可能为空）或者<code>null</code>，具体分成三种情况。</p>
+<ol>
+<li>用户输入信息，并点击“确定”，则用户输入的信息就是返回值。</li>
+<li>用户没有输入信息，直接点击“确定”，则输入框的默认值就是返回值。</li>
+<li>用户点击了“取消”（或者按了Esc按钮），则返回值是<code>null</code>。</li>
+</ol>
+<p><code>prompt</code>方法的第二个参数是可选的，但是如果不提供的话，IE浏览器会在输入框中显示<code>undefined</code>。因此，最好总是提供第二个参数，作为输入框的默认值。</p>
+<p><code>confirm</code>方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”两个按钮，往往用来征询用户的意见。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(<span class="string">"你最近好吗？"</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码弹出一个对话框，上面只有一行文字“你最近好吗？”，用户选择点击“确定”或“取消”。</p>
+<p><code>confirm</code>方法返回一个布尔值，如果用户点击“确定”，则返回<code>true</code>；如果用户点击“取消”，则返回<code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> okay = confirm(<span class="string">'Please confirm this message.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (okay) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“确定”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“取消”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>confirm</code>的一个用途是，当用户离开当前页面时，弹出一个对话框，问用户是否真的要离开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> confirm(<span class="string">'你确定要离开当面页面吗？'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Karl Dubost, <a href="https://hacks.mozilla.org/2013/09/user-agent-detection-history-and-checklist/" target="_blank" rel="noopener">User-Agent detection, history and checklist</a></li>
+<li>Conrad Irwin, <a href="https://bugsnag.com/blog/js-stacktraces/" target="_blank" rel="noopener">JS stacktraces. The good, the bad, and the ugly</a></li>
+<li>Daniel Lee, <a href="http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/" target="_blank" rel="noopener">How to catch JavaScript Errors with window.onerror (even on Chrome and Firefox)</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-02-28 </div>
+			<div class="article-title"><a href="/2017/02/28/2017-02-28-使用-Chrome-分析内存泄漏/" >使用 Chrome 分析内存泄漏</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>本文主要是记录如何通过 Chrome 的调试工具，来分析 Web App 内存泄漏</p>
+</blockquote>
+<h2 id="一、排查方法"><a href="#一、排查方法" class="headerlink" title="一、排查方法"></a>一、排查方法</h2><h3 id="1-The-Timeline"><a href="#1-The-Timeline" class="headerlink" title="1. The Timeline"></a>1. The Timeline</h3><p><code>Ctrl + Shift + i</code> -&gt; Timeline</p>
+<p>如下图:<br><img src="http://www.dwmkerr.com/content/images/2015/02/StartRecording.png" alt="Timeline"></p>
+<ul>
+<li>点击左上角圆点，开始记录。</li>
+<li>运行你的 app 应用。</li>
+<li>点击停止记录。</li>
+</ul>
+<p>这时你会看到类似如下图：</p>
+<p><img src="http://www.dwmkerr.com/content/images/2015/02/MemoryUsage.png" alt=""></p>
+<p>如果是排查内存泄漏，我们要关注的是 <strong>蓝色的线(JS Heap)</strong>。如果我们的应用在点击某个操作会消耗比较大的内存，完成后内存应该被垃圾回收，回到原来状态，这样抓取的图应该是 <strong>锯齿状</strong> 的。如下图:</p>
+<p><img src="http://www.dwmkerr.com/content/images/2015/03/TimelineSawtooth.png" alt=""></p>
+<p>如果是 <strong>梯形</strong> 状，那就要注意了，如下图:<br><img src="http://www.dwmkerr.com/content/images/2015/03/TimelineSteps-1.png" alt=""></p>
+<p>但是这并不代表就是存在内存泄漏，例如，我们允许用户不断滚动浏览图片，但是代码中并没释放之前图片。还有我们手机应用，下拉刷新列表，随着我们不断的下拉刷新，内存占用就会不断的上升。</p>
+<p>如果是下面的图片:<br><img src="http://www.dwmkerr.com/content/images/2015/03/TimelineLeakySawtooth.png" alt=""><br>初看也是 <strong>锯齿状</strong>，貌似正常。细看我们会发现，上图中的锯齿图会不断的往上倾斜。也就是，我们每操作一次应用，内存回收并没有到最初的点，而是，逐次的减少。这很 <strong>可能</strong> 就存在内存泄漏，但还需进一步确认。</p>
+<h3 id="2-Recording-Heap-Allocations"><a href="#2-Recording-Heap-Allocations" class="headerlink" title="2. Recording Heap Allocations"></a>2. Recording Heap Allocations</h3><p>为了进一步确认是否存在内存泄漏，就需要用到强大的 <code>Profiles</code> 工具了，打开方法:</p>
+<p><code>Ctrl + Shift + i</code> -&gt; Profiles -&gt; Recording Heap Allocations<br><img src="http://www.dwmkerr.com/content/images/2015/02/HeapAllocations.png" alt=""></p>
+<p>使用该工具可以帮助我们快速看到是否有内存泄漏。使用方法:</p>
+<ul>
+<li>点击开始录制</li>
+<li>操作应用</li>
+<li>回到原始操作点</li>
+<li>停止录制</li>
+</ul>
+<p>这时会看到类似如下的柱状图:</p>
+<p><img src="http://www.dwmkerr.com/content/images/2015/03/HeapAllocationsEx3.png" alt=""></p>
+<p>图中的 <strong>蓝色</strong> 柱状图表示该操作 Chrome 保留用到的内存，<strong>灰色</strong> 部分表示释放的内存。<br>如果完全理想状态应该是，重复操作完两次 (1-2,3-4),回到最初状态应该都是灰色，但是实际情况并非如此，如果还有 <strong>蓝色</strong> 柱状图(如上图),可能是由于缓存原因，并非是内存泄漏。</p>
+<p><em>如果是下图，那就要注意了</em>:</p>
+<p><img src="http://www.dwmkerr.com/content/images/2015/03/Scenario2HeapAllocations.png" alt=""></p>
+<p>上图是重复进入退出一个页面 10 次的抓取结果，可以看出，几乎每次都有保留 <strong>蓝色</strong> 柱状图，这很可能就是内存泄漏了。这时我们可以通过，组后一步的方法来确认!!!</p>
+<h3 id="3-Heap-Snapshots"><a href="#3-Heap-Snapshots" class="headerlink" title="3. Heap Snapshots"></a>3. Heap Snapshots</h3><p>最后一步，分别抓取每次操作的 Heap 快照，然后进行对比排查。<br>打开方法：<br><code>Ctrl + Shift + i</code> -&gt; Profiles -&gt; Heap Snapshots<br><img src="http://www.dwmkerr.com/content/images/2015/03/TakeHeapSnapshot.png" alt=""></p>
+<p><strong>注意：每次抓取都会进行内存的垃圾回收</strong></p>
+<p><code>Heap Snapshots vs Recording Heap Allocations</code></p>
+<ul>
+<li>Heap Snapshots 看到的数据和 Recording Heap Allocations 是相同的</li>
+<li>Heap Snapshots: 可以查看到目前所用到的所有内存</li>
+<li>Recording Heap Allocations：只能看当前被引用到并实例化的 <strong>对象</strong></li>
+</ul>
+<p>Heap Snapshots 真正可以用来排查内存泄漏的是里面的 <strong>快照对比</strong> 功能，可以分析对比两次快照的差别点，例如，销毁了多少内存对象，新增了多少对象，哪些 DOM 被隔离等，并能看到相应的代码上下文，这为我们排查内存泄漏带来了很大的帮助。</p>
+<h4 id="3-1-Analysing-Memory-Leaks"><a href="#3-1-Analysing-Memory-Leaks" class="headerlink" title="3.1 Analysing Memory Leaks"></a>3.1 Analysing Memory Leaks</h4><p><img src="http://www.dwmkerr.com/content/images/2015/03/HeapData.png" alt=""></p>
+<p>Constructor 列是目前所占用的内存对象实例，有的是系统创建的，有的是应用创建的。</p>
+<ul>
+<li>(compiled code): Chrome 创建的内部对象，不用考虑。</li>
+<li>(array): 同上，内部引用对象，不用考虑。</li>
+<li>system: 同上，内部引用对象，不考虑。</li>
+<li>Array: 应用用到的数组对象，需要关注。</li>
+<li>Object: 普通的 JavaScript 对象，而不是用户定义 array 或者浏览器 document 对象或者 null，它就是空 {} 或者键值对</li>
+<li>(closure): 闭包</li>
+<li>system / Context: 基础数据需要调用函数，例如闭包所使用的实际数据</li>
+<li>其它：类似 <code>HTMLDivElement、HTMLButtonElement、HTMLElement...</code> 等。</li>
+</ul>
+<p><img src="http://od6sd4xau.bkt.clouddn.com/heap-snapshot-01.png" alt=""></p>
+<h4 id="3-2-内存泄漏代码实例"><a href="#3-2-内存泄漏代码实例" class="headerlink" title="3.2 内存泄漏代码实例"></a>3.2 内存泄漏代码实例</h4><p>下面是一段内存泄漏的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;title&gt;Memory Leak Demo&lt;<span class="regexp">/title&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">&lt;/</span>head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &lt;h1&gt;Memory Leak Demo&lt;<span class="regexp">/h1&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &lt;div style="margin: 5px"&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">		Current Num: &lt;span id="curNum" style="text-align: center;color:red"&gt;0&lt;/</span>span&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &lt;<span class="regexp">/div&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &lt;div&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">		&lt;button id="add" onclick="addNewHeapData()"&gt;add a heap data&lt;/</span>button&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">		&lt;button id=<span class="string">"del"</span> onclick=<span class="string">"deleteHeapData()"</span>&gt;<span class="keyword">delete</span> a heap data&lt;<span class="regexp">/button&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &lt;script type=<span class="string">"text/javascript"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">window</span>.funArray = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 事件绑定相关代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// var addEelement = document.getElementById('add');</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// function hello()&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//     console.log('hello');</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * 模拟添加内存数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addNewHeapData</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">       </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Create a class which will hold heap data. Makes it easier </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  to find the data in Chrome.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">HeapData</span>(<span class="params"></span>) </span>&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Create a heap data object.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">var</span> heapData = <span class="keyword">new</span> HeapData();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Create a function that multiplies two numbers.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">a, b</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> a * b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Create a 'multiply by' function, which curries the above</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  to generate a function which multiplies by a constant. This</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  will involve closures. </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">var</span> multiplyBy = <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> multiply(a, b);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Add some data to our heap data object.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">        heapData.fry = <span class="string">"Philip J. Fry"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        heapData.zoidberb = <span class="string">"John "</span> + <span class="string">"Zoidberg"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        heapData.character = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">            firstName: <span class="string">"Amy"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">            secondName: <span class="string">"Wong"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">        &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        heapData.double = multiplyBy(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">        heapData.multiplyBy100 = multiplyBy(<span class="number">100</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">        heapData.doubledNumber = heapData.double(<span class="number">18</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        heapData.multipliedNumber = heapData.multiplyBy100(<span class="number">15</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">        heapData.div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 添加事件绑定</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// addEelement.addEventListener('click',hello,false);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//  Put the heap data on the window, it is now pinned to a GC root.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 挂载到 window 对象的属性是不能被 GC 回收</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">window</span>.funArray.push(heapData);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">        setCurrentNum();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">console</span>.log(<span class="string">'funArray.length: '</span> + <span class="built_in">window</span>.funArray.length);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deleteHeapData</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// addEelement.removeEventListener('click',hello,false);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    	<span class="built_in">window</span>.funArray.shift();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">    	setCurrentNum();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">    	<span class="built_in">console</span>.log(<span class="string">'funArray.length: '</span> + <span class="built_in">window</span>.funArray.length);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setCurrentNum</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">    	<span class="keyword">var</span> curNum = <span class="built_in">document</span>.getElementById(<span class="string">'curNum'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">    	curNum.innerHTML = <span class="built_in">window</span>.funArray.length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">    &lt;<span class="regexp">/script&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line"><span class="regexp">&lt;/</span>body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/html&gt;</span></span></pre></td></tr></table></figure>
+<h4 id="3-3-内存泄漏在线例子"><a href="#3-3-内存泄漏在线例子" class="headerlink" title="3.3 内存泄漏在线例子"></a>3.3 内存泄漏在线例子</h4><p><a href="https://jesse-chiu.github.io/web-memory-leak-demo/" target="_blank" rel="noopener">内存泄漏在线例子</a></p>
+<p>下面是测试的 <code>Heap Snapshot</code> 截图：<br><img src="http://od6sd4xau.bkt.clouddn.com/demo-0.png" alt=""><br><img src="http://od6sd4xau.bkt.clouddn.com/demo-1.png" alt=""><br><img src="http://od6sd4xau.bkt.clouddn.com/demo-2.png" alt=""></p>
+<p>如上图是初始化，和添加 2 次的内存快照。</p>
+<p>图片解析:</p>
+<ul>
+<li>每个 Constructor 都会有一个唯一 UUID()，入上面的 <code>HeapData @312793</code></li>
+<li>Distance: 这个是各个实例距离 GC Root 的距离。例如上面的 demo 中，window 是全局对象(GC root),<code>HeapData</code> 距离它的值为 <code>3 = window -&gt; funArray(3) -&gt; funArray[x](2) -&gt; heapData=new HeapData() -&gt;(1) HeapData(构造函数)</code>。并且挂载到 window 下的属性是不会被 GC 的。<ul>
+<li>如下图的测试代码<br><img src="http://od6sd4xau.bkt.clouddn.com/global-delete.png" alt=""></li>
+</ul>
+</li>
+<li>Objects count: 有多少个实例对象别引用。</li>
+<li>Shallow Size: 对象直接占用的内存大小。</li>
+<li>Retained Size: 对象自身和其所应用到的对象总内存大小。 </li>
+<li><strong>上图中的背景用黄色高亮的实例，表示可以通过 <code>javascript</code> 直接访问。例如：<code>window.funArray[x]</code> 访问到。</strong></li>
+</ul>
+<p>再来看下闭包中引用到的<br><img src="http://www.dwmkerr.com/content/images/2015/03/HeapDataAnalysis4-1.png" alt=""><br>上图中可以看到，demo 中的属性引用到的闭包(<code>multiplyBy100</code>)。</p>
+<p>再来一张<br><img src="http://www.dwmkerr.com/content/images/2015/03/HeapDataAnalysis5.png" alt=""><br>上图要注意点</p>
+<ul>
+<li><code>HTMLDivElement</code> 选中时背景是 <strong>红色</strong>，不选中时时 <strong>黄色</strong>。</li>
+<li><strong>上面的 <code>native:: Detached Dom tree</code> 那行，显示占用的内存为 0 ，这个只是表示，js 层没有分配内存，但是在 V8 engine 依然占用着。</strong></li>
+<li><strong>红色</strong> 表示被隔离。也就是，存在 + 被其它对象引用着 + 不能被 GC 的对象，但是不存在于 DOM 中。如果一直在递增不是一种好的信号。</li>
+</ul>
+<h4 id="3-3-Comparison"><a href="#3-3-Comparison" class="headerlink" title="3.3 Comparison"></a>3.3 Comparison</h4><p>我们可以通过分别抓取两次操作的 <code>Heap Snapshot</code>,然后选择 <code>Comparison</code> 进行对比，新增了哪些对象。如下图：<br><img src="http://od6sd4xau.bkt.clouddn.com/demo-3.png" alt=""></p>
+<p>通过上图可以很快的查找出那些新增加的对象。</p>
+<h2 id="二、修复方法"><a href="#二、修复方法" class="headerlink" title="二、修复方法"></a>二、修复方法</h2><p><img src="http://www.dwmkerr.com/content/images/2015/03/ScopeLeakGraph2.png" alt=""><br>修改 bug 是个复杂的过程，这里 以 <code>AngularJS 1.x</code> 为例,介绍几个黄金准则,原理适合其它的框架。</p>
+<h3 id="1-熟悉你使用的框架-和-它的函数生命周期"><a href="#1-熟悉你使用的框架-和-它的函数生命周期" class="headerlink" title="1. 熟悉你使用的框架 和 它的函数生命周期"></a>1. 熟悉你使用的框架 和 它的函数生命周期</h3><h3 id="2-在短生命周期和长生命周期交互地方需要特别注意"><a href="#2-在短生命周期和长生命周期交互地方需要特别注意" class="headerlink" title="2. 在短生命周期和长生命周期交互地方需要特别注意"></a>2. 在短生命周期和长生命周期交互地方需要特别注意</h3><ul>
+<li>不要让长生命周期的函数，通过直接引用、闭包、回调等方式关联到短生命周期中的对象。<br>例如，angular 中的 directive、controler 和 service 之间，还有 angular 与其它库之间。</li>
+</ul>
+<h3 id="3-切断引用"><a href="#3-切断引用" class="headerlink" title="3. 切断引用"></a>3. 切断引用</h3><ul>
+<li>在 js 中造成内存泄都是由于被引用，GC 没办法回收引起。虽然大部分框架在页面销毁时都会这么做。但并非都是简单 <code>nulling</code> 对象或者清空数组，所以安全起见还是手动 <strong>切断引用</strong>。</li>
+</ul>
+<h3 id="4-实例"><a href="#4-实例" class="headerlink" title="4. 实例:"></a>4. 实例:</h3><h4 id="4-1-事件绑定"><a href="#4-1-事件绑定" class="headerlink" title="4.1 事件绑定"></a>4.1 事件绑定</h4><p>Poorly:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attrs</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  element.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    scope.selected = <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>这里我们在事件回调函数的闭包中，引用到了 <code>scope</code>,如果我们未解绑该事件，<code>scope</code> 将会被一直引用。<br>Fix:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attrs</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  element.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    scope.selected = <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      element.off(); <span class="comment">// deregister all event handlers</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &#125;)<span class="string">''</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>** 注意，removeEventListener 方法移除的监听函数，必须与对应的 addEventListener 方法的参数完全一致，而且必须在同一个元素节点，否则无效。**</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以正常解绑</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,hello,<span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.removeEventListener(<span class="string">'click'</span>,hello,<span class="literal">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是匿名的回调函数则，不能正常解绑</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="literal">false</span>);</span></pre></td></tr></table></figure>
+
+<h4 id="4-2-Watchers"><a href="#4-2-Watchers" class="headerlink" title="4.2 Watchers"></a>4.2 Watchers</h4><p>Poorly:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'someEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    $scope.refresh();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+<p>虽然框架会自动帮我们清楚，但是建议还是手动添加相应的解绑函数<br>Fix:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cleanup = $scope.$on(<span class="string">'someEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    $scope.refresh();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    cleanup();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure>
+
+<h4 id="4-3-解耦长短生命周期函数相互引用"><a href="#4-3-解耦长短生命周期函数相互引用" class="headerlink" title="4.3 解耦长短生命周期函数相互引用"></a>4.3 解耦长短生命周期函数相互引用</h4><ul>
+<li><p>Suggest one:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// poorly:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UserService.onNameChange(<span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    $scope.userName = newName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过回调函数容易造成引用释放问题</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// fix:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// change and name and wait for the result</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">UserService.changeName(<span class="string">"Fry"</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    $scope.name = newName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+</li>
+<li><p>Suggest two:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// more like our original example</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'NotificationService:ChangeName'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    $scope.name = data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+<p>虽然不建议这么做，代价会比较高。但是这也是一个解耦方法，框架会自动清理。</p>
+</li>
+</ul>
+<h4 id="4-4-rootScope-new"><a href="#4-4-rootScope-new" class="headerlink" title="4.4 $rootScope.$new()"></a>4.4 $rootScope.$new()</h4><p>如果在 servcie 中有使用到 <code>$rootScope.$new()</code>,一定要记得在不需要时，销毁创建的子作用域。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> childScope = $rootScope.$<span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// do some thing</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">childScope.$destroy();</span></pre></td></tr></table></figure>
+
+<h4 id="4-5-定时器"><a href="#4-5-定时器" class="headerlink" title="4.5 定时器"></a>4.5 定时器</h4><p>定时器在使用完时需要取消，尤其是 <code>$interval</code> 定时器，如果没取消会在后台一直运行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer_1 = $timeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer_2 = $interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;,<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  $timeout.cancel(timer_1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  $interval.cancel(timer_2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.dwmkerr.com/fixing-memory-leaks-in-angularjs-applications/#identifyingmemoryleaks" target="_blank" rel="noopener">Fixing Memory Leaks in AngularJS and other JavaScript Applications</a></li>
+<li><a href="http://zccst.iteye.com/blog/2172803" target="_blank" rel="noopener">Document、Node、Element、HTMLDocument 、HTMLCollection、HTMLElement、NodeList</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2017-02-13 </div>
 			<div class="article-title"><a href="/2017/02/13/2017-02-13-搭建-nodejs-https-服务器/" >搭建 Node.js Https 服务器</a></div>						
 		</h3>
@@ -1717,268 +2120,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-12-13 </div>
-			<div class="article-title"><a href="/2016/12/13/2016-12-13-object/" >Object 对象</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>JavaScript原生提供一个<code>Object</code>对象（注意起首的<code>O</code>是大写），所有其他对象都继承自这个对象。<code>Object</code>本身也是一个构造函数，可以直接通过它来生成新对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr></table></figure>
-
-<p><code>Object</code>作为构造函数使用时，可以接受一个参数。如果该参数是一个对象，则直接返回这个对象；如果是一个原始类型的值，则返回该值对应的包装对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>(o1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">o1 === o2 <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Object</span>(<span class="number">123</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意，通过<code>new Object()</code>的写法生成新对象，与字面量的写法<code>o = {}</code>是等价的。</p>
-</blockquote>
-<p>与其他构造函数一样，如果要在<code>Object</code>对象上面部署一个方法，有两种做法。</p>
-<p><strong>（1）部署在<code>Object</code>对象本身</strong></p>
-<p>比如，在<code>Object</code>对象上面定义一个<code>print</code>方法，显示其他对象的内容。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.print = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>)</span>&#123; <span class="built_in">console</span>.log(o) &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.print(o)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object</span></span></pre></td></tr></table></figure>
-
-<p><strong>（2）部署在<code>Object.prototype</code>对象</strong></p>
-<p>所有构造函数都有一个prototype属性，指向一个原型对象。凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享。（关于prototype属性的详细解释，参见《面向对象编程》一章。）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">o.print() <span class="comment">// Object</span></span></pre></td></tr></table></figure>
-
-<p>上面代码在Object.prototype定义了一个print方法，然后生成一个Object的实例o。o直接继承了Object.prototype的属性和方法，可以在自身调用它们，也就是说，o对象的print方法实质上是调用Object.prototype.print方法。。</p>
-<p>可以看到，尽管上面两种写法的<code>print</code>方法功能相同，但是用法是不一样的，因此必须区分“构造函数的方法”和“实例对象的方法”。</p>
-<h2 id="Object"><a href="#Object" class="headerlink" title="Object()"></a>Object()</h2><p><code>Object</code>本身当作工具方法使用时，可以将任意值转为对象。这个方法常用于保证某个值一定是对象。</p>
-<p>如果参数是原始类型的值，<code>Object</code>方法返回对应的包装对象的实例（参见《原始类型的包装对象》一节）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>() <span class="comment">// 返回一个空对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>() <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">undefined</span>) <span class="comment">// 返回一个空对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">undefined</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">null</span>) <span class="comment">// 返回一个空对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">null</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="number">1</span>) <span class="comment">// 等同于 new Number(1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="number">1</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="number">1</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="string">'foo'</span>) <span class="comment">// 等同于 new String('foo')</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="string">'foo'</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="string">'foo'</span>) <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">true</span>) <span class="comment">// 等同于 new Boolean(true)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">true</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(<span class="literal">true</span>) <span class="keyword">instanceof</span> <span class="built_in">Boolean</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<p>上面代码表示<code>Object</code>函数可以将各种值转为对应的构造函数生成的对象。</p>
-<p>如果<code>Object</code>方法的参数是一个对象，它总是返回原对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(arr) <span class="comment">// 返回原数组</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(arr) === arr <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(obj) <span class="comment">// 返回原对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(obj) === obj <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(fn) <span class="comment">// 返回原函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>(fn) === fn <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<p>利用这一点，可以写一个判断变量是否为对象的函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">value</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> value === <span class="built_in">Object</span>(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">isObject([]) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">isObject(<span class="literal">true</span>) <span class="comment">// false</span></span></pre></td></tr></table></figure>
-
-<h2 id="Object-对象的静态方法"><a href="#Object-对象的静态方法" class="headerlink" title="Object 对象的静态方法"></a>Object 对象的静态方法</h2><p>所谓“静态方法”，是指部署在<code>Object</code>对象自身的方法。</p>
-<h3 id="Object-keys-，Object-getOwnPropertyNames"><a href="#Object-keys-，Object-getOwnPropertyNames" class="headerlink" title="Object.keys()，Object.getOwnPropertyNames()"></a>Object.keys()，Object.getOwnPropertyNames()</h3><p><code>Object.keys</code>方法和<code>Object.getOwnPropertyNames</code>方法很相似，一般用来遍历对象的属性。它们的参数都是一个对象，都返回一个数组，该数组的成员都是对象自身的（而不是继承的）所有属性名。它们的区别在于，<code>Object.keys</code>方法只返回可枚举的属性（关于可枚举性的详细解释见后文），<code>Object.getOwnPropertyNames</code>方法还返回不可枚举的属性名。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  p1: <span class="number">123</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  p2: <span class="number">456</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(o)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ["p1", "p2"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(o)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ["p1", "p2"]</span></span></pre></td></tr></table></figure>
-
-<p>上面的代码表示，对于一般的对象来说，这两个方法返回的结果是一样的。只有涉及不可枚举属性时，才会有不一样的结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="string">"Hello"</span>, <span class="string">"World"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(a)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ["0", "1"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(a)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ["0", "1", "length"]</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，数组的length属性是不可枚举的属性，所以只出现在Object.getOwnPropertyNames方法的返回结果中。</p>
-<p>由于JavaScript没有提供计算对象属性个数的方法，所以可以用这两个方法代替。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(o).length</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(o).length</span></pre></td></tr></table></figure>
-
-<p>一般情况下，几乎总是使用Object.keys方法，遍历数组的属性。</p>
-<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><p>除了上面提到的方法，Object还有不少其他方法，将在后文逐一详细介绍。</p>
-<p><strong>（1）对象属性模型的相关方法</strong></p>
-<ul>
-<li>Object.getOwnPropertyDescriptor()：获取某个属性的attributes对象。</li>
-<li>Object.defineProperty()：通过attributes对象，定义某个属性。</li>
-<li>Object.defineProperties()：通过attributes对象，定义多个属性。</li>
-<li>Object.getOwnPropertyNames()：返回直接定义在某个对象上面的全部属性的名称。</li>
-</ul>
-<p><strong>（2）控制对象状态的方法</strong></p>
-<ul>
-<li>Object.preventExtensions()：防止对象扩展。</li>
-<li>Object.isExtensible()：判断对象是否可扩展。</li>
-<li>Object.seal()：禁止对象配置。</li>
-<li>Object.isSealed()：判断一个对象是否可配置。</li>
-<li>Object.freeze()：冻结一个对象。</li>
-<li>Object.isFrozen()：判断一个对象是否被冻结。</li>
-</ul>
-<p><strong>（3）原型链相关方法</strong></p>
-<ul>
-<li>Object.create()：生成一个新对象，并该对象的原型。</li>
-<li>Object.getPrototypeOf()：获取对象的Prototype对象。</li>
-</ul>
-<h2 id="Object对象的实例方法"><a href="#Object对象的实例方法" class="headerlink" title="Object对象的实例方法"></a>Object对象的实例方法</h2><p>除了<code>Object</code>对象本身的方法，还有不少方法是部署在<code>Object.prototype</code>对象上的，所有<code>Object</code>的实例对象都继承了这些方法。</p>
-<p><code>Object</code>实例对象的方法，主要有以下六个。</p>
-<ul>
-<li><code>valueOf()</code>：返回当前对象对应的值。</li>
-<li><code>toString()</code>：返回当前对象对应的字符串形式。</li>
-<li><code>toLocaleString()</code>：返回当前对象对应的本地字符串形式。</li>
-<li><code>hasOwnProperty()</code>：判断某个属性是否为当前对象自身的属性，还是继承自原型对象的属性。</li>
-<li><code>isPrototypeOf()</code>：判断当前对象是否为另一个对象的原型。</li>
-<li><code>propertyIsEnumerable()</code>：判断某个属性是否可枚举。</li>
-</ul>
-<p>本节介绍前两个方法，其他方法将在后文相关章节介绍。</p>
-<h3 id="Object-prototype-valueOf"><a href="#Object-prototype-valueOf" class="headerlink" title="Object.prototype.valueOf()"></a>Object.prototype.valueOf()</h3><p><code>valueOf</code>方法的作用是返回一个对象的“值”，默认情况下返回对象本身。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">o.valueOf() === o <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<p>上面代码比较<code>o.valueOf()</code>与<code>o</code>本身，两者是一样的。</p>
-<p><code>valueOf</code>方法的主要用途是，JavaScript自动类型转换时会默认调用这个方法（详见《数据类型转换》一节）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + o <span class="comment">// "1[object Object]"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码将对象<code>o</code>与数字<code>1</code>相加，这时JavaScript就会默认调用<code>valueOf()</code>方法。所以，如果自定义<code>valueOf</code>方法，就可以得到想要的结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">o.valueOf = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + o <span class="comment">// 3</span></span></pre></td></tr></table></figure>
-
-<p>上面代码自定义了<code>o</code>对象的<code>valueOf</code>方法，于是<code>1 + o</code>就得到了<code>3</code>。这种方法就相当于用<code>o.valueOf</code>覆盖<code>Object.prototype.valueOf</code>。</p>
-<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString()"></a>Object.prototype.toString()</h3><p><code>toString</code>方法的作用是返回一个对象的字符串形式，默认情况下返回类型字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">o1.toString() <span class="comment">// "[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o2 = &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">o2.toString() <span class="comment">// "[object Object]"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码表示，对于一个对象调用<code>toString</code>方法，会返回字符串<code>[object Object]</code>，该字符串说明对象的类型。</p>
-<p>字符串<code>[object Object]</code>本身没有太大的用处，但是通过自定义<code>toString</code>方法，可以让对象在自动类型转换时，得到想要的字符串形式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">o.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="string">'hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">o + <span class="string">' '</span> + <span class="string">'world'</span> <span class="comment">// "hello world"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码表示，当对象用于字符串加法时，会自动调用<code>toString</code>方法。由于自定义了<code>toString</code>方法，所以返回字符串<code>hello world</code>。</p>
-<p>数组、字符串、函数、Date对象都分别部署了自己版本的<code>toString</code>方法，覆盖了<code>Object.prototype.toString</code>方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].toString() <span class="comment">// "1,2,3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">'123'</span>.toString() <span class="comment">// "123"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">123</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;).toString()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "function () &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   return 123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#125;"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toString()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Tue May 10 2016 09:11:31 GMT+0800 (CST)"</span></span></pre></td></tr></table></figure>
-
-<h3 id="toString-的应用：判断数据类型"><a href="#toString-的应用：判断数据类型" class="headerlink" title="toString()的应用：判断数据类型"></a>toString()的应用：判断数据类型</h3><p><code>Object.prototype.toString</code>方法返回对象的类型字符串，因此可以用来判断一个值的类型。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">o.toString() <span class="comment">// "[object Object]"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码调用空对象的<code>toString</code>方法，结果返回一个字符串<code>object Object</code>，其中第二个<code>Object</code>表示该值的构造函数。这是一个十分有用的判断数据类型的方法。</p>
-<p>实例对象可能会自定义<code>toString</code>方法，覆盖掉<code>Object.prototype.toString</code>方法。通过函数的<code>call</code>方法，可以在任意值上调用<code>Object.prototype.toString</code>方法，帮助我们判断这个值的类型。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(value)</span></pre></td></tr></table></figure>
-
-<p>不同数据类型的<code>Object.prototype.toString</code>方法返回值如下。</p>
-<ul>
-<li>数值：返回<code>[object Number]</code>。</li>
-<li>字符串：返回<code>[object String]</code>。</li>
-<li>布尔值：返回<code>[object Boolean]</code>。</li>
-<li>undefined：返回<code>[object Undefined]</code>。</li>
-<li>null：返回<code>[object Null]</code>。</li>
-<li>数组：返回<code>[object Array]</code>。</li>
-<li>arguments对象：返回<code>[object Arguments]</code>。</li>
-<li>函数：返回<code>[object Function]</code>。</li>
-<li>Error对象：返回<code>[object Error]</code>。</li>
-<li>Date对象：返回<code>[object Date]</code>。</li>
-<li>RegExp对象：返回<code>[object RegExp]</code>。</li>
-<li>其他对象：返回<code>[object &quot; + 构造函数的名称 + &quot;]</code>。</li>
-</ul>
-<p>也就是说，<code>Object.prototype.toString</code>可以得到一个实例对象的构造函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">2</span>) <span class="comment">// "[object Number]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="string">''</span>) <span class="comment">// "[object String]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>) <span class="comment">// "[object Boolean]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>) <span class="comment">// "[object Undefined]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>) <span class="comment">// "[object Null]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Math</span>) <span class="comment">// "[object Math]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) <span class="comment">// "[object Object]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]) <span class="comment">// "[object Array]"</span></span></pre></td></tr></table></figure>
-
-<p>利用这个特性，可以写出一个比<code>typeof</code>运算符更准确的类型判断函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> type = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> s = <span class="built_in">Object</span>.prototype.toString.call(o);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> s.match(<span class="regexp">/\[object (.*?)\]/</span>)[<span class="number">1</span>].toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">type(&#123;&#125;); <span class="comment">// "object"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">type([]); <span class="comment">// "array"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">type(<span class="number">5</span>); <span class="comment">// "number"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">type(<span class="literal">null</span>); <span class="comment">// "null"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">type(); <span class="comment">// "undefined"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">type(<span class="regexp">/abcd/</span>); <span class="comment">// "regex"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">type(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// "date"</span></span></pre></td></tr></table></figure>
-
-<p>在上面这个<code>type</code>函数的基础上，还可以加上专门判断某种类型数据的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'Null'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Undefined'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Object'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Array'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'String'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Number'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Boolean'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Function'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'RegExp'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'NaN'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> <span class="string">'Infinite'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">t</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  type[<span class="string">'is'</span> + t] = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> type(o) === t.toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">type.isObject(&#123;&#125;) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">type.isNumber(<span class="literal">NaN</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">type.isRegExp(<span class="regexp">/abc/</span>) <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Axel Rauschmayer, <a href="http://www.2ality.com/2013/08/protecting-objects.html" target="_blank" rel="noopener">Protecting objects in JavaScript</a></li>
-<li>kangax, <a href="http://perfectionkills.com/understanding-delete/" target="_blank" rel="noopener">Understanding delete</a></li>
-<li>Jon Bretman, <a href="http://techblog.badoo.com/blog/2013/11/01/type-checking-in-javascript/" target="_blank" rel="noopener">Type Checking in JavaScript</a></li>
-<li>Cody Lindley, <a href="http://tech.pro/tutorial/1671/thinking-about-ecmascript-5-parts" target="_blank" rel="noopener">Thinking About ECMAScript 5 Parts</a></li>
-<li>Bjorn Tipling, <a href="http://bjorn.tipling.com/advanced-objects-in-javascript" target="_blank" rel="noopener">Advanced objects in JavaScript</a></li>
-<li>Javier Márquez, <a href="http://arqex.com/967/javascript-properties-enumerable-writable-configurable" target="_blank" rel="noopener">Javascript properties are enumerable, writable and configurable</a></li>
-<li>Sella Rafaeli, <a href="http://www.sellarafaeli.com/blog/native_javascript_data_binding" target="_blank" rel="noopener">Native JavaScript Data-Binding</a>: 使用存取函数实现model与view的双向绑定</li>
-<li>Lea Verou, <a href="http://lea.verou.me/2015/08/copying-properties-the-robust-way/" target="_blank" rel="noopener">Copying object properties, the robust way</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-12-13 </div>
-			<div class="article-title"><a href="/2016/12/13/2016-12-13-number/" >Number 对象</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。</p>
-<p>作为构造函数时，它用于生成值为数值的对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> n <span class="comment">// "object"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>Number</code>对象作为构造函数使用，返回一个值为1的对象。</p>
-<p>作为工具函数时，它可以将任何类型的值转为数值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span></pre></td></tr></table></figure>
-
-<p>上面代码将布尔值<code>true</code>转为数值1。Number对象的工具方法，详细介绍参见上一章的《数据类型转换》一节。</p>
-<h2 id="Number对象的属性"><a href="#Number对象的属性" class="headerlink" title="Number对象的属性"></a>Number对象的属性</h2><p>Number对象拥有以下一些属性。</p>
-<ul>
-<li><code>Number.POSITIVE_INFINITY</code>：正的无限，指向<code>Infinity</code>。</li>
-<li><code>Number.NEGATIVE_INFINITY</code>：负的无限，指向<code>-Infinity</code>。</li>
-<li><code>Number.NaN</code>：表示非数值，指向<code>NaN</code>。</li>
-<li><code>Number.MAX_VALUE</code>：表示最大的正数，相应的，最小的负数为<code>-Number.MAX_VALUE</code>。</li>
-<li><code>Number.MIN_VALUE</code>：表示最小的正数（即最接近0的正数，在64位浮点数体系中为<code>5e-324</code>），相应的，最接近0的负数为<code>-Number.MIN_VALUE</code>。</li>
-<li><code>Number.MAX_SAFE_INTEGER</code>：表示能够精确表示的最大整数，即<code>9007199254740991</code>。</li>
-<li><code>Number.MIN_SAFE_INTEGER</code>：表示能够精确表示的最小整数，即<code>-9007199254740991</code>。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.POSITIVE_INFINITY <span class="comment">// Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.NEGATIVE_INFINITY <span class="comment">// -Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.NaN <span class="comment">// NaN</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_VALUE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.7976931348623157e+308</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_VALUE &lt; <span class="literal">Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_VALUE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5e-324</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_VALUE &gt; <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_SAFE_INTEGER <span class="comment">// 9007199254740991</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MIN_SAFE_INTEGER <span class="comment">// -9007199254740991</span></span></pre></td></tr></table></figure>
-
-<h2 id="Number对象实例的方法"><a href="#Number对象实例的方法" class="headerlink" title="Number对象实例的方法"></a>Number对象实例的方法</h2><p><code>Number</code>对象有4个实例方法，都跟将数值转换成指定格式有关。</p>
-<h3 id="Number-prototype-toString"><a href="#Number-prototype-toString" class="headerlink" title="Number.prototype.toString()"></a>Number.prototype.toString()</h3><p><code>Number</code>对象部署了自己的<code>toString</code>方法，用来将一个数值转为字符串形式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString() <span class="comment">// "10"</span></span></pre></td></tr></table></figure>
-
-<p><code>toString</code>方法可以接受一个参数，表示输出的进制。如何省略这个参数，默认将数值先转为十进制，再输出字符串；否则，就根据参数指定的进制，将一个数字转化成某个进制的字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">8</span>) <span class="comment">// "12"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toString(<span class="number">16</span>) <span class="comment">// "a"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，之所以要把10放在括号里，是为了表明10是一个单独的数值，后面的点表示调用对象属性。如果不加括号，这个点会被JavaScript引擎解释成小数点，从而报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.</span>toString(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// SyntaxError: Unexpected token ILLEGAL</span></span></pre></td></tr></table></figure>
-
-<p>只要能够让JavaScript引擎不混淆小数点和对象的点运算符，各种写法都能用。除了为<code>10</code>加上括号，还可以在<code>10</code>后面加两个点，JavaScript会把第一个点理解成小数点（即<code>10.0</code>），把第二个点理解成调用对象属性，从而得到正确结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.</span>.toString(<span class="number">2</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其他方法还包括</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> .toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.0</span>.toString(<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr></table></figure>
-
-<p>这实际上意味着，可以直接对一个小数使用<code>toString</code>方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString() <span class="comment">// "10.5"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">2</span>) <span class="comment">// "1010.1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">8</span>) <span class="comment">// "12.4"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.5</span>.toString(<span class="number">16</span>) <span class="comment">// "a.8"</span></span></pre></td></tr></table></figure>
-
-<p>通过方括号运算符也可以调用<code>toString</code>方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span>[<span class="string">'toString'</span>](<span class="number">2</span>) <span class="comment">// "1010"</span></span></pre></td></tr></table></figure>
-
-<p>将其他进制的数，转回十进制，需要使用<code>parseInt</code>方法。</p>
-<h3 id="Number-prototype-toFixed"><a href="#Number-prototype-toFixed" class="headerlink" title="Number.prototype.toFixed()"></a>Number.prototype.toFixed()</h3><p><code>toFixed</code>方法用于将一个数转为指定位数的小数，返回这个小数对应的字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toFixed(<span class="number">2</span>) <span class="comment">// "10.00"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">10.005</span>.toFixed(<span class="number">2</span>) <span class="comment">// "10.01"</span></span></pre></td></tr></table></figure>
-
-<p>上面代码分别将<code>10</code>和<code>10.005</code>转成2位小数的格式。其中，<code>10</code>必须放在括号里，否则后面的点运算符会被处理小数点，而不是表示调用对象的方法；而<code>10.005</code>就不用放在括号里，因为第一个点被解释为小数点，第二个点就只能解释为点运算符。</p>
-<p><code>toFixed</code>方法的参数为指定的小数位数，有效范围为0到20，超出这个范围将抛出RangeError错误。</p>
-<h3 id="Number-prototype-toExponential"><a href="#Number-prototype-toExponential" class="headerlink" title="Number.prototype.toExponential()"></a>Number.prototype.toExponential()</h3><p><code>toExponential</code>方法用于将一个数转为科学计数法形式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential()  <span class="comment">// "1e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential(<span class="number">1</span>) <span class="comment">// "1.0e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">10</span>).toExponential(<span class="number">2</span>) <span class="comment">// "1.00e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential()  <span class="comment">// "1.234e+3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential(<span class="number">1</span>) <span class="comment">// "1.2e+3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1234</span>).toExponential(<span class="number">2</span>) <span class="comment">// "1.23e+3"</span></span></pre></td></tr></table></figure>
-
-<p><code>toExponential</code>方法的参数表示小数点后有效数字的位数，范围为0到20，超出这个范围，会抛出一个RangeError。</p>
-<h3 id="Number-prototype-toPrecision"><a href="#Number-prototype-toPrecision" class="headerlink" title="Number.prototype.toPrecision()"></a>Number.prototype.toPrecision()</h3><p><code>toPrecision</code>方法用于将一个数转为指定位数的有效数字。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">1</span>) <span class="comment">// "1e+1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">2</span>) <span class="comment">// "12"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">4</span>) <span class="comment">// "12.34"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.34</span>).toPrecision(<span class="number">5</span>) <span class="comment">// "12.340"</span></span></pre></td></tr></table></figure>
-
-<p><code>toPrecision</code>方法的参数为有效数字的位数，范围是1到21，超出这个范围会抛出RangeError错误。</p>
-<p><code>toPrecision</code>方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.35</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.25</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.15</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.2"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="number">12.45</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.4"</span></span></pre></td></tr></table></figure>
-
-<h2 id="自定义方法"><a href="#自定义方法" class="headerlink" title="自定义方法"></a>自定义方法</h2><p>与其他对象一样，<code>Number.prototype</code>对象上面可以自定义方法，被<code>Number</code>的实例继承。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<p>上面代码为<code>Number</code>对象实例定义了一个<code>add</code>方法。</p>
-<p>在数值上调用某个方法，数值会自动转为<code>Number</code>的实例对象，所以就得到了下面的结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">8</span>[<span class="string">'add'</span>](<span class="number">2</span>) <span class="comment">// 10</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，调用方法之所以写成<code>8[&#39;add&#39;]</code>，而不是<code>8.add</code>，是因为数值后面的点，会被解释为小数点，而不是点运算符。将数值放在圆括号中，就可以使用点运算符调用方法了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).add(<span class="number">2</span>) <span class="comment">// 10</span></span></pre></td></tr></table></figure>
-
-<p>由于add方法返回的还是数值，所以可以链式运算。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.subtract = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span> - x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).add(<span class="number">2</span>).subtract(<span class="number">4</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 6</span></span></pre></td></tr></table></figure>
-
-<p>上面代码在<code>Number</code>对象的实例上部署了<code>subtract</code>方法，它可以与<code>add</code>方法链式调用。</p>
-<p>我们还可以部署更复杂的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.prototype.iterate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> result = [];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="keyword">this</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    result.push(i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> result;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).iterate()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8]</span></span></pre></td></tr></table></figure>
-
-<p>上面代码在<code>Number</code>对象的原型上部署了<code>iterate</code>方法，可以将一个数值自动遍历为一个数组。</p>
-<p>需要注意的是，数值的自定义方法，只能定义在它的原型对象<code>Number.prototype</code>上面，数值本身是无法自定义属性的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">n.x = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">n.x <span class="comment">// undefined</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>n</code>是一个原始类型的数值。直接在它上面新增一个属性x，不会报错，但毫无作用，总是返回undefined。这是因为一旦被调用属性，n就自动转为Number的实例对象，调用结束后，该对象自动销毁。所以，下一次调用n的属性时，实际取到的是另一个对象，属性x当然就读不出来。</p>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -2049,7 +2190,7 @@
 		
 			<li><a href="/categories/Css3/">Css3<span>4</span></a></li>
 		
-			<li><a href="/categories/Database/">Database<span>4</span></a></li>
+			<li><a href="/categories/Database/">Database<span>6</span></a></li>
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
@@ -2100,48 +2241,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
 			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
 			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
 			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
 			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/sqlite/">sqlite<span>2</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>25</span></a></li>
+		   <li><a href="/tags">...<span>26</span></a></li>
 		 
 		</ul>
 	</div>
@@ -2154,6 +2295,14 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/11/25/2020-11-21-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
+      </li>
+    
+      <li>
         <a href="/2020/11/12/2020-11-10-django.starting/" ><i class="fa fa-file-o"></i>Django Starting</a>
       </li>
     
@@ -2163,14 +2312,6 @@
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
-      </li>
-    
-      <li>
-        <a href="/2020/09/10/2020-09-10-synology/" ><i class="fa fa-file-o"></i>Synology</a>
-      </li>
-    
-      <li>
-        <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
       </li>
     
   </ul>

@@ -128,6 +128,268 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2017-06-11 </div>
+			<div class="article-title"><a href="/2017/06/11/2017-06-11-Css-学习札记/" >Css 学习札记</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>主要是记录学习极客学员的 CSS3 视频教程笔记，知识点比较零散，主要是为了做个备忘</p>
+</blockquote>
+<h3 id="一、选择器"><a href="#一、选择器" class="headerlink" title="一、选择器"></a>一、选择器</h3><ul>
+<li><code>*{}</code> 通配符选中所有 <strong>元素</strong></li>
+<li>h1,h2…{} 元素选择器</li>
+<li>.className{} 类选择器</li>
+<li>#idName{} id 选择器，只能有一个，不能结合使用</li>
+<li>后代选择器 空格</li>
+<li>第一子代选择器 &gt;</li>
+<li>相邻兄弟选择器</li>
+</ul>
+<ul>
+<li>h1+p{} // 如果需要选择紧接在另一个元素后的元素，而且二者有相同的父元素，可以使用相邻兄弟选择器<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">例1：如果要增加紧接在 <span class="selector-tag">h1</span> 元素后出现的段落的上边距，可以这样写：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> + <span class="selector-tag">p</span> &#123;<span class="attribute">margin-top</span>:<span class="number">50px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">这个选择器读作：“选择紧接在 <span class="selector-tag">h1</span> 元素后出现的段落，<span class="selector-tag">h1</span> 和 <span class="selector-tag">p</span> 元素拥有共同的父元素”</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">例2：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  &lt;<span class="selector-tag">ul</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 1&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 2&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 3&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  &lt;/ul&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &lt;<span class="selector-tag">ol</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 1&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 2&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &lt;li&gt;List item 3&lt;/li&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  &lt;/ol&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&lt;/div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">在上面的片段中，<span class="selector-tag">div</span> 元素中包含两个列表：一个无序列表，一个有序列表，每个列表都包含三个列表项。这两个列表是相邻兄弟，列表项本身也是相邻兄弟。不过，第一个列表中的列表项与第二个列表中的列表项不是相邻兄弟，因为这两组列表项不属于同一父元素（最多只能算堂兄弟）。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">请记住，用一个结合符只能选择两个相邻兄弟中的第二个元素。请看下面的选择器：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> + <span class="selector-tag">li</span> &#123;<span class="attribute">font-weight</span>:bold;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">上面这个选择器只会把列表中的第二个和第三个列表项变为粗体。第一个列表项不受影响。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">// ref: http://www.w3school.com.cn/css/css_selector_adjacent_sibling.asp</span></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>多类元素选择器<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">.p1&#123;color:blue&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">.p2&#123;font-size:30px&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">.p1.p2&#123;font-style:italic&#125; // 这个就是多类选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">class</span>=<span class="string">"p1"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">class</span>=<span class="string">"p2"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">class</span>=<span class="string">"p1 p2"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span> // 会具有，blue、30px、italic 这三个样式</span></pre></td></tr></table></figure></li>
+<li>属性选择器</li>
+</ul>
+<ul>
+<li>[title]{} // 选择元素具有 title 属性的元素 </li>
+<li>[href=”<a href="http://jessechiu.com&quot;]{}" target="_blank" rel="noopener">http://jessechiu.com&quot;]{}</a> // 只匹配属性 href 值为 “Jessechiu.com” 的元素</li>
+<li>[value~=”jesse”]{} // 匹配只要属性有 value 且值中有包含 “jesse”，类似 [value*=”jesse”]<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">value</span>=<span class="string">"jesse"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span> // 匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">value</span>=<span class="string">"hello jesse"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span>// 匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pp</span> <span class="attr">value</span>=<span class="string">"hello je"</span>&gt;</span>hello jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span>// 不匹配</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">``` </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">#### CSS3 选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">- 属性选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"> * [id*=jesse]&#123;&#125; // 包含 jesse </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> * [id^=jesse]&#123;&#125; // 以 jesse 开头</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"> * [id$=jesse]&#123;&#125; // 以 jesse 为结束字符</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> 注意：这里是用 id ，因为它也是元素的属性，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">- 结构性伪类选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">* p:first-line&#123;&#125; // 选择第一行元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">* p:first-letter&#123;&#125; // 选择首字母</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">* li:before/after&#123; // 元素前面/后面添加内容</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">		content:"--";</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">		font-size:30px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	&#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">- 结构元素选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">* :root&#123;background-color:darker;&#125; // 选择文档中的 root 元素，也就是 html 部分</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">* div *:not(h1)&#123;&#125; // not 排除选择，该列是选择 div 中所有 **子类** 元素，但是不包含 h1 元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">* :empty&#123;&#125; // 用来选择没有内容的元素，通常可以来设置 table 中无值得单元格</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">* target&#123;&#125; // 用来设置用户所选择的元素样式，例如 a 元素在页内跳转</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">- li:first-child&#123;&#125; // 选择第一个元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">- li:last-child&#123;&#125; // 选择最后一个元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">- li:nth-child(3)&#123;&#125; // 根据当前元素选择下一个元素，可以传人参数：数字，odd:奇数，even:偶数，可以是 an+b 的方式来循环设置样式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">- li:nth-last-child(3)&#123;&#125; // 上面的相反，是从尾部开始数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">注意，如果要以组的方式计算同类元素，应该使用下面的选择器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">- h1:nth-of-type(odd)&#123;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">```css</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> // 设置 nth-of-type</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span>	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span>	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> // 设置 nth-of-type</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span>	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>li:only-child{} // 选择只有一个 li 子元素的 li 元素</p>
+</li>
+<li><p>伪类元素选择器(css3 中总共有 17 个)</p>
+</li>
+</ul>
+<ul>
+<li>input[name=”jesse”]:hover/focus/active/checked/invalid/valid{} // </li>
+<li>input[name=”jesse”]:enabled/disabled/required/selection/optional{} // </li>
+<li>input[name=”jesse”]:read-only/default/indeterminate/in-range{} // </li>
+</ul>
+<ul>
+<li>通用兄弟选择器<br>div ~ p{} // 同一父元素之中，某个元素之后，所有其它其它元素，例如<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span> // 相同的父级元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span> // 这个 div 就是指某个元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>kuku<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span> // 选中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span> // 选中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>jesse<span class="tag">&lt;/<span class="name">p</span>&gt;</span> // 选中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="二、文本样式"><a href="#二、文本样式" class="headerlink" title="二、文本样式"></a>二、文本样式</h3><ul>
+<li>text-align: center/left/right;</li>
+<li>text-wrap: normal;// 正常是换行，当时必须和 width 一起设置使用</li>
+<li>text-shadow: 1px 1px 1px blue;// 阴影距离 左、顶、清晰度、颜色，可以同时设置多个阴影</li>
+</ul>
+<h3 id="三、字体样式"><a href="#三、字体样式" class="headerlink" title="三、字体样式"></a>三、字体样式</h3><ul>
+<li>font-size: xxpx;</li>
+<li>font-family: ‘微软’ ‘宋体’;</li>
+<li>设置自定义字体<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">// 定义</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	font-family: myFont</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	src:local(),url(); // 如果本地有先使用本地字体，如果没有则使用 url 地址字体</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">// 在样式中使用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	font-family:myFont;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	// 如果在使用不同字体时，需要保持字体大小一致，可以通过下面两个属性调整</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	font-size:xpx;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	font-size-adjust:0.xxpx;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="四、a-标签样式"><a href="#四、a-标签样式" class="headerlink" title="四、a 标签样式"></a>四、a 标签样式</h3><ul>
+<li>a:link 普通的，未被访问的链接</li>
+<li>a:visisted</li>
+<li>a:hover</li>
+<li>a:active 链接被点击时</li>
+<li>text-decoration:none 用于去掉 a 标签下划线</li>
+</ul>
+<h3 id="五、list-样式"><a href="#五、list-样式" class="headerlink" title="五、list 样式"></a>五、list 样式</h3><ul>
+<li>list-style-type: none; // 可以设置列表前面的点样式，none 为无。</li>
+<li>list-style-image:url();// 可以设置列表项图标</li>
+</ul>
+<h3 id="六、表格样式"><a href="#六、表格样式" class="headerlink" title="六、表格样式"></a>六、表格样式</h3><ul>
+<li>设置表格边框为折叠边框，这样边框只显示一条线<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">table,th,td&#123;// 这里可以不用设置 tr</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	border:1px solid blue; // 表格和表头，表内容设置边框</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">table&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	border-collapse: collapse;// 折叠边框为一条线</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="七、CSS-轮廓-主要用来突出元素作用"><a href="#七、CSS-轮廓-主要用来突出元素作用" class="headerlink" title="七、CSS 轮廓 // 主要用来突出元素作用"></a>七、CSS 轮廓 // 主要用来突出元素作用</h3><ul>
+<li>outline-style:dotted;</li>
+<li>outline-color:blue;</li>
+<li>outline-width:2px; // 设置轮廓粗细</li>
+</ul>
+<h3 id="八、CSS-定位"><a href="#八、CSS-定位" class="headerlink" title="八、CSS 定位"></a>八、CSS 定位</h3><ul>
+<li>position: static/relative/absolute/fixed</li>
+<li>float: left/right/none/inherite</li>
+<li>clear: left/right/both; // 去掉浮动，受影响的元素</li>
+</ul>
+<h3 id="九、盒子模型"><a href="#九、盒子模型" class="headerlink" title="九、盒子模型"></a>九、盒子模型</h3><ul>
+<li>宽、高：是指 <strong>内容</strong> 的宽、高</li>
+<li>内边距</li>
+</ul>
+<ul>
+<li>border-style: none/silid/…; 有十种边框样式</li>
+<li>border-radius: 1px;</li>
+<li>border-shadow:1px 1px 1px blue; // 类似 text-shadow</li>
+<li>border-image: url();</li>
+</ul>
+<ul>
+<li>外边距</li>
+</ul>
+<ul>
+<li>默认为透明区域</li>
+<li>通过 margin 属性设置</li>
+<li>两个外边距合并，取大的值</li>
+</ul>
+<h3 id="十、对齐操作"><a href="#十、对齐操作" class="headerlink" title="十、对齐操作"></a>十、对齐操作</h3><ul>
+<li>margin: 0px auto; // 水平居中，前提条件需要设置 width</li>
+<li>position</li>
+<li>float</li>
+</ul>
+<h3 id="十一、常用操作"><a href="#十一、常用操作" class="headerlink" title="十一、常用操作"></a>十一、常用操作</h3><ul>
+<li>line-height: normal/200%/50%; 设置行高</li>
+<li>max-width/height: 1px; // 设置最大值，在换行是会自动拆分单词 </li>
+<li>cursor: point; // 设置鼠标样式</li>
+<li>display: inline/block; // 设置显示方式，可以把 li 设置显示为水平方式，用于导航栏</li>
+<li>visibility: visible/hidden; // 设置是否可见</li>
+<li>opacity: 0-1; // 设置图片透明度，0：完全透明，1：不透明</li>
+</ul>
+<h3 id="十二、CSS-动画"><a href="#十二、CSS-动画" class="headerlink" title="十二、CSS 动画"></a>十二、CSS 动画</h3><ul>
+<li><p>transform: translate(100px,100px); // 表示向 X 坐标、向 Y 坐标，移动</p>
+</li>
+<li><p>transform: rotate(45deg); // 旋转角度</p>
+</li>
+<li><p>transform: scale(1,2);  // 放大，第一个是 宽度，第二是高度 倍数</p>
+</li>
+<li><p>transform: skew(45deg,30deg); // 倾斜角度，向 x 轴，向 y 轴</p>
+</li>
+<li><p>transform: rotateX/Y(45deg); // 3D 旋转效果</p>
+</li>
+<li><p>过渡</p>
+</li>
+</ul>
+<ul>
+<li>transition: 5s;// 过渡时间<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">background-color</span>:blue;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	-webkit-transition:5s; // 这里设置过渡时间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="selector-tag">transition</span>: 5<span class="selector-tag">s</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	-weibkit-transition-delay:2s; // 这里可以设置延时 2s 开始,这会导致每次触发都有延时，包含过程状态</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="selector-tag">transition-delay</span><span class="selector-pseudo">:2s</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">div:hover&#123;// 这里设置触发条件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="selector-tag">width</span>: 200<span class="selector-tag">px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="selector-tag">height</span>: 200<span class="selector-tag">px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	-webkit-transform: rotate(300deg);// 添加过渡效果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="selector-tag">transform</span>: <span class="selector-tag">rotate</span>(300<span class="selector-tag">deg</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>动画</li>
+</ul>
+<ul>
+<li>animation: anim 5s infinite alternate; // anim 是动画名称，对应下面的 @keyframes 动画帧名，infinite 是无限循环，alternate 可以让动画往返动作</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div1</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">background-color</span>: green;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">-webkit-animation</span>: anim <span class="number">3s</span> infinite alternate;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="attribute">animation</span>: anim <span class="number">3s</span> infinite alternate;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	position: relative; // 这句是为了可以移动，如果不设置，动不了</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> anim&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	// 也可以使用 from、to 来设置过程变化</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	0%&#123;<span class="attribute">background</span>: green;<span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	50%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	100%&#123;<span class="attribute">background</span>: black;<span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">400px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">@-<span class="keyword">webkiy</span>-<span class="keyword">keyframes</span> anim&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	0%&#123;<span class="attribute">background</span>: green;<span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	50%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	100%&#123;<span class="attribute">background</span>: black;<span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">400px</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">// ref：http://www.w3school.com.cn/css3/css3_animation.asp</span></pre></td></tr></table></figure>
+
+<ul>
+<li>多</li>
+</ul>
+<ul>
+<li>columns: 200px 3; // 列宽度、列数</li>
+<li>column-gap: 10px; // 列间距</li>
+<li>column-rule：2px outset red; // 规定列之间的宽度、样式和颜色<br>// ref：<a href="http://www.w3school.com.cn/cssref/pr_columns.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/cssref/pr_columns.asp</a></li>
+</ul>
+<h3 id="十三、CSS3-盒子模型"><a href="#十三、CSS3-盒子模型" class="headerlink" title="十三、CSS3 盒子模型"></a>十三、CSS3 盒子模型</h3><ul>
+<li><p>display:inline/inline-block/block</p>
+</li>
+<li><p>display:inline-table // 可以设置 table 以 inline 方式显示</p>
+</li>
+<li><p>display:list-item// 可以设置元素按照 li 方式显示，这样就有 li 相对应的样式属性设置</p>
+</li>
+<li><p>overflow:hidden/scroll/auto // auto 会自动根据文字内容，在水平和垂直方向添加滚动条</p>
+</li>
+<li><p>overfolow-x/y:hidden/scroll/auto // 也可以单独在 x或者y 轴上设置</p>
+</li>
+<li><p>box-shadow: 1px 1px 1px red;// 设置盒子阴影，使用方法和 text-shadow 相同。</p>
+</li>
+<li><p>指定盒子大小计算方法</p>
+</li>
+</ul>
+<ul>
+<li>box-sizing: border-box;// border 和 padding 包含在盒子大小中</li>
+<li>box-sizing: content-box;// border 和 padding 不包含在盒子大小中，显示会大</li>
+</ul>
+<h3 id="十四、CSS3-背景相关属性"><a href="#十四、CSS3-背景相关属性" class="headerlink" title="十四、CSS3 背景相关属性"></a>十四、CSS3 背景相关属性</h3><ul>
+<li><p>background-clip: border-box;// 背景色充满 border 和 padding</p>
+</li>
+<li><p>background-clip: padding-box;// 背景色充满 padding</p>
+</li>
+<li><p>background-clip: content-box;// 背景色 只填充内容部分</p>
+</li>
+<li><p>background-origin:border/padding/content-box; // 代表背景从那个区域块开始绘制</p>
+</li>
+<li><p>同一元素绘制多张图片</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">div&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	background-image:url(),url();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	background-repeat:repeat-x,no-repeat;// 这里设置第一张图片 x 轴重复，第二张不重复</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	background-position: 100%,100%,center,center;// 100% 绘制，居中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">// 显示效果，第一张图片在上面</span></pre></td></tr></table></figure></li>
+<li><p>使用图片边框，背景图片会根据里面内容自动撑开</p>
+</li>
+<li><p>-webkit-border-image:url() 10 20 10 30;<br>// ref: <a href="http://www.w3school.com.cn/cssref/pr_border-image.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/cssref/pr_border-image.asp</a></p>
+</li>
+</ul>
+<h3 id="十五、Css-使用技巧"><a href="#十五、Css-使用技巧" class="headerlink" title="十五、Css 使用技巧"></a>十五、Css 使用技巧</h3><h4 id="背景图片自适应填充"><a href="#背景图片自适应填充" class="headerlink" title="背景图片自适应填充"></a>背景图片自适应填充</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'../../../static/img/bg_login.png'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">background-image</span>: no-repeat;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">-webkit-background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">position</span>: relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">height</span>:<span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h4><p>利用 <code>top: 50%</code>(让元素的上边界定位到父元素的50%位置)和<code>transform: translateY(-50%)</code>(让元素往上移动元素自身高度的50%).</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.vertical-center</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">position</span>: relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-50%);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="垂直水平居中"><a href="#垂直水平居中" class="headerlink" title="垂直水平居中"></a>垂直水平居中</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.center</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">position</span>:relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">top</span>:<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">left</span>:<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">right</span>:<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">bottom</span>:<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="attribute">width</span>:<span class="number">30px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  height;30px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="selector-tag">margin</span><span class="selector-pseudo">:auto</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="加载动画框"><a href="#加载动画框" class="headerlink" title="加载动画框"></a>加载动画框</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"loadingToast"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mask_transparent"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toast"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"loading icon-toast"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"toast-content"</span>&gt;</span>加载中...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.mask_transparent</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  position: fixed;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  z-index: 3000;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  top: 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  right: 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  left: 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  bottom: 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(17, 17, 17, 0<span class="selector-class">.3</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.toast</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  position: fixed;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  z-index: 5000;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  width: 200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  height: 200px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  top: 40%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  left: 50%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(<span class="selector-tag">-50</span>%,<span class="selector-tag">-50</span>%); <span class="comment">/*水平垂直居中*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(17, 17, 17, 0<span class="selector-class">.7</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  text-align: center;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  border-radius: 10px;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-tag">color</span>: <span class="selector-id">#FFFFFF</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="comment">/*border: 1px solid red;*/</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.loading</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  width: 40%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">  height: 40%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  display: inline-block;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">  vertical-align: middle;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">  -webkit-animation: loadingFrames 1s steps(12, end) infinite;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">          animation: loadingFrames 1s steps(12, end) infinite;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">  background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">  background-size: 100%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.icon-toast</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">  position: relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">  top: 15%;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">  margin: 0 auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">  display: block;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line"><span class="css"><span class="selector-class">.toast-content</span> &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">  position: relative;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line"><span class="css">  <span class="selector-tag">top</span><span class="selector-pseudo">:25</span>%;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line"><span class="css">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> loadingFrames &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">  0% &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    -webkit-transform: rotate3d(0, 0, 1, 0deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">            transform: rotate3d(0, 0, 1, 0deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">  100% &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">    -webkit-transform: rotate3d(0, 0, 1, 360deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">            transform: rotate3d(0, 0, 1, 360deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line"><span class="css">@<span class="keyword">keyframes</span> loadingFrames &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">  0% &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">    -webkit-transform: rotate3d(0, 0, 1, 0deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">            transform: rotate3d(0, 0, 1, 0deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">  100% &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">    -webkit-transform: rotate3d(0, 0, 1, 360deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">            transform: rotate3d(0, 0, 1, 360deg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr></table></figure>
+<h4 id="常用的-metea-设置"><a href="#常用的-metea-设置" class="headerlink" title="常用的 metea 设置"></a>常用的 metea 设置</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h4 id="relative-对-absolute-的限制"><a href="#relative-对-absolute-的限制" class="headerlink" title="relative 对 absolute 的限制"></a>relative 对 absolute 的限制</h4><ul>
+<li>限制 left/right/top/bottom 定位。// 参考位置为 relative 设置位置。</li>
+<li>限制 z-index 层级显示。// 父级 relative 的 z-index 覆盖 absolate 的设置。</li>
+<li>限制 overflow 显示。</li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-06-04 </div>
+			<div class="article-title"><a href="/2017/06/04/2017-06-04-让进程长住后台的方法/" >让进程常驻后台方法</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>我们经常会碰到这样的问题，用 telnet/ssh 登录了远程的 Linux 服务器，运行了一些耗时较长的任务， 结果却由于网络的不稳定导致任务中途失败。如何让命令提交后不受本地关闭终端窗口/网络断开连接的干扰呢？请看下面的方法介绍。</p>
+</blockquote>
+<h2 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h2><p>如果只是临时有一个命令需要长时间运行，什么方法能最简便的保证它在后台稳定运行呢？<br>主要有下面三个方法：</p>
+<h3 id="1-nohup"><a href="#1-nohup" class="headerlink" title="1. nohup"></a>1. <code>nohup</code></h3><p><code>nohup</code> 的用途就是让提交的命令忽略 <code>hangup</code> 信号，也就是窗口关闭时发出的信号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">nohup ping www.jessechiu.com &amp;</span></pre></td></tr></table></figure>
+
+<h3 id="2-setsid"><a href="#2-setsid" class="headerlink" title="2. setsid"></a>2. <code>setsid</code></h3><p><code>setsid</code> 是直接把进程的父进程设置为初始进场，<code>ppid:1</code>;这样即使窗口(父进程关闭)也不会受影响。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setsid ping www.jessechiu.com</span></pre></td></tr></table></figure>
+
+<h3 id="3-ping-www-jessechou-com-amp"><a href="#3-ping-www-jessechou-com-amp" class="headerlink" title="3. (ping www.jessechou.com &amp;)"></a>3. <code>(ping www.jessechou.com &amp;)</code></h3><p>效果同 第二种 方法一样。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(ping www.jessechou.com &amp;)</span></pre></td></tr></table></figure>
+
+<h2 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h2><p>如果事先在命令前加上 nohup 或者 setsid 就可以避免 HUP 信号的影响。但是如果我们未加任何处理就已经提交了命令，该如何补救才能让它避免 HUP 信号的影响呢？<br>可以使用 <code>disown</code> 命令解决，具体看下面两个实例</p>
+<h3 id="例-1："><a href="#例-1：" class="headerlink" title="例 1："></a>例 1：</h3><p>如果提交命令时已经用 <code>&amp;</code> 将命令放入后台运行，则可以直接使用 <code>disown</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># cp -r testLargeFile largeFile &amp;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">[1] 4825</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># jobs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[1]+  Running                 cp -i -r testLargeFile largeFile &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># disown -h %1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># ps -ef |grep largeFile</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">root      4825   968  1 09:46 pts/4    00:00:00 cp -i -r testLargeFile largeFile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">root      4853   968  0 09:46 pts/4    00:00:00 grep largeFile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># logout</span></span></pre></td></tr></table></figure>
+<h3 id="例-2："><a href="#例-2：" class="headerlink" title="例 2："></a>例 2：</h3><p>如果提交命令时未使用<code>&amp;</code> 将命令放入后台运行，可使用 <code>CTRL-z</code> 和 <code>bg</code> 将其放入后台，再使用 <code>disown</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># cp -r testLargeFile largeFile2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[1]+  Stopped                 cp -i -r testLargeFile largeFile2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># bg %1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">[1]+ cp -i -r testLargeFile largeFile2 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># jobs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">[1]+  Running                 cp -i -r testLargeFile largeFile2 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># disown -h %1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment"># ps -ef |grep largeFile2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">root      5790  5577  1 10:04 pts/3    00:00:00 cp -i -r testLargeFile largeFile2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">root      5824  5577  0 10:05 pts/3    00:00:00 grep largeFile2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">[root@pvcent107 build]<span class="comment">#</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">## 场景三</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">如果想在开机时自动启动，可以把需要执行的命令放到 `/etc/rc.local` 文件中</span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="noopener">让进程在后台可靠运行的几种方法</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2017-06-01 </div>
 			<div class="article-title"><a href="/2017/06/01/2017-06-01-微信公众号后台服务器配置/" >微信公众号后台服务器配置</a></div>						
 		</h3>
@@ -795,164 +1057,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-url/" >url 模块</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><code>url</code>模块用于生成和解析URL。该模块使用前，必须加载。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────────────────────────────────────┐</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">│                                            href                                             │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">├──────────┬──┬─────────────────────┬─────────────────────┬───────────────────────────┬───────┤</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">│ protocol │  │        auth         │        host         │           path            │ hash  │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">│          │  │                     ├──────────────┬──────┼──────────┬────────────────┤       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">│          │  │                     │   hostname   │ port │ pathname │     search     │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">│          │  │                     │              │      │          ├─┬──────────────┤       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">│          │  │                     │              │      │          │ │    query     │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="string">"  https:   //    user   :   pass   @ sub.host.com : 8080   /p/a/t/h  ?  query=string   #hash "</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">│          │  │          │          │   hostname   │ port │          │                │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">│          │  │          │          ├──────────────┴──────┤          │                │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">│ protocol │  │ username │ password │        host         │          │                │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">├──────────┴──┼──────────┴──────────┼─────────────────────┤          │                │       │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">│   origin    │                     │       origin        │ pathname │     search     │ hash  │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">├─────────────┴─────────────────────┴─────────────────────┴──────────┴────────────────┴───────┤</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">│                                            href                                             │</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">└─────────────────────────────────────────────────────────────────────────────────────────────┘</span></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span></pre></td></tr></table></figure>
-
-<h2 id="url-parse"><a href="#url-parse" class="headerlink" title="url.parse()"></a>url.parse()</h2><p><code>url.parse()</code> 将一个 URL 字符串转换为URL对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">url.parse(<span class="string">'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">protocol</span>: <span class="string">'http:'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  auth: <span class="string">'user:pass'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  host: <span class="string">'host.com:8080'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  port: <span class="string">'8080'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  hostname: <span class="string">'host.com'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  hash: <span class="string">'#hash'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  search: <span class="string">'?query=string'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  query: <span class="string">'query=string'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  pathname: <span class="string">'/p/a/t/h'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  path: <span class="string">'/p/a/t/h?query=string'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  href: <span class="string">'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</span> &#125;</span></pre></td></tr></table></figure>
-
-<h2 id="url-format"><a href="#url-format" class="headerlink" title="url.format()"></a>url.format()</h2><p><code>url.format()</code> 方法允许将一个 URL 对象转换为 URL 字符串</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">url.format(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">     protocol: <span class="string">'http:'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     host: <span class="string">'www.example.com'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">     pathname: <span class="string">'/p/a/t/h'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">     search: <span class="string">'query=string'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">'http://www.example.com/p/a/t/h?query=string'</span></span></pre></td></tr></table></figure>
-
-<h2 id="url-resolve-from-to"><a href="#url-resolve-from-to" class="headerlink" title="url.resolve(from, to)"></a>url.resolve(from, to)</h2><p><code>url.resolve</code>方法用于生成URL。它的第一个参数是基准URL，其余参数依次根据基准URL，生成对应的位置。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'/one/two/three'</span>, <span class="string">'four'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// '/one/two/four'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/'</span>, <span class="string">'/one'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/one'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/one/'</span>, <span class="string">'two'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/one/two'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/one'</span>, <span class="string">'/two'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/two'</span></span></pre></td></tr></table></figure>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-version/" >版本管理</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="语义版本"><a href="#语义版本" class="headerlink" title="语义版本"></a>语义版本</h2><p>npm采用”语义版本“（semver）管理软件包。</p>
-<p>所谓语义版本，就是指版本号为 <code>a.b.c</code> 的形式，其中 <code>a</code> 是大版本号，<code>b</code> 是小版本号，<code>c</code> 是补丁号。</p>
-<p>一个软件发布的时候，默认就是 <code>v1.0.0</code> 版。如果以后发布补丁，就增加最后一位数字，比如 <code>v1.0.1</code>；如果增加新功能，且不影响原有的功能，就增加中间的数字（即小版本号），比如 <code>v1.1.0</code>；如果引入的变化，破坏了向后兼容性，就增加第一位数字（即大版本号），比如 <code>v2.0.0</code>。</p>
-<p>注意，如果大版本不到 v1.0.0（即v0.x.y）时，不兼容变动应该修改小版本号，即从<code>v0.4.1</code>升级到<code>v0.5.0</code>。</p>
-<p>npm允许使用特殊符号，指定所要使用的版本范围，假定当前版本是1.0.4。</p>
-<ul>
-<li>只接受补丁包：<code>1.0</code>或者<code>1.0.x</code>或者<code>~1.0.4</code></li>
-<li>只接受小版本和补丁包：<code>1</code>或者<code>1.x</code>或者<code>^1.0.4</code>。这是<code>--save</code>或<code>save-dev</code>安装时，默认的版本范围。</li>
-<li>接受所有更新：<code>*</code> or <code>x</code></li>
-</ul>
-<p>对于<code>~</code>和<code>^</code>，要注意区分。前者表示接受当前小版本（如果省略小版本号，则是当前大版本）的最新补丁包，后者表示接受当前大版本的最新小版本和最新补丁包。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span> <span class="comment">// 接受2.2.0和2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span> <span class="comment">// 接受2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr></table></figure>
-
-<p><code>npm</code>默认使用<code>^</code>，使用下面的命令，可以改变这个行为。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> save-prefix=<span class="string">'~'</span></span></pre></td></tr></table></figure>
-
-<p>此外，还可以使用数学运算符（比如<code>&gt;</code>、<code>&lt;</code>、<code>=</code>、<code>&gt;=</code>或者<code>&lt;=</code>等），指定版本范围。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">2.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.0</span><span class="number">.0</span> - <span class="number">1.2</span><span class="number">.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">1.0</span><span class="number">.0</span>-alpha</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt;= <span class="number">1.0</span><span class="number">.0</span>-rc<span class="number">.0</span> &lt; <span class="number">1.0</span><span class="number">.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> &lt; <span class="number">2.2</span> || &gt; <span class="number">2.3</span></span></pre></td></tr></table></figure>
-
-<p>以上都是合法的版本指定方式。</p>
-<p>注意，如果使用连字号，它的两端必须有空格，比如<code>1.0.0 - 2.0.0</code>。如果不带空格，会被npm理解成预发布的tag，比如<code>1.0.0-rc.1</code>。</p>
-<p>npm官方提供一个在线工具<a href="http://semver.npmjs.com/" target="_blank" rel="noopener">semver.npmjs.com</a>，可以查看不同语义版本涵盖的版本范围。</p>
-<h2 id="npm-version"><a href="#npm-version" class="headerlink" title="npm version"></a>npm version</h2><p><code>npm version</code>命令用来修改项目的版本号。当你完成代码修改，要发布新版本的时候，就用这个命令更新一下软件的版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;update_type&gt; -m <span class="string">"&lt;message&gt;"</span></span></pre></td></tr></table></figure>
-
-<p><code>npm version</code>命令更新<code>package.json</code>里面的版本号，并且新增一个Git commit记录，以及一个新的Git tag。<code>-m</code>参数（或者<code>--message</code>）用来指定生成Git commit时的提交说明。</p>
-<p>注意，由于要生成Git commit，所以执行这个命令前，当前目录里面的所有变动，都必须要保存进Git，否则会报错。</p>
-<p><code>npm version</code>命令可以带有以下参数。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改为指定的版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;x.y.z&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># patch 生成 1.1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># minor 生成 1.2.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># major 生成 2.0.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;major|minor|patch&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号，并且加上预发号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.5.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># premajor 生成 v2.0.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># preminor 生成 v1.6.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prepatch 生成 v1.5.2-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prerelease 将原来的预发号加1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;premajor|preminor|prepatch|prerelease&gt;</span></pre></td></tr></table></figure>
-
-<p>下面是一个例子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - xxxxxx"</span></span></pre></td></tr></table></figure>
-
-<p>上面命令的<code>%s</code>表示新的版本号。</p>
-<p>如果<code>package.json</code>的<code>scripts</code>属性里面，指定了<code>preversion</code>、<code>version</code>、<code>postversion</code>命令，<code>npm version</code>命令会自动执行这些脚本。执行顺序如下。</p>
-<ol>
-<li>检查当前目录是否有未提交的文件变动，如果有就报错。</li>
-<li>运行<code>preversion</code>脚本。该脚本拿到的是旧版本号，典型用途就是运行测试。</li>
-<li>增加<code>package.json</code>里面的版本号。</li>
-<li>运行<code>version</code>脚本，此时拿到的是新版本号。</li>
-<li>提交commit，并在Git里面生成一个tag。</li>
-<li>运行<code>postversion</code>脚本，典型用途是推送新生成的commit和tag。</li>
-</ol>
-<p>下面是一个例子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"preversion"</span>: <span class="string">"npm test"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span>: <span class="string">"npm run build &amp;&amp; git add -A dist"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"postversion"</span>: <span class="string">"git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，增加版本号之前会运行测试，只有全部通过，才会新增版本号；版本号增加以后，会进行构建，然后将新生成的<code>dist</code>目录，加入Git的暂存区；最后，推送到远程仓库，并且删除构建所用的临时目录。</p>
-<p>由于更新npm网站的唯一方法，就是发布一个新的版本。因此，除了第一次发布，这个命令与<code>npm publish</code>几乎是配套的，先使用它，再使用<code>npm publish</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - add sweet badges"</span>$</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ git push &amp;&amp; git push --tags (or git push origin master --tags)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm publish</span></pre></td></tr></table></figure>
-
-<h2 id="发布流程"><a href="#发布流程" class="headerlink" title="发布流程"></a>发布流程</h2><p>对于大型项目来说，发布一个大版本，大致会经过以下的流程，即预发一些预备版本。</p>
-<ul>
-<li>v0.5.0-alpha1</li>
-<li>v0.5.0-beta1</li>
-<li>v0.5.0-beta2</li>
-<li>v0.5.0-rc1</li>
-<li>v0.5.0-rc2</li>
-<li>v0.5.0</li>
-</ul>
-<p>操作步骤如下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version 0.5.0-alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用alpha1标签发布该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装使用该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">npm i &lt;your package name&gt;@alpha1</span></pre></td></tr></table></figure>
-
-<h2 id="模块标签"><a href="#模块标签" class="headerlink" title="模块标签"></a>模块标签</h2><p>npm允许为模块的某个版本，新建一个标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm dist-tag add &lt;pkg&gt;@&lt;version&gt; [&lt;tag&gt;]</span></pre></td></tr></table></figure>
-
-<p>另一种方法是发布的时候，加上标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=beta</span></pre></td></tr></table></figure>
-
-<p>有了标签以后，就可以指定安装该标签的版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;name&gt;@&lt;tag&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm install --tag &lt;tag&gt;</span></pre></td></tr></table></figure>
-
-<p>常见的标签有<code>latest</code>、<code>stable</code>、<code>next</code>等。</p>
-<p>npm默认会为最新一次发布的版本，新建<code>latest</code>标签。然后，下载的时候，默认是下载带有<code>latest</code>标签的版本。但是，这可能并不是我们想要的行为。比如，当前最新版本是4.2版，然后发布了一个3.6版，<code>latest</code>的标签就会打在3.6版上面，用户<code>npm install</code>安装的就是这个版本。</p>
-<p>为了避免这个问题，可以为3.6版加上<code>previous</code>标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发布</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=previous</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;package&gt;@previous</span></pre></td></tr></table></figure>
-
-<p><code>package.json</code>文件可以设置默认标签。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"publishConfig"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"tag"</span>: <span class="string">"next"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面的<code>publishConfig</code>设置了最新发布的默认标签是<code>next</code>。<code>publishConfig</code>属性设置的值，可以在publish过程中使用。</p>
-<h2 id="npm-outdated"><a href="#npm-outdated" class="headerlink" title="npm outdated"></a>npm outdated</h2><p><code>npm outdated</code>命令列出项目所有依赖的当前版本号与最新版本号，提示你是否需要更新。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm outdated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Package      Current   Wanted   Latest  Location</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">glob          5.0.15   5.0.15    6.0.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm            3.5.1    3.5.2    3.5.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr></table></figure>
-
-<p>每个项目依赖的模块，都会输出三个版本号。<code>Current</code>表示当前使用的版本，<code>Wanted</code>表示符合预置条件的最新版本，<code>Latest</code>表示最新发布的版本。</p>
-<blockquote>
-<p>如果需要更新所有版本到 <code>Wanted</code> 列表显示的版本，可以使用 <code>npm update</code> 命令。</p>
-</blockquote>
-<h2 id="npm-shrinkwrap"><a href="#npm-shrinkwrap" class="headerlink" title="npm shrinkwrap"></a>npm shrinkwrap</h2><p>对于一个项目来说，通常不会写死依赖的npm模块的版本。比如，开发时使用某个模块的版本是1.0，那么等到用户安装时，如果该模块升级到1.1，往往就会安装1.1。</p>
-<p>但是，对于开发者来说，有时最好锁定所有依赖的版本，防止模块升级带来意想不到的问题。但是，由于模块自己还依赖别的模块，这一点往往很难做到。举例来说，项目依赖A模块，A模块依赖B模块。即使写死A模块的版本，但是B模块升级依然可能导致不兼容。</p>
-<p><code>npm shrinkwrap</code>命令就是用来彻底锁定所有模块的版本。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap</span></pre></td></tr></table></figure>
-
-<p>运行上面这个命令以后，会在项目目录下生成一个npm-shrinkwrap.json文件，里面包含当前项目用到的所有依赖（包括依赖的依赖，以此类推），以及它们的准确版本，也就是当前正在使用的版本。</p>
-<p>只要存在<code>npm-shrinkwrap.json</code>文件，下一次用户使用<code>npm install</code>命令安装依赖的时候，就会安装所有版本完全相同的模块。</p>
-<p>如果执行<code>npm shrinkwrap</code>的时候，加上参数dev，还可以记录devDependencies字段中模块的准确版本。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap --dev</span></pre></td></tr></table></figure>
-
-<h2 id="npm-prune"><a href="#npm-prune" class="headerlink" title="npm prune"></a>npm prune</h2><p><code>npm prune</code>命令与<code>npm shrinkwrap</code>配套使用。使用<code>npm shrinkwrap</code>的时候，有时可能存在某个已经安装的模块不在<code>dependencies</code>字段内的情况，这时<code>npm shrinkwrap</code>就会报错。</p>
-<p><code>npm prune</code>命令可以移除所有不在<code>dependencies</code>字段内的模块。如果指定模块名，则移除指定的模块。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm prune</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm prune &lt;package name&gt;</span></pre></td></tr></table></figure>
-
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1023,7 +1127,7 @@
 		
 			<li><a href="/categories/Css3/">Css3<span>4</span></a></li>
 		
-			<li><a href="/categories/Database/">Database<span>4</span></a></li>
+			<li><a href="/categories/Database/">Database<span>6</span></a></li>
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
@@ -1074,48 +1178,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
 			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>2</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>25</span></a></li>
+		   <li><a href="/tags">...<span>26</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1128,6 +1232,14 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/11/25/2020-11-21-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
+      </li>
+    
+      <li>
         <a href="/2020/11/12/2020-11-10-django.starting/" ><i class="fa fa-file-o"></i>Django Starting</a>
       </li>
     
@@ -1137,14 +1249,6 @@
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
-      </li>
-    
-      <li>
-        <a href="/2020/09/10/2020-09-10-synology/" ><i class="fa fa-file-o"></i>Synology</a>
-      </li>
-    
-      <li>
-        <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
       </li>
     
   </ul>

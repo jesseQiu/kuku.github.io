@@ -128,6 +128,139 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2016-10-23 </div>
+			<div class="article-title"><a href="/2016/10/23/2016-10-23-vue-2-0-学习顺序/" >Vue 2.0 学习顺序</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>下面是转载 <em>尤雨溪</em> 大神的一篇文章，为新人学习 Vue 2.0 给出了一个学习路线和方法。</p>
+</blockquote>
+<blockquote>
+<p>注：2.0 已经有社区翻译的中文文档 。如果对自己英文有信心，建议直接阅读英文文档。<br>此指南仅供参考，请根据自身实际情况灵活调整。<br>欢迎转载，请注明出处。</p>
+</blockquote>
+<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><ol>
+<li><p>扎实的 <code>JavaScript / HTML / CSS</code> 基本功。这是前置条件。</p>
+</li>
+<li><p>通读官方教程 (guide) 的基础篇。不要用任何构建工具，就只用最简单的 <code>&lt;script&gt;</code>，把教程里的例子模仿一遍，理解用法。不推荐上来就直接用 vue-cli 构建项目，尤其是如果没有 <code>Node/Webpack</code> 基础。</p>
+</li>
+<li><p>照着官网上的示例，自己想一些类似的例子，模仿着实现来练手，加深理解。</p>
+</li>
+<li><p>阅读官方教程进阶篇的前半部分，到『自定义指令 (Custom Directive) 』为止。着重理解 Vue 的响应式机制和组件生命周期。『渲染函数（Render Function)』如果理解吃力可以先跳过。</p>
+</li>
+<li><p>阅读教程里关于路由和状态管理的章节，然后根据需要学习 vue-router 和 vuex。同样的，先不要管构建工具，以跟着文档里的例子理解用法为主。</p>
+</li>
+<li><p>走完基础文档后，如果你对于基于 Node 的前端工程化不熟悉，就需要补课了。下面这些严格来说并不是 Vue 本身的内容，也不涵盖所有的前端工程化知识，但对于大型的 Vue 工程是前置条件，也是合格的『前端工程师』应当具备的知识。</p>
+</li>
+</ol>
+<h2 id="前端生态-工程化"><a href="#前端生态-工程化" class="headerlink" title="前端生态/工程化"></a>前端生态/工程化</h2><ol>
+<li><p>了解 JavaScript 背后的规范，ECMAScript 的历史和目前的规范制定方式。学习 ES2015/16 的新特性，理解 ES2015 modules，适当关注还未成为标准的提案。</p>
+</li>
+<li><p>学习命令行的使用。建议用 Mac。</p>
+</li>
+<li><p>学习 Node.js 基础。建议使用 nvm 这样的工具来管理机器上的 Node 版本，并且将 npm 的 registry 注册表配置为淘宝的镜像源。至少要了解 npm 的常用命令，npm scripts 如何使用，语义化版本号规则，CommonJS 模块规范（了解它和 ES2015 Modules 的异同），Node 包的解析规则，以及 Node 的常用 API。应当做到可以自己写一些基本的命令行程序。注意最新版本的 Node (6+) 已经支持绝大部分 ES2015 的特性，可以借此巩固 ES2015。</p>
+</li>
+<li><p>了解如何使用 / 配置 Babel 来将 ES2015 编译到 ES5 用于浏览器环境。</p>
+</li>
+<li><p>学习 Webpack。Webpack 是一个极其强大同时也复杂的工具，作为起步，理解它的『一切皆模块』的思想，并基本了解其常用配置选项和 loader 的概念/使用方法即可，比如如何搭配 Webpack 使用 Babel。学习 Webpack 的一个挑战在于其本身文档的混乱，建议多搜索搜索，应该还是有质量不错的第三方教程的。英文好的建议阅读 Webpack 2.0 的文档，比起 1.0 有极大的改善，但需要注意和 1.0 的不兼容之处。</p>
+</li>
+</ol>
+<h2 id="Vue-进阶"><a href="#Vue-进阶" class="headerlink" title="Vue 进阶"></a>Vue 进阶</h2><ol>
+<li><p>有了 Node 和 Webpack 的基础，可以通过 vue-cli 来搭建基于 Webpack ，并且支持单文件组件的项目了。建议用 webpack-simple 这个模板开始，并阅读官方教程进阶篇剩余的内容以及 vue-loader 的文档，了解一些进阶配置。有兴趣的可以自己亲手从零开始搭一个项目加深理解。</p>
+</li>
+<li><p>根据 例子 尝试在 Webpack 模板基础上整合 vue-router 和 vuex</p>
+</li>
+<li><p>深入理解 Virtual DOM 和『渲染函数 (Render Functions)』这一章节（可选择性使用 JSX)，理解模板和渲染函数之间的对应关系，了解其使用方法和适用场景。</p>
+</li>
+<li><p>（可选）根据需求，了解服务端渲染的使用（需要配合 Node 服务器开发的知识）。其实更重要的是理解它所解决的问题并搞清楚你是否需要它。</p>
+</li>
+<li><p>阅读开源的 Vue 应用、组件、插件源码，自己尝试编写开源的 Vue 组件、插件。</p>
+</li>
+<li><p>参考 贡献指南 阅读 Vue 的源码，理解内部实现细节。（需要了解 Flow）</p>
+</li>
+<li><p>参与 Vue GitHub issue 的定位 -&gt; 贡献 PR -&gt; 加入核心团队 -&gt; 升任 CTO -&gt; 迎娶白富美…</p>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/23134551" target="_blank" rel="noopener">新手向：Vue 2.0 的建议学习顺序</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-10-20 </div>
+			<div class="article-title"><a href="/2016/10/20/2016-10-20-webpack-原理解析(一)/" >Webpack 原理解析(一)</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>Webpack 可以识别 CommonJS 和 AMD 方式定义的模块，并且会自动根据代码的依赖关系，分别打包，按需自动加载。下面是对这个部分原理的解析。</p>
+</blockquote>
+<h2 id="一、测试工程"><a href="#一、测试工程" class="headerlink" title="一、测试工程"></a>一、测试工程</h2><ol>
+<li><p>CommonJS 模块文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="string">'Hello i am a.js'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里省略了多余代码，主要是增加文件大小，为后面的测试用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="string">"Hello i am b.js"</span>;</span></pre></td></tr></table></figure>
+</li>
+<li><p>AMD 模块文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// c.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a.js'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		sayHello: <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(<span class="string">'Hello i am c.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式二</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		sayHello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(<span class="string">'Hello i am c.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在打包 c.js 模块是会包含 a.js 模块。</span></span></pre></td></tr></table></figure>
+<p> 上面的两种方式定义效果是一样的，只不过 <strong>方式二</strong> 是 <strong>方式一</strong> 的语法糖写法</p>
+</li>
+<li><p>入口文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// main1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.ensure([<span class="string">'./a'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">require</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// webpack 会根据下面的语句单独打包生成 1.bundle-1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> content = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.open();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.write(<span class="string">'&lt;h1&gt;'</span> + content + <span class="string">'&lt;/h1&gt;'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	script.innerText = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">		<span class="comment">// webpack 会根据下面的语句单独打包生成 2.bundle-2.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">		<span class="comment">// 初始时并没加载，过了 2 秒后才会加载</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">		<span class="built_in">require</span>([<span class="string">'./b.js'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">			<span class="built_in">console</span>.log(a);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	&#125;, <span class="number">2000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">document</span>.close();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据配置文件 webpack.config.js 的入口参数对象 main1.js 中的 require </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 个数自动分别打相应个数的包，改文件打了 2 个包(1.bundle-1.js，2.bundle-2.js)和一个 bundle-main1.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// main2.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据下面的语句单独打包生成 4.bundle-4.js,包含了 a.js 的内容。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">'./c.js'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	c.sayHello();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack 会根据配置文件 webpack.config.js 的入口参数对象 main2.js 中的 require </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 个数自动分别打相应个数的包，改文件打了 1 个包(4.bundle-4.js)和一个 bundle-main2.js</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>webpack 配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  entry: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  	main1: <span class="string">'./main1.js'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  	main2: <span class="string">'./main2.js'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  output: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    filename: <span class="string">'bundle-[name].js'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+</li>
+<li><p>index.html 文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle-main1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle-main2.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="二、使用-webpack-命令打包"><a href="#二、使用-webpack-命令打包" class="headerlink" title="二、使用 webpack 命令打包"></a>二、使用 webpack 命令打包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; webpack</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">// 如果使用 webpack -p 生产方式打包，生成的分包名称会有所差别</span></pre></td></tr></table></figure>
+<p>在同级目录下回多出 5 文件</p>
+<ul>
+<li><code>1.bundle-1.js</code>  // a.js</li>
+<li><code>2.bundle-2.js</code>  // b.js</li>
+<li><code>4.bundle-4.js</code>  // c.js a.js</li>
+<li><code>bundle-main1.js</code> // main1.js</li>
+<li><code>bundle-main2.js</code> // main2.js</li>
+</ul>
+<p>可以看到 webpack 生成两个 5 个包文件，其中两个 <code>bundle-main1.js</code> 和 <code>bundle-main2.js</code> 两个主文件，也是我们 <code>index.html</code> 文件引用的文件，其它三个文件是 <code>webpack</code> 根据 <code>main1.js</code> 和 <code>main2.js</code> 中使用 <code>require(moduleName,callback)</code> 自动分别打包生成，在 <code>index.html</code> 运行时按需自动加载。例如上面测试代码 <code>main1.js</code> 中有设置了一个定时器，2 秒后加载 <code>b.js</code>,也就是 <code>2.bundle-2.js</code>(<code>b.js</code> 打包生成) 文件是在加载完 <code>index.html</code> 文件 2 秒后才运行。</p>
+<h2 id="三、运行测试代码"><a href="#三、运行测试代码" class="headerlink" title="三、运行测试代码"></a>三、运行测试代码</h2><p>使用浏览器打开 <code>index.html</code> 文件，打开控制台查看日志信息变化。</p>
+<div>
+<iframe width="100%" height="300" src="http://od6sd4xau.bkt.clouddn.com/webpack-1.gif">
+</div>
+
+<p>从上面的视频可以看到在刷新页面后，过了 2 秒 <code>2.bundle-2.js</code> 才加载。</p>
+<h4 id="下载完整测试代码"><a href="#下载完整测试代码" class="headerlink" title="下载完整测试代码"></a><a href="http://od6sd4xau.bkt.clouddn.com/Webpack-%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%28%E4%B8%80%29-code.rar" target="_blank" rel="noopener">下载完整测试代码</a></h4>
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-10-19 </div>
 			<div class="article-title"><a href="/2016/10/19/2016-10-19-webpack-start/" >Webpack Start</a></div>						
 		</h3>
@@ -938,267 +1071,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-10-13 </div>
-			<div class="article-title"><a href="/2016/10/13/2016-10-13-《编写可维护的 javascript》/" >《编写可维护的 javascript》</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><img src="http://od6sd4xau.bkt.clouddn.com/read/maintaintable_javascript.gif" alt="编写可维护的 javascript"></p>
-<blockquote>
-<p>本文主要是我对《编写可维护的 javascript》美 nicbolas c.zakas 著 李晶 郭凯 张散集 译 人民邮电出版社<br>的读书笔记，以便查阅。</p>
-</blockquote>
-<ol>
-<li><p>行缩进</p>
-<p>  使用 4 个空格，不使用 Tab 键，因为不同的编辑器 Tab 键设置不同。</p>
-</li>
-<li><p>语句结尾</p>
-<p> 语句结尾需加 “;”。虽然 js 分析器(ASI)会自动插入，但是为了避免分析器自动加入产生歧义。</p>
-</li>
-<li><p>行长度</p>
-<p> 80 个字符。</p>
-</li>
-<li><p>换行</p>
-<p> 在运算符后换行(ASI 不会再运算符后自动插入”;”)，下一行增加两个层级缩进(8 个空格)。</p>
-</li>
-<li><p>命名</p>
-<p> 变量：以名词为前缀。(小驼峰)<br> 函数：以动词为前缀。(小驼峰)<br> 常量：大写字母和下划线。<br> 构造函数：名词。(大驼峰)</p>
-</li>
-<li><p>字符串</p>
-<p> 统一使用双引号(“”)。各种编程语言可以通用，也使代码风格保持统一。<br> ps：如果一串字符串过长，需要换行，使用 “+” 连接。</p>
-</li>
-<li><p>null </p>
-<p> 1). 应当使用情形：<br>   1). 用来初始化一个变量，这个变量可能赋值为一个对象。<br>   2). 用来和一个已经初始化的变量比较，这个变量可以是也可以不是一个对象。<br>   3). 当函数参数期望是对象时，用作参数传入。<br>   4). 当函数的返回值期望是对象时，用作返回值传出。</p>
-<p> 2).不应当使用情形：<br>   1). 不要使用 null 来检测是否传入了某个参数。<br>   2). 不要用 null 检测一个未初始化的变量。</p>
-<p>ps：可以把 null 理解为对象的占位符。<br>注意和 undefined 区分。(我们应该禁止 undefined 的使用)</p>
-</li>
-<li><p>对象和数组采用直接量方式</p>
-<ul>
-<li>对象：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book =&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    title: <span class="string">"jsvascript"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    author: <span class="string">"jasin"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure></li>
-<li>数组：  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>,<span class="string">"green"</span>,<span class="string">"blue"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>注释</p>
-<ul>
-<li><p>单行注释：</p>
-<ul>
-<li>// 前后个留个空格。</li>
-<li>可放在被注释语句上面和句尾。如果在上面，保持和被注释语句相同缩进。</li>
-</ul>
-</li>
-<li><p>多行注释：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * ... ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * ... ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span></span></pre></td></tr></table></figure></li>
-<li><p>文档注释：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * 通过 app 名称 判断该 app 进程 id 是否有效</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @brief MultiAppManager::checkAppProcessIdByKey</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @param dlfKey</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * @return:true 有效，false:无效</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> **/</span></span></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>禁止使用 with 语句。</p>
-</li>
-<li><p>for-in</p>
-<p>for-in 是用来遍历 <strong>对象</strong> 的属性，并返回 <strong>属性的名</strong> 而不是值。它不仅会遍历对象的实例属性，同样还会遍历原型继承来的属性。<br>所以我们在遍历实例对象属性时，最好使用 <code>hasOwnProperty()</code> 方法来为 for-in 循环过滤出实例属性，避免因为意外的结果而终止。<br>例如:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prop;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (prop <span class="keyword">in</span> object) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 hasOwnProperty() 方法判断实例对象属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (object.hasOwnProperty(prop))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"Property name is "</span> + prop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"Property value is "</span> + object[prop]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">ps：强调一点，<span class="keyword">for</span>-<span class="keyword">in</span> 是用来遍历 对象 的属性，所以不能用来遍历数组成员.</span></pre></td></tr></table></figure>
-</li>
-<li><p>严格模式</p>
-<p>建议在函数内部使用 “use strict”;因为在全局使用严格模式，则所有函数都是严格模式。如果在和其它非严格模式的文件合并，会统一<br>按照严格模式处理，这样有些代码在严格模式下会出错。</p>
-</li>
-<li><p>=== 和 !==</p>
-<p>在判断相等或不相等，必须使用 === 和 !== 。避免判断的数据内部类型转换，违背本意。</p>
-</li>
-<li><p>禁止使用 eval()</p>
-</li>
-<li><p>禁止使用原始包装类型。</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name =  <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"nicholas"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name =  <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name =  <span class="keyword">new</span> Numbers(<span class="number">10</span>)</span></pre></td></tr></table></figure>
-<p>主要是由于开发者会在对象和原始值之间跳来跳去，避免出错几率。</p>
-</li>
-<li><p>UI 层松耦合</p>
-<p>HTML、CSS、JavaScript 代码各自独立，避免相互包含，这样可以避免出现问题时难定位。</p>
-</li>
-<li><p>全局变量</p>
-<p>1). 避免使用全局变量。(会带来命名冲突)<br>2). 避免使用未声明的变量。(因为这样就创造一个全局变量)</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> count = <span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    name = <span class="string">"nicholas"</span>; <span class="comment">// 不好写法，创建了一个全局变量。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>  最好的规则是总是使用 var 来定义变量，哪怕是定义全局变量。</p>
-<p>3). 单全局变量方式。// page：75<br>4). 模块方式。 // page：78<br>5). 零全局变量方式，可以使用地方很局限，实际项目中少用到。</p>
-</li>
-<li><p>事件处理</p>
-<ul>
-<li>隔离应用逻辑。</li>
-<li>不要分发事件对象。<br>  例如：<br>  // 事件处理程序  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyApplication = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">handleClick: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 假设事件支持 DOM Level2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 下面两句阻止了事件继续冒泡，过滤无用事件信息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    event.preventDefault();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    event.stopPropagation();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 传入应用逻辑，提取出事件有用的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 这里是事件处理和应用逻辑分界点，这样还可以方便编写测试代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.showPopup(event.clientX,event.clientY);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 应用逻辑处理函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">showPopup: <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> popup = <span class="built_in">document</span>.getElementById(<span class="string">"popup"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    popup.style.left = x + <span class="string">"px"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    popup.style.top = y + <span class="string">"px"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    popup.className = <span class="string">"reveal"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定触发元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">addListener(element,<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">MyApplication.handleClick(event);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>检测原始值</p>
-<p>js 包含 5 种原始值：字符串、数字、布尔值、null、undefined。</p>
-<p>检测方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> name === <span class="string">"string"</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测数字</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> count === <span class="string">"number"</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测布尔值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> found === <span class="string">"boolean"</span> &amp;&amp; found) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测 undefined</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> MyApp === <span class="string">"undefined"</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>null 一般不用于检测语句，typeof null 返回 “object”。但是有个例外，如果期望的值真是 null，可以用该值比较。</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">"my-div"</span>);<span class="comment">// 如果 DOM 元素不存在 返回 null，反之返回一个节点。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (element !== <span class="literal">null</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    element.className = <span class="string">"found"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
-<li><p>检测引用值(对象 object)</p>
-<p>除了原始值外，还有几种内置应用类型：object、array、date 和 error。</p>
-<p>不能使用 typeof 因为都是返回 “object”，应该使用 instanceof。</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">now <span class="keyword">instanceof</span> <span class="built_in">Object</span>  <span class="comment">// true 所有的对象都认为是 object 的实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">now <span class="keyword">instanceof</span> <span class="built_in">Date</span>    <span class="comment">// true</span></span></pre></td></tr></table></figure>
-<p>同样可以检测自定义对象。</p>
-<p>注意：instance 检测不能跨帧(frame)。</p>
-</li>
-<li><p>检测函数</p>
-<p>使用 typeof<br>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span>&#123;&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> myFunction === <span class="string">"function"</span>; <span class="comment">// true</span></span></pre></td></tr></table></figure>
-<p>注意：检测函数可以跨帧 (frame)。</p>
-</li>
-<li><p>检测数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">value</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 先判断是否有 isArray 函数，因为该函数是在 ECMAScript5 引入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">Array</span>.isArray === <span class="string">"function"</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;<span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 如果没有 isArray 函数则使用该方法，因为用内置 toString 在所有浏览器中都会返回标准字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 对于数组返回 "[object Array]"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(value) === <span class="string">"[object Array]"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>注意该方法支持跨域</p>
-</li>
-<li><p>检测对象属性</p>
-<p>1). 判断属性最好的方法是使用 in 运算符。in 运算符仅仅会简单的判断属性值是否存在，而不会去读属性的值。</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">Object</span> = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    count: <span class="number">0</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    related: <span class="literal">null</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="string">"count"</span> <span class="keyword">in</span> <span class="built_in">Object</span>)&#123; <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>2). 如果想检测某个实例对象的属性使用 object.hasOwnProperty()，所以继承 Object 都有该方法</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (object.hasOwnProperty(<span class="string">"related"</span>))&#123; <span class="comment">// true </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>3). 如果是 DOM 对象，需要增加该方法的判断，因为 IE8 及更早版本 IE 中， DOM 对象并非继承自 Object。</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">"hasOwnProperty"</span> <span class="keyword">in</span> object &amp;&amp; object.hasOwnProperty(<span class="string">"related"</span>))&#123; <span class="comment">// true </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
-<li><p>错误类型</p>
-<p>ECMA-262 规范指出 7 中错误类型：</p>
-<p>1). Error、EvalError、RangeError、ReferenceError、SyntaxError、SyntaxError、TypeError、URIError // 详细参阅 page：109</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">tyr&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 可能引发错误的代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;<span class="keyword">catch</span>(ex)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> <span class="built_in">TypeError</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> <span class="built_in">ReferenceError</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;<span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>2). 错误类型继承</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyError</span>(<span class="params">msg</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.msg = msg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">MyError.prototype = <span class="keyword">new</span> <span class="built_in">Error</span>();</span></pre></td></tr></table></figure>
-<p>3). 抛出自定义异常</p>
-<p>  例如：</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> MyError(<span class="string">"hello world!!!"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">``</span><span class="string">` </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">4). 检测自定义异常</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">  例如：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">  `</span><span class="string">``</span>javascript</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      tyr&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">          <span class="comment">// 可能引发错误的代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      &#125;<span class="keyword">catch</span>(ex)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">          <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> MyError)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">              <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">          &#125;<span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">              <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">          &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr></table></figure></li>
-<li><p>基于对象继承和基于类型继承</p>
-<p>1). 基于对象继承<br>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">name: <span class="string">"nike"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sayName:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">alert(<span class="keyword">this</span>.name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myPerson = <span class="built_in">Object</span>.create(person);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">myPerson.sayName(); <span class="comment">// 弹出 "nike"</span></span></pre></td></tr></table></figure>
-<p>2). 基于类型继承<br>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyError</span>(<span class="params">msg</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.msg = msg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">MyError.prototype = <span class="keyword">new</span> <span class="built_in">Error</span>();</span></pre></td></tr></table></figure>
-</li>
-</ol>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-10-13 </div>
-			<div class="article-title"><a href="/2016/10/13/2016-10-13-数组-slice-和-splice/" >数组 Slice() 和 Splice()</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p>在开发中经常碰到 <code>[].slice()</code> 和 <code>[].splice()</code> 两个方法，但是总是不能很好的区分它们的差别和用法，今天刚好又碰到就查阅相关文档，做个小结，以便加深印象。</p>
-</blockquote>
-<h3 id="一、Array-prototype-slice"><a href="#一、Array-prototype-slice" class="headerlink" title="一、Array.prototype.slice()"></a>一、Array.prototype.slice()</h3><p>slice() 方法会浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组。</p>
-<ol>
-<li><p>单词意思<br>slice  美 [slaɪs]<br>vt.  切成片; 切下; 划分;<br>n.  薄片; 一部分; （因失误而打出的）曲线球;<br>vi.  斜击;</p>
-</li>
-<li><p>语法<br>arr.slice([begin[, end]])</p>
-<ul>
-<li><p>参数</p>
-<ul>
-<li><p>begin<br>  从该索引处开始提取原数组中的元素（从0开始）。<br>  如果该参数为负数，则表示从原数组中的倒数第几个元素开始提取，slice(-2)表示提取原数组中的倒数第二个元素到最后一个元素（包含最后一个元素）。<br>  如果省略 begin，则 slice 从索引 0 开始。</p>
-</li>
-<li><p>end<br>  在该索引处结束提取原数组元素（从0开始）。slice 会提取原数组中索引从 begin 到 end 的所有元素（包含 begin，但 <strong>不包含 end</strong>）。<br>  slice(1,4) 提取原数组中的第二个元素开始直到第四个元素的所有元素 （索引为 1, 2, 3的元素）。<br>  如果该参数为负数， 则它表示在原数组中的倒数第几个元素结束抽取。 slice(-2,-1)表示抽取了原数组中的倒数第二个元素到最后一个元素（不包含最后一个元素，也就是只有倒数第二个元素）。<br>  如果 end 被省略，则 slice 会一直提取到原数组末尾。<br>  返回值是一个含有提取元素的新数组</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>描述<br> slice <strong>不修改原数组</strong>，只会返回一个浅复制了原数组中的元素的一个新数组。原数组的元素会按照下述规则拷贝：</p>
-<p> 如果该元素是个对象引用 （不是实际的对象），slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。<br> 对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组。<br> 如果向两个数组任一中添加了新元素，则另一个不会受到影响。</p>
-</li>
-<li><p>示例</p>
-</li>
-</ol>
-<ul>
-<li><p>返回数组中的一部分</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Our good friend the citrus from fruits example</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Lemon"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> citrus = fruits.slice(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// 注意这里不包含下标 3("Apple") 的元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// puts --&gt; ["Orange","Lemon"]</span></span></pre></td></tr></table></figure>
-</li>
-<li><p>使用 slice<br>  在下例中, slice 从 myCar 中创建了一个新数组 newCar. 两个数组都包含了一个 myHonda 对象的引用. 当 myHonda 的 color 属性改变为 purple, 则两个数组中的对应元素都会随之改变.</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 slice方法从 myCar 中创建一个 newCar.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myHonda = &#123; <span class="attr">color</span>: <span class="string">"red"</span>, <span class="attr">wheels</span>: <span class="number">4</span>, <span class="attr">engine</span>: &#123; <span class="attr">cylinders</span>: <span class="number">4</span>, <span class="attr">size</span>: <span class="number">2.2</span> &#125; &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCar = [myHonda, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newCar = myCar.slice(<span class="number">0</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出myCar, newCar,以及各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar = "</span> + myCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar = "</span> + newCar.toSource());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变myHonda对象的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">myHonda.color = <span class="string">"purple"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"The new color of my Honda is "</span> + myHonda.color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出myCar, newCar中各自的myHonda对象引用的color属性.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"myCar[0].color = "</span> + myCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">"newCar[0].color = "</span> + newCar[<span class="number">0</span>].color);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">上述代码输出:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">myCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>, <span class="string">"cherry condition"</span>, <span class="string">"purchased 1997"</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">newCar = [&#123;<span class="attr">color</span>:<span class="string">"red"</span>, <span class="attr">wheels</span>:<span class="number">4</span>, <span class="attr">engine</span>:&#123;<span class="attr">cylinders</span>:<span class="number">4</span>, <span class="attr">size</span>:<span class="number">2.2</span>&#125;&#125;, <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = red </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = red</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">The <span class="keyword">new</span> color <span class="keyword">of</span> my Honda is purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">myCar[<span class="number">0</span>].color = purple</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">newCar[<span class="number">0</span>].color = purple</span></pre></td></tr></table></figure>
-</li>
-<li><p>类数组（Array-like）对象<br>  slice 方法可以用来将一个类数组（Array-like）对象/集合转换成一个数组。你只需将该方法绑定到这个对象上。下述代码中 list 函数中的 arguments 就是一个类数组对象。</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">除了使用 <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)，你也可以简单的使用 [].slice.call(<span class="built_in">arguments</span>) 来代替。另外，你可以使用 bind 来简化该过程。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unboundSlice = <span class="built_in">Array</span>.prototype.slice;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice = <span class="built_in">Function</span>.prototype.call.bind(unboundSlice);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> slice(<span class="built_in">arguments</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = list(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// [1, 2, 3]</span></span></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h3 id="二、Array-prototype-splice"><a href="#二、Array-prototype-splice" class="headerlink" title="二、Array.prototype.splice()"></a>二、Array.prototype.splice()</h3><p>splice() 方法用新元素替换旧元素，以此修改数组的内容。</p>
-<ol>
-<li><p>单词意思<br> splice 美 [splaɪs]<br> vt.  绞接; 捻接（两段绳子）; 胶接; 粘接（胶片、磁带等）;<br> n.  胶接处，粘接处，铰接处;</p>
-</li>
-<li><p>语法<br> array.splice(start, deleteCount[, item1[, item2[, …]]])</p>
-</li>
-<li><p>参数</p>
-<ul>
-<li><p>start​<br>  从数组的哪一位开始修改内容。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位。</p>
-</li>
-<li><p>deleteCount<br>  整数，表示要移除的数组元素的个数。如果 deleteCount 是 0，则不移除元素。这种情况下，至少应添加一个新元素。如果 deleteCount 大于 start 之后的元素的总数，则从 start 后面的元素都将被删除（含第 start 位）。</p>
-</li>
-<li><p>itemN<br>  要添加进数组的元素。如果不指定，则 splice() 只删除数组元素。</p>
-</li>
-<li><p>返回值<br>  由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</p>
-</li>
-</ul>
-</li>
-<li><p>描述<br> 如果添加进数组的元素个数不等于被删除的元素个数，数组的长度会发生相应的改变。</p>
-</li>
-<li><p>提示和注释<br> 注释：请注意，splice() 方法与 slice() 方法的作用是不同的，splice() 方法会直接对数组进行修改。</p>
-</li>
-<li><p>示例<br> 使用 splice()</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下代码演示了 splice 的用法：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFish = [<span class="string">"angel"</span>, <span class="string">"clown"</span>, <span class="string">"mandarin"</span>, <span class="string">"surgeon"</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 0 个元素，插入 "drum"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removed = myFish.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">"drum"</span>); <span class="comment">// 这里的 "drum" 是被插入到 下标 2("mandarin") 的前面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的 myFish:["angel", "clown", "drum", "mandarin", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：[]，没有元素被删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 1 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["angel", "clown", "drum", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["mandarin"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 2 位开始删除 1 个元素，然后插入 "trumpet"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">2</span>, <span class="number">1</span>, <span class="string">"trumpet"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["angel", "clown", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素数组：["drum"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 0 位开始删除 2 个元素，然后插入 "parrot", "anemone" 和 "blue"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">0</span>, <span class="number">2</span>, <span class="string">"parrot"</span>, <span class="string">"anemone"</span>, <span class="string">"blue"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish：["parrot", "anemone", "blue", "trumpet", "surgeon"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["angel", "clown"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从第 3 位开始删除 2 个元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">removed = myFish.splice(<span class="number">3</span>, <span class="built_in">Number</span>.MAX_VALUE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运算后的myFish: ["parrot", "anemone", "blue"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//被删除元素的数组：["trumpet", "surgeon"]</span></span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="三、slice-Vs-splice"><a href="#三、slice-Vs-splice" class="headerlink" title="三、slice Vs splice"></a>三、slice Vs splice</h3><ol>
-<li>作用不同：<ul>
-<li>slice: 浅复制（shallow copy）数组的一部分到一个新的数组，并返回这个新数组</li>
-<li>splice: 用新元素替换旧元素，以此修改数组的内容</li>
-</ul>
-</li>
-<li>对原数组的影响不同<ul>
-<li>slice: 返回新数组，不影响原数组</li>
-<li>splice: 会更改原数组值</li>
-</ul>
-</li>
-</ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="noopener">Array.prototype.slice()</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" target="_blank" rel="noopener">Array.prototype.splice()</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1269,7 +1141,7 @@
 		
 			<li><a href="/categories/Css3/">Css3<span>4</span></a></li>
 		
-			<li><a href="/categories/Database/">Database<span>4</span></a></li>
+			<li><a href="/categories/Database/">Database<span>6</span></a></li>
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
@@ -1320,48 +1192,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
 			<li><a href="/tags/synology/">synology<span>1</span></a></li>
 		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>2</span></a></li>
+		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
 			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
 			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
 			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
 			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
 			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>25</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>26</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1374,6 +1246,14 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/11/25/2020-11-21-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
+      </li>
+    
+      <li>
         <a href="/2020/11/12/2020-11-10-django.starting/" ><i class="fa fa-file-o"></i>Django Starting</a>
       </li>
     
@@ -1383,14 +1263,6 @@
     
       <li>
         <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
-      </li>
-    
-      <li>
-        <a href="/2020/09/10/2020-09-10-synology/" ><i class="fa fa-file-o"></i>Synology</a>
-      </li>
-    
-      <li>
-        <a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" ><i class="fa fa-file-o"></i>CompileSdkVersion、TargetSdk...</a>
       </li>
     
   </ul>
