@@ -128,6 +128,238 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2016-11-23 </div>
+			<div class="article-title"><a href="/2016/11/23/2016-11-23-vue-模板语法/" >Vue 模板语法</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。所有 Vue.js 的模板都是合法的 HTML ，所以能被遵循规范的浏览器和 HTML 解析器解析。</p>
+<p>在底层的实现上， Vue 将模板编译成虚拟 DOM 渲染函数。结合响应系统，在应用状态改变时， Vue 能够智能地计算出重新渲染组件的最小代价并应用到 DOM 操作上。</p>
+<p>如果你熟悉虚拟 DOM 并且偏爱 JavaScript 的原始力量，你也可以不用模板，<a href="https://vuefe.cn/guide/render-function.html" target="_blank" rel="noopener">直接写渲染（render）函数</a>，使用可选的 JSX 语法。<a href="https://vuefe.cn/guide/syntax.html#插值" target="_blank" rel="noopener"></a></p>
+<h2 id="一、插值"><a href="#一、插值" class="headerlink" title="一、插值"></a>一、插值</h2><h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>数据绑定最常见的形式就是使用 “Mustache” 语法（双大括号）的文本插值：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>Mustache 标签将会被替代为对应数据对象上 <code>msg</code> 属性的值。无论何时，绑定的数据对象上 <code>msg</code> 属性发生了改变，插值处的内容都会更新。</p>
+<p>通过使用 <a href="https://vuefe.cn/api/#v-once" target="_blank" rel="noopener">v-once 指令</a>，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上所有的数据绑定：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>This will never change: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="纯-HTML"><a href="#纯-HTML" class="headerlink" title="纯 HTML"></a>纯 HTML</h3><p>双大括号会将数据解释为纯文本，而非 HTML 。为了输出真正的 HTML ，你需要使用 <code>v-html</code> 指令：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"rawHtml"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>被插入的内容都会被当做 HTML —— 数据绑定会被忽略。注意，你不能使用 <code>v-html</code> 来复合局部模板，因为 Vue 不是基于字符串的模板引擎。组件更适合担任 UI 重用与复合的基本单元。</p>
+<p>你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS 攻击</a>。请只对可信内容使用 HTML 插值，<strong>绝不要</strong>对用户提供的内容插值。<a href="https://vuefe.cn/guide/syntax.html#属性" target="_blank" rel="noopener"></a></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>Mustache 不能在 HTML 属性中使用，应使用 <a href="https://vuefe.cn/api/#v-bind" target="_blank" rel="noopener">v-bind 指令</a>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"dynamicId"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>这对布尔值的属性也有效 —— 如果条件被求值为 false 的话该属性会被移除： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:disabled</span>=<span class="string">"someDynamicCondition"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="JavaScript-表达式"><a href="#JavaScript-表达式" class="headerlink" title="JavaScript 表达式"></a>JavaScript 表达式</h3><p>迄今为止，在我们的模板中，我们一直都只绑定简单的属性键值。但实际上，对于所有的数据绑定， Vue.js 都提供了完全的 JavaScript 表达式支持。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; number + 1 &#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; ok ? 'YES' : 'NO' &#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; message.split('').reverse().join('') &#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"'list-' + id"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>这些表达式会在所属 Vue 实例的数据作用域下作为 JavaScript 被解析。有个限制就是，每个绑定都只能包含<strong>单个表达式</strong>，所以下面的例子都<strong>不会</strong>生效。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这是语句，不是表达式 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; var a = 1 &#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 流控制也不会生效，请使用三元表达式 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; if (ok) &#123; return message &#125; &#125;&#125;</span></pre></td></tr></table></figure>
+<p>模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，如 <code>Math</code> 和 <code>Date</code> 。你不应该在模板表达式中试图访问用户定义的全局变量。<a href="https://vuefe.cn/guide/syntax.html#过滤器" target="_blank" rel="noopener"></a></p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化。过滤器应该被添加在 <strong>mustache 插值</strong>的尾部，由“管道符”指示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; message | capitalize &#125;&#125;</span></pre></td></tr></table></figure>
+
+<p>Vue 2.x 中，过滤器只能在 mustache 绑定中使用。为了在指令绑定中实现同样的行为，你应该使用<a href="https://vuefe.cn/guide/computed.html" target="_blank" rel="noopener">计算属性</a>。</p>
+<p>过滤器函数总接受表达式的值作为第一个参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">new</span> Vue(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      filters: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    capitalize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (!value) <span class="keyword">return</span> <span class="string">''</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">          value = value.toString()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> value.charAt(<span class="number">0</span>).toUpperCase() + value.slice(<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`   </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="string">过滤器可以串联：</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="string">`</span><span class="string">``</span>html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; message | filterA | filterB &#125;&#125;</span></pre></td></tr></table></figure>
+<p>过滤器是 JavaScript 函数，因此可以接受参数：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;&#123; message | filterA('arg1', arg2) &#125;&#125;</span></pre></td></tr></table></figure>
+
+<p>这里，字符串 <code>&#39;arg1&#39;</code> 将传给过滤器作为第二个参数， <code>arg2</code> 表达式的值将被求值然后传给过滤器作为第三个参数。</p>
+<h2 id="二、指令"><a href="#二、指令" class="headerlink" title="二、指令"></a>二、指令</h2><p>指令（Directives）是带有 <code>v-</code> 前缀的特殊属性。指令属性的值预期是<strong>单一 JavaScript 表达式</strong>（除了 <code>v-for</code>，之后再讨论）。指令的职责就是当其表达式的值改变时相应地将某些行为应用到 DOM 上。让我们回顾一下在介绍里的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"seen"</span>&gt;</span>Now you see me<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>这里， <code>v-if</code> 指令将根据表达式 <code>seen</code> 的值的真假来移除/插入 <code>&lt;p&gt;</code> 元素。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>一些指令能接受一个“参数”，在指令后以冒号指明。例如， <code>v-bind</code> 指令被用来响应地更新 HTML 属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>在这里 <code>href</code> 是参数，告知 <code>v-bind</code> 指令将该元素的 <code>href</code> 属性与表达式 <code>url</code> 的值绑定。</p>
+<p>另一个例子是 <code>v-on</code> 指令，它用于监听 DOM 事件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>在这里参数是监听的事件名。我们也会更详细地讨论事件处理。</p>
+<h3 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h3><p>修饰符（Modifiers）是以半角句号 <code>.</code> 指明的特殊后缀，用于指出一个指定应该以特殊方式绑定。例如，<code>.prevent</code> 修饰符告诉 <code>v-on</code> 指令对于触发的事件调用 <code>event.preventDefault()</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>之后当我们更深入地了解 <code>v-on</code> 与 <code>v-model</code>时，会看到更多修饰符的使用。</p>
+<h2 id="三、缩写"><a href="#三、缩写" class="headerlink" title="三、缩写"></a>三、缩写</h2><p><code>v-</code> 前缀在模板中是作为一个标示 Vue 特殊属性的明显标识。当你使用 Vue.js 为现有的标记添加动态行为时，它会很有用，但对于一些经常使用的指令来说有点繁琐。同时，当搭建 Vue.js 管理所有模板的 <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank" rel="noopener">SPA</a> 时，<code>v-</code> 前缀也变得没那么重要了。因此，Vue.js 为两个最为常用的指令提供了特别的缩写：</p>
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"url"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 完整语法 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 缩写 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>它们看起来可能与普通的 HTML 略有不同，但 <code>:</code> 与 <code>@</code> 对于属性名来说都是合法字符，在所有支持 Vue.js 的浏览器都能被正确地解析。而且，它们不会出现在最终渲染的标记。缩写语法是完全可选的，但随着你更深入地了解它们的作用，你会庆幸拥有它们。</p>
+<h2 id="四、测试代码"><a href="#四、测试代码" class="headerlink" title="四、测试代码"></a>四、测试代码</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="css">		<span class="selector-id">#buity</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="css">			<span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>模板语法<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"test"</span>&gt;</span>输入: <span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">v-model</span>=<span class="string">"msg"</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"switch"</span>&gt;</span>使能开关: <span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"switch"</span> <span class="attr">v-model</span>=<span class="string">"enable"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>插值<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">	1. 文本:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>Message: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>This will never change: &#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">	2. 纯 Html: </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">&lt;!-- 更新元素的 innerHTML,可以在上面的 input 输入 &lt;h1&gt;World&lt;/h1&gt; --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">	3. 属性:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">&lt;!-- 可以在上面的 input 输入 buity  --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"msg"</span>&gt;</span>我可以动态改变属性 ID 值<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:disabled</span>=<span class="string">"!enable"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">	4. 使用 Javascript 表达式:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; number + 1 &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; enable ? 'YES' : 'NO' &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; msg.split('').reverse().join('') &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"'buit' + msg"</span>&gt;</span>表达式动态改变属性 ID 值<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">	5. 过滤器:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>常规： &#123;&#123; msg | capitalize &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>串联: &#123;&#123; msg | capitalize | addMyName &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>多参数: &#123;&#123; msg | fullName('jesse','chiu') &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>指令<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">	1. 指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"enable"</span>&gt;</span>Now you see me<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">	2. 参数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>url: <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span>click url<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>click: <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"showMe()"</span>&gt;</span>doSomething<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">	3. 修饰符 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">&lt;!-- &lt;form action="http://blog.jessechiu.com"&gt; --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span>name: <span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"Submit"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">	4. 缩写</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"url"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span>click url<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"showMe()"</span>&gt;</span>doSomething<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript"><span class="keyword">var</span> vm =  <span class="keyword">new</span> Vue(&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">	el: <span class="string">'#app'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">	data:&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		msg:<span class="string">'Hello Jesse'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		enable: <span class="literal">true</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">		number:1,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		url:<span class="string">'http://blog.jessechiu.com'</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">	&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">	methods:&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		showMe:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">			alert(<span class="string">'HI I am jesse'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">	&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">	filters:&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		capitalize:<span class="function"><span class="keyword">function</span><span class="params">(value)</span></span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">			<span class="keyword">if</span> (!value) <span class="keyword">return</span> <span class="string">''</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">		    value = value.toString();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		    <span class="keyword">return</span> value.charAt(<span class="number">0</span>).toUpperCase() + value.slice(<span class="number">1</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">		&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		addMyName:<span class="function"><span class="keyword">function</span><span class="params">(value)</span></span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">			<span class="keyword">if</span> (!value) <span class="keyword">return</span> <span class="string">''</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">			<span class="keyword">return</span> value.toString() + <span class="string">' kuku'</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">		&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">		fullName:<span class="function"><span class="keyword">function</span><span class="params">(value,arg1,arg2)</span></span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">			<span class="keyword">return</span> value + <span class="string">':'</span> +　arg1 + <span class="string">':'</span> + arg2;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://vuefe.cn/guide/syntax.html#插值" target="_blank" rel="noopener">文字部分引用</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-11-20 </div>
+			<div class="article-title"><a href="/2016/11/20/2016-11-20-《成大事者不纠结》/" >《成大事者不纠结》</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><img src="http://img38.ddimg.cn/18/30/1367811738-1_u_1.jpg" alt="成大事者不纠结"></p>
+<p>这本书是罗胖子(<a href="http://baike.baidu.com/link?url=IjAj2JUwyYE7M8G9ptnNjjLmA6NgFSoB6UB89nff7ybspVCj3gHTJsS-LMH9zX2EAIFWjyNeI5UcIpY7EW43ydLKJ1SEgzK8xbHeCQqsuHPNuElO9-mTetR9Rivws7qj" target="_blank" rel="noopener">罗振宇</a>)所著，本书主要讲述了清朝，民国时期以及外国里关于李鸿章，曾国藩，嘉庆皇帝，雍正皇帝，拿破仑三世，卢梭，甘地等的一些思维与轶事。全书精选自视频《罗辑思维》节目 12 小段，分为 6 大章节，每个章节有关一个人的小故事，所以阅读起来也比较轻松。</p>
+<p>本书的主旨是围绕着曾国藩的 <strong>未来不迎，当下不杂，过往不恋</strong> 这句话，本人也很喜欢。想到我们之所以浮躁，可能就是因为总是担心着未来，对当心的事又不能专心，还常常留恋着过去。如果我们能够专心的做好当下的事，想必总能做出不错的成绩。</p>
+<p>其中还有个观点说的很好，说的是曾国藩的 <strong>就是论事</strong> 的能力。咱们说这个事就是这个事，不涉及个人情感，不涉及过往，不担心未来发生什么，不牵扯对你的态度。</p>
+<p>本书的最后还说到了曾国藩的 <strong>内圣外王</strong> 的处事原则。这是他在失落回乡期间领悟到的处事方法，用儒家的道德、君子的标准来要求自己，让自己的内心里成为一个圣人。而对外还要有能力调动一切能够帮助你的力量来帮助你成就一番事业。最终也让他在官场上做到功成身退的好结果。所以也就有了 <strong>经商要读胡雪岩，当官的看曾国藩</strong></p>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-11-19 </div>
+			<div class="article-title"><a href="/2016/11/19/2016-11-19-frameset-frame-iframe-区别/" >Frameset、Frame、Iframe 区别</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="一、框架概念"><a href="#一、框架概念" class="headerlink" title="一、框架概念"></a>一、框架概念</h2><p>所谓框架便是网页画面分成几个框窗，同时取得多个 URL。只需要 <code>&lt;FRAMESET&gt; &lt;FRAME&gt;</code> 即可，而所有框架标记需要放在一个总起的 html 档，这个档案只记录了该框架 如何划分，不会显示任何资料，所以 <strong>不能</strong> 放入 <code>&lt;BODY&gt;</code> 标记，浏览这框架必须读取这档 案而不是其它框窗的档案。<code>&lt;FRAMESET&gt;</code> 是用以划分框窗，每一框窗由一个 <code>&lt;FRAME&gt;</code> 标 记所标示，<code>&lt;FRAME&gt;</code> 必须在 <code>&lt;FRAMESET&gt;</code> 范围中使用。如下例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"50%,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"a"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"b"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>此例中  <code>&lt;FRAMESET&gt;</code> 把画面分成左右两相等部分，左便是显示 <code>a.html</code>，右边则会显示 <code>b.html</code> 这档案，<code>&lt;FRAME&gt;</code> 标记所标示的框窗永远是按由: 上 -&gt;下-&gt;左-&gt;右的次序。 </p>
+<h2 id="二、-lt-FRAMESET-gt-lt-FRAME-gt"><a href="#二、-lt-FRAMESET-gt-lt-FRAME-gt" class="headerlink" title="二、&lt;FRAMESET&gt; &lt;FRAME&gt;"></a>二、<code>&lt;FRAMESET&gt; &lt;FRAME&gt;</code></h2><ol>
+<li><p><code>&lt;FRAMESET&gt;</code> 称框架标记，用以宣告 HTML 文件为框架模式，并设定视窗如何分割。 <code>&lt;FRAME&gt;</code> 则只是设定某一个框窗内的参数属性。<br><code>&lt;FRAMESET&gt;</code> 参数设定：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">例子：<span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"90,*"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">border</span>=<span class="string">0</span> <span class="attr">framespacing</span>=<span class="string">"2"</span> <span class="attr">bordercolor</span>=<span class="string">"#008000"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>COLS=”90,*”<br>垂直切割画面(如分左右两个画面)，接受整数值、百分数， * 则代表占用馀下空 间。数值的个数代表分成的视窗数目且以逗号分隔。</p>
+</li>
+<li><p>ROWS=”120,*”<br>就是横向切割，将画面上下分开，数值设定同上。唯 COLS 与 ROWS 两参数尽量 不要同在一个  <code>&lt;FRAMESET&gt;</code> 标记中，因 Netacape 偶然不能显示这类形的框架，尽 采用多重分割。 </p>
+</li>
+<li><p>frameborder=”0”<br>设定框架的边框，其值只有 0 和 1 ， 0 表示不要边框， 1 表示要显示边框。(避 免使用 yes 或 no )</p>
+</li>
+<li><p>border=”0”<br>设定框架的边框厚度，以 pixels 为单位。   </p>
+</li>
+<li><p>bordercolor=”#008000”<br>设定框架的边框颜色。  </p>
+</li>
+<li><p>framespacing=”5”<br>表示框架与框架间的保留空白的距离。</p>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;FRAME&gt;</code> 参数设定： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">例子：<span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span> <span class="attr">marginwidth</span>=<span class="string">"5"</span> <span class="attr">marginheight</span>=<span class="string">"5"</span> <span class="attr">scrolling</span>=<span class="string">"Auto"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">noresize</span> <span class="attr">framespacing</span>=<span class="string">"6"</span> <span class="attr">bordercolor</span>=<span class="string">"#0000FF"</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>SRC=”a.html”<br>设定此框窗中要显示的网页档案名称，每个框窗一定要对应着一个网页档案。你可 使用绝对路径或相对路径。   </p>
+</li>
+<li><p>NAME=”top”<br>设定这个框窗的名称，这样才能指定框架来作连结，必须但任意命名。</p>
+</li>
+<li><p>frameborder=0<br>设定框架的边框，其值只有 0 和 1 ， 0 表示不要边框， 1 表示要显示边框。</p>
+</li>
+<li><p>framespacing=”6”<br>表示框架与框架间的保留空白的距离。</p>
+</li>
+<li><p>bordercolor=”#008000”<br>设定框架的边框颜色。</p>
+</li>
+<li><p>scrolling=”Auto”<br>设定是否要显示卷轴，YES 表示要显示卷轴，NO 表示无论如何都不要显示， AUTO 是视情况显示。</p>
+</li>
+<li><p>noresize<br>设定不让使用者可以改变这个框框的大小，亦没有设定此参数，使用者可以很随 意地拉动框架，改变其大小。</p>
+</li>
+<li><p>marginhight=5<br>表示框架高度部份边缘所保留的空间。</p>
+</li>
+<li><p>marginwidth=5<br>表示框架宽度部份边缘所保留的空间。  </p>
+</li>
+<li><p>target<br>表示在指定的框架中打开网页</p>
+<ul>
+<li>blank   它表示在一个新的窗口中打开链接网页</li>
+<li>top      它表示在本窗口中打开链接网页</li>
+<li>parent 在上一层的框架中打开链接网页</li>
+<li>self      在超链接中打开链接网页</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>例子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">//例子 1   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">//例子 2   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*,80"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"middle"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">//例子 3   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"upper_left"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_left"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">//例子 4   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_left"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">//例子 5   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">cols</span>=<span class="string">"150,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"left"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"upper_right"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"lower_right"</span> <span class="attr">src</span>=<span class="string">"c.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="三、-lt-NOFRAMES-gt"><a href="#三、-lt-NOFRAMES-gt" class="headerlink" title="三、&lt;NOFRAMES&gt;"></a>三、<code>&lt;NOFRAMES&gt;</code></h2><p>当别人使用的浏览器太旧，不支援框架这个功能时，他看到的将会是一片空白。为了避免 这种情况，可使用 <code>&lt;NOFRAMES&gt;</code> 这个标记，当使用者的浏览器看不到框架时，他就会看到 <code>&lt;NOFRAMES&gt; 与 &lt;/NOFRAMES&gt;</code> 之间的内容，而不是一片空白。<br>应用方法：   </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"80,*"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">noframes</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  很抱歉，阁下使用的浏览器不支援框架功能，请转用新的浏览器。   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">noframes</span>&gt;</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"top"</span> <span class="attr">src</span>=<span class="string">"a.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"bottom"</span> <span class="attr">src</span>=<span class="string">"b.html"</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>若浏览器支援框架，那麽它不会理会 <code>&lt;noframes&gt;</code> 中的东西，但若浏览器不支援框架，由 於不认识所有框架标记，不明的标记会被略过，标记包围的东西便被解读出来，所以放在 <code>&lt;noframes&gt;</code> 范围内的文字会被显示。 </p>
+<h2 id="四、-lt-IFRAME-gt"><a href="#四、-lt-IFRAME-gt" class="headerlink" title="四、 &lt;IFRAME&gt;"></a>四、 <code>&lt;IFRAME&gt;</code></h2><p>这标记作用是在一页网页中间插入一个框窗以显示另一个文件。它是 一个围堵标记，但围着的字句只有在浏览器不支援 iframe 标记时才会显示，如 <code>&lt;noframes&gt;</code> 一样，可以放些提醒字句之类。通常 iframe 配合一个辨认浏览器的 JavaScript 会较好，若 JavaScript 认出该浏览器并非 Internet Explorer 便会切换至另一版本。PS：一定要使用 <code>&lt;/iframe&gt;</code> 关闭，否则后面的内容显示不出来。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span>&gt;</span> 的参数设定如下：   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">例子： <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"iframe.html"</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">align</span>=<span class="string">"MIDDLE"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"100"</span> <span class="attr">marginwidth</span>=<span class="string">"1"</span> <span class="attr">marginheight</span>=<span class="string">"1"</span> <span class="attr">frameborder</span>=<span class="string">"1"</span> <span class="attr">scrolling</span>=<span class="string">"Yes"</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>src=”iframe.html”<br>欲显示於此框窗的文件来源除档案名称，必要加上相对或绝对路径。</p>
+</li>
+<li><p>name=”test”<br>此框窗名称，这是连结标记的 target 参数所需要的。</p>
+</li>
+<li><p>align=”MIDDLE”<br>可选值为 left, right, top, middle, bottom，作用不大</p>
+</li>
+<li><p>width=”300” height=”100”<br>框窗的宽及长，以 pixels 为单位。</p>
+</li>
+<li><p>marginwidth=”1” marginheight=”1”<br>该插入的文件与框边所保留的空间。</p>
+</li>
+<li><p>frameborder=”1”<br>使用 1 表示显示边框， 0 则不显示。（可以是 yes 或 no） </p>
+</li>
+<li><p>scrolling=”Yes”<br>使用 Yes 表示容许卷动（内定）， No 则不容许卷动</p>
+</li>
+</ul>
+<h2 id="五、frame-和-iframe-的区别"><a href="#五、frame-和-iframe-的区别" class="headerlink" title="五、frame 和 iframe 的区别"></a>五、frame 和 iframe 的区别</h2><p>1、frame 不能脱离 frameSet 单独使用，iframe 可以；<br>2、frame 不能放在 <strong>body</strong> 中；如下可以正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>  <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>  <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+
+<p>如下不能正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>3、嵌套在 frameSet 中的 iframe 必需放在 body 中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下可以正常显示：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>如下不能正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span> <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span> <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+
+<p>4、不嵌套在 frameSet 中的 iframe 可以随意使用；<br>如下均可以正常显示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">``` </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">``html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+<p>5、frame 的高度只能通过 frameSet 控制；iframe 可以自己控制，不能通过 frameSet 控制，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;body&gt;--&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span> <span class="attr">rows</span>=<span class="string">"50%,*"</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame1"</span>   <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">frame</span>   <span class="attr">name</span>=<span class="string">"frame2"</span>   <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;/body&gt;--&gt;</span></span></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">frameset</span>&gt;</span>  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">height</span>=<span class="string">"30%"</span>  <span class="attr">name</span>=<span class="string">"frame1"</span>    <span class="attr">src</span>=<span class="string">"a.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">height</span>=<span class="string">"100"</span>  <span class="attr">name</span>=<span class="string">"frame2"</span>    <span class="attr">src</span>=<span class="string">"b.htm"</span>/&gt;</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">frameset</span>&gt;</span>   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.xuebuyuan.com/1385439.html" target="_blank" rel="noopener">frame,iframe,frameset 之间的关系与区别</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-11-19 </div>
 			<div class="article-title"><a href="/2016/11/19/2016-11-19-html-转义字符/" >Html 转义字符</a></div>						
 		</h3>
@@ -1418,309 +1650,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-11-16 </div>
-			<div class="article-title"><a href="/2016/11/16/2016-11-16-sublime-eslint/" >Sublime ESlint 插件配置</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h3 id="一、插件安装"><a href="#一、插件安装" class="headerlink" title="一、插件安装"></a>一、插件安装</h3><p>sublime 集成 ESlint 需要全局安装 <a href="https://github.com/eslint/eslint" target="_blank" rel="noopener">ESlint</a> 和两个插件 <a href="https://github.com/SublimeLinter/SublimeLinter3" target="_blank" rel="noopener">SublimeLinter</a>、<a href="https://github.com/roadhump/SublimeLinter-eslint" target="_blank" rel="noopener">SublimeLinter-contrib-eslint </a>才能正常使用</p>
-<p>（插件目录名是 SublimeLinter3，默认 gutter_theme 路径配置是 SublimeLinter，这两个需要保持统一，否则启动时会报错）</p>
-<p>然后通过 Preferences-&gt;Package Settings-&gt;SublimeLinter-&gt;Settings - User 进行集成：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"user"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"debug"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"delay"</span>: <span class="number">0.25</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"error_color"</span>: <span class="string">"D02000"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//SublimeLinter与插件文件夹名保持一致</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"gutter_theme"</span>: <span class="string">"Packages/SublimeLinter/gutter-themes/Default/Default.gutter-theme"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"gutter_theme_excludes"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"lint_mode"</span>: <span class="string">"background"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"linters"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">//新增的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"eslint"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"@disable"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"args"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"excludes"</span>: []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"mark_style"</span>: <span class="string">"outline"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"no_column_highlights_line"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"passive_warnings"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"paths"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"linux"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"osx"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"windows"</span>: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                <span class="comment">//全局安装 ESLint 生成的 eslint.cmd 的目录，根据自身情况修改</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                <span class="string">"**/nodejs/eslint.cmd"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            ]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"python_paths"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"linux"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"osx"</span>: [],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"windows"</span>: []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"rc_search_limit"</span>: <span class="number">3</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"shell_timeout"</span>: <span class="number">10</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"show_errors_on_save"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"show_marks_in_minimap"</span>: <span class="literal">true</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"syntax_map"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"html (django)"</span>: <span class="string">"html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"html (rails)"</span>: <span class="string">"html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"html 5"</span>: <span class="string">"html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"javascript (babel)"</span>: <span class="string">"javascript"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"magicpython"</span>: <span class="string">"python"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"php"</span>: <span class="string">"html"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            <span class="string">"python django"</span>: <span class="string">"python"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"warning_color"</span>: <span class="string">"DDB700"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"wrap_find"</span>: <span class="literal">true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="二、添加配置文件"><a href="#二、添加配置文件" class="headerlink" title="二、添加配置文件"></a>二、添加配置文件</h3><p>将下面的配置代码保存到根目录，文件名为<code>.eslintrc.js/json</code>。也可以参考 <a href="http://eslint.org/docs/rules/" target="_blank" rel="noopener">官方文档</a>。</p>
-<p><em>建议使用 <a href="http://standardjs.com/" target="_blank" rel="noopener">standardjs</a></em></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"globals"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"$"</span>: <span class="literal">true</span>,                                <span class="comment">//zepto</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"define"</span>: <span class="literal">true</span>,                           <span class="comment">//requirejs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"require"</span>: <span class="literal">true</span>                           <span class="comment">//requirejs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"env"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"browser"</span>: <span class="literal">true</span>                           <span class="comment">//执行环境 浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"rules"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//官方文档 http://eslint.org/docs/rules/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//警告</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// "quotes": [0, "single"],                  //建议使用单引号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// "no-inner-declarations": [0, "both"],     //不建议在&#123;&#125;代码块内部声明变量或函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-extra-boolean-cast"</span>: <span class="number">1</span>,               <span class="comment">//多余的感叹号转布尔型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-extra-semi"</span>: <span class="number">1</span>,                       <span class="comment">//多余的分号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-extra-parens"</span>: <span class="number">1</span>,                     <span class="comment">//多余的括号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-empty"</span>: <span class="number">1</span>,                            <span class="comment">//空代码块</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-use-before-define"</span>: [<span class="number">1</span>, <span class="string">"nofunc"</span>],    <span class="comment">//使用前未定义</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"complexity"</span>: [<span class="number">1</span>, <span class="number">10</span>],                    <span class="comment">//圈复杂度大于10 警告</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//常见错误</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"comma-dangle"</span>: [<span class="number">2</span>, <span class="string">"never"</span>],             <span class="comment">//定义数组或对象最后多余的逗号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-debugger"</span>: <span class="number">2</span>,                         <span class="comment">//debugger 调试代码未删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-constant-condition"</span>: <span class="number">2</span>,               <span class="comment">//常量作为条件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-dupe-args"</span>: <span class="number">2</span>,                        <span class="comment">//参数重复</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-dupe-keys"</span>: <span class="number">2</span>,                        <span class="comment">//对象属性重复</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-duplicate-case"</span>: <span class="number">2</span>,                   <span class="comment">//case重复</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-empty-character-class"</span>: <span class="number">2</span>,            <span class="comment">//正则无法匹配任何值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-invalid-regexp"</span>: <span class="number">2</span>,                   <span class="comment">//无效的正则</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-func-assign"</span>: <span class="number">2</span>,                      <span class="comment">//函数被赋值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"valid-typeof"</span>: <span class="number">2</span>,                        <span class="comment">//无效的类型判断</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-unreachable"</span>: <span class="number">2</span>,                      <span class="comment">//不可能执行到的代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-unexpected-multiline"</span>: <span class="number">2</span>,             <span class="comment">//行尾缺少分号可能导致一些意外情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-sparse-arrays"</span>: <span class="number">2</span>,                    <span class="comment">//数组中多出逗号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-shadow-restricted-names"</span>: <span class="number">2</span>,          <span class="comment">//关键词与命名冲突</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-undef"</span>: <span class="number">2</span>,                            <span class="comment">//变量未定义</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-unused-vars"</span>: <span class="number">2</span>,                      <span class="comment">//变量定义后未使用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-cond-assign"</span>: <span class="number">2</span>,                      <span class="comment">//条件语句中禁止赋值操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-native-reassign"</span>: <span class="number">2</span>,                  <span class="comment">//禁止覆盖原生对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//代码风格优化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-else-return"</span>: <span class="number">1</span>,                      <span class="comment">//在else代码块中return，else是多余的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-multi-spaces"</span>: <span class="number">1</span>,                     <span class="comment">//不允许多个空格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"key-spacing"</span>: [<span class="number">1</span>, &#123;<span class="string">"beforeColon"</span>: <span class="literal">false</span>, <span class="string">"afterColon"</span>: <span class="literal">true</span>&#125;],<span class="comment">//object直接量建议写法 : 后一个空格前面不留空格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"block-scoped-var"</span>: <span class="number">2</span>,                    <span class="comment">//变量应在外部上下文中声明，不应在&#123;&#125;代码块中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"consistent-return"</span>: <span class="number">2</span>,                   <span class="comment">//函数返回值可能是不同类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"accessor-pairs"</span>: <span class="number">2</span>,                      <span class="comment">//object getter/setter方法需要成对出现</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"dot-location"</span>: [<span class="number">2</span>, <span class="string">"property"</span>],          <span class="comment">//换行调用对象方法  点操作符应写在行首</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-lone-blocks"</span>: <span class="number">2</span>,                      <span class="comment">//多余的&#123;&#125;嵌套</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-empty-label"</span>: <span class="number">2</span>,                      <span class="comment">//无用的标记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-extend-native"</span>: <span class="number">2</span>,                    <span class="comment">//禁止扩展原生对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-floating-decimal"</span>: <span class="number">2</span>,                 <span class="comment">//浮点型需要写全 禁止.1 或 2.写法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-loop-func"</span>: <span class="number">2</span>,                        <span class="comment">//禁止在循环体中定义函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-new-func"</span>: <span class="number">2</span>,                         <span class="comment">//禁止new Function(...) 写法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-self-compare"</span>: <span class="number">2</span>,                     <span class="comment">//不允与自己比较作为条件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-sequences"</span>: <span class="number">2</span>,                        <span class="comment">//禁止可能导致结果不明确的逗号操作符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-throw-literal"</span>: <span class="number">2</span>,                    <span class="comment">//禁止抛出一个直接量 应是Error对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-return-assign"</span>: [<span class="number">2</span>, <span class="string">"always"</span>],        <span class="comment">//不允return时有赋值操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-redeclare"</span>: [<span class="number">2</span>, &#123;<span class="string">"builtinGlobals"</span>: <span class="literal">true</span>&#125;],<span class="comment">//不允许重复声明</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-unused-expressions"</span>: [<span class="number">2</span>, &#123;<span class="string">"allowShortCircuit"</span>: <span class="literal">true</span>, <span class="string">"allowTernary"</span>: <span class="literal">true</span>&#125;],<span class="comment">//不执行的表达式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-useless-call"</span>: <span class="number">2</span>,                     <span class="comment">//无意义的函数call或apply</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-useless-concat"</span>: <span class="number">2</span>,                   <span class="comment">//无意义的string concat</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-void"</span>: <span class="number">2</span>,                             <span class="comment">//禁用void</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-with"</span>: <span class="number">2</span>,                             <span class="comment">//禁用with</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"space-infix-ops"</span>: <span class="number">2</span>,                     <span class="comment">//操作符前后空格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"valid-jsdoc"</span>: [<span class="number">2</span>, &#123;<span class="string">"requireParamDescription"</span>: <span class="literal">true</span>, <span class="string">"requireReturnDescription"</span>: <span class="literal">true</span>&#125;],<span class="comment">//jsdoc</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"no-warning-comments"</span>: [<span class="number">2</span>, &#123; <span class="string">"terms"</span>: [<span class="string">"todo"</span>, <span class="string">"fixme"</span>, <span class="string">"any other term"</span>], <span class="string">"location"</span>: <span class="string">"anywhere"</span> &#125;],<span class="comment">//标记未写注释</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"curly"</span>: <span class="number">1</span>                                <span class="comment">//if、else、while、for代码块用&#123;&#125;包围</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>三、重启 sublime</p>
-<p>效果图：<br><img src="http://img.blog.csdn.net/20151104150321655" alt="这里写图片描述"></p>
-<h3 id="四、gulp-搭建-eslint"><a href="#四、gulp-搭建-eslint" class="headerlink" title="四、gulp 搭建 eslint"></a>四、gulp 搭建 eslint</h3><p>安装 gulp-lint 可以生成报表到 checkstyle 目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;lint&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    var d &#x3D; new Date;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;yyyy-MM-dd_HHmmss</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    var outputTime &#x3D; d.toLocaleDateString().replace(&#x2F;[&#x2F;]&#x2F;g, &#39;-&#39;) + &#39;_&#39; + d.toTimeString().replace(&#x2F;[:]|\s.+&#x2F;g, &#39;&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    return gulp.src(paths.src + &#39;&#x2F;js&#x2F;**&#x2F;*.js&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        .pipe(eslint())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        .pipe(eslint.format(&#39;html&#39;, fs.createWriteStream(&#39;..&#x2F;checkstyle&#x2F;&#39; + outputTime + &#39;.html&#39;)))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        .pipe(eslint.format(&#39;stylish&#39;, process.stdout))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        .pipe(eslint.failAfterError());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="http://eslint.org/" target="_blank" rel="noopener">ESLint 官网</a></li>
-<li><a href="http://blog.csdn.net/lj745280746/article/details/49658249" target="_blank" rel="noopener">sublime 集成 ESLint</a></li>
-<li><a href="http://www.jianshu.com/p/e826e13c67ec" target="_blank" rel="noopener">Sublime Text 中配置 ESLint</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-11-15 </div>
-			<div class="article-title"><a href="/2016/11/15/2016-11-15-《让大脑自由》/" >《让大脑自由》</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><img src="https://img1.doubanio.com/lpic/s4331978.jpg" alt="Brain rules"></p>
-<p>在公司的图书馆借阅了《Brain Rules》的中译本《让大脑自由》，刚开始阅读兴趣较浓，但是书本理论偏多，也没有插图，渐渐的失去了阅读的激情，后面几章也就浏览了个大概。当然这篇的读书笔记也就偷懒了，直接从网络上引用了。</p>
-<h3 id="定律1-越运动-大脑越聪明"><a href="#定律1-越运动-大脑越聪明" class="headerlink" title="定律1:越运动,大脑越聪明"></a>定律1:越运动,大脑越聪明</h3><ul>
-<li><p>我们的大脑在步行中进化——每天步行12英里！</p>
-</li>
-<li><p>想要改善思维技能吗？动起来吧！</p>
-</li>
-<li><p>运动使更多的血液流向大脑，为大脑带来丰富的葡萄糖作为能量，同时还能带来氧气吸附遗留下来的有害电子。运动也能刺激蛋白的生成，促使神经元彼此连接。</p>
-</li>
-<li><p>只要每周两次有氧运动就可以将罹患一般老年痴呆症的风险降低一半，而且将患阿尔茨海默症的风险减少60%。</p>
-</li>
-</ul>
-<h3 id="定律2：大脑一直在进化"><a href="#定律2：大脑一直在进化" class="headerlink" title="定律2：大脑一直在进化"></a>定律2：大脑一直在进化</h3><ul>
-<li><p>我们的头颅内不仅只有一个大脑，我们有三个。首先介绍“蜥蜴脑”，它控制着我们的呼吸，我们还有一个和猫的大脑一样的大脑，在这两部分大脑上面覆盖着一层类似吉露果子冻薄薄的物质，我们称之为皮层，它是人类大脑的第三个组成部分，也是强大且“人类特有”的大脑。</p>
-</li>
-<li><p>天气变化瓦解了我们祖先的食物供应，他们被迫从树上跳下来，到大草原上生活。之后人类通过适应变化本身接管了地球。</p>
-</li>
-<li><p>从四条腿走路到两条腿直立行走在大草原上，这节省了能量，让人类的大脑得以发展的更加复杂、精密。</p>
-</li>
-<li><p>象征推理是大脑特有的一项才能。这种能力可能出于我们需要了解彼此的意图、动机，它是人类在一个小团体内的协作成为可能。</p>
-</li>
-</ul>
-<h3 id="定律3：每个大脑都不同"><a href="#定律3：每个大脑都不同" class="headerlink" title="定律3：每个大脑都不同"></a>定律3：每个大脑都不同</h3><ul>
-<li><p>日常生活你做了些什么，学习了什么会实质性的改变你大脑的样子——实际上你所学的东西对大脑进行了重新塑造。</p>
-</li>
-<li><p>大脑的各个区域在不同人之间以不同的速度发育。</p>
-</li>
-<li><p>没有两个大脑以同样的方式，在同一地点存储相同的信息。</p>
-</li>
-<li><p>我们的智能表现在各个方面，其中许多是不能通过智商测试来揭示的。</p>
-</li>
-</ul>
-<h3 id="定律4：大脑不关注无聊的事"><a href="#定律4：大脑不关注无聊的事" class="headerlink" title="定律4：大脑不关注无聊的事"></a>定律4：大脑不关注无聊的事</h3><ul>
-<li><p>我们无法对无聊的事集中精神。</p>
-</li>
-<li><p>大脑的注意力“聚光灯”一次只能集中在一件事情上：不能多任务处理。</p>
-</li>
-<li><p>与我们记忆细节相比，我们更善于参照模式以及提炼事件的含义。</p>
-</li>
-<li><p>情绪唤起有助于大脑学习。</p>
-</li>
-<li><p>听众会在讲座开始的10分钟后走神，不过你可以通过讲故事或者制造一个富含情绪的事件来抓住他们的注意力。</p>
-</li>
-</ul>
-<h3 id="定律5：短期记忆取决于最初几秒间"><a href="#定律5：短期记忆取决于最初几秒间" class="headerlink" title="定律5：短期记忆取决于最初几秒间"></a>定律5：短期记忆取决于最初几秒间</h3><ul>
-<li><p>大脑有许多类型的记忆系统。其中有一类有如下4个连续的处理阶段：编码、存储、检索、遗忘。</p>
-</li>
-<li><p>信息一进入到你的大脑就立刻被分裂成碎片，然后被送到大脑皮层的不同区域储存。</p>
-</li>
-<li><p>那些能够预测学习到的东西是否在日后能够被记起的大多数事件，都发生在学习的最初时刻。我们在记忆的最初时刻对其编码的越精细，记忆就越牢固。</p>
-</li>
-<li><p>如果你能复制你在记忆摸个事情时的周围环境，你可以提高记起这件事情的几率。</p>
-</li>
-</ul>
-<h3 id="定律6：长期记忆取决于有规律的重复"><a href="#定律6：长期记忆取决于有规律的重复" class="headerlink" title="定律6：长期记忆取决于有规律的重复"></a>定律6：长期记忆取决于有规律的重复</h3><ul>
-<li><p>大部分的记忆在几分钟后就消失了，不过那些度过脆弱期的记忆随着时间的推移在逐渐增强。</p>
-</li>
-<li><p>长期记忆在海马和大脑皮层之间的双向交流中形成，直到海马切断了与皮层之间的联系，记忆才被固定在皮层中，这个过程要经历数年的时间。</p>
-</li>
-<li><p>对于现实，大脑仅给我们一个近似的见解，因为它把新识同过去的记忆混在了一起，并把新知识、旧记忆当成一个事物存储在一起。</p>
-</li>
-<li><p>使长期记忆变得更加可靠的方式是，将新的信息逐步输入大脑并在固定的时间间隔温习这些信息。</p>
-</li>
-</ul>
-<h3 id="定律7：睡得好，大脑才会转得好"><a href="#定律7：睡得好，大脑才会转得好" class="headerlink" title="定律7：睡得好，大脑才会转得好"></a>定律7：睡得好，大脑才会转得好</h3><ul>
-<li><p>大脑中有两股同样由细胞和化学物质所构成的战斗力量，它们处于持续紧张的战斗状态中，一股力量试图让你睡觉，而另一股力量试图让你清醒。</p>
-</li>
-<li><p>当你睡着了的时候，大脑的神经元表现出旺盛的节奏性活动，也许它此时正在重放你白天学习的内容。</p>
-</li>
-<li><p>需要多长时间的睡眠，以及什么时候睡觉，在这个方面人人都不同，但在下午小睡一会的生物性驱力人人都具有。</p>
-</li>
-<li><p>睡眠缺失会损伤人的注意力、执行功能、工作记忆、情绪、数学能力、逻辑推理甚至运动的灵巧性。</p>
-</li>
-</ul>
-<h3 id="定律8：压力会损伤你的大脑"><a href="#定律8：压力会损伤你的大脑" class="headerlink" title="定律8：压力会损伤你的大脑"></a>定律8：压力会损伤你的大脑</h3><ul>
-<li><p>你身体的防御系统通过释放肾上腺素和皮质醇，对严重的、短暂的危险作出即刻的反应，比如，我们的祖先在觅食的过程中遭遇剑齿虎。慢性刺激，比如家庭中的矛盾，严重损害了我们的防御系统，因为我们的防御系统在进化之初只是为了处理短时的压力反应。</p>
-</li>
-<li><p>在慢性刺激下，肾上腺素在你的血管壁上造成伤痕，这会导致心脏病发作或引起中风，而皮质醇会伤害海马的细胞，从而削弱你的学习和记忆能力。</p>
-</li>
-<li><p>对个体而言，最坏的压力是你感觉对问题失去了控制，感到束手无策、无依无靠。</p>
-</li>
-<li><p>情绪压力对整个社会都有巨大的影响，影响儿童的学习能力，影响员工的工作效率。</p>
-</li>
-</ul>
-<h3 id="定律9：大脑喜欢多重感觉的世界"><a href="#定律9：大脑喜欢多重感觉的世界" class="headerlink" title="定律9：大脑喜欢多重感觉的世界"></a>定律9：大脑喜欢多重感觉的世界</h3><ul>
-<li><p>我们通过感官获得某一事件的信息，将其翻译成电子信号（一些信号来自视觉，一些信号来自听觉，等等），然后将这些信号发送到大脑的不同区域，接着对发生的一切进行重建，最后大脑对整件事情有了认知。</p>
-</li>
-<li><p>大脑似乎部分依赖过去的经历，以决定如何将这些信息整合，所以两个人可能对同一事件产生了完全不同的认知。</p>
-</li>
-<li><p>我们的感官就是被进化成需要在一起协同工作的模式，例如，视觉影响听觉，这意味着同时激发各个感官可能让我们学习的更好。</p>
-</li>
-<li><p>气味具有唤起记忆的不同寻常的力量，也许是因为嗅觉信号绕过丘脑直奔自己目的地的缘故，在这些目的地中，就包括了那个被称为杏仁核的情绪主管者。</p>
-</li>
-</ul>
-<h3 id="定律10：视觉是最有力的感官"><a href="#定律10：视觉是最有力的感官" class="headerlink" title="定律10：视觉是最有力的感官"></a>定律10：视觉是最有力的感官</h3><ul>
-<li><p>视觉是目前我们最重要的感觉器官，占去了大脑一半的资源。</p>
-</li>
-<li><p>我们所看到的，仅是大脑告诉过我们应该看到的，并不是百分之百准确。</p>
-</li>
-<li><p>我们的视觉分析分为很多步骤。视网膜将光子组装成像小电影一样的信息流。视觉皮层处理这些信息流，某些区域记录动作，某些区域记录颜色，等等。最后，我们把这些信息重新整合到一起，于是我们看到外面的世界了。</p>
-</li>
-<li><p>图片可以让我们获得最好的学习和记忆，书面或口头信息做不到这一点。</p>
-</li>
-</ul>
-<h3 id="定律11：大脑也有性别差异"><a href="#定律11：大脑也有性别差异" class="headerlink" title="定律11：大脑也有性别差异"></a>定律11：大脑也有性别差异</h3><ul>
-<li><p>男性拥有一条X染色体，女性拥有两条——一条是作为备份用的，X染色体是认知的“热点”，他携带了与大脑构造有关的众多基因。</p>
-</li>
-<li><p>女性的基因更为复杂，因为其细胞内活跃的X染色体是妈妈和爸爸的混合。而男性的X染色体都来自妈妈，并且他们的Y染色体携带的基因少于100个，而X染色体携带有1500个基因。</p>
-</li>
-<li><p>男女大脑在结构上和生化上都是不同的，例如，男性的杏仁核大。但我们不知道这些差别是否有重要的意义。</p>
-</li>
-<li><p>对急性应激男性和女性的反应不同：女性激活左半球的杏仁核，并记住情绪的细节；男性激活右半球的杏仁核，并记住要旨。</p>
-</li>
-</ul>
-<h3 id="定律12：我们是天生的探险家"><a href="#定律12：我们是天生的探险家" class="headerlink" title="定律12：我们是天生的探险家"></a>定律12：我们是天生的探险家</h3><ul>
-<li><p>婴儿是指导我们如何学习的榜样，他们不是被动的对环境作出反应，相反他们通过积极的观察、假设、实验和总结对周围事件进行探索。</p>
-</li>
-<li><p>大脑的特定部分帮助人类在探索世界过程中形成了某些科学的态度。大脑的右前额叶皮层检查我们假设中出现的错误（例如“剑齿虎不是对我们没有威胁的动物”），与它毗邻的区域告诉我们应该改变行为（快跑）。</p>
-</li>
-<li><p>因为“镜像神经元”的存在，我们可以识别和模仿某些行为，镜像神经元分布在大脑的各个地方。</p>
-</li>
-<li><p>成人大脑的一些区域像婴儿一样具有可塑性，所以我们可以产生新的神经元，让我们在一生中都能够学习新事物。</p>
-</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://book.douban.com/review/3466994/" target="_blank" rel="noopener">源文档</a> </li>
-<li><a href="http://baike.baidu.com/link?url=78JCvGj8xE5A3ECiHJY8znlm6WTos3Z8tQbYZ5_w8qRGu0xQ4-wOGvDAxcuPMEdKdfrX4MqjkgivaFbynb_2DENj7DW4vxqyXGbEdQvt6v0bxRj9Rarbi19LA1b-KePoXhOdFeISuSvLIT8ojUFdma" target="_blank" rel="noopener">百度百科</a></li>
-<li><a href="http://wenku.baidu.com/view/73fedcf883d049649a665869.html?re=view" target="_blank" rel="noopener">ppt</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-11-15 </div>
-			<div class="article-title"><a href="/2016/11/15/2016-11-15-javascript-检验工具的比较/" >Javascript 检验工具的比较</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="javascript-检验工具的比较"><a href="#javascript-检验工具的比较" class="headerlink" title="javascript 检验工具的比较"></a>javascript 检验工具的比较</h2><p>当写js代码的时候，一个校验工具可以帮助我避免愚蠢的错误。尽管我有许多年的经验，但是我仍然有变量命名不正确、产生语法错误以及忘记正确处理错 误。在我浪费时间，尤其是客户时间之前，一个好的校验工具或校验器可以告诉我这些问题。好的校验工具可以确保一个项目遵循代码规范。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a href="http://developer.51cto.com/art/201506/481510.htm#" target="_blank" rel="noopener"></a></h2><p>当写js代码的时候，一个校验工具可以帮助我避免愚蠢的错误。尽管我有许多年的经验，但是我仍然有变量命名不正确、产生语法错误以及忘记正确处理错 误。在我浪费时间，尤其是客户时间之前，一个好的校验工具或校验器可以告诉我这些问题。好的校验工具可以确保一个项目遵循代码规范。</p>
-<p><a href="http://s4.51cto.com/wyfs02/M00/6E/F5/wKiom1WMx4Wxk_-uAABGvJTyiQU744.jpg-wh_651x-s_3539409099.jpg" target="_blank" rel="noopener"><img src="http://s4.51cto.com/wyfs02/M00/6E/F5/wKiom1WMx4Wxk_-uAABGvJTyiQU744.jpg-wh_651x-s_3539409099.jpg" alt="javascript检验工具的比较"></a></p>
-<p>存在四个可以使用的js校验器，但是怎么选择使用哪一个呢？接下来让我们看看这四种流行方案的特点、优点和不足：<a href="http://www.jslint.com/" target="_blank" rel="noopener">JSLint</a>、<a href="http://jshint.com/" target="_blank" rel="noopener">JSHint</a>、<a href="http://jscs.info/" target="_blank" rel="noopener">JSCS</a>、<a href="http://eslint.org/" target="_blank" rel="noopener">ESLint</a>。</p>
-<p><strong>Overview</strong></p>
-<p>四种工具用相同的基本方式工作。他们都有一套用户分析、报告js文件错误的规则。他们都可以通过npm安装。他们都可以通过命令行使用、作为Grunt插件使用、也可以集成到编辑器中。他们四种均支持使用注释进行配置。</p>
-<p>但是相似点结束了。每个工具都有各自的优点和缺点–优点是通过比较得到的。</p>
-<p><strong>JSLint</strong></p>
-<p>JSLint是其中最老的工具。在2002年 Douglas Crockford开发了该工具，根据其经验，强制使用js语言中精粹的部分。如果你同意这些精粹，JSLint能成为一个好的工具。</p>
-<p>JSLint的缺点是不能配置和拓展。你根本不能禁掉需要特性，并且很多缺少文档。官方文档非常不友好，例如缺少如何将其集成到编辑的信息。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>参数配置完成，可以直接使用</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>JSLint不存在配置文件，如果想改变参数设置，那就存在问题</li>
-<li>有限的配置选项，许多规则不能禁掉</li>
-<li>不能增加个性化规则</li>
-<li>没有文档记录规则</li>
-<li>很难弄清楚哪个规则引起的错误</li>
-</ul>
-<p><strong>JSHint</strong></p>
-<p>作为一个可配置的JSLint版本，JSHint被开发出来。你可以配置每个规则，将其放到一个配置文件中，这样在大项目中可以容易使用。JSHint对每个规则有好的文档，所以可以准确知道每个规则的作用。将其集成到编辑器也是简单的。</p>
-<p>JSHint的一个小缺点是里面的松散默认配置。也即是你在使其可用之前必须将其启动。和ESLint相比，确定哪个规则用户开启或关闭错误信息，JSHint是更加困难。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>大多是参数可以配置</li>
-<li>支持配置文件，在大项目中容易使用</li>
-<li>已经支持需要类库，像jQuery、QUnit、NodeJS、Mocha等</li>
-<li>支持基本的ES6</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>难于知道哪个规则产生错误</li>
-<li>存在两类选项：强制选项和松散选项。使得配置有些混乱</li>
-<li>不支持自定义规则</li>
-</ul>
-<p><strong>JSCS</strong></p>
-<p>JSCS不同于其他，因为如果不给它一个配置文件或告诉它一个配置项，JSCS<br>不会做任何事情。可以存他们的网站现在配置项，所以这不是个大问题，并且有许多配置项，例如jQuery代码风格配置项、Google配置项。</p>
-<p>它有超过90个不同的规则，通过插件可以创建自定义规则。当和其他工具集成需要特定格式时，JSCS也支持自定义报告使得变得非常容易。</p>
-<p>JSCS是一个代码风格检查器。这意味着它仅仅匹配代码格式的问题，不匹配潜在的bugs、errors。因此，跟其他工具相比缺少灵活性，但是如果你仅仅强制检查代码风格，JSCS也是一个好的工具。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>支持自定义报告，更容易与其他工具集成</li>
-<li>如果你遵循一种可用的代码风格，配置项和准备好的配置文件使其容易启动</li>
-<li>在报告中存在标记包含规则名字，所以很容易指出哪个规则造成了错误</li>
-<li>通过自定义插件进行拓展</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>仅仅检查代码风格的问题。JSCS不检查潜在存在的bugs，例如不适用的变量、偶然的全局变量等等</li>
-<li>四个工具中最慢，但是在使用中不是一个问题</li>
-</ul>
-<p><strong>ESLint</strong></p>
-<p>ESLint是最新出来的工具。它被设计的容易拓展、拥有大量的自定义规则、容易的通过插件来安装。它给出准确的输出，而且包括规则名，这样可以知道哪个规则造成了错误。</p>
-<p>ESLint文档多少有些混乱。规则容易查找，以及被分为逻辑组，但是配置指南在有些地方容易弄混。然而它可以在一个地方提供链接去编辑集成、插件和样例。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li><p>灵活：任何规则都可以开启闭合，以及有些规则有些额外配置</p>
-</li>
-<li><p>很容易拓展和有需要可用插件</p>
-</li>
-<li><p>容易理解产出</p>
-</li>
-<li><p>包含了在其他检查器中不可用的规则，使得ESLint在错误检查上更有用</p>
-</li>
-<li><p>支持ES6，唯一支持JSX的工具</p>
-</li>
-<li><p>支持自定义报告</p>
-</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>需要一些配置</li>
-<li>速度慢，但不是主要问题</li>
-</ul>
-<p><strong>我的推荐</strong></p>
-<p>我的选择是ESLint。JSHint是严格和不可配置的，而JSHint缺少拓展机制。JSCS如果仅仅用于代码风格检验是一个好的选择，但是ESLint不仅可以进行代码风格的检验，而且可以检查代码中的bug和其他问题。</p>
-<p>如果使用ES6，ESLint也是明显的选择。在上面提到的工具中，ESLint对ES6支持的最广泛。</p>
-<p>如果你像尝试ESLint，我已经创造了5步快速开始指南。你可以 <a href="http://codeutopia.net/blog/h/get-eslint-guide/" target="_blank" rel="noopener">download the ESLint 5-step quickstart guide form my website</a></p>
-<p>JSHint是第二选择。如果不需要ESLint先进的特点，JSHint一旦配置就可以捕获需要好的问题。带有许多规则的JSCS，如果出了代码风格外不进行其他检查，将是一个好的选择。</p>
-<p>我非常犹豫去推荐JSLint。其他工具做同样地事情，但是不强制用户遵守这些规则。唯一的例外是你碰巧统一那些强制规则，那是值得深入研究的情况。</p>
-<p>一个检验工具是捕获问题的很好一步，但是仅仅能看到它规则的错误。为了更进一步的bug自动捕获，我推荐使用单元测试。code view也有助于达到该目的。</p>
-<p>你和你的团队是如何保障代码质量的呢？</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://developer.51cto.com/art/201506/481510.htm" target="_blank" rel="noopener">Javascript 检验工具的比较</a></li>
-<li><a href="http://www.sitepoint.com/comparison-javascript-linting-tools/" target="_blank" rel="noopener">英文原文</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1773,7 +1702,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>14</span></a></li>
+			<li><a href="/categories/Android/">Android<span>15</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1791,7 +1720,7 @@
 		
 			<li><a href="/categories/Css3/">Css3<span>4</span></a></li>
 		
-			<li><a href="/categories/Database/">Database<span>6</span></a></li>
+			<li><a href="/categories/Database/">Database<span>7</span></a></li>
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
@@ -1817,7 +1746,7 @@
 		
 			<li><a href="/categories/Powershell/">Powershell<span>1</span></a></li>
 		
-			<li><a href="/categories/Python/">Python<span>3</span></a></li>
+			<li><a href="/categories/Python/">Python<span>4</span></a></li>
 		
 			<li><a href="/categories/Read/">Read<span>9</span></a></li>
 		
@@ -1842,48 +1771,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-			<li><a href="/tags/sqlite/">sqlite<span>2</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
 		
 			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
 			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
 		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>26</span></a></li>
+		   <li><a href="/tags">...<span>28</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1896,23 +1825,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2020/11/25/2020-11-21-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
+        <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/29/2020-11-29-scrapy/" ><i class="fa fa-file-o"></i>Scrapy</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/26/2020-11-26-database-sqlite-exercise/" ><i class="fa fa-file-o"></i>SQLite Exercise</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
       </li>
     
       <li>
         <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/12/2020-11-10-django.starting/" ><i class="fa fa-file-o"></i>Django Starting</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker Starting</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
       </li>
     
   </ul>

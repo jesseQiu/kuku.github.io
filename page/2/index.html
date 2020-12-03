@@ -128,8 +128,120 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2019-12-05 </div>
+			<div class="article-title"><a href="/2019/12/05/2019-12-05-android-rxjava/" >Android-rxjava</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Android-Studio-环境搭建"><a href="#Android-Studio-环境搭建" class="headerlink" title="Android Studio 环境搭建"></a>Android Studio 环境搭建</h2><h3 id="1-Android-Studio-rxjava-环境配置"><a href="#1-Android-Studio-rxjava-环境配置" class="headerlink" title="1. Android Studio rxjava 环境配置"></a>1. Android Studio rxjava 环境配置</h3><p>由于 Android 的仓库有两个，默认创建工程中的是 jcenter 和 google 并没有包含 rxjava 和 rxandroid 的库。所以需要在工程目录下的 <code>build.grade</code> 中添加下面的语句</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    repositories &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        google()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        jcenter()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        maven &#123; url <span class="string">"https://jitpack.io"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        mavenCentral()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="2-配置支持-Lambda-表达式"><a href="#2-配置支持-Lambda-表达式" class="headerlink" title="2. 配置支持 Lambda 表达式"></a>2. 配置支持 Lambda 表达式</h3><ul>
+<li>Android Studio 3.x 默认支持</li>
+<li>在 app 文件夹下的 <code>build.grade</code> 文件中添加下面语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">android &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    // ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    compileOptions &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2019-11-14 </div>
+			<div class="article-title"><a href="/2019/11/14/2019-11-14-java-NIO/" >NIO</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>简介：网络编程 -&gt; RPC 的 “基石”。众所周知，网络编程有三种方式：BIO、NIO、AIO。本课程通过对 BIO/NIO 两种编程模型对比的形式，引入 NIO 的优势。后对 NIO 核心类进行梳理、分析。最后通过动手实践，完成一个基于 NIO 的多人聊天室功能。通过动手实践，来加深对 NIO 原理的理解，并发现NIO的不足之处，培养辩证的看待和使用 NIO 解决问题的能力。</p>
+</blockquote>
+<ul>
+<li><p>NIO: Non-blocking I/O || New I/O</p>
+</li>
+<li><p>JDK 1.4</p>
+</li>
+<li><p>用于高并发场景</p>
+</li>
+<li><p>Channel,Buffer,Selector</p>
+</li>
+</ul>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://www.imooc.com/learn/1118" target="_blank" rel="noopener">解锁网络编程之NIO的前世今生</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2019-11-06 </div>
+			<div class="article-title"><a href="/2019/11/06/2019-11-06-flutter/" >Flutter</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>Flutter 是谷歌的移动 UI 框架 ，可以快速在 iOS 和 Android 上构建高质量的原生用户界面。 Flutter 可以与现有的代码一起工作。在全世界，Flutter 正在被越来越多的开发者和组织使用，并且 Flutter 是完全免费、开源的。它也是构建未来的 Google Fuchsia(/ˈfjuːʃə/ ) 应用的主要方式。<br>Flutter 组件采用现代响应式框架构建，这是从 React 中获得的灵感，中心思想是用组件(widget)构建你的UI。 组件描述了在给定其当前配置和状态时他们显示的样子。当组件状态改变，组件会重构它的描述(description)，Flutter 会对比之前的描述， 以确定底层渲染树从当前状态转换到下一个状态所需要的最小更改。</p>
+</blockquote>
+<ul>
+<li>Google 推出一款跨平台的 UI 套件</li>
+<li>Linux，Android，IOS，Web</li>
+<li>原生的用户界面</li>
+<li>开源，免费</li>
+<li>渲染技术上使用了自主开发的(GDI)</li>
+<li>120fps 超高技术</li>
+<li>性能优于 Codova，RN</li>
+<li>以 Dart 语言编程</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://flutter.dev/" target="_blank" rel="noopener">flutter</a></li>
+<li><a href="https://github.com/Solido/awesome-flutter" target="_blank" rel="noopener">awesome-flutter github</a></li>
+<li><a href="https://www.imooc.com/learn/1090" target="_blank" rel="noopener">Flutter入门与案例实战</a></li>
+<li><a href="https://baike.baidu.com/item/Fuchsia/19900570?fr=aladdin" target="_blank" rel="noopener">Fuchsia</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2019-10-03 </div>
-			<div class="article-title"><a href="/2019/10/03/2019-10-02.car/" >Car Parameters</a></div>						
+			<div class="article-title"><a href="/2019/10/03/2019-10-02-car/" >Car Parameters</a></div>						
 		</h3>
 	
 
@@ -228,7 +340,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2019-09-20 </div>
-			<div class="article-title"><a href="/2019/09/20/2019-09--20.hadoop/" >Hadoop</a></div>						
+			<div class="article-title"><a href="/2019/09/20/2019-09-20-hadoop/" >Hadoop</a></div>						
 		</h3>
 	
 
@@ -257,7 +369,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2019-09-17 </div>
-			<div class="article-title"><a href="/2019/09/17/2019-09--17.golang/" >Golang</a></div>						
+			<div class="article-title"><a href="/2019/09/17/2019-09-17-golang/" >Golang</a></div>						
 		</h3>
 	
 
@@ -287,7 +399,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2019-03-25 </div>
-			<div class="article-title"><a href="/2019/03/25/2019-03--25.gantt.project.start/" >Gantt Project Start</a></div>						
+			<div class="article-title"><a href="/2019/03/25/2019-03--25-gantt.project.start/" >Gantt Project Start</a></div>						
 		</h3>
 	
 
@@ -325,68 +437,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2018-12-03 </div>
-			<div class="article-title"><a href="/2018/12/03/2018-12-03-mermaid/" >Mermaid</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>Mermaid 是一个轻量级的图标生成工具(基于 nodejs)，只要通过简单的配置既可以生成漂亮的不同格式文件(svg、png、pdf)</p>
-<blockquote>
-<p>Generation of diagrams and flowcharts from text in a similar manner as markdown.<br>Ever wanted to simplify documentation and avoid heavy tools like Visio when explaining your code?<br>This is why mermaid was born, a simple markdown-like script language for generating charts from text via javascript.</p>
-</blockquote>
-<h2 id="一、效果图"><a href="#一、效果图" class="headerlink" title="一、效果图"></a>一、效果图</h2><h3 id="Flowchart"><a href="#Flowchart" class="headerlink" title="Flowchart"></a>Flowchart</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">graph TD;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    A--&gt;B;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    A--&gt;C;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    B--&gt;D;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    C--&gt;D;</span></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/knsv/mermaid/blob/master/img/flow.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/flow.png" alt="Flowchart"></a></p>
-<h3 id="Sequence-diagram"><a href="#Sequence-diagram" class="headerlink" title="Sequence diagram"></a>Sequence diagram</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    participant Alice</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    participant Bob</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Alice-&gt;&gt;John: Hello John, how are you?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    loop Healthcheck</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        John-&gt;&gt;John: Fight against hypochondria</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    Note right of John: Rational thoughts &lt;br&#x2F;&gt;prevail...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    John--&gt;&gt;Alice: Great!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    John-&gt;&gt;Bob: How about you?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    Bob--&gt;&gt;John: Jolly good!</span></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/knsv/mermaid/blob/master/img/sequence.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/sequence.png" alt="Sequence diagram"></a></p>
-<h3 id="Gantt-diagram"><a href="#Gantt-diagram" class="headerlink" title="Gantt diagram"></a>Gantt diagram</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gantt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">dateFormat  YYYY-MM-DD</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">title Adding GANTT diagram to mermaid</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">section A section</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Completed task            :done,    des1, 2014-01-06,2014-01-08</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Active task               :active,  des2, 2014-01-09, 3d</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Future task               :         des3, after des2, 5d</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Future task2               :         des4, after des3, 5d</span></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/knsv/mermaid/blob/master/img/gantt.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/gantt.png" alt="Gantt diagram"></a></p>
-<h3 id="Class-diagram-experimental"><a href="#Class-diagram-experimental" class="headerlink" title="Class diagram - experimental"></a>Class diagram - experimental</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">classDiagram</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Class01 &lt;|-- AveryLongClass : Cool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Class03 *-- Class04</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Class05 o-- Class06</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Class07 .. Class08</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Class09 --&gt; C2 : Where am i?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Class09 --* C3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Class09 --|&gt; Class07</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Class07 : equals()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Class07 : Object[] elementData</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Class01 : size()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">Class01 : int chimp</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">Class01 : int gorilla</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">Class08 &lt;--&gt; C2: Cool label</span></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/knsv/mermaid/blob/master/img/class.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/class.png" alt="Class diagram"></a></p>
-<h3 id="Git-graph-experimental"><a href="#Git-graph-experimental" class="headerlink" title="Git graph - experimental"></a>Git graph - experimental</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gitGraph:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">options</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &quot;nodeSpacing&quot;: 150,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &quot;nodeRadius&quot;: 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">branch newbranch</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">checkout newbranch</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">checkout master</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">merge newbranch</span></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/knsv/mermaid/blob/master/img/git.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/git.png" alt="Git graph"></a></p>
-<h2 id="二、使用技巧"><a href="#二、使用技巧" class="headerlink" title="二、使用技巧"></a>二、使用技巧</h2><h3 id="Mermaid-cli"><a href="#Mermaid-cli" class="headerlink" title="Mermaid.cli"></a>Mermaid.cli</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.svg</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.pdf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.svg -w 1024 -H 768</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -t forest</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png -b <span class="string">'#FFF000'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png -b transparent</span></pre></td></tr></table></figure>
-<h3 id="Gantt"><a href="#Gantt" class="headerlink" title="Gantt"></a>Gantt</h3><p>在生成甘特图时如果时间比较紧密，使用 <code>mermaid.cli</code> 命令行生成的 pdf 文件时，时间会挤在一起。这时可以使用 <a href="https://github.com/mermaidjs/mermaid-live-editor" target="_blank" rel="noopener">mermaid 在线编辑器</a> 在线显示，再通过浏览器保存为 pdf 解决</p>
-<h2 id="三、问题解决"><a href="#三、问题解决" class="headerlink" title="三、问题解决"></a>三、问题解决</h2><h3 id="安装-mermaid-cli-问题"><a href="#安装-mermaid-cli-问题" class="headerlink" title="安装 mermaid.cli 问题"></a>安装 mermaid.cli 问题</h3><h4 id="ERROR-Failed-to-download-Chromium-r515411-Set-quot-PUPPETEER-SKIP-CHROMIUM-DOWNLOA"><a href="#ERROR-Failed-to-download-Chromium-r515411-Set-quot-PUPPETEER-SKIP-CHROMIUM-DOWNLOA" class="headerlink" title="ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA"></a><code>ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA</code></h4><p>可以通过设置环境变量 <code>$env:PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1</code></p>
-<h4 id="全局安装失败问题"><a href="#全局安装失败问题" class="headerlink" title="全局安装失败问题"></a>全局安装失败问题</h4><p>这个问题在 <code>mermaind.cli</code> git 主页中有提到，建议使用本地安装解决。<br>这边有个办法可以安装为全局：</p>
-<ul>
-<li>进入 node 插件全局安装目录 <code>C:\Users\xxxx\AppData\Roaming\npm</code></li>
-<li><code>npm i mermaid.cli</code></li>
-</ul>
-<h2 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h2><p>目前 Sublime 还不支持 Mermaid 插件，不过 <a href="https://typora.io/#windows" target="_blank" rel="noopener">typora</a> 已经得到了支持，如果习惯该编辑器的可以尝试下</p>
-<h3 id="Gantt-1"><a href="#Gantt-1" class="headerlink" title="Gantt"></a>Gantt</h3><ul>
-<li>无法按百分比显示当前项目进度</li>
-<li>没有里程碑标记</li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="https://github.com/knsv/mermaid#readme" target="_blank" rel="noopener">mermaid git</a></li>
-<li><a href="https://github.com/mermaidjs/mermaid.cli" target="_blank" rel="noopener">mermaid cli</a></li>
-<li><a href="https://mermaidjs.github.io/" target="_blank" rel="noopener">mermaid 电子文档</a></li>
-<li><a href="https://github.com/mermaidjs/mermaid-live-editor" target="_blank" rel="noopener">mermaid 在线编辑器</a></li>
-<li><a href="https://typora.io/#windows" target="_blank" rel="noopener">typora</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-12-03 </div>
-			<div class="article-title"><a href="/2018/12/03/2019-01-22.powershell.skill/" >Powershell Skill</a></div>						
+			<div class="article-title"><a href="/2018/12/03/2019-01-22.powershell-skill/" >Powershell Skill</a></div>						
 		</h3>
 	
 
@@ -484,6 +535,67 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2018-12-03 </div>
+			<div class="article-title"><a href="/2018/12/03/2018-12-03-mermaid/" >Mermaid</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Mermaid 是一个轻量级的图标生成工具(基于 nodejs)，只要通过简单的配置既可以生成漂亮的不同格式文件(svg、png、pdf)</p>
+<blockquote>
+<p>Generation of diagrams and flowcharts from text in a similar manner as markdown.<br>Ever wanted to simplify documentation and avoid heavy tools like Visio when explaining your code?<br>This is why mermaid was born, a simple markdown-like script language for generating charts from text via javascript.</p>
+</blockquote>
+<h2 id="一、效果图"><a href="#一、效果图" class="headerlink" title="一、效果图"></a>一、效果图</h2><h3 id="Flowchart"><a href="#Flowchart" class="headerlink" title="Flowchart"></a>Flowchart</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">graph TD;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    A--&gt;B;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    A--&gt;C;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    B--&gt;D;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    C--&gt;D;</span></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/knsv/mermaid/blob/master/img/flow.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/flow.png" alt="Flowchart"></a></p>
+<h3 id="Sequence-diagram"><a href="#Sequence-diagram" class="headerlink" title="Sequence diagram"></a>Sequence diagram</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    participant Alice</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    participant Bob</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Alice-&gt;&gt;John: Hello John, how are you?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    loop Healthcheck</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        John-&gt;&gt;John: Fight against hypochondria</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    Note right of John: Rational thoughts &lt;br&#x2F;&gt;prevail...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    John--&gt;&gt;Alice: Great!</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    John-&gt;&gt;Bob: How about you?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    Bob--&gt;&gt;John: Jolly good!</span></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/knsv/mermaid/blob/master/img/sequence.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/sequence.png" alt="Sequence diagram"></a></p>
+<h3 id="Gantt-diagram"><a href="#Gantt-diagram" class="headerlink" title="Gantt diagram"></a>Gantt diagram</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gantt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">dateFormat  YYYY-MM-DD</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">title Adding GANTT diagram to mermaid</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">section A section</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Completed task            :done,    des1, 2014-01-06,2014-01-08</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Active task               :active,  des2, 2014-01-09, 3d</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Future task               :         des3, after des2, 5d</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Future task2               :         des4, after des3, 5d</span></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/knsv/mermaid/blob/master/img/gantt.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/gantt.png" alt="Gantt diagram"></a></p>
+<h3 id="Class-diagram-experimental"><a href="#Class-diagram-experimental" class="headerlink" title="Class diagram - experimental"></a>Class diagram - experimental</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">classDiagram</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Class01 &lt;|-- AveryLongClass : Cool</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Class03 *-- Class04</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Class05 o-- Class06</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Class07 .. Class08</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Class09 --&gt; C2 : Where am i?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Class09 --* C3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Class09 --|&gt; Class07</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Class07 : equals()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Class07 : Object[] elementData</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">Class01 : size()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">Class01 : int chimp</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">Class01 : int gorilla</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">Class08 &lt;--&gt; C2: Cool label</span></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/knsv/mermaid/blob/master/img/class.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/class.png" alt="Class diagram"></a></p>
+<h3 id="Git-graph-experimental"><a href="#Git-graph-experimental" class="headerlink" title="Git graph - experimental"></a>Git graph - experimental</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">gitGraph:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">options</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &quot;nodeSpacing&quot;: 150,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &quot;nodeRadius&quot;: 10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">branch newbranch</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">checkout newbranch</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">checkout master</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">commit</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">merge newbranch</span></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/knsv/mermaid/blob/master/img/git.png" target="_blank" rel="noopener"><img src="https://github.com/knsv/mermaid/raw/master/img/git.png" alt="Git graph"></a></p>
+<h2 id="二、使用技巧"><a href="#二、使用技巧" class="headerlink" title="二、使用技巧"></a>二、使用技巧</h2><h3 id="Mermaid-cli"><a href="#Mermaid-cli" class="headerlink" title="Mermaid.cli"></a>Mermaid.cli</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.svg</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.pdf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.svg -w 1024 -H 768</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -t forest</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png -b <span class="string">'#FFF000'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">mmdc -i input.mmd -o output.png -b transparent</span></pre></td></tr></table></figure>
+<h3 id="Gantt"><a href="#Gantt" class="headerlink" title="Gantt"></a>Gantt</h3><p>在生成甘特图时如果时间比较紧密，使用 <code>mermaid.cli</code> 命令行生成的 pdf 文件时，时间会挤在一起。这时可以使用 <a href="https://github.com/mermaidjs/mermaid-live-editor" target="_blank" rel="noopener">mermaid 在线编辑器</a> 在线显示，再通过浏览器保存为 pdf 解决</p>
+<h2 id="三、问题解决"><a href="#三、问题解决" class="headerlink" title="三、问题解决"></a>三、问题解决</h2><h3 id="安装-mermaid-cli-问题"><a href="#安装-mermaid-cli-问题" class="headerlink" title="安装 mermaid.cli 问题"></a>安装 mermaid.cli 问题</h3><h4 id="ERROR-Failed-to-download-Chromium-r515411-Set-quot-PUPPETEER-SKIP-CHROMIUM-DOWNLOA"><a href="#ERROR-Failed-to-download-Chromium-r515411-Set-quot-PUPPETEER-SKIP-CHROMIUM-DOWNLOA" class="headerlink" title="ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA"></a><code>ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA</code></h4><p>可以通过设置环境变量 <code>$env:PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1</code></p>
+<h4 id="全局安装失败问题"><a href="#全局安装失败问题" class="headerlink" title="全局安装失败问题"></a>全局安装失败问题</h4><p>这个问题在 <code>mermaind.cli</code> git 主页中有提到，建议使用本地安装解决。<br>这边有个办法可以安装为全局：</p>
+<ul>
+<li>进入 node 插件全局安装目录 <code>C:\Users\xxxx\AppData\Roaming\npm</code></li>
+<li><code>npm i mermaid.cli</code></li>
+</ul>
+<h2 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h2><p>目前 Sublime 还不支持 Mermaid 插件，不过 <a href="https://typora.io/#windows" target="_blank" rel="noopener">typora</a> 已经得到了支持，如果习惯该编辑器的可以尝试下</p>
+<h3 id="Gantt-1"><a href="#Gantt-1" class="headerlink" title="Gantt"></a>Gantt</h3><ul>
+<li>无法按百分比显示当前项目进度</li>
+<li>没有里程碑标记</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://github.com/knsv/mermaid#readme" target="_blank" rel="noopener">mermaid git</a></li>
+<li><a href="https://github.com/mermaidjs/mermaid.cli" target="_blank" rel="noopener">mermaid cli</a></li>
+<li><a href="https://mermaidjs.github.io/" target="_blank" rel="noopener">mermaid 电子文档</a></li>
+<li><a href="https://github.com/mermaidjs/mermaid-live-editor" target="_blank" rel="noopener">mermaid 在线编辑器</a></li>
+<li><a href="https://typora.io/#windows" target="_blank" rel="noopener">typora</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2018-11-16 </div>
 			<div class="article-title"><a href="/2018/11/16/2018-11-16-gitbook-start/" >Gitbook</a></div>						
 		</h3>
@@ -508,112 +620,6 @@
 <li><a href="https://calibre-ebook.com/download_windows" target="_blank" rel="noopener">calibre windows</a></li>
 <li><a href="https://chrisniael.gitbooks.io/gitbook-documentation/content/format/markdown.html" target="_blank" rel="noopener">gitbook 中文文档</a></li>
 <li><a href="https://www.cnblogs.com/zhangjk1993/p/5066771.html" target="_blank" rel="noopener">gitbook 实用配置及插件介绍</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-07-30 </div>
-			<div class="article-title"><a href="/2018/07/30/2018-07-30-baidu-yun-pan-download-tools/" >百度网盘内容下载工具</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>360网盘关闭后，百度似乎要成为国内网盘的唯一选择，然而百度云下载速度太慢，显然是被限速了，吃相难看。下面有3个方法解决百度网盘限速的问题，演示的下载文件是大于1G的一个 <a href="https://www.runningcheese.com/go/?url=https://pan.baidu.com/s/1miMaRiw" target="_blank" rel="noopener">War3.zip</a> 单文件（用拖拽的方法打开，否则显示页面不存在），使用的宽带是电信20M，百度限速后的下载速度只有256KB/s，而理论上的下载速度是可以达到2M/s的。奶酪也将持续关注百度网盘限速的问题。  </p>
-<h2 id="1-百度网盘下载助手脚本-—-2018-04-15更新【最长久】"><a href="#1-百度网盘下载助手脚本-—-2018-04-15更新【最长久】" class="headerlink" title="1. 百度网盘下载助手脚本 — 2018-04-15更新【最长久】"></a>1. 百度网盘下载助手脚本 — 2018-04-15更新【最长久】</h2><p>最早是网友“有一份田”制作的脚本百度下载助手，可以显示直链，绕过大文件云盘下载，还可以调用<a href="https://www.runningcheese.com/go/?url=http://dl.xunlei.com/" target="_blank" rel="noopener">迅雷</a>或者<a href="https://www.runningcheese.com/go/?url=http://www.zdfans.com/575.html" target="_blank" rel="noopener">IDM</a>加速下载。</p>
-<p><img src="https://ws1.sinaimg.cn/large/7a6a15d5gy1fqei3eshpyj20k00ci3yq.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/7a6a15d5gy1fqei3mv5tej20k00ad74e.jpg" alt=""></p>
-<p><strong>使用方法：</strong><br>1、浏览器安装拓展 <a href="https://www.runningcheese.com/go/?url=https://violentmonkey.github.io/get-it/" target="_blank" rel="noopener">Violentmonkey</a> 或者 <a href="https://www.runningcheese.com/go/?url=http://tampermonkey.net/" target="_blank" rel="noopener">Tampermonkey</a><br>2、安装下载脚本：<a href="https://www.runningcheese.com/go/?url=https://greasyfork.org/zh-CN/scripts/39776" target="_blank" rel="noopener">https://greasyfork.org/zh-CN/scripts/39776</a><br>3、用迅雷或IDM下载时，点击“直接下载”，然后将链接复制到迅雷或IDM中去下载，支持在网盘管理页面和文件分享页面生效。</p>
-<p><strong>注意：</strong><br>1、IDM绿色版需要点击运行文件 “!绿化卸载.bat” 才会自动关联下载。<br>2、如果你不太会怎么操作，你可以尝试一下已经集成好脚本的Firefox浏览器：<a href="https://www.runningcheese.com/v10" target="_blank" rel="noopener">https://www.runningcheese.com/v10</a><br>（下载后需要在右上角的那个“火箭”图标里选择“系统工具”，然后再选择“设置IDM”，这样就会自动调用IDM下载了。）<br>3、如果下载速度被限制在100KB左右，说明你的帐号被百度网盘拉黑了，需要退出登录才能恢复正常下载。<br>4、如果下载速度在200-700KB左右，可以在“设置–&gt;连接”中，将最达连接数设置为16或者32.<br>5、在文件分享页面，直接选择文件夹会无法下载，可以同时勾选下载任意一个文件，让文件夹与文件同时下载，这时即可下载。</p>
-<p><strong>另附：</strong><br>迅雷极速版下载：<a href="https://www.runningcheese.com/go/?url=http://www.pc6.com/softview/softview_108931.html" target="_blank" rel="noopener">http://www.pc6.com/softview/softview_108931.html</a><br>IDM 绿色版下载：<a href="https://www.runningcheese.com/go/?url=https://pan.baidu.com/share/init?shareid=3457730696&uk=1767948507#3edk" target="_blank" rel="noopener">https://pan.baidu.com/share/init?shareid</a> 密码 3edk </p>
-<h2 id="2-度盘下载器-—-2018-05-14更新-【速度最快】"><a href="#2-度盘下载器-—-2018-05-14更新-【速度最快】" class="headerlink" title="2. 度盘下载器 — 2018-05-14更新 【速度最快】"></a>2. 度盘下载器 — 2018-05-14更新 【速度最快】</h2><p>PanDownload二代，最新度盘不限速！！实测速度最高可达5MB/S，采用了Aria 2技术，下载自动切换线路，支持设置超高线程爆速下载。由原作者双霖等人开发，2.0版界面全新设计。</p>
-<p><a href="https://ww3.sinaimg.cn/large/7a6a15d5gy1fjgvc3ziunj20nq08x41v.jpg" target="_blank" rel="noopener"><img src="https://ww3.sinaimg.cn/large/7a6a15d5gy1fjgvc3ziunj20nq08x41v.jpg" alt=""></a></p>
-<p>下载地址： （v2.31最新）<br>链接: <a href="https://www.runningcheese.com/go/?url=https://pan.lanzou.com/i0irygf" target="_blank" rel="noopener">https://pan.lanzou.com/i0irygf</a>  </p>
-<h2 id="3-速盘-—-2018-07-10更新-【功能最强大】"><a href="#3-速盘-—-2018-07-10更新-【功能最强大】" class="headerlink" title="3. 速盘 — 2018-07-10更新 【功能最强大】"></a>3. 速盘 — 2018-07-10更新 【功能最强大】</h2><p>由吾爱破解论坛会员“菩提叶”制作的度盘满速下载工具。这款百度网盘高速下载工具，免费小巧简单易用，采用了Aria2多线程下载，支持免登陆网盘账号解析分享链接下载，支持百度网盘网络资源搜索并下载，登陆我的网盘账户可以下载网盘文件，还能离线下载。下载地址： （v1.4.1最新）</p>
-<p><a href="https://ws1.sinaimg.cn/large/7a6a15d5gy1fsfmoq7izgj20sg0icgmp.jpg" target="_blank" rel="noopener"><img src="https://ws1.sinaimg.cn/large/7a6a15d5gy1fsfmoq7izgj20sg0icgmp.jpg" alt=""></a></p>
-<p>功能介绍：<br>1、百度网盘不限速下载 （正常情况下都可以满宽带）<br>2、分享链接下载 （不需要登录）<br>3、分享资源搜索并下载（不需要等录）<br>4、离线下载 （离线下载需要登录）<br>5、其它网盘常规操作，如创建文件夹，创建分享链接，删除等（访问自己的网盘需要登录） 6、登录时调用的是百度的登录页，只记录登录cookie，不会保存用户密码等信息。  </p>
-<h2 id="4-PanDownload-—-2018-03-10更新-【最早】"><a href="#4-PanDownload-—-2018-03-10更新-【最早】" class="headerlink" title="4. PanDownload — 2018-03-10更新 【最早】"></a>4. PanDownload — 2018-03-10更新 【最早】</h2><p>52Pojie网友@<a href="https://www.runningcheese.com/go/?url=http://www.52pojie.cn/thread-579335-1-1.html" target="_blank" rel="noopener">Kiryuu</a> 制作作的一个C#语言下载工具，工作原理和方法5类似，可满速下载。登陆自己的账号选择文件下载即可，这对于不会使用脚本的人来说非常的方便，作者提供了一个检查更新的通道，可供持续检查更新，这样就不怕软件失效了。</p>
-<p>下载地址：（ v1.5.4最新）<br><a href="https://www.runningcheese.com/go/?url=https://pan.lanzou.com/b1733233/" target="_blank" rel="noopener">https://pan.lanzou.com/b173323/</a><br>备用下载：<a href="https://www.runningcheese.com/baiduyun" target="_blank" rel="noopener"></a></p>
-<p><a href="https://ww3.sinaimg.cn/large/7a6a15d5gy1fdal9isi9mj20cm0e6q2z.jpg" target="_blank" rel="noopener"><img src="https://ww3.sinaimg.cn/large/7a6a15d5gy1fdal9isi9mj20cm0e6q2z.jpg" alt=""></a>  </p>
-<h2 id="5-Proxyee-down-—-2018-07-20更新-【支持MAC】"><a href="#5-Proxyee-down-—-2018-07-20更新-【支持MAC】" class="headerlink" title="5. Proxyee down — 2018-07-20更新 【支持MAC】"></a>5. Proxyee down — 2018-07-20更新 【支持MAC】</h2><p><a href="https://www.runningcheese.com/go/?url=https://github.com/proxyee-down-org/proxyee-down" target="_blank" rel="noopener">Proxyee down</a> 使用本地http代理服务器方式嗅探下载请求，支持所有操作系统和大部分主流浏览器,支持分段下载和断点下载。</p>
-<p><img src="https://ws1.sinaimg.cn/large/7a6a15d5gy1ftl7pzoy21j20l206j0sy.jpg" alt=""></p>
-<p>下载地址：（ v2.5.4最新）<br><a href="https://www.runningcheese.com/go/?url=https://github.com/proxyee-down-org/proxyee-down/releases" target="_blank" rel="noopener">https://github.com/proxyee-down-org/proxyee-down/releases</a></p>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>1，下载链接如若失效，或者高速下载上述软件，<a href="https://ws1.sinaimg.cn/large/7a6a15d5gy1fr3v1xxt8ej205k05kt8p.jpg" target="_blank" rel="noopener">公众号</a>（ID: runningcheese01）回复关键字“百度云”即可获取。  </p>
-<p>2，最后，利用这些方法可以在百度网盘离线下载一些冷门的磁力资源并获得最高的下载速度，方法我想应该不用我说了吧？</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="https://www.runningcheese.com/baiduyun" target="_blank" rel="noopener">原文</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-07-23 </div>
-			<div class="article-title"><a href="/2018/07/23/2018-07-23-rxjava-encapsulation-fun/" >RxJava 函数封装</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="一、封装同步函数"><a href="#一、封装同步函数" class="headerlink" title="一、封装同步函数"></a>一、封装同步函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Observable <span class="title">wrappedMethod</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> Observable.defer(() -&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Observable.just(library.synchronousMethod());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
-<p>如果你的库拥有可用的同步方法，那么将其用 RxJava 封装起来的最好的方式是使用 <code>Observable.defer()</code>这会简单地延迟这个调用直到 observable 被订阅，然后在 subscription 的分配线程中执行</p>
-<h2 id="二、封装抛出异常的同步方法"><a href="#二、封装抛出异常的同步方法" class="headerlink" title="二、封装抛出异常的同步方法"></a>二、封装抛出异常的同步方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Observable <span class="title">queryInventory</span><span class="params">(<span class="keyword">final</span> List skus)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> Observable.defer(() -&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">try</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> Observable.just(helper.queryInventory(skus));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">catch</span> (IabException e) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> Observable.error(e);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>将同步调用的代码用 try-catch 包起来，并根据结果返回 <code>Observable.just()</code> 或是 <code>Observable.error()</code>,这里不能直接使用 <code>Observable.just()</code> 方法，因为它抛出的 <code>IabException</code> 并不是 <code>RuntimeException</code> 的子类，因此必须被捕获。</p>
-<h2 id="三、封装带有监听器的方法"><a href="#三、封装带有监听器的方法" class="headerlink" title="三、封装带有监听器的方法"></a>三、封装带有监听器的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Observable <span class="title">setup</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> Observable.create( emitter -&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (!helper.setupSuccessful()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      helper.startSetup(result -&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> ( emitter.isUnsubscribed()) <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (result.isSuccess()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">           emitter.onNext(<span class="keyword">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">           emitter.onCompleted();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">           emitter.onError(<span class="keyword">new</span> IabException(result.getMessage()));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">       emitter.onNext(<span class="keyword">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">       emitter.onComplete();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>封装那些使用了监听器的方法时，<code>Observable.just()</code> 并不管用，因为它一般没有返回值。我们必须使用 <code>Observable.create()</code>,这样我们就可以将监听器的结果回调给  emitter</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0413/4141.html" target="_blank" rel="noopener">使用 RxJava 封装现有的库</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-07-23 </div>
-			<div class="article-title"><a href="/2018/07/23/2018-07-23-rxjava-map/" >RxJava Map</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="一、变换"><a href="#一、变换" class="headerlink" title="一、变换"></a>一、变换</h2><h3 id="1-Map"><a href="#1-Map" class="headerlink" title="1. Map"></a>1. Map</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String[] str1 = &#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(str1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 这里用了 Function 包装接口，返回一个新的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        .map(<span class="keyword">new</span> Function&lt;String, String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="string">"apply: "</span> + s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">s = [apply <span class="number">3</span>]</span></pre></td></tr></table></figure>
-
-<h3 id="2-FlatMap"><a href="#2-FlatMap" class="headerlink" title="2. FlatMap"></a>2. FlatMap</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String [] course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, String[] course)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.name = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.course = course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> String[] getCourse() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> course;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">String[] course1 = &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">String[] course2 = &#123;<span class="string">"d"</span>,<span class="string">"e"</span>,<span class="string">"f"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">Student[] students = &#123;<span class="keyword">new</span> Student(<span class="string">"kuku"</span>,course1),<span class="keyword">new</span> Student(<span class="string">"lili"</span>,course2)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里通过 flatMap 获取每个学生的课程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">Observable.fromArray(students)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        .flatMap(<span class="keyword">new</span> Function&lt;Student, ObservableSource&lt;String&gt;&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// 多了一层 Observable 来处理</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> ObservableSource&lt;String&gt; <span class="title">apply</span><span class="params">(Student student)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> Observable.fromArray(student.getCourse());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> <span class="keyword">throws</span> Exception </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                System.out.println(<span class="string">"s = ["</span> + s + <span class="string">"]"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运行结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">s = [a]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">s = [b]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">s = [c]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">s = [d]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">s = [e]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">s = [f]</span></pre></td></tr></table></figure>
-
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="noopener">给 Android 开发者的 RxJava 详解</a></li>
 </ul>
 
 	
@@ -674,7 +680,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>14</span></a></li>
+			<li><a href="/categories/Android/">Android<span>15</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -692,7 +698,7 @@
 		
 			<li><a href="/categories/Css3/">Css3<span>4</span></a></li>
 		
-			<li><a href="/categories/Database/">Database<span>6</span></a></li>
+			<li><a href="/categories/Database/">Database<span>7</span></a></li>
 		
 			<li><a href="/categories/Design/">Design<span>1</span></a></li>
 		
@@ -718,7 +724,7 @@
 		
 			<li><a href="/categories/Powershell/">Powershell<span>1</span></a></li>
 		
-			<li><a href="/categories/Python/">Python<span>3</span></a></li>
+			<li><a href="/categories/Python/">Python<span>4</span></a></li>
 		
 			<li><a href="/categories/Read/">Read<span>9</span></a></li>
 		
@@ -743,48 +749,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
 			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/sqlite/">sqlite<span>2</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 			<li><a href="/tags/synology/">synology<span>1</span></a></li>
 		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
 		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
 			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>26</span></a></li>
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>28</span></a></li>
 		 
 		</ul>
 	</div>
@@ -797,23 +803,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2020/11/25/2020-11-21-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
+        <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/29/2020-11-29-scrapy/" ><i class="fa fa-file-o"></i>Scrapy</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/26/2020-11-26-database-sqlite-exercise/" ><i class="fa fa-file-o"></i>SQLite Exercise</a>
+      </li>
+    
+      <li>
+        <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
       </li>
     
       <li>
         <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/12/2020-11-10-django.starting/" ><i class="fa fa-file-o"></i>Django Starting</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/10/2020-11-10-docker.starting/" ><i class="fa fa-file-o"></i>Docker Starting</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/09/2020-11-09-android.sparseArray.arrayMap/" ><i class="fa fa-file-o"></i>性能优化:使用SparseArray和ArrayMap...</a>
       </li>
     
   </ul>
