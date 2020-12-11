@@ -129,7 +129,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-engine/" >浏览器环境概述</a></div>						
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-history/" >History 对象</a></div>						
 		</h3>
 	
 
@@ -138,325 +138,109 @@
   <div class="row">
 	
 	
-		<h2 id="JavaScript代码嵌入网页的方法"><a href="#JavaScript代码嵌入网页的方法" class="headerlink" title="JavaScript代码嵌入网页的方法"></a>JavaScript代码嵌入网页的方法</h2><p>JavaScript代码只有嵌入网页，才能在用户浏览器网页时运行。</p>
-<p>网页中嵌入JavaScript代码，主要有四种方法。</p>
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>浏览器窗口有一个<code>history</code>对象，用来保存浏览历史。</p>
+<p>比如，当前窗口先后访问了三个地址，那么<code>history</code>对象就包括三项，<code>history.length</code>属性等于3。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+
+<p><code>history</code>对象提供了一系列方法，允许在浏览历史之间移动。</p>
 <ul>
-<li><code>&lt;script&gt;</code>标签：代码嵌入网页</li>
-<li><code>&lt;script&gt;</code>标签：加载外部脚本</li>
-<li>事件属性：代码写入HTML元素的事件处理属性，比如<code>onclick</code>或者<code>onmouseover</code></li>
-<li>URL协议：URL支持以<code>javascript:</code>协议的方式，执行JavaScript代码</li>
+<li><code>back()</code>：移动到上一个访问页面，等同于浏览器的后退键。</li>
+<li><code>forward()</code>：移动到下一个访问页面，等同于浏览器的前进键。</li>
+<li><code>go()</code>：接受一个整数作为参数，移动到该整数指定的页面，比如<code>go(1)</code>相当于<code>forward()</code>，<code>go(-1)</code>相当于<code>back()</code>。</li>
 </ul>
-<p>后两种方法用得很少，常用的是前两种方法。由于内容（HTML代码）和行为（JavaScript）代码应该分离，所以第一种方法应当谨慎使用。</p>
-<h3 id="script标签：代码嵌入网页"><a href="#script标签：代码嵌入网页" class="headerlink" title="script标签：代码嵌入网页"></a>script标签：代码嵌入网页</h3><p>通过<code>&lt;script&gt;</code>标签，可以直接将JavaScript代码嵌入网页。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.forward();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">-2</span>);</span></pre></td></tr></table></figure>
 
-<p><code>&lt;script&gt;</code>标签有一个<code>type</code>属性，用来指定脚本类型。对JavaScript脚本来说，<code>type</code>属性可以设为两种值。</p>
+<p>如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。</p>
+<p>以下命令相当于刷新当前页面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p>常见的“返回上一页”链接，代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'backLink'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>注意，返回上一页时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</p>
+<h2 id="history-pushState-，history-replaceState"><a href="#history-pushState-，history-replaceState" class="headerlink" title="history.pushState()，history.replaceState()"></a>history.pushState()，history.replaceState()</h2><p>HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!!(<span class="built_in">window</span>.history &amp;&amp; history.pushState))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持History API</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 不支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码可以用来检查，当前浏览器是否支持History API。如果不支持的话，可以考虑使用Polyfill库<a href="https://github.com/browserstate/history.js/" target="_blank" rel="noopener">History.js</a>。</p>
+<p>history.pushState方法接受三个参数，依次为：</p>
 <ul>
-<li><code>text/javascript</code>：这是默认值，也是历史上一贯设定的值。如果你省略<code>type</code>属性，默认就是这个值。对于老式浏览器，设为这个值比较好。</li>
-<li><code>application/javascript</code>：对于较新的浏览器，建议设为这个值。</li>
+<li><strong>state</strong>：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。</li>
+<li><strong>title</strong>：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。</li>
+<li><strong>url</strong>：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"application/javascript"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>假定当前网址是<code>example.com/1.html</code>，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.pushState(stateObj, <span class="string">"page 2"</span>, <span class="string">"2.html"</span>);</span></pre></td></tr></table></figure>
 
-<p>由于<code>&lt;script&gt;</code>标签默认就是JavaScript代码。所以，嵌入JavaScript脚本时，<code>type</code>属性也可以省略。</p>
-<p>如果<code>type</code>属性的值，浏览器不认识，那么它不会执行其中的代码。利用这一点，可以在<code>&lt;script&gt;</code>标签之中嵌入任意的文本内容，然后加上一个浏览器不认识的<code>type</code>属性即可。</p>
-<h3 id="script标签：加载外部脚本"><a href="#script标签：加载外部脚本" class="headerlink" title="script标签：加载外部脚本"></a>script标签：加载外部脚本</h3><p><code>&lt;script&gt;</code>标签也可以指定加载外部的脚本文件。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>添加上面这个新记录后，浏览器地址栏立刻显示<code>example.com/2.html</code>，但并不会跳转到2.html，甚至也不会检查2.html是否存在，它只是成为浏览历史中的最新记录。假定这时你访问了google.com，然后点击了倒退按钮，页面的url将显示2.html，但是内容还是原来的1.html。你再点击一次倒退按钮，url将显示1.html，内容不变。</p>
+<blockquote>
+<p>注意，pushState方法不会触发页面刷新。</p>
+</blockquote>
+<p>如果 pushState 的url参数，设置了一个当前网页的#号值（即hash），并不会触发hashchange事件。如果设置了一个非同域的网址，则会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'https://twitter.com/hello'</span>);</span></pre></td></tr></table></figure>
 
-<p>如果脚本文件使用了非英语字符，还应该注明编码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>上面代码中，pushState想要插入一个非同域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。</p>
+<p><code>history.replaceState</code>方法的参数与<code>pushState</code>方法一模一样，区别是它修改浏览历史中当前页面的值。下面的例子假定当前网页是example.com/example.html。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html?page=1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">2</span>);  <span class="comment">// url显示为http://example.com/example.html?page=3</span></span></pre></td></tr></table></figure>
 
-<p>所加载的脚本必须是纯的HTML代码，不能有<code>HTML</code>代码和<code>&lt;script&gt;</code>标签。</p>
-<p>加载外部脚本和直接添加代码块，这两种方法不能混用。下面代码的<code>console.log</code>语句直接被忽略。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World!'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<h2 id="history-state属性"><a href="#history-state属性" class="headerlink" title="history.state属性"></a>history.state属性</h2><p>history.state 属性保存当前页面的state对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.state</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123; page: 1 &#125;</span></span></pre></td></tr></table></figure>
 
-<p>为了防止攻击者篡改外部脚本，<code>script</code>标签允许设置一个<code>integrity</code>属性，写入该外部脚本的Hash签名，用来验证脚本的一致性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/assets/application.js"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">  <span class="attr">integrity</span>=<span class="string">"sha256-TvVUHzSfftWg1rcfL6TIJ0XKEGrgLyEq6lEpcmrG9qs="</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<h2 id="popstate-事件"><a href="#popstate-事件" class="headerlink" title="popstate 事件"></a>popstate 事件</h2><p>每当同一个文档的浏览历史（即history对象）出现变化时，就会触发 popstate 事件。需要注意的是，仅仅调用 pushState 方法或 replaceState 方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 back、forward、go 方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
+<p>使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
 
-<p>上面代码中，<code>script</code>标签有一个<code>integrity</code>属性，指定了外部脚本<code>/assets/application.js</code>的SHA265签名。一旦有人改了这个脚本，导致SHA265签名不匹配，浏览器就会拒绝加载。</p>
-<h3 id="事件属性"><a href="#事件属性" class="headerlink" title="事件属性"></a>事件属性</h3><p>某些HTML元素的事件属性（比如<code>onclick</code>和<code>onmouseover</code>），可以写入JavaScript代码。当指定事件发生时，就会调用这些代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"alert('Hello')"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>上面代码中的event.state，就是通过pushState和replaceState方法，为当前url绑定的state对象。</p>
+<p>这个state对象也可以直接通过history对象读取。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentState = history.state;</span></pre></td></tr></table></figure>
 
-<p>上面的事件属性代码只有一个语句。如果有多个语句，用分号分隔即可。</p>
-<h3 id="URL协议"><a href="#URL协议" class="headerlink" title="URL协议"></a>URL协议</h3><p>URL支持<code>javascript:</code>协议，调用这个URL时，就会执行JavaScript代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:alert('Hello')"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate 事件，而Firefox和IE浏览器不会。</p>
+<h3 id="如果要设置禁止浏览器后退和前进的按钮"><a href="#如果要设置禁止浏览器后退和前进的按钮" class="headerlink" title="如果要设置禁止浏览器后退和前进的按钮"></a>如果要设置禁止浏览器后退和前进的按钮</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止页面后退</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把当前的 url 地址设置的历史记录中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听 popstate 事件，每当页面切换时，触发更新设置历史记录中的记录为当前 url 地址，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样每次历史记录中永远都是当前页面，达到进制后退功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+<h2 id="URLSearchParams-API"><a href="#URLSearchParams-API" class="headerlink" title="URLSearchParams API"></a>URLSearchParams API</h2><p>URLSearchParams API用于处理URL之中的查询字符串，即问号之后的部分。没有部署这个API的浏览器，可以用<a href="https://github.com/WebReflection/url-search-params" target="_blank" rel="noopener">url-search-params</a>这个垫片库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">'q=URLUtils.searchParams&amp;topic=api'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr></table></figure>
 
-<p>浏览器的地址栏也可以执行<code>javascipt:</code>协议。将<code>javascript:alert(&#39;Hello&#39;)</code>放入地址栏，按回车键，就会跳出提示框。</p>
-<p>如果JavaScript代码返回一个字符串，浏览器就会新建一个文档，展示这个字符串的内容，原有文档的内容都会消失。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:new Date().toLocaleTimeString();"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  What time is it?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，用户点击链接以后，会打开一个新文档，里面有当前时间。</p>
-<p>如果返回的不是字符串，那么浏览器不会新建文档，也不会跳转。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"javascript:console.log(new Date().toLocaleTimeString())"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">What time is it?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/a&gt;</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，用户点击链接后，网页不会跳转，只会在控制台显示当前时间。</p>
-<p><code>javascript:</code>协议的常见用途是书签脚本Bookmarklet。由于浏览器的书签保存的是一个网址，所以<code>javascript:</code>网址也可以保存在里面，用户选择这个书签的时候，就会在当前页面执行这个脚本。为了防止书签替换掉当前文档，可以在脚本最后返回<code>void 0</code>。</p>
-<h2 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h2><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>浏览器加载JavaScript脚本，主要通过<code>&lt;script&gt;</code>标签完成。正常的网页加载流程是这样的。</p>
-<ol>
-<li>浏览器一边下载HTML网页，一边开始解析</li>
-<li>解析过程中，发现<code>&lt;script&gt;</code>标签</li>
-<li>暂停解析，网页渲染的控制权转交给JavaScript引擎</li>
-<li>如果<code>&lt;script&gt;</code>标签引用了外部脚本，就下载该脚本，否则就直接执行</li>
-<li>执行完毕，控制权交还渲染引擎，恢复往下解析HTML网页</li>
-</ol>
-<p>加载外部脚本时，浏览器会暂停页面渲染，等待脚本下载并执行完成后，再继续渲染。原因是JavaScript可以修改DOM（比如使用<code>document.write</code>方法），所以必须把控制权让给它，否则会导致复杂的线程竞赛的问题。</p>
-<p>如果外部脚本加载时间很长（比如一直无法完成下载），就会造成网页长时间失去响应，浏览器就会呈现“假死”状态，这被称为“阻塞效应”。</p>
-<p>为了避免这种情况，较好的做法是将<code>&lt;script&gt;</code>标签都放在页面底部，而不是头部。这样即使遇到脚本失去响应，网页主体的渲染也已经完成了，用户至少可以看到内容，而不是面对一张空白的页面。</p>
-<p>如果某些脚本代码非常重要，一定要放在页面头部的话，最好直接将代码嵌入页面，而不是连接外部脚本文件，这样能缩短加载时间。</p>
-<p>将脚本文件都放在网页尾部加载，还有一个好处。在DOM结构生成之前就调用DOM，JavaScript会报错，如果脚本都在网页尾部加载，就不存在这个问题，因为这时DOM肯定已经生成了。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>上面代码执行时会报错，因为此时<code>document.body</code>元素还未生成。</p>
-<p>一种解决方法是设定<code>DOMContentLoaded</code>事件的回调函数。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">document</span>.addEventListener(</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="string">'DOMContentLoaded'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> </span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>另一种解决方法是，使用<code>&lt;script&gt;</code>标签的<code>onload</code>属性。当<code>&lt;script&gt;</code>标签指定的外部脚本文件下载和解析完成，会触发一个load事件，可以把所需执行的代码，放在这个事件的回调函数里面。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"jquery.min.js"</span> <span class="attr">onload</span>=<span class="string">"console.log(document.body.innerHTML)"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>但是，如果将脚本放在页面底部，就可以完全按照正常的方式写，上面两种方式都不需要。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">&lt;!-- 其他代码  --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>如果有多个<code>script</code>标签，比如下面这样。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>浏览器会同时并行下载<code>a.js</code>和<code>b.js</code>，但是，执行时会保证先执行<code>a.js</code>，然后再执行<code>b.js</code>，即使后者先下载完成，也是如此。也就是说，脚本的执行顺序由它们在页面中的出现顺序决定，这是为了保证脚本之间的依赖关系不受到破坏。当然，加载这两个脚本都会产生“阻塞效应”，必须等到它们都加载完成，浏览器才会继续页面渲染。</p>
-<p>Gecko和Webkit引擎在网页被阻塞后，会生成第二个线程解析文档，下载外部资源，但是不会修改DOM，网页还是处于阻塞状态。</p>
-<p>解析和执行CSS，也会产生阻塞。Firefox会等到脚本前面的所有样式表，都下载并解析完，再执行脚本；Webkit则是一旦发现脚本引用了样式，就会暂停执行脚本执行，等到样式表下载并解析完，再恢复执行。</p>
-<p>此外，对于来自同一个域名的资源，比如脚本文件、样式表文件、图片文件等，浏览器一般最多同时下载六个（IE11允许同时下载13个）。如果是来自不同域名的资源，就没有这个限制。所以，通常把静态文件放在不同的域名之下，以加快下载速度。</p>
-<h3 id="defer属性"><a href="#defer属性" class="headerlink" title="defer属性"></a>defer属性</h3><p>为了解决脚本文件下载阻塞网页渲染的问题，一个方法是加入<code>defer</code>属性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，只有等到DOM加载完成后，才会执行<code>a.js</code>和<code>b.js</code>。</p>
-<p><code>defer</code>的运行流程如下。</p>
-<ol>
-<li>浏览器开始解析HTML网页</li>
-<li>解析过程中，发现带有<code>defer</code>属性的<code>script</code>标签</li>
-<li>浏览器继续往下解析HTML网页，同时并行下载<code>script</code>标签中的外部脚本</li>
-<li>浏览器完成解析HTML网页，此时再执行下载的脚本</li>
-</ol>
-<p>有了<code>defer</code>属性，浏览器下载脚本文件的时候，不会阻塞页面渲染。下载的脚本文件在<code>DOMContentLoaded</code>事件触发前执行（即刚刚读取完<code>&lt;/html&gt;</code>标签），而且可以保证执行顺序就是它们在页面上出现的顺序。</p>
-<p>对于内置而不是加载外部脚本的<code>script</code>标签，以及动态生成的<code>script</code>标签，<code>defer</code>属性不起作用。另外，使用<code>defer</code>加载的外部脚本不应该使用<code>document.write</code>方法。</p>
-<h3 id="async属性"><a href="#async属性" class="headerlink" title="async属性"></a>async属性</h3><p>解决“阻塞效应”的另一个方法是加入<code>async</code>属性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p><code>async</code>属性的作用是，使用另一个进程下载脚本，下载时不会阻塞渲染。</p>
-<ol>
-<li>浏览器开始解析HTML网页</li>
-<li>解析过程中，发现带有<code>async</code>属性的<code>script</code>标签</li>
-<li>浏览器继续往下解析HTML网页，同时并行下载<code>script</code>标签中的外部脚本</li>
-<li>脚本下载完成，浏览器暂停解析HTML网页，开始执行下载的脚本</li>
-<li>脚本执行完毕，浏览器恢复解析HTML网页</li>
-</ol>
-<p><code>async</code>属性可以保证脚本下载的同时，浏览器继续渲染。需要注意的是，一旦采用这个属性，就无法保证脚本的执行顺序。哪个脚本先下载结束，就先执行那个脚本。另外，使用<code>async</code>属性的脚本文件中，不应该使用<code>document.write</code>方法。</p>
-<p><code>defer</code>属性和<code>async</code>属性到底应该使用哪一个？</p>
-<p>一般来说，如果脚本之间没有依赖关系，就使用<code>async</code>属性，如果脚本之间有依赖关系，就使用<code>defer</code>属性。如果同时使用<code>async</code>和<code>defer</code>属性，后者不起作用，浏览器行为由<code>async</code>属性决定。</p>
-<h3 id="脚本的动态加载"><a href="#脚本的动态加载" class="headerlink" title="脚本的动态加载"></a>脚本的动态加载</h3><p>除了静态的<code>script</code>标签，还可以动态生成<code>script</code>标签，然后加入页面，从而实现脚本的动态加载。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'a.js'</span>, <span class="string">'b.js'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  script.src = src;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">document</span>.head.appendChild(script);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<p>这种方法的好处是，动态生成的<code>script</code>标签不会阻塞页面渲染，也就不会造成浏览器假死。但是问题在于，这种方法无法保证脚本的执行顺序，哪个脚本文件先下载完成，就先执行哪个。</p>
-<p>如果想避免这个问题，可以设置async属性为<code>false</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'a.js'</span>, <span class="string">'b.js'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  script.src = src;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  script.async = <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">document</span>.head.appendChild(script);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<p>上面的代码依然不会阻塞页面渲染，而且可以保证<code>b.js</code>在<code>a.js</code>后面执行。不过需要注意的是，在这段代码后面加载的脚本文件，会因此都等待<code>b.js</code>执行完成后再执行。</p>
-<p>我们可以把上面的写法，封装成一个函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> scripts = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'script'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">load</span>(<span class="params">url</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    script.async = <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    script.src = url;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    scripts.parentNode.insertBefore(script, scripts);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//apis.google.com/js/plusone.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//platform.twitter.com/widgets.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//s.thirdpartywidget.com/widget.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;());</span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>async</code>属性设为<code>true</code>，是因为加载的脚本没有互相依赖关系。而且，这样就不会造成堵塞。</p>
-<p>此外，动态嵌入还有一个地方需要注意。动态嵌入必须等待CSS文件加载完成后，才会去下载外部脚本文件。静态加载就不存在这个问题，<code>script</code>标签指定的外部脚本文件，都是与CSS文件同时并发下载的。</p>
-<h3 id="加载使用的协议"><a href="#加载使用的协议" class="headerlink" title="加载使用的协议"></a>加载使用的协议</h3><p>如果不指定协议，浏览器默认采用HTTP协议下载。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>上面的<code>example.js</code>默认就是采用HTTP协议下载，如果要采用HTTPS协议下载，必需写明（假定服务器支持）。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<p>但是有时我们会希望，根据页面本身的协议来决定加载协议，这时可以采用下面的写法。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
-
-<h2 id="浏览器的组成"><a href="#浏览器的组成" class="headerlink" title="浏览器的组成"></a>浏览器的组成</h2><p>浏览器的核心是两部分：渲染引擎和JavaScript解释器（又称JavaScript引擎）。</p>
-<h3 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h3><p>渲染引擎的主要作用是，将网页代码渲染为用户视觉可以感知的平面文档。</p>
-<p>不同的浏览器有不同的渲染引擎。</p>
+<p>URLSearchParams有以下方法，用来操作某个参数。</p>
 <ul>
-<li>Firefox：Gecko引擎</li>
-<li>Safari：WebKit引擎</li>
-<li>Chrome：Blink引擎</li>
-<li>IE: Trident引擎</li>
-<li>Edge: EdgeHTML引擎</li>
+<li><code>has()</code>：返回一个布尔值，表示是否具有某个参数</li>
+<li><code>get（）</code>：返回指定参数的第一个值</li>
+<li><code>getAll()</code>：返回一个数组，成员是指定参数的所有值</li>
+<li><code>set()</code>：设置指定参数</li>
+<li><code>delete()</code>：删除指定参数</li>
+<li><code>append()</code>：在查询字符串之中，追加一个键值对</li>
+<li><code>toString()</code>：返回整个查询字符串</li>
 </ul>
-<p>渲染引擎处理网页，通常分成四个阶段。</p>
-<ol>
-<li>解析代码：HTML代码解析为DOM，CSS代码解析为CSSOM（CSS Object Model）</li>
-<li>对象合成：将DOM和CSSOM合成一棵渲染树（render tree）</li>
-<li>布局：计算出渲染树的布局（layout）</li>
-<li>绘制：将渲染树绘制到屏幕</li>
-</ol>
-<p>以上四步并非严格按顺序执行，往往第一步还没完成，第二步和第三步就已经开始了。所以，会看到这种情况：网页的HTML代码还没下载完，但浏览器已经显示出内容了。</p>
-<h3 id="重流和重绘"><a href="#重流和重绘" class="headerlink" title="重流和重绘"></a>重流和重绘</h3><p>渲染树转换为网页布局，称为“布局流”（flow）；布局显示到页面的这个过程，称为“绘制”（paint）。它们都具有阻塞效应，并且会耗费很多时间和计算资源。</p>
-<p>页面生成以后，脚本操作和样式表操作，都会触发重流（reflow）和重绘（repaint）。用户的互动，也会触发，比如设置了鼠标悬停（<code>a:hover</code>）效果、页面滚动、在输入框中输入文本、改变窗口大小等等。</p>
-<p>重流和重绘并不一定一起发生，重流必然导致重绘，重绘不一定需要重流。比如改变元素颜色，只会导致重绘，而不会导致重流；改变元素的布局，则会导致重绘和重流。</p>
-<p>大多数情况下，浏览器会智能判断，将重流和重绘只限制到相关的子树上面，最小化所耗费的代价，而不会全局重新生成网页。</p>
-<p>作为开发者，应该尽量设法降低重绘的次数和成本。比如，尽量不要变动高层的DOM元素，而以底层DOM元素的变动代替；再比如，重绘<code>table</code>布局和<code>flex</code>布局，开销都会比较大。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="built_in">document</span>.getElementById(<span class="string">'foobar'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">foo.style.color = <span class="string">'blue'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">foo.style.marginTop = <span class="string">'30px'</span>;</span></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">"q=URLUtils.searchParams&amp;topic=api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">searchParams.has(<span class="string">'topic'</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'topic'</span>) <span class="comment">// "api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'topic'</span>) <span class="comment">// ["api"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// null，注意Firefox返回空字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">searchParams.set(<span class="string">'foo'</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'topic'</span>, <span class="string">'webdev'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;topic=api&amp;foo=2&amp;topic=webdev"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'foo'</span>, <span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'foo'</span>) <span class="comment">// [2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">searchParams.delete(<span class="string">'topic'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;foo=2&amp;foo=3"</span></span></pre></td></tr></table></figure>
 
-<p>上面的代码只会导致一次重绘，因为浏览器会累积DOM变动，然后一次性执行。</p>
-<p>下面是一些优化技巧。</p>
+<p>URLSearchParams还有三个方法，用来遍历所有参数。</p>
 <ul>
-<li>读取DOM或者写入DOM，尽量写在一起，不要混杂</li>
-<li>缓存DOM信息</li>
-<li>不要一项一项地改变样式，而是使用CSS class一次性改变样式</li>
-<li>使用document fragment操作DOM</li>
-<li>动画时使用absolute定位或fixed定位，这样可以减少对其他元素的影响</li>
-<li>只在必要时才显示元素</li>
-<li>使用<code>window.requestAnimationFrame()</code>，因为它可以把代码推迟到下一次重流时执行，而不是立即要求页面重流</li>
-<li>使用虚拟DOM（virtual DOM）库</li>
+<li><code>keys()</code>：遍历所有参数名</li>
+<li><code>values()</code>：遍历所有参数值</li>
+<li><code>entries()</code>：遍历所有参数的键值对</li>
 </ul>
-<p>下面是一个<code>window.requestAnimationFrame()</code>对比效果的例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重绘代价高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleHeight</span>(<span class="params">element</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currentHeight = element.clientHeight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  element.style.height = (currentHeight * <span class="number">2</span>) + <span class="string">'px'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">all_my_elements.forEach(doubleHeight);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重绘代价低</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleHeight</span>(<span class="params">element</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currentHeight = element.clientHeight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.requestAnimationFrame(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    element.style.height = (currentHeight * <span class="number">2</span>) + <span class="string">'px'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">all_my_elements.forEach(doubleHeight);</span></pre></td></tr></table></figure>
+<p>上面三个方法返回的都是Iterator对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'key1=value1&amp;key2=value2'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">of</span> searchParams.keys()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> value <span class="keyword">of</span> searchParams.values()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> pair <span class="keyword">of</span> searchParams.entries()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(pair[<span class="number">0</span>]+ <span class="string">', '</span>+ pair[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1, value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2, value2</span></span></pre></td></tr></table></figure>
 
-<h3 id="JavaScript引擎"><a href="#JavaScript引擎" class="headerlink" title="JavaScript引擎"></a>JavaScript引擎</h3><p>JavaScript引擎的主要作用是，读取网页中的JavaScript代码，对其处理后运行。</p>
-<p>JavaScript是一种解释型语言，也就是说，它不需要编译，由解释器实时运行。这样的好处是运行和修改都比较方便，刷新页面就可以重新解释；缺点是每次运行都要调用解释器，系统开销较大，运行速度慢于编译型语言。</p>
-<p>为了提高运行速度，目前的浏览器都将JavaScript进行一定程度的编译，生成类似字节码（bytecode）的中间代码，以提高运行速度。</p>
-<p>早期，浏览器内部对JavaScript的处理过程如下：</p>
-<ol>
-<li>读取代码，进行词法分析（Lexical analysis），将代码分解成词元（token）。</li>
-<li>对词元进行语法分析（parsing），将代码整理成“语法树”（syntax tree）。</li>
-<li>使用“翻译器”（translator），将代码转为字节码（bytecode）。</li>
-<li>使用“字节码解释器”（bytecode interpreter），将字节码转为机器码。</li>
-</ol>
-<p>逐行解释将字节码转为机器码，是很低效的。为了提高运行速度，现代浏览器改为采用“即时编译”（Just In Time compiler，缩写JIT），即字节码只在运行时编译，用到哪一行就编译哪一行，并且把编译结果缓存（inline cache）。通常，一个程序被经常用到的，只是其中一小部分代码，有了缓存的编译结果，整个程序的运行速度就会显著提升。不同的浏览器有不同的编译策略。有的浏览器只编译最经常用到的部分，比如循环的部分；有的浏览器索性省略了字节码的翻译步骤，直接编译成机器码，比如chrome浏览器的V8引擎。</p>
-<p>字节码不能直接运行，而是运行在一个虚拟机（Virtual Machine）之上，一般也把虚拟机称为JavaScript引擎。因为JavaScript运行时未必有字节码，所以JavaScript虚拟机并不完全基于字节码，而是部分基于源码，即只要有可能，就通过JIT（just in time）编译器直接把源码编译成机器码运行，省略字节码步骤。这一点与其他采用虚拟机（比如Java）的语言不尽相同。这样做的目的，是为了尽可能地优化代码、提高性能。下面是目前最常见的一些JavaScript虚拟机：</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Chakra_(JScript_engine)" target="_blank" rel="noopener">Chakra</a>(Microsoft Internet Explorer)</li>
-<li><a href="http://en.wikipedia.org/wiki/WebKit#JavaScriptCore" target="_blank" rel="noopener">Nitro/JavaScript Core</a> (Safari)</li>
-<li><a href="http://dev.opera.com/articles/view/labs-carakan/" target="_blank" rel="noopener">Carakan</a> (Opera)</li>
-<li><a href="https://developer.mozilla.org/en-US/docs/SpiderMonkey" target="_blank" rel="noopener">SpiderMonkey</a> (Firefox)</li>
-<li><a href="http://en.wikipedia.org/wiki/V8_(JavaScript_engine)" target="_blank" rel="noopener">V8</a> (Chrome, Chromium)</li>
-</ul>
+<p>在Chrome浏览器之中，<code>URLSearchParams</code>实例本身就是Iterator对象，与<code>entries</code>方法返回值相同。所以，可以写成下面的样子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">of</span> searchParams) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>下面是一个替换当前URL的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> params = <span class="keyword">new</span> URLSearchParams(location.search.slice(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">params.set(<span class="string">'version'</span>, <span class="number">2.0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.replaceState(&#123;&#125;, <span class="string">''</span>, <span class="string">`<span class="subst">$&#123;location.pathname&#125;</span>?<span class="subst">$&#123;params&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=2.0</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>实例可以当作POST数据发送，所有数据都会URL编码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">params.append(<span class="string">'api_key'</span>, <span class="string">'1234567890'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'https://example.com/api'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  body: params</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;).then(...)</span></pre></td></tr></table></figure>
+
+<p>DOM的<code>a</code>元素节点的<code>searchParams</code>属性，就是一个<code>URLSearchParams</code>实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">a.href = <span class="string">'https://example.com?filter=api'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">a.searchParams.get(<span class="string">'filter'</span>) <span class="comment">// "api"</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>还可以与<code>URL</code>接口结合使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="keyword">new</span> URL(location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = url.searchParams.get(<span class="string">'foo'</span>) || <span class="string">'somedefault'</span>;</span></pre></td></tr></table></figure>
+
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>John Dalziel, <a href="http://creativejs.com/2013/06/the-race-for-speed-part-2-how-javascript-compilers-work/" target="_blank" rel="noopener">The race for speed part 2: How JavaScript compilers work</a></li>
-<li>Jake Archibald，<a href="http://www.html5rocks.com/en/tutorials/speed/script-loading/" target="_blank" rel="noopener">Deep dive into the murky waters of script loading</a></li>
-<li>Mozilla Developer Network, <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.setTimeout" target="_blank" rel="noopener">window.setTimeout</a></li>
-<li>Remy Sharp, <a href="http://remysharp.com/2010/07/21/throttling-function-calls/" target="_blank" rel="noopener">Throttling function calls</a></li>
-<li>Ayman Farhat, <a href="http://www.thecodeship.com/web-development/alternative-to-javascript-evil-setinterval/" target="_blank" rel="noopener">An alternative to Javascript’s evil setInterval</a></li>
-<li>Ilya Grigorik, <a href="https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/" target="_blank" rel="noopener">Script-injected “async scripts” considered harmful</a></li>
-<li>Axel Rauschmayer, <a href="http://www.2ality.com/2014/09/es6-promises-foundations.html" target="_blank" rel="noopener">ECMAScript 6 promises (1/2): foundations</a></li>
-<li>Daniel Imms, <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html" target="_blank" rel="noopener">async vs defer attributes</a></li>
-<li>Craig Buckler, <a href="http://www.sitepoint.com/non-blocking-async-defer/" target="_blank" rel="noopener">Load Non-blocking JavaScript with HTML5 Async and Defer</a></li>
-<li>Domenico De Felice, <a href="http://domenicodefelice.blogspot.sg/2015/08/how-browsers-work.html?t=2" target="_blank" rel="noopener">How browsers work</a></li>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="noopener">Manipulating the browser history</a></li>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onpopstate" target="_blank" rel="noopener">window.onpopstate</a></li>
+<li>Johnny Simpson, <a href="http://www.inserthtml.com/2013/06/history-api/" target="_blank" rel="noopener">Controlling History: The HTML5 History API And ‘Selective’ Loading</a></li>
+<li>Louis Lazaris, <a href="http://www.impressivewebs.com/html5-history-api-syntax/" target="_blank" rel="noopener">HTML5 History API: A Syntax Primer</a></li>
+<li>Eric Bidelman, <a href="https://developers.google.com/web/updates/2016/01/urlsearchparams?hl=en" target="_blank" rel="noopener">Easy URL manipulation with URLSearchParams</a></li>
 </ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-cookie/" >Cookie</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Cookie是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB。浏览器每次向服务器发出请求，就会自动附上这段信息。</p>
-<p>Cookie保存以下几方面的信息。</p>
-<ul>
-<li>Cookie的名字</li>
-<li>Cookie的值</li>
-<li>到期时间</li>
-<li>所属域名（默认是当前域名）</li>
-<li>生效的路径（默认是当前网址）</li>
-</ul>
-<p>举例来说，如果当前URL是<code>www.example.com</code>，那么Cookie的路径就是根目录<code>/</code>。这意味着，这个Cookie对该域名的根路径和它的所有子路径都有效。如果路径设为<code>/forums</code>，那么这个Cookie只有在访问<code>www.example.com/forums</code>及其子路径时才有效。</p>
-<p>浏览器可以设置不接受Cookie，也可以设置不向服务器发送Cookie。<code>window.navigator.cookieEnabled</code>属性返回一个布尔值，表示浏览器是否打开Cookie功能。</p>
-<p><code>document.cookie</code>属性返回当前网页的Cookie。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取当前网页的所有cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> allCookies = <span class="built_in">document</span>.cookie;</span></pre></td></tr></table></figure>
-
-<p>由于<code>document.cookie</code>返回的是分号分隔的所有Cookie，所以必须手动还原，才能取出每一个Cookie的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// cookies[i] name=value形式的单个Cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p><code>document.cookie</code>属性是可写的，可以通过它为当前网站添加Cookie。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14'</span>;</span></pre></td></tr></table></figure>
-
-<p>Cookie的值必须写成<code>key=value</code>的形式。注意，等号两边不能有空格。另外，写入Cookie的时候，必须对分号、逗号和空格进行转义（它们都不允许作为Cookie的值），这可以用<code>encodeURIComponent</code>方法达到。</p>
-<p>但是，<code>document.cookie</code>一次只能写入一个Cookie，而且写入并不是覆盖，而是添加。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test1=hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test2=world'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// test1=hello;test2=world</span></span></pre></td></tr></table></figure>
-
-<p><code>document.cookie</code>属性读写行为的差异（一次可以读出全部Cookie，但是只能写入一个Cookie），与服务器与浏览器之间的Cookie通信格式有关。浏览器向服务器发送Cookie的时候，是一行将所有Cookie全部发送。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sample_page.html</span> HTTP/1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Host</span>: www.example.org</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: cookie_name1=cookie_value1; cookie_name2=cookie_value2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept</span>: */*</span></pre></td></tr></table></figure>
-
-<p>上面的头信息中，<code>Cookie</code>字段是浏览器向服务器发送的Cookie。</p>
-<p>服务器告诉浏览器需要储存Cookie的时候，则是分行指定。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.0 <span class="number">200</span> OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-type</span>: text/html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name1=cookie_value1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name2=cookie_value2; expires=Sun, 16 Jul 3567 06:23:41 GMT</span></pre></td></tr></table></figure>
-
-<p>上面的头信息中，<code>Set-Cookie</code>字段是服务器写入浏览器的Cookie，一行一个。</p>
-<p>如果仔细看浏览器向服务器发送的Cookie，就会意识到，Cookie协议存在问题。对于服务器来说，有两点是无法知道的。</p>
-<ul>
-<li>Cookie的各种属性，比如何时过期。</li>
-<li>哪个域名设置的Cookie，因为Cookie可能是一级域名设的，也可能是任意一个二级域名设的。</li>
-</ul>
-<h2 id="Cookie的属性"><a href="#Cookie的属性" class="headerlink" title="Cookie的属性"></a>Cookie的属性</h2><p>除了Cookie本身的内容，还有一些可选的属性也是可以写入的，它们都必须以分号开头。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: value[; expires=date][; domain=domain][; path=path][; secure]</span></pre></td></tr></table></figure>
-
-<p>上面的<code>Set-Cookie</code>字段，用分号分隔多个属性。它们的含义如下。</p>
-<p>（1）value属性</p>
-<p><code>value</code>属性是必需的，它是一个键值对，用于指定Cookie的值。</p>
-<p>（2）expires属性</p>
-<p><code>expires</code>属性用于指定Cookie过期时间。它的格式采用<code>Date.toUTCString()</code>的格式。</p>
-<p>如果不设置该属性，或者设为<code>null</code>，Cookie只在当前会话（session）有效，浏览器窗口一旦关闭，当前Session结束，该Cookie就会被删除。</p>
-<p>浏览器根据本地时间，决定Cookie是否过期，由于本地时间是不精确的，所以没有办法保证Cookie一定会在服务器指定的时间过期。</p>
-<p>（3）domain属性</p>
-<p><code>domain</code>属性指定Cookie所在的域名，比如<code>example.com</code>或<code>.example.com</code>（这种写法将对所有子域名生效）、<code>subdomain.example.com</code>。</p>
-<p>如果未指定，默认为设定该Cookie的域名。所指定的域名必须是当前发送Cookie的域名的一部分，比如当前访问的域名是<code>example.com</code>，就不能将其设为<code>google.com</code>。只有访问的域名匹配domain属性，Cookie才会发送到服务器。</p>
-<p>（4）path属性</p>
-<p><code>path</code>属性用来指定路径，必须是绝对路径（比如<code>/</code>、<code>/mydir</code>），如果未指定，默认为请求该Cookie的网页路径。</p>
-<p>只有<code>path</code>属性匹配向服务器发送的路径，Cookie才会发送。这里的匹配不是绝对匹配，而是从根路径开始，只要<code>path</code>属性匹配发送路径的一部分，就可以发送。比如，<code>path</code>属性等于<code>/blog</code>，则发送路径是<code>/blog</code>或者<code>/blogroll</code>，Cookie都会发送。<code>path</code>属性生效的前提是<code>domain</code>属性匹配。</p>
-<p>（5）secure</p>
-<p><code>secure</code>属性用来指定Cookie只能在加密协议HTTPS下发送到服务器。</p>
-<p>该属性只是一个开关，不需要指定值。如果通信是HTTPS协议，该开关自动打开。</p>
-<p>（6）max-age</p>
-<p><code>max-age</code>属性用来指定Cookie有效期，比如<code>60 * 60 * 24 * 365</code>（即一年31536e3秒）。</p>
-<p>（7）HttpOnly</p>
-<p><code>HttpOnly</code>属性用于设置该Cookie不能被JavaScript读取，详见下文的说明。</p>
-<p>以上属性可以同时设置一个或多个，也没有次序的要求。如果服务器想改变一个早先设置的Cookie，必须同时满足四个条件：Cookie的<code>key</code>、<code>domain</code>、<code>path</code>和<code>secure</code>都匹配。也就是说，如果原始的Cookie是用如下的<code>Set-Cookie</code>设置的。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value1; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
-
-<p>改变上面这个cookie的值，就必须使用同样的<code>Set-Cookie</code>。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
-
-<p>只要有一个属性不同，就会生成一个全新的Cookie，而不是替换掉原来那个Cookie。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/</span></pre></td></tr></table></figure>
-
-<p>上面的命令设置了一个全新的同名Cookie，但是<code>path</code>属性不一样。下一次访问<code>example.com/blog</code>的时候，浏览器将向服务器发送两个同名的Cookie。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: key1=value1; key1=value2</span></pre></td></tr></table></figure>
-
-<p>上面代码的两个Cookie是同名的，匹配越精确的Cookie排在越前面。</p>
-<p>浏览器设置这些属性的写法如下。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'expires='</span> + someDate.toGMTString() + <span class="string">'; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'path=/subdirectory; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'domain=*.example.com'</span>;</span></pre></td></tr></table></figure>
-
-<p>另外，这些属性只能用来设置Cookie。一旦设置完成，就没有办法读取这些属性的值。</p>
-<p>删除一个Cookie的简便方法，就是设置<code>expires</code>属性等于0，或者等于一个过去的日期。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT'</span>;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，名为<code>fontSize</code>的Cookie的值为空，过期时间设为1970年1月1月零点，就等同于删除了这个Cookie。</p>
-<h2 id="Cookie的限制"><a href="#Cookie的限制" class="headerlink" title="Cookie的限制"></a>Cookie的限制</h2><p>浏览器对Cookie数量的限制，规定不一样。目前，Firefox是每个域名最多设置50个Cookie，而Safari和Chrome没有域名数量的限制。</p>
-<p>所有Cookie的累加长度限制为4KB。超过这个长度的Cookie，将被忽略，不会被设置。</p>
-<p>由于Cookie可能存在数量限制，有时为了规避限制，可以将cookie设置成下面的形式。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">name=a=b&amp;c=d&amp;e=f&amp;g=h</span></pre></td></tr></table></figure>
-
-<p>上面代码实际上是设置了一个Cookie，但是这个Cookie内部使用<code>&amp;</code>符号，设置了多部分的内容。因此，读取这个Cookie的时候，就要自行解析，得到多个键值对。这样就规避了cookie的数量限制。</p>
-<h2 id="同源政策"><a href="#同源政策" class="headerlink" title="同源政策"></a>同源政策</h2><p>浏览器的同源政策规定，两个网址只要域名相同和端口相同，就可以共享Cookie。</p>
-<p>注意，这里不要求协议相同。也就是说，<code>http://example.com</code>设置的Cookie，可以被<code>https://example.com</code>读取。</p>
-<h2 id="Http-Only-Cookie"><a href="#Http-Only-Cookie" class="headerlink" title="Http-Only Cookie"></a>Http-Only Cookie</h2><p>设置Cookie的时候，如果服务器加上了<code>HttpOnly</code>属性，则这个Cookie无法被JavaScript读取（即<code>document.cookie</code>不会返回这个Cookie的值），只用于向服务器发送。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key=value; HttpOnly</span></pre></td></tr></table></figure>
-
-<p>上面的这个Cookie将无法用JavaScript获取。进行AJAX操作时，<code>XMLHttpRequest</code>对象也无法包括这个Cookie。这主要是为了防止XSS攻击盗取Cookie。</p>
 
 	
 	</div>
@@ -753,7 +537,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-window/" >Window 对象</a></div>						
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-cookie/" >Cookie</a></div>						
 		</h3>
 	
 
@@ -762,216 +546,324 @@
   <div class="row">
 	
 	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在浏览器中，<code>window</code>对象（注意，<code>w</code>为小写）指当前的浏览器窗口。它也是所有对象的顶层对象。</p>
-<p><img src="http://www.dreamdu.com/images/browser_objects.png" alt=""></p>
-<p>“顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，<br>都是<code>window</code>对象的属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span></pre></td></tr></table></figure>
-
-<p>上面代码中，变量<code>a</code>是一个全局变量，但是实质上它是<code>window</code>对象的属性。声明一个全局变量，就是为<code>window</code>对象的同名属性赋值。</p>
-<p>从语言设计的角度看，所有变量都是<code>window</code>对象的属性，其实不是很合理。因为<code>window</code>对象有自己的实体含义，不适合当作最高一层的顶层对象。这个设计失误与JavaScript语言匆忙的设计过程有关，最早的设想是语言内置的对象越少越好，这样可以提高浏览器的性能。因此，语言设计者Brendan Eich就把<code>window</code>对象当作顶层对象，所有未声明就赋值的变量都自动变成<code>window</code>对象的属性。这种设计使得编译阶段无法检测出未声明变量，但到了今天已经没有办法纠正了。</p>
-<h2 id="window对象的属性"><a href="#window对象的属性" class="headerlink" title="window对象的属性"></a>window对象的属性</h2><h3 id="window-window"><a href="#window-window" class="headerlink" title="window.window"></a>window.window</h3><p><code>window</code>对象的<code>window</code>属性指向自身。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.window === <span class="keyword">this</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<h3 id="window-closed"><a href="#window-closed" class="headerlink" title="window.closed"></a>window.closed</h3><p><code>window.closed</code>属性返回一个布尔值，表示窗口是否关闭。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.closed <span class="comment">// false</span></span></pre></td></tr></table></figure>
-
-<p>上面代码检查当前窗口是否关闭。这种检查意义不大，因为只要能运行代码，当前窗口肯定没有关闭。这个属性一般用来检查，使用脚本打开的新窗口是否关闭。</p>
-<h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p><code>window.opener</code>属性返回打开当前窗口的父窗口。如果当前窗口没有父窗口，则返回<code>null</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowA = <span class="built_in">window</span>.opener;</span></pre></td></tr></table></figure>
-
-<p>通过<code>opener</code>属性，可以获得父窗口的的全局变量和方法，比如<code>windowA.window.propertyName</code>和<code>windowA.window.functionName()</code>。</p>
-<p>该属性只适用于两个窗口属于同源的情况（参见《<a href="/bom/same-origin.html">同源政策</a>》一节），且其中一个窗口由另一个打开。</p>
-<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p><code>window.name</code>属性用于设置当前浏览器窗口的名字。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">'Hello World!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Hello World!"</span></span></pre></td></tr></table></figure>
-
-<p>各个浏览器对这个值的储存容量有所不同，但是一般来说，可以高达几MB。</p>
-<p>它有一个重要特点，就是只要是本窗口打开的网页，都能读写该属性，不管这些网页是否属于同一个网站。所以，可以把值存放在该属性内，然后让另一个网页读取，从而实现跨域通信（详见《<a href="/bom/same-origin.html">同源政策</a>》一节）。</p>
-<p>该属性只能保存字符串，且当浏览器窗口关闭后，所保存的值就会消失。因此局限性比较大，但是与iframe窗口通信时，非常有用。</p>
-<h3 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h3><p><code>window.location</code>返回一个<code>location</code>对象，用于获取窗口当前的URL信息。它等同于<code>document.location</code>对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location === <span class="built_in">document</span>.location <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<h3 id="window-frames"><a href="#window-frames" class="headerlink" title="window.frames"></a>window.frames</h3><p><code>window.frames</code>属性返回一个类似数组的对象，成员为页面内所有框架窗口，包括<code>frame</code>元素和<code>iframe</code>元素。<code>window.frames[0]</code>表示页面中第一个框架窗口，<code>window.frames[&#39;someName&#39;]</code>则是根据框架窗口的<code>name</code>属性的值（不是<code>id</code>属性），返回该窗口。另外，通过<code>document.getElementById()</code>方法也可以引用指定的框架窗口。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frame = <span class="built_in">document</span>.getElementById(<span class="string">'theFrame'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameWindow = frame.contentWindow;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于 frame.contentWindow.document</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameDoc = frame.contentDocument;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取子窗口的变量和属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">frameWindow<span class="function">.<span class="keyword">function</span>(<span class="params"></span>)</span></span></pre></td></tr></table></figure>
-
-<p><code>window.length</code>属性返回当前页面中所有框架窗口总数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames.length === <span class="built_in">window</span>.length <span class="comment">// true</span></span></pre></td></tr></table></figure>
-
-<p><code>window.frames.length</code>与<code>window.length</code>应该是相等的。</p>
-<p>由于传统的<code>frame</code>窗口已经不建议使用了，这里主要介绍<code>iframe</code>窗口。</p>
-<p>需要注意的是，<code>window.frames</code>的每个成员对应的是框架内的窗口（即框架的<code>window</code>对象）。如果要获取每个框架内部的DOM树，需要使用<code>window.frames[0].document</code>的写法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">window</span>.getElementsByTagName(<span class="string">'iframe'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe_title = iframe.contentWindow.title;</span></pre></td></tr></table></figure>
-
-<p>上面代码用于获取<code>iframe</code>页面的标题。</p>
-<p><code>iframe</code>元素遵守同源政策，只有当父页面与框架页面来自同一个域名，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。</p>
-<p><code>iframe</code>窗口内部，使用<code>window.parent</code>引用父窗口。如果当前页面没有父窗口，则<code>window.parent</code>属性返回自身。因此，可以通过<code>window.parent</code>是否等于<code>window.self</code>，判断当前窗口是否为<code>iframe</code>窗口。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.parent != <span class="built_in">window</span>.self) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 当前窗口是子窗口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="window-screenX，window-screenY"><a href="#window-screenX，window-screenY" class="headerlink" title="window.screenX，window.screenY"></a>window.screenX，window.screenY</h3><p><code>window.screenX</code>和<code>window.screenY</code>属性，返回浏览器窗口左上角相对于当前屏幕左上角（<code>(0, 0)</code>）的水平距离和垂直距离，单位为像素。</p>
-<h3 id="window-innerHeight，window-innerWidth"><a href="#window-innerHeight，window-innerWidth" class="headerlink" title="window.innerHeight，window.innerWidth"></a>window.innerHeight，window.innerWidth</h3><p><code>window.innerHeight</code>和<code>window.innerWidth</code>属性，返回网页在当前窗口中可见部分的高度和宽度，即“视口”（viewport），单位为像素。</p>
-<p>当用户放大网页的时候（比如将网页从100%的大小放大为200%），这两个属性会变小。因为这时网页的像素大小不变（比如宽度还是960像素），只是每个像素占据的屏幕空间变大了，因为可见部分（视口）就变小了。</p>
-<p>注意，这两个属性值包括滚动条的高度和宽度。</p>
-<h3 id="window-outerHeight，window-outerWidth"><a href="#window-outerHeight，window-outerWidth" class="headerlink" title="window.outerHeight，window.outerWidth"></a>window.outerHeight，window.outerWidth</h3><p><code>window.outerHeight</code>和<code>window.outerWidth</code>属性返回浏览器窗口的高度和宽度，包括浏览器菜单和边框，单位为像素。</p>
-<h3 id="window-pageXOffset，window-pageYOffset"><a href="#window-pageXOffset，window-pageYOffset" class="headerlink" title="window.pageXOffset，window.pageYOffset"></a>window.pageXOffset，window.pageYOffset</h3><p><code>window.pageXOffset</code>属性返回页面的水平滚动距离，<code>window.pageYOffset</code>属性返回页面的垂直滚动距离，单位都为像素。</p>
-<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><p><code>window</code>对象的<code>navigator</code>属性，指向一个包含浏览器相关信息的对象。</p>
-<h3 id="navigator-userAgent"><a href="#navigator-userAgent" class="headerlink" title="navigator.userAgent"></a>navigator.userAgent</h3><p><code>navigator.userAgent</code>属性返回浏览器的User-Agent字符串，用来标示浏览器的种类。下面是Chrome浏览器的<code>userAgent</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">navigator.userAgent</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"</span></span></pre></td></tr></table></figure>
-
-<p>通过<code>userAgent</code>属性识别浏览器，不是一个好办法。因为必须考虑所有的情况（不同的浏览器，不同的版本），非常麻烦，而且无法保证未来的适用性，更何况各种上网设备层出不穷，难以穷尽。所以，现在一般不再识别浏览器了，而是使用“功能识别”方法，即逐一测试当前浏览器是否支持要用到的JavaScript功能。</p>
-<p>不过，通过<code>userAgent</code>可以大致准确地识别手机浏览器，方法就是测试是否包含<code>mobi</code>字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ua = navigator.userAgent.toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/mobi/i</span>.test(ua)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 非手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>如果想要识别所有移动设备的浏览器，可以测试更多的特征字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/mobi|android|touch|mini/i.test(ua)</span></pre></td></tr></table></figure>
-
-<h3 id="navigator-plugins"><a href="#navigator-plugins" class="headerlink" title="navigator.plugins"></a>navigator.plugins</h3><p><code>navigator.plugins</code>属性返回一个类似数组的对象，成员是浏览器安装的插件，比如Flash、ActiveX等。</p>
-<h2 id="window-screen对象"><a href="#window-screen对象" class="headerlink" title="window.screen对象"></a>window.screen对象</h2><p><code>window.screen</code>对象包含了显示设备的信息。</p>
-<p><code>screen.height</code>和<code>screen.width</code>两个属性，一般用来了解设备的分辨率。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的高度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">screen.height <span class="comment">// 1920</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的宽度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">screen.width <span class="comment">// 1080</span></span></pre></td></tr></table></figure>
-
-<p>上面代码显示，某设备的分辨率是1920x1080。</p>
-<p>除非调整显示器的分辨率，否则这两个值可以看作常量，不会发生变化。显示器的分辨率与浏览器设置无关，缩放网页并不会改变分辨率。</p>
-<p>下面是根据屏幕分辨率，将用户导向不同网页的代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((screen.width &lt;= <span class="number">800</span>) &amp;&amp; (screen.height &lt;= <span class="number">600</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'small.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'wide.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p><code>screen.availHeight</code>和<code>screen.availWidth</code>属性返回屏幕可用的高度和宽度，单位为像素。它们的值为屏幕的实际大小减去操作系统某些功能占据的空间，比如系统的任务栏。</p>
-<p><code>screen.colorDepth</code>属性返回屏幕的颜色深度，一般为16（表示16-bit）或24（表示24-bit）。</p>
-<h2 id="window对象的方法"><a href="#window对象的方法" class="headerlink" title="window对象的方法"></a>window对象的方法</h2><h3 id="window-moveTo-，window-moveBy"><a href="#window-moveTo-，window-moveBy" class="headerlink" title="window.moveTo()，window.moveBy()"></a>window.moveTo()，window.moveBy()</h3><p><code>window.moveTo</code>方法用于移动浏览器窗口到指定位置。它接受两个参数，分别是窗口左上角距离屏幕左上角的水平距离和垂直距离，单位为像素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">100</span>, <span class="number">200</span>)</span></pre></td></tr></table></figure>
-
-<p>上面代码将窗口移动到屏幕<code>(100, 200)</code>的位置。</p>
-<p><code>window.moveBy</code>方法将窗口移动到一个相对位置。它接受两个参数，分布是窗口左上角向右移动的水平距离和向下移动的垂直距离，单位为像素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">25</span>, <span class="number">50</span>)</span></pre></td></tr></table></figure>
-
-<p>上面代码将窗口向右移动25像素、向下移动50像素。</p>
-<h3 id="window-open-window-close"><a href="#window-open-window-close" class="headerlink" title="window.open(), window.close()"></a>window.open(), window.close()</h3><p><code>window.open</code>方法用于新建另一个浏览器窗口，并且返回该窗口对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(<span class="string">'somefile.html'</span>);</span></pre></td></tr></table></figure>
-
-<p><code>open</code>方法的第一个参数是新窗口打开的网址，此外还可以加上第二个参数，表示新窗口的名字，以及第三个参数用来指定新窗口的参数，形式是一个逗号分隔的<code>property=value</code>字符串。</p>
-<p>下面是一个例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'somepage.html'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'DefinitionsWindows'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'height=200,width=200,location=no,resizable=yes,scrollbars=yes'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
-
-<p>注意，如果在第三个参数中设置了一部分参数，其他没有被设置的<code>yes/no</code>参数都会被设成No，只有<code>titlebar</code>和关闭按钮除外（它们的值默认为yes）。</p>
-<p><code>open</code>方法返回新窗口的引用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowB = <span class="built_in">window</span>.open(<span class="string">'windowB.html'</span>, <span class="string">'WindowB'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">windowB.window.name <span class="comment">// "WindowB"</span></span></pre></td></tr></table></figure>
-
-<p>由于<code>open</code>这个方法很容易被滥用，许多浏览器默认都不允许脚本新建窗口。因此，有必要检查一下打开新窗口是否成功。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (popup === <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 新建窗口失败</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p><code>window.close</code>方法用于关闭当前窗口，一般用来关闭<code>window.open</code>方法新建的窗口。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">popup.close()</span></pre></td></tr></table></figure>
-
-<p><code>window.closed</code>属性用于检查当前窗口是否被关闭了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 窗口仍然打开着</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="window-print"><a href="#window-print" class="headerlink" title="window.print()"></a>window.print()</h3><p><code>print</code>方法会跳出打印对话框，同用户点击菜单里面的“打印”命令效果相同。</p>
-<p>页面上的打印按钮代码如下。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'printLink'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.print();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>非桌面设备（比如手机）可能没有打印功能，这时可以这样判断。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.print === <span class="string">'function'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持打印功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h3><p><code>getComputedStyle</code>方法接受一个HTML元素作为参数，返回一个包含该HTML元素的最终样式信息的对象。详见《DOM》一章的CSS章节。</p>
-<h3 id="window-matchMedia"><a href="#window-matchMedia" class="headerlink" title="window.matchMedia()"></a>window.matchMedia()</h3><p><code>window.matchMedia</code>方法用来检查CSS的mediaQuery语句。详见《DOM》一章的CSS章节。</p>
-<h3 id="window-focus"><a href="#window-focus" class="headerlink" title="window.focus()"></a>window.focus()</h3><p><code>focus</code>方法会激活指定当前窗口，使其获得焦点。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  popup.focus();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码先检查<code>popup</code>窗口是否依然存在，确认后激活该窗口。</p>
-<p>当前窗口获得焦点时，会触发<code>focus</code>事件；当前窗口失去焦点时，会触发<code>blur</code>事件。</p>
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p><code>window</code>对象可以接收以下事件。</p>
-<h3 id="load事件和onload属性"><a href="#load事件和onload属性" class="headerlink" title="load事件和onload属性"></a>load事件和onload属性</h3><p><code>load</code>事件发生在文档在浏览器窗口加载完毕时。<code>window.onload</code>属性可以指定这个事件的回调函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> elements = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'example'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> elt = elements[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<p>上面代码在网页加载完毕后，获取指定元素并进行处理。</p>
-<h3 id="error事件和onerror属性"><a href="#error事件和onerror属性" class="headerlink" title="error事件和onerror属性"></a>error事件和onerror属性</h3><p>浏览器脚本发生错误时，会触发window对象的<code>error</code>事件。我们可以通过<code>window.onerror</code>属性对该事件指定回调函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">message, filename, lineno, colno, error</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"出错了！--&gt; %s"</span>, error.stack);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
-
-<p><code>error</code>事件的回调函数，一共可以有五个参数，它们的含义依次如下。</p>
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Cookie是服务器保存在浏览器的一小段文本信息，每个Cookie的大小一般不能超过4KB。浏览器每次向服务器发出请求，就会自动附上这段信息。</p>
+<p>Cookie保存以下几方面的信息。</p>
 <ul>
-<li>出错信息</li>
-<li>出错脚本的网址</li>
-<li>行号</li>
-<li>列号</li>
-<li>错误对象</li>
+<li>Cookie的名字</li>
+<li>Cookie的值</li>
+<li>到期时间</li>
+<li>所属域名（默认是当前域名）</li>
+<li>生效的路径（默认是当前网址）</li>
 </ul>
-<p>老式浏览器只支持前三个参数。</p>
-<p>需要注意的是，如果脚本网址与网页网址不在同一个域（比如使用了CDN），浏览器根本不会提供详细的出错信息，只会提示出错，错误类型是“Script error.”，行号为0，其他信息都没有。这是浏览器防止向外部脚本泄漏信息。一个解决方法是在脚本所在的服务器，设置Access-Control-Allow-Origin的HTTP头信息。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin:*</span></pre></td></tr></table></figure>
+<p>举例来说，如果当前URL是<code>www.example.com</code>，那么Cookie的路径就是根目录<code>/</code>。这意味着，这个Cookie对该域名的根路径和它的所有子路径都有效。如果路径设为<code>/forums</code>，那么这个Cookie只有在访问<code>www.example.com/forums</code>及其子路径时才有效。</p>
+<p>浏览器可以设置不接受Cookie，也可以设置不向服务器发送Cookie。<code>window.navigator.cookieEnabled</code>属性返回一个布尔值，表示浏览器是否打开Cookie功能。</p>
+<p><code>document.cookie</code>属性返回当前网页的Cookie。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取当前网页的所有cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> allCookies = <span class="built_in">document</span>.cookie;</span></pre></td></tr></table></figure>
 
-<p>然后，在网页的<code>&lt;script&gt;</code>标签中设置<code>crossorigin</code>属性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span> <span class="attr">src</span>=<span class="string">"//example.com/file.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+<p>由于<code>document.cookie</code>返回的是分号分隔的所有Cookie，所以必须手动还原，才能取出每一个Cookie的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// cookies[i] name=value形式的单个Cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
-<p>上面代码的<code>crossorigin=&quot;anonymous&quot;</code>表示，读取文件不需要身份信息，即不需要cookie和HTTP认证信息。如果设为<code>crossorigin=&quot;use-credentials&quot;</code>，就表示浏览器会上传cookie和HTTP认证信息，同时还需要服务器端打开HTTP头信息Access-Control-Allow-Credentials。</p>
-<p>并不是所有的错误，都会触发JavaScript的<code>error</code>事件（即让JavaScript报错），只限于以下三类事件。</p>
+<p><code>document.cookie</code>属性是可写的，可以通过它为当前网站添加Cookie。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14'</span>;</span></pre></td></tr></table></figure>
+
+<p>Cookie的值必须写成<code>key=value</code>的形式。注意，等号两边不能有空格。另外，写入Cookie的时候，必须对分号、逗号和空格进行转义（它们都不允许作为Cookie的值），这可以用<code>encodeURIComponent</code>方法达到。</p>
+<p>但是，<code>document.cookie</code>一次只能写入一个Cookie，而且写入并不是覆盖，而是添加。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test1=hello'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'test2=world'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// test1=hello;test2=world</span></span></pre></td></tr></table></figure>
+
+<p><code>document.cookie</code>属性读写行为的差异（一次可以读出全部Cookie，但是只能写入一个Cookie），与服务器与浏览器之间的Cookie通信格式有关。浏览器向服务器发送Cookie的时候，是一行将所有Cookie全部发送。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/sample_page.html</span> HTTP/1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Host</span>: www.example.org</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: cookie_name1=cookie_value1; cookie_name2=cookie_value2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Accept</span>: */*</span></pre></td></tr></table></figure>
+
+<p>上面的头信息中，<code>Cookie</code>字段是浏览器向服务器发送的Cookie。</p>
+<p>服务器告诉浏览器需要储存Cookie的时候，则是分行指定。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">HTTP/1.0 <span class="number">200</span> OK</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-type</span>: text/html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name1=cookie_value1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: cookie_name2=cookie_value2; expires=Sun, 16 Jul 3567 06:23:41 GMT</span></pre></td></tr></table></figure>
+
+<p>上面的头信息中，<code>Set-Cookie</code>字段是服务器写入浏览器的Cookie，一行一个。</p>
+<p>如果仔细看浏览器向服务器发送的Cookie，就会意识到，Cookie协议存在问题。对于服务器来说，有两点是无法知道的。</p>
 <ul>
-<li>JavaScript语言错误</li>
-<li>JavaScript脚本文件不存在</li>
-<li>图像文件不存在</li>
+<li>Cookie的各种属性，比如何时过期。</li>
+<li>哪个域名设置的Cookie，因为Cookie可能是一级域名设的，也可能是任意一个二级域名设的。</li>
 </ul>
-<p>以下两类事件不会触发JavaScript的error事件。</p>
+<h2 id="Cookie的属性"><a href="#Cookie的属性" class="headerlink" title="Cookie的属性"></a>Cookie的属性</h2><p>除了Cookie本身的内容，还有一些可选的属性也是可以写入的，它们都必须以分号开头。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: value[; expires=date][; domain=domain][; path=path][; secure]</span></pre></td></tr></table></figure>
+
+<p>上面的<code>Set-Cookie</code>字段，用分号分隔多个属性。它们的含义如下。</p>
+<p>（1）value属性</p>
+<p><code>value</code>属性是必需的，它是一个键值对，用于指定Cookie的值。</p>
+<p>（2）expires属性</p>
+<p><code>expires</code>属性用于指定Cookie过期时间。它的格式采用<code>Date.toUTCString()</code>的格式。</p>
+<p>如果不设置该属性，或者设为<code>null</code>，Cookie只在当前会话（session）有效，浏览器窗口一旦关闭，当前Session结束，该Cookie就会被删除。</p>
+<p>浏览器根据本地时间，决定Cookie是否过期，由于本地时间是不精确的，所以没有办法保证Cookie一定会在服务器指定的时间过期。</p>
+<p>（3）domain属性</p>
+<p><code>domain</code>属性指定Cookie所在的域名，比如<code>example.com</code>或<code>.example.com</code>（这种写法将对所有子域名生效）、<code>subdomain.example.com</code>。</p>
+<p>如果未指定，默认为设定该Cookie的域名。所指定的域名必须是当前发送Cookie的域名的一部分，比如当前访问的域名是<code>example.com</code>，就不能将其设为<code>google.com</code>。只有访问的域名匹配domain属性，Cookie才会发送到服务器。</p>
+<p>（4）path属性</p>
+<p><code>path</code>属性用来指定路径，必须是绝对路径（比如<code>/</code>、<code>/mydir</code>），如果未指定，默认为请求该Cookie的网页路径。</p>
+<p>只有<code>path</code>属性匹配向服务器发送的路径，Cookie才会发送。这里的匹配不是绝对匹配，而是从根路径开始，只要<code>path</code>属性匹配发送路径的一部分，就可以发送。比如，<code>path</code>属性等于<code>/blog</code>，则发送路径是<code>/blog</code>或者<code>/blogroll</code>，Cookie都会发送。<code>path</code>属性生效的前提是<code>domain</code>属性匹配。</p>
+<p>（5）secure</p>
+<p><code>secure</code>属性用来指定Cookie只能在加密协议HTTPS下发送到服务器。</p>
+<p>该属性只是一个开关，不需要指定值。如果通信是HTTPS协议，该开关自动打开。</p>
+<p>（6）max-age</p>
+<p><code>max-age</code>属性用来指定Cookie有效期，比如<code>60 * 60 * 24 * 365</code>（即一年31536e3秒）。</p>
+<p>（7）HttpOnly</p>
+<p><code>HttpOnly</code>属性用于设置该Cookie不能被JavaScript读取，详见下文的说明。</p>
+<p>以上属性可以同时设置一个或多个，也没有次序的要求。如果服务器想改变一个早先设置的Cookie，必须同时满足四个条件：Cookie的<code>key</code>、<code>domain</code>、<code>path</code>和<code>secure</code>都匹配。也就是说，如果原始的Cookie是用如下的<code>Set-Cookie</code>设置的。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value1; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
+
+<p>改变上面这个cookie的值，就必须使用同样的<code>Set-Cookie</code>。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/blog</span></pre></td></tr></table></figure>
+
+<p>只要有一个属性不同，就会生成一个全新的Cookie，而不是替换掉原来那个Cookie。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key1=value2; domain=example.com; path=/</span></pre></td></tr></table></figure>
+
+<p>上面的命令设置了一个全新的同名Cookie，但是<code>path</code>属性不一样。下一次访问<code>example.com/blog</code>的时候，浏览器将向服务器发送两个同名的Cookie。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cookie</span>: key1=value1; key1=value2</span></pre></td></tr></table></figure>
+
+<p>上面代码的两个Cookie是同名的，匹配越精确的Cookie排在越前面。</p>
+<p>浏览器设置这些属性的写法如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=14; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'expires='</span> + someDate.toGMTString() + <span class="string">'; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'path=/subdirectory; '</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  + <span class="string">'domain=*.example.com'</span>;</span></pre></td></tr></table></figure>
+
+<p>另外，这些属性只能用来设置Cookie。一旦设置完成，就没有办法读取这些属性的值。</p>
+<p>删除一个Cookie的简便方法，就是设置<code>expires</code>属性等于0，或者等于一个过去的日期。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT'</span>;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，名为<code>fontSize</code>的Cookie的值为空，过期时间设为1970年1月1月零点，就等同于删除了这个Cookie。</p>
+<h2 id="Cookie的限制"><a href="#Cookie的限制" class="headerlink" title="Cookie的限制"></a>Cookie的限制</h2><p>浏览器对Cookie数量的限制，规定不一样。目前，Firefox是每个域名最多设置50个Cookie，而Safari和Chrome没有域名数量的限制。</p>
+<p>所有Cookie的累加长度限制为4KB。超过这个长度的Cookie，将被忽略，不会被设置。</p>
+<p>由于Cookie可能存在数量限制，有时为了规避限制，可以将cookie设置成下面的形式。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">name=a=b&amp;c=d&amp;e=f&amp;g=h</span></pre></td></tr></table></figure>
+
+<p>上面代码实际上是设置了一个Cookie，但是这个Cookie内部使用<code>&amp;</code>符号，设置了多部分的内容。因此，读取这个Cookie的时候，就要自行解析，得到多个键值对。这样就规避了cookie的数量限制。</p>
+<h2 id="同源政策"><a href="#同源政策" class="headerlink" title="同源政策"></a>同源政策</h2><p>浏览器的同源政策规定，两个网址只要域名相同和端口相同，就可以共享Cookie。</p>
+<p>注意，这里不要求协议相同。也就是说，<code>http://example.com</code>设置的Cookie，可以被<code>https://example.com</code>读取。</p>
+<h2 id="Http-Only-Cookie"><a href="#Http-Only-Cookie" class="headerlink" title="Http-Only Cookie"></a>Http-Only Cookie</h2><p>设置Cookie的时候，如果服务器加上了<code>HttpOnly</code>属性，则这个Cookie无法被JavaScript读取（即<code>document.cookie</code>不会返回这个Cookie的值），只用于向服务器发送。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: key=value; HttpOnly</span></pre></td></tr></table></figure>
+
+<p>上面的这个Cookie将无法用JavaScript获取。进行AJAX操作时，<code>XMLHttpRequest</code>对象也无法包括这个Cookie。这主要是为了防止XSS攻击盗取Cookie。</p>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-04 </div>
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-engine/" >浏览器环境概述</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="JavaScript代码嵌入网页的方法"><a href="#JavaScript代码嵌入网页的方法" class="headerlink" title="JavaScript代码嵌入网页的方法"></a>JavaScript代码嵌入网页的方法</h2><p>JavaScript代码只有嵌入网页，才能在用户浏览器网页时运行。</p>
+<p>网页中嵌入JavaScript代码，主要有四种方法。</p>
 <ul>
-<li>CSS文件不存在</li>
-<li>iframe文件不存在</li>
+<li><code>&lt;script&gt;</code>标签：代码嵌入网页</li>
+<li><code>&lt;script&gt;</code>标签：加载外部脚本</li>
+<li>事件属性：代码写入HTML元素的事件处理属性，比如<code>onclick</code>或者<code>onmouseover</code></li>
+<li>URL协议：URL支持以<code>javascript:</code>协议的方式，执行JavaScript代码</li>
 </ul>
-<h2 id="URL的编码-解码方法"><a href="#URL的编码-解码方法" class="headerlink" title="URL的编码/解码方法"></a>URL的编码/解码方法</h2><p>网页URL的合法字符分成两类。</p>
+<p>后两种方法用得很少，常用的是前两种方法。由于内容（HTML代码）和行为（JavaScript）代码应该分离，所以第一种方法应当谨慎使用。</p>
+<h3 id="script标签：代码嵌入网页"><a href="#script标签：代码嵌入网页" class="headerlink" title="script标签：代码嵌入网页"></a>script标签：代码嵌入网页</h3><p>通过<code>&lt;script&gt;</code>标签，可以直接将JavaScript代码嵌入网页。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p><code>&lt;script&gt;</code>标签有一个<code>type</code>属性，用来指定脚本类型。对JavaScript脚本来说，<code>type</code>属性可以设为两种值。</p>
 <ul>
-<li>URL元字符：分号（<code>;</code>），逗号（’,’），斜杠（<code>/</code>），问号（<code>?</code>），冒号（<code>:</code>），at（<code>@</code>），<code>&amp;</code>，等号（<code>=</code>），加号（<code>+</code>），美元符号（<code>$</code>），井号（<code>#</code>）</li>
-<li>语义字符：<code>a-z</code>，<code>A-Z</code>，<code>0-9</code>，连词号（<code>-</code>），下划线（<code>_</code>），点（<code>.</code>），感叹号（<code>!</code>），波浪线（<code>~</code>），星号（<code>*</code>），单引号（<code>\``），圆括号（</code>()`）</li>
+<li><code>text/javascript</code>：这是默认值，也是历史上一贯设定的值。如果你省略<code>type</code>属性，默认就是这个值。对于老式浏览器，设为这个值比较好。</li>
+<li><code>application/javascript</code>：对于较新的浏览器，建议设为这个值。</li>
 </ul>
-<p>除了以上字符，其他字符出现在URL之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（<code>%</code>）加上两个大写的十六进制字母。比如，UTF-8的操作系统上，<code>http://www.example.com/q=春节</code>这个URL之中，汉字“春节”不是URL的合法字符，所以被浏览器自动转成<code>http://www.example.com/q=%E6%98%A5%E8%8A%82</code>。其中，“春”转成了<code>%E6%98%A5</code>，“节”转成了“%E8%8A%82”。这是因为“春”和”节“的UTF-8编码分别是<code>E6 98 A5</code>和<code>E8 8A 82</code>，将每个字节前面加上百分号，就构成了URL编码。</p>
-<p>JavaScript提供四个URL的编码/解码方法。</p>
-<ul>
-<li><code>encodeURI()</code></li>
-<li><code>encodeURIComponent()</code></li>
-<li><code>decodeURI()</code></li>
-<li><code>decodeURIComponent()</code></li>
-</ul>
-<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h3><p><code>encodeURI</code> 方法的参数是一个字符串，代表整个URL。它会将元字符和语义字符之外的字符，都进行转义。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURI</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"application/javascript"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h3><p><code>encodeURIComponent</code>只转除了语义字符之外的字符，元字符也会被转义。因此，它的参数通常是URL的路径或参数值，而不是整个URL。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "%E6%98%A5%E8%8A%82"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http%3A%2F%2Fwww.example.com%2Fq%3D%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+<p>由于<code>&lt;script&gt;</code>标签默认就是JavaScript代码。所以，嵌入JavaScript脚本时，<code>type</code>属性也可以省略。</p>
+<p>如果<code>type</code>属性的值，浏览器不认识，那么它不会执行其中的代码。利用这一点，可以在<code>&lt;script&gt;</code>标签之中嵌入任意的文本内容，然后加上一个浏览器不认识的<code>type</code>属性即可。</p>
+<h3 id="script标签：加载外部脚本"><a href="#script标签：加载外部脚本" class="headerlink" title="script标签：加载外部脚本"></a>script标签：加载外部脚本</h3><p><code>&lt;script&gt;</code>标签也可以指定加载外部的脚本文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>上面代码中，<code>encodeURIComponent</code>会连URL元字符一起转义，所以通常只用它转URL的片段。</p>
-<h3 id="decodeURI"><a href="#decodeURI" class="headerlink" title="decodeURI"></a>decodeURI</h3><p><code>decodeURI</code>用于还原转义后的URL。它是<code>encodeURI</code>方法的逆运算。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">'http://www.example.com/q=%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=春节"</span></span></pre></td></tr></table></figure>
+<p>如果脚本文件使用了非英语字符，还应该注明编码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<h3 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="decodeURIComponent"></a>decodeURIComponent</h3><p><code>decodeURIComponent</code>用于还原转义后的URL片段。它是<code>encodeURIComponent</code>方法的逆运算。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">'%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "春节"</span></span></pre></td></tr></table></figure>
+<p>所加载的脚本必须是纯的HTML代码，不能有<code>HTML</code>代码和<code>&lt;script&gt;</code>标签。</p>
+<p>加载外部脚本和直接添加代码块，这两种方法不能混用。下面代码的<code>console.log</code>语句直接被忽略。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">  <span class="built_in">console</span>.log(<span class="string">'Hello World!'</span>);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<h2 id="alert-，prompt-，confirm"><a href="#alert-，prompt-，confirm" class="headerlink" title="alert()，prompt()，confirm()"></a>alert()，prompt()，confirm()</h2><p><code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。</p>
-<p>需要注意的是，<code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>这三个方法弹出的对话框，都是浏览器统一规定的式样，是无法定制的。</p>
-<p><code>alert</code>方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">alert(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World'</span>);</span></pre></td></tr></table></figure>
+<p>为了防止攻击者篡改外部脚本，<code>script</code>标签允许设置一个<code>integrity</code>属性，写入该外部脚本的Hash签名，用来验证脚本的一致性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/assets/application.js"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">  <span class="attr">integrity</span>=<span class="string">"sha256-TvVUHzSfftWg1rcfL6TIJ0XKEGrgLyEq6lEpcmrG9qs="</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>用户只有点击“确定”按钮，对话框才会消失。在对话框弹出期间，浏览器窗口处于冻结状态，如果不点“确定”按钮，用户什么也干不了。</p>
-<p><code>alert</code>方法的参数只能是字符串，没法使用CSS样式，但是可以用<code>\n</code>指定换行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'本条提示\n分成两行'</span>);</span></pre></td></tr></table></figure>
+<p>上面代码中，<code>script</code>标签有一个<code>integrity</code>属性，指定了外部脚本<code>/assets/application.js</code>的SHA265签名。一旦有人改了这个脚本，导致SHA265签名不匹配，浏览器就会拒绝加载。</p>
+<h3 id="事件属性"><a href="#事件属性" class="headerlink" title="事件属性"></a>事件属性</h3><p>某些HTML元素的事件属性（比如<code>onclick</code>和<code>onmouseover</code>），可以写入JavaScript代码。当指定事件发生时，就会调用这些代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"alert('Hello')"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p><code>prompt</code>方法弹出的对话框，在提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(text[, <span class="keyword">default</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(<span class="string">'您的年龄？'</span>, <span class="number">25</span>)</span></pre></td></tr></table></figure>
+<p>上面的事件属性代码只有一个语句。如果有多个语句，用分号分隔即可。</p>
+<h3 id="URL协议"><a href="#URL协议" class="headerlink" title="URL协议"></a>URL协议</h3><p>URL支持<code>javascript:</code>协议，调用这个URL时，就会执行JavaScript代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:alert('Hello')"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>上面代码会跳出一个对话框，文字提示为“您的年龄？”，要求用户在对话框中输入自己的年龄（默认显示25）。</p>
-<p><code>prompt</code>方法的返回值是一个字符串（有可能为空）或者<code>null</code>，具体分成三种情况。</p>
+<p>浏览器的地址栏也可以执行<code>javascipt:</code>协议。将<code>javascript:alert(&#39;Hello&#39;)</code>放入地址栏，按回车键，就会跳出提示框。</p>
+<p>如果JavaScript代码返回一个字符串，浏览器就会新建一个文档，展示这个字符串的内容，原有文档的内容都会消失。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:new Date().toLocaleTimeString();"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  What time is it?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，用户点击链接以后，会打开一个新文档，里面有当前时间。</p>
+<p>如果返回的不是字符串，那么浏览器不会新建文档，也不会跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"javascript:console.log(new Date().toLocaleTimeString())"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">What time is it?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="regexp">/a&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，用户点击链接后，网页不会跳转，只会在控制台显示当前时间。</p>
+<p><code>javascript:</code>协议的常见用途是书签脚本Bookmarklet。由于浏览器的书签保存的是一个网址，所以<code>javascript:</code>网址也可以保存在里面，用户选择这个书签的时候，就会在当前页面执行这个脚本。为了防止书签替换掉当前文档，可以在脚本最后返回<code>void 0</code>。</p>
+<h2 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h2><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>浏览器加载JavaScript脚本，主要通过<code>&lt;script&gt;</code>标签完成。正常的网页加载流程是这样的。</p>
 <ol>
-<li>用户输入信息，并点击“确定”，则用户输入的信息就是返回值。</li>
-<li>用户没有输入信息，直接点击“确定”，则输入框的默认值就是返回值。</li>
-<li>用户点击了“取消”（或者按了Esc按钮），则返回值是<code>null</code>。</li>
+<li>浏览器一边下载HTML网页，一边开始解析</li>
+<li>解析过程中，发现<code>&lt;script&gt;</code>标签</li>
+<li>暂停解析，网页渲染的控制权转交给JavaScript引擎</li>
+<li>如果<code>&lt;script&gt;</code>标签引用了外部脚本，就下载该脚本，否则就直接执行</li>
+<li>执行完毕，控制权交还渲染引擎，恢复往下解析HTML网页</li>
 </ol>
-<p><code>prompt</code>方法的第二个参数是可选的，但是如果不提供的话，IE浏览器会在输入框中显示<code>undefined</code>。因此，最好总是提供第二个参数，作为输入框的默认值。</p>
-<p><code>confirm</code>方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”两个按钮，往往用来征询用户的意见。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(<span class="string">"你最近好吗？"</span>);</span></pre></td></tr></table></figure>
+<p>加载外部脚本时，浏览器会暂停页面渲染，等待脚本下载并执行完成后，再继续渲染。原因是JavaScript可以修改DOM（比如使用<code>document.write</code>方法），所以必须把控制权让给它，否则会导致复杂的线程竞赛的问题。</p>
+<p>如果外部脚本加载时间很长（比如一直无法完成下载），就会造成网页长时间失去响应，浏览器就会呈现“假死”状态，这被称为“阻塞效应”。</p>
+<p>为了避免这种情况，较好的做法是将<code>&lt;script&gt;</code>标签都放在页面底部，而不是头部。这样即使遇到脚本失去响应，网页主体的渲染也已经完成了，用户至少可以看到内容，而不是面对一张空白的页面。</p>
+<p>如果某些脚本代码非常重要，一定要放在页面头部的话，最好直接将代码嵌入页面，而不是连接外部脚本文件，这样能缩短加载时间。</p>
+<p>将脚本文件都放在网页尾部加载，还有一个好处。在DOM结构生成之前就调用DOM，JavaScript会报错，如果脚本都在网页尾部加载，就不存在这个问题，因为这时DOM肯定已经生成了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p>上面代码弹出一个对话框，上面只有一行文字“你最近好吗？”，用户选择点击“确定”或“取消”。</p>
-<p><code>confirm</code>方法返回一个布尔值，如果用户点击“确定”，则返回<code>true</code>；如果用户点击“取消”，则返回<code>false</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> okay = confirm(<span class="string">'Please confirm this message.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (okay) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“确定”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“取消”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>上面代码执行时会报错，因为此时<code>document.body</code>元素还未生成。</p>
+<p>一种解决方法是设定<code>DOMContentLoaded</code>事件的回调函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">document</span>.addEventListener(</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="string">'DOMContentLoaded'</span>,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="actionscript">      <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> </span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr></table></figure>
 
-<p><code>confirm</code>的一个用途是，当用户离开当前页面时，弹出一个对话框，问用户是否真的要离开。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> confirm(<span class="string">'你确定要离开当面页面吗？'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>另一种解决方法是，使用<code>&lt;script&gt;</code>标签的<code>onload</code>属性。当<code>&lt;script&gt;</code>标签指定的外部脚本文件下载和解析完成，会触发一个load事件，可以把所需执行的代码，放在这个事件的回调函数里面。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"jquery.min.js"</span> <span class="attr">onload</span>=<span class="string">"console.log(document.body.innerHTML)"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 
+<p>但是，如果将脚本放在页面底部，就可以完全按照正常的方式写，上面两种方式都不需要。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">&lt;!-- 其他代码  --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.body.innerHTML);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>如果有多个<code>script</code>标签，比如下面这样。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>浏览器会同时并行下载<code>a.js</code>和<code>b.js</code>，但是，执行时会保证先执行<code>a.js</code>，然后再执行<code>b.js</code>，即使后者先下载完成，也是如此。也就是说，脚本的执行顺序由它们在页面中的出现顺序决定，这是为了保证脚本之间的依赖关系不受到破坏。当然，加载这两个脚本都会产生“阻塞效应”，必须等到它们都加载完成，浏览器才会继续页面渲染。</p>
+<p>Gecko和Webkit引擎在网页被阻塞后，会生成第二个线程解析文档，下载外部资源，但是不会修改DOM，网页还是处于阻塞状态。</p>
+<p>解析和执行CSS，也会产生阻塞。Firefox会等到脚本前面的所有样式表，都下载并解析完，再执行脚本；Webkit则是一旦发现脚本引用了样式，就会暂停执行脚本执行，等到样式表下载并解析完，再恢复执行。</p>
+<p>此外，对于来自同一个域名的资源，比如脚本文件、样式表文件、图片文件等，浏览器一般最多同时下载六个（IE11允许同时下载13个）。如果是来自不同域名的资源，就没有这个限制。所以，通常把静态文件放在不同的域名之下，以加快下载速度。</p>
+<h3 id="defer属性"><a href="#defer属性" class="headerlink" title="defer属性"></a>defer属性</h3><p>为了解决脚本文件下载阻塞网页渲染的问题，一个方法是加入<code>defer</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，只有等到DOM加载完成后，才会执行<code>a.js</code>和<code>b.js</code>。</p>
+<p><code>defer</code>的运行流程如下。</p>
+<ol>
+<li>浏览器开始解析HTML网页</li>
+<li>解析过程中，发现带有<code>defer</code>属性的<code>script</code>标签</li>
+<li>浏览器继续往下解析HTML网页，同时并行下载<code>script</code>标签中的外部脚本</li>
+<li>浏览器完成解析HTML网页，此时再执行下载的脚本</li>
+</ol>
+<p>有了<code>defer</code>属性，浏览器下载脚本文件的时候，不会阻塞页面渲染。下载的脚本文件在<code>DOMContentLoaded</code>事件触发前执行（即刚刚读取完<code>&lt;/html&gt;</code>标签），而且可以保证执行顺序就是它们在页面上出现的顺序。</p>
+<p>对于内置而不是加载外部脚本的<code>script</code>标签，以及动态生成的<code>script</code>标签，<code>defer</code>属性不起作用。另外，使用<code>defer</code>加载的外部脚本不应该使用<code>document.write</code>方法。</p>
+<h3 id="async属性"><a href="#async属性" class="headerlink" title="async属性"></a>async属性</h3><p>解决“阻塞效应”的另一个方法是加入<code>async</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"a.js"</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"b.js"</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p><code>async</code>属性的作用是，使用另一个进程下载脚本，下载时不会阻塞渲染。</p>
+<ol>
+<li>浏览器开始解析HTML网页</li>
+<li>解析过程中，发现带有<code>async</code>属性的<code>script</code>标签</li>
+<li>浏览器继续往下解析HTML网页，同时并行下载<code>script</code>标签中的外部脚本</li>
+<li>脚本下载完成，浏览器暂停解析HTML网页，开始执行下载的脚本</li>
+<li>脚本执行完毕，浏览器恢复解析HTML网页</li>
+</ol>
+<p><code>async</code>属性可以保证脚本下载的同时，浏览器继续渲染。需要注意的是，一旦采用这个属性，就无法保证脚本的执行顺序。哪个脚本先下载结束，就先执行那个脚本。另外，使用<code>async</code>属性的脚本文件中，不应该使用<code>document.write</code>方法。</p>
+<p><code>defer</code>属性和<code>async</code>属性到底应该使用哪一个？</p>
+<p>一般来说，如果脚本之间没有依赖关系，就使用<code>async</code>属性，如果脚本之间有依赖关系，就使用<code>defer</code>属性。如果同时使用<code>async</code>和<code>defer</code>属性，后者不起作用，浏览器行为由<code>async</code>属性决定。</p>
+<h3 id="脚本的动态加载"><a href="#脚本的动态加载" class="headerlink" title="脚本的动态加载"></a>脚本的动态加载</h3><p>除了静态的<code>script</code>标签，还可以动态生成<code>script</code>标签，然后加入页面，从而实现脚本的动态加载。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'a.js'</span>, <span class="string">'b.js'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  script.src = src;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">document</span>.head.appendChild(script);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>这种方法的好处是，动态生成的<code>script</code>标签不会阻塞页面渲染，也就不会造成浏览器假死。但是问题在于，这种方法无法保证脚本的执行顺序，哪个脚本文件先下载完成，就先执行哪个。</p>
+<p>如果想避免这个问题，可以设置async属性为<code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'a.js'</span>, <span class="string">'b.js'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  script.src = src;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  script.async = <span class="literal">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">document</span>.head.appendChild(script);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>上面的代码依然不会阻塞页面渲染，而且可以保证<code>b.js</code>在<code>a.js</code>后面执行。不过需要注意的是，在这段代码后面加载的脚本文件，会因此都等待<code>b.js</code>执行完成后再执行。</p>
+<p>我们可以把上面的写法，封装成一个函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> scripts = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'script'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">load</span>(<span class="params">url</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    script.async = <span class="literal">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    script.src = url;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    scripts.parentNode.insertBefore(script, scripts);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//apis.google.com/js/plusone.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//platform.twitter.com/widgets.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  load(<span class="string">'//s.thirdpartywidget.com/widget.js'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;());</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>async</code>属性设为<code>true</code>，是因为加载的脚本没有互相依赖关系。而且，这样就不会造成堵塞。</p>
+<p>此外，动态嵌入还有一个地方需要注意。动态嵌入必须等待CSS文件加载完成后，才会去下载外部脚本文件。静态加载就不存在这个问题，<code>script</code>标签指定的外部脚本文件，都是与CSS文件同时并发下载的。</p>
+<h3 id="加载使用的协议"><a href="#加载使用的协议" class="headerlink" title="加载使用的协议"></a>加载使用的协议</h3><p>如果不指定协议，浏览器默认采用HTTP协议下载。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面的<code>example.js</code>默认就是采用HTTP协议下载，如果要采用HTTPS协议下载，必需写明（假定服务器支持）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>但是有时我们会希望，根据页面本身的协议来决定加载协议，这时可以采用下面的写法。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//example.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="浏览器的组成"><a href="#浏览器的组成" class="headerlink" title="浏览器的组成"></a>浏览器的组成</h2><p>浏览器的核心是两部分：渲染引擎和JavaScript解释器（又称JavaScript引擎）。</p>
+<h3 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h3><p>渲染引擎的主要作用是，将网页代码渲染为用户视觉可以感知的平面文档。</p>
+<p>不同的浏览器有不同的渲染引擎。</p>
+<ul>
+<li>Firefox：Gecko引擎</li>
+<li>Safari：WebKit引擎</li>
+<li>Chrome：Blink引擎</li>
+<li>IE: Trident引擎</li>
+<li>Edge: EdgeHTML引擎</li>
+</ul>
+<p>渲染引擎处理网页，通常分成四个阶段。</p>
+<ol>
+<li>解析代码：HTML代码解析为DOM，CSS代码解析为CSSOM（CSS Object Model）</li>
+<li>对象合成：将DOM和CSSOM合成一棵渲染树（render tree）</li>
+<li>布局：计算出渲染树的布局（layout）</li>
+<li>绘制：将渲染树绘制到屏幕</li>
+</ol>
+<p>以上四步并非严格按顺序执行，往往第一步还没完成，第二步和第三步就已经开始了。所以，会看到这种情况：网页的HTML代码还没下载完，但浏览器已经显示出内容了。</p>
+<h3 id="重流和重绘"><a href="#重流和重绘" class="headerlink" title="重流和重绘"></a>重流和重绘</h3><p>渲染树转换为网页布局，称为“布局流”（flow）；布局显示到页面的这个过程，称为“绘制”（paint）。它们都具有阻塞效应，并且会耗费很多时间和计算资源。</p>
+<p>页面生成以后，脚本操作和样式表操作，都会触发重流（reflow）和重绘（repaint）。用户的互动，也会触发，比如设置了鼠标悬停（<code>a:hover</code>）效果、页面滚动、在输入框中输入文本、改变窗口大小等等。</p>
+<p>重流和重绘并不一定一起发生，重流必然导致重绘，重绘不一定需要重流。比如改变元素颜色，只会导致重绘，而不会导致重流；改变元素的布局，则会导致重绘和重流。</p>
+<p>大多数情况下，浏览器会智能判断，将重流和重绘只限制到相关的子树上面，最小化所耗费的代价，而不会全局重新生成网页。</p>
+<p>作为开发者，应该尽量设法降低重绘的次数和成本。比如，尽量不要变动高层的DOM元素，而以底层DOM元素的变动代替；再比如，重绘<code>table</code>布局和<code>flex</code>布局，开销都会比较大。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="built_in">document</span>.getElementById(<span class="string">'foobar'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">foo.style.color = <span class="string">'blue'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">foo.style.marginTop = <span class="string">'30px'</span>;</span></pre></td></tr></table></figure>
+
+<p>上面的代码只会导致一次重绘，因为浏览器会累积DOM变动，然后一次性执行。</p>
+<p>下面是一些优化技巧。</p>
+<ul>
+<li>读取DOM或者写入DOM，尽量写在一起，不要混杂</li>
+<li>缓存DOM信息</li>
+<li>不要一项一项地改变样式，而是使用CSS class一次性改变样式</li>
+<li>使用document fragment操作DOM</li>
+<li>动画时使用absolute定位或fixed定位，这样可以减少对其他元素的影响</li>
+<li>只在必要时才显示元素</li>
+<li>使用<code>window.requestAnimationFrame()</code>，因为它可以把代码推迟到下一次重流时执行，而不是立即要求页面重流</li>
+<li>使用虚拟DOM（virtual DOM）库</li>
+</ul>
+<p>下面是一个<code>window.requestAnimationFrame()</code>对比效果的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重绘代价高</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleHeight</span>(<span class="params">element</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currentHeight = element.clientHeight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  element.style.height = (currentHeight * <span class="number">2</span>) + <span class="string">'px'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">all_my_elements.forEach(doubleHeight);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重绘代价低</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doubleHeight</span>(<span class="params">element</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> currentHeight = element.clientHeight;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.requestAnimationFrame(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    element.style.height = (currentHeight * <span class="number">2</span>) + <span class="string">'px'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">all_my_elements.forEach(doubleHeight);</span></pre></td></tr></table></figure>
+
+<h3 id="JavaScript引擎"><a href="#JavaScript引擎" class="headerlink" title="JavaScript引擎"></a>JavaScript引擎</h3><p>JavaScript引擎的主要作用是，读取网页中的JavaScript代码，对其处理后运行。</p>
+<p>JavaScript是一种解释型语言，也就是说，它不需要编译，由解释器实时运行。这样的好处是运行和修改都比较方便，刷新页面就可以重新解释；缺点是每次运行都要调用解释器，系统开销较大，运行速度慢于编译型语言。</p>
+<p>为了提高运行速度，目前的浏览器都将JavaScript进行一定程度的编译，生成类似字节码（bytecode）的中间代码，以提高运行速度。</p>
+<p>早期，浏览器内部对JavaScript的处理过程如下：</p>
+<ol>
+<li>读取代码，进行词法分析（Lexical analysis），将代码分解成词元（token）。</li>
+<li>对词元进行语法分析（parsing），将代码整理成“语法树”（syntax tree）。</li>
+<li>使用“翻译器”（translator），将代码转为字节码（bytecode）。</li>
+<li>使用“字节码解释器”（bytecode interpreter），将字节码转为机器码。</li>
+</ol>
+<p>逐行解释将字节码转为机器码，是很低效的。为了提高运行速度，现代浏览器改为采用“即时编译”（Just In Time compiler，缩写JIT），即字节码只在运行时编译，用到哪一行就编译哪一行，并且把编译结果缓存（inline cache）。通常，一个程序被经常用到的，只是其中一小部分代码，有了缓存的编译结果，整个程序的运行速度就会显著提升。不同的浏览器有不同的编译策略。有的浏览器只编译最经常用到的部分，比如循环的部分；有的浏览器索性省略了字节码的翻译步骤，直接编译成机器码，比如chrome浏览器的V8引擎。</p>
+<p>字节码不能直接运行，而是运行在一个虚拟机（Virtual Machine）之上，一般也把虚拟机称为JavaScript引擎。因为JavaScript运行时未必有字节码，所以JavaScript虚拟机并不完全基于字节码，而是部分基于源码，即只要有可能，就通过JIT（just in time）编译器直接把源码编译成机器码运行，省略字节码步骤。这一点与其他采用虚拟机（比如Java）的语言不尽相同。这样做的目的，是为了尽可能地优化代码、提高性能。下面是目前最常见的一些JavaScript虚拟机：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Chakra_(JScript_engine)" target="_blank" rel="noopener">Chakra</a>(Microsoft Internet Explorer)</li>
+<li><a href="http://en.wikipedia.org/wiki/WebKit#JavaScriptCore" target="_blank" rel="noopener">Nitro/JavaScript Core</a> (Safari)</li>
+<li><a href="http://dev.opera.com/articles/view/labs-carakan/" target="_blank" rel="noopener">Carakan</a> (Opera)</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/SpiderMonkey" target="_blank" rel="noopener">SpiderMonkey</a> (Firefox)</li>
+<li><a href="http://en.wikipedia.org/wiki/V8_(JavaScript_engine)" target="_blank" rel="noopener">V8</a> (Chrome, Chromium)</li>
+</ul>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Karl Dubost, <a href="https://hacks.mozilla.org/2013/09/user-agent-detection-history-and-checklist/" target="_blank" rel="noopener">User-Agent detection, history and checklist</a></li>
-<li>Conrad Irwin, <a href="https://bugsnag.com/blog/js-stacktraces/" target="_blank" rel="noopener">JS stacktraces. The good, the bad, and the ugly</a></li>
-<li>Daniel Lee, <a href="http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/" target="_blank" rel="noopener">How to catch JavaScript Errors with window.onerror (even on Chrome and Firefox)</a></li>
+<li>John Dalziel, <a href="http://creativejs.com/2013/06/the-race-for-speed-part-2-how-javascript-compilers-work/" target="_blank" rel="noopener">The race for speed part 2: How JavaScript compilers work</a></li>
+<li>Jake Archibald，<a href="http://www.html5rocks.com/en/tutorials/speed/script-loading/" target="_blank" rel="noopener">Deep dive into the murky waters of script loading</a></li>
+<li>Mozilla Developer Network, <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.setTimeout" target="_blank" rel="noopener">window.setTimeout</a></li>
+<li>Remy Sharp, <a href="http://remysharp.com/2010/07/21/throttling-function-calls/" target="_blank" rel="noopener">Throttling function calls</a></li>
+<li>Ayman Farhat, <a href="http://www.thecodeship.com/web-development/alternative-to-javascript-evil-setinterval/" target="_blank" rel="noopener">An alternative to Javascript’s evil setInterval</a></li>
+<li>Ilya Grigorik, <a href="https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/" target="_blank" rel="noopener">Script-injected “async scripts” considered harmful</a></li>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2014/09/es6-promises-foundations.html" target="_blank" rel="noopener">ECMAScript 6 promises (1/2): foundations</a></li>
+<li>Daniel Imms, <a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html" target="_blank" rel="noopener">async vs defer attributes</a></li>
+<li>Craig Buckler, <a href="http://www.sitepoint.com/non-blocking-async-defer/" target="_blank" rel="noopener">Load Non-blocking JavaScript with HTML5 Async and Defer</a></li>
+<li>Domenico De Felice, <a href="http://domenicodefelice.blogspot.sg/2015/08/how-browsers-work.html?t=2" target="_blank" rel="noopener">How browsers work</a></li>
 </ul>
 
 	
@@ -1890,45 +1782,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
 			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
 		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
 			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
 			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>28</span></a></li>

@@ -129,7 +129,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-05-20 </div>
-			<div class="article-title"><a href="/2017/05/20/2017-05-20-SSH-工具使用/" >SSH 工具使用</a></div>						
+			<div class="article-title"><a href="/2017/05/20/2017-05-20-vim-常用命令/" >Vim 常用命令</a></div>						
 		</h3>
 	
 
@@ -138,60 +138,231 @@
   <div class="row">
 	
 	
-		<h2 id="一、什么是-SSH"><a href="#一、什么是-SSH" class="headerlink" title="一、什么是 SSH"></a>一、什么是 SSH</h2><ul>
-<li>SSH 是英文 Secure Shell 简写，是一种加密协议</li>
-<li>是 C/S 架构</li>
-<li>可以把所有传输的数据进行加密</li>
-<li>防止攻击和 DNS\IP 欺骗</li>
-<li>传输的数据是经过压缩的，所以可以加快传输的速度</li>
-<li>可以代替Telnet，又可以为FTP、Pop、甚至为PPP提供一个安全的”通道”。</li>
-</ul>
-<h2 id="二、SSH-配置文件"><a href="#二、SSH-配置文件" class="headerlink" title="二、SSH 配置文件"></a>二、SSH 配置文件</h2><h3 id="1-liunux-中-ssh-服务端配置文件"><a href="#1-liunux-中-ssh-服务端配置文件" class="headerlink" title="1. liunux 中 ssh 服务端配置文件"></a>1. liunux 中 ssh 服务端配置文件</h3><ul>
-<li>默认路径：<code>/etc/ssh/sshd_config</code></li>
-<li>注意，如果在该目录下有 <code>/etc/ssh/ssh_config</code> 少了一个 <code>d</code> 的文件，这个是 linux 服务器中也安装了 ssh 客户端，指的就是该客户端配置文件。</li>
-</ul>
-<h3 id="2-常用的配置项说明"><a href="#2-常用的配置项说明" class="headerlink" title="2. 常用的配置项说明"></a>2. 常用的配置项说明</h3><ul>
-<li><code>Port     22</code>                                          #SSH端口设置，这里默认使用的是22端口</li>
-<li><code>Protocol    2，1</code>                                #选择SSH协议版本</li>
-<li><code>ListenAddress     0.0.0.0</code>                  #监听的网卡IP</li>
-<li><code>PermitRootLogin     no</code>                        #是否允许root登入，默认是允许的</li>
-<li><code>PasswordAuthentication yes</code>            #是否开启密码验证</li>
-<li><code>PermitEmptyPasswords no</code>              #是否允许密码为空</li>
-<li><code>PrintMotd no</code>                                        #登入后是否显示一些信息，如上次登入时间及地点等。</li>
-<li><code>PrintLastLog yes</code>                                #显示上次登入的信息</li>
-<li><code>KeepAlive yes</code>                                        #发送KeepAlive信息给客户端</li>
-<li><code>MaxStartups 10</code>                                    #允许尚未登入的联机画面数</li>
-<li><code>DenyUsers *</code>                                            #禁止用户登录，*表示所有用户</li>
-<li><code>AllowUsers *</code>                                        #允许用户登录</li>
-</ul>
-<h2 id="三、操作实战"><a href="#三、操作实战" class="headerlink" title="三、操作实战"></a>三、操作实战</h2><h3 id="1-基于口令方式认证"><a href="#1-基于口令方式认证" class="headerlink" title="1. 基于口令方式认证"></a>1. 基于口令方式认证</h3><ul>
-<li><img src="http://od6sd4xau.bkt.clouddn.com/ssh-1.png" alt="putty 输入登入 ip 地址"><br>其中的 4，5 步骤可选择跳过，建议保存，这样下次只要点击保存的会话名称，就可以直接登入到 <code>cmd</code> 界面，不用每次都输入一串 id 地址。</li>
-<li><img src="http://od6sd4xau.bkt.clouddn.com/ssh-2.png" alt="输入用户名和密码"></li>
-</ul>
-<h3 id="2-基于密钥方式认证"><a href="#2-基于密钥方式认证" class="headerlink" title="2. 基于密钥方式认证"></a>2. 基于密钥方式认证</h3><p>在 SSH 2.0 协议中支持使用密钥方式登入</p>
+		<h2 id="Vim命令合集"><a href="#Vim命令合集" class="headerlink" title="Vim命令合集"></a>Vim命令合集</h2><h3 id="命令历史"><a href="#命令历史" class="headerlink" title="命令历史"></a>命令历史</h3><p>以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。</p>
+<h3 id="启动vim"><a href="#启动vim" class="headerlink" title="启动vim"></a>启动vim</h3><p>在命令行窗口中输入以下命令即可<br>-vim 直接启动vim<br>-vim filename 打开vim并创建名为filename的文件</p>
+<h3 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h3><p>打开单个文件</p>
 <ul>
-<li><p>在 linux 服务器中使用 <code>ssh-keygen</code> 命令生成公钥与密钥<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-3.png" alt="生成 rsa 密钥"><br>注意，在这步中生成的 <strong>authroized_keys</strong> 文件名称必须一样，不能错。</p>
+<li>vim file</li>
+</ul>
+<p>同时打开多个文件</p>
+<ul>
+<li>vim file1 file2 file3 …</li>
+</ul>
+<p>在 vim 窗口中打开一个新文件</p>
+<ul>
+<li>:open file</li>
+</ul>
+<p>在新窗口中打开文件</p>
+<ul>
+<li>:split file</li>
+</ul>
+<p>切换到下一个文件</p>
+<ul>
+<li>:bn</li>
+</ul>
+<p>切换到上一个文件</p>
+<ul>
+<li>:bp</li>
+</ul>
+<p>查看当前打开的文件列表，当前正在编辑的文件会用[]括起来。</p>
+<ul>
+<li>:args</li>
+</ul>
+<p>打开远程文件，比如 ftp 或者 share folder</p>
+<ul>
+<li>:e <a href="ftp://192.168.10.76/abc.txt" target="_blank" rel="noopener">ftp://192.168.10.76/abc.txt</a></li>
+<li>:e \qadrive\test\1.txt</li>
+</ul>
+<h3 id="vim-的模式"><a href="#vim-的模式" class="headerlink" title="vim 的模式"></a>vim 的模式</h3><ul>
+<li>正常模式（按Esc或Ctrl+[进入） 左下角显示文件名或为空  </li>
+<li>插入模式（按i键进入） 左下角显示–INSERT–  </li>
+<li>可视模式（不知道如何进入） 左下角显示–VISUAL–</li>
+</ul>
+<h3 id="导航命令"><a href="#导航命令" class="headerlink" title="导航命令"></a>导航命令</h3><ul>
+<li>% 括号匹配</li>
+</ul>
+<h3 id="插入命令"><a href="#插入命令" class="headerlink" title="插入命令"></a>插入命令</h3><ul>
+<li>i 在当前位置生前插入</li>
+<li>I 在当前行首插入</li>
+<li>a 在当前位置后插入</li>
+<li>A 在当前行尾插入</li>
+<li>o 在当前行之后插入一行</li>
+<li>O 在当前行之前插入一行</li>
+</ul>
+<h3 id="查找命令"><a href="#查找命令" class="headerlink" title="查找命令"></a>查找命令</h3><ul>
+<li>/text　　查找text，按n健查找下一个，按N健查找前一个。</li>
+<li>?text　　查找text，反向查找，按n健查找下一个，按N健查找前一个。</li>
+</ul>
+<p>vim 中有一些特殊字符在查找时需要转义　　.*[]^%/?~$</p>
+<ul>
+<li>:set ignorecase　　忽略大小写的查找</li>
+<li>:set noignorecase　　不忽略大小写的查找</li>
+</ul>
+<p>查找很长的词，如果一个词很长，键入麻烦，可以将光标移动到该词上，按*或#键即可以该单词进行搜索，相当于/搜索。而#命令相当于?搜索。</p>
+<ul>
+<li>:set hlsearch　　高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配。</li>
+<li>:set nohlsearch　　关闭高亮搜索显示</li>
+<li>:nohlsearch　　关闭当前的高亮显示，如果再次搜索或者按下n或N键，则会再次高亮。</li>
+<li>:set incsearch　　逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成。</li>
+<li>:set wrapscan　　重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启。</li>
+</ul>
+<h3 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h3><ul>
+<li>ra 将当前字符替换为a，当期字符即光标所在字符。</li>
+<li>s/old/new/ 用old替换new，替换当前行的第一个匹配</li>
+<li>s/old/new/g 用old替换new，替换当前行的所有匹配</li>
+<li>%s/old/new/ 用old替换new，替换所有行的第一个匹配</li>
+<li>%s/old/new/g 用old替换new，替换整个文件的所有匹配</li>
+<li>:10,20 s/^/    /g 在第10行知第20行每行前面加四个空格，用于缩进。</li>
+<li>ddp 交换光标所在行和其下紧邻的一行。</li>
+</ul>
+<h3 id="移动命令"><a href="#移动命令" class="headerlink" title="移动命令"></a>移动命令</h3><ul>
+<li><p>h 左移一个字符  </p>
 </li>
-<li><p>修改 <strong>authroized_keys</strong> 文件权限<br><code>chmod 600 authroized_keys</code>，不然会限制访问</p>
+<li><p>l 右移一个字符，这个命令很少用，一般用w代替。  </p>
 </li>
-<li><p>通过 winscp 把生成的 <strong>id_rsa</strong> 文件拷贝到本地<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-4.png" alt="使用 winscp 拷贝文件"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-5.png" alt="使用 winscp 拷贝文件"></p>
+<li><p>k 上移一个字符  </p>
 </li>
-<li><p>使用 <code>puttygen.exe</code> 软件转换上一步的 <code>id_rsa</code> 文件为 <code>*.ppk</code> 文件,因为 <code>putty</code> 不能识别 <code>ras</code> 文件，所有需要转换下<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-6.png" alt="puttygen.exe 转换文件"></p>
+<li><p>j 下移一个字符<br>以上四个命令可以配合数字使用，比如20j就是向下移动20行，5h就是向左移动5个字符，在Vim中，很多命令都可以配合数字使用，比如删除10个字符10x，在当前位置后插入3个！，3a！<Esc>，这里的Esc是必须的，否则命令不生效。</p>
 </li>
-<li><p>设置 putty 为密钥认证方式登入<br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-7.png" alt="密钥方式登入-1"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-8.png" alt="密钥方式登入-2"><br><img src="http://od6sd4xau.bkt.clouddn.com/ssh-9.png" alt="密钥方式登入-3"></p>
+<li><p>w 向前移动一个单词（光标停在单词首部），如果已到行尾，则转至下一行行首。此命令快，可以代替l命令。</p>
 </li>
-<li><p>保存登入信息<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ssh-10.png" alt="保存登入会话信息"></p>
+<li><p>b 向后移动一个单词 2b 向后移动2个单词</p>
+</li>
+<li><p>e，同w，只不过是光标停在单词尾部</p>
+</li>
+<li><p>ge，同b，光标停在单词尾部。</p>
+</li>
+<li><p>^ 移动到本行第一个非空白字符上。</p>
+</li>
+<li><p>0（数字0）移动到本行第一个字符上，</p>
+</li>
+<li><p><HOME> 移动到本行第一个字符。同0健。</p>
+</li>
+<li><p>$ 移动到行尾 3$ 移动到下面3行的行尾</p>
+</li>
+<li><p>gg 移动到文件头。 = [[ </p>
+</li>
+<li><p>G（shift + g） 移动到文件尾。 = ]] </p>
+</li>
+<li><p>f（find）命令也可以用于移动，fx将找到光标后第一个为x的字符，3fd将找到第三个为d的字符。</p>
+</li>
+<li><p>F 同f，反向查找。</p>
 </li>
 </ul>
-<h2 id="四、对应的客户端软件"><a href="#四、对应的客户端软件" class="headerlink" title="四、对应的客户端软件"></a>四、对应的客户端软件</h2><ul>
-<li><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="noopener">putty 官网下载地址</a></li>
-<li>[Xshell]</li>
-<li>[SecureCRT]</li>
-<li>[Plink] 如果安装了 putty 客户端，默认就有该文件</li>
-<li><a href="http://winscp.net/eng/docs/lang:chs" target="_blank" rel="noopener">winscp</a> windows 图形界面操作 linux 的文件传输</li>
+<p>跳到指定行，冒号+行号，回车，比如跳到240行就是 :240回车。另一个方法是行号+G，比如230G跳到230行。</p>
+<ul>
+<li>Ctrl + e 向下滚动一行</li>
+<li>Ctrl + y 向上滚动一行</li>
+<li>Ctrl + d 向下滚动半屏</li>
+<li>Ctrl + u 向上滚动半屏</li>
+<li>Ctrl + f 向下滚动一屏</li>
+<li>Ctrl + b 向上滚动一屏</li>
+</ul>
+<h3 id="撤销和重做"><a href="#撤销和重做" class="headerlink" title="撤销和重做"></a>撤销和重做</h3><ul>
+<li>u 撤销（Undo）  </li>
+<li>U 撤销对整行的操作  </li>
+<li>Ctrl + r 重做（Redo），即撤销的撤销。</li>
+</ul>
+<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3><ul>
+<li>x 删除当前字符</li>
+<li>3x 删除当前光标开始向后三个字符</li>
+<li>X 删除当前字符的前一个字符。X=dh</li>
+<li>dl 删除当前字符， dl=x</li>
+<li>dh 删除前一个字符</li>
+<li>dd 删除当前行</li>
+<li>dj 删除上一行</li>
+<li>dk 删除下一行</li>
+<li>10d 删除当前行开始的10行。</li>
+<li>D 删除当前字符至行尾。D=d$</li>
+<li>d$ 删除当前字符之后的所有字符（本行）</li>
+<li>kdgg 删除当前行之前所有行（不包括当前行）</li>
+<li>jdG（jd shift + g）   删除当前行之后所有行（不包括当前行）</li>
+<li>:1,10d 删除1-10行</li>
+<li>:11,$d 删除11行及以后所有的行</li>
+<li>:1,$d 删除所有行</li>
+<li>J(shift + j)　　删除两行之间的空行，实际上是合并两行。</li>
+</ul>
+<h3 id="拷贝和粘贴"><a href="#拷贝和粘贴" class="headerlink" title="拷贝和粘贴"></a>拷贝和粘贴</h3><ul>
+<li>yy 拷贝当前行</li>
+<li>nyy 拷贝当前后开始的n行，比如2yy拷贝当前行及其下一行。</li>
+<li>p  在当前光标后粘贴,如果之前使用了yy命令来复制一行，那么就在当前行的下一行粘贴。</li>
+<li>shift+p 在当前行前粘贴</li>
+<li>:1,10 co 20 将1-10行插入到第20行之后。</li>
+<li>:1,$ co $ 将整个文件复制一份并添加到文件尾部。</li>
+</ul>
+<p>正常模式下按v（逐字）或V（逐行）进入可视模式，然后用jklh命令移动即可选择某些行或字符，再按y即可复制</p>
+<ul>
+<li>ddp交换当前行和其下一行</li>
+<li>xp交换当前字符和其后一个字符</li>
+</ul>
+<h3 id="剪切命令"><a href="#剪切命令" class="headerlink" title="剪切命令"></a>剪切命令</h3><ul>
+<li>正常模式下按v（逐字）或V（逐行）进入可视模式，然后用jklh命令移动即可选择某些行或字符，再按d即可剪切</li>
+<li>ndd 剪切当前行之后的n行。利用p命令可以对剪切的内容进行粘贴</li>
+<li>:1,10d 将1-10行剪切。利用p命令可将剪切后的内容进行粘贴。</li>
+<li>:1, 10 m 20 将第1-10行移动到第20行之后。</li>
+</ul>
+<h3 id="退出命令"><a href="#退出命令" class="headerlink" title="退出命令"></a>退出命令</h3><ul>
+<li>:wq 保存并退出</li>
+<li>ZZ 保存并退出</li>
+<li>:q! 强制退出并忽略所有更改</li>
+<li>:e! 放弃所有修改，并打开原来文件。</li>
+</ul>
+<h3 id="窗口命令"><a href="#窗口命令" class="headerlink" title="窗口命令"></a>窗口命令</h3><p>:split或new 打开一个新窗口，光标停在顶层的窗口上<br>:split file或:new file 用新窗口打开文件<br>split打开的窗口都是横向的，使用vsplit可以纵向打开窗口。<br>Ctrl+ww 移动到下一个窗口<br>Ctrl+wj 移动到下方的窗口<br>Ctrl+wk 移动到上方的窗口</p>
+<h3 id="关闭窗口"><a href="#关闭窗口" class="headerlink" title="关闭窗口"></a>关闭窗口</h3><ul>
+<li>:close 最后一个窗口不能使用此命令，可以防止意外退出vim。</li>
+<li>:q 如果是最后一个被关闭的窗口，那么将退出vim。</li>
+<li>ZZ 保存并退出。</li>
+</ul>
+<p>关闭所有窗口，只保留当前窗口</p>
+<ul>
+<li>:only</li>
+</ul>
+<p>录制宏</p>
+<ul>
+<li>按q键加任意字母开始录制，再按q键结束录制（这意味着vim中的宏不可嵌套），使用的时候@加宏名，比如qa。。。q录制名为a的宏，@a使用这个宏。</li>
+</ul>
+<h3 id="执行shell命令"><a href="#执行shell命令" class="headerlink" title="执行shell命令"></a>执行shell命令</h3><ul>
+<li>:!command</li>
+<li>:!ls 列出当前目录下文件</li>
+<li>:!perl -c script.pl 检查perl脚本语法，可以不用退出vim，非常方便。</li>
+<li>:!perl script.pl 执行perl脚本，可以不用退出vim，非常方便。</li>
+<li>:suspend或Ctrl - Z 挂起vim，回到shell，按fg可以返回vim。</li>
+</ul>
+<h3 id="注释命令"><a href="#注释命令" class="headerlink" title="注释命令"></a>注释命令</h3><ul>
+<li>perl程序中#开始的行为注释，所以要注释某些行，只需在行首加入#</li>
+<li>3,5 s/^/#/g 注释第3-5行</li>
+<li>3,5 s/^#//g 解除3-5行的注释</li>
+<li>1,$ s/^/#/g 注释整个文档。</li>
+<li>:%s/^/#/g 注释整个文档，此法更快。</li>
+</ul>
+<h3 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h3><ul>
+<li>:help or F1 显示整个帮助  </li>
+<li>:help xxx 显示xxx的帮助，比如 :help i, :help CTRL-[（即Ctrl+[的帮助）。  </li>
+<li>:help ‘number’ Vim选项的帮助用单引号括起  </li>
+<li>:help <Esc> 特殊键的帮助用&lt;&gt;扩起  </li>
+<li>:help -t Vim启动参数的帮助用-  </li>
+<li>：help i_<Esc> 插入模式下Esc的帮助，某个模式下的帮助用模式_主题的模式<br>帮助文件中位于||之间的内容是超链接，可以用Ctrl+]进入链接，Ctrl+o（Ctrl + t）返回</li>
+</ul>
+<h3 id="其他非编辑命令"><a href="#其他非编辑命令" class="headerlink" title="其他非编辑命令"></a>其他非编辑命令</h3><ul>
+<li>. 重复前一次命令</li>
+<li>:set ruler?　　查看是否设置了ruler，在.vimrc中，使用set命令设制的选项都可以通过这个命令查看</li>
+<li>:scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等。</li>
+<li>:set list 显示非打印字符，如tab，空格，行尾等。如果tab无法显示，请确定用set - lcs=tab:&gt;-命令设置了.vimrc文件，并确保你的文件中的确有tab，如果开启了expendtab，那么tab将被扩展为空格。</li>
+</ul>
+<h3 id="Vim-教程"><a href="#Vim-教程" class="headerlink" title="Vim 教程"></a>Vim 教程</h3><p>在Unix系统上  </p>
+<ul>
+<li>$ vimtutor  </li>
+</ul>
+<p>在Windows系统上  </p>
+<ul>
+<li>:help tutor  </li>
+<li>:syntax 列出已经定义的语法项  </li>
+<li>:syntax clear 清除已定义的语法规则  </li>
+<li>:syntax case match 大小写敏感，int和Int将视为不同的语法元素  </li>
+<li>:syntax case ignore 大小写无关，int和Int将视为相同的语法元素，并使用同样的配色方案</li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://blog.csdn.net/macrossdzh/article/details/5691924" target="_blank" rel="noopener">ssh 协议介绍</a></li>
+<li><a href="http://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104435.html" target="_blank" rel="noopener">vim 命令集合</a></li>
 </ul>
 
 	
@@ -288,129 +459,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-version/" >版本管理</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="语义版本"><a href="#语义版本" class="headerlink" title="语义版本"></a>语义版本</h2><p>npm采用”语义版本“（semver）管理软件包。</p>
-<p>所谓语义版本，就是指版本号为 <code>a.b.c</code> 的形式，其中 <code>a</code> 是大版本号，<code>b</code> 是小版本号，<code>c</code> 是补丁号。</p>
-<p>一个软件发布的时候，默认就是 <code>v1.0.0</code> 版。如果以后发布补丁，就增加最后一位数字，比如 <code>v1.0.1</code>；如果增加新功能，且不影响原有的功能，就增加中间的数字（即小版本号），比如 <code>v1.1.0</code>；如果引入的变化，破坏了向后兼容性，就增加第一位数字（即大版本号），比如 <code>v2.0.0</code>。</p>
-<p>注意，如果大版本不到 v1.0.0（即v0.x.y）时，不兼容变动应该修改小版本号，即从<code>v0.4.1</code>升级到<code>v0.5.0</code>。</p>
-<p>npm允许使用特殊符号，指定所要使用的版本范围，假定当前版本是1.0.4。</p>
-<ul>
-<li>只接受补丁包：<code>1.0</code>或者<code>1.0.x</code>或者<code>~1.0.4</code></li>
-<li>只接受小版本和补丁包：<code>1</code>或者<code>1.x</code>或者<code>^1.0.4</code>。这是<code>--save</code>或<code>save-dev</code>安装时，默认的版本范围。</li>
-<li>接受所有更新：<code>*</code> or <code>x</code></li>
-</ul>
-<p>对于<code>~</code>和<code>^</code>，要注意区分。前者表示接受当前小版本（如果省略小版本号，则是当前大版本）的最新补丁包，后者表示接受当前大版本的最新小版本和最新补丁包。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span> <span class="comment">// 接受2.2.0和2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span> <span class="comment">// 接受2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr></table></figure>
-
-<p><code>npm</code>默认使用<code>^</code>，使用下面的命令，可以改变这个行为。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> save-prefix=<span class="string">'~'</span></span></pre></td></tr></table></figure>
-
-<p>此外，还可以使用数学运算符（比如<code>&gt;</code>、<code>&lt;</code>、<code>=</code>、<code>&gt;=</code>或者<code>&lt;=</code>等），指定版本范围。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">2.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.0</span><span class="number">.0</span> - <span class="number">1.2</span><span class="number">.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">1.0</span><span class="number">.0</span>-alpha</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt;= <span class="number">1.0</span><span class="number">.0</span>-rc<span class="number">.0</span> &lt; <span class="number">1.0</span><span class="number">.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> &lt; <span class="number">2.2</span> || &gt; <span class="number">2.3</span></span></pre></td></tr></table></figure>
-
-<p>以上都是合法的版本指定方式。</p>
-<p>注意，如果使用连字号，它的两端必须有空格，比如<code>1.0.0 - 2.0.0</code>。如果不带空格，会被npm理解成预发布的tag，比如<code>1.0.0-rc.1</code>。</p>
-<p>npm官方提供一个在线工具<a href="http://semver.npmjs.com/" target="_blank" rel="noopener">semver.npmjs.com</a>，可以查看不同语义版本涵盖的版本范围。</p>
-<h2 id="npm-version"><a href="#npm-version" class="headerlink" title="npm version"></a>npm version</h2><p><code>npm version</code>命令用来修改项目的版本号。当你完成代码修改，要发布新版本的时候，就用这个命令更新一下软件的版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;update_type&gt; -m <span class="string">"&lt;message&gt;"</span></span></pre></td></tr></table></figure>
-
-<p><code>npm version</code>命令更新<code>package.json</code>里面的版本号，并且新增一个Git commit记录，以及一个新的Git tag。<code>-m</code>参数（或者<code>--message</code>）用来指定生成Git commit时的提交说明。</p>
-<p>注意，由于要生成Git commit，所以执行这个命令前，当前目录里面的所有变动，都必须要保存进Git，否则会报错。</p>
-<p><code>npm version</code>命令可以带有以下参数。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改为指定的版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;x.y.z&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># patch 生成 1.1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># minor 生成 1.2.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># major 生成 2.0.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;major|minor|patch&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号，并且加上预发号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.5.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># premajor 生成 v2.0.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># preminor 生成 v1.6.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prepatch 生成 v1.5.2-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prerelease 将原来的预发号加1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;premajor|preminor|prepatch|prerelease&gt;</span></pre></td></tr></table></figure>
-
-<p>下面是一个例子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - xxxxxx"</span></span></pre></td></tr></table></figure>
-
-<p>上面命令的<code>%s</code>表示新的版本号。</p>
-<p>如果<code>package.json</code>的<code>scripts</code>属性里面，指定了<code>preversion</code>、<code>version</code>、<code>postversion</code>命令，<code>npm version</code>命令会自动执行这些脚本。执行顺序如下。</p>
-<ol>
-<li>检查当前目录是否有未提交的文件变动，如果有就报错。</li>
-<li>运行<code>preversion</code>脚本。该脚本拿到的是旧版本号，典型用途就是运行测试。</li>
-<li>增加<code>package.json</code>里面的版本号。</li>
-<li>运行<code>version</code>脚本，此时拿到的是新版本号。</li>
-<li>提交commit，并在Git里面生成一个tag。</li>
-<li>运行<code>postversion</code>脚本，典型用途是推送新生成的commit和tag。</li>
-</ol>
-<p>下面是一个例子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"preversion"</span>: <span class="string">"npm test"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span>: <span class="string">"npm run build &amp;&amp; git add -A dist"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"postversion"</span>: <span class="string">"git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，增加版本号之前会运行测试，只有全部通过，才会新增版本号；版本号增加以后，会进行构建，然后将新生成的<code>dist</code>目录，加入Git的暂存区；最后，推送到远程仓库，并且删除构建所用的临时目录。</p>
-<p>由于更新npm网站的唯一方法，就是发布一个新的版本。因此，除了第一次发布，这个命令与<code>npm publish</code>几乎是配套的，先使用它，再使用<code>npm publish</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - add sweet badges"</span>$</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ git push &amp;&amp; git push --tags (or git push origin master --tags)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm publish</span></pre></td></tr></table></figure>
-
-<h2 id="发布流程"><a href="#发布流程" class="headerlink" title="发布流程"></a>发布流程</h2><p>对于大型项目来说，发布一个大版本，大致会经过以下的流程，即预发一些预备版本。</p>
-<ul>
-<li>v0.5.0-alpha1</li>
-<li>v0.5.0-beta1</li>
-<li>v0.5.0-beta2</li>
-<li>v0.5.0-rc1</li>
-<li>v0.5.0-rc2</li>
-<li>v0.5.0</li>
-</ul>
-<p>操作步骤如下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version 0.5.0-alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用alpha1标签发布该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装使用该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">npm i &lt;your package name&gt;@alpha1</span></pre></td></tr></table></figure>
-
-<h2 id="模块标签"><a href="#模块标签" class="headerlink" title="模块标签"></a>模块标签</h2><p>npm允许为模块的某个版本，新建一个标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm dist-tag add &lt;pkg&gt;@&lt;version&gt; [&lt;tag&gt;]</span></pre></td></tr></table></figure>
-
-<p>另一种方法是发布的时候，加上标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=beta</span></pre></td></tr></table></figure>
-
-<p>有了标签以后，就可以指定安装该标签的版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;name&gt;@&lt;tag&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm install --tag &lt;tag&gt;</span></pre></td></tr></table></figure>
-
-<p>常见的标签有<code>latest</code>、<code>stable</code>、<code>next</code>等。</p>
-<p>npm默认会为最新一次发布的版本，新建<code>latest</code>标签。然后，下载的时候，默认是下载带有<code>latest</code>标签的版本。但是，这可能并不是我们想要的行为。比如，当前最新版本是4.2版，然后发布了一个3.6版，<code>latest</code>的标签就会打在3.6版上面，用户<code>npm install</code>安装的就是这个版本。</p>
-<p>为了避免这个问题，可以为3.6版加上<code>previous</code>标签。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发布</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=previous</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;package&gt;@previous</span></pre></td></tr></table></figure>
-
-<p><code>package.json</code>文件可以设置默认标签。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"publishConfig"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"tag"</span>: <span class="string">"next"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面的<code>publishConfig</code>设置了最新发布的默认标签是<code>next</code>。<code>publishConfig</code>属性设置的值，可以在publish过程中使用。</p>
-<h2 id="npm-outdated"><a href="#npm-outdated" class="headerlink" title="npm outdated"></a>npm outdated</h2><p><code>npm outdated</code>命令列出项目所有依赖的当前版本号与最新版本号，提示你是否需要更新。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm outdated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Package      Current   Wanted   Latest  Location</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">glob          5.0.15   5.0.15    6.0.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm            3.5.1    3.5.2    3.5.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr></table></figure>
-
-<p>每个项目依赖的模块，都会输出三个版本号。<code>Current</code>表示当前使用的版本，<code>Wanted</code>表示符合预置条件的最新版本，<code>Latest</code>表示最新发布的版本。</p>
-<blockquote>
-<p>如果需要更新所有版本到 <code>Wanted</code> 列表显示的版本，可以使用 <code>npm update</code> 命令。</p>
-</blockquote>
-<h2 id="npm-shrinkwrap"><a href="#npm-shrinkwrap" class="headerlink" title="npm shrinkwrap"></a>npm shrinkwrap</h2><p>对于一个项目来说，通常不会写死依赖的npm模块的版本。比如，开发时使用某个模块的版本是1.0，那么等到用户安装时，如果该模块升级到1.1，往往就会安装1.1。</p>
-<p>但是，对于开发者来说，有时最好锁定所有依赖的版本，防止模块升级带来意想不到的问题。但是，由于模块自己还依赖别的模块，这一点往往很难做到。举例来说，项目依赖A模块，A模块依赖B模块。即使写死A模块的版本，但是B模块升级依然可能导致不兼容。</p>
-<p><code>npm shrinkwrap</code>命令就是用来彻底锁定所有模块的版本。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap</span></pre></td></tr></table></figure>
-
-<p>运行上面这个命令以后，会在项目目录下生成一个npm-shrinkwrap.json文件，里面包含当前项目用到的所有依赖（包括依赖的依赖，以此类推），以及它们的准确版本，也就是当前正在使用的版本。</p>
-<p>只要存在<code>npm-shrinkwrap.json</code>文件，下一次用户使用<code>npm install</code>命令安装依赖的时候，就会安装所有版本完全相同的模块。</p>
-<p>如果执行<code>npm shrinkwrap</code>的时候，加上参数dev，还可以记录devDependencies字段中模块的准确版本。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap --dev</span></pre></td></tr></table></figure>
-
-<h2 id="npm-prune"><a href="#npm-prune" class="headerlink" title="npm prune"></a>npm prune</h2><p><code>npm prune</code>命令与<code>npm shrinkwrap</code>配套使用。使用<code>npm shrinkwrap</code>的时候，有时可能存在某个已经安装的模块不在<code>dependencies</code>字段内的情况，这时<code>npm shrinkwrap</code>就会报错。</p>
-<p><code>npm prune</code>命令可以移除所有不在<code>dependencies</code>字段内的模块。如果指定模块名，则移除指定的模块。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm prune</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm prune &lt;package name&gt;</span></pre></td></tr></table></figure>
-
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-04-14 </div>
 			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-url/" >url 模块</a></div>						
 		</h3>
 	
@@ -433,77 +481,6 @@
 
 <h2 id="url-resolve-from-to"><a href="#url-resolve-from-to" class="headerlink" title="url.resolve(from, to)"></a>url.resolve(from, to)</h2><p><code>url.resolve</code>方法用于生成URL。它的第一个参数是基准URL，其余参数依次根据基准URL，生成对应的位置。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'/one/two/three'</span>, <span class="string">'four'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// '/one/two/four'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/'</span>, <span class="string">'/one'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/one'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/one/'</span>, <span class="string">'two'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/one/two'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="string">'http://example.com/one'</span>, <span class="string">'/two'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'http://example.com/two'</span></span></pre></td></tr></table></figure>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-timer/" >定时器</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>”定时器“指的是Node的一些特定方法，可以让函数在指定时间执行。</p>
-<h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><p>“定时器”的实现是建立在“Event Loop”机制（中文译为“事件循环”）基础上的。所谓“Event Loop”是指Node的异步回调函数的处理机制。如果遇到异步操作，Node会把这些操作交给操作系统处理，自己继续往下执行。然后，等到空闲时，不断循环检查操作系统是否返回结果。一旦得到结果，就执行对应的回调函数。</p>
-<p>“Event Loop”由Node底层的libuv库的<a href="https://github.com/libuv/libuv/blob/master/src/unix/core.c#L321" target="_blank" rel="noopener"><code>uv_run</code></a>函数实现，它的代码大致如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int uv_run(uv_loop_t* loop, uv_run_mode mode) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    uv__update_time(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    uv__run_timers(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    ran_pending &#x3D; uv__run_pending(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    uv__run_idle(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    uv__run_prepare(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    timeout &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    if ((mode &#x3D;&#x3D; UV_RUN_ONCE &amp;&amp; !ran_pending) || mode &#x3D;&#x3D; UV_RUN_DEFAULT)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      timeout &#x3D; uv_backend_timeout(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    uv__io_poll(loop, timeout);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    uv__run_check(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    uv__run_closing_handles(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>每一轮事件循环，就会执行一次上面的代码。它的基本步骤如下。</p>
-<ol>
-<li>更新当前时间（<code>uv__update_time</code>）</li>
-<li>执行<code>setTimeout</code>和<code>setInterval</code>（<code>uv__run_timers</code>）</li>
-<li>执行（以前轮次的）定时器的回调函数（<code>uv__run_pending</code>）</li>
-<li>执行I/O事件的回调函数（<code>uv__io_poll</code>）</li>
-<li>执行<code>setImmediate</code>（<code>uv__run_check</code>）</li>
-</ol>
-<p>这里需要注意的是，执行<code>setTimeout</code>、<code>setInterval</code>和<code>setImmediate</code>这三个方法时，它们指定的回调函数是不会在本轮事件循环执行的，而是会放入一个数组，在以后轮次的事件循环清空。</p>
-<h2 id="process-nextTick"><a href="#process-nextTick" class="headerlink" title="process.nextTick()"></a>process.nextTick()</h2><p><code>process.nextTick</code>方法用于指定在本轮Event Loop即将结束、下轮Event Loop开始前执行的回调函数。因此，<code>process.nextTick</code>的回调函数会阻塞下一个Event Loop。所以，<code>process.nextTick</code>不能出现嵌套，否则会阻塞掉整个Event Loop，不过此时Node会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compute</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// performs complicated calculations continuously</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(compute);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  res.end(<span class="string">'Hello World'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;).listen(<span class="number">5000</span>, <span class="string">'127.0.0.1'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">compute();</span></pre></td></tr></table></figure>
-
-<p>上面代码中，服务器是不会响应HTTP请求的，因为嵌套的<code>process.nextTick</code>在网络I/O之前不断执行，不会结束。</p>
-<p><code>process.nextTick</code>的一个应用是，确保回调函数异步执行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncReal</span>(<span class="params">data, callback</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    callback(data === <span class="string">'foo'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，即使<code>asyncReal</code>同步执行，<code>callback</code>也能确保是异步执行。</p>
-<p>另一个用途是保证某些方法在初始化之后执行。下面是一个数据流的库文件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'start'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ... 从文件读取数据，然后触发data事件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">StreamLibrary.prototype.__proto__ = EventEmitter.prototype;</span></pre></td></tr></table></figure>
-
-<p>上面这样的写法，使用时根本不会监听到<code>start</code>事件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stream = <span class="keyword">new</span> StreamLibrary(<span class="string">'fooResource'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">stream.on(<span class="string">'start'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Reading has started'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">stream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received: '</span> + chunk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<p>上面代码中，<code>start</code>事件是监听不到的。因为<code>StreamLibrary</code>一初始化时，就会触发<code>start</code>事件，这时根本还没指定回调函数。这就需要使用<code>process.nextTick</code>改写<code>StreamLibrary</code>库。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    self.emit(<span class="string">'start'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ... 从文件读取数据，然后触发data事件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码中，只有当前Event Loop的所有代码执行完，才会触发<code>start</code>事件，这就确保这个事件可以被监听到。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'setImmediate'</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>); &#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'nextTick'</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// output:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// nextTick</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// setTimeout</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// setImmediate</span></span></pre></td></tr></table></figure>
-
-<p>上面的代码中，<code>process.nextTick</code>总是在<code>setTimeout</code>和<code>setImmediate</code>之前执行。这是因为<code>process.nextTick</code>是在本轮事件循环的末尾执行，而其他两个方法都是在下轮事件循环执行。所以，前者总是排在后者前面。</p>
-<h2 id="setImmediate"><a href="#setImmediate" class="headerlink" title="setImmediate()"></a>setImmediate()</h2><p><code>setImmediate</code>方法用于指定在下一轮Event Loop立即执行的回调函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setImmediate(callback[, arg][, ...])</span></pre></td></tr></table></figure>
-
-<p>它的第一个参数就是指定的回调函数，其他参数则会被传入回调函数。它返回一个对象，供<code>clearImmediate()</code>使用。</p>
-<p><code>setImmediate</code>指定的回调函数，执行顺序是在I/O事件的回调函数之后，<code>setTimeout</code>和<code>setInterval</code>方法指定的回调函数（延迟时间非零的情况下）之前。</p>
-<p>如果延迟时间为零，即<code>setImmediate</code>与<code>setTimeout(fn, 0)</code>哪个命令会先执行？答案是不确定。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Timeout 0'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Immediate'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  x();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  y();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">10</span>);</span></pre></td></tr></table></figure>
-
-<p>上面代码执行后，<code>Timeout 0</code>和<code>Immediate</code>都有可能首先输出。</p>
-<p>考虑到<code>setImmediate</code>语义更清楚，行为更规范，建议总是使用它替代<code>setTimeout(fn, 0)</code>。</p>
-<h2 id="clearImmediate"><a href="#clearImmediate" class="headerlink" title="clearImmediate()"></a>clearImmediate()</h2><p><code>clearImmediate</code>方法用于清除<code>setImmediate</code>设置的定时器。它的参数是<code>setImmediate</code>方法返回的定时器对象。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>Kishore Nallan, <a href="http://howtonode.org/understanding-process-next-tick" target="_blank" rel="noopener">Understanding process.nextTick()</a></li>
-</ul>
 
 	
 	</div>
@@ -786,7 +763,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-repl/" >repl 模块</a></div>						
+			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-version/" >版本管理</a></div>						
 		</h3>
 	
 
@@ -795,10 +772,178 @@
   <div class="row">
 	
 	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>repl</code>模块用于在程序内提供REPL在线环境。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> repl = <span class="built_in">require</span>(<span class="string">'repl'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">i</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> context = repl.start(<span class="string">'repl&gt; '</span>).context;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  context.pi  = <span class="number">3.14</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  context.arg = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">a(<span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt; pi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.14</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt; arg</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt;</span></span></pre></td></tr></table></figure>
+		<h2 id="语义版本"><a href="#语义版本" class="headerlink" title="语义版本"></a>语义版本</h2><p>npm采用”语义版本“（semver）管理软件包。</p>
+<p>所谓语义版本，就是指版本号为 <code>a.b.c</code> 的形式，其中 <code>a</code> 是大版本号，<code>b</code> 是小版本号，<code>c</code> 是补丁号。</p>
+<p>一个软件发布的时候，默认就是 <code>v1.0.0</code> 版。如果以后发布补丁，就增加最后一位数字，比如 <code>v1.0.1</code>；如果增加新功能，且不影响原有的功能，就增加中间的数字（即小版本号），比如 <code>v1.1.0</code>；如果引入的变化，破坏了向后兼容性，就增加第一位数字（即大版本号），比如 <code>v2.0.0</code>。</p>
+<p>注意，如果大版本不到 v1.0.0（即v0.x.y）时，不兼容变动应该修改小版本号，即从<code>v0.4.1</code>升级到<code>v0.5.0</code>。</p>
+<p>npm允许使用特殊符号，指定所要使用的版本范围，假定当前版本是1.0.4。</p>
+<ul>
+<li>只接受补丁包：<code>1.0</code>或者<code>1.0.x</code>或者<code>~1.0.4</code></li>
+<li>只接受小版本和补丁包：<code>1</code>或者<code>1.x</code>或者<code>^1.0.4</code>。这是<code>--save</code>或<code>save-dev</code>安装时，默认的版本范围。</li>
+<li>接受所有更新：<code>*</code> or <code>x</code></li>
+</ul>
+<p>对于<code>~</code>和<code>^</code>，要注意区分。前者表示接受当前小版本（如果省略小版本号，则是当前大版本）的最新补丁包，后者表示接受当前大版本的最新小版本和最新补丁包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span><span class="number">.1</span> <span class="comment">// 接受2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2.2</span> <span class="comment">// 接受2.2.0和2.2.1，不接受2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2.2</span> <span class="comment">// 接受2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">~<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> <span class="comment">// 接受2.0.0、2.1.0、2.2.0、2.2.1和2.3.0</span></span></pre></td></tr></table></figure>
 
-<p>上面代码通过<code>repl.start</code>方法，启动REPL环境。<code>repl.start</code>方法还可以通过参数，定制提示符。REPL实例对象的<code>context</code>对象的属性，可以在REPL环境内读取。</p>
+<p><code>npm</code>默认使用<code>^</code>，使用下面的命令，可以改变这个行为。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> save-prefix=<span class="string">'~'</span></span></pre></td></tr></table></figure>
+
+<p>此外，还可以使用数学运算符（比如<code>&gt;</code>、<code>&lt;</code>、<code>=</code>、<code>&gt;=</code>或者<code>&lt;=</code>等），指定版本范围。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">2.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.0</span><span class="number">.0</span> - <span class="number">1.2</span><span class="number">.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">1.0</span><span class="number">.0</span>-alpha</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&gt;= <span class="number">1.0</span><span class="number">.0</span>-rc<span class="number">.0</span> &lt; <span class="number">1.0</span><span class="number">.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">^<span class="number">2</span> &lt; <span class="number">2.2</span> || &gt; <span class="number">2.3</span></span></pre></td></tr></table></figure>
+
+<p>以上都是合法的版本指定方式。</p>
+<p>注意，如果使用连字号，它的两端必须有空格，比如<code>1.0.0 - 2.0.0</code>。如果不带空格，会被npm理解成预发布的tag，比如<code>1.0.0-rc.1</code>。</p>
+<p>npm官方提供一个在线工具<a href="http://semver.npmjs.com/" target="_blank" rel="noopener">semver.npmjs.com</a>，可以查看不同语义版本涵盖的版本范围。</p>
+<h2 id="npm-version"><a href="#npm-version" class="headerlink" title="npm version"></a>npm version</h2><p><code>npm version</code>命令用来修改项目的版本号。当你完成代码修改，要发布新版本的时候，就用这个命令更新一下软件的版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;update_type&gt; -m <span class="string">"&lt;message&gt;"</span></span></pre></td></tr></table></figure>
+
+<p><code>npm version</code>命令更新<code>package.json</code>里面的版本号，并且新增一个Git commit记录，以及一个新的Git tag。<code>-m</code>参数（或者<code>--message</code>）用来指定生成Git commit时的提交说明。</p>
+<p>注意，由于要生成Git commit，所以执行这个命令前，当前目录里面的所有变动，都必须要保存进Git，否则会报错。</p>
+<p><code>npm version</code>命令可以带有以下参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改为指定的版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;x.y.z&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># patch 生成 1.1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># minor 生成 1.2.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># major 生成 2.0.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;major|minor|patch&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改语义版本的大版本、小版本、补丁号，并且加上预发号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 举例来说，原版本是1.5.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># premajor 生成 v2.0.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># preminor 生成 v1.6.0-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prepatch 生成 v1.5.2-0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># prerelease 将原来的预发号加1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">$ npm version &lt;premajor|preminor|prepatch|prerelease&gt;</span></pre></td></tr></table></figure>
+
+<p>下面是一个例子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - xxxxxx"</span></span></pre></td></tr></table></figure>
+
+<p>上面命令的<code>%s</code>表示新的版本号。</p>
+<p>如果<code>package.json</code>的<code>scripts</code>属性里面，指定了<code>preversion</code>、<code>version</code>、<code>postversion</code>命令，<code>npm version</code>命令会自动执行这些脚本。执行顺序如下。</p>
+<ol>
+<li>检查当前目录是否有未提交的文件变动，如果有就报错。</li>
+<li>运行<code>preversion</code>脚本。该脚本拿到的是旧版本号，典型用途就是运行测试。</li>
+<li>增加<code>package.json</code>里面的版本号。</li>
+<li>运行<code>version</code>脚本，此时拿到的是新版本号。</li>
+<li>提交commit，并在Git里面生成一个tag。</li>
+<li>运行<code>postversion</code>脚本，典型用途是推送新生成的commit和tag。</li>
+</ol>
+<p>下面是一个例子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"preversion"</span>: <span class="string">"npm test"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span>: <span class="string">"npm run build &amp;&amp; git add -A dist"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"postversion"</span>: <span class="string">"git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，增加版本号之前会运行测试，只有全部通过，才会新增版本号；版本号增加以后，会进行构建，然后将新生成的<code>dist</code>目录，加入Git的暂存区；最后，推送到远程仓库，并且删除构建所用的临时目录。</p>
+<p>由于更新npm网站的唯一方法，就是发布一个新的版本。因此，除了第一次发布，这个命令与<code>npm publish</code>几乎是配套的，先使用它，再使用<code>npm publish</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm version patch -m <span class="string">"Version %s - add sweet badges"</span>$</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ git push &amp;&amp; git push --tags (or git push origin master --tags)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm publish</span></pre></td></tr></table></figure>
+
+<h2 id="发布流程"><a href="#发布流程" class="headerlink" title="发布流程"></a>发布流程</h2><p>对于大型项目来说，发布一个大版本，大致会经过以下的流程，即预发一些预备版本。</p>
+<ul>
+<li>v0.5.0-alpha1</li>
+<li>v0.5.0-beta1</li>
+<li>v0.5.0-beta2</li>
+<li>v0.5.0-rc1</li>
+<li>v0.5.0-rc2</li>
+<li>v0.5.0</li>
+</ul>
+<p>操作步骤如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新版本号</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm version 0.5.0-alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用alpha1标签发布该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag alpha1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装使用该版本</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">npm i &lt;your package name&gt;@alpha1</span></pre></td></tr></table></figure>
+
+<h2 id="模块标签"><a href="#模块标签" class="headerlink" title="模块标签"></a>模块标签</h2><p>npm允许为模块的某个版本，新建一个标签。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm dist-tag add &lt;pkg&gt;@&lt;version&gt; [&lt;tag&gt;]</span></pre></td></tr></table></figure>
+
+<p>另一种方法是发布的时候，加上标签。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=beta</span></pre></td></tr></table></figure>
+
+<p>有了标签以后，就可以指定安装该标签的版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;name&gt;@&lt;tag&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ npm install --tag &lt;tag&gt;</span></pre></td></tr></table></figure>
+
+<p>常见的标签有<code>latest</code>、<code>stable</code>、<code>next</code>等。</p>
+<p>npm默认会为最新一次发布的版本，新建<code>latest</code>标签。然后，下载的时候，默认是下载带有<code>latest</code>标签的版本。但是，这可能并不是我们想要的行为。比如，当前最新版本是4.2版，然后发布了一个3.6版，<code>latest</code>的标签就会打在3.6版上面，用户<code>npm install</code>安装的就是这个版本。</p>
+<p>为了避免这个问题，可以为3.6版加上<code>previous</code>标签。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发布</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm publish --tag=previous</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ npm install &lt;package&gt;@previous</span></pre></td></tr></table></figure>
+
+<p><code>package.json</code>文件可以设置默认标签。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"publishConfig"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"tag"</span>: <span class="string">"next"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面的<code>publishConfig</code>设置了最新发布的默认标签是<code>next</code>。<code>publishConfig</code>属性设置的值，可以在publish过程中使用。</p>
+<h2 id="npm-outdated"><a href="#npm-outdated" class="headerlink" title="npm outdated"></a>npm outdated</h2><p><code>npm outdated</code>命令列出项目所有依赖的当前版本号与最新版本号，提示你是否需要更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm outdated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Package      Current   Wanted   Latest  Location</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">glob          5.0.15   5.0.15    6.0.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">npm            3.5.1    3.5.2    3.5.1  <span class="built_in">test</span>-outdated-output</span></pre></td></tr></table></figure>
+
+<p>每个项目依赖的模块，都会输出三个版本号。<code>Current</code>表示当前使用的版本，<code>Wanted</code>表示符合预置条件的最新版本，<code>Latest</code>表示最新发布的版本。</p>
+<blockquote>
+<p>如果需要更新所有版本到 <code>Wanted</code> 列表显示的版本，可以使用 <code>npm update</code> 命令。</p>
+</blockquote>
+<h2 id="npm-shrinkwrap"><a href="#npm-shrinkwrap" class="headerlink" title="npm shrinkwrap"></a>npm shrinkwrap</h2><p>对于一个项目来说，通常不会写死依赖的npm模块的版本。比如，开发时使用某个模块的版本是1.0，那么等到用户安装时，如果该模块升级到1.1，往往就会安装1.1。</p>
+<p>但是，对于开发者来说，有时最好锁定所有依赖的版本，防止模块升级带来意想不到的问题。但是，由于模块自己还依赖别的模块，这一点往往很难做到。举例来说，项目依赖A模块，A模块依赖B模块。即使写死A模块的版本，但是B模块升级依然可能导致不兼容。</p>
+<p><code>npm shrinkwrap</code>命令就是用来彻底锁定所有模块的版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap</span></pre></td></tr></table></figure>
+
+<p>运行上面这个命令以后，会在项目目录下生成一个npm-shrinkwrap.json文件，里面包含当前项目用到的所有依赖（包括依赖的依赖，以此类推），以及它们的准确版本，也就是当前正在使用的版本。</p>
+<p>只要存在<code>npm-shrinkwrap.json</code>文件，下一次用户使用<code>npm install</code>命令安装依赖的时候，就会安装所有版本完全相同的模块。</p>
+<p>如果执行<code>npm shrinkwrap</code>的时候，加上参数dev，还可以记录devDependencies字段中模块的准确版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm shrinkwrap --dev</span></pre></td></tr></table></figure>
+
+<h2 id="npm-prune"><a href="#npm-prune" class="headerlink" title="npm prune"></a>npm prune</h2><p><code>npm prune</code>命令与<code>npm shrinkwrap</code>配套使用。使用<code>npm shrinkwrap</code>的时候，有时可能存在某个已经安装的模块不在<code>dependencies</code>字段内的情况，这时<code>npm shrinkwrap</code>就会报错。</p>
+<p><code>npm prune</code>命令可以移除所有不在<code>dependencies</code>字段内的模块。如果指定模块名，则移除指定的模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm prune</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm prune &lt;package name&gt;</span></pre></td></tr></table></figure>
+
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-04-14 </div>
+			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-timer/" >定时器</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>”定时器“指的是Node的一些特定方法，可以让函数在指定时间执行。</p>
+<h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><p>“定时器”的实现是建立在“Event Loop”机制（中文译为“事件循环”）基础上的。所谓“Event Loop”是指Node的异步回调函数的处理机制。如果遇到异步操作，Node会把这些操作交给操作系统处理，自己继续往下执行。然后，等到空闲时，不断循环检查操作系统是否返回结果。一旦得到结果，就执行对应的回调函数。</p>
+<p>“Event Loop”由Node底层的libuv库的<a href="https://github.com/libuv/libuv/blob/master/src/unix/core.c#L321" target="_blank" rel="noopener"><code>uv_run</code></a>函数实现，它的代码大致如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int uv_run(uv_loop_t* loop, uv_run_mode mode) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    uv__update_time(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    uv__run_timers(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    ran_pending &#x3D; uv__run_pending(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    uv__run_idle(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    uv__run_prepare(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    timeout &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    if ((mode &#x3D;&#x3D; UV_RUN_ONCE &amp;&amp; !ran_pending) || mode &#x3D;&#x3D; UV_RUN_DEFAULT)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      timeout &#x3D; uv_backend_timeout(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    uv__io_poll(loop, timeout);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    uv__run_check(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    uv__run_closing_handles(loop);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>每一轮事件循环，就会执行一次上面的代码。它的基本步骤如下。</p>
+<ol>
+<li>更新当前时间（<code>uv__update_time</code>）</li>
+<li>执行<code>setTimeout</code>和<code>setInterval</code>（<code>uv__run_timers</code>）</li>
+<li>执行（以前轮次的）定时器的回调函数（<code>uv__run_pending</code>）</li>
+<li>执行I/O事件的回调函数（<code>uv__io_poll</code>）</li>
+<li>执行<code>setImmediate</code>（<code>uv__run_check</code>）</li>
+</ol>
+<p>这里需要注意的是，执行<code>setTimeout</code>、<code>setInterval</code>和<code>setImmediate</code>这三个方法时，它们指定的回调函数是不会在本轮事件循环执行的，而是会放入一个数组，在以后轮次的事件循环清空。</p>
+<h2 id="process-nextTick"><a href="#process-nextTick" class="headerlink" title="process.nextTick()"></a>process.nextTick()</h2><p><code>process.nextTick</code>方法用于指定在本轮Event Loop即将结束、下轮Event Loop开始前执行的回调函数。因此，<code>process.nextTick</code>的回调函数会阻塞下一个Event Loop。所以，<code>process.nextTick</code>不能出现嵌套，否则会阻塞掉整个Event Loop，不过此时Node会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compute</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// performs complicated calculations continuously</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(compute);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  res.end(<span class="string">'Hello World'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;).listen(<span class="number">5000</span>, <span class="string">'127.0.0.1'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">compute();</span></pre></td></tr></table></figure>
+
+<p>上面代码中，服务器是不会响应HTTP请求的，因为嵌套的<code>process.nextTick</code>在网络I/O之前不断执行，不会结束。</p>
+<p><code>process.nextTick</code>的一个应用是，确保回调函数异步执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncReal</span>(<span class="params">data, callback</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    callback(data === <span class="string">'foo'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，即使<code>asyncReal</code>同步执行，<code>callback</code>也能确保是异步执行。</p>
+<p>另一个用途是保证某些方法在初始化之后执行。下面是一个数据流的库文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'start'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ... 从文件读取数据，然后触发data事件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">StreamLibrary.prototype.__proto__ = EventEmitter.prototype;</span></pre></td></tr></table></figure>
+
+<p>上面这样的写法，使用时根本不会监听到<code>start</code>事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stream = <span class="keyword">new</span> StreamLibrary(<span class="string">'fooResource'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">stream.on(<span class="string">'start'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Reading has started'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">stream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received: '</span> + chunk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>start</code>事件是监听不到的。因为<code>StreamLibrary</code>一初始化时，就会触发<code>start</code>事件，这时根本还没指定回调函数。这就需要使用<code>process.nextTick</code>改写<code>StreamLibrary</code>库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    self.emit(<span class="string">'start'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// ... 从文件读取数据，然后触发data事件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码中，只有当前Event Loop的所有代码执行完，才会触发<code>start</code>事件，这就确保这个事件可以被监听到。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'setImmediate'</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>); &#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'nextTick'</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// output:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// nextTick</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// setTimeout</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// setImmediate</span></span></pre></td></tr></table></figure>
+
+<p>上面的代码中，<code>process.nextTick</code>总是在<code>setTimeout</code>和<code>setImmediate</code>之前执行。这是因为<code>process.nextTick</code>是在本轮事件循环的末尾执行，而其他两个方法都是在下轮事件循环执行。所以，前者总是排在后者前面。</p>
+<h2 id="setImmediate"><a href="#setImmediate" class="headerlink" title="setImmediate()"></a>setImmediate()</h2><p><code>setImmediate</code>方法用于指定在下一轮Event Loop立即执行的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setImmediate(callback[, arg][, ...])</span></pre></td></tr></table></figure>
+
+<p>它的第一个参数就是指定的回调函数，其他参数则会被传入回调函数。它返回一个对象，供<code>clearImmediate()</code>使用。</p>
+<p><code>setImmediate</code>指定的回调函数，执行顺序是在I/O事件的回调函数之后，<code>setTimeout</code>和<code>setInterval</code>方法指定的回调函数（延迟时间非零的情况下）之前。</p>
+<p>如果延迟时间为零，即<code>setImmediate</code>与<code>setTimeout(fn, 0)</code>哪个命令会先执行？答案是不确定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Timeout 0'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Immediate'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  x();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  y();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;, <span class="number">10</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码执行后，<code>Timeout 0</code>和<code>Immediate</code>都有可能首先输出。</p>
+<p>考虑到<code>setImmediate</code>语义更清楚，行为更规范，建议总是使用它替代<code>setTimeout(fn, 0)</code>。</p>
+<h2 id="clearImmediate"><a href="#clearImmediate" class="headerlink" title="clearImmediate()"></a>clearImmediate()</h2><p><code>clearImmediate</code>方法用于清除<code>setImmediate</code>设置的定时器。它的参数是<code>setImmediate</code>方法返回的定时器对象。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Kishore Nallan, <a href="http://howtonode.org/understanding-process-next-tick" target="_blank" rel="noopener">Understanding process.nextTick()</a></li>
+</ul>
 
 	
 	</div>
@@ -989,7 +1134,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-04-14 </div>
-			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-path/" >Path 模块</a></div>						
+			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-repl/" >repl 模块</a></div>						
 		</h3>
 	
 
@@ -998,26 +1143,104 @@
   <div class="row">
 	
 	
-		<h2 id="path-join"><a href="#path-join" class="headerlink" title="path.join()"></a>path.join()</h2><p><code>path.join</code> 方法用于连接路径。该方法的主要用途在于，会正确使用当前系统的路径<strong>分隔符</strong>，Unix 系统是 <code>”/“</code>，Windows 系统是 <code>”\“</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var path &#x3D; require(&#39;path&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">path.join(mydir, &quot;foo&quot;);</span></pre></td></tr></table></figure>
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>repl</code>模块用于在程序内提供REPL在线环境。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> repl = <span class="built_in">require</span>(<span class="string">'repl'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">i</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> context = repl.start(<span class="string">'repl&gt; '</span>).context;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  context.pi  = <span class="number">3.14</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  context.arg = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">a(<span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt; pi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3.14</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt; arg</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// repl&gt;</span></span></pre></td></tr></table></figure>
 
-<p>上面代码在 Unix 系统下，会返回路径 <code>mydir/foo</code>。</p>
-<h2 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve()"></a>path.resolve()</h2><p><code>path.resolve</code>方法用于将相<strong>对路径转为绝对路径</strong>。</p>
-<p>它可以接受多个参数，依次表示所要进入的路径，直到将<strong>最后一个参数</strong>转为绝对路径。如果根据参数无法得到绝对路径，就以当前所在路径作为基准。除了根目录，该方法的返回值都不带尾部的斜杠。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">path.resolve([<span class="keyword">from</span> ...], to)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'foo/bar'</span>, <span class="string">'/tmp/file/'</span>, <span class="string">'..'</span>, <span class="string">'a/../subfile'</span>)</span></pre></td></tr></table></figure>
+<p>上面代码通过<code>repl.start</code>方法，启动REPL环境。<code>repl.start</code>方法还可以通过参数，定制提示符。REPL实例对象的<code>context</code>对象的属性，可以在REPL环境内读取。</p>
 
-<p>上面代码的实例，执行效果类似下面的命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> foo/bar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /tmp/file/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ..</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> a/../subfile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span></pre></td></tr></table></figure>
+	
+	</div>
+</div>
 
-<p>更多例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'/foo/bar'</span>, <span class="string">'./baz'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// '/foo/bar/baz'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'/foo/bar'</span>, <span class="string">'/tmp/file/'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// '/tmp/file'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'wwwroot'</span>, <span class="string">'static_files/png/'</span>, <span class="string">'../gif/image.gif'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果当前目录是/home/myself/node，返回</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// /home/myself/node/wwwroot/static_files/gif/image.gif</span></span></pre></td></tr></table></figure>
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-04-14 </div>
+			<div class="article-title"><a href="/2017/04/14/2017-04-14-node-js-packagejson/" >package.json 文件</a></div>						
+		</h3>
+	
 
-<p>该方法忽略非字符串的参数。</p>
-<h2 id="path-relative"><a href="#path-relative" class="headerlink" title="path.relative"></a>path.relative</h2><p><code>path.relative</code>方法接受两个参数，这两个参数都应该是绝对路径。该方法返回第二个路径相对于第一个路径的系统相对路径。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">path.relative(<span class="string">'/data/orandea/test/aaa'</span>, <span class="string">'/data/orandea/impl/bbb'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// '../../impl/bbb'</span></span></pre></td></tr></table></figure>
 
-<p>上面代码中，如果当前目录是<code>/data/orandea/test/aaa</code>，进入<code>path.relative</code>返回的相对路径，就会到达<code>/data/orandea/impl/bbb</code>。</p>
-<p>如果<code>path.relative</code>方法的两个参数相同，则返回一个空字符串。</p>
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>每个项目的根目录下面，一般都有一个<code>package.json</code>文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）。<code>npm install</code>命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。</p>
+<p>下面是一个最简单的package.json文件，只定义两项元数据：项目名称和项目版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span> : <span class="string">"xxx"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"version"</span> : <span class="string">"0.0.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码说明，<code>package.json</code>文件内部就是一个JSON对象，该对象的每一个成员就是当前项目的一项设置。比如<code>name</code>就是项目名称，<code>version</code>是版本（遵守“大版本.次要版本.小版本”的格式）。</p>
+<p>下面是一个更完整的package.json文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"name"</span>: <span class="string">"Hello World"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"author"</span>: <span class="string">"张三"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"description"</span>: <span class="string">"第一个node.js程序"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"keywords"</span>:[<span class="string">"node.js"</span>,<span class="string">"javascript"</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"repository"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"type"</span>: <span class="string">"git"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"url"</span>: <span class="string">"https://path/to/url"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"license"</span>:<span class="string">"MIT"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"engines"</span>: &#123;<span class="string">"node"</span>: <span class="string">"0.10.x"</span>&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"bugs"</span>:&#123;<span class="string">"url"</span>:<span class="string">"http://path/to/bug"</span>,<span class="string">"email"</span>:<span class="string">"bug@example.com"</span>&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"contributors"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"李四"</span>,<span class="string">"email"</span>:<span class="string">"lisi@example.com"</span>&#125;],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"start"</span>: <span class="string">"node index.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"dependencies"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"express"</span>: <span class="string">"latest"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"mongoose"</span>: <span class="string">"~3.8.3"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"handlebars-runtime"</span>: <span class="string">"~1.0.12"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"express3-handlebars"</span>: <span class="string">"~0.5.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"MD5"</span>: <span class="string">"~1.2.0"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	&#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">	<span class="string">"devDependencies"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"bower"</span>: <span class="string">"~1.2.8"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt"</span>: <span class="string">"~0.4.1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt-contrib-concat"</span>: <span class="string">"~0.3.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt-contrib-jshint"</span>: <span class="string">"~0.7.2"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt-contrib-uglify"</span>: <span class="string">"~0.2.7"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt-contrib-clean"</span>: <span class="string">"~0.5.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"browserify"</span>: <span class="string">"2.36.1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">		<span class="string">"grunt-browserify"</span>: <span class="string">"~1.3.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>下面详细解释package.json文件的各个字段。</p>
+<h2 id="scripts字段"><a href="#scripts字段" class="headerlink" title="scripts字段"></a>scripts字段</h2><p><code>scripts</code>指定了运行脚本命令的npm命令行缩写，比如start指定了运行<code>npm run start</code>时，所要执行的命令。</p>
+<p>下面的设置指定了<code>npm run preinstall</code>、<code>npm run postinstall</code>、<code>npm run start</code>、<code>npm run test</code>时，所要执行的命令。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"preinstall"</span>: <span class="string">"echo here it comes!"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"postinstall"</span>: <span class="string">"echo there it goes!"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"start"</span>: <span class="string">"node index.js"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"test"</span>: <span class="string">"tap test/*.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="dependencies字段，devDependencies字段"><a href="#dependencies字段，devDependencies字段" class="headerlink" title="dependencies字段，devDependencies字段"></a>dependencies字段，devDependencies字段</h2><p><code>dependencies</code>字段指定了项目运行所依赖的模块，<code>devDependencies</code>指定项目开发所需要的模块。</p>
+<p>它们都指向一个对象。该对象的各个成员，分别由模块名和对应的版本要求组成，表示依赖的模块及其版本范围。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"browserify"</span>: <span class="string">"~13.0.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"karma-browserify"</span>: <span class="string">"~5.0.1"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>对应的版本可以加上各种限定，主要有以下几种：</p>
+<ul>
+<li><strong>指定版本</strong>：比如<code>1.2.2</code>，遵循“大版本.次要版本.小版本”的格式规定，安装时只安装指定版本。</li>
+<li><strong>波浪号（tilde）+指定版本</strong>：比如<code>~1.2.2</code>，表示安装1.2.x的最新版本（不低于1.2.2），但是不安装1.3.x，也就是说安装时不改变大版本号和次要版本号。</li>
+<li><strong>插入号（caret）+指定版本</strong>：比如&#710;1.2.2，表示安装1.x.x的最新版本（不低于1.2.2），但是不安装2.x.x，也就是说安装时不改变大版本号。需要注意的是，如果大版本号为0，则插入号的行为与波浪号相同，这是因为此时处于开发阶段，即使是次要版本号变动，也可能带来程序的不兼容。</li>
+<li><strong>latest</strong>：安装最新版本。</li>
+</ul>
+<p>package.json文件可以手工编写，也可以使用<code>npm init</code>命令自动生成。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm init</span></pre></td></tr></table></figure>
+
+<p>这个命令采用互动方式，要求用户回答一些问题，然后在当前目录生成一个基本的package.json文件。所有问题之中，只有项目名称（name）和项目版本（version）是必填的，其他都是选填的。</p>
+<p>有了package.json文件，直接使用npm install命令，就会在当前目录中安装所需要的模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install</span></pre></td></tr></table></figure>
+
+<p>如果一个模块不在<code>package.json</code>文件之中，可以单独安装这个模块，并使用相应的参数，将其写入<code>package.json</code>文件之中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm install express --save</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$ npm install express --save-dev</span></pre></td></tr></table></figure>
+
+<p>上面代码表示单独安装express模块，<code>--save</code>参数表示将该模块写入<code>dependencies</code>属性，<code>--save-dev</code>表示将该模块写入<code>devDependencies</code>属性。</p>
+<h2 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h2><p>有时，你的项目和所依赖的模块，都会同时依赖另一个模块，但是所依赖的版本不一样。比如，你的项目依赖A模块和B模块的1.0版，而A模块本身又依赖B模块的2.0版。</p>
+<p>大多数情况下，这不构成问题，B模块的两个版本可以并存，同时运行。但是，有一种情况，会出现问题，就是这种依赖关系将暴露给用户。</p>
+<p>最典型的场景就是插件，比如A模块是B模块的插件。用户安装的B模块是1.0版本，但是A插件只能和2.0版本的B模块一起使用。这时，用户要是将1.0版本的B的实例传给A，就会出现问题。因此，需要一种机制，在模板安装的时候提醒用户，如果A和B一起安装，那么B必须是2.0模块。</p>
+<p><code>peerDependencies</code>字段，就是用来供插件指定其所需要的主工具的版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span>: <span class="string">"chai-as-promised"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"peerDependencies"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"chai"</span>: <span class="string">"1.x"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码指定，安装<code>chai-as-promised</code>模块时，主程序<code>chai</code>必须一起安装，而且<code>chai</code>的版本必须是<code>1.x</code>。如果你的项目指定的依赖是<code>chai</code>的2.0版本，就会报错。</p>
+<p>注意，从npm 3.0版开始，<code>peerDependencies</code>不再会默认安装了。</p>
+<h2 id="bin字段"><a href="#bin字段" class="headerlink" title="bin字段"></a>bin字段</h2><p>bin项用来指定各个内部命令对应的可执行文件的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"bin"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"someTool"</span>: <span class="string">"./bin/someTool.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码指定，someTool 命令对应的可执行文件为 bin 子目录下的 someTool.js。Npm会寻找这个文件，在<code>node_modules/.bin/</code>目录下建立符号链接。在上面的例子中，someTool.js会建立符号链接<code>npm_modules/.bin/someTool</code>。由于<code>node_modules/.bin/</code>目录会在运行时加入系统的PATH变量，因此在运行npm时，就可以不带路径，直接通过命令来调用这些脚本。</p>
+<p>因此，像下面这样的写法可以采用简写。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">scripts: &#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  start: <span class="string">'./node_modules/someTool/someTool.js build'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简写为</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">scripts: &#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  start: <span class="string">'someTool build'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>所有<code>node_modules/.bin/</code>目录下的命令，都可以用<code>npm run [命令]</code>的格式运行。在命令行下，键入<code>npm run</code>，然后按tab键，就会显示所有可以使用的命令。</p>
+<h2 id="main字段"><a href="#main字段" class="headerlink" title="main字段"></a>main字段</h2><p><code>main</code>字段指定了加载该模块时的入门文件，默认是模块根目录下面的<code>index.js</code>。</p>
+<h2 id="config字段"><a href="#config字段" class="headerlink" title="config字段"></a>config字段</h2><p>config字段用于向环境变量输出值。</p>
+<p>下面是一个package.json文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"name"</span> : <span class="string">"foo"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"config"</span> : &#123; <span class="string">"port"</span> : <span class="string">"8080"</span> &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span> : &#123; <span class="string">"start"</span> : <span class="string">"node server.js"</span> &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>然后，在<code>server.js</code>脚本就可以引用config字段的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">http.createServer(...).listen(process.env.npm_package_config_port)</span></pre></td></tr></table></figure>
+
+<p>用户可以改变这个值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> foo:port 80</span></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="browser字段"><a href="#browser字段" class="headerlink" title="browser字段"></a>browser字段</h3><p>browser指定该模板供浏览器使用的版本。Browserify这样的浏览器打包工具，通过它就知道该打包那个文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"browser"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"tipso"</span>: <span class="string">"./node_modules/tipso/src/tipso.js"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;,</span></pre></td></tr></table></figure>
+
+<h3 id="engines字段"><a href="#engines字段" class="headerlink" title="engines字段"></a>engines字段</h3><p>engines指明了该项目所需要的node.js版本。</p>
+<h3 id="man字段"><a href="#man字段" class="headerlink" title="man字段"></a>man字段</h3><p>man用来指定当前模块的man文档的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"man"</span> :[ <span class="string">"./doc/calc.1"</span> ]</span></pre></td></tr></table></figure>
+
+<h3 id="preferGlobal字段"><a href="#preferGlobal字段" class="headerlink" title="preferGlobal字段"></a>preferGlobal字段</h3><p>preferGlobal的值是布尔值，表示当用户不将该模块安装为全局模块时（即不用–global参数），要不要显示警告，表示该模块的本意就是安装为全局模块。</p>
+<h3 id="style字段"><a href="#style字段" class="headerlink" title="style字段"></a>style字段</h3><p>style指定供浏览器使用时，样式文件所在的位置。样式文件打包工具parcelify，通过它知道样式文件的打包位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">"style"</span>: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">"./node_modules/tipso/src/tipso.css"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
 
 	
 	</div>
@@ -1146,45 +1369,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
 		
 			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
 			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
-			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
 		
 			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
 			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
+		
+			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
+		
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>28</span></a></li>
