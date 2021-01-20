@@ -129,6 +129,114 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2018-04-21 </div>
+			<div class="article-title"><a href="/2018/04/21/2018-04-21-html-debugging/" >调试 HTML (七)</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>写 HTML 是非常容易的，但如果某部分出了问题并且你找不到错误代码在哪里的时候，本文将向您介绍一些可以帮助您查找和修复 HTML 中的错误的工具。<br>目标: | 学习基础使用调试工具查找 HTML 中的错误。</p>
+</blockquote>
+<h2 id="一、HTML-和-调试"><a href="#一、HTML-和-调试" class="headerlink" title="一、HTML 和 调试"></a>一、HTML 和 调试</h2><p>今天这里并没有介绍使用工具的高级用法，因为目前我们还在基础阶段，所以介绍的都是基础原理性的知识，所以大家不用急，后面我们会推出相应的教程。</p>
+<h3 id="1-1-宽容模式代码"><a href="#1-1-宽容模式代码" class="headerlink" title="1.1 宽容模式代码"></a>1.1 宽容模式代码</h3><p>宽容的意思是什么呢？通常当你写错代码的时候，你会遇到以下两种主要类型的错误：</p>
+<ul>
+<li><strong>语法错误</strong>: 由于拼写错误导致程序无法运行，就像上面Rust的例子. 修正这些错误是没问题的，只要你熟悉正确的使用工具和知道错误信息的意思。</li>
+<li><strong>逻辑错误</strong>: 实际上语法是正确的，但代码不是你想要的，这意味着程序运行不正确. 逻辑错误通常比语法错误更难修复，因为没有一个错误信息指示你到错误的来源。</li>
+</ul>
+<p>HTML 本身不容易因语法错误出错，因为浏览器是以 <strong>宽松模式</strong> 来运行，这意味着即使出现语法错误浏览器依然会运行。浏览器通常都有自己的规则来解析语法错误的标记语言，所以程序仍然会运行，尽管可能不是你预期的样子。这样当然仍然会带来问题。</p>
+<p><strong>注意</strong>: HTML 可以自由的运行，是因为在 Web 创建之初，它的宗旨就是：允许人们获取他们发布的内容比确保所有语法完全正确更重要。如果当初 Web 在一开始就更加严格的话，也许 Web 就不会像今天这样流行了。</p>
+<h3 id="1-2-主动学习-学习宽容式代码风格"><a href="#1-2-主动学习-学习宽容式代码风格" class="headerlink" title="1.2 主动学习: 学习宽容式代码风格"></a>1.2 主动学习: 学习宽容式代码风格</h3><p>现在到你自己学习 HTML 代码宽松特性的时候了。</p>
+<ol>
+<li><p>首先，找到我们的 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">debug-example demo</a> 副本并保存到本地。这里故意写了一些错误在代码中，以便我们探究（HTML 标记被写成了<strong>糟糕的格式</strong>，与 <strong>良好的格式</strong>相反）。</p>
+</li>
+<li><p>接着，在浏览器中打开—你会看到下面的样子：<img src="https://mdn.mozillademos.org/files/12437/badly-formed-html.png" alt="A simple HTML document with a title of HTML debugging examples, and some information about common HTML errors, such as unclosed elements, badly nested elements, and unclosed attributes. "></p>
+</li>
+<li><p>这看起来一点儿也不好；让我们来看看源代码，看看我们是否能找出为什么（只显示了 body 的内容）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML debugging examples<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>What causes errors in HTML?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed elements: If an element is <span class="tag">&lt;<span class="name">strong</span>&gt;</span>not closed properly,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      then its effect can spread to areas you didn't intend</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Badly nested elements: Nesting elements properly is also very important</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      for code behaving correctly. <span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed attributes: Another common source of HTML problems. Let's</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      look at an example: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.mozilla.org/&gt;link to Mozilla</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">      homepage&lt;/a&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">&lt;/ul&gt;</span></span></span></pre></td></tr></table></figure>
+</li>
+<li><p>让我们检查一下这里看到的问题：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p" target="_blank" rel="noopener" title="HTML &lt;p&gt;元素（或者说 HTML 段落元素）表示文本的一个段落。该元素通常表现为一整块与相邻文本分离的文本，或以垂直的空白隔离或以首行缩进。另外，&lt;p&gt; 是块级元素。">paragraph</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/li" target="_blank" rel="noopener" title="HTML &lt;li&gt; 元素 (或者 HTML 列表条目元素) 用于表示列表里的条目。它必须被包含在一个父元素里：一个有顺序的列表(&lt;ol&gt;)，一个无顺序的列表(&lt;ul&gt;)，或者一个菜单 (&lt;menu&gt;)。在菜单或者无顺序的列表里，列表条目通常用点排列显示。在有顺序的列表里，列表条目通常是在左边有按升序排列计数的显示，例如数字或者字母。">list item</a> 元素没有结束标签。看看上面的图片，看起来对标记并没有导致太严重的影响，因为很容易推断出一个元素应该在哪里结束，在哪里开始。</li>
+<li>第一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a> 元素没有结束标签。这问题有一点大，因为不太容易确定元素在哪里结束。事实上，整个剩下的文本都被加粗强调了。</li>
+<li>这部分代码嵌套很糟糕：<code>&lt;strong&gt;strong &lt;em&gt;strong emphasised?&lt;/strong&gt; what is this?&lt;/em&gt;</code>。由于之前的问题，要解释这是如何解析的并不容易。</li>
+<li><code>[href](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-href)</code> 属性缺少了一个双引号。这导致了最大的问题—链接完全没有解析出来。</li>
+</ul>
+</li>
+<li><p>现在我们看看浏览器渲染出来的标记语言，而不是源代码中的标记语言。我们打开浏览器的开发者工具。如果你对这个不太熟悉的话，先浏览一下<a href="https://developer.mozilla.org/zh-CN/docs/Learn/Discover_browser_developer_tools" target="_blank" rel="noopener">Discover browser developer tools</a>。</p>
+</li>
+<li><p>在开发者模式中的审查器件，你可以看到被渲染出来的标记语言会像这样。<img src="https://mdn.mozillademos.org/files/12439/html-inspector.png" alt="The HTML inspector in Firefox, with our example&#39;s paragraph highlighted, showing the text &quot;What causes errors in HTML?&quot; Here you can see that the paragraph element has been closed by the browser."></p>
+</li>
+<li><p>使用开发者模式下的审查器，可以非常清楚地看到 <strong>浏览器尝试修补</strong> 我们的代码错误（下面是火狐浏览器中的情况，其他浏览器也会进行修补）</p>
+<ul>
+<li><p>段落和类表元素被加上了闭合标签。</p>
+</li>
+<li><p>第一个<strong>标签闭合的位置并不明确，因此浏览器用自己的<strong>标签将每一块分离的文本包括了进来，就在文档的底部。</p>
+</li>
+<li><p>浏览器像下面这样修补嵌套错误：</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span> what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>有错误属性的链接整个被删掉了。最后一个列表元素就像这样：</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Unclosed attributes: Another common source of HTML problems.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  Let's look at an example: <span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="1-3-HTML-验证"><a href="#1-3-HTML-验证" class="headerlink" title="1.3 HTML 验证"></a>1.3 HTML 验证</h3><p>看了上面的例子之后，你应该会希望自己的HTML格式正确。那么应该如何做呢？上面的例子都是一些非常小的错误，因此稍微浏览一下自己的代码就可以发现，但是如果是一个非常庞大、复杂的HTML文档呢？</p>
+<p>最好的方法就是让你的 HTML 页面通过 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> — 由 W3C 创立并维护的，这个网站紧跟定义 HTML，CSS，和其他网络技术的具体内容. 这个网页将 HTML 文档作为输入,并运行 ，然后给你一个报告告诉你你的 HTML 有哪些错误.</p>
+<p><img src="https://mdn.mozillademos.org/files/12441/validator.png" alt="The HTML validator homepage"></p>
+<p>为了确定需要验证的HTML，你可以输入一个指向该HTML页面的网址，或者上传一份HTML文件，或者直接输入一些HTML代码。</p>
+<h3 id="1-4-主动学习：验证一份HTML文档"><a href="#1-4-主动学习：验证一份HTML文档" class="headerlink" title="1.4 主动学习：验证一份HTML文档"></a>1.4 主动学习：验证一份HTML文档</h3><p>让我们用 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">sample document</a>尝试一下：</p>
+<ol>
+<li>在浏览器中打开 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> 。</li>
+<li>点击或者激活 <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">Validate by Direct Input</a> 栏。</li>
+<li>将整个示范文档的代码（不仅仅是body部分）复制粘贴到在 Markup Validation Service中显示的巨大的文本框。</li>
+<li><em>点击Check按钮。</em></li>
+</ol>
+<p>然后就会出现一张列表，显示了文档中的错误或者其他信息。</p>
+<p><img src="https://mdn.mozillademos.org/files/12443/validation-results.png" alt="A list of of HTML validation results from the W3C markup validation service"></p>
+<h4 id="1-5-解析错误信息"><a href="#1-5-解析错误信息" class="headerlink" title="1.5 解析错误信息"></a>1.5 解析错误信息</h4><p>展示在你眼前的错误信息列表可能会很有用，也可能并没有帮助。经过一点点练习你就会知道如何解析这些错误从而修复错误。让我们来浏览一下这些错误信息的含义。你会看到每一行都有一个数字和信息栏，来帮助你轻松定位错误。</p>
+<ul>
+<li><p>End tag <code>li</code> implied, but there were open elements（隐含着结束标签 <code>li</code> ，但却出现了元素的开始标签；共两个）: 这条信息表明一个元素的开始标签应该对应着一个结束标签，结束标签是隐含的，但实际上并不存在。行/列（line/column）信息指出那一行代码的下一行是结束标签应该出现的地方，这已经足够看出问题所在了。</p>
+</li>
+<li><p>Unclosed element <code>strong</code>（未闭合标签 <code>strong</code> ）：这是非常容易理解的，一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a>元素没有闭合，行/列信息指出了它所在之处。</p>
+</li>
+<li><p>End tag <code>strong</code> violates nesting rules（结束标签 <code>strong</code> 违反了嵌套规则）：指出了错误嵌套的元素，行/列信息表明了错误所在。</p>
+</li>
+<li><p>End of file reached when inside an attribute value. Ignoring tag（在属性值内达到文件末尾。忽略标签）: 这个比较难懂，它说的是在某个地方有一个属性的值没有正确构成，估计是在文件末尾附近，因为文件的结尾（EOF）出现在了一个属性值里。事实上浏览器没有渲染超链接就已经告诉我们错误出在哪个元素了。</p>
+</li>
+<li><p>End of file seen and there were open elements（文件结尾有未闭合的元素）：这个有点意义不明，但基本上表明了有元素没有正确闭合。行号指向文件最后几行，且错误信息给出了一个这种错误的案例：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">example: &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.mozilla.org&#x2F;&gt;link to Mozilla homepage&lt;&#x2F;a&gt; ↩ &lt;&#x2F;ul&gt;↩ &lt;&#x2F;body&gt;↩&lt;&#x2F;html&gt;</span></pre></td></tr></table></figure>
+
+<p>  <strong>注意</strong>: 一个缺少结束引号标记的属性会导致一个未闭合的元素，因为其余的文档被解析为了属性的内容。</p>
+</li>
+<li><p>Unclosed element <code>ul</code>（未闭合元素 <code>ul</code>）：这个不是很有帮助，因为<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul" target="_blank" rel="noopener" title="The HTML &lt;ul&gt; 元素 ( 或 HTML 无序列表元素） 代表多项的无序列表，即无数值排序项的集合，且它们在列表中的顺序是没有意义的。通常情况下，无序列表项的头部可以是几种形式，如一个点，一个圆形或方形。头部的风格并不是在页面的HTML描述定义, 但在其相关的CSS 可以用 list-style-type 属性。"><code>&lt;ul&gt;</code></a>已经正确闭合了。出现这个错误是因为那个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素因少了右引号而没有闭合。</p>
+</li>
+</ul>
+<p>如果你不能一次弄懂所有的错误，别着急，你可以试试先修复那些你已经弄懂的错误，然后再申请验证，看看剩下的错误是哪些。有时候最先修复的错误可能让你摆脱了后面一系列的错误——因为一个小问题可能引发好几个错误，就像连锁反应。</p>
+<p>当你所有的错误都修复之后，会得到下面的输出。</p>
+<p><img src="https://mdn.mozillademos.org/files/12445/valid-html-banner.png" alt="Banner that reads &quot;The document validates according to the specified schema(s) and to additional constraints checked by the validator.&quot;"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这就是我们关于HTML调试的介绍，这应该也会帮助你调试 CSS 和 JavaScript，或者你未来遇到的任何一种语言。这也是HTML模块学习的最后一篇文章，现在你可以用我们给你布置的任务来测试一下自己：下面的第一个链接。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/Debugging_HTML" target="_blank" rel="noopener">调试 HTML</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2018-04-21 </div>
 			<div class="article-title"><a href="/2018/04/21/2018-04-21-html-document-and-website-structure/" >文件和网站结构(六)</a></div>						
 		</h3>
 	
@@ -351,7 +459,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;<span class="name">code</span>&gt;</span>var para = document.querySelector('p');</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">para.onclick = function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  alert('Owww, stop poking me!');</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>You shouldn't use presentational elements like <span class="tag">&lt;<span class="name">code</span>&gt;</span>&amp;lt;font&amp;gt;<span class="tag">&lt;/<span class="name">code</span>&gt;</span> and <span class="tag">&lt;<span class="name">code</span>&gt;</span>&amp;lt;center&amp;gt;<span class="tag">&lt;/<span class="name">code</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>In the above JavaScript example, <span class="tag">&lt;<span class="name">var</span>&gt;</span>para<span class="tag">&lt;/<span class="name">var</span>&gt;</span> represents a paragraph element.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Select all the text with <span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Ctrl<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>/<span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Cmd<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span> + <span class="tag">&lt;<span class="name">kbd</span>&gt;</span>A<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span>$ <span class="tag">&lt;<span class="name">kbd</span>&gt;</span>ping mozilla.org<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">samp</span>&gt;</span>PING mozilla.org (63.245.215.20): 56 data bytes</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">64 bytes from 63.245.215.20: icmp_seq=0 ttl=40 time=158.233 ms<span class="tag">&lt;/<span class="name">samp</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span></pre></td></tr></table></figure>
 
 <p>上面的代码显示效果如下：</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/html-sup-sub.png" alt=""></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/html-sup-sub.png" alt=""></p>
 <h2 id="七、标记时间和日期"><a href="#七、标记时间和日期" class="headerlink" title="七、标记时间和日期"></a>七、标记时间和日期</h2><p>HTML 还支持将时间和日期标记为可供机器识别的格式的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/time" target="_blank" rel="noopener" title="HTML time 标签(&lt;time&gt;) 用来表示24小时制时间或者公历日期，若表示日期则也可包含时间和时区。"><code>&lt;time&gt;</code></a> 元素。例如：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">"2016-01-20"</span>&gt;</span>20 January 2016<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span></pre></td></tr></table></figure>
 
@@ -403,7 +511,7 @@
 <h2 id="一、什么是超链接"><a href="#一、什么是超链接" class="headerlink" title="一、什么是超链接?"></a>一、什么是超链接?</h2><p>超链接是互联网提供的最令人兴奋的创新之一，它们从一开始就一直是互联网的一个功能，使互联网成为互联的网络。超链接使我们能够将我们的文档链接到任何其他文档（或其他资源），也可以链接到文档的指定部分，我们可以在一个简单的网址上提供应用程序（与必须先安装的本地应用程序或其他东西相比）。几乎任何网络内容都可以转换为链接，点击（或激活）超链接将使网络浏览器转到另一个网址（<a href="https://developer.mozilla.org/en-US/docs/Glossary/URL" target="_blank" rel="noopener" title="URL: Uniform Resource Locator (URL) is a text string specifying where a resource can be found on the Internet.">URL</a>）。</p>
 <p>注意：URL 可以指向 HTML 文件、文本文件、图像、文本文档、视频和音频文件以及可以在网络上保存的任何其他内容。 如果浏览器不知道如何显示或处理文件，它会询问您是否要打开文件（需要选择合适的本地应用来打开或处理文件）或下载文件（以后处理它）。</p>
 <p>例如，BBC 主页包含大量的链接，不仅指向多个新闻故事，而且指向网站的不同区域（导航功能），登录/注册页面（用户工具）等等。</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/bbc-homepage.png" alt="frontpage of bbc.co.uk, showing many news items, and navigation menu functionality"></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/bbc-homepage.png" alt="frontpage of bbc.co.uk, showing many news items, and navigation menu functionality"></p>
 <h2 id="二、链接的解析"><a href="#二、链接的解析" class="headerlink" title="二、链接的解析"></a>二、链接的解析</h2><p>通过将文本（或其他内容，见 <a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks#块级链接" target="_blank" rel="noopener">块级链接</a>) 转换为 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素内的链接来创建基本链接， 给它一个 <code>[href](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-href)</code>属性（也称为目标），它将包含您希望链接指向的网址。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>I'm creating a link to</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.mozilla.org/en-US/"</span>&gt;</span>the Mozilla homepage<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></pre></td></tr></table></figure>
 
@@ -511,7 +619,7 @@
 <li>在每一页上，只删除同一页的链接——一个页面包含自己的链接是令人困惑和毫无意义的，而缺少链接会对你当前的页面起到很好的视觉提示作用。</li>
 </ol>
 <p>最终的例子应该是这样的：</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/simple-directory.png" alt="An example of a simple HTML navigation menu, with home, pictures, projects, and social menu items"></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/simple-directory.png" alt="An example of a simple HTML navigation menu, with home, pictures, projects, and social menu items"></p>
 <p><strong>注意</strong>: 如果你卡住了，或者不确定你是否正确，你可以检查导航菜单上的目录，看看正确的答案。</p>
 <h2 id="六、电子邮件链接"><a href="#六、电子邮件链接" class="headerlink" title="六、电子邮件链接"></a>六、电子邮件链接</h2><p>当点击一个链接或按钮时，打开一个新的电子邮件发送信息而不是连接到一个资源或页面，这种情况是可能做到的。这样做是使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a> 元素和 <code>mailto</code>：URL 的方案。<br>其最基本和最常用的使用形式为一个<code>mailto</code>:link （链接），链接简单说明收件人的电子邮件地址。例如:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"mailto:nowhere@mozilla.org"</span>&gt;</span>Send email to nowhere<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr></table></figure>
@@ -1035,7 +1143,7 @@
 	
 	
 		<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>观察者模式（又被称为 发布-订阅（Publish/Subscribe）模式，属于 <strong>行为</strong> 型模式的一种，它定义了 <strong>一种一对多</strong> 的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态变化时，会通知所有的观察者对象，使他们能够自动更新自己。</p>
-<h2 id="二、结构图"><a href="#二、结构图" class="headerlink" title="二、结构图"></a>二、结构图</h2><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/observer.png" alt=""></p>
+<h2 id="二、结构图"><a href="#二、结构图" class="headerlink" title="二、结构图"></a>二、结构图</h2><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/observer.png" alt=""></p>
 <h2 id="三、具体角色"><a href="#三、具体角色" class="headerlink" title="三、具体角色"></a>三、具体角色</h2><ul>
 <li><p>Subject：抽象主题（抽象被观察者），抽象主题角色把所有观察者对象保存在一个集合里，每个主题都可以有任意数量的观察者，抽象主题提供一个接口，可以增加和删除观察者对象。</p>
 </li>
@@ -1081,7 +1189,7 @@
   <div class="row">
 	
 	
-		<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/rxjava.jpg" alt=""></p>
+		<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/rxjava.jpg" alt=""></p>
 <h2 id="一、ReactiveX"><a href="#一、ReactiveX" class="headerlink" title="一、ReactiveX"></a>一、ReactiveX</h2><h2 id="1-历史"><a href="#1-历史" class="headerlink" title="1. 历史"></a>1. 历史</h2><p>ReactiveX 是 Reactive Extensions 的缩写，一般简写为 Rx，最初是 LINQ 的一个扩展，由微软的架构师 Erik Meijer 领导的团队开发，在 2012 年 11 月开源，Rx 是一个编程模型，目标是提供一致的编程接口，帮助开发者更方便的处理异步数据流，Rx 库支持 .NET、JavaScript 和 C++。Rx的大部分语言库由 ReactiveX 这个组织负责维护，社区网站是 reactivex.io。</p>
 <blockquote>
 <p>LINQ（Language Integrated Query）语言集成查询是一组用于c#和Visual Basic语言的扩展。它允许编写C#或者Visual Basic代码以查询数据库相同的方式操作内存数据。</p>
@@ -1106,7 +1214,7 @@
 <h3 id="2-3-扩展的观察者模式"><a href="#2-3-扩展的观察者模式" class="headerlink" title="2.3 扩展的观察者模式"></a>2.3 扩展的观察者模式</h3><ul>
 <li>添加了 <code>onCompleted()</code> 通知事件</li>
 <li>添加了 <code>onError()</code> 事件</li>
-<li>组合而不是嵌套，避免了回调地狱<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/rajava-observable.png" alt=""></li>
+<li>组合而不是嵌套，避免了回调地狱<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/rajava-observable.png" alt=""></li>
 </ul>
 <h3 id="2-4-subscribeOn-vs-observeOn"><a href="#2-4-subscribeOn-vs-observeOn" class="headerlink" title="2.4 subscribeOn() vs observeOn()"></a>2.4 <code>subscribeOn()</code> vs <code>observeOn()</code></h3><ul>
 <li><code>subscribeOn()</code> 改变的是 <strong>订阅</strong> 的线程，即 <code>subscribe()</code> 执行的线程(创建可观察对象时回调事件，只会触发一次)</li>
@@ -1136,59 +1244,6 @@
 <li><a href="https://mcxiaoke.gitbooks.io/rxdocs/content/" target="_blank" rel="noopener">rxjava 中文文档</a></li>
 <li><a href="https://github.com/lzyzsd/Awesome-RxJava/" target="_blank" rel="noopener">rxjava 经典资料</a></li>
 <li><a href="https://www.imooc.com/learn/877" target="_blank" rel="noopener">RxJava 与 RxAndroid 基础入门</a>// 慕课网视频</li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-04-15 </div>
-			<div class="article-title"><a href="/2018/04/15/2018-04-15-guess-number/" >猜数字游戏</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>扫雷游戏想必大家都玩过，今天我向大家介绍一个类似扫雷的游戏，<strong>猜数字</strong> 游戏。</p>
-<p>先来两张靓照:<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/guess-number-1.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/guess-number-2.png" alt=""></p>
-<p>具体的游戏规则:</p>
-<ol>
-<li>每次随机生成 5 个数字(1-100 之间，游戏玩家看不到)</li>
-<li>用户通过在输入框中输入可能的数字，进行猜测</li>
-<li>每猜一次，游戏会自动记录，直到你猜的数字是第一步生成的 5 个数字之一，这时游戏结束，最后会显示你总共尝试了多少次</li>
-</ol>
-<p>使用到的技术:</p>
-<ul>
-<li>html</li>
-<li>css</li>
-<li>javascript</li>
-</ul>
-<p>下面就和大家介绍具体实现步骤:</p>
-<h2 id="一、页面的主题框架"><a href="#一、页面的主题框架" class="headerlink" title="一、页面的主题框架"></a>一、页面的主题框架</h2><ul>
-<li>html 部分<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Guess Number<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">h4</span>&gt;</span>Please enter 1 - 100 number<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"body"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">label</span> &gt;</span>Please Enter Number: <span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">id</span>=<span class="string">"inputNum"</span> <span class="attr">min</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"100"</span> <span class="attr">name</span>=<span class="string">""</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"confirm"</span>&gt;</span>Confrim<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"result"</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"restart"</span> <span class="attr">id</span>=<span class="string">"restart"</span>&gt;</span>Play Again<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr></table></figure></li>
-<li>css 部分<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>,<span class="selector-tag">body</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">background</span>:<span class="built_in">-webkit-gradient</span>(linear, 0 0, 0 bottom, from(#5E07F6), <span class="built_in">to</span>(rgba(0, 0, 255, 0.5)));  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">text-align</span>: center;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">color</span>: <span class="number">#22FD14</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">50px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.body</span> <span class="selector-tag">button</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.body</span> <span class="selector-tag">input</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.body</span> <span class="selector-tag">hr</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>: <span class="number">80%</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">margin-top</span>:<span class="number">20px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#restart</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">border-color</span>: <span class="number">#65F6E6</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">background-color</span>: <span class="number">#65F6E6</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">display</span>: none;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span> auto;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> (max-width: <span class="number">576px</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="selector-id">#confirm</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="attribute">margin-top</span>: <span class="number">5px</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="二、js-部分"><a href="#二、js-部分" class="headerlink" title="二、js 部分"></a>二、js 部分</h2><ul>
-<li>生成随机数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generatorNum</span>(<span class="params">num</span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 使用了 es6 set，确保存储的随机数不重复</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> result = <span class="keyword">new</span> <span class="built_in">Set</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(result.size &gt;= num) <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        result.add(<span class="built_in">Math</span>.ceil(<span class="built_in">Math</span>.random() * <span class="number">100</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(<span class="built_in">Array</span>.from(result)));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(result);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
-<li>校验输入的数字<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNum</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(!inputNumEle.value)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.log(<span class="string">`请输入数字!`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(guessNum.includes(<span class="built_in">Number</span>(inputNumEle.value)))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      result.innerHTML = <span class="string">`&lt;h3&gt;Lucky Number: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(guessNum)&#125;</span>&lt;/h3&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">      &lt;h4&gt;Congratulations.After <span class="subst">$&#123;guessTimes&#125;</span> attempts,you got it!&lt;/h4&gt;`</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">      restartEle.style = <span class="string">'display:block'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.log(<span class="string">`恭喜你在经过 <span class="subst">$&#123;guessTimes&#125;</span> 次努力后，终于猜对了`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;<span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">      guessTimes++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 清除输入值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      inputNumEle.value = <span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// 设置焦点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">      inputNumEle.focus();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">console</span>.log(<span class="string">`没有猜对，再来一次`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="三、完整代码下载"><a href="#三、完整代码下载" class="headerlink" title="三、完整代码下载"></a>三、完整代码下载</h2><ul>
-<li><a href="https://github.com/Jesse-Chiu/guess-number.git" target="_blank" rel="noopener">Guess Number</a></li>
-<li><a href="https://jesse-chiu.github.io/guess-number/" target="_blank" rel="noopener">在线试玩</a></li>
 </ul>
 
 	
@@ -1249,7 +1304,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1318,48 +1373,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
 			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
 		
 			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
 			<li><a href="/tags/synology/">synology<span>1</span></a></li>
 		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1370,6 +1425,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -1385,10 +1444,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -1437,7 +1492,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

@@ -129,131 +129,6 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-03-04 </div>
-			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-history/" >History 对象</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>浏览器窗口有一个<code>history</code>对象，用来保存浏览历史。</p>
-<p>比如，当前窗口先后访问了三个地址，那么<code>history</code>对象就包括三项，<code>history.length</code>属性等于3。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
-
-<p><code>history</code>对象提供了一系列方法，允许在浏览历史之间移动。</p>
-<ul>
-<li><code>back()</code>：移动到上一个访问页面，等同于浏览器的后退键。</li>
-<li><code>forward()</code>：移动到下一个访问页面，等同于浏览器的前进键。</li>
-<li><code>go()</code>：接受一个整数作为参数，移动到该整数指定的页面，比如<code>go(1)</code>相当于<code>forward()</code>，<code>go(-1)</code>相当于<code>back()</code>。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.forward();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">-2</span>);</span></pre></td></tr></table></figure>
-
-<p>如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。</p>
-<p>以下命令相当于刷新当前页面。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">0</span>);</span></pre></td></tr></table></figure>
-
-<p>常见的“返回上一页”链接，代码如下。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'backLink'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>注意，返回上一页时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</p>
-<h2 id="history-pushState-，history-replaceState"><a href="#history-pushState-，history-replaceState" class="headerlink" title="history.pushState()，history.replaceState()"></a>history.pushState()，history.replaceState()</h2><p>HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!!(<span class="built_in">window</span>.history &amp;&amp; history.pushState))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持History API</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 不支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>上面代码可以用来检查，当前浏览器是否支持History API。如果不支持的话，可以考虑使用Polyfill库<a href="https://github.com/browserstate/history.js/" target="_blank" rel="noopener">History.js</a>。</p>
-<p>history.pushState方法接受三个参数，依次为：</p>
-<ul>
-<li><strong>state</strong>：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。</li>
-<li><strong>title</strong>：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。</li>
-<li><strong>url</strong>：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</li>
-</ul>
-<p>假定当前网址是<code>example.com/1.html</code>，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.pushState(stateObj, <span class="string">"page 2"</span>, <span class="string">"2.html"</span>);</span></pre></td></tr></table></figure>
-
-<p>添加上面这个新记录后，浏览器地址栏立刻显示<code>example.com/2.html</code>，但并不会跳转到2.html，甚至也不会检查2.html是否存在，它只是成为浏览历史中的最新记录。假定这时你访问了google.com，然后点击了倒退按钮，页面的url将显示2.html，但是内容还是原来的1.html。你再点击一次倒退按钮，url将显示1.html，内容不变。</p>
-<blockquote>
-<p>注意，pushState方法不会触发页面刷新。</p>
-</blockquote>
-<p>如果 pushState 的url参数，设置了一个当前网页的#号值（即hash），并不会触发hashchange事件。如果设置了一个非同域的网址，则会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'https://twitter.com/hello'</span>);</span></pre></td></tr></table></figure>
-
-<p>上面代码中，pushState想要插入一个非同域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。</p>
-<p><code>history.replaceState</code>方法的参数与<code>pushState</code>方法一模一样，区别是它修改浏览历史中当前页面的值。下面的例子假定当前网页是example.com/example.html。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html?page=1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">2</span>);  <span class="comment">// url显示为http://example.com/example.html?page=3</span></span></pre></td></tr></table></figure>
-
-<h2 id="history-state属性"><a href="#history-state属性" class="headerlink" title="history.state属性"></a>history.state属性</h2><p>history.state 属性保存当前页面的state对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.state</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123; page: 1 &#125;</span></span></pre></td></tr></table></figure>
-
-<h2 id="popstate-事件"><a href="#popstate-事件" class="headerlink" title="popstate 事件"></a>popstate 事件</h2><p>每当同一个文档的浏览历史（即history对象）出现变化时，就会触发 popstate 事件。需要注意的是，仅仅调用 pushState 方法或 replaceState 方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 back、forward、go 方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
-<p>使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-
-<p>上面代码中的event.state，就是通过pushState和replaceState方法，为当前url绑定的state对象。</p>
-<p>这个state对象也可以直接通过history对象读取。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentState = history.state;</span></pre></td></tr></table></figure>
-
-<p>另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate 事件，而Firefox和IE浏览器不会。</p>
-<h3 id="如果要设置禁止浏览器后退和前进的按钮"><a href="#如果要设置禁止浏览器后退和前进的按钮" class="headerlink" title="如果要设置禁止浏览器后退和前进的按钮"></a>如果要设置禁止浏览器后退和前进的按钮</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止页面后退</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把当前的 url 地址设置的历史记录中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听 popstate 事件，每当页面切换时，触发更新设置历史记录中的记录为当前 url 地址，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样每次历史记录中永远都是当前页面，达到进制后退功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
-<h2 id="URLSearchParams-API"><a href="#URLSearchParams-API" class="headerlink" title="URLSearchParams API"></a>URLSearchParams API</h2><p>URLSearchParams API用于处理URL之中的查询字符串，即问号之后的部分。没有部署这个API的浏览器，可以用<a href="https://github.com/WebReflection/url-search-params" target="_blank" rel="noopener">url-search-params</a>这个垫片库。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">'q=URLUtils.searchParams&amp;topic=api'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr></table></figure>
-
-<p>URLSearchParams有以下方法，用来操作某个参数。</p>
-<ul>
-<li><code>has()</code>：返回一个布尔值，表示是否具有某个参数</li>
-<li><code>get（）</code>：返回指定参数的第一个值</li>
-<li><code>getAll()</code>：返回一个数组，成员是指定参数的所有值</li>
-<li><code>set()</code>：设置指定参数</li>
-<li><code>delete()</code>：删除指定参数</li>
-<li><code>append()</code>：在查询字符串之中，追加一个键值对</li>
-<li><code>toString()</code>：返回整个查询字符串</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">"q=URLUtils.searchParams&amp;topic=api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">searchParams.has(<span class="string">'topic'</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'topic'</span>) <span class="comment">// "api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'topic'</span>) <span class="comment">// ["api"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// null，注意Firefox返回空字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">searchParams.set(<span class="string">'foo'</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'topic'</span>, <span class="string">'webdev'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;topic=api&amp;foo=2&amp;topic=webdev"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'foo'</span>, <span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'foo'</span>) <span class="comment">// [2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">searchParams.delete(<span class="string">'topic'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;foo=2&amp;foo=3"</span></span></pre></td></tr></table></figure>
-
-<p>URLSearchParams还有三个方法，用来遍历所有参数。</p>
-<ul>
-<li><code>keys()</code>：遍历所有参数名</li>
-<li><code>values()</code>：遍历所有参数值</li>
-<li><code>entries()</code>：遍历所有参数的键值对</li>
-</ul>
-<p>上面三个方法返回的都是Iterator对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'key1=value1&amp;key2=value2'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">of</span> searchParams.keys()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> value <span class="keyword">of</span> searchParams.values()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> pair <span class="keyword">of</span> searchParams.entries()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(pair[<span class="number">0</span>]+ <span class="string">', '</span>+ pair[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1, value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2, value2</span></span></pre></td></tr></table></figure>
-
-<p>在Chrome浏览器之中，<code>URLSearchParams</code>实例本身就是Iterator对象，与<code>entries</code>方法返回值相同。所以，可以写成下面的样子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">of</span> searchParams) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<p>下面是一个替换当前URL的例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> params = <span class="keyword">new</span> URLSearchParams(location.search.slice(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">params.set(<span class="string">'version'</span>, <span class="number">2.0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.replaceState(&#123;&#125;, <span class="string">''</span>, <span class="string">`<span class="subst">$&#123;location.pathname&#125;</span>?<span class="subst">$&#123;params&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=2.0</span></span></pre></td></tr></table></figure>
-
-<p><code>URLSearchParams</code>实例可以当作POST数据发送，所有数据都会URL编码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">params.append(<span class="string">'api_key'</span>, <span class="string">'1234567890'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'https://example.com/api'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  body: params</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;).then(...)</span></pre></td></tr></table></figure>
-
-<p>DOM的<code>a</code>元素节点的<code>searchParams</code>属性，就是一个<code>URLSearchParams</code>实例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">a.href = <span class="string">'https://example.com?filter=api'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">a.searchParams.get(<span class="string">'filter'</span>) <span class="comment">// "api"</span></span></pre></td></tr></table></figure>
-
-<p><code>URLSearchParams</code>还可以与<code>URL</code>接口结合使用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="keyword">new</span> URL(location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = url.searchParams.get(<span class="string">'foo'</span>) || <span class="string">'somedefault'</span>;</span></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="noopener">Manipulating the browser history</a></li>
-<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onpopstate" target="_blank" rel="noopener">window.onpopstate</a></li>
-<li>Johnny Simpson, <a href="http://www.inserthtml.com/2013/06/history-api/" target="_blank" rel="noopener">Controlling History: The HTML5 History API And ‘Selective’ Loading</a></li>
-<li>Louis Lazaris, <a href="http://www.impressivewebs.com/html5-history-api-syntax/" target="_blank" rel="noopener">HTML5 History API: A Syntax Primer</a></li>
-<li>Eric Bidelman, <a href="https://developers.google.com/web/updates/2016/01/urlsearchparams?hl=en" target="_blank" rel="noopener">Easy URL manipulation with URLSearchParams</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-03-04 </div>
 			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-engine/" >浏览器环境概述</a></div>						
 		</h3>
 	
@@ -864,6 +739,364 @@
 <li>Mathias Bynens, <a href="http://mathiasbynens.be/notes/xhr-responsetype-json" target="_blank" rel="noopener">Loading JSON-formatted data with Ajax and xhr.responseType=’json’</a></li>
 <li>Eric Bidelman, <a href="http://www.html5rocks.com/en/tutorials/file/xhr2/" target="_blank" rel="noopener">New Tricks in XMLHttpRequest2</a></li>
 <li>Matt West, <a href="http://blog.teamtreehouse.com/uploading-files-ajax" target="_blank" rel="noopener">Uploading Files with AJAX</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-04 </div>
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-window/" >Window 对象</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在浏览器中，<code>window</code>对象（注意，<code>w</code>为小写）指当前的浏览器窗口。它也是所有对象的顶层对象。</p>
+<p><img src="http://www.dreamdu.com/images/browser_objects.png" alt=""></p>
+<p>“顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，<br>都是<code>window</code>对象的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a <span class="comment">// 1</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，变量<code>a</code>是一个全局变量，但是实质上它是<code>window</code>对象的属性。声明一个全局变量，就是为<code>window</code>对象的同名属性赋值。</p>
+<p>从语言设计的角度看，所有变量都是<code>window</code>对象的属性，其实不是很合理。因为<code>window</code>对象有自己的实体含义，不适合当作最高一层的顶层对象。这个设计失误与JavaScript语言匆忙的设计过程有关，最早的设想是语言内置的对象越少越好，这样可以提高浏览器的性能。因此，语言设计者Brendan Eich就把<code>window</code>对象当作顶层对象，所有未声明就赋值的变量都自动变成<code>window</code>对象的属性。这种设计使得编译阶段无法检测出未声明变量，但到了今天已经没有办法纠正了。</p>
+<h2 id="window对象的属性"><a href="#window对象的属性" class="headerlink" title="window对象的属性"></a>window对象的属性</h2><h3 id="window-window"><a href="#window-window" class="headerlink" title="window.window"></a>window.window</h3><p><code>window</code>对象的<code>window</code>属性指向自身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.window === <span class="keyword">this</span> <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-closed"><a href="#window-closed" class="headerlink" title="window.closed"></a>window.closed</h3><p><code>window.closed</code>属性返回一个布尔值，表示窗口是否关闭。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.closed <span class="comment">// false</span></span></pre></td></tr></table></figure>
+
+<p>上面代码检查当前窗口是否关闭。这种检查意义不大，因为只要能运行代码，当前窗口肯定没有关闭。这个属性一般用来检查，使用脚本打开的新窗口是否关闭。</p>
+<h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p><code>window.opener</code>属性返回打开当前窗口的父窗口。如果当前窗口没有父窗口，则返回<code>null</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowA = <span class="built_in">window</span>.opener;</span></pre></td></tr></table></figure>
+
+<p>通过<code>opener</code>属性，可以获得父窗口的的全局变量和方法，比如<code>windowA.window.propertyName</code>和<code>windowA.window.functionName()</code>。</p>
+<p>该属性只适用于两个窗口属于同源的情况（参见《<a href="/bom/same-origin.html">同源政策</a>》一节），且其中一个窗口由另一个打开。</p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p><code>window.name</code>属性用于设置当前浏览器窗口的名字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">'Hello World!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.name)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Hello World!"</span></span></pre></td></tr></table></figure>
+
+<p>各个浏览器对这个值的储存容量有所不同，但是一般来说，可以高达几MB。</p>
+<p>它有一个重要特点，就是只要是本窗口打开的网页，都能读写该属性，不管这些网页是否属于同一个网站。所以，可以把值存放在该属性内，然后让另一个网页读取，从而实现跨域通信（详见《<a href="/bom/same-origin.html">同源政策</a>》一节）。</p>
+<p>该属性只能保存字符串，且当浏览器窗口关闭后，所保存的值就会消失。因此局限性比较大，但是与iframe窗口通信时，非常有用。</p>
+<h3 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h3><p><code>window.location</code>返回一个<code>location</code>对象，用于获取窗口当前的URL信息。它等同于<code>document.location</code>对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location === <span class="built_in">document</span>.location <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<h3 id="window-frames"><a href="#window-frames" class="headerlink" title="window.frames"></a>window.frames</h3><p><code>window.frames</code>属性返回一个类似数组的对象，成员为页面内所有框架窗口，包括<code>frame</code>元素和<code>iframe</code>元素。<code>window.frames[0]</code>表示页面中第一个框架窗口，<code>window.frames[&#39;someName&#39;]</code>则是根据框架窗口的<code>name</code>属性的值（不是<code>id</code>属性），返回该窗口。另外，通过<code>document.getElementById()</code>方法也可以引用指定的框架窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frame = <span class="built_in">document</span>.getElementById(<span class="string">'theFrame'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameWindow = frame.contentWindow;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等同于 frame.contentWindow.document</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frameDoc = frame.contentDocument;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取子窗口的变量和属性</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">frameWindow<span class="function">.<span class="keyword">function</span>(<span class="params"></span>)</span></span></pre></td></tr></table></figure>
+
+<p><code>window.length</code>属性返回当前页面中所有框架窗口总数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.frames.length === <span class="built_in">window</span>.length <span class="comment">// true</span></span></pre></td></tr></table></figure>
+
+<p><code>window.frames.length</code>与<code>window.length</code>应该是相等的。</p>
+<p>由于传统的<code>frame</code>窗口已经不建议使用了，这里主要介绍<code>iframe</code>窗口。</p>
+<p>需要注意的是，<code>window.frames</code>的每个成员对应的是框架内的窗口（即框架的<code>window</code>对象）。如果要获取每个框架内部的DOM树，需要使用<code>window.frames[0].document</code>的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">window</span>.getElementsByTagName(<span class="string">'iframe'</span>)[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe_title = iframe.contentWindow.title;</span></pre></td></tr></table></figure>
+
+<p>上面代码用于获取<code>iframe</code>页面的标题。</p>
+<p><code>iframe</code>元素遵守同源政策，只有当父页面与框架页面来自同一个域名，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。</p>
+<p><code>iframe</code>窗口内部，使用<code>window.parent</code>引用父窗口。如果当前页面没有父窗口，则<code>window.parent</code>属性返回自身。因此，可以通过<code>window.parent</code>是否等于<code>window.self</code>，判断当前窗口是否为<code>iframe</code>窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.parent != <span class="built_in">window</span>.self) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 当前窗口是子窗口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-screenX，window-screenY"><a href="#window-screenX，window-screenY" class="headerlink" title="window.screenX，window.screenY"></a>window.screenX，window.screenY</h3><p><code>window.screenX</code>和<code>window.screenY</code>属性，返回浏览器窗口左上角相对于当前屏幕左上角（<code>(0, 0)</code>）的水平距离和垂直距离，单位为像素。</p>
+<h3 id="window-innerHeight，window-innerWidth"><a href="#window-innerHeight，window-innerWidth" class="headerlink" title="window.innerHeight，window.innerWidth"></a>window.innerHeight，window.innerWidth</h3><p><code>window.innerHeight</code>和<code>window.innerWidth</code>属性，返回网页在当前窗口中可见部分的高度和宽度，即“视口”（viewport），单位为像素。</p>
+<p>当用户放大网页的时候（比如将网页从100%的大小放大为200%），这两个属性会变小。因为这时网页的像素大小不变（比如宽度还是960像素），只是每个像素占据的屏幕空间变大了，因为可见部分（视口）就变小了。</p>
+<p>注意，这两个属性值包括滚动条的高度和宽度。</p>
+<h3 id="window-outerHeight，window-outerWidth"><a href="#window-outerHeight，window-outerWidth" class="headerlink" title="window.outerHeight，window.outerWidth"></a>window.outerHeight，window.outerWidth</h3><p><code>window.outerHeight</code>和<code>window.outerWidth</code>属性返回浏览器窗口的高度和宽度，包括浏览器菜单和边框，单位为像素。</p>
+<h3 id="window-pageXOffset，window-pageYOffset"><a href="#window-pageXOffset，window-pageYOffset" class="headerlink" title="window.pageXOffset，window.pageYOffset"></a>window.pageXOffset，window.pageYOffset</h3><p><code>window.pageXOffset</code>属性返回页面的水平滚动距离，<code>window.pageYOffset</code>属性返回页面的垂直滚动距离，单位都为像素。</p>
+<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><p><code>window</code>对象的<code>navigator</code>属性，指向一个包含浏览器相关信息的对象。</p>
+<h3 id="navigator-userAgent"><a href="#navigator-userAgent" class="headerlink" title="navigator.userAgent"></a>navigator.userAgent</h3><p><code>navigator.userAgent</code>属性返回浏览器的User-Agent字符串，用来标示浏览器的种类。下面是Chrome浏览器的<code>userAgent</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">navigator.userAgent</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"</span></span></pre></td></tr></table></figure>
+
+<p>通过<code>userAgent</code>属性识别浏览器，不是一个好办法。因为必须考虑所有的情况（不同的浏览器，不同的版本），非常麻烦，而且无法保证未来的适用性，更何况各种上网设备层出不穷，难以穷尽。所以，现在一般不再识别浏览器了，而是使用“功能识别”方法，即逐一测试当前浏览器是否支持要用到的JavaScript功能。</p>
+<p>不过，通过<code>userAgent</code>可以大致准确地识别手机浏览器，方法就是测试是否包含<code>mobi</code>字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ua = navigator.userAgent.toLowerCase();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/mobi/i</span>.test(ua)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 非手机浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如果想要识别所有移动设备的浏览器，可以测试更多的特征字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/mobi|android|touch|mini/i.test(ua)</span></pre></td></tr></table></figure>
+
+<h3 id="navigator-plugins"><a href="#navigator-plugins" class="headerlink" title="navigator.plugins"></a>navigator.plugins</h3><p><code>navigator.plugins</code>属性返回一个类似数组的对象，成员是浏览器安装的插件，比如Flash、ActiveX等。</p>
+<h2 id="window-screen对象"><a href="#window-screen对象" class="headerlink" title="window.screen对象"></a>window.screen对象</h2><p><code>window.screen</code>对象包含了显示设备的信息。</p>
+<p><code>screen.height</code>和<code>screen.width</code>两个属性，一般用来了解设备的分辨率。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的高度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">screen.height <span class="comment">// 1920</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示设备的宽度，单位为像素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">screen.width <span class="comment">// 1080</span></span></pre></td></tr></table></figure>
+
+<p>上面代码显示，某设备的分辨率是1920x1080。</p>
+<p>除非调整显示器的分辨率，否则这两个值可以看作常量，不会发生变化。显示器的分辨率与浏览器设置无关，缩放网页并不会改变分辨率。</p>
+<p>下面是根据屏幕分辨率，将用户导向不同网页的代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((screen.width &lt;= <span class="number">800</span>) &amp;&amp; (screen.height &lt;= <span class="number">600</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'small.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.location.replace(<span class="string">'wide.html'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>screen.availHeight</code>和<code>screen.availWidth</code>属性返回屏幕可用的高度和宽度，单位为像素。它们的值为屏幕的实际大小减去操作系统某些功能占据的空间，比如系统的任务栏。</p>
+<p><code>screen.colorDepth</code>属性返回屏幕的颜色深度，一般为16（表示16-bit）或24（表示24-bit）。</p>
+<h2 id="window对象的方法"><a href="#window对象的方法" class="headerlink" title="window对象的方法"></a>window对象的方法</h2><h3 id="window-moveTo-，window-moveBy"><a href="#window-moveTo-，window-moveBy" class="headerlink" title="window.moveTo()，window.moveBy()"></a>window.moveTo()，window.moveBy()</h3><p><code>window.moveTo</code>方法用于移动浏览器窗口到指定位置。它接受两个参数，分别是窗口左上角距离屏幕左上角的水平距离和垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">100</span>, <span class="number">200</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口移动到屏幕<code>(100, 200)</code>的位置。</p>
+<p><code>window.moveBy</code>方法将窗口移动到一个相对位置。它接受两个参数，分布是窗口左上角向右移动的水平距离和向下移动的垂直距离，单位为像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">25</span>, <span class="number">50</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码将窗口向右移动25像素、向下移动50像素。</p>
+<h3 id="window-open-window-close"><a href="#window-open-window-close" class="headerlink" title="window.open(), window.close()"></a>window.open(), window.close()</h3><p><code>window.open</code>方法用于新建另一个浏览器窗口，并且返回该窗口对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(<span class="string">'somefile.html'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>open</code>方法的第一个参数是新窗口打开的网址，此外还可以加上第二个参数，表示新窗口的名字，以及第三个参数用来指定新窗口的参数，形式是一个逗号分隔的<code>property=value</code>字符串。</p>
+<p>下面是一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> popup = <span class="built_in">window</span>.open(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'somepage.html'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'DefinitionsWindows'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="string">'height=200,width=200,location=no,resizable=yes,scrollbars=yes'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">);</span></pre></td></tr></table></figure>
+
+<p>注意，如果在第三个参数中设置了一部分参数，其他没有被设置的<code>yes/no</code>参数都会被设成No，只有<code>titlebar</code>和关闭按钮除外（它们的值默认为yes）。</p>
+<p><code>open</code>方法返回新窗口的引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowB = <span class="built_in">window</span>.open(<span class="string">'windowB.html'</span>, <span class="string">'WindowB'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">windowB.window.name <span class="comment">// "WindowB"</span></span></pre></td></tr></table></figure>
+
+<p>由于<code>open</code>这个方法很容易被滥用，许多浏览器默认都不允许脚本新建窗口。因此，有必要检查一下打开新窗口是否成功。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (popup === <span class="literal">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 新建窗口失败</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>window.close</code>方法用于关闭当前窗口，一般用来关闭<code>window.open</code>方法新建的窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">popup.close()</span></pre></td></tr></table></figure>
+
+<p><code>window.closed</code>属性用于检查当前窗口是否被关闭了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 窗口仍然打开着</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-print"><a href="#window-print" class="headerlink" title="window.print()"></a>window.print()</h3><p><code>print</code>方法会跳出打印对话框，同用户点击菜单里面的“打印”命令效果相同。</p>
+<p>页面上的打印按钮代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'printLink'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.print();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>非桌面设备（比如手机）可能没有打印功能，这时可以这样判断。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.print === <span class="string">'function'</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持打印功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h3><p><code>getComputedStyle</code>方法接受一个HTML元素作为参数，返回一个包含该HTML元素的最终样式信息的对象。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-matchMedia"><a href="#window-matchMedia" class="headerlink" title="window.matchMedia()"></a>window.matchMedia()</h3><p><code>window.matchMedia</code>方法用来检查CSS的mediaQuery语句。详见《DOM》一章的CSS章节。</p>
+<h3 id="window-focus"><a href="#window-focus" class="headerlink" title="window.focus()"></a>window.focus()</h3><p><code>focus</code>方法会激活指定当前窗口，使其获得焦点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((popup !== <span class="literal">null</span>) &amp;&amp; !popup.closed) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  popup.focus();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码先检查<code>popup</code>窗口是否依然存在，确认后激活该窗口。</p>
+<p>当前窗口获得焦点时，会触发<code>focus</code>事件；当前窗口失去焦点时，会触发<code>blur</code>事件。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p><code>window</code>对象可以接收以下事件。</p>
+<h3 id="load事件和onload属性"><a href="#load事件和onload属性" class="headerlink" title="load事件和onload属性"></a>load事件和onload属性</h3><p><code>load</code>事件发生在文档在浏览器窗口加载完毕时。<code>window.onload</code>属性可以指定这个事件的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> elements = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'example'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> elt = elements[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p>上面代码在网页加载完毕后，获取指定元素并进行处理。</p>
+<h3 id="error事件和onerror属性"><a href="#error事件和onerror属性" class="headerlink" title="error事件和onerror属性"></a>error事件和onerror属性</h3><p>浏览器脚本发生错误时，会触发window对象的<code>error</code>事件。我们可以通过<code>window.onerror</code>属性对该事件指定回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">message, filename, lineno, colno, error</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"出错了！--&gt; %s"</span>, error.stack);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+
+<p><code>error</code>事件的回调函数，一共可以有五个参数，它们的含义依次如下。</p>
+<ul>
+<li>出错信息</li>
+<li>出错脚本的网址</li>
+<li>行号</li>
+<li>列号</li>
+<li>错误对象</li>
+</ul>
+<p>老式浏览器只支持前三个参数。</p>
+<p>需要注意的是，如果脚本网址与网页网址不在同一个域（比如使用了CDN），浏览器根本不会提供详细的出错信息，只会提示出错，错误类型是“Script error.”，行号为0，其他信息都没有。这是浏览器防止向外部脚本泄漏信息。一个解决方法是在脚本所在的服务器，设置Access-Control-Allow-Origin的HTTP头信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin:*</span></pre></td></tr></table></figure>
+
+<p>然后，在网页的<code>&lt;script&gt;</code>标签中设置<code>crossorigin</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span> <span class="attr">src</span>=<span class="string">"//example.com/file.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<p>上面代码的<code>crossorigin=&quot;anonymous&quot;</code>表示，读取文件不需要身份信息，即不需要cookie和HTTP认证信息。如果设为<code>crossorigin=&quot;use-credentials&quot;</code>，就表示浏览器会上传cookie和HTTP认证信息，同时还需要服务器端打开HTTP头信息Access-Control-Allow-Credentials。</p>
+<p>并不是所有的错误，都会触发JavaScript的<code>error</code>事件（即让JavaScript报错），只限于以下三类事件。</p>
+<ul>
+<li>JavaScript语言错误</li>
+<li>JavaScript脚本文件不存在</li>
+<li>图像文件不存在</li>
+</ul>
+<p>以下两类事件不会触发JavaScript的error事件。</p>
+<ul>
+<li>CSS文件不存在</li>
+<li>iframe文件不存在</li>
+</ul>
+<h2 id="URL的编码-解码方法"><a href="#URL的编码-解码方法" class="headerlink" title="URL的编码/解码方法"></a>URL的编码/解码方法</h2><p>网页URL的合法字符分成两类。</p>
+<ul>
+<li>URL元字符：分号（<code>;</code>），逗号（’,’），斜杠（<code>/</code>），问号（<code>?</code>），冒号（<code>:</code>），at（<code>@</code>），<code>&amp;</code>，等号（<code>=</code>），加号（<code>+</code>），美元符号（<code>$</code>），井号（<code>#</code>）</li>
+<li>语义字符：<code>a-z</code>，<code>A-Z</code>，<code>0-9</code>，连词号（<code>-</code>），下划线（<code>_</code>），点（<code>.</code>），感叹号（<code>!</code>），波浪线（<code>~</code>），星号（<code>*</code>），单引号（<code>\``），圆括号（</code>()`）</li>
+</ul>
+<p>除了以上字符，其他字符出现在URL之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（<code>%</code>）加上两个大写的十六进制字母。比如，UTF-8的操作系统上，<code>http://www.example.com/q=春节</code>这个URL之中，汉字“春节”不是URL的合法字符，所以被浏览器自动转成<code>http://www.example.com/q=%E6%98%A5%E8%8A%82</code>。其中，“春”转成了<code>%E6%98%A5</code>，“节”转成了“%E8%8A%82”。这是因为“春”和”节“的UTF-8编码分别是<code>E6 98 A5</code>和<code>E8 8A 82</code>，将每个字节前面加上百分号，就构成了URL编码。</p>
+<p>JavaScript提供四个URL的编码/解码方法。</p>
+<ul>
+<li><code>encodeURI()</code></li>
+<li><code>encodeURIComponent()</code></li>
+<li><code>decodeURI()</code></li>
+<li><code>decodeURIComponent()</code></li>
+</ul>
+<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h3><p><code>encodeURI</code> 方法的参数是一个字符串，代表整个URL。它会将元字符和语义字符之外的字符，都进行转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURI</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h3><p><code>encodeURIComponent</code>只转除了语义字符之外的字符，元字符也会被转义。因此，它的参数通常是URL的路径或参数值，而不是整个URL。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "%E6%98%A5%E8%8A%82"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">'http://www.example.com/q=春节'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http%3A%2F%2Fwww.example.com%2Fq%3D%E6%98%A5%E8%8A%82"</span></span></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>encodeURIComponent</code>会连URL元字符一起转义，所以通常只用它转URL的片段。</p>
+<h3 id="decodeURI"><a href="#decodeURI" class="headerlink" title="decodeURI"></a>decodeURI</h3><p><code>decodeURI</code>用于还原转义后的URL。它是<code>encodeURI</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">'http://www.example.com/q=%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "http://www.example.com/q=春节"</span></span></pre></td></tr></table></figure>
+
+<h3 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="decodeURIComponent"></a>decodeURIComponent</h3><p><code>decodeURIComponent</code>用于还原转义后的URL片段。它是<code>encodeURIComponent</code>方法的逆运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">'%E6%98%A5%E8%8A%82'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// "春节"</span></span></pre></td></tr></table></figure>
+
+<h2 id="alert-，prompt-，confirm"><a href="#alert-，prompt-，confirm" class="headerlink" title="alert()，prompt()，confirm()"></a>alert()，prompt()，confirm()</h2><p><code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。</p>
+<p>需要注意的是，<code>alert()</code>、<code>prompt()</code>、<code>confirm()</code>这三个方法弹出的对话框，都是浏览器统一规定的式样，是无法定制的。</p>
+<p><code>alert</code>方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">alert(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World'</span>);</span></pre></td></tr></table></figure>
+
+<p>用户只有点击“确定”按钮，对话框才会消失。在对话框弹出期间，浏览器窗口处于冻结状态，如果不点“确定”按钮，用户什么也干不了。</p>
+<p><code>alert</code>方法的参数只能是字符串，没法使用CSS样式，但是可以用<code>\n</code>指定换行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'本条提示\n分成两行'</span>);</span></pre></td></tr></table></figure>
+
+<p><code>prompt</code>方法弹出的对话框，在提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(text[, <span class="keyword">default</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = prompt(<span class="string">'您的年龄？'</span>, <span class="number">25</span>)</span></pre></td></tr></table></figure>
+
+<p>上面代码会跳出一个对话框，文字提示为“您的年龄？”，要求用户在对话框中输入自己的年龄（默认显示25）。</p>
+<p><code>prompt</code>方法的返回值是一个字符串（有可能为空）或者<code>null</code>，具体分成三种情况。</p>
+<ol>
+<li>用户输入信息，并点击“确定”，则用户输入的信息就是返回值。</li>
+<li>用户没有输入信息，直接点击“确定”，则输入框的默认值就是返回值。</li>
+<li>用户点击了“取消”（或者按了Esc按钮），则返回值是<code>null</code>。</li>
+</ol>
+<p><code>prompt</code>方法的第二个参数是可选的，但是如果不提供的话，IE浏览器会在输入框中显示<code>undefined</code>。因此，最好总是提供第二个参数，作为输入框的默认值。</p>
+<p><code>confirm</code>方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”两个按钮，往往用来征询用户的意见。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(message);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = confirm(<span class="string">"你最近好吗？"</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码弹出一个对话框，上面只有一行文字“你最近好吗？”，用户选择点击“确定”或“取消”。</p>
+<p><code>confirm</code>方法返回一个布尔值，如果用户点击“确定”，则返回<code>true</code>；如果用户点击“取消”，则返回<code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> okay = confirm(<span class="string">'Please confirm this message.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (okay) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“确定”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 用户按下“取消”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><code>confirm</code>的一个用途是，当用户离开当前页面时，弹出一个对话框，问用户是否真的要离开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> confirm(<span class="string">'你确定要离开当面页面吗？'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>Karl Dubost, <a href="https://hacks.mozilla.org/2013/09/user-agent-detection-history-and-checklist/" target="_blank" rel="noopener">User-Agent detection, history and checklist</a></li>
+<li>Conrad Irwin, <a href="https://bugsnag.com/blog/js-stacktraces/" target="_blank" rel="noopener">JS stacktraces. The good, the bad, and the ugly</a></li>
+<li>Daniel Lee, <a href="http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/" target="_blank" rel="noopener">How to catch JavaScript Errors with window.onerror (even on Chrome and Firefox)</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2017-03-04 </div>
+			<div class="article-title"><a href="/2017/03/04/2017-03-04-bom-history/" >History 对象</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>浏览器窗口有一个<code>history</code>对象，用来保存浏览历史。</p>
+<p>比如，当前窗口先后访问了三个地址，那么<code>history</code>对象就包括三项，<code>history.length</code>属性等于3。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.length <span class="comment">// 3</span></span></pre></td></tr></table></figure>
+
+<p><code>history</code>对象提供了一系列方法，允许在浏览历史之间移动。</p>
+<ul>
+<li><code>back()</code>：移动到上一个访问页面，等同于浏览器的后退键。</li>
+<li><code>forward()</code>：移动到下一个访问页面，等同于浏览器的前进键。</li>
+<li><code>go()</code>：接受一个整数作为参数，移动到该整数指定的页面，比如<code>go(1)</code>相当于<code>forward()</code>，<code>go(-1)</code>相当于<code>back()</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.forward();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">-2</span>);</span></pre></td></tr></table></figure>
+
+<p>如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。</p>
+<p>以下命令相当于刷新当前页面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p>常见的“返回上一页”链接，代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'backLink'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.history.back();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>注意，返回上一页时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</p>
+<h2 id="history-pushState-，history-replaceState"><a href="#history-pushState-，history-replaceState" class="headerlink" title="history.pushState()，history.replaceState()"></a>history.pushState()，history.replaceState()</h2><p>HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!!(<span class="built_in">window</span>.history &amp;&amp; history.pushState))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 支持History API</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 不支持</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面代码可以用来检查，当前浏览器是否支持History API。如果不支持的话，可以考虑使用Polyfill库<a href="https://github.com/browserstate/history.js/" target="_blank" rel="noopener">History.js</a>。</p>
+<p>history.pushState方法接受三个参数，依次为：</p>
+<ul>
+<li><strong>state</strong>：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。</li>
+<li><strong>title</strong>：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。</li>
+<li><strong>url</strong>：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</li>
+</ul>
+<p>假定当前网址是<code>example.com/1.html</code>，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.pushState(stateObj, <span class="string">"page 2"</span>, <span class="string">"2.html"</span>);</span></pre></td></tr></table></figure>
+
+<p>添加上面这个新记录后，浏览器地址栏立刻显示<code>example.com/2.html</code>，但并不会跳转到2.html，甚至也不会检查2.html是否存在，它只是成为浏览历史中的最新记录。假定这时你访问了google.com，然后点击了倒退按钮，页面的url将显示2.html，但是内容还是原来的1.html。你再点击一次倒退按钮，url将显示1.html，内容不变。</p>
+<blockquote>
+<p>注意，pushState方法不会触发页面刷新。</p>
+</blockquote>
+<p>如果 pushState 的url参数，设置了一个当前网页的#号值（即hash），并不会触发hashchange事件。如果设置了一个非同域的网址，则会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'https://twitter.com/hello'</span>);</span></pre></td></tr></table></figure>
+
+<p>上面代码中，pushState想要插入一个非同域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。</p>
+<p><code>history.replaceState</code>方法的参数与<code>pushState</code>方法一模一样，区别是它修改浏览历史中当前页面的值。下面的例子假定当前网页是example.com/example.html。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html?page=1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">history.back(); <span class="comment">// url显示为http://example.com/example.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">2</span>);  <span class="comment">// url显示为http://example.com/example.html?page=3</span></span></pre></td></tr></table></figure>
+
+<h2 id="history-state属性"><a href="#history-state属性" class="headerlink" title="history.state属性"></a>history.state属性</h2><p>history.state 属性保存当前页面的state对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">history.state</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123; page: 1 &#125;</span></span></pre></td></tr></table></figure>
+
+<h2 id="popstate-事件"><a href="#popstate-事件" class="headerlink" title="popstate 事件"></a>popstate 事件</h2><p>每当同一个文档的浏览历史（即history对象）出现变化时，就会触发 popstate 事件。需要注意的是，仅仅调用 pushState 方法或 replaceState 方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 back、forward、go 方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
+<p>使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"location: "</span> + <span class="built_in">document</span>.location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">"state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+<p>上面代码中的event.state，就是通过pushState和replaceState方法，为当前url绑定的state对象。</p>
+<p>这个state对象也可以直接通过history对象读取。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentState = history.state;</span></pre></td></tr></table></figure>
+
+<p>另外，需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate 事件，而Firefox和IE浏览器不会。</p>
+<h3 id="如果要设置禁止浏览器后退和前进的按钮"><a href="#如果要设置禁止浏览器后退和前进的按钮" class="headerlink" title="如果要设置禁止浏览器后退和前进的按钮"></a>如果要设置禁止浏览器后退和前进的按钮</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止页面后退</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把当前的 url 地址设置的历史记录中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听 popstate 事件，每当页面切换时，触发更新设置历史记录中的记录为当前 url 地址，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样每次历史记录中永远都是当前页面，达到进制后退功能</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">document</span>.URL);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+<h2 id="URLSearchParams-API"><a href="#URLSearchParams-API" class="headerlink" title="URLSearchParams API"></a>URLSearchParams API</h2><p>URLSearchParams API用于处理URL之中的查询字符串，即问号之后的部分。没有部署这个API的浏览器，可以用<a href="https://github.com/WebReflection/url-search-params" target="_blank" rel="noopener">url-search-params</a>这个垫片库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">'q=URLUtils.searchParams&amp;topic=api'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr></table></figure>
+
+<p>URLSearchParams有以下方法，用来操作某个参数。</p>
+<ul>
+<li><code>has()</code>：返回一个布尔值，表示是否具有某个参数</li>
+<li><code>get（）</code>：返回指定参数的第一个值</li>
+<li><code>getAll()</code>：返回一个数组，成员是指定参数的所有值</li>
+<li><code>set()</code>：设置指定参数</li>
+<li><code>delete()</code>：删除指定参数</li>
+<li><code>append()</code>：在查询字符串之中，追加一个键值对</li>
+<li><code>toString()</code>：返回整个查询字符串</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paramsString = <span class="string">"q=URLUtils.searchParams&amp;topic=api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(paramsString);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">searchParams.has(<span class="string">'topic'</span>) <span class="comment">// true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'topic'</span>) <span class="comment">// "api"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'topic'</span>) <span class="comment">// ["api"]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// null，注意Firefox返回空字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">searchParams.set(<span class="string">'foo'</span>, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">searchParams.get(<span class="string">'foo'</span>) <span class="comment">// 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'topic'</span>, <span class="string">'webdev'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;topic=api&amp;foo=2&amp;topic=webdev"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">searchParams.append(<span class="string">'foo'</span>, <span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">searchParams.getAll(<span class="string">'foo'</span>) <span class="comment">// [2, 3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">searchParams.delete(<span class="string">'topic'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">searchParams.toString() <span class="comment">// "q=URLUtils.searchParams&amp;foo=2&amp;foo=3"</span></span></pre></td></tr></table></figure>
+
+<p>URLSearchParams还有三个方法，用来遍历所有参数。</p>
+<ul>
+<li><code>keys()</code>：遍历所有参数名</li>
+<li><code>values()</code>：遍历所有参数值</li>
+<li><code>entries()</code>：遍历所有参数的键值对</li>
+</ul>
+<p>上面三个方法返回的都是Iterator对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'key1=value1&amp;key2=value2'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">of</span> searchParams.keys()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> value <span class="keyword">of</span> searchParams.values()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// value2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> pair <span class="keyword">of</span> searchParams.entries()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(pair[<span class="number">0</span>]+ <span class="string">', '</span>+ pair[<span class="number">1</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key1, value1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// key2, value2</span></span></pre></td></tr></table></figure>
+
+<p>在Chrome浏览器之中，<code>URLSearchParams</code>实例本身就是Iterator对象，与<code>entries</code>方法返回值相同。所以，可以写成下面的样子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">of</span> searchParams) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>下面是一个替换当前URL的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> params = <span class="keyword">new</span> URLSearchParams(location.search.slice(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">params.set(<span class="string">'version'</span>, <span class="number">2.0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.replaceState(&#123;&#125;, <span class="string">''</span>, <span class="string">`<span class="subst">$&#123;location.pathname&#125;</span>?<span class="subst">$&#123;params&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL: https://example.com?version=2.0</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>实例可以当作POST数据发送，所有数据都会URL编码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">params.append(<span class="string">'api_key'</span>, <span class="string">'1234567890'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'https://example.com/api'</span>, &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  method: <span class="string">'POST'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  body: params</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;).then(...)</span></pre></td></tr></table></figure>
+
+<p>DOM的<code>a</code>元素节点的<code>searchParams</code>属性，就是一个<code>URLSearchParams</code>实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">a.href = <span class="string">'https://example.com?filter=api'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">a.searchParams.get(<span class="string">'filter'</span>) <span class="comment">// "api"</span></span></pre></td></tr></table></figure>
+
+<p><code>URLSearchParams</code>还可以与<code>URL</code>接口结合使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="keyword">new</span> URL(location);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = url.searchParams.get(<span class="string">'foo'</span>) || <span class="string">'somedefault'</span>;</span></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="noopener">Manipulating the browser history</a></li>
+<li>MOZILLA DEVELOPER NETWORK，<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onpopstate" target="_blank" rel="noopener">window.onpopstate</a></li>
+<li>Johnny Simpson, <a href="http://www.inserthtml.com/2013/06/history-api/" target="_blank" rel="noopener">Controlling History: The HTML5 History API And ‘Selective’ Loading</a></li>
+<li>Louis Lazaris, <a href="http://www.impressivewebs.com/html5-history-api-syntax/" target="_blank" rel="noopener">HTML5 History API: A Syntax Primer</a></li>
+<li>Eric Bidelman, <a href="https://developers.google.com/web/updates/2016/01/urlsearchparams?hl=en" target="_blank" rel="noopener">Easy URL manipulation with URLSearchParams</a></li>
 </ul>
 
 	
@@ -1613,54 +1846,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-01-02 </div>
-			<div class="article-title"><a href="/2017/01/02/2017-01-02-《Hackers and Painters》/" >《Hackers and Painters》</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><img src="http://i260.photobucket.com/albums/ii7/ruanyf/blog/bg2009122805.jpg" alt="Hackers and Painters"></p>
-<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>《黑客与画家：硅谷创业之父 Paul Graham 文集》的作者是格雷厄姆，由人民邮电出版社于2011年4月1日出版。本书是硅谷创业之父 Paul Graham 的文集，主要介绍黑客即优秀程序员的爱好和动机，讨论黑客成长、黑客对世界的贡献以及编程语言和黑客工作方法等所有对计算机时代感兴趣的人的一些话题</p>
-<h2 id="二、目录"><a href="#二、目录" class="headerlink" title="二、目录"></a>二、目录</h2><ol>
-<li>为什么书呆子不受欢迎<br> 他们的心思在别的地方。</li>
-<li>黑客与画家<br> 黑客也是创造者，与画家、建筑师、作家一样。</li>
-<li>不能说的话<br> 如果你的想法是社会无法容忍的，你怎么办?</li>
-<li>良好的坏习惯<br> 与其他美国人一样，黑客的成功秘诀就是打破常规。</li>
-<li>另一条路<br> 互联网软件是微机诞生后的最大机会。</li>
-<li>如何创造财富<br> 致富的最好方法就是为社会创造财富。创造财富的最好方法就是创业。</li>
-<li>关注贫富分化<br> “收入分配不平等”的危害，会不会没有我们想的那样严重?</li>
-<li>防止垃圾邮件的一种方法<br> 不久前，许多专家还认为无法有效地过滤垃圾邮件。本文改变了他们的想法。</li>
-<li>设计者的品味<br> 如何做出优秀的东西？</li>
-<li>编程语言解析<br>什么是编程语言？为什么它们现在很热门？</li>
-<li>一百年后的编程语言<br>一百年后，人类怎样编程？为什么不从现在开始就这样编程呢？</li>
-<li>拒绝平庸<br>别忘了你的对手与你一样，能用任何想用的语言编写互联网软件。</li>
-<li>书呆子的复仇<br>在高科技行业，只有失败者采用“业界最佳实践”。</li>
-<li>梦寐以求的编程语言<br>一种好的编程语言，是让黑客可以随心所欲使用的语言。</li>
-<li>设计与研究<br>研究必须是“新”的，而设计必须是“好”的。</li>
-</ol>
-<h2 id="三、相关资源网站"><a href="#三、相关资源网站" class="headerlink" title="三、相关资源网站"></a>三、相关资源网站</h2><ul>
-<li><a href="http://www.ruanyifeng.com/docs/pg/" target="_blank" rel="noopener">Paul Graham 文选</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2009/12/i_will_translate_paul_graham.html" target="_blank" rel="noopener">Paul Graham 概况</a></li>
-<li><a href="http://www.paulgraham.com/" target="_blank" rel="noopener">Paul Graham 网站</a></li>
-<li><a href="http://baike.baidu.com/link?url=c_Ui_B9C4eSqkfmTEyp7bfusNEUVo2sxpSzqxZuWtU5SLvPp2pGkydv3YaxSetFyix-0VBXwPTPytKVGUK_I3fQBrC0XHwu5ucnDVDirul7hIAWCHRgSRm_BvngQlBBB_Lp55VHBLwnpvmQXCMzRnKPtJiTjLLp3lAWav1QC3bHrEZl_CpV9QCmLC1ryqrZl9vcEPIY89v2YvwAkxWZ2CiTakFpZJwwO8hk9G5-3I0w-2pZUrkoVQh0x3Ia5v8lQreBD2S3qE1RFVpog4PQ78q" target="_blank" rel="noopener">Eric Steven Raymond</a></li>
-<li><a href="http://catb.org/~esr/faqs/hacker-howto.html" target="_blank" rel="noopener">How To Become A Hacker</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1713,7 +1898,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1784,46 +1969,46 @@
 		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
+			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
 		
 			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/kotlin/">kotlin<span>1</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
+		
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
+		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1834,6 +2019,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -1849,10 +2038,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -1901,7 +2086,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

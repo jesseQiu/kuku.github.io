@@ -128,6 +128,81 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2018-05-15 </div>
+			<div class="article-title"><a href="/2018/05/15/2018-05-15-html-font-rending/" >认识字体渲染</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<blockquote>
+<p>在 Mac OS 系统上对网页截屏，然后打开图片不断放大观察。你会发现黑色的文字居然不完全是纯黑色的！（Windows 7下IE9使用微软雅黑字体也可以看到这个现象）。肿么回事，这不科学！读完这篇文章后你就都懂了。</p>
+</blockquote>
+<p><img src="https://ksmx.me/content/images/2013/09/cover.png" alt="post cover"></p>
+<p>为什么相同的字体，在Mac OS上的显示效果「看起来」要比Windows上好看？这个问题我一直没有搞清楚，昨天偶尔看到有关字体渲染方面的一篇文章：<a href="http://www.smashingmagazine.com/2012/04/24/a-closer-look-at-font-rendering/" target="_blank" rel="noopener">《A Closer Look At Font Rendering》</a>，终于对字体渲染有了一些认识。这篇文章是我对字体渲染知识的归纳总结，只挑重点写。</p>
+<h2 id="一、一个理想和三种实现（渲染策略，Rendering-Strategies）"><a href="#一、一个理想和三种实现（渲染策略，Rendering-Strategies）" class="headerlink" title="一、一个理想和三种实现（渲染策略，Rendering Strategies）"></a>一、一个理想和三种实现（渲染策略，Rendering Strategies）</h2><h3 id="1-1-理想的形状"><a href="#1-1-理想的形状" class="headerlink" title="1.1 理想的形状"></a>1.1 理想的形状</h3><p><img src="https://ksmx.me/content/images/2013/09/ideal_shape.png" alt="理想的形状（ideal shape）"></p>
+<p>理想中的文字，指的是使用矢量图形描述出来的形状。矢量图形是在计算机图形学中使用数学方程表达的几何形状（点、线和多边形等）来绘制图像。这样抽象的描述可能比较难懂，可以理解为矢量图形是「e这个字母的形状是数字9翻转过来的图形」这种描述的数学版。</p>
+<p>如何将这种抽象形状描述转化为展示在显示器上字体呢？这需要引入一个新的术语——栅格化（Rasterization），栅格化指的是将理想中的形状转化为一个一个像素的这个过程。我们的显示器、手机屏幕实际上都是有无数个发光的像素点构成的，它们在单位面积排列得越密集显示效果越精细（PPI，像素密度）。你可能已经注意到，理想形状示意图里的字母e并不能和灰色的网格（可以理解为像素点）对应起来，尤其是曲线的边缘，只占了网格的一部分。由于我们所能控制的最小单位就是像素，便造成了理想和现实间的差距，如何让以像素为基础的屏幕更好的表达我们理想中的文字形状，牛X的前辈们发明了三种字体渲染策略，后面一一道来。</p>
+<h3 id="1-2-初代：黑白渲染（black-and-white-rendering）"><a href="#1-2-初代：黑白渲染（black-and-white-rendering）" class="headerlink" title="1.2 初代：黑白渲染（black-and-white rendering）"></a>1.2 初代：黑白渲染（black-and-white rendering）</h3><p><img src="https://ksmx.me/content/images/2013/09/black_and_white_rendering.png" alt="黑白渲染（black-and-white rendering）"></p>
+<p>黑白渲染是最早人们使用的渲染技术，这种渲染方式只使用黑白两种颜色来表达文字的形状。还记得Windows的蓝天白云界面上的文字显示效果吗？还有Dos和PC机器启动时候的提示文字，都使用了这种渲染方法。在显示屏幕上，少量的像素点并不能很好地传达字体微妙的形状变化，在圆的边缘轮廓上我们就会发现锯齿。这时字体渲染技术还处在初级阶段。</p>
+<h3 id="1-3-二代：灰度渲染（Grayscale-rendering）"><a href="#1-3-二代：灰度渲染（Grayscale-rendering）" class="headerlink" title="1.3 二代：灰度渲染（Grayscale rendering）"></a>1.3 二代：灰度渲染（Grayscale rendering）</h3><p><img src="https://ksmx.me/content/images/2013/09/grayscale_rendering.png" alt="灰度渲染（Grayscale rendering）"></p>
+<p>在上世纪90年代中期，我们的前辈们开始使用一种非常巧妙的方法，可以说是黑白渲染的优化版。灰度渲染可以控制每个像素的明暗，让字形边界看起来过渡平滑。处于字形边界上的像素亮度取决于自身被理想形状所覆盖的面积比值。这样，字体轮廓看起来就更平滑，字体设计的细节也得以再现。字体在屏幕上看起不仅清晰——而且还能体现字体本身特征及风格。我们人眼和大脑在解读灰色像素中信息时，将它转换为了形状的轮廓，因此我们感觉这样渲染后的效果更加接近原始的形状。</p>
+<h3 id="1-4-三代：亚像素渲染（Subpixel-rendering）"><a href="#1-4-三代：亚像素渲染（Subpixel-rendering）" class="headerlink" title="1.4 三代：亚像素渲染（Subpixel rendering）"></a>1.4 三代：亚像素渲染（Subpixel rendering）</h3><p><img src="https://ksmx.me/content/images/2013/09/subpixel_rendering.png" alt="亚像素渲染（Subpixel rendering）"></p>
+<p>隆重介绍 <a href="http://en.wikipedia.org/wiki/Subpixel_rendering" target="_blank" rel="noopener">亚像素渲染</a>，第三代渲染技术，它一个重要特征是引入彩色像素。如果我们将屏幕截屏放大，发现字体边缘呈红色和蓝色，那么我们就可以知道它采用的是亚像素渲染技术。 有趣的是，这一渲染技术和显示技术的发展是息息相关的，在液晶显示屏（LCD）上，一个像素是由红、绿、蓝三个子（亚）像素构成的，LCD能够做到单独控制每一个子像素的开关。LCD屏幕像素在显微镜下的样子：</p>
+<p><img src="https://ksmx.me/content/images/2013/09/lcd_display.png" alt="LCD液晶显示屏像素构成"></p>
+<p>因为这些子像素非常小，以至于人眼无法察觉到他们是一个个独立的颜色点。与单纯的灰度渲染相比，水平方向的分辨率翻了三倍。竖笔的位置及粗细就可表现的更为精确，文本外观也就更为清晰。</p>
+<p>通过观察，我还发现亚像素渲染总是把暖色放在左边（如上图的红），冷色（如上图的蓝）放在右边，据我自己的猜想这很有可能与从左向右的阅读顺序有关。这样的设计从视觉上会感受到光源是从左边进入，增加字体的立体感，让阅读更加舒适。（这仅仅是我个人的猜测，如何有人能从色彩原理上解释这一点，请一定要告诉我）</p>
+<p>下面图片是我在Mac OS上的Finder侧边栏截图放大，仔细观察文字后半部分能体现出这种微妙的感觉：</p>
+<p><img src="https://ksmx.me/content/images/2013/09/mac_os_screenshot.png" alt="Mac OS系统Finder截图放大效果"></p>
+<h2 id="二、在各种操作系统中的应用情况"><a href="#二、在各种操作系统中的应用情况" class="headerlink" title="二、在各种操作系统中的应用情况"></a>二、在各种操作系统中的应用情况</h2><p>了解完了三种字体渲染策略，我们来看一下各种操作系统对渲染方式的选择。</p>
+<h3 id="2-1-Windows系统"><a href="#2-1-Windows系统" class="headerlink" title="2.1 Windows系统"></a>2.1 Windows系统</h3><p>在Windows系统下，使用什么渲染技术取决于使用什么样的字体，以及应用程序的设置。Windows系统有两套图形文字渲染接口，一个是GDI，另一个是Windows Vista之后推出的DirectWrite，用于取代老的GDI。严格来说，微软自己的亚像素渲染技术有另一个名字——<a href="http://en.wikipedia.org/wiki/ClearType" target="_blank" rel="noopener">ClearType</a>，这个技术与两套图形文字渲染接口是被包含的关系。</p>
+<p>ClearType在微软自家系统和程序中支持情况如下：</p>
+<ul>
+<li>Windows XP (off by default)</li>
+<li>Windows Vista (on by default)</li>
+<li>Windows 7 (on by default)</li>
+<li>Microsoft Office 2007 and later (on by default)</li>
+<li>Internet Explorer 7 and later (on by default)</li>
+<li>Windows Live Messenger (on by default)</li>
+</ul>
+<p>字体渲染策略与浏览器和字体格式的关系：</p>
+<p><img src="https://ksmx.me/content/images/2013/09/font_rendering_browser_support.png" alt="字体渲染策略与浏览器和字体格式的关系"></p>
+<p>PS-webfonts指的是PostScript字体，TrueType 和 PostScript 区别在于在描绘曲线时所有的数学方法不一样，只有字体设计人员才需要了解两者的区别。感兴趣想要深入了解可以自己Google资料学习。</p>
+<p>Windows系统为了兼容性，提供了大量的选择权给应用程序和系统，最终的结果是在Windows系统上的文字阅读体验不够统一，有的地方看上去不错，有的却无法直视。这和Windows系统整体的生态环境是息息相关的，它需要支持各种各样的屏幕和分辨率，再加上我们之前提到的亚像素渲染技术是和LCD液晶屏幕的物理属相息息相关的一项技术，不同的LCD像素排布都需要做相应的适配，加大微软完善这一体验的成本。</p>
+<h3 id="2-2-Mac-OS-系统"><a href="#2-2-Mac-OS-系统" class="headerlink" title="2.2 Mac OS 系统"></a>2.2 Mac OS 系统</h3><p>在Mac OS系统上，所有浏览器使用的是Quartz渲染引擎，这个引擎据说非常可靠。TrueType和PostScript字体都是以同样的方式渲染的，也就是使用了亚像素渲染技术，渲染提示（hinting）被故意忽略了，而这正是两类字体在概念上最大的差别，Mac OS对PS和TrueType字体同等对待，不管它们那些不一样的特性。Mac OS的字体渲染技术不会试图理解构成字体的笔画及特征。字母形状不会解读，因而也就不会出现曲解的情况。另外苹果似乎也会应用一些精妙的自动化措施增强渲染效果，但是这类自增强的技术没有文档说明，我们无从得知这背后的细节。在Mac 上另外碰到的一个难以控制的现象是，字体会渲染的更重些。在文本字体大小下，这点差异尤其明显。同样的字体在Mac OS上看起来有点浓稠，而在Windows上则看起要清淡些。</p>
+<p>Mac OS系统只运行在自己的Mac上，Apple在字体渲染方面更容易给用户一个统一的体验，再一次体现了软硬结合的优势。</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>「Mac上字体看着比Windows好看」其实是几年前Windows XP时代的刻板映像。 应该来说，在不同操作系统上，字体渲染技术的区别正在缩小，随着微软DirectWirte的普及，Windows和Mac OS在字体渲染方面的区别仅在于他们对字体显示的理解和偏好。Joel Spolsky 的 <a href="http://www.joelonsoftware.com/items/2007/06/12.html" target="_blank" rel="noopener">《Font smoothing, anti-aliasing, and sub-pixel rendering》</a> 一文解释了两者的区别。</p>
+<blockquote>
+<p>苹果总体上认为，（字体渲染）算法的目标应尽可能还原字体的设计，即使代价是造成些许模糊。</p>
+</blockquote>
+<blockquote>
+<p>微软认为，字符的形状应和像素契合，以防止模糊，提高可读性，即便扭曲了字体的构造。</p>
+</blockquote>
+<p>更令人惊叹的是，针对LCD优化的Subpixel rendering技术，居然在1977年的Apple II 的图形显示中就已经被发明了，比微软宣布ClearType技术整整早了22年。Steve Wozniak，Apple II的设计师和这项专利的拥有者对究竟是谁先发明了这项技术的回复如下：</p>
+<blockquote>
+<p>“Back in 1976, my design of the Apple II’s high resolution graphics system utilized a characteristic of the NTSC color video signal (called the ‘color subcarrier’) that creates a left to right horizontal distribution of available colors. By coincidence, this is exactly analogous to the R-G-B distribution of colored sub-pixels used by modern LCD display panels. So more than twenty years ago, Apple II graphics programmers were using this ‘sub-pixel’ technology to effectively increase the horizontal resolution of their Apple II displays.”</p>
+</blockquote>
+<p>具体的争论细节可以八卦 <a href="https://www.grc.com/ctwho.htm" target="_blank" rel="noopener">Sub-Pixel Font Rendering Technology - Who Di It First</a>。</p>
+<p>虽然当时这项技术是运用在NTSC信号上的，但技术的思路都是一致的。乔帮主当时是有一个多牛X的技术团队呀，对帮主的敬畏有多出了几分！</p>
+<p>最后，给大家留个悬念，在iPhone或者安卓手机上找一个网页打开截屏，图片拿到电脑上不断放大后，你会发现手机上的字体渲染并没有使用亚像素渲染，这是为什么呢？^_^ 答案留给你去寻找吧。</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://ksmx.me/understanding-font-rendering/" target="_blank" rel="noopener">认识字体渲染</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2018-05-14 </div>
 			<div class="article-title"><a href="/2018/05/14/2018-05-14-html-add-vector-graphics/" >在 HTML 中添加矢量图片 (十二)</a></div>						
 		</h3>
@@ -155,7 +230,7 @@
 <p>作为一个简单的例子，以下代码创建一个圆和一个矩形：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">version</span>=<span class="string">"1.1"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">baseProfile</span>=<span class="string">"full"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"200"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">     <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">fill</span>=<span class="string">"black"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"150"</span> <span class="attr">cy</span>=<span class="string">"100"</span> <span class="attr">r</span>=<span class="string">"90"</span> <span class="attr">fill</span>=<span class="string">"blue"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span></pre></td></tr></table></figure>
 <p>将创建如下输出:</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/svg.png" alt=""></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/svg.png" alt=""></p>
 <p>从上面的例子可以看出，SVG很容易手工编码。 是的，您可以在文本编辑器中手动编写简单的SVG，但是对于复杂的图像，这很快就开始变得非常困难。 为了创建SVG图像，大多数人使用矢量图形编辑器，如 <a href="https://inkscape.org/en/" target="_blank" rel="noopener">Inkscape</a> 或 <a href="https://en.wikipedia.org/wiki/Adobe_Illustrator" target="_blank" rel="noopener">Illustrator</a>。 这些软件包允许您使用各种图形工具创建各种插图，并创建照片的近似值（例如Inkscape的跟踪位图功能）。</p>
 <p>SVG 除了迄今为止所描述的以外还有其他优点：</p>
 <ul>
@@ -592,7 +667,7 @@
 <p><strong>注意</strong><br>：您可以阅读 Frederik Braun 的帖子<br><code>&lt;a href=&quot;https://blog.mozilla.org/security/2013/12/12/on-the-x-frame-options-security-header/&quot; class=&quot;external external-icon&quot; rel=&quot;noopener&quot;&gt;在X-Frame-Options安全性头上&lt;/a&gt;</code>获取有关此主题的更多背景信息。显然，在这篇文章中已经解释得很清楚了。</p>
 <h2 id="四、-lt-embed-gt-和-lt-object-gt-元素"><a href="#四、-lt-embed-gt-和-lt-object-gt-元素" class="headerlink" title="四、&lt;embed&gt; 和 &lt;object&gt; 元素"></a>四、&lt;embed&gt; 和 &lt;object&gt; 元素</h2><p><a href="https:/`/developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener">embed</a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object" target="_blank" rel="noopener">object</a> 元素的功能不同于<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank" rel="noopener">iframe</a>——这些元素是用来嵌入多种类型的外部内容的通用嵌入工具，其中包括像 Java 小程序和 Flash，PDF（可在浏览器中显示为一个 PDF 插件）这样的插件技术，甚至像视频，SVG 和图像的内容！</p>
 <p><strong>注意</strong>：<strong>插件</strong>是一种对浏览器原生无法读取的内容提供访问权限的软件。然而，您不太可能使用这些元素 - Applet 几年来一直没有被使用；由于许多原因，Flash 不再受欢迎（见下面的<a href="https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies#The_case_against_plugins" target="_blank" rel="noopener">插件案例</a>）；PDF 更倾向于被链接而不是被嵌入；其他内容，如图像和视频都有更优秀、更容易元素来处理。插件和这些嵌入方法真的是一种传统技术，我们提及它们主要是为了以防您在某些情况下遇到问题，比如内部网或企业项目等。如果您发现自己需要嵌入插件内容，那么您至少需要一些这样的信息：</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/embed-object.png" alt=""></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/embed-object.png" alt=""></p>
 <p><strong>注意</strong>：&lt;<code>object&gt;``需要</code>data<code>属性，</code>type<code>属性或两者。如果您同时使用这两个，您也可以使用该</code><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object#attr-typemustmatch" target="_blank" rel="noopener">typemustmatch</a><code>属性（仅在Firefox中实现，在本文中）。</code>typemustmatch<code>保持嵌入文件不运行，除非</code>type<code>属性提供正确的媒体类型。</code>typemustmatch`因此，当您嵌入来自不同<a href="https://developer.mozilla.org/en-US/docs/Glossary/origin" target="_blank" rel="noopener" title="来源：Web内容的起源由方案（协议），主机（域）和用于访问它的URL的端口定义。 只有当方案，主机和端口都匹配时，两个对象具有相同的原点。">来源的</a>内容（可以防止攻击者通过插件运行任意脚本）时，可以赋予重要的安全优势。</p>
 <p>下面是一个使用该<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" target="_blank" rel="noopener" title="HTML &lt;embed&gt;元素表示外部应用程序或交互式内容（换句话说，插件）的集成点。"><code>&lt;embed&gt;</code></a>元素嵌入 Flash 影片的示例（请参阅此处的<a href="http://mdn.github.io/learning-area/html/multimedia-and-embedding/other-embedding-technologies/embed-flash.html" target="_blank" rel="noopener">Github</a>，并<a href="https://github.com/mdn/learning-area/blob/gh-pages/html/multimedia-and-embedding/other-embedding-technologies/embed-flash.html" target="_blank" rel="noopener">检查源代码</a>）：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">"whoosh.swf"</span> <span class="attr">quality</span>=<span class="string">"medium"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">bgcolor</span>=<span class="string">"#ffffff"</span> <span class="attr">width</span>=<span class="string">"550"</span> <span class="attr">height</span>=<span class="string">"400"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">name</span>=<span class="string">"whoosh"</span> <span class="attr">align</span>=<span class="string">"middle"</span> <span class="attr">allowScriptAccess</span>=<span class="string">"sameDomain"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">allowFullScreen</span>=<span class="string">"false"</span> <span class="attr">type</span>=<span class="string">"application/x-shockwave-flash"</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">       <span class="attr">pluginspage</span>=<span class="string">"http://www.macromedia.com/go/getflashplayer"</span>&gt;</span></span></pre></td></tr></table></figure>
@@ -936,7 +1011,7 @@
 <blockquote>
 <p>ABI（Application Binary Interface）: 定义了二进制文件（尤其是 .so 文件）如何运行在相应的系统平台上，从使用的指令集，内存对齐到可用的系统函数库。在 Android 系统上，每一个 CPU 架构对应一个 ABI：armeabi，armeabi-v7a，x86，mips，arm64-v8a，mips64，x86_64</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/abi-cpu.png" alt="ABI 与 CPU 关系"></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/abi-cpu.png" alt="ABI 与 CPU 关系"></p>
 <h2 id="一、为什么你需要重点关注-so-文件"><a href="#一、为什么你需要重点关注-so-文件" class="headerlink" title="一、为什么你需要重点关注 .so 文件"></a>一、为什么你需要重点关注 .so 文件</h2><p>如果项目中使用到了 NDK，它将会生成 .so 文件，因此显然你已经在关注它了。如果只是使用Java语言进行编码，你可能在想不需要关注.so文件了吧，因为Java是跨平台的。但事实上，即使你在项目中只是使用Java语言，很多情况下，你可能并没有意识到项目中依赖的函数库或者引擎库里面已经嵌入了.so文件，并依赖于不同的ABI。</p>
 <p>例如，项目中使用 RenderScript 支持库，OpenCV，Unity，android-gif-drawable，SQLCipher 等，你都已经在生成的APK文件中包含 .so 文件了，而你需要关注 .so 文件。</p>
 <p>Android 应用支持的 ABI 取决于APK中位于 lib/ABI 目录中的 .so 文件，其中 ABI 可能是上面说过的七种ABI中的一种。</p>
@@ -1006,7 +1081,7 @@
   <div class="row">
 	
 	
-		<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/android-ndk.jpg" alt=""></p>
+		<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/android-ndk.jpg" alt=""></p>
 <h2 id="一、Android-NDK？"><a href="#一、Android-NDK？" class="headerlink" title="一、Android NDK？"></a>一、Android NDK？</h2><p>Android NDK 是在 SDK 前面又加上了“原生”二字，即 Native Development Kit，因此又被 Google 称为 “NDK”。<br>众所周知，Android 程序运行在 Dalvik 虚拟机中，NDK 允许用户使用类似 C/C++ 之类的原生代码语言执行部分程序。</p>
 <h3 id="1-NDK-包括"><a href="#1-NDK-包括" class="headerlink" title="1. NDK 包括"></a>1. NDK 包括</h3><ul>
 <li>从 C/C++ 生成原生代码库所需要的工具和 build files</li>
@@ -1019,10 +1094,10 @@
 <li>便于移植，用 C/C++ 写的库可以方便在其他的嵌入式平台上再次使用</li>
 </ul>
 <h2 id="二、JNI"><a href="#二、JNI" class="headerlink" title="二、JNI"></a>二、JNI</h2><p>JNI 是 Java Native Interface 的缩写，它提供了若干的 API 实现了 Java 和其他语言的通信（主要是 C&amp;C++ ）。从 Java1.1 开始，JNI 标准成为 java 平台的一部分，它允许 Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是 C 和 C++ 而设计的，但是它并不妨碍你使用其他编程语言，只要调用约定受支持就可以了。使用 java 与本地已编译的代码交互，通常会丧失平台可移植性。但是，有些情况下这样做是可以接受的，甚至是必须的。例如，使用一些旧的库，与硬件、操作系统进行交互，或者为了提高程序的性能。<strong>JNI 标准至少要保证本地代码能工作在任何 Java 虚拟机环境</strong>。</p>
-<h2 id="三、创建-NDK-工程"><a href="#三、创建-NDK-工程" class="headerlink" title="三、创建 NDK 工程"></a>三、创建 NDK 工程</h2><h3 id="1-创建一个空的-Activity-工程"><a href="#1-创建一个空的-Activity-工程" class="headerlink" title="1. 创建一个空的 Activity 工程"></a>1. 创建一个空的 Activity 工程</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-1.png" alt=""><br><em>AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish</em><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-2.png" alt=""><br>工程会自动创建 Ndk 环境配置<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-3.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-4.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-5.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-6.png" alt=""></p>
-<h3 id="2-创建生成-so-库和对应-jar-包模块"><a href="#2-创建生成-so-库和对应-jar-包模块" class="headerlink" title="2. 创建生成 .so 库和对应 jar 包模块"></a>2. 创建生成 .so 库和对应 jar 包模块</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-7.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-8.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-9.png" alt=""></p>
-<h3 id="3-把第一步中的-NDK-代码移到新创建的模块中"><a href="#3-把第一步中的-NDK-代码移到新创建的模块中" class="headerlink" title="3. 把第一步中的 NDK 代码移到新创建的模块中"></a>3. 把第一步中的 NDK 代码移到新创建的模块中</h3><p>这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-10.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-11.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-12.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-13.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-14.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-15.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-16.png" alt=""></p>
-<h3 id="4-在其他工程中使用-NDK-的-so-文件和-jar-包"><a href="#4-在其他工程中使用-NDK-的-so-文件和-jar-包" class="headerlink" title="4. 在其他工程中使用 NDK 的 so 文件和 jar 包"></a>4. 在其他工程中使用 NDK 的 so 文件和 jar 包</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-17.png" alt=""></p>
+<h2 id="三、创建-NDK-工程"><a href="#三、创建-NDK-工程" class="headerlink" title="三、创建 NDK 工程"></a>三、创建 NDK 工程</h2><h3 id="1-创建一个空的-Activity-工程"><a href="#1-创建一个空的-Activity-工程" class="headerlink" title="1. 创建一个空的 Activity 工程"></a>1. 创建一个空的 Activity 工程</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-1.png" alt=""><br><em>AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish</em><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-2.png" alt=""><br>工程会自动创建 Ndk 环境配置<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-3.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-4.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-5.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-6.png" alt=""></p>
+<h3 id="2-创建生成-so-库和对应-jar-包模块"><a href="#2-创建生成-so-库和对应-jar-包模块" class="headerlink" title="2. 创建生成 .so 库和对应 jar 包模块"></a>2. 创建生成 .so 库和对应 jar 包模块</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-7.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-8.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-9.png" alt=""></p>
+<h3 id="3-把第一步中的-NDK-代码移到新创建的模块中"><a href="#3-把第一步中的-NDK-代码移到新创建的模块中" class="headerlink" title="3. 把第一步中的 NDK 代码移到新创建的模块中"></a>3. 把第一步中的 NDK 代码移到新创建的模块中</h3><p>这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-10.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-11.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-12.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-13.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-14.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-15.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-16.png" alt=""></p>
+<h3 id="4-在其他工程中使用-NDK-的-so-文件和-jar-包"><a href="#4-在其他工程中使用-NDK-的-so-文件和-jar-包" class="headerlink" title="4. 在其他工程中使用 NDK 的 so 文件和 jar 包"></a>4. 在其他工程中使用 NDK 的 so 文件和 jar 包</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-17.png" alt=""></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://www.jianshu.com/p/a37782b56770" target="_blank" rel="noopener">Android studio3.0 JNI/NDK开发流程</a></li>
 <li><a href="https://www.jianshu.com/p/ac00d59993aa" target="_blank" rel="noopener">Android NDK开发：JNI 基础篇</a></li>
@@ -1103,114 +1178,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-04-21 </div>
-			<div class="article-title"><a href="/2018/04/21/2018-04-21-html-debugging/" >调试 HTML (七)</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p>写 HTML 是非常容易的，但如果某部分出了问题并且你找不到错误代码在哪里的时候，本文将向您介绍一些可以帮助您查找和修复 HTML 中的错误的工具。<br>目标: | 学习基础使用调试工具查找 HTML 中的错误。</p>
-</blockquote>
-<h2 id="一、HTML-和-调试"><a href="#一、HTML-和-调试" class="headerlink" title="一、HTML 和 调试"></a>一、HTML 和 调试</h2><p>今天这里并没有介绍使用工具的高级用法，因为目前我们还在基础阶段，所以介绍的都是基础原理性的知识，所以大家不用急，后面我们会推出相应的教程。</p>
-<h3 id="1-1-宽容模式代码"><a href="#1-1-宽容模式代码" class="headerlink" title="1.1 宽容模式代码"></a>1.1 宽容模式代码</h3><p>宽容的意思是什么呢？通常当你写错代码的时候，你会遇到以下两种主要类型的错误：</p>
-<ul>
-<li><strong>语法错误</strong>: 由于拼写错误导致程序无法运行，就像上面Rust的例子. 修正这些错误是没问题的，只要你熟悉正确的使用工具和知道错误信息的意思。</li>
-<li><strong>逻辑错误</strong>: 实际上语法是正确的，但代码不是你想要的，这意味着程序运行不正确. 逻辑错误通常比语法错误更难修复，因为没有一个错误信息指示你到错误的来源。</li>
-</ul>
-<p>HTML 本身不容易因语法错误出错，因为浏览器是以 <strong>宽松模式</strong> 来运行，这意味着即使出现语法错误浏览器依然会运行。浏览器通常都有自己的规则来解析语法错误的标记语言，所以程序仍然会运行，尽管可能不是你预期的样子。这样当然仍然会带来问题。</p>
-<p><strong>注意</strong>: HTML 可以自由的运行，是因为在 Web 创建之初，它的宗旨就是：允许人们获取他们发布的内容比确保所有语法完全正确更重要。如果当初 Web 在一开始就更加严格的话，也许 Web 就不会像今天这样流行了。</p>
-<h3 id="1-2-主动学习-学习宽容式代码风格"><a href="#1-2-主动学习-学习宽容式代码风格" class="headerlink" title="1.2 主动学习: 学习宽容式代码风格"></a>1.2 主动学习: 学习宽容式代码风格</h3><p>现在到你自己学习 HTML 代码宽松特性的时候了。</p>
-<ol>
-<li><p>首先，找到我们的 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">debug-example demo</a> 副本并保存到本地。这里故意写了一些错误在代码中，以便我们探究（HTML 标记被写成了<strong>糟糕的格式</strong>，与 <strong>良好的格式</strong>相反）。</p>
-</li>
-<li><p>接着，在浏览器中打开—你会看到下面的样子：<img src="https://mdn.mozillademos.org/files/12437/badly-formed-html.png" alt="A simple HTML document with a title of HTML debugging examples, and some information about common HTML errors, such as unclosed elements, badly nested elements, and unclosed attributes. "></p>
-</li>
-<li><p>这看起来一点儿也不好；让我们来看看源代码，看看我们是否能找出为什么（只显示了 body 的内容）：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML debugging examples<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>What causes errors in HTML?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed elements: If an element is <span class="tag">&lt;<span class="name">strong</span>&gt;</span>not closed properly,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">      then its effect can spread to areas you didn't intend</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Badly nested elements: Nesting elements properly is also very important</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      for code behaving correctly. <span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">      what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Unclosed attributes: Another common source of HTML problems. Let's</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">      look at an example: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.mozilla.org/&gt;link to Mozilla</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">      homepage&lt;/a&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="tag"><span class="string">&lt;/ul&gt;</span></span></span></pre></td></tr></table></figure>
-</li>
-<li><p>让我们检查一下这里看到的问题：</p>
-<ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p" target="_blank" rel="noopener" title="HTML &lt;p&gt;元素（或者说 HTML 段落元素）表示文本的一个段落。该元素通常表现为一整块与相邻文本分离的文本，或以垂直的空白隔离或以首行缩进。另外，&lt;p&gt; 是块级元素。">paragraph</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/li" target="_blank" rel="noopener" title="HTML &lt;li&gt; 元素 (或者 HTML 列表条目元素) 用于表示列表里的条目。它必须被包含在一个父元素里：一个有顺序的列表(&lt;ol&gt;)，一个无顺序的列表(&lt;ul&gt;)，或者一个菜单 (&lt;menu&gt;)。在菜单或者无顺序的列表里，列表条目通常用点排列显示。在有顺序的列表里，列表条目通常是在左边有按升序排列计数的显示，例如数字或者字母。">list item</a> 元素没有结束标签。看看上面的图片，看起来对标记并没有导致太严重的影响，因为很容易推断出一个元素应该在哪里结束，在哪里开始。</li>
-<li>第一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a> 元素没有结束标签。这问题有一点大，因为不太容易确定元素在哪里结束。事实上，整个剩下的文本都被加粗强调了。</li>
-<li>这部分代码嵌套很糟糕：<code>&lt;strong&gt;strong &lt;em&gt;strong emphasised?&lt;/strong&gt; what is this?&lt;/em&gt;</code>。由于之前的问题，要解释这是如何解析的并不容易。</li>
-<li><code>[href](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-href)</code> 属性缺少了一个双引号。这导致了最大的问题—链接完全没有解析出来。</li>
-</ul>
-</li>
-<li><p>现在我们看看浏览器渲染出来的标记语言，而不是源代码中的标记语言。我们打开浏览器的开发者工具。如果你对这个不太熟悉的话，先浏览一下<a href="https://developer.mozilla.org/zh-CN/docs/Learn/Discover_browser_developer_tools" target="_blank" rel="noopener">Discover browser developer tools</a>。</p>
-</li>
-<li><p>在开发者模式中的审查器件，你可以看到被渲染出来的标记语言会像这样。<img src="https://mdn.mozillademos.org/files/12439/html-inspector.png" alt="The HTML inspector in Firefox, with our example&#39;s paragraph highlighted, showing the text &quot;What causes errors in HTML?&quot; Here you can see that the paragraph element has been closed by the browser."></p>
-</li>
-<li><p>使用开发者模式下的审查器，可以非常清楚地看到 <strong>浏览器尝试修补</strong> 我们的代码错误（下面是火狐浏览器中的情况，其他浏览器也会进行修补）</p>
-<ul>
-<li><p>段落和类表元素被加上了闭合标签。</p>
-</li>
-<li><p>第一个<strong>标签闭合的位置并不明确，因此浏览器用自己的<strong>标签将每一块分离的文本包括了进来，就在文档的底部。</p>
-</li>
-<li><p>浏览器像下面这样修补嵌套错误：</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">em</span>&gt;</span>strong emphasised?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span> what is this?<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span></pre></td></tr></table></figure>
-</li>
-<li><p>有错误属性的链接整个被删掉了。最后一个列表元素就像这样：</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Unclosed attributes: Another common source of HTML problems.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  Let's look at an example: <span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="1-3-HTML-验证"><a href="#1-3-HTML-验证" class="headerlink" title="1.3 HTML 验证"></a>1.3 HTML 验证</h3><p>看了上面的例子之后，你应该会希望自己的HTML格式正确。那么应该如何做呢？上面的例子都是一些非常小的错误，因此稍微浏览一下自己的代码就可以发现，但是如果是一个非常庞大、复杂的HTML文档呢？</p>
-<p>最好的方法就是让你的 HTML 页面通过 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> — 由 W3C 创立并维护的，这个网站紧跟定义 HTML，CSS，和其他网络技术的具体内容. 这个网页将 HTML 文档作为输入,并运行 ，然后给你一个报告告诉你你的 HTML 有哪些错误.</p>
-<p><img src="https://mdn.mozillademos.org/files/12441/validator.png" alt="The HTML validator homepage"></p>
-<p>为了确定需要验证的HTML，你可以输入一个指向该HTML页面的网址，或者上传一份HTML文件，或者直接输入一些HTML代码。</p>
-<h3 id="1-4-主动学习：验证一份HTML文档"><a href="#1-4-主动学习：验证一份HTML文档" class="headerlink" title="1.4 主动学习：验证一份HTML文档"></a>1.4 主动学习：验证一份HTML文档</h3><p>让我们用 <a href="https://github.com/mdn/learning-area/blob/master/html/introduction-to-html/debugging-html/debug-example.html" target="_blank" rel="noopener">sample document</a>尝试一下：</p>
-<ol>
-<li>在浏览器中打开 <a href="https://validator.w3.org/" target="_blank" rel="noopener">Markup Validation Service</a> 。</li>
-<li>点击或者激活 <a href="https://validator.w3.org/#validate_by_input" target="_blank" rel="noopener">Validate by Direct Input</a> 栏。</li>
-<li>将整个示范文档的代码（不仅仅是body部分）复制粘贴到在 Markup Validation Service中显示的巨大的文本框。</li>
-<li><em>点击Check按钮。</em></li>
-</ol>
-<p>然后就会出现一张列表，显示了文档中的错误或者其他信息。</p>
-<p><img src="https://mdn.mozillademos.org/files/12443/validation-results.png" alt="A list of of HTML validation results from the W3C markup validation service"></p>
-<h4 id="1-5-解析错误信息"><a href="#1-5-解析错误信息" class="headerlink" title="1.5 解析错误信息"></a>1.5 解析错误信息</h4><p>展示在你眼前的错误信息列表可能会很有用，也可能并没有帮助。经过一点点练习你就会知道如何解析这些错误从而修复错误。让我们来浏览一下这些错误信息的含义。你会看到每一行都有一个数字和信息栏，来帮助你轻松定位错误。</p>
-<ul>
-<li><p>End tag <code>li</code> implied, but there were open elements（隐含着结束标签 <code>li</code> ，但却出现了元素的开始标签；共两个）: 这条信息表明一个元素的开始标签应该对应着一个结束标签，结束标签是隐含的，但实际上并不存在。行/列（line/column）信息指出那一行代码的下一行是结束标签应该出现的地方，这已经足够看出问题所在了。</p>
-</li>
-<li><p>Unclosed element <code>strong</code>（未闭合标签 <code>strong</code> ）：这是非常容易理解的，一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/strong" target="_blank" rel="noopener" title="Strong 元素 (&lt;strong&gt;)表示文本十分重要，一般用粗体显示。"><code>&lt;strong&gt;</code></a>元素没有闭合，行/列信息指出了它所在之处。</p>
-</li>
-<li><p>End tag <code>strong</code> violates nesting rules（结束标签 <code>strong</code> 违反了嵌套规则）：指出了错误嵌套的元素，行/列信息表明了错误所在。</p>
-</li>
-<li><p>End of file reached when inside an attribute value. Ignoring tag（在属性值内达到文件末尾。忽略标签）: 这个比较难懂，它说的是在某个地方有一个属性的值没有正确构成，估计是在文件末尾附近，因为文件的结尾（EOF）出现在了一个属性值里。事实上浏览器没有渲染超链接就已经告诉我们错误出在哪个元素了。</p>
-</li>
-<li><p>End of file seen and there were open elements（文件结尾有未闭合的元素）：这个有点意义不明，但基本上表明了有元素没有正确闭合。行号指向文件最后几行，且错误信息给出了一个这种错误的案例：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">example: &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.mozilla.org&#x2F;&gt;link to Mozilla homepage&lt;&#x2F;a&gt; ↩ &lt;&#x2F;ul&gt;↩ &lt;&#x2F;body&gt;↩&lt;&#x2F;html&gt;</span></pre></td></tr></table></figure>
-
-<p>  <strong>注意</strong>: 一个缺少结束引号标记的属性会导致一个未闭合的元素，因为其余的文档被解析为了属性的内容。</p>
-</li>
-<li><p>Unclosed element <code>ul</code>（未闭合元素 <code>ul</code>）：这个不是很有帮助，因为<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul" target="_blank" rel="noopener" title="The HTML &lt;ul&gt; 元素 ( 或 HTML 无序列表元素） 代表多项的无序列表，即无数值排序项的集合，且它们在列表中的顺序是没有意义的。通常情况下，无序列表项的头部可以是几种形式，如一个点，一个圆形或方形。头部的风格并不是在页面的HTML描述定义, 但在其相关的CSS 可以用 list-style-type 属性。"><code>&lt;ul&gt;</code></a>已经正确闭合了。出现这个错误是因为那个<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a" target="_blank" rel="noopener" title="HTML &lt;a&gt; 元素  (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。"><code>&lt;a&gt;</code></a>元素因少了右引号而没有闭合。</p>
-</li>
-</ul>
-<p>如果你不能一次弄懂所有的错误，别着急，你可以试试先修复那些你已经弄懂的错误，然后再申请验证，看看剩下的错误是哪些。有时候最先修复的错误可能让你摆脱了后面一系列的错误——因为一个小问题可能引发好几个错误，就像连锁反应。</p>
-<p>当你所有的错误都修复之后，会得到下面的输出。</p>
-<p><img src="https://mdn.mozillademos.org/files/12445/valid-html-banner.png" alt="Banner that reads &quot;The document validates according to the specified schema(s) and to additional constraints checked by the validator.&quot;"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这就是我们关于HTML调试的介绍，这应该也会帮助你调试 CSS 和 JavaScript，或者你未来遇到的任何一种语言。这也是HTML模块学习的最后一篇文章，现在你可以用我们给你布置的任务来测试一下自己：下面的第一个链接。</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/learn/HTML/Introduction_to_HTML/Debugging_HTML" target="_blank" rel="noopener">调试 HTML</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1263,7 +1230,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1332,48 +1299,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
+			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
 			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
-		
 			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
 		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
 		
 			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1384,6 +1351,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -1399,10 +1370,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -1451,7 +1418,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

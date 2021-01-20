@@ -140,7 +140,7 @@
 <blockquote>
 <p>ABI（Application Binary Interface）: 定义了二进制文件（尤其是 .so 文件）如何运行在相应的系统平台上，从使用的指令集，内存对齐到可用的系统函数库。在 Android 系统上，每一个 CPU 架构对应一个 ABI：armeabi，armeabi-v7a，x86，mips，arm64-v8a，mips64，x86_64</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/abi-cpu.png" alt="ABI 与 CPU 关系"></p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/abi-cpu.png" alt="ABI 与 CPU 关系"></p>
 <h2 id="一、为什么你需要重点关注-so-文件"><a href="#一、为什么你需要重点关注-so-文件" class="headerlink" title="一、为什么你需要重点关注 .so 文件"></a>一、为什么你需要重点关注 .so 文件</h2><p>如果项目中使用到了 NDK，它将会生成 .so 文件，因此显然你已经在关注它了。如果只是使用Java语言进行编码，你可能在想不需要关注.so文件了吧，因为Java是跨平台的。但事实上，即使你在项目中只是使用Java语言，很多情况下，你可能并没有意识到项目中依赖的函数库或者引擎库里面已经嵌入了.so文件，并依赖于不同的ABI。</p>
 <p>例如，项目中使用 RenderScript 支持库，OpenCV，Unity，android-gif-drawable，SQLCipher 等，你都已经在生成的APK文件中包含 .so 文件了，而你需要关注 .so 文件。</p>
 <p>Android 应用支持的 ABI 取决于APK中位于 lib/ABI 目录中的 .so 文件，其中 ABI 可能是上面说过的七种ABI中的一种。</p>
@@ -243,7 +243,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Android/">Android<span>15</span></a></li>
+    <li><a href="/categories/Android/">Android<span>16</span></a></li>
   </li>
 
     </ul>
@@ -320,7 +320,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

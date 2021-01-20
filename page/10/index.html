@@ -128,6 +128,40 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2017-08-30 </div>
+			<div class="article-title"><a href="/2017/08/30/2017-08-30-linux-bash-命令无法使用破解/" >Linux bash 命令无法使用破解</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一次部署时，更新了 <code>/ect/profile</code> 文件后，发现 <code>ls</code>和其它的基本命令都不能使用了,提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[root@fapiao ~]<span class="comment"># ls</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">bash: ls: 未找到命令...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">相似命令是： <span class="string">'lz'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">``` </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">错误信息。但在其它还未关闭的ssh终端中可以使用，推测是 `/etc/profile` 文件的问题,查看 `<span class="variable">$PATH</span>` 后发现不对；切换 `root` 权限准备修改 `profile` 文件后，发现 `vi` 命令不能用。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">### 解决方法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">在 ssh 终端中执行下面语句，可以让此会话终端中环境变量起作用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">```bash</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</span></pre></td></tr></table></figure>
+<p>这时已经可以使用 bash 命令了，再通过修改 <code>/etc/profile</code> 文件，重新 source 后系统恢复正常。</p>
+<h3 id="错误原因"><a href="#错误原因" class="headerlink" title="错误原因"></a>错误原因</h3><p>在修改 profile 文件时，使用了 <code>$PATH=&#39;xxx/xx&#39;</code> 后面没有使用 <code>:</code> 拼接原来的 <code>$PATH</code>,导致 PATH 丢失了重要环境变量.</p>
+<blockquote>
+<p>如果是错误的字符也会导致环境变量丢失，例如</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/node-v6.10.3-linux-x64/bin/</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">PATH=<span class="comment">#PATH:/usr/local/ngrok/      </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH JAVA_HOME CLASSPATH</span></pre></td></tr></table></figure>
+<p>上面的第 3 行， <code>PATH=</code> 后面的是 <code>#</code> 而不是 <code>$</code> 符号，在 <code>source /etc/profile</code> 后导致环境变量丢失</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://zhidao.baidu.com/question/41683527.html" target="_blank" rel="noopener">Linux 基本命令不能用的解决方法</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2017-08-29 </div>
 			<div class="article-title"><a href="/2017/08/29/2017-08-29-Node.js-环境变量设置/" >Node.js 环境变量设置</a></div>						
 		</h3>
@@ -209,7 +243,7 @@
 		<p>云服务器（Elastic Compute Service，简称 ECS）是一种简单高效、处理能力可弹性伸缩的计算服务，帮助您快速构建更稳定、安全的应用，提升运维效率，降低 IT 成本，使您更专注于核心业务创新。</p>
 <h3 id="1-升级-CentOS-系统"><a href="#1-升级-CentOS-系统" class="headerlink" title="1. 升级 CentOS 系统"></a>1. 升级 CentOS 系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">yum -y update // 升级所有包，改变软件设置和系统设置,系统版本内核都升级</span></pre></td></tr></table></figure>
 
-<h3 id="2-安装-Node-js-环境"><a href="#2-安装-Node-js-环境" class="headerlink" title="2. 安装 Node.js 环境"></a>2. <a href="http://blog.jessechiu.com/2017/05/21/Linux-%E9%83%A8%E7%BD%B2-Nodejs/" target="_blank" rel="noopener">安装 Node.js 环境</a></h3><h3 id="3-安装-MongoDB-环境"><a href="#3-安装-MongoDB-环境" class="headerlink" title="3. 安装 MongoDB 环境"></a>3. <a href="http://blog.jessechiu.com/2017/08/24/mongodb-start/" target="_blank" rel="noopener">安装 MongoDB 环境</a></h3><h3 id="4-测试访问应用"><a href="#4-测试访问应用" class="headerlink" title="4. 测试访问应用"></a>4. 测试访问应用</h3><p>在浏览器中输入公网地址访问，如果访问不了多半是云服务器对应的端口未开通<br>开通方法: 管理控制台 -&gt; 网络和安全 -&gt; 安全组页面在实例中的 <code>配置规则</code> -&gt; 添加安全组规则<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ali-ecs-001.png" alt="ali-ecs-001"><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ali-ecs-002.png" alt="ali-ecs-002"></p>
+<h3 id="2-安装-Node-js-环境"><a href="#2-安装-Node-js-环境" class="headerlink" title="2. 安装 Node.js 环境"></a>2. <a href="http://blog.jessechiu.com/2017/05/21/Linux-%E9%83%A8%E7%BD%B2-Nodejs/" target="_blank" rel="noopener">安装 Node.js 环境</a></h3><h3 id="3-安装-MongoDB-环境"><a href="#3-安装-MongoDB-环境" class="headerlink" title="3. 安装 MongoDB 环境"></a>3. <a href="http://blog.jessechiu.com/2017/08/24/mongodb-start/" target="_blank" rel="noopener">安装 MongoDB 环境</a></h3><h3 id="4-测试访问应用"><a href="#4-测试访问应用" class="headerlink" title="4. 测试访问应用"></a>4. 测试访问应用</h3><p>在浏览器中输入公网地址访问，如果访问不了多半是云服务器对应的端口未开通<br>开通方法: 管理控制台 -&gt; 网络和安全 -&gt; 安全组页面在实例中的 <code>配置规则</code> -&gt; 添加安全组规则<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ali-ecs-001.png" alt="ali-ecs-001"><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ali-ecs-002.png" alt="ali-ecs-002"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/0496ef49b2a5" target="_blank" rel="noopener">Nodejs 部署到阿里云全过程</a><br><a href="http://blog.csdn.net/inite/article/details/73658214" target="_blank" rel="noopener"> 阿里云服务器 ECS 访问不了公网 ip 可能的原因及解决方法</a><br><a href="http://www.runoob.com/mongodb/mongodb-linux-install.html" target="_blank" rel="noopener">Linux平台安装MongoDB</a><br><a href="https://help.aliyun.com/product/25365.html?spm=5176.750001.2.1.gBqnFz" target="_blank" rel="noopener">阿里云产品帮助文档</a></p>
 
 	
@@ -678,53 +712,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2017-06-22 </div>
-			<div class="article-title"><a href="/2017/06/22/2017-06-22-express-常用中间件/" >Express 常用中间件</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<blockquote>
-<p>本文主要收集 Express 中常用的中间件的使用方法</p>
-</blockquote>
-<h2 id="一、cookie-parse"><a href="#一、cookie-parse" class="headerlink" title="一、cookie-parse"></a>一、<code>cookie-parse</code></h2><p>基础用法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = express();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果在 res.cookie 设置 signed:true，在这里必需传人一个 secret 用于签名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">app.use(cookieParser(<span class="string">'3d48ed43942b031f995cf34b1419a2fe'</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认首页加载页面</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(<span class="string">`\name: <span class="subst">$&#123;req.cookies.name&#125;</span> sex: <span class="subst">$&#123;req.signedCookies.sex&#125;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="string">    car1: <span class="subst">$&#123;req.cookies.car1&#125;</span> car2: <span class="subst">$&#123;req.signedCookies.car2&#125;</span>`</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 设置明文 cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  res.cookie(<span class="string">'name'</span>,<span class="string">'jesse'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 设置带签名 cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  res.cookie(<span class="string">'sex'</span>,<span class="string">'man'</span>,&#123;<span class="attr">signed</span>:<span class="literal">true</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 设置加密 cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  res.cookie(<span class="string">'age'</span>,<span class="string">'18'</span>,&#123;<span class="attr">secure</span>:<span class="literal">true</span>&#125;); <span class="comment">// 这个值对 https 有效</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 设置明文 JSON 类型 cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  res.cookie(<span class="string">'car1'</span>,<span class="built_in">JSON</span>.stringify(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    color:<span class="string">'red'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    speed:<span class="number">100</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  &#125;)); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// 设置签名 JSON 类型 cookie</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  res.cookie(<span class="string">'car2'</span>,<span class="built_in">JSON</span>.stringify(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    color:<span class="string">'blue'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    speed: <span class="number">200</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  &#125;),&#123;<span class="attr">signed</span>:<span class="literal">true</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">  res.render(<span class="string">'index'</span>, &#123;<span class="attr">currentTime</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//-----------------------------------------------</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">在浏览器的开发工具中查看到的值：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">name: <span class="string">'jesse'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">sex: <span class="string">'s%3Aman.bgKlzHHA5q%2B6jEdT%2BbwiJTLoYdvUX7plg3AAdcH1oW8'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">	- <span class="built_in">decodeURIComponent</span>(<span class="string">'s%3Aman.bgKlzHHA5q%2B6jEdT%2BbwiJTLoYdvUX7plg3AAdcH1oW8'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">	- <span class="string">"s:man.bgKlzHHA5q+6jEdT+bwiJTLoYdvUX7plg3AAdcH1oW8"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">car1: %<span class="number">7</span>B%<span class="number">22</span>color%<span class="number">22</span>%<span class="number">3</span>A%<span class="number">22</span>red%<span class="number">22</span>%<span class="number">2</span>C%<span class="number">22</span>speed%<span class="number">22</span>%<span class="number">3</span>A100%<span class="number">7</span>D</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">car2: s%<span class="number">3</span>A%<span class="number">7</span>B%<span class="number">22</span>color%<span class="number">22</span>%<span class="number">3</span>A%<span class="number">22</span>blue%<span class="number">22</span>%<span class="number">2</span>C%<span class="number">22</span>speed%<span class="number">22</span>%<span class="number">3</span>A200%<span class="number">7</span>D.pjlpa%<span class="number">2</span>Bvo9Ujms2kpq5BFbsHrjZBAHGPBUc5OHeZHBIQ</span></pre></td></tr></table></figure>
-<p>从上面的设置 <code>cookie</code> 结果可以看出,不管是设置明文还是签名的 cookie，都会使用 <code>encodeURIComponent</code> 进行编码，当然也可在初始化时使用自定义的加解密函数处理。</p>
-<p>使用中需要注意的点：</p>
-<ul>
-<li>设置 <code>req.cookie(key,value,options)</code></li>
-<li>取值 <code>res.cookies(key)/res.singedCookies(key)</code> // 注意： cookie 有加 s</li>
-<li>删除可以统一使用：<code>res.clearCookie(key)</code>; 如果设置的时候有设置 <code>path</code>,删除时也需要带上: <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">res.cookie(<span class="string">'name'</span>, <span class="string">'tobi'</span>, &#123; <span class="attr">path</span>: <span class="string">'/admin'</span> &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">res.clearCookie(<span class="string">'name'</span>, &#123; <span class="attr">path</span>: <span class="string">'/admin'</span> &#125;);</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="二、express-session"><a href="#二、express-session" class="headerlink" title="二、express-session"></a>二、<code>express-session</code></h2><p>使用前须知：</p>
-<ul>
-<li>session 数据并没有存储在 cookie 中，只是存储了 session_id 值在 cookie 中.</li>
-<li>session 如果和 <code>cookie-parse</code> 中间件使用的 secret 不一样，可能会有一些问题。<br>简单配置使用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 挂载 session</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">app.use(session(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  cookie: &#123;<span class="attr">maxAge</span>:  <span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">2</span>&#125;,<span class="comment">// 有效时间 2 个小时</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 强制没有“初始化”的 session 保存到 storage中，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 没有初始化的 session 指的是：刚被创建没有被修改</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  saveUninitialized: <span class="literal">false</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use the session middleware</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">app.use(session(&#123; <span class="attr">secret</span>: <span class="string">'keyboard cat'</span>, <span class="attr">cookie</span>: &#123; <span class="attr">maxAge</span>: <span class="number">60000</span> &#125;&#125;))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Access the session as req.session</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> sess = req.session</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (sess.views) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    sess.views++</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    res.write(<span class="string">'&lt;p&gt;views: '</span> + sess.views + <span class="string">'&lt;/p&gt;'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    res.write(<span class="string">'&lt;p&gt;expires in: '</span> + (sess.cookie.maxAge / <span class="number">1000</span>) + <span class="string">'s&lt;/p&gt;'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    res.end()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    sess.views = <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    res.end(<span class="string">'welcome to the session demo. refresh!'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;)</span></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>注意这里的取值和设置都是在 <code>req</code> 对象上，和 cookie 有所差别</strong><br>如果要删除 session 值: <code>delete req.session.xxxx;</code></p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
-<li><a href="https://github.com/expressjs/cookie-parser" target="_blank" rel="noopener">cookie-parse star:727</a></li>
-<li><a href="https://github.com/expressjs/session#compatible-session-stores" target="_blank" rel="noopener">express-session star:2379</a></li>
-<li><a href="http://blog.csdn.net/liangklfang/article/details/50998959" target="_blank" rel="noopener"> node.js中express-session配置项详解</a> 讲解非常详细，配合源码解析</li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -777,7 +764,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -846,39 +833,17 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
-		
 			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
 		
 			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
 		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
 		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
 		
 			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
 			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
@@ -886,8 +851,30 @@
 		
 			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
 		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/StdLib/">StdLib<span>11</span></a></li>
+		
+			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
+		
+			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
+		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -898,6 +885,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -913,10 +904,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -965,7 +952,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

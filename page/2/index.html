@@ -128,6 +128,49 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2019-12-10 </div>
+			<div class="article-title"><a href="/2019/12/10/2019-12-10-android-compile-target-min-sdkversion/" >CompileSdkVersion、TargetSdkVersion、MinSdkVersion</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="CompileSdkVersion"><a href="#CompileSdkVersion" class="headerlink" title="CompileSdkVersion"></a>CompileSdkVersion</h2><p>*定义应用程序编译选择哪个 Android SDK版本，通常 compileSDKVersion 属性值被设置为最新的API版本，例如：25，改变 compileSDKVersion 的属性值不会影响 Android 系统运行行为，比如说，将属性值设置为 25，targetSdkVersion 属性值为 23，代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">compileSdkVersion 25</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">buildToolsVersion "25.0.2"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    applicationId "cn.teachcourse.demos"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    minSdkVersion 11</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    targetSdkVersion 23</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    versionCode 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    versionName "1.0"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>开发的应用程序在 Android 7.0 系统运行，不会以 Android 7.0 新增的行为运行，<strong>决定 Android 系统行为的仍然是 targetSDKVersion</strong>，那么 compileSDKVersion 有什么用呢？选择最新的 API 版本，在编译的时候检查代码的错误和警告，提示开发者修改和优化，因为通常在 Android 项目中会引入第三方的支持库，支持库使用了 23.1.1 版本，compileSdkVersion 的属性值至少为 23.0.0，新版本的支持库的发布紧跟着对应的Android系统平台，能够更好的兼容。</p>
+<h2 id="MinSdkVersion"><a href="#MinSdkVersion" class="headerlink" title="MinSdkVersion"></a>MinSdkVersion</h2><p>定义应用程序支持的最低 API 版本，最低版本设置为 API 11，目标版本设置为 API 24，那么应用程序调用使用 API 14 提供的方法时，Android Studio 或 Eclipse 开发工具将提醒开发者引用一个未定义的方法，使用该方法需要将 minSdkVersion 设置为 API 14 以上，如下图：</p>
+<p><img src="https://blog.csdn.net/u012345683/article/details/81286989" alt=""></p>
+<p>造成的结果大于或等于 Android 4.0(API 14) 的系统可以正常执行，小于 Android 4.0 的系统将在运行时尝试访问不可用的 API 时发生崩溃。</p>
+<h2 id="TargetSdkVersion"><a href="#TargetSdkVersion" class="headerlink" title="TargetSdkVersion"></a>TargetSdkVersion</h2><p>目标软件开发版本，在创建每一个 Android 项目的时候都需要选择 targetSdkVersion 和 minSdkVersion，一个 targetSdkVersion 的属性值表示创建的 Android 项目使用哪个 API 版本，一个 API 版本使用一个整型数字表示，API 的全称是 Application Programming Interface，即应用程序编程接口，API 19 对应的编程接口和 API 23 定义的编程接口存在差别，因为使用整型数字表示 targetSdkVersion 的属性值，容易记忆和便于比较它们之间的大小，高版本 API 编程接口可以兼容低版本 API 编程接口，反之则不行。</p>
+<p>需要区别 Android 7.0 和 API 24 之间的关系，Android 7.0 定义的手机系统的版本，该系统的版本对外开放的应用程序接口被定义为 API 24，如果开发者想要在开发的 APP 中使用 Android 7.0 系统提供的功能，这些功能包括：多窗口支持、通知显示变更、JIT/AOT 编译、快速的应用安装路径等等，那么新手在创建的 Android 项目的时候就需要选择 API 24 的应用程序接口。</p>
+<p>简单来说就代表着你的 App 能够适配的系统版本，意味着你的 App 在这个版本的手机上做了充分的 前向 兼容性处理和实际测试。其实我们写代码时都是经常干这么一件事，就是 <code>if(Build.VERSION.SDK_INT &gt;= 23) { … }</code> ，这就是兼容性处理最典型的一个例子。如果你的 target 设置得越高，其实调用系统提供的 API 时，所得到的处理也是不一样的，甚至有些新的 API 是只有新的系统才有的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这样一来我们就可以知道，版本号的大小关系就是：compileSdkVersion &gt; targetSdkVersion &gt; minSdkVersion</p>
+<ul>
+<li>compileSdkVersion: 代表着编译的时候，会采用该 API 的规范进行代码检查和警告，但是并不会编译进 APK 中</li>
+<li>targetSdkVersion: 代表着目标版本，在编译的时候会将该版本的 API 编译进 APK 中</li>
+<li>minSdkVersion: 代表着最低版本，在编译的时候<strong>兼容</strong>到该参数指定最低版本 API</li>
+</ul>
+<p>安卓中的兼容其实是，各个 API 接口中通过判断系统的版本来兼容的，比如最常见的 View 的创建过程，就是在创建之前判断当前运行的安卓系统版本是多少，然后调用对应的 API 接口进行创建。targetSdkVersion，minSdkVersion 的版本问题就迎刃而解了，说明打包的时候将最高版本的 API 接口到最低版本之间的 API 打包进 APK 中，如果安装到范围之外的安卓系统中，那么运行程序肯定就是找不到方法的错误出现。而如果 targetSdkVersion 版本低于 23，但是装在了 6.0 以上的系统中的话，那么动态权限申请的 API 没有打包进 APK 中，所以自然还是走低版本的权限流程，不需要动态申请就可以获得权限了。安卓系统至于为什么会兼容低于自己系统的 targetSdkVersion 版本，也是因为源码里面对 API 接口调用做了版本判断，用于向下兼容。</p>
+<p>Android6.0普通权限normal permission 和 危险权限dangerous permission<br>Normal Permission：写在xml文件里，那么App安装时就会默认获得这些权限，即使是在Android6.0系统的手机上，用户也无法在安装后动态取消这些normal权限，这和以前的权限系统是一样的，不变。</p>
+<h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><p>Dangerous Permission：还是得写在 xml 文件里，但是 App 安装时具体如果执行授权分以下几种情况：<br>1、targetSDKVersion &lt; 23 &amp; API(手机系统) &lt; 6.0 ：安装时默认获得权限，且用户无法在安装 App 之后取消权限。<br>2、targetSDKVersion &lt; 23 &amp; API(手机系统) &gt;= 6.0 ：安装时默认获得权限，但是用户可以在安装 App 完成后动态取消授权（ 取消时手机会弹出提醒，告诉用户这个是为旧版手机打造的应用，让用户谨慎操作 ）。<br>3、targetSDKVersion &gt;= 23 &amp; API(手机系统) &lt; 6.0 ：安装时默认获得权限，且用户无法在安装 App 之后取消权限<br>4、targetSDKVersion &gt;= 23 &amp; API(手机系统) &gt;= 6.0 ：安装时不会获得权限，可以在运行时向用户申请权限。用户授权以后仍然可以在设置界面中取消授权，用户主动在设置界面取消后，在 app 运行过程中可能会出现 crash。</p>
+<h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><p>现在有一个类 Icon，这个类是在 api 版本 23 加入到 android frame 源码中的，如果 compileSdkVersion=28，targetSdkVersion=23 ，minSdkVersion=16 的话，编译是不会有任何问题的，因为我的 targetSdkVersion 版本就包含了 Icon 这个类，如果我将其设置为 22 就会报错，说找不到这个类，因为 android.jar 架包内不存在这个类，如果我将 targetSdkVersion 设置为 23，并且打包出来的 apk 安装到 5.0 的手机上的时候，会发现程序闪退，之所这样是因为，android.jar 只参与编译（frame层代码是手机自带的，不会从外部打包进 apk 的），并不会打包进 apk，这样 apk 在调用 Ico 类的时候，使用的是安卓手机自带的 frame 层代码，Icon 在 api23 引入，5.0 的手机自然就没有，程序自然就会 crash 掉。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/u012345683/article/details/81286989" target="_blank" rel="noopener">compileSdkVersion、targetSdkVersion、minSdkVersion 三者的关系</a></p>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2019-12-05 </div>
 			<div class="article-title"><a href="/2019/12/05/2019-12-05-android-rxjava/" >Android-rxjava</a></div>						
 		</h3>
@@ -591,43 +634,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2018-11-16 </div>
-			<div class="article-title"><a href="/2018/11/16/2018-11-16-gitbook-start/" >Gitbook</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="开源工具链"><a href="#开源工具链" class="headerlink" title="开源工具链"></a>开源工具链</h2><p>这个工具链 (GitBook) 是一个使用 Git 和 Markdown 来构建书籍的工具。它可以将你的书输出很多格式：PDF，ePub，mobi，或者输出为静态网页<br>GitBook 工具链是开源并且完全免费的，它的源码可以在 <a href="https://github.com/GitbookIO/gitbook" target="_blank" rel="noopener">GitHub</a> 上获取<br>与格式和工具链相关的问题被发表在 <a href="https://github.com/GitbookIO/gitbook/issues" target="_blank" rel="noopener">github.com/GitbookIO/gitbook/issues</a></p>
-<h2 id="GitBook-com"><a href="#GitBook-com" class="headerlink" title="GitBook.com"></a>GitBook.com</h2><p>GitBook.com 是一个使用工具链来创建和托管书籍的在线平台 (<a href="https://www.gitbook.com/" target="_blank" rel="noopener">www.gitbook.com</a>)</p>
-<h2 id="其他文档"><a href="#其他文档" class="headerlink" title="其他文档"></a>其他文档</h2><p>开发文档 (API &amp; 插件) 地址 <a href="http://developer.gitbook.com/" target="_blank" rel="noopener">developer.gitbook.com</a>。<br>企业版本的安装向导和手册的地址 <a href="http://help.enterprise.gitbook.com/" target="_blank" rel="noopener">hep.enterprise.gitbook.com</a></p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>在使用 <code>gitbook pdf/epub/mobi</code> 生成电子文档时，需要先安装 <a href="https://calibre-ebook.com/download_windows" target="_blank" rel="noopener">calibre</a> 转换软件，否则会转换不成功。</p>
-<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><h3 id="RangeError-Maximum-call-stack-size-exceeded"><a href="#RangeError-Maximum-call-stack-size-exceeded" class="headerlink" title="RangeError: Maximum call stack size exceeded"></a><code>RangeError: Maximum call stack size exceeded</code></h3><p>默认的搜索插件建立的索引过大溢出,可以使用下面方法解决,使用 lunr 插件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// book.json</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">"plugins"</span>: [<span class="string">"-lunr"</span>,<span class="string">"autohome-fix-link"</span>,<span class="string">"page-footer-copyright"</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">"pluginsConfig"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"autohome-fix-link"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"link"</span>: <span class="string">"https://www.npmjs.com/"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"lunr"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"maxIndexSize"</span>: <span class="number">100000000000000</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<ul>
-<li><a href="https://github.com/GitbookIO/gitbook/issues/1009" target="_blank" rel="noopener">RangeError: Maximum call stack size exceeded #1009</a></li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="https://github.com/GitbookIO/gitbook" target="_blank" rel="noopener">gitbook git</a></li>
-<li><a href="https://calibre-ebook.com/download_windows" target="_blank" rel="noopener">calibre windows</a></li>
-<li><a href="https://chrisniael.gitbooks.io/gitbook-documentation/content/format/markdown.html" target="_blank" rel="noopener">gitbook 中文文档</a></li>
-<li><a href="https://www.cnblogs.com/zhangjk1993/p/5066771.html" target="_blank" rel="noopener">gitbook 实用配置及插件介绍</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -680,7 +686,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -749,48 +755,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
 		
-			<li><a href="/tags/Document/">Document<span>8</span></a></li>
-		
-			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
-		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
-		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
-		
-			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
 		
 			<li><a href="/tags/Library/">Library<span>7</span></a></li>
 		
-			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
+			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
 			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
+			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>3</span></a></li>
+		
+			<li><a href="/tags/kotlin/">kotlin<span>1</span></a></li>
+		
+			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
+		
+			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
+		
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
+		
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
+		
 			<li><a href="/tags/Chrome/">Chrome<span>2</span></a></li>
-		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
-		
-			<li><a href="/tags/JSP/">JSP<span>1</span></a></li>
 		
 			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
 		
+			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -801,6 +807,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -816,10 +826,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -868,7 +874,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

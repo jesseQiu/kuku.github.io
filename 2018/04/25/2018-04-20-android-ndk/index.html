@@ -136,7 +136,7 @@
 	<div class="mypage">		
 	  		
 
-	  <p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/android-ndk.jpg" alt=""></p>
+	  <p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/android-ndk.jpg" alt=""></p>
 <h2 id="一、Android-NDK？"><a href="#一、Android-NDK？" class="headerlink" title="一、Android NDK？"></a>一、Android NDK？</h2><p>Android NDK 是在 SDK 前面又加上了“原生”二字，即 Native Development Kit，因此又被 Google 称为 “NDK”。<br>众所周知，Android 程序运行在 Dalvik 虚拟机中，NDK 允许用户使用类似 C/C++ 之类的原生代码语言执行部分程序。</p>
 <h3 id="1-NDK-包括"><a href="#1-NDK-包括" class="headerlink" title="1. NDK 包括"></a>1. NDK 包括</h3><ul>
 <li>从 C/C++ 生成原生代码库所需要的工具和 build files</li>
@@ -149,10 +149,10 @@
 <li>便于移植，用 C/C++ 写的库可以方便在其他的嵌入式平台上再次使用</li>
 </ul>
 <h2 id="二、JNI"><a href="#二、JNI" class="headerlink" title="二、JNI"></a>二、JNI</h2><p>JNI 是 Java Native Interface 的缩写，它提供了若干的 API 实现了 Java 和其他语言的通信（主要是 C&amp;C++ ）。从 Java1.1 开始，JNI 标准成为 java 平台的一部分，它允许 Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是 C 和 C++ 而设计的，但是它并不妨碍你使用其他编程语言，只要调用约定受支持就可以了。使用 java 与本地已编译的代码交互，通常会丧失平台可移植性。但是，有些情况下这样做是可以接受的，甚至是必须的。例如，使用一些旧的库，与硬件、操作系统进行交互，或者为了提高程序的性能。<strong>JNI 标准至少要保证本地代码能工作在任何 Java 虚拟机环境</strong>。</p>
-<h2 id="三、创建-NDK-工程"><a href="#三、创建-NDK-工程" class="headerlink" title="三、创建 NDK 工程"></a>三、创建 NDK 工程</h2><h3 id="1-创建一个空的-Activity-工程"><a href="#1-创建一个空的-Activity-工程" class="headerlink" title="1. 创建一个空的 Activity 工程"></a>1. 创建一个空的 Activity 工程</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-1.png" alt=""><br><em>AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish</em><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-2.png" alt=""><br>工程会自动创建 Ndk 环境配置<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-3.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-4.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-5.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-6.png" alt=""></p>
-<h3 id="2-创建生成-so-库和对应-jar-包模块"><a href="#2-创建生成-so-库和对应-jar-包模块" class="headerlink" title="2. 创建生成 .so 库和对应 jar 包模块"></a>2. 创建生成 .so 库和对应 jar 包模块</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-7.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-8.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-9.png" alt=""></p>
-<h3 id="3-把第一步中的-NDK-代码移到新创建的模块中"><a href="#3-把第一步中的-NDK-代码移到新创建的模块中" class="headerlink" title="3. 把第一步中的 NDK 代码移到新创建的模块中"></a>3. 把第一步中的 NDK 代码移到新创建的模块中</h3><p>这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-10.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-11.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-12.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-13.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-14.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-15.png" alt=""><br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-16.png" alt=""></p>
-<h3 id="4-在其他工程中使用-NDK-的-so-文件和-jar-包"><a href="#4-在其他工程中使用-NDK-的-so-文件和-jar-包" class="headerlink" title="4. 在其他工程中使用 NDK 的 so 文件和 jar 包"></a>4. 在其他工程中使用 NDK 的 so 文件和 jar 包</h3><p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/ndk-17.png" alt=""></p>
+<h2 id="三、创建-NDK-工程"><a href="#三、创建-NDK-工程" class="headerlink" title="三、创建 NDK 工程"></a>三、创建 NDK 工程</h2><h3 id="1-创建一个空的-Activity-工程"><a href="#1-创建一个空的-Activity-工程" class="headerlink" title="1. 创建一个空的 Activity 工程"></a>1. 创建一个空的 Activity 工程</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-1.png" alt=""><br><em>AndroidStudio 3.0 上创建 NDK 项目的时候,记得勾选 include c++ support,这样会很方便。接着一路 Next 最后点击 Finish</em><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-2.png" alt=""><br>工程会自动创建 Ndk 环境配置<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-3.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-4.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-5.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-6.png" alt=""></p>
+<h3 id="2-创建生成-so-库和对应-jar-包模块"><a href="#2-创建生成-so-库和对应-jar-包模块" class="headerlink" title="2. 创建生成 .so 库和对应 jar 包模块"></a>2. 创建生成 .so 库和对应 jar 包模块</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-7.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-8.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-9.png" alt=""></p>
+<h3 id="3-把第一步中的-NDK-代码移到新创建的模块中"><a href="#3-把第一步中的-NDK-代码移到新创建的模块中" class="headerlink" title="3. 把第一步中的 NDK 代码移到新创建的模块中"></a>3. 把第一步中的 NDK 代码移到新创建的模块中</h3><p>这一步的目的主要是让 NDK 部分的代码独立一个模块，后面可以生成对应的 .so 文件和 jar 包提供给其他项目使用<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-10.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-11.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-12.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-13.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-14.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-15.png" alt=""><br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-16.png" alt=""></p>
+<h3 id="4-在其他工程中使用-NDK-的-so-文件和-jar-包"><a href="#4-在其他工程中使用-NDK-的-so-文件和-jar-包" class="headerlink" title="4. 在其他工程中使用 NDK 的 so 文件和 jar 包"></a>4. 在其他工程中使用 NDK 的 so 文件和 jar 包</h3><p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/ndk-17.png" alt=""></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://www.jianshu.com/p/a37782b56770" target="_blank" rel="noopener">Android studio3.0 JNI/NDK开发流程</a></li>
 <li><a href="https://www.jianshu.com/p/ac00d59993aa" target="_blank" rel="noopener">Android NDK开发：JNI 基础篇</a></li>
@@ -218,7 +218,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Android/">Android<span>15</span></a></li>
+    <li><a href="/categories/Android/">Android<span>16</span></a></li>
   </li>
 
     </ul>
@@ -295,7 +295,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

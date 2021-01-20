@@ -145,15 +145,15 @@
 <blockquote>
 <p>本文是以主要是以 <code>Node.js</code> 语言开发的后台，其它语言的类似</p>
 </blockquote>
-<h2 id="一、服务器地址配置"><a href="#一、服务器地址配置" class="headerlink" title="一、服务器地址配置"></a>一、服务器地址配置</h2><p>微信公众号开发第一步，就是需要配置开发的服务器地址，如下图<br><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/weichat-server-1.png" alt="weichat-server-1"><br>对应的服务器端代码</p>
+<h2 id="一、服务器地址配置"><a href="#一、服务器地址配置" class="headerlink" title="一、服务器地址配置"></a>一、服务器地址配置</h2><p>微信公众号开发第一步，就是需要配置开发的服务器地址，如下图<br><img src="http://jessechiu.synology.me:5959/images/2021/01/20/weichat-server-1.png" alt="weichat-server-1"><br>对应的服务器端代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/weichat'</span>, <span class="built_in">require</span>(<span class="string">'./routes/index'</span>));</span></pre></td></tr></table></figure>
 <p>上面的 <code>./routes/index</code> 是指定 微信相关的处理到统一个文件路口。</p>
 <h2 id="二、JSSDK-域名设置"><a href="#二、JSSDK-域名设置" class="headerlink" title="二、JSSDK 域名设置"></a>二、JSSDK 域名设置</h2><p>当我们需要在页面中调用微信的功能接口时，就需要用到微信提供的 <code>JSSDK</code> 库，这时就需要在服务器端配置对应的域名地址。<br><strong>注意：设置的域名必须是要备案的域名</strong></p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/weichat-jssdk.png" alt="weichat-jssdk"><br>对应的服务器端代码</p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/weichat-jssdk.png" alt="weichat-jssdk"><br>对应的服务器端代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/weichat'</span>,express.static(<span class="string">'src/assets'</span>));</span></pre></td></tr></table></figure>
 <p>如上图所示，我设置的域名是 <code>jessechiu.com/weichat</code>，在后台认证时会去访问 <code>MP_verify_1NbyCgfIxWP76HnW.txt</code> 该文件，这样我们就需要把该文存放的路径设置为可以访问的。这里使用了 <code>express.static()</code> 函数。</p>
 <h2 id="三、网页授权域名设置"><a href="#三、网页授权域名设置" class="headerlink" title="三、网页授权域名设置"></a>三、网页授权域名设置</h2><p>当我们在公众中需要跳转页面时，如果该页面的域名地址没有在微信后台中配置，在每次跳转时都会有个安全提示页面出现，这样用户体验相当不好，这时我们就需要设置对应的域名地址。</p>
-<p><img src="https://raw.githubusercontent.com/Jesse-Chiu/images/master/weichat-page.png" alt="weichat-jssdk"><br>对应的服务器端代码</p>
+<p><img src="http://jessechiu.synology.me:5959/images/2021/01/20/weichat-page.png" alt="weichat-jssdk"><br>对应的服务器端代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/weichat'</span>,express.static(<span class="string">'src/assets'</span>));</span></pre></td></tr></table></figure>
 <p>由于用到的 <code>MP_verify_1NbyCgfIxWP76HnW.txt</code> 文件和设置 <code>JSSDK</code> 域名一样，所以域名也设置和 <code>JSSDK</code> 中的一样。</p>
 	  
@@ -288,7 +288,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 

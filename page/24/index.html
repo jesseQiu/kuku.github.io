@@ -128,6 +128,171 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2016-11-25 </div>
+			<div class="article-title"><a href="/2016/11/25/2016-11-25-float-属性详解/" >float 属性详解</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>本篇主要介绍 float 属性：定义元素朝哪个方向浮动。</p>
+<h2 id="一、页面布局方式"><a href="#一、页面布局方式" class="headerlink" title="一、页面布局方式"></a>一、页面布局方式</h2><ol>
+<li>文档流</li>
+</ol>
+<p>HTML 页面的标准文档流(默认布局)是：从上到下，从左到右，遇块(块级元素)换行。</p>
+<ol start="2">
+<li>浮动层</li>
+</ol>
+<p>浮动层：给元素的 float 属性赋值后，就是脱离文档流，进行左右浮动，紧贴着 <strong>父</strong> 元素(默认为 body 文本区域)的左右边框。<br>而此浮动元素在文档流空出的位置，由后续的(非浮动)元素填充上去：块级元素直接填充上去，若跟浮动元素的范围发生重叠，浮动元素覆盖块级元素。内联元素：有空隙就插入。</p>
+<ol start="3">
+<li>float 属性介绍</li>
+</ol>
+<ul>
+<li>left ：元素向左浮动。</li>
+<li>right ：元素向右浮动。</li>
+<li>none ：默认值。</li>
+<li>inherit ：从父元素继承float属性。</li>
+</ul>
+<ol start="4">
+<li><p>示例</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE"&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>2.3-float属性<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="css">        <span class="selector-id">#a</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">background-color</span><span class="selector-pseudo">:Red</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">width</span><span class="selector-pseudo">:100px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="css">        <span class="selector-id">#b</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">background-color</span><span class="selector-pseudo">:Yellow</span>;    </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">width</span><span class="selector-pseudo">:200px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="css">        <span class="selector-id">#c</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">background-color</span><span class="selector-pseudo">:Blue</span>;   </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">width</span><span class="selector-pseudo">:300px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">         &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="css">         <span class="selector-id">#d</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">         &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">background-color</span><span class="selector-pseudo">:Gray</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="css">            <span class="selector-tag">width</span><span class="selector-pseudo">:400px</span>;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">         &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">a</span> &gt;</span>div-a<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">b</span>&gt;</span>div-b<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">c</span>&gt;</span>div-c<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"input1"</span>  /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"input2"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"input3 "</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">d</span>&gt;</span>div-d<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"input4 "</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/24170209-132155d5089d4f478e8c303a7129fbfa.jpg" alt=""></p>
+</li>
+<li><p>float:left<br>说明：元素向左浮动</p>
+</li>
+</ol>
+<ul>
+<li>input2 添加：float:left</li>
+<li>div-b 添加：float:left</li>
+<li>div-d 添加：float:left</li>
+</ul>
+<p>变更后视图</p>
+<ul>
+<li>浏览器的宽度 <strong>不够长</strong> 时</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/24171643-c8b2d2cd7f42459497c1087f978c9991.jpg" alt=""></p>
+<ul>
+<li>浏览器的宽度 <strong>够长</strong> 时</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/24171704-ac4397cbb1a6461d9e8b3ffa9257d08c.jpg" alt=""></p>
+<ul>
+<li>结论</li>
+</ul>
+<p>当前元素分类(float:left) | 下一个紧邻元素分类(不含float)           | 结论<br>块级元素(a)            | 块级元素(b)                      | b会填充a遗留下来的空间，a会和b发生重叠，a的图层在上面。<br>内联元素(b)            | b会紧跟在a的后面。并根据自身内联元素的特点，是否换行。<br>内联元素(a)            | 块级元素(b)                      | b不会跟随a的移动。<br>内联元素(b)            | b会紧跟在a的后面。并根据自身内联元素的特点，是否换行。</p>
+<ol start="6">
+<li>float:right</li>
+</ol>
+<p>说明：元素向右浮动。</p>
+<ul>
+<li><p>代码变更<br>input2 元素：添加 float:right<br>div-b 添加：float:right<br>div-d 添加：float:right</p>
+</li>
+<li><p>更后视图</p>
+</li>
+<li><p>浏览器的宽度“不够长”时</p>
+</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/24174501-436dcc9ebd8c4c1aa898a9d1c0162962.jpg" alt=""></p>
+<ul>
+<li><p>浏览器的宽度”够长”时<br><img src="http://images.cnitblog.com/blog/153475/201307/24174556-cba26cf986604edda876ce4e8594fade.jpg" alt=""></p>
+</li>
+<li><p>结论</p>
+</li>
+</ul>
+<p>块级元素(a)             | 块级元素(b)             | b会填充a遗留下来的空间，若a会和b发生重叠(父容器宽度减少)，a的图层在上面。<br>内联元素(b)             | b会填充a遗留下来的空间。<br>内联元素(b)             | b会填充a遗留下来的空间。      </p>
+<ol start="7">
+<li>相邻元素含有 float 属性 </li>
+</ol>
+<p>因内联元素的特性，最好别把内联元素与块级元素相邻使用 float 属性。</p>
+<p><strong>下面都以块级元素为例</strong>：</p>
+<p>默认视图：</p>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25140619-ed75ecf3f321440fab8a324c35254c20.jpg" alt=""></p>
+<ul>
+<li>float:left</li>
+</ul>
+<p>给这三个 div 都添加 float:left</p>
+<ul>
+<li><p>视图</p>
+</li>
+<li><p>浏览器的宽度”足够长”</p>
+</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25140907-cc5496849bf84aceb44f80f8c6183c55.jpg" alt=""></p>
+<ul>
+<li>浏览器的宽度”不够长”</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25140946-0a95c5527da644d2b5167d6d1dc0bafa.jpg" alt=""></p>
+<ul>
+<li>结论</li>
+</ul>
+<p>Ⅰ 相邻的浮动元素，left属性最前面的元素，排在最左面。</p>
+<p>Ⅱ 成为浮动元素后，在浮动层拥有内联元素的”特性”，当多个浮动元素1排容不下时，就换行。</p>
+<ul>
+<li>float:right</li>
+</ul>
+<p>给这三个 div 都添加 float:right</p>
+<ul>
+<li><p>视图</p>
+</li>
+<li><p>浏览器的宽度”足够长”</p>
+</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25144514-b25819a9c4f542d7b87ea64c8420ad28.jpg" alt=""></p>
+<ul>
+<li>浏览器的宽度”不够长”</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25144531-81182a0d072448b29ce9ddd13ecb760b.jpg" alt=""></p>
+<ol start="8">
+<li>结论</li>
+</ol>
+<p>Ⅰ 相邻的浮动元素，right属性最前面的元素，排在最右面。</p>
+<p>Ⅱ 成为浮动元素后，在浮动层拥有内联元素的”特性”，当多个浮动元素1排容不下时，就换行。</p>
+<ul>
+<li>height 高度不等的块级元素</li>
+</ul>
+<p>把 div-a 的 height 值设为大于 div-b，三个 div 都添加 float:left 后：</p>
+<ul>
+<li><p>视图</p>
+</li>
+<li><p>浏览器的宽度”足够长”</p>
+</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25145924-32c677134ee24f2ea1a2039f4063c06b.jpg" alt=""></p>
+<ul>
+<li>浏览器宽度缩小时</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25150141-8743a30a4b2f40c9999c78e42e72a51b.jpg" alt=""></p>
+<ul>
+<li>浏览器宽度进一步缩小时</li>
+</ul>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25150159-29548a6c6d33403eb8d4fe657f272a1a.jpg" alt=""></p>
+<ul>
+<li>结论</li>
+</ul>
+<p>Ⅰ height不相等的div浮动元素排序时，照拥有内联元素的”特性”，当多个浮动元素1排容不下时，就换行。</p>
+<ul>
+<li>解决浏览器宽度缩小变形</li>
+</ul>
+<p>把添加float的属性的div元素嵌入在一个div中，并给此div添加width和height属性。浏览器宽度缩小时，也不会发生变形。</p>
+<p>可参照 <a href="http://www.cnblogs.com/polk6/p/3185692.html" target="_blank" rel="noopener">CSS HTML元素布局及Display属性介绍</a></p>
+<p><img src="http://images.cnitblog.com/blog/153475/201307/25151347-2699a7aec1d1489cadea96478892a70a.jpg" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>引用 <a href="http://www.cnblogs.com/polk6/p/3142187.html" target="_blank" rel="noopener">CSS float 浮动属性</a></li>
+</ul>
+
+	
+	</div>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2016-11-23 </div>
 			<div class="article-title"><a href="/2016/11/23/2016-11-23-vue-模板语法/" >Vue 模板语法</a></div>						
 		</h3>
@@ -1615,41 +1780,6 @@
 
            
 		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-11-16 </div>
-			<div class="article-title"><a href="/2016/11/16/2016-11-16-sgml-html-xml/" >SGML、HTML 和 XML 的区别</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><strong>内容提要：</strong> SGML：1969 年，IBM 公司开发了一种文档描述语言 SGML(Standard Generalized Markup  Language)，用来解决不同系统中文档格式不同的问题</p>
-<h3 id="1、-SGML"><a href="#1、-SGML" class="headerlink" title="1、 SGML"></a>1、 SGML</h3><p>1969年，IBM公司开发了一种文档描述语言 SGML(Standard Generalized Markup Language)，用来解决不同系统中文档格式不同的问题。</p>
-<p>1986 年成为了一个国际标准〔ISO8879〕，这就是 SGML。</p>
-<p>SGML 是很多大型组织的文档标准，它是一种与语言无关的、结构化的、可扩展的语言，这些特点使它在很多公司受到欢迎，被用来创建、处理和发布大量的文本信息。</p>
-<h3 id="2、HTML"><a href="#2、HTML" class="headerlink" title="2、HTML"></a>2、HTML</h3><p>1989 年，在 CERN 欧洲粒子物理研究中心的研究人员开发了基于 SGML 的超文本版本，称为 HTML( HyperText Markup Language)。</p>
-<p>HTML 继承了 SGML 的许多重要的特点，比如结构化、实现独立和可描述性，但是它也存在很多缺陷，比如它只能使用固定的有限的标记，而且它只侧重于对内容的显示方面。</p>
-<h3 id="3、XML"><a href="#3、XML" class="headerlink" title="3、XML"></a>3、XML</h3><p>W3C 在 1996 年提出了 XML 的概念。XML 不仅保留了 SGML 的很多优点，而且更加容易操作以及在 World Wide Web 环境下实现。1998 年，XML 成了 W3C 的推荐标准。与 HTML 最大的区别就是把 <strong>数据本身和数据的显示分离开来</strong>。</p>
-<h3 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h3><p>SGML 是在文字处理应用中表达数据的一个 <strong>方法</strong>。 它已经出现十多年了， XML 和 HTML 都是从 SGML 发展而来的文档形式。 因此， 它们都有一些共同点， 如相似的语法和标记的使用。但是 HTML 是 SGML 的一个 <strong>应用</strong>， 而 XML 是 SGML 的一个 <strong>子集</strong>。 区别是重要的。 基本上 HTML 不能用来定义新的应用， 而 XML 可以。 事实上， XML 和 SGML 是兼容的 – XML 文档可以通过任何 SGML 制作或浏览工具阅读。 但是， XML 没有 SGML 那么复杂， 它是设计用于有限带宽的网络的， 如 Internet。 XML 规范的合作者 Tim Bray 说， XML 的设计出发点是取 SGML 的优点， 去除复杂的部分， 使其保持轻巧， 可以在 Web 上工作。</p>
-<p>HTML，SGML 和 XML 将继续用于其合适的地方， 它们中的任何一个不会使其他一个废弃。 HTML 仍是在 Web 上快速出版数据的最简单的方法， 大部分短期的数据， 如会议议程或广告宣传册。 如果数据会长期使用， 并且需要更多的一些结构， Web 建造者将愿意使用 XML。 不同于 HTML 和 XML， SGML 可能永远不会在 Internet 上被广泛接受， 因为它从来 <strong>没有为某个网络协议的需求而设计或优化过</strong>。 对于高端的， 复杂结构的出版应用， SGML 将继续适用。</p>
-<h3 id="5-参考"><a href="#5-参考" class="headerlink" title="5. 参考"></a>5. 参考</h3><ul>
-<li><a href="http://wdk.bdqn.cn/news/201307/9957.html" target="_blank" rel="noopener">SGML、HTML 和 XML 的区别</a></li>
-<li><a href="http://blog.csdn.net/kepeizong/article/details/580449" target="_blank" rel="noopener">HTML，SGML，XML</a></li>
-</ul>
-
-	
-	</div>
-</div>
-
-           
-		
 
 		</div>
 
@@ -1702,7 +1832,7 @@
 		
 			<li><a href="/categories/AliPay/">AliPay<span>1</span></a></li>
 		
-			<li><a href="/categories/Android/">Android<span>15</span></a></li>
+			<li><a href="/categories/Android/">Android<span>16</span></a></li>
 		
 			<li><a href="/categories/AngularJS/">AngularJS<span>4</span></a></li>
 		
@@ -1771,48 +1901,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/MongoDB/">MongoDB<span>2</span></a></li>
-		
-			<li><a href="/tags/Webpack/">Webpack<span>2</span></a></li>
-		
-			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
-		
-			<li><a href="/tags/gradle/">gradle<span>1</span></a></li>
-		
-			<li><a href="/tags/Android/">Android<span>3</span></a></li>
-		
-			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
-		
-			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
-		
-			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
-		
-			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
-		
-			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
-		
-			<li><a href="/tags/Mocha/">Mocha<span>1</span></a></li>
+			<li><a href="/tags/Document/">Document<span>8</span></a></li>
 		
 			<li><a href="/tags/PhantomJs/">PhantomJs<span>1</span></a></li>
 		
-			<li><a href="/tags/docker/">docker<span>1</span></a></li>
-		
 			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
-			<li><a href="/tags/Bom/">Bom<span>10</span></a></li>
+			<li><a href="/tags/OOP/">OOP<span>9</span></a></li>
 		
-			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+			<li><a href="/tags/kotlin/">kotlin<span>1</span></a></li>
 		
-			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+			<li><a href="/tags/docker/">docker<span>1</span></a></li>
 		
 			<li><a href="/tags/Promise/">Promise<span>2</span></a></li>
 		
+			<li><a href="/tags/Es6/">Es6+<span>2</span></a></li>
+		
+			<li><a href="/tags/Grammar/">Grammar<span>11</span></a></li>
+		
+			<li><a href="/tags/Library/">Library<span>7</span></a></li>
+		
+			<li><a href="/tags/Karma/">Karma<span>1</span></a></li>
+		
+			<li><a href="/tags/sqlite/">sqlite<span>3</span></a></li>
+		
+			<li><a href="/tags/Sublime/">Sublime<span>2</span></a></li>
+		
+			<li><a href="/tags/synology/">synology<span>1</span></a></li>
+		
+			<li><a href="/tags/scrapy/">scrapy<span>1</span></a></li>
+		
 			<li><a href="/tags/MySQL/">MySQL<span>1</span></a></li>
+		
+			<li><a href="/tags/RegExp/">RegExp<span>2</span></a></li>
 		
 			<li><a href="/tags/Jasmine/">Jasmine<span>1</span></a></li>
 		
+			<li><a href="/tags/Npm/">Npm<span>3</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/Performence/">Performence<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>29</span></a></li>
 		 
 		</ul>
 	</div>
@@ -1823,6 +1953,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/01/19/2021-01-19-kotlin-starting/" ><i class="fa fa-file-o"></i>Kotlin Starting</a>
+      </li>
     
       <li>
         <a href="/2020/11/30/2020-11-30-android-gradle/" ><i class="fa fa-file-o"></i>Gradle</a>
@@ -1838,10 +1972,6 @@
     
       <li>
         <a href="/2020/11/25/2020-11-25-database-sqlite-optimization/" ><i class="fa fa-file-o"></i>SQLite 性能优化</a>
-      </li>
-    
-      <li>
-        <a href="/2020/11/21/2020-11-21-database-sqlite/" ><i class="fa fa-file-o"></i>SQLite</a>
       </li>
     
   </ul>
@@ -1890,7 +2020,7 @@
 
 
 <span>
-  &copy; 2020 JesseChiu
+  &copy; 2021 JesseChiu
   
 </span>
 
